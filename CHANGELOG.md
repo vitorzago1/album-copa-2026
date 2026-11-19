@@ -2,6 +2,18 @@
 
 O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 
+## v0.2-design (19/11/2026)
+
+- Direção visual "Uma tinta só" aplicada: papel rosa com tinta azul no tema claro, papel azul com tinta rosa no escuro.
+- Cores por função em `css/tokens.css`, com tema claro, tema escuro e duas versões de alto contraste.
+- Script `scripts/contraste.js` e tabela `docs/cores.md`: 128 pares de cor, 0 reprovados.
+- Fontes Londrina Solid e Atkinson Hyperlegible Next guardadas no projeto.
+- Componentes: botão, etiqueta, cartão, cupom, vaga, figurinha (comum, brilhante, lendária), tira de grupos, passos e campo de formulário.
+- Painel de acessibilidade: tema, tamanho da letra, alto contraste, reduzir animações, mais espaço no texto e destacar links, com as escolhas salvas no navegador.
+- Menu recolhido atrás do botão "Menu" em telas pequenas.
+- Página inicial montada e guia de estilo na página Sobre.
+- Ícone do site.
+
 ## v0.1-estrutura (19/11/2026)
 
 - Pasta do projeto, git e arquivo de regras (`CLAUDE.md`).
