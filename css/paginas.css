@@ -1,1 +1,158 @@
-/* paginas.css: o que é próprio de cada página (etapa 3 em diante). */
+/* ==========================================================================
+   paginas.css
+   --------------------------------------------------------------------------
+   O que é próprio de cada página. As peças que se repetem pelo site ficam em
+   componentes.css; aqui fica só a arrumação de cada tela.
+   ========================================================================== */
+
+/* ---------- Início ---------- */
+
+/* Abertura: o título de um lado e a página de amostra do outro */
+.abertura {
+  padding-block: var(--espaco-4) var(--espaco-7);
+  align-items: center;
+}
+
+.abertura-texto {
+  font-size: var(--texto-medio);
+}
+
+/* Página de amostra: três vagas e uma figurinha solta por cima, torta,
+   como se estivesse na mão, prestes a ser colada */
+.amostra {
+  position: relative;
+  max-width: 34rem;
+  padding-bottom: var(--espaco-7);
+}
+
+.amostra-vagas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco-3);
+}
+
+.amostra-solta {
+  position: absolute;
+  right: 3%;
+  bottom: 0;
+  width: 37%;   /* no celular a figurinha é maior, para o texto dela caber */
+  --giro: 7deg;
+}
+
+@media (min-width: 48rem) {
+  .amostra-solta {
+    width: 31%;
+  }
+}
+
+/* Raridades: no celular, figurinha à esquerda e texto à direita;
+   em telas maiores, as três lado a lado */
+.raridades {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.raridades > li {
+  display: grid;
+  /* A figurinha ocupa cerca de um terço (entre 5rem e 7rem); o texto fica com o resto.
+     O minmax(0, 1fr) deixa a coluna do texto encolher em telas estreitas. */
+  grid-template-columns: clamp(5rem, 32%, 7rem) minmax(0, 1fr);
+  gap: var(--espaco-4);
+  align-items: center;
+}
+
+.raridades h3 {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  .raridades {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .raridades > li {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .raridades .figurinha {
+    max-width: 10rem;
+  }
+}
+
+/* Cartela da sequência: sete casas impressas, uma por dia */
+.cartela {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--espaco-2);
+  max-width: 22rem;
+}
+
+.cartela > li {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+/* Bilhete de troca: duas linhas, "Tenho" e "Preciso" */
+.bilhete {
+  max-width: 26rem;
+}
+
+.bilhete dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--espaco-2) var(--espaco-4);
+}
+
+.bilhete dt {
+  font-weight: 700;
+}
+
+.bilhete dd {
+  font-variant-numeric: tabular-nums;   /* números com a mesma largura, alinhados */
+}
+
+/* ---------- Sobre: guia de estilo ----------
+   As peças do site todas juntas, para consulta e para testar os temas. */
+
+.guia h3 {
+  margin-top: var(--espaco-6);
+}
+
+.guia-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+  max-width: none;
+}
+
+.guia-colunas {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.guia-figurinhas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 9rem));
+  gap: var(--espaco-5);
+}
+
+@media (min-width: 40rem) {
+  .guia-colunas {
+    grid-template-columns: repeat(2, minmax(0, 28rem));
+  }
+
+  .guia-figurinhas {
+    grid-template-columns: repeat(4, minmax(0, 9rem));
+  }
+}

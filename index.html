@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Colei! Álbum de figurinhas da Copa 2026</title>
   <meta name="description" content="Álbum de figurinhas digital da Copa do Mundo de 2026: abra o pacotinho do dia, cole as figurinhas e troque as repetidas.">
+  <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
   <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
@@ -53,10 +54,189 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura">
-      <h1>A Copa acabou. Seu álbum, não.</h1>
-      <p>São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. A página inicial completa chega na próxima versão.</p>
-    </div>
+
+    <!-- ABERTURA. Página dupla: à esquerda o convite, à direita uma página de amostra do álbum. -->
+    <section class="largura abertura dobra" aria-labelledby="titulo-abertura">
+      <div class="fluxo">
+        <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
+        <p class="abertura-texto">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
+        <p><a class="botao" href="album.html">Abrir o álbum</a></p>
+      </div>
+
+      <!-- O desenho inteiro é lido como uma imagem só, com a descrição do aria-label. -->
+      <div class="amostra" role="img" aria-label="Página de amostra do álbum: três espaços vazios numerados e uma figurinha solta, pronta para colar.">
+        <div class="amostra-vagas">
+          <div class="vaga"><span class="vaga-numero">001</span><span class="vaga-legenda">Falta</span></div>
+          <div class="vaga"><span class="vaga-numero">002</span><span class="vaga-legenda">Falta</span></div>
+          <div class="vaga"><span class="vaga-numero">003</span><span class="vaga-legenda">Falta</span></div>
+        </div>
+        <div class="figurinha figurinha-comum figurinha-solta amostra-solta" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F">
+          <div class="figurinha-arte">
+            <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+              <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
+            </svg>
+          </div>
+          <div class="figurinha-tarja">
+            <span class="figurinha-nome">Sua primeira</span>
+            <span class="figurinha-numero">Nº 003</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESSO. Uma casa por grupo, de A a L. Por enquanto começa vazia;
+         na etapa do álbum ela passa a mostrar o que foi colado. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-progresso">
+      <h2 id="titulo-progresso">Seu álbum até agora</h2>
+      <ol class="tira" aria-label="Progresso por grupo">
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>A</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>B</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>C</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>D</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>E</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>F</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>G</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>H</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>I</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>J</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>K</span></li>
+        <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>L</span></li>
+      </ol>
+      <p>Nenhuma figurinha colada ainda. Cada casa é um grupo, de A a L, e vai enchendo conforme você cola.</p>
+    </section>
+
+    <!-- COMO FUNCIONA. É uma sequência de verdade, por isso é uma lista numerada. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-como">
+      <h2 id="titulo-como">Como funciona</h2>
+      <ol class="passos">
+        <li>
+          <h3>Rasgue o pacotinho</h3>
+          <p>Todo dia tem um pacotinho grátis com cinco figurinhas.</p>
+        </li>
+        <li>
+          <h3>Vire a figurinha</h3>
+          <p>Elas saem de costas. Vire uma por uma e torça pela lendária.</p>
+        </li>
+        <li>
+          <h3>Cole no lugar</h3>
+          <p>Cada figurinha tem um espaço numerado no álbum. As que vierem em dobro vão para as trocas.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- PACOTINHO DO DIA e RARIDADES, lado a lado na página dupla. -->
+    <section class="largura secao dobra">
+      <div>
+        <article class="cartao" aria-labelledby="titulo-pacotinho">
+          <h2 id="titulo-pacotinho">Pacotinho do dia</h2>
+          <p>Um pacotinho grátis por dia, com cinco figurinhas. Amanhã tem outro.</p>
+          <p><a class="botao" href="pacotinhos.html">Ir para os pacotinhos</a></p>
+
+          <!-- O canhoto do cupom: a cartela da sequência de dias. -->
+          <div class="cupom-canhoto fluxo">
+            <h3>Sua sequência</h3>
+            <ol class="cartela" aria-label="Cartela de sete dias seguidos">
+              <li><span class="escondido">Dia </span>1</li>
+              <li><span class="escondido">Dia </span>2</li>
+              <li><span class="escondido">Dia </span>3</li>
+              <li><span class="escondido">Dia </span>4</li>
+              <li><span class="escondido">Dia </span>5</li>
+              <li><span class="escondido">Dia </span>6</li>
+              <li><span class="escondido">Dia </span>7</li>
+            </ol>
+            <p class="texto-apoio">Nenhum dia marcado ainda. Cada pacotinho aberto ganha um carimbo.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="fluxo">
+        <h2 id="titulo-raridades">Raridades</h2>
+        <p>Toda figurinha diz a raridade por escrito, com um ícone e um acabamento próprio. Nunca só pela cor.</p>
+        <ul class="raridades" aria-labelledby="titulo-raridades">
+          <li>
+            <div class="figurinha figurinha-comum" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F; --giro: -1.2deg" aria-hidden="true">
+              <div class="figurinha-arte">
+                <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" focusable="false">
+                  <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+                  <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+                  <text class="busto-numero" x="30" y="57" text-anchor="middle">5</text>
+                </svg>
+              </div>
+              <div class="figurinha-tarja">
+                <span class="figurinha-nome">Amostra</span>
+                <span class="raridade"><span class="raridade-icone raridade-icone-circulo"></span>Comum</span>
+              </div>
+            </div>
+            <div>
+              <h3>Comum</h3>
+              <p>Fosca e sem textura. É a maioria do álbum.</p>
+            </div>
+          </li>
+          <li>
+            <div class="figurinha figurinha-brilhante" style="--campo: #1D4E9E; --camisa: #FFFFFF; --numero: #1D4E9E; --giro: 0.8deg" aria-hidden="true">
+              <div class="figurinha-arte">
+                <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" focusable="false">
+                  <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+                  <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+                  <text class="busto-numero" x="30" y="57" text-anchor="middle">8</text>
+                </svg>
+              </div>
+              <div class="figurinha-tarja">
+                <span class="figurinha-nome">Amostra</span>
+                <span class="raridade"><span class="raridade-icone raridade-icone-losango"></span>Brilhante</span>
+              </div>
+            </div>
+            <div>
+              <h3>Brilhante</h3>
+              <p>Laminada, com listras. Aparece de vez em quando.</p>
+            </div>
+          </li>
+          <li>
+            <div class="figurinha figurinha-lendaria" style="--campo: #B3202A; --camisa: #F6F2F2; --numero: #B3202A; --giro: -0.6deg" aria-hidden="true">
+              <div class="figurinha-arte">
+                <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" focusable="false">
+                  <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+                  <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+                  <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
+                </svg>
+              </div>
+              <div class="figurinha-tarja">
+                <span class="figurinha-nome">Amostra</span>
+                <span class="raridade"><span class="raridade-icone raridade-icone-estrela"></span>Lendária</span>
+              </div>
+            </div>
+            <div>
+              <h3>Lendária</h3>
+              <p>Holográfica, com trama e estrela. A mais difícil de sair.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- COMO TROCAR. À direita, um bilhete com um exemplo de lista de troca. -->
+    <section class="largura secao dobra" aria-labelledby="titulo-trocar">
+      <div class="fluxo">
+        <h2 id="titulo-trocar">Como trocar</h2>
+        <p>As repetidas viram moeda de troca. O site monta a lista do que você tem e do que falta, pronta para mandar aos amigos.</p>
+        <p><a class="botao botao-contorno" href="trocas.html">Ver minhas trocas</a></p>
+      </div>
+
+      <div>
+        <div class="cartao bilhete">
+          <h3>Exemplo de lista de troca</h3>
+          <dl>
+            <dt>Tenho</dt>
+            <dd>012, 045, 045, 201</dd>
+            <dt>Preciso</dt>
+            <dd>007, 088, 133</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- RODAPÉ. É igual nas 7 páginas. -->
