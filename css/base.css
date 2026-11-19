@@ -1,1 +1,463 @@
-/* base.css: estilos gerais da página, do cabeçalho e do rodapé (etapa 3). */
+/* ==========================================================================
+   base.css
+   --------------------------------------------------------------------------
+   O que vale para o site inteiro: fontes, texto, links, foco do teclado,
+   cabeçalho, rodapé e as grades de página. Usa as cores de tokens.css.
+   ========================================================================== */
+
+/* ---------- Fontes ----------
+   Os arquivos ficam em assets/fontes, dentro do projeto: o site não depende
+   de outro site para mostrar as letras. "font-display: swap" mostra o texto
+   na hora com uma fonte do sistema e troca quando a fonte certa carrega. */
+
+@font-face {
+  font-family: "Londrina Solid";
+  src: url("../assets/fontes/londrina-solid-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Londrina Solid";
+  src: url("../assets/fontes/londrina-solid-900.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* A Atkinson é uma fonte "variável": um arquivo só guarda todos os pesos,
+   de 200 a 800. Ela vem em duas partes: "latin" (o português inteiro) e
+   "latin-ext" (letras como ł, ř, ş, de nomes estrangeiros). O unicode-range
+   diz ao navegador quais letras cada arquivo tem; a segunda parte só é
+   baixada se a página usar alguma dessas letras. */
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("../assets/fontes/atkinson-next-normal-latin.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("../assets/fontes/atkinson-next-normal-latin-ext.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("../assets/fontes/atkinson-next-italico-latin.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("../assets/fontes/atkinson-next-italico-latin-ext.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------- Ajustes iniciais ----------
+   Cada navegador tem margens e medidas próprias. Aqui todos partem do mesmo ponto. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* a largura de uma caixa já inclui a borda e o espaço interno */
+}
+
+body, h1, h2, h3, p, ul, ol, dl, dd, figure {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, select, textarea {
+  font: inherit;   /* campos e botões usam a mesma letra do resto da página */
+  color: inherit;
+}
+
+/* ---------- Página ---------- */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* cabeçalho, conteúdo e rodapé empilhados */
+  font-family: var(--fonte-leitura);
+  font-size: var(--texto-base);
+  line-height: var(--entrelinha);
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  overflow-wrap: break-word;   /* palavra comprida demais quebra em vez de empurrar a página */
+}
+
+main {
+  flex: 1;   /* o conteúdo estica e empurra o rodapé para o fim da tela */
+  padding-block: var(--espaco-6) var(--espaco-7);
+}
+
+/* O "Pular para o conteúdo" leva o foco para o <main>. Como ele não é um
+   controle, não precisa do anel de foco em volta da página inteira. */
+main:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Miolo centralizado, com respiro nas laterais */
+.largura {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  margin-inline: auto;
+  padding-inline: var(--espaco-4);
+}
+
+/* ---------- Texto ---------- */
+
+h1, h2, h3 {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  line-height: 1;
+  text-wrap: balance;   /* quebra o título em linhas de tamanho parecido */
+}
+
+h1 { font-size: var(--titulo-1); line-height: 0.95; }
+h2 { font-size: var(--titulo-2); }
+h3 { font-size: var(--titulo-3); line-height: 1.1; }
+
+p {
+  max-width: var(--largura-leitura);
+}
+
+/* Empilha os filhos com o mesmo espaço entre eles */
+.fluxo > * + * {
+  margin-top: var(--espaco-4);
+}
+
+.texto-apoio {
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+/* ---------- Links ----------
+   Todo link é sublinhado: assim ele não depende só da cor para ser reconhecido. */
+
+a {
+  color: var(--cor-acao);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--cor-acao-forte);
+  text-decoration-thickness: 0.16em;
+}
+
+/* ---------- Foco do teclado ----------
+   Dois tons: um anel (outline) e um vão (box-shadow) de claridade oposta.
+   Em qualquer fundo, claro ou escuro, pelo menos um dos dois aparece. */
+
+:focus-visible {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--cor-foco-vao);
+}
+
+/* ---------- Ajudas de acessibilidade ---------- */
+
+/* Esconde da tela, mas o leitor de tela continua lendo */
+.escondido {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* "Pular para o conteúdo": fica fora da tela até receber o foco do teclado */
+.pular {
+  position: absolute;
+  left: var(--espaco-4);
+  top: var(--espaco-2);
+  z-index: 10;
+  padding: var(--espaco-2) var(--espaco-4);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  font-weight: 700;
+  border-radius: var(--raio-ferramenta);
+  transform: translateY(-250%);
+}
+
+.pular:hover {
+  color: var(--cor-etiqueta-texto);
+}
+
+.pular:focus {
+  transform: translateY(0);
+}
+
+/* ---------- Cabeçalho ----------
+   No celular: marca, botão Menu e botão de acessibilidade na primeira linha;
+   o menu abre embaixo. No computador: tudo em uma linha só.
+   O cabeçalho não é fixo: ele sobe com a página, então nunca cobre o foco. */
+
+.cabecalho {
+  border-bottom: 2px solid var(--cor-texto);
+}
+
+.cabecalho-grade {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    "marca botao-menu acessibilidade"
+    "menu  menu       menu";
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-3);
+  padding-block: var(--espaco-3);
+}
+
+.marca {
+  grid-area: marca;
+  justify-self: start;
+  padding-block: var(--espaco-1);
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+.marca:hover {
+  color: var(--cor-texto);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+/* Os dois botões do cabeçalho: contorno de tinta, sem preenchimento */
+.botao-menu,
+.botao-acessibilidade {
+  display: none;   /* só aparecem se o JavaScript estiver ligado (ver abaixo) */
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-width: 2.75rem;
+  min-height: 2.75rem;   /* 44 px: alvo de toque confortável */
+  padding: 0 var(--espaco-3);
+  background: transparent;
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-texto);
+  border-radius: var(--raio-ferramenta);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao-menu:hover,
+.botao-acessibilidade:hover {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+.botao-menu { grid-area: botao-menu; }
+.botao-acessibilidade { grid-area: acessibilidade; }
+
+/* A classe "com-js" é posta no <html> pelo js/tema-acessibilidade.js.
+   Sem JavaScript, os botões que dependem dele nem aparecem e o menu fica sempre aberto. */
+.com-js .botao-menu,
+.com-js .botao-acessibilidade {
+  display: inline-flex;
+}
+
+/* No celular, o texto "Acessibilidade" fica só para o leitor de tela; sobra o ícone */
+.botao-acessibilidade-texto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.menu {
+  grid-area: menu;
+}
+
+.com-js .menu {
+  display: none;
+}
+
+.com-js .menu.menu-aberto {
+  display: block;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: var(--espaco-3);
+  color: var(--cor-texto);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+/* Página atual: sublinhado grosso e peso maior (não depende de cor) */
+.menu a[aria-current="page"] {
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+@media (min-width: 60rem) {
+  .cabecalho-grade {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "marca menu acessibilidade";
+    column-gap: var(--espaco-5);
+  }
+
+  .com-js .botao-menu {
+    display: none;
+  }
+
+  .com-js .menu {
+    display: block;
+  }
+
+  .menu ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .menu .menu-entrar {
+    margin-left: var(--espaco-3);
+    border: 2px solid var(--cor-texto);
+    border-radius: var(--raio-ferramenta);
+  }
+
+  .botao-acessibilidade-texto {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  border-top: 2px solid var(--cor-texto);
+  padding-block: var(--espaco-6);
+  font-size: var(--texto-pequeno);
+}
+
+.rodape-grade {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.rodape-marca {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.rodape-links {
+  list-style: none;
+  padding: 0;
+  columns: 2;
+  column-gap: var(--espaco-5);
+}
+
+.rodape-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.rodape-creditos p + p {
+  margin-top: var(--espaco-2);
+}
+
+@media (min-width: 60rem) {
+  .rodape-grade {
+    grid-template-columns: 1fr 1.2fr 2fr;
+    gap: var(--espaco-6);
+  }
+}
+
+/* ---------- Página dupla ----------
+   A grade principal do site: duas "páginas" de larguras diferentes com uma
+   dobra no meio, como um álbum aberto. No celular vira uma página só. */
+
+.dobra {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.dobra > * {
+  min-width: 0;   /* deixa o conteúdo encolher em telas estreitas */
+}
+
+.dobra > * + * {
+  border-top: 2px solid var(--cor-texto);
+  padding-top: var(--espaco-5);
+}
+
+@media (min-width: 48rem) {
+  .dobra {
+    grid-template-columns: 5fr 7fr;
+    gap: 0;
+  }
+
+  .dobra > * {
+    padding-right: var(--espaco-6);
+  }
+
+  .dobra > * + * {
+    border-top: 0;
+    padding-top: 0;
+    border-left: 2px solid var(--cor-texto);
+    padding-left: var(--espaco-6);
+    padding-right: 0;
+  }
+}
+
+/* Uma seção da página, separada da anterior por um fio impresso */
+.secao {
+  padding-block: var(--espaco-6);
+}
+
+.secao + .secao {
+  border-top: 2px solid var(--cor-texto);
+}
