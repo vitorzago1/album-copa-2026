@@ -1,1 +1,147 @@
-/* acessibilidade.css: painel de acessibilidade e as preferências que ele liga (etapa 3). */
+/* ==========================================================================
+   acessibilidade.css
+   --------------------------------------------------------------------------
+   Duas coisas:
+   1. A aparência do painel de acessibilidade.
+   2. O que cada preferência do painel muda na página.
+
+   As preferências chegam como atributos no <html>, postos pelo
+   js/tema-acessibilidade.js. Exemplo: <html data-tema="escuro" data-fonte="grande">
+   (As cores de cada tema e do alto contraste ficam em tokens.css.)
+   ========================================================================== */
+
+/* ---------- 1. O painel ----------
+   É um <dialog>: uma janela que o próprio navegador sabe abrir por cima da
+   página, prender o foco do teclado dentro dela e fechar com a tecla Esc. */
+
+.painel {
+  width: min(26rem, calc(100% - 2rem));
+  max-height: calc(100% - 2rem);
+  padding: 0;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-texto);
+  border-radius: var(--raio-adesivo);
+}
+
+/* O fundo escurecido atrás do painel */
+.painel::backdrop {
+  background: rgba(10, 16, 40, 0.65);
+}
+
+.painel-dentro {
+  display: grid;
+  gap: var(--espaco-4);
+  padding: var(--espaco-5);
+}
+
+.painel-cabeca {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+}
+
+.painel-cabeca h2 {
+  font-size: var(--titulo-3);
+}
+
+/* Cada grupo de opções é um <fieldset> com a pergunta no <legend> */
+.painel-grupo {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.painel-grupo legend {
+  padding: 0;
+  font-weight: 700;
+}
+
+.painel-pe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+/* Aviso lido pelo leitor de tela quando uma preferência é salva */
+.painel-aviso {
+  min-height: 1.5em;
+  color: var(--cor-sucesso);
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+}
+
+/* ---------- 2. O que cada preferência muda ---------- */
+
+/* Tamanho da letra: como o site inteiro usa rem, basta mudar o tamanho da raiz */
+html[data-fonte="grande"] { font-size: 112.5%; }
+html[data-fonte="maior"] { font-size: 125%; }
+
+/* Mais espaço no texto: linhas, letras, palavras e parágrafos mais afastados
+   (as medidas seguem o critério 1.4.12 do WCAG, com folga) */
+[data-espacamento="amplo"] body {
+  line-height: 1.8;
+  letter-spacing: 0.12em;
+  word-spacing: 0.16em;
+}
+
+[data-espacamento="amplo"] h1,
+[data-espacamento="amplo"] h2,
+[data-espacamento="amplo"] h3 {
+  line-height: 1.25;
+  letter-spacing: 0.04em;
+}
+
+[data-espacamento="amplo"] p + p,
+[data-espacamento="amplo"] .fluxo > * + * {
+  margin-top: 2em;
+}
+
+/* Destacar links: sublinhado grosso, negrito e um fundo atrás */
+[data-links="destacados"] a:not(.botao):not(.marca) {
+  background: var(--cor-superficie);
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+/* Reduzir animações: vale se a pessoa ligou no painel... */
+[data-movimento="reduzido"] *,
+[data-movimento="reduzido"] *::before,
+[data-movimento="reduzido"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ...ou se o próprio aparelho já pede menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Alto contraste: além das cores (tokens.css), as linhas engrossam
+   e a retícula decorativa da figurinha some */
+[data-contraste="alto"] .cartao,
+[data-contraste="alto"] .campo-entrada {
+  border-width: 3px;
+}
+
+[data-contraste="alto"] .figurinha-arte::after {
+  display: none;
+}
+
+[data-contraste="alto"] a {
+  text-decoration-thickness: 2px;
+}
