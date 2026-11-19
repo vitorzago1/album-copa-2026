@@ -19,7 +19,29 @@ As duas licenças estão copiadas em `assets/fontes/LICENCA-*.txt`, do repositó
 
 ## Dados da Copa de 2026
 
-A preencher na etapa de pesquisa. Cada registro de `js/dados.js` terá um campo `fonte`.
+Consulta feita em 19/11/2026. Cada registro de `js/dados.js` tem um campo `fonte` que aponta para uma ou mais destas fontes. Por enquanto só o Grupo C (Brasil, Marrocos, Haiti e Escócia) foi pesquisado.
+
+Como foi conferido:
+
+- Número da camisa, posição e clube: duas listas independentes, que bateram nos 20 jogadores escolhidos (Wikipedia e Football365).
+- Capitães e curiosidades: comunicado da FIFA, confederações (UEFA e Concacaf) e imprensa.
+- Classificação e placares do grupo: página do Grupo C na Wikipedia e relatos de jogo da imprensa.
+
+Fontes:
+
+- FIFA. World Cup 2026: 48 squads confirmed (2 de junho de 2026): https://inside.fifa.com/media-releases/world-cup-2026-48-squads-confirmed
+- Wikipedia. 2026 FIFA World Cup squads: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads
+- Wikipedia. 2026 FIFA World Cup Group C: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_C
+- Football365. Final confirmed squad lists and squad numbers for all 48 nations: https://www.football365.com/news/2026-world-cup-squads-full-48-teams-every-player
+- UEFA. Scotland at the World Cup 2026: https://www.uefa.com/european-qualifiers/news/02a6-20d159741fe9-a2a8fac9839d-1000--scotland-at-the-world-cup-2026-squad-fixtures-group-and-hi/
+- Concacaf. FIFA World Cup 2026 Team Profile: Haiti: https://www.concacaf.com/competitions/fifa-world-cup/news/fifa-world-cup-2026-team-profile-haiti
+- Imprensa (Itatiaia, Diário de Pernambuco, O Popular, FourFourTwo, Sports Illustrated, ESPN, beIN Sports, Al Jazeera, Fox Sports, The National, Heavy, theScore): os endereços completos estão na lista `FONTES`, no começo de `js/dados.js`.
+
+Pendências desta pesquisa:
+
+- A lista oficial de elencos da FIFA em PDF (https://fdp.fifa.org/assetspublic/ce281/pdf/SquadLists-English.pdf) não pôde ser lida de forma automática. Vale abrir e conferir os 20 nomes à mão.
+- O que cada seleção fez depois da fase de grupos está marcado como "a confirmar": a fonte consultada veio com dados confusos.
+- Três curiosidades foram deduzidas da lista de elencos, e não de uma reportagem: El Kaabi (mais gols no elenco), Ricardo Adé (defensor mais velho do elenco) e Brahim Díaz (camisa 10).
 
 ## Normas e documentação das técnicas usadas
 
