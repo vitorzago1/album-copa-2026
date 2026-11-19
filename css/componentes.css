@@ -1,1 +1,459 @@
-/* componentes.css: botão, cartão, figurinha e campo de formulário (etapa 3). */
+/* ==========================================================================
+   componentes.css
+   --------------------------------------------------------------------------
+   As peças que se repetem pelo site: botão, etiqueta, cartão, vaga,
+   figurinha, tira de grupos e campo de formulário.
+
+   Regra dos cantos (vem de tokens.css):
+   - canto vivo  = o que está impresso na página (vaga, tira)
+   - 4 px        = ferramenta (botão, campo)
+   - 10 px       = o que se cola (figurinha, cartão de papel, cupom)
+   Linha tracejada sempre quer dizer picote: "dá para destacar".
+   ========================================================================== */
+
+/* ---------- Botão ---------- */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-2);
+  min-height: 2.75rem;   /* 44 px */
+  padding: 0 var(--espaco-5);
+  background: var(--cor-acao);
+  color: var(--cor-sobre-acao);
+  border: 2px solid var(--cor-acao);
+  border-radius: var(--raio-ferramenta);
+  font-family: var(--fonte-leitura);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: var(--cor-acao-forte);
+  border-color: var(--cor-acao-forte);
+  color: var(--cor-sobre-acao);
+}
+
+/* O botão "afunda" um pouco ao ser apertado: resposta ao toque */
+.botao:active {
+  transform: translateY(1px);
+}
+
+/* Botão secundário: só o contorno, na cor da tinta */
+.botao-contorno {
+  background: transparent;
+  color: var(--cor-texto);
+  border-color: var(--cor-texto);
+}
+
+.botao-contorno:hover {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  border-color: var(--cor-texto);
+}
+
+/* Botão desligado: continua legível, mas com cara de "agora não" */
+.botao[disabled],
+.botao[aria-disabled="true"] {
+  background: var(--cor-vaga);
+  color: var(--cor-texto-secundario);
+  border-color: var(--cor-borda);
+  cursor: not-allowed;
+}
+
+/* ---------- Etiqueta ----------
+   O negativo da tinta: destaca "Nova" e "Repetida" sem trazer cor nova. */
+
+.etiqueta {
+  display: inline-block;
+  padding: 0.1em 0.55em;
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-radius: 3px;
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ---------- Cartão ----------
+   Um papel solto em cima da página: mais claro que o fundo e com canto de 10 px. */
+
+.cartao {
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio-adesivo);
+  padding: var(--espaco-5);
+}
+
+.cartao > * + * {
+  margin-top: var(--espaco-3);
+}
+
+/* Cupom: um cartão com canhoto. A linha tracejada é o picote. */
+.cupom-canhoto {
+  margin-top: var(--espaco-4);
+  padding-top: var(--espaco-4);
+  border-top: 2px dashed var(--cor-borda);
+}
+
+/* ---------- Vaga ----------
+   O espaço vazio do álbum, impresso na página: canto vivo e número grande. */
+
+.vaga {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-1);
+  background: var(--cor-vaga);
+  color: var(--cor-texto-secundario);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-impresso);
+  text-align: center;
+}
+
+.vaga-numero {
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.vaga-legenda {
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+}
+
+/* ---------- Figurinha ----------
+   Um adesivo: canto de 10 px e moldura do próprio papel.
+   A cor da moldura já diz a raridade: branca (comum), prata (brilhante), ouro (lendária).
+   Mesmo assim a raridade vem SEMPRE escrita, com um ícone e uma textura:
+   nunca depende só da cor.
+
+   As cores da seleção entram por variáveis no HTML:
+     style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F"
+   Nenhum texto é escrito em cima dessas cores, só na tarja. */
+
+.figurinha {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  background: var(--material, var(--cor-figurinha-papel));
+  color: var(--cor-figurinha-tinta);
+  border-radius: var(--raio-adesivo);
+  box-shadow: var(--sombra-colada);
+  transform: rotate(var(--giro, 0deg));   /* colada à mão: levemente torta */
+}
+
+/* Figurinha na mão, ainda não colada: sem sombra e mais torta */
+.figurinha-solta {
+  box-shadow: 0 0 0 1.5px var(--cor-borda);
+}
+
+.figurinha-arte {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--campo, #8A8FB0);
+  border-radius: 6px 6px 0 0;
+}
+
+/* Retícula: os pontinhos de impressão que fazem a sombra do retrato.
+   São bolinhas desenhadas com gradiente, mais fortes embaixo. */
+.figurinha-arte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(20, 32, 79, 0.45) 1px, transparent 1.4px) 0 0 / 5px 5px;
+  -webkit-mask-image: linear-gradient(to top, #000, transparent 65%);
+  mask-image: linear-gradient(to top, #000, transparent 65%);
+}
+
+/* O retrato é genérico: uma cabeça lisa e uma camisa com o número.
+   Não é foto nem desenho de nenhuma pessoa. */
+.figurinha-busto {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 88%;
+}
+
+.busto-cabeca {
+  fill: var(--cor-figurinha-tinta);
+}
+
+.busto-camisa {
+  fill: var(--camisa, #FFFFFF);
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 1.5;
+}
+
+.busto-numero {
+  fill: var(--numero, var(--cor-figurinha-tinta));
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 15px;
+}
+
+/* Tarja: a faixa de baixo, onde fica o texto */
+.figurinha-tarja {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 10px 4px 2px;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+
+/* A faixinha de textura no topo da tarja (o "acabamento" da figurinha) */
+.figurinha-tarja::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  background: var(--trama, transparent);
+}
+
+.figurinha-nome {
+  font-weight: 600;
+}
+
+.figurinha-numero {
+  color: var(--cor-figurinha-tinta);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Comum: fosca, sem textura */
+.figurinha-comum {
+  --material: var(--cor-figurinha-papel);
+}
+
+/* Brilhante: laminada, com listras diagonais */
+.figurinha-brilhante {
+  --material: var(--cor-prata-clara);
+  --trama: repeating-linear-gradient(115deg, var(--cor-prata) 0 4px, var(--cor-figurinha-tinta) 4px 6px);
+}
+
+/* Lendária: holográfica, com trama de losangos */
+.figurinha-lendaria {
+  --material: var(--cor-ouro);
+  --trama:
+    linear-gradient(45deg, transparent 42%, var(--cor-figurinha-tinta) 42% 58%, transparent 58%) 0 0 / 6px 6px,
+    linear-gradient(-45deg, transparent 42%, var(--cor-figurinha-tinta) 42% 58%, transparent 58%) 0 0 / 6px 6px;
+}
+
+/* Reflexo parado sobre o retrato da brilhante e da lendária */
+.figurinha-brilhante .figurinha-arte::before,
+.figurinha-lendaria .figurinha-arte::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
+}
+
+/* Etiqueta presa na figurinha: usa a tinta e o papel da própria figurinha,
+   porque a figurinha não muda de cor quando o tema muda. */
+.figurinha .etiqueta {
+  position: absolute;
+  z-index: 2;
+  top: -8px;
+  right: -8px;
+  background: var(--cor-figurinha-tinta);
+  color: var(--cor-figurinha-papel);
+  outline: 2px solid var(--cor-figurinha-papel);
+}
+
+/* ---------- Raridade: palavra + ícone ---------- */
+
+.raridade {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.raridade-icone {
+  flex: none;
+  width: 0.75em;
+  height: 0.75em;
+  background: currentColor;
+}
+
+.raridade-icone-circulo {
+  border-radius: 50%;
+}
+
+.raridade-icone-losango {
+  transform: rotate(45deg) scale(0.85);
+}
+
+/* Estrela de cinco pontas, recortada com clip-path (uma lista de pontos x y) */
+.raridade-icone-estrela {
+  width: 1em;
+  height: 1em;
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* ---------- Tira de grupos ----------
+   12 casas, uma por grupo (A a L). O preenchimento sobe conforme o grupo
+   enche: a variável --parte vai de 0 (vazio) a 1 (completo). */
+
+.tira {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--espaco-2);
+}
+
+.tira-casa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-1);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+.tira-quadro {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid var(--cor-borda);
+  background: linear-gradient(to top, var(--cor-texto) calc(var(--parte, 0) * 100%), var(--cor-vaga) 0);
+}
+
+@media (min-width: 40rem) {
+  .tira {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Passos numerados ----------
+   Só para o que é sequência de verdade (primeiro isto, depois aquilo). */
+
+.passos {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--espaco-5);
+  counter-reset: passo;
+}
+
+.passos > li {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;   /* o título fica colado no texto; a sobra de altura vai para baixo */
+  column-gap: var(--espaco-3);
+  align-items: start;
+}
+
+.passos > li::before {
+  content: counter(passo);
+  grid-row: span 2;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 0.85;
+}
+
+.passos h3 {
+  font-size: var(--titulo-3);
+}
+
+@media (min-width: 48rem) {
+  .passos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Campo de formulário ---------- */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-1);
+  max-width: 28rem;
+}
+
+.campo-rotulo {
+  font-weight: 700;
+}
+
+.campo-dica {
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+.campo-entrada {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-ferramenta);
+}
+
+textarea.campo-entrada {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* Campo com erro: a borda engrossa e muda de cor, e a mensagem vem com ícone e texto */
+.campo-entrada[aria-invalid="true"] {
+  border-width: 3px;
+  border-color: var(--cor-erro);
+}
+
+.campo-erro {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-2);
+  color: var(--cor-erro);
+  font-size: var(--texto-pequeno);
+  font-weight: 600;
+}
+
+.campo-erro svg {
+  flex: none;
+  margin-top: 0.1em;
+}
+
+/* O "x" desenhado dentro do ícone de cartão usa a cor do papel */
+.campo-erro .cartao-x {
+  stroke: var(--cor-superficie);
+}
+
+/* Caixas de marcar e de escolher: maiores e na cor da ação */
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+
+.opcao input {
+  flex: none;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0;
+  accent-color: var(--cor-acao);
+  cursor: pointer;
+}
