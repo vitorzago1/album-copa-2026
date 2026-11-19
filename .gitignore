@@ -1,0 +1,15 @@
+# Arquivos que o git não deve guardar.
+
+# Lixo do sistema operacional
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Pastas de ferramentas (não fazem parte do site)
+node_modules/
+.claude/
+.vscode/
+
+# Arquivos temporários
+*.tmp
+*.log
