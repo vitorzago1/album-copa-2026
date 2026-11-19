@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sobre o projeto | Colei!</title>
+  <meta name="description" content="Projeto acadêmico de Desenvolvimento de Interfaces: o que foi usado e como foi feito.">
+
+  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
+       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
+  <script src="js/tema-acessibilidade.js"></script>
+  <script src="js/menu.js" defer></script>
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/paginas.css">
+  <link rel="stylesheet" href="css/acessibilidade.css">
+</head>
+<body>
+  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
+  <header class="cabecalho">
+    <div class="largura cabecalho-grade">
+      <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
+
+      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
+      <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+
+      <nav class="menu" id="menu-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="album.html">Álbum</a></li>
+          <li><a href="pacotinhos.html">Pacotinhos</a></li>
+          <li><a href="trocas.html">Trocas</a></li>
+          <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a class="menu-entrar" href="login.html">Entrar</a></li>
+        </ul>
+      </nav>
+
+      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
+      <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
+        <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
+          <path d="M4 8.5h16M12 8.5v6M8 21l4-6.5 4 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="botao-acessibilidade-texto">Acessibilidade</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="largura">
+      <h1>Sobre o projeto</h1>
+      <p>Este site é o Projeto Final da disciplina Desenvolvimento de Interfaces (CEUB, 2/2026). Os detalhes da construção entram aqui em uma das próximas versões.</p>
+    </div>
+  </main>
+
+  <!-- RODAPÉ. É igual nas 7 páginas. -->
+  <footer class="rodape">
+    <div class="largura rodape-grade">
+      <div class="rodape-sobre">
+        <p class="rodape-marca">Colei!</p>
+        <p>O álbum de figurinhas da Copa de 2026.</p>
+      </div>
+
+      <nav aria-label="Rodapé">
+        <ul class="rodape-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="album.html">Álbum</a></li>
+          <li><a href="pacotinhos.html">Pacotinhos</a></li>
+          <li><a href="trocas.html">Trocas</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html">Entrar</a></li>
+          <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+        </ul>
+      </nav>
+
+      <div class="rodape-creditos">
+        <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
+        <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next, com licença livre (OFL). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
