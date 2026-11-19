@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sobre o projeto | Colei!</title>
   <meta name="description" content="Projeto acadêmico de Desenvolvimento de Interfaces: o que foi usado e como foi feito.">
+  <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
   <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
@@ -53,10 +54,100 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura">
+    <div class="largura fluxo">
       <h1>Sobre o projeto</h1>
       <p>Este site é o Projeto Final da disciplina Desenvolvimento de Interfaces (CEUB, 2/2026). Os detalhes da construção entram aqui em uma das próximas versões.</p>
     </div>
+
+    <!-- GUIA DE ESTILO: as peças do site, todas juntas. Serve de consulta e de teste dos temas. -->
+    <section class="largura secao fluxo guia" aria-labelledby="titulo-guia">
+      <h2 id="titulo-guia">Guia de estilo</h2>
+      <p>As peças que o site usa, todas juntas. Troque o tema no botão Acessibilidade e veja como cada uma se comporta.</p>
+
+      <h3>Botões</h3>
+      <p class="guia-linha">
+        <button class="botao" type="button">Colar figurinha</button>
+        <button class="botao botao-contorno" type="button">Guardar nas repetidas</button>
+        <button class="botao" type="button" disabled>Pacotinho já aberto</button>
+      </p>
+
+      <h3>Etiquetas</h3>
+      <p class="guia-linha">
+        <span class="etiqueta">Nova</span>
+        <span class="etiqueta">Repetida ×2</span>
+      </p>
+
+      <h3>Campo de formulário</h3>
+      <p class="texto-apoio">Campos de exemplo: não enviam nada.</p>
+      <div class="guia-colunas">
+        <div class="campo">
+          <label class="campo-rotulo" for="guia-nome">Nome</label>
+          <span class="campo-dica" id="guia-nome-dica">Como você quer ser chamado.</span>
+          <input class="campo-entrada" id="guia-nome" type="text" autocomplete="off" aria-describedby="guia-nome-dica">
+        </div>
+
+        <!-- Campo com erro: borda grossa, ícone de cartão e frase que explica o conserto. -->
+        <div class="campo">
+          <label class="campo-rotulo" for="guia-email">E-mail</label>
+          <input class="campo-entrada" id="guia-email" type="email" value="nome.exemplo" autocomplete="off" aria-invalid="true" aria-describedby="guia-email-erro">
+          <span class="campo-erro" id="guia-email-erro">
+            <svg viewBox="0 0 16 20" width="16" height="20" aria-hidden="true" focusable="false">
+              <rect x="1" y="1" width="14" height="18" rx="2" fill="currentColor"/>
+              <path class="cartao-x" d="M5 7l6 6M11 7l-6 6" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Faltou o @ no e-mail. Escreva como nome@exemplo.com.
+          </span>
+        </div>
+      </div>
+
+      <h3>Vaga e figurinhas</h3>
+      <div class="guia-figurinhas">
+        <div class="vaga"><span class="vaga-numero">127</span><span class="vaga-legenda">Falta</span></div>
+
+        <div class="figurinha figurinha-comum" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F">
+          <div class="figurinha-arte">
+            <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+              <text class="busto-numero" x="30" y="57" text-anchor="middle">5</text>
+            </svg>
+          </div>
+          <div class="figurinha-tarja">
+            <span class="figurinha-nome">Amostra</span>
+            <span class="raridade"><span class="raridade-icone raridade-icone-circulo" aria-hidden="true"></span>Comum</span>
+          </div>
+        </div>
+
+        <div class="figurinha figurinha-brilhante" style="--campo: #1D4E9E; --camisa: #FFFFFF; --numero: #1D4E9E">
+          <span class="etiqueta">Nova</span>
+          <div class="figurinha-arte">
+            <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+              <text class="busto-numero" x="30" y="57" text-anchor="middle">8</text>
+            </svg>
+          </div>
+          <div class="figurinha-tarja">
+            <span class="figurinha-nome">Amostra</span>
+            <span class="raridade"><span class="raridade-icone raridade-icone-losango" aria-hidden="true"></span>Brilhante</span>
+          </div>
+        </div>
+
+        <div class="figurinha figurinha-lendaria" style="--campo: #B3202A; --camisa: #F6F2F2; --numero: #B3202A">
+          <div class="figurinha-arte">
+            <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
+              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
+              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
+              <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
+            </svg>
+          </div>
+          <div class="figurinha-tarja">
+            <span class="figurinha-nome">Amostra</span>
+            <span class="raridade"><span class="raridade-icone raridade-icone-estrela" aria-hidden="true"></span>Lendária</span>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- RODAPÉ. É igual nas 7 páginas. -->
