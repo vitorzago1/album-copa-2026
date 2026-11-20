@@ -31,9 +31,10 @@ album-copa-2026/
 ├── css/      estilos (cores, base, componentes, páginas, acessibilidade)
 ├── js/       comportamento, um arquivo por assunto:
 │             dados.js (seleções e figurinhas), estado.js (progresso guardado),
-│             figurinha.js (desenho e virar), album.js, pacotinho.js, inicio.js,
-│             demonstracao.js, menu.js e tema-acessibilidade.js
-├── assets/   bandeiras, SVG e fontes
+│             figurinha.js (desenho e virar), album.js, pacotinho.js, trocas.js,
+│             inicio.js, carrossel.js, login.js, contato.js, formulario.js,
+│             sobre.js, demonstracao.js, menu.js e tema-acessibilidade.js
+├── assets/   bandeiras, fotos dos estádios, SVG e fontes
 ├── docs/     cores, decisões, referências, prints e anexo de código
 ├── scripts/  ferramentas de apoio (contraste, anexo de código)
 ├── README.md
@@ -94,6 +95,18 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 11. **Bandeiras.** As 4 bandeiras vêm da biblioteca `flag-icons` (licença MIT), copiadas para `assets/bandeiras/`. Só os arquivos SVG foram usados: nenhum código da biblioteca roda no site.
 12. **Testes.** 114 verificações automáticas novas (regras do álbum, colar, desfazer, arrastar, virar, abas pelo teclado, busca, filtros, pacotinho, 320 px, menos movimento), além das 42 da etapa 3. O script de contraste passou a conferir 140 pares, com 0 reprovados.
 
+### Etapa 6: as outras páginas (entra na versão `v0.4-acessibilidade`)
+
+1. **Entrar (`login.html` e `js/login.js`).** Criar conta, entrar e sair. É uma simulação: não existe servidor, e isso está escrito na própria página. Os campos têm `label`, `autocomplete` (`email`, `current-password`, `new-password`), botão de mostrar a senha e mensagens de erro ligadas ao campo. Colar a senha e usar gerenciador de senhas funcionam.
+2. **A senha nunca é guardada.** Guarda-se o "hash" dela, feito com a ferramenta `crypto.subtle` do navegador (algoritmo SHA-256). Hash é como um moedor de carne: a senha entra, sai uma sequência de letras e números, e não há caminho de volta. Para conferir a senha, mói-se de novo o que foi digitado e compara-se o resultado. Antes de moer, a senha é misturada a um "sal", um tempero sorteado para cada conta: assim duas contas com a mesma senha ficam com hashes diferentes. Em um site de verdade essa conta seria feita no servidor, com um algoritmo lento de propósito.
+3. **Álbum por pessoa.** Quem entra passa a usar o álbum da própria conta. Ao criar a conta, as figurinhas de visitante vão junto. O menu mostra "Minha conta" no lugar de "Entrar".
+4. **Contato (`contato.html` e `js/contato.js`).** Nome, e-mail, assunto e mensagem. Ao enviar com erro, cada campo ganha a sua frase e um resumo no topo lista o que falta, com link para cada campo. Ao enviar certo, a mensagem de sucesso é lida pelo leitor de tela (`aria-live`). O envio é simulado.
+5. **Trocas (`trocas.html` e `js/trocas.js`).** Lista das repetidas e das que faltam, texto pronto para copiar ou mandar pelo WhatsApp (link `wa.me`) e a "banca de trocas", que simula uma troca: sai uma repetida e chega uma figurinha que faltava.
+6. **Carrossel das 16 sedes (`index.html` e `js/carrossel.js`).** Uma sede por vez, com foto do estádio, botões Anterior e Próxima, um botão numerado para cada sede e a posição anunciada ("3 de 16: Dallas"). Não passa sozinho.
+7. **Fotos em uma tinta só.** As 16 fotos vêm do Wikimedia Commons, com licença livre. O arquivo é colorido; o CSS é que mostra a foto como se fosse impressa com a tinta da página (duas camadas de cor por cima de uma foto em preto e branco).
+8. **Sobre (`sobre.html` e `js/sobre.js`).** O que é o projeto, o que é de verdade e o que é simulado, como foi feito, os créditos de fontes, bandeiras e fotos, e as fontes dos dados.
+9. **Testes.** 67 verificações automáticas novas (conta, hash, erros de formulário, trocas, carrossel, créditos). Somando as etapas anteriores, são 223.
+
 ## Como conferir o contraste
 
 Com o Node.js instalado, na pasta do projeto:
@@ -110,6 +123,8 @@ O script reescreve `docs/cores.md` e avisa se algum par de cores reprovar.
 - Git e GitHub para o histórico de versões.
 - Node.js só para rodar o script de contraste (o site em si não precisa dele).
 - `flag-icons` (licença MIT): só as imagens das bandeiras, copiadas para dentro do projeto. Motivo: desenhar à mão cada bandeira com fidelidade daria muito trabalho e mais chance de erro, e o enunciado do projeto permite bandeiras de fonte com licença livre.
+- Fotos do Wikimedia Commons (licenças CC BY, CC BY-SA, CC0 e domínio público), com autor e licença de cada uma na página Sobre e em `docs/referencias.md`.
+- `crypto.subtle` (já vem no navegador): calcula o hash da senha. Não é biblioteca externa.
 
 ## Documentação
 

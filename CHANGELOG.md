@@ -2,6 +2,18 @@
 
 O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 
+## A caminho da v0.4 (ainda sem marca)
+
+- Página Entrar: criar conta, entrar e sair, com a senha guardada só como hash (SHA-256 com sal). Simulação, sem servidor.
+- Álbum separado por conta; as figurinhas de visitante vão para a conta nova; o menu mostra "Minha conta".
+- Página Contato: formulário com validação, resumo dos erros e mensagem de sucesso anunciada. Envio simulado.
+- Página Trocas: repetidas, faltantes, lista para copiar ou mandar pelo WhatsApp e banca de trocas (simulação).
+- Nova conquista: "Primeira troca".
+- Carrossel das 16 sedes na página inicial, com fotos dos estádios mostradas em uma tinta só.
+- Dados das 16 sedes em `js/dados.js`, com fonte.
+- Página Sobre: o que é o projeto, o que é simulado, créditos e fontes dos dados.
+- Crédito das fotos no rodapé.
+
 ## v0.3-album (20/11/2026)
 
 - Dados do Grupo C em `js/dados.js`: 4 seleções e 24 figurinhas, com fonte em cada registro.
