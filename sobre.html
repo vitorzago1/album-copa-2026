@@ -16,6 +16,7 @@
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/demonstracao.js" defer></script>
+  <script src="js/sobre.js" defer></script>
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -59,10 +60,89 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura fluxo">
-      <h1>Sobre o projeto</h1>
-      <p>Este site é o Projeto Final da disciplina Desenvolvimento de Interfaces (CEUB, 2/2026). Os detalhes da construção entram aqui em uma das próximas versões.</p>
-    </div>
+
+    <!-- O QUE É. Página dupla: à esquerda a apresentação, à direita a ficha do projeto. -->
+    <section class="largura dobra">
+      <div class="fluxo">
+        <h1>Sobre o projeto</h1>
+        <p class="abertura-texto">O Colei! é um álbum de figurinhas digital da Copa do Mundo de 2026. Foi feito como Projeto Final da disciplina Desenvolvimento de Interfaces, do CEUB.</p>
+        <p>É um projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
+      </div>
+
+      <dl class="sobre-ficha">
+        <dt>Aluno</dt>
+        <dd>Vitor Zago Pontes Morais</dd>
+        <dt>Disciplina</dt>
+        <dd>Desenvolvimento de Interfaces, 2/2026, CEUB</dd>
+        <dt>Professor</dt>
+        <dd>Prof. Dr. Felipe Batista da Silva</dd>
+        <dt>Código e histórico de versões</dt>
+        <dd><a href="https://github.com/vitorzago1/album-copa-2026">github.com/vitorzago1/album-copa-2026</a></dd>
+      </dl>
+    </section>
+
+    <!-- O QUE É DE VERDADE E O QUE É SIMULADO. -->
+    <section class="largura secao dobra">
+      <div class="fluxo">
+        <h2>O que é de verdade</h2>
+        <ul class="lista-simples">
+          <li>As seleções, os jogadores, os clubes, os resultados e os estádios vêm de pesquisa. Cada dado tem a fonte anotada.</li>
+          <li>O que não foi possível confirmar aparece escrito como "a confirmar".</li>
+          <li>As fotos, as bandeiras e as fontes de letra têm licença livre, com o crédito mais abaixo.</li>
+        </ul>
+      </div>
+
+      <div class="fluxo">
+        <h2>O que é simulado</h2>
+        <ul class="lista-simples">
+          <li>Não existe servidor. O álbum, a conta e as preferências ficam guardados só no navegador em que o site foi aberto.</li>
+          <li>O login serve para separar o álbum de cada pessoa neste navegador. Não é um login de verdade.</li>
+          <li>O formulário de contato confere os campos, mas não envia a mensagem.</li>
+          <li>A banca de trocas sorteia as ofertas. Não há outra pessoa do outro lado.</li>
+          <li>O retrato das figurinhas é um desenho genérico. Não representa nenhum jogador.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- COMO FOI FEITO. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-feito">
+      <h2 id="titulo-feito">Como foi feito</h2>
+      <ul class="lista-simples">
+        <li>HTML, CSS e JavaScript puros, sem framework e sem etapa de build. O site abre direto do arquivo <code>index.html</code>.</li>
+        <li>Sete páginas com o mesmo cabeçalho e o mesmo rodapé.</li>
+        <li>Meta de acessibilidade: WCAG 2.2, nível AA, nos temas claro e escuro. O contraste de cada par de cores é calculado por um script.</li>
+        <li>Tudo funciona pelo teclado. O que se faz arrastando também se faz por botão.</li>
+        <li>O histórico de versões fica no GitHub, com uma marca em cada etapa.</li>
+        <li>Inteligência artificial usada: Claude Code (modelo Claude, da Anthropic), para escrever código, pesquisar os dados e montar a documentação técnica, a partir das decisões do aluno.</li>
+      </ul>
+    </section>
+
+    <!-- CRÉDITOS. A lista das fotos é montada pelo js/sobre.js, a partir de js/dados.js. -->
+    <section class="largura secao fluxo" id="creditos" aria-labelledby="titulo-creditos">
+      <h2 id="titulo-creditos">Créditos</h2>
+
+      <h3>Fontes de letra</h3>
+      <ul class="lista-simples">
+        <li>Londrina Solid, de Marcelo Magalhães. Licença SIL Open Font License 1.1.</li>
+        <li>Atkinson Hyperlegible Next, do Braille Institute of America. Licença SIL Open Font License 1.1.</li>
+      </ul>
+
+      <h3>Bandeiras</h3>
+      <p>Biblioteca <a href="https://github.com/lipis/flag-icons">flag-icons</a>, de Panayiotis Lipiridis. Licença MIT.</p>
+
+      <h3>Fotos dos estádios</h3>
+      <p>Todas vêm do Wikimedia Commons. Foram reduzidas para 960 pixels de largura e, no site, aparecem na cor da tinta da página por um efeito feito no CSS. O link de cada linha leva à foto original.</p>
+      <ul class="lista-fontes" id="creditos-fotos"></ul>
+      <noscript><p>A lista completa das fotos está no arquivo <code>docs/referencias.md</code> do repositório.</p></noscript>
+    </section>
+
+    <!-- FONTES DOS DADOS. Lista montada pelo js/sobre.js, a partir de js/dados.js. -->
+    <section class="largura secao fluxo" id="fontes" aria-labelledby="titulo-fontes">
+      <h2 id="titulo-fontes">Fontes dos dados</h2>
+      <p>De onde vieram os dados da Copa usados no álbum. Consultas feitas em novembro de 2026.</p>
+      <ul class="lista-fontes" id="fontes-dados"></ul>
+      <noscript><p>A lista completa das fontes está no arquivo <code>docs/referencias.md</code> do repositório.</p></noscript>
+    </section>
 
     <!-- MODO DEMONSTRAÇÃO: para testar o álbum na apresentação sem esperar um pacotinho por dia.
          Os botões são ligados pelo js/demonstracao.js. -->
@@ -206,7 +286,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Fotos dos estádios: Wikimedia Commons. Os créditos completos ficam na página <a href="sobre.html#creditos">Sobre</a>.</p>
       </div>
     </div>
   </footer>
