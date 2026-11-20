@@ -342,6 +342,90 @@ html {
   max-width: none;
 }
 
+/* ---------- Trocas ---------- */
+
+/* Tenho para trocar: uma linha impressa por figurinha, com a contagem na ponta */
+.lista-troca {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-troca > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-1) var(--espaco-3);
+  padding-block: var(--espaco-2);
+  border-bottom: 1.5px solid var(--cor-borda);
+}
+
+/* Preciso: os números que faltam, cada um em um quadrinho impresso (como uma vaga pequena) */
+.lista-faltam {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+.lista-faltam > li {
+  padding: 0.15em 0.55em;
+  background: var(--cor-vaga);
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-borda);
+  font-size: var(--texto-pequeno);
+}
+
+/* A lista pronta ocupa o cartão inteiro */
+.bilhete .campo {
+  max-width: none;
+}
+
+/* Banca: as duas perguntas lado a lado quando há largura */
+.banca-grade {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+@media (min-width: 48rem) {
+  .banca-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Sobre ---------- */
+
+.sobre-ficha dt {
+  font-weight: 700;
+}
+
+.sobre-ficha dd + dt {
+  margin-top: var(--espaco-3);
+}
+
+/* Listas de créditos e de fontes: uma linha impressa por item */
+.lista-fontes {
+  list-style: none;
+  padding: 0;
+  font-size: var(--texto-pequeno);
+}
+
+.lista-fontes > li {
+  padding-block: var(--espaco-2);
+  border-bottom: 1.5px solid var(--cor-borda);
+}
+
+/* Lista comum, com marcador, dentro do texto corrido */
+.lista-simples {
+  padding-left: 1.2em;
+  max-width: var(--largura-leitura);
+}
+
+.lista-simples > li + li {
+  margin-top: var(--espaco-2);
+}
+
 /* ---------- Sobre: guia de estilo ----------
    As peças do site todas juntas, para consulta e para testar os temas. */
 

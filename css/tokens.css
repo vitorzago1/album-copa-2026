@@ -49,6 +49,11 @@
   --cor-prata-clara: #ECEEF3;
   --cor-ouro: #F2C230;               /* lendária: holográfico */
 
+  /* Foto impressa em uma tinta só: a parte escura da foto sai na cor da tinta
+     e a parte clara fica na cor do papel */
+  --cor-foto-sombra: #14204F;
+  --cor-foto-luz: #F6CDD7;
+
   /* Sombra da figurinha colada (só ela tem sombra no site) */
   --sombra-colada: 0 0 0 1.5px var(--cor-borda), 3px 4px 0 0 rgba(20, 32, 79, 0.55);
 }
@@ -82,6 +87,11 @@
   --cor-prata-clara: #DDE1E9;
   --cor-ouro: #E0AC1F;
 
+  /* No escuro o papel é que é escuro: a sombra da foto fica no azul do rebaixo
+     e a luz, na tinta rosa */
+  --cor-foto-sombra: #131D4A;
+  --cor-foto-luz: #FBE3E9;
+
   /* No escuro não se vê sombra: a figurinha colada ganha só o contorno */
   --sombra-colada: 0 0 0 1.5px var(--cor-borda);
 }
@@ -114,6 +124,10 @@
   --cor-prata: #D9D9D9;
   --cor-prata-clara: #FFFFFF;
   --cor-ouro: #FFE066;
+
+  /* No alto contraste (claro e escuro) a foto fica em preto e branco */
+  --cor-foto-sombra: #000000;
+  --cor-foto-luz: #FFFFFF;
 
   --sombra-colada: 0 0 0 2px var(--cor-borda);
 }

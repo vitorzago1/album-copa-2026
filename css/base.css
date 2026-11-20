@@ -148,6 +148,13 @@ p {
   max-width: var(--largura-leitura);
 }
 
+/* Nome de arquivo ou de comando no meio do texto: mesma letra, mais pesada.
+   (Sem isto o navegador usaria uma terceira fonte, de máquina de escrever.) */
+code {
+  font-family: inherit;
+  font-weight: 700;
+}
+
 /* Empilha os filhos com o mesmo espaço entre eles */
 .fluxo > * + * {
   margin-top: var(--espaco-4);
