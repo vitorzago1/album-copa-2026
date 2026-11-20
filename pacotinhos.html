@@ -12,6 +12,13 @@
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
 
+  <!-- Os scripts dos pacotinhos, nesta ordem: os dados, o caderninho do progresso,
+       o desenho da figurinha e, por último, a página. -->
+  <script src="js/dados.js" defer></script>
+  <script src="js/estado.js" defer></script>
+  <script src="js/figurinha.js" defer></script>
+  <script src="js/pacotinho.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -54,10 +61,39 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura">
-      <h1>Pacotinhos</h1>
-      <p>Aqui você vai abrir o pacotinho do dia, com cinco figurinhas. Ele chega em uma das próximas versões.</p>
-    </div>
+
+    <!-- Página dupla: à esquerda a situação de hoje e a cartela da sequência;
+         à direita o palco, onde fica o pacotinho e, depois de rasgar, as figurinhas. -->
+    <section class="largura dobra">
+      <div class="fluxo">
+        <h1>Pacotinhos</h1>
+        <p class="abertura-texto" id="situacao">Todo dia tem um pacotinho grátis com cinco figurinhas.</p>
+        <p id="extras-texto" hidden></p>
+
+        <article class="cartao" aria-labelledby="titulo-sequencia">
+          <h2 id="titulo-sequencia">Sua sequência</h2>
+          <ol class="cartela" id="cartela" aria-label="Cartela de sete dias seguidos">
+            <li><span class="escondido">Dia </span>1</li>
+            <li><span class="escondido">Dia </span>2</li>
+            <li><span class="escondido">Dia </span>3</li>
+            <li><span class="escondido">Dia </span>4</li>
+            <li><span class="escondido">Dia </span>5</li>
+            <li><span class="escondido">Dia </span>6</li>
+            <li><span class="escondido">Dia </span>7</li>
+          </ol>
+          <p class="texto-apoio" id="sequencia-texto">Cada pacotinho do dia ganha um carimbo.</p>
+        </article>
+
+        <p class="texto-apoio">A comum sai bastante, a brilhante de vez em quando e a lendária quase nunca. Para testar sem esperar o dia seguinte, use o <a href="sobre.html#demonstracao">modo demonstração</a>.</p>
+        <noscript><p>Os pacotinhos precisam do JavaScript ligado no navegador.</p></noscript>
+      </div>
+
+      <!-- O conteúdo do palco é montado pelo js/pacotinho.js. -->
+      <div class="palco" id="palco"></div>
+    </section>
+
+    <!-- Recado para o leitor de tela (escondido da tela, mas lido em voz alta). -->
+    <p class="escondido" id="aviso" role="status"></p>
   </main>
 
   <!-- RODAPÉ. É igual nas 7 páginas. -->
@@ -84,7 +120,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next, com licença livre (OFL). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
       </div>
     </div>
   </footer>
