@@ -195,9 +195,64 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Foco (anel ou vão) em volta do botão principal | `#000000` | `#9CB4FF` | 10,39:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre área na cor da tinta | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 
+## Contraste: cores das seleções
+
+O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.
+
+| Seleção | Campo | Camisa | Número | Número sobre a camisa | Silhueta sobre o campo | Resultado |
+|---|---|---|---|---|---|---|
+| México | `#D9534F` | `#0B6B3A` | `#FFFFFF` | 6,61:1 | 3,93:1 | Passa (3:1) |
+| África do Sul | `#2E9E6B` | `#F7C531` | `#0B5A3C` | 5,11:1 | 4,61:1 | Passa (3:1) |
+| Coreia do Sul | `#DCE6F5` | `#D8242F` | `#FFFFFF` | 4,98:1 | 12,36:1 | Passa (3:1) |
+| Tchéquia | `#5B8BD6` | `#C8102E` | `#FFFFFF` | 5,88:1 | 4,53:1 | Passa (3:1) |
+| Canadá | `#F0E6E6` | `#D52B1E` | `#FFFFFF` | 5,01:1 | 12,72:1 | Passa (3:1) |
+| Bósnia e Herzegovina | `#F2D34B` | `#1F4AA8` | `#FFFFFF` | 8,07:1 | 10,52:1 | Passa (3:1) |
+| Catar | `#E9DDE2` | `#8A1538` | `#FFFFFF` | 9,35:1 | 11,79:1 | Passa (3:1) |
+| Suíça | `#EADADA` | `#D52B1E` | `#FFFFFF` | 5,01:1 | 11,52:1 | Passa (3:1) |
+| Brasil | `#228B59` | `#F7D417` | `#1B3F8F` | 6,68:1 | 3,64:1 | Passa (3:1) |
+| Marrocos | `#2E9B5F` | `#C1272D` | `#FFFFFF` | 5,84:1 | 4,42:1 | Passa (3:1) |
+| Haiti | `#DC2B47` | `#00209F` | `#FFFFFF` | 12,30:1 | 3,32:1 | Passa (3:1) |
+| Escócia | `#DCE6F5` | `#005EB8` | `#FFFFFF` | 6,38:1 | 12,36:1 | Passa (3:1) |
+| Estados Unidos | `#DE5B64` | `#FFFFFF` | `#1B2A6B` | 13,21:1 | 4,29:1 | Passa (3:1) |
+| Paraguai | `#5B8BD6` | `#D52B1E` | `#FFFFFF` | 5,01:1 | 4,53:1 | Passa (3:1) |
+| Austrália | `#2E9E6B` | `#F7C531` | `#0B5A3C` | 5,11:1 | 4,61:1 | Passa (3:1) |
+| Turquia | `#F0E0E0` | `#E30A17` | `#FFFFFF` | 4,86:1 | 12,19:1 | Passa (3:1) |
+| Alemanha | `#E6B93C` | `#FFFFFF` | `#1A1A1A` | 17,40:1 | 8,43:1 | Passa (3:1) |
+| Curaçao | `#F2D34B` | `#1F4AA8` | `#FFFFFF` | 8,07:1 | 10,52:1 | Passa (3:1) |
+| Costa do Marfim | `#3FA36B` | `#F28C28` | `#14204F` | 6,34:1 | 4,94:1 | Passa (3:1) |
+| Equador | `#5B8BD6` | `#F7D417` | `#1B3F8F` | 6,68:1 | 4,53:1 | Passa (3:1) |
+| Holanda | `#F2E2D0` | `#F36C21` | `#1A1A1A` | 5,78:1 | 12,28:1 | Passa (3:1) |
+| Japão | `#E8ECF5` | `#1D3C8F` | `#FFFFFF` | 10,02:1 | 13,15:1 | Passa (3:1) |
+| Suécia | `#5B8BD6` | `#F7D417` | `#1B4F9C` | 5,44:1 | 4,53:1 | Passa (3:1) |
+| Tunísia | `#DE5B64` | `#FFFFFF` | `#C8102E` | 5,88:1 | 4,29:1 | Passa (3:1) |
+| Bélgica | `#E6B93C` | `#C8102E` | `#FFFFFF` | 5,88:1 | 8,43:1 | Passa (3:1) |
+| Egito | `#E9E2D0` | `#C8102E` | `#FFFFFF` | 5,88:1 | 12,05:1 | Passa (3:1) |
+| Irã | `#3FA36B` | `#FFFFFF` | `#C8102E` | 5,88:1 | 4,94:1 | Passa (3:1) |
+| Nova Zelândia | `#A9B1BB` | `#FFFFFF` | `#1A1A1A` | 17,40:1 | 7,18:1 | Passa (3:1) |
+| Espanha | `#F1BF00` | `#C60B1E` | `#FFFFFF` | 6,06:1 | 9,04:1 | Passa (3:1) |
+| Cabo Verde | `#DDE3F2` | `#1F4AA8` | `#FFFFFF` | 8,07:1 | 12,11:1 | Passa (3:1) |
+| Arábia Saudita | `#E6EFE9` | `#0B6B3A` | `#FFFFFF` | 6,61:1 | 13,26:1 | Passa (3:1) |
+| Uruguai | `#F2F2EA` | `#6CACE4` | `#14204F` | 6,42:1 | 13,83:1 | Passa (3:1) |
+| França | `#DE5B64` | `#1F3A8A` | `#FFFFFF` | 10,34:1 | 4,29:1 | Passa (3:1) |
+| Senegal | `#F2D34B` | `#FFFFFF` | `#0B6B3A` | 6,61:1 | 10,52:1 | Passa (3:1) |
+| Iraque | `#E9E2D0` | `#0B7A45` | `#FFFFFF` | 5,41:1 | 12,05:1 | Passa (3:1) |
+| Noruega | `#5B8BD6` | `#C8102E` | `#FFFFFF` | 5,88:1 | 4,53:1 | Passa (3:1) |
+| Argentina | `#F3F3F0` | `#75AADB` | `#14204F` | 6,32:1 | 14,00:1 | Passa (3:1) |
+| Argélia | `#3FA36B` | `#FFFFFF` | `#0B6B3A` | 6,61:1 | 4,94:1 | Passa (3:1) |
+| Áustria | `#F0E6E6` | `#D52B1E` | `#FFFFFF` | 5,01:1 | 12,72:1 | Passa (3:1) |
+| Jordânia | `#B9BEC6` | `#FFFFFF` | `#C8102E` | 5,88:1 | 8,33:1 | Passa (3:1) |
+| Portugal | `#2E9E6B` | `#C8102E` | `#FFFFFF` | 5,88:1 | 4,61:1 | Passa (3:1) |
+| RD Congo | `#F2D34B` | `#1F6FD0` | `#FFFFFF` | 4,95:1 | 10,52:1 | Passa (3:1) |
+| Uzbequistão | `#6FC0EA` | `#FFFFFF` | `#1F5FBF` | 6,09:1 | 7,71:1 | Passa (3:1) |
+| Colômbia | `#5B8BD6` | `#F7D417` | `#1B3F8F` | 6,68:1 | 4,53:1 | Passa (3:1) |
+| Inglaterra | `#DE5B64` | `#FFFFFF` | `#1B2A6B` | 13,21:1 | 4,29:1 | Passa (3:1) |
+| Croácia | `#F2F2F2` | `#E03A3E` | `#FFFFFF` | 4,34:1 | 13,90:1 | Passa (3:1) |
+| Gana | `#E6B93C` | `#FFFFFF` | `#1A1A1A` | 17,40:1 | 8,43:1 | Passa (3:1) |
+| Panamá | `#5B8BD6` | `#D52B1E` | `#FFFFFF` | 5,01:1 | 4,53:1 | Passa (3:1) |
+
 ## Resumo
 
-- Pares conferidos: 140 (35 pares em 4 temas).
+- Pares conferidos: 236 (35 pares da página em 4 temas, mais 2 pares do desenho de cada uma das 48 seleções).
 - Reprovados: 0.
 - A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.
-- As cores das seleções (dentro das figurinhas) não entram nesta tabela: nenhum texto é escrito em cima delas.
+- A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.
