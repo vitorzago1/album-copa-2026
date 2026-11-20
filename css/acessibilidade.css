@@ -114,9 +114,16 @@ html[data-fonte="maior"] { font-size: 125%; }
 [data-movimento="reduzido"] *::before,
 [data-movimento="reduzido"] *::after {
   animation-duration: 0.01ms !important;
+  animation-delay: 0s !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
+}
+
+/* Sem movimento, a figurinha não gira: a face só é trocada, na hora */
+[data-movimento="reduzido"] .figurinha-vira {
+  --meia-volta: 0deg;
+  --tempo-de-virar: 0s;
 }
 
 /* ...ou se o próprio aparelho já pede menos movimento */
@@ -125,9 +132,15 @@ html[data-fonte="maior"] { font-size: 125%; }
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .figurinha-vira {
+    --meia-volta: 0deg;
+    --tempo-de-virar: 0s;
   }
 }
 
@@ -140,6 +153,21 @@ html[data-fonte="maior"] { font-size: 125%; }
 
 [data-contraste="alto"] .figurinha-arte::after {
   display: none;
+}
+
+/* Os pontinhos do pacotinho e das costas da figurinha também somem */
+[data-contraste="alto"] .pacotinho-aba::before,
+[data-contraste="alto"] .pacotinho-corpo::before {
+  display: none;
+}
+
+[data-contraste="alto"] .figurinha-costas {
+  background-image: none;
+}
+
+[data-contraste="alto"] .conquista,
+[data-contraste="alto"] .barra {
+  border-width: 3px;
 }
 
 [data-contraste="alto"] a {

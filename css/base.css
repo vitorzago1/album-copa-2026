@@ -91,6 +91,12 @@ button, input, select, textarea {
   color: inherit;
 }
 
+/* O atributo "hidden" do HTML esconde um elemento. Sem esta regra, qualquer
+   "display" escrito no CSS (flex, grid) faria o elemento aparecer de novo. */
+[hidden] {
+  display: none !important;
+}
+
 /* ---------- Página ---------- */
 
 body {
