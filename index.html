@@ -16,6 +16,7 @@
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/inicio.js" defer></script>
+  <script src="js/carrossel.js" defer></script>
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -129,6 +130,47 @@
           <p>Cada figurinha tem um espaço numerado no álbum. As que vierem em dobro vão para as trocas.</p>
         </li>
       </ol>
+    </section>
+
+    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
+         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
+         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
+      <h2 id="titulo-sedes">As 16 sedes</h2>
+      <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
+      <noscript><p>As fotos das sedes aparecem com o JavaScript ligado no navegador.</p></noscript>
+
+      <div class="carrossel fluxo" id="carrossel" hidden>
+        <div class="dobra" role="group" aria-roledescription="slide" aria-labelledby="sede-cidade">
+          <div class="fluxo">
+            <h3 class="carrossel-cidade" id="sede-cidade"></h3>
+            <p class="carrossel-estadio" id="sede-estadio"></p>
+            <dl class="carrossel-dados">
+              <dt>Onde fica</dt>
+              <dd><img class="bandeirinha" id="sede-bandeira" src="assets/bandeiras/mx.svg" alt="" width="48" height="36"> <span id="sede-pais"></span></dd>
+              <dt>Na Copa de 2026</dt>
+              <dd id="sede-numeros"></dd>
+              <dt>Nome usado no torneio</dt>
+              <dd id="sede-nome-na-copa"></dd>
+            </dl>
+            <p id="sede-nota"></p>
+          </div>
+
+          <figure class="carrossel-figura">
+            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
+            <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
+            <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
+          </figure>
+        </div>
+
+        <div class="carrossel-controles">
+          <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
+          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
+          <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
+          <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
+        </div>
+        <ol class="carrossel-indicadores" id="sede-indicadores" aria-label="Ir direto para uma sede"></ol>
+      </div>
     </section>
 
     <!-- PACOTINHO DO DIA e RARIDADES, lado a lado na página dupla. -->
@@ -268,7 +310,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Fotos dos estádios: Wikimedia Commons. Os créditos completos ficam na página <a href="sobre.html#creditos">Sobre</a>.</p>
       </div>
     </div>
   </footer>
