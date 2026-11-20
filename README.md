@@ -170,5 +170,23 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 
 - `docs/cores.md`: paleta dos temas, motivo de cada cor e tabela de contraste calculada.
 - `docs/decisoes.md`: decisões de design e onde cada critério do WCAG e cada heurística de Nielsen foi aplicado.
-- `docs/referencias.md`: fontes, ferramentas e IAs usadas.
+- `docs/referencias.md`: fontes dos dados, das letras e das imagens, documentação consultada, ferramentas e IAs usadas.
+- `docs/prints/`: prints de cada versão, nos temas claro e escuro, no computador e no celular.
+- `docs/anexo-codigo.md`: todo o código do projeto em um arquivo só, gerado por `node scripts/gerar-anexo.js`.
 - `CHANGELOG.md`: o que mudou em cada versão.
+
+## Como publicar no GitHub Pages
+
+O GitHub Pages é a hospedagem gratuita do GitHub: ele pega os arquivos do repositório e os serve como um site. Como este projeto não tem etapa de build, basta mandar os arquivos.
+
+1. Criar no GitHub um repositório vazio chamado `album-copa-2026`, na conta `vitorzago1` (sem README, sem licença e sem `.gitignore`, porque o projeto já tem os seus).
+2. Na pasta do projeto, ligar a pasta ao repositório e mandar o histórico com as marcas de versão:
+
+   ```
+   git remote add origin https://github.com/vitorzago1/album-copa-2026.git
+   git push -u origin main --tags
+   ```
+
+3. No GitHub, abrir Settings, depois Pages. Em "Build and deployment", escolher "Deploy from a branch", a branch `main` e a pasta `/ (root)`. Salvar.
+4. Esperar um ou dois minutos. O endereço fica `https://vitorzago1.github.io/album-copa-2026/`.
+5. Colocar esse endereço no começo deste README e conferir o site por ele (a página Entrar, em especial, que depende de `https` para proteger a senha).
