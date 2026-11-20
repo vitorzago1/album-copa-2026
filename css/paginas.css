@@ -121,6 +121,227 @@
   font-variant-numeric: tabular-nums;   /* números com a mesma largura, alinhados */
 }
 
+/* Dia carimbado na cartela: um círculo de tinta em volta do número,
+   posto à mão (por isso torto). O formato muda, não só a cor. */
+.cartela > li.carimbado .cartela-dia {
+  display: grid;
+  place-items: center;
+  width: 82%;
+  aspect-ratio: 1;
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  border-radius: 50%;
+  rotate: -8deg;
+}
+
+/* ---------- Álbum ---------- */
+
+/* O recado fica preso no pé da tela. Esta folga faz o navegador parar a
+   rolagem um pouco antes, para o recado nunca cobrir o que está em foco. */
+html {
+  scroll-padding-bottom: 7rem;
+}
+
+.album-topo {
+  padding-bottom: var(--espaco-6);
+}
+
+/* Placar: o número de coladas bem grande, na fonte de destaque */
+.placar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--espaco-3);
+  font-size: var(--texto-medio);
+  font-weight: 600;
+}
+
+.placar-numero {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 5rem;
+  line-height: 0.9;
+}
+
+/* Bandeja: as figurinhas na mão, cada uma com o seu botão "Colar" embaixo */
+.bandeja {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.75rem, 1fr));
+  gap: var(--espaco-5) var(--espaco-4);
+}
+
+.bandeja > li {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+}
+
+.bandeja .figurinha {
+  cursor: grab;   /* a mãozinha avisa que dá para arrastar */
+}
+
+/* Filtros: dois por linha no celular, os quatro lado a lado em telas maiores */
+.filtros {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-3);
+  max-width: 44rem;
+}
+
+@media (min-width: 48rem) {
+  .filtros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.resultado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-4);
+  font-weight: 700;
+}
+
+/* Grupo: o título e a conta de coladas na mesma linha */
+.grupo-cabeca {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--espaco-1) var(--espaco-4);
+  padding-block: var(--espaco-5) var(--espaco-4);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.grupo-conta {
+  font-weight: 700;
+}
+
+/* Seleção: uma página dupla, com a ficha de um lado e as casas do outro */
+.selecao {
+  padding-block: var(--espaco-6);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.selecao-titulo {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-size: var(--titulo-2);
+}
+
+.bandeirinha {
+  flex: none;
+  width: 3rem;
+  height: auto;
+  border: 1.5px solid var(--cor-texto);
+}
+
+.selecao-conta {
+  font-weight: 700;
+}
+
+.selecao-dados dt {
+  font-weight: 700;
+}
+
+.selecao-dados dd + dt {
+  margin-top: var(--espaco-3);
+}
+
+/* As casas: duas colunas no celular e três quando há largura.
+   Entre 48rem e 64rem a página já é dupla e a metade direita ainda é
+   estreita, então voltam a ser duas. */
+.vagas {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 12rem));
+  gap: var(--espaco-5) var(--espaco-4);
+  align-content: start;
+}
+
+@media (min-width: 30rem) {
+  .vagas {
+    grid-template-columns: repeat(3, minmax(0, 12rem));
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .vagas {
+    grid-template-columns: repeat(2, minmax(0, 12rem));
+  }
+}
+
+/* A casa empilha a figurinha (ou a vaga) e, se houver, o botão "Desfazer" */
+.casa {
+  display: grid;
+  gap: var(--espaco-2);
+  align-content: start;
+}
+
+/* A largura de cada casa é a da coluna, e pronto: "minmax(0, 1fr)" proíbe o
+   conteúdo de alargar a coluna. Sem isto, quando o texto fica alto (letra
+   maior), a proporção 3 por 4 alargaria a figurinha junto e ela passaria da
+   tela. Com a largura presa, só a altura cresce. */
+.vagas > li,
+.mesa > li,
+.bandeja > li {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.mesa > li {
+  display: grid;
+}
+
+.vazio {
+  padding-block: var(--espaco-6);
+  border-top: 2px solid var(--cor-texto);
+}
+
+/* ---------- Pacotinhos ---------- */
+
+/* O palco: onde fica o pacotinho fechado e, depois de rasgar, as figurinhas */
+.palco {
+  display: grid;
+  gap: var(--espaco-5);
+  align-content: start;
+}
+
+.palco .pacotinho {
+  margin: var(--espaco-2) var(--espaco-4);
+}
+
+/* A mesa: as cinco figurinhas do pacotinho, três em cima e duas embaixo */
+.mesa {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 12rem));
+  gap: var(--espaco-5) var(--espaco-4);
+}
+
+@media (min-width: 30rem) {
+  .mesa {
+    grid-template-columns: repeat(3, minmax(0, 12rem));
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .mesa {
+    grid-template-columns: repeat(2, minmax(0, 12rem));
+  }
+}
+
+.mesa-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+  max-width: none;
+}
+
 /* ---------- Sobre: guia de estilo ----------
    As peças do site todas juntas, para consulta e para testar os temas. */
 

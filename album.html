@@ -12,6 +12,14 @@
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
 
+  <!-- Os scripts do álbum, nesta ordem: os dados, o caderninho do progresso,
+       o desenho da figurinha e, por último, a página. O "defer" espera o HTML
+       ficar pronto e mantém a ordem. -->
+  <script src="js/dados.js" defer></script>
+  <script src="js/estado.js" defer></script>
+  <script src="js/figurinha.js" defer></script>
+  <script src="js/album.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -54,9 +62,99 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura">
-      <h1>Álbum</h1>
-      <p>Aqui ficam as páginas do álbum, de A a L, com um espaço numerado para cada figurinha. Elas chegam em uma das próximas versões.</p>
+
+    <!-- TOPO. Página dupla: à esquerda o placar do álbum, à direita as figurinhas que estão na mão. -->
+    <section class="largura dobra album-topo">
+      <div class="fluxo">
+        <h1>Álbum</h1>
+        <p class="placar">
+          <span class="placar-numero" id="placar-coladas">0</span>
+          <span>de <span id="placar-total">24</span> figurinhas coladas</span>
+        </p>
+        <!-- A barra é só desenho: o número já está escrito acima. -->
+        <div class="barra" aria-hidden="true"><span class="barra-cheia" id="placar-barra"></span></div>
+        <p id="placar-texto">Falta colar tudo: o álbum está novinho.</p>
+        <p class="texto-apoio">Por enquanto o álbum tem só o Grupo C. Os outros 11 grupos chegam em uma próxima versão.</p>
+        <noscript><p>O álbum precisa do JavaScript ligado no navegador para mostrar e colar as figurinhas.</p></noscript>
+      </div>
+
+      <div class="fluxo">
+        <h2 id="titulo-mao" tabindex="-1">Na mão</h2>
+        <p id="mao-texto">As figurinhas que saem do pacotinho aparecem aqui, prontas para colar.</p>
+        <!-- Cada figurinha desta lista pode ser arrastada até a vaga ou colada pelo botão. -->
+        <ul class="bandeja" id="bandeja" aria-labelledby="titulo-mao"></ul>
+        <p id="mao-vazia"><a class="botao" href="pacotinhos.html">Abrir um pacotinho</a></p>
+      </div>
+    </section>
+
+    <!-- BUSCA, ABAS E FILTROS. Tudo aqui muda quais figurinhas aparecem logo abaixo. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-procurar">
+      <h2 id="titulo-procurar">Procurar no álbum</h2>
+
+      <div class="campo">
+        <label class="campo-rotulo" for="busca">Buscar figurinha</label>
+        <span class="campo-dica" id="busca-dica">Nome, número, seleção, posição ou clube.</span>
+        <input class="campo-entrada" type="search" id="busca" autocomplete="off" aria-describedby="busca-dica">
+      </div>
+
+      <!-- Abas no padrão WAI-ARIA: as setas do teclado passam de uma para a outra. -->
+      <div class="abas" role="tablist" aria-label="Quais figurinhas mostrar">
+        <button class="aba" type="button" role="tab" id="aba-todas" data-aba="todas" aria-selected="true" aria-controls="painel-album">Todas<span class="aba-conta" id="conta-todas">24</span></button>
+        <button class="aba" type="button" role="tab" id="aba-tenho" data-aba="tenho" aria-selected="false" aria-controls="painel-album" tabindex="-1">Tenho<span class="aba-conta" id="conta-tenho">0</span></button>
+        <button class="aba" type="button" role="tab" id="aba-faltam" data-aba="faltam" aria-selected="false" aria-controls="painel-album" tabindex="-1">Faltam<span class="aba-conta" id="conta-faltam">24</span></button>
+        <button class="aba" type="button" role="tab" id="aba-repetidas" data-aba="repetidas" aria-selected="false" aria-controls="painel-album" tabindex="-1">Repetidas<span class="aba-conta" id="conta-repetidas">0</span></button>
+      </div>
+
+      <div class="filtros">
+        <div class="campo">
+          <label class="campo-rotulo" for="filtro-grupo">Grupo</label>
+          <select class="campo-entrada" id="filtro-grupo"><option value="">Todos</option></select>
+        </div>
+        <div class="campo">
+          <label class="campo-rotulo" for="filtro-selecao">Seleção</label>
+          <select class="campo-entrada" id="filtro-selecao"><option value="">Todas</option></select>
+        </div>
+        <div class="campo">
+          <label class="campo-rotulo" for="filtro-posicao">Posição</label>
+          <select class="campo-entrada" id="filtro-posicao"><option value="">Todas</option></select>
+        </div>
+        <div class="campo">
+          <label class="campo-rotulo" for="filtro-raridade">Raridade</label>
+          <select class="campo-entrada" id="filtro-raridade"><option value="">Todas</option></select>
+        </div>
+      </div>
+
+      <div class="resultado">
+        <!-- role="status": o leitor de tela lê este texto sempre que ele muda. -->
+        <p id="resultado" role="status">24 figurinhas</p>
+        <button class="botao botao-contorno botao-pequeno" type="button" id="limpar-filtros" hidden>Limpar busca e filtros</button>
+      </div>
+    </section>
+
+    <!-- AS PÁGINAS DO ÁLBUM. É o painel das abas: o conteúdo é montado pelo js/album.js. -->
+    <div class="largura" role="tabpanel" id="painel-album" aria-labelledby="aba-todas">
+      <div id="paginas"></div>
+      <div class="vazio fluxo" id="vazio" hidden>
+        <h2>Nada por aqui</h2>
+        <p>Nenhuma figurinha combina com essa busca. Tente outra palavra ou limpe os filtros.</p>
+      </div>
+    </div>
+
+    <!-- CONQUISTAS. Cada uma vale um pacotinho extra. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-conquistas">
+      <h2 id="titulo-conquistas">Conquistas</h2>
+      <p>Cada conquista vale um pacotinho extra, para abrir quando quiser.</p>
+      <ul class="conquistas" id="conquistas"></ul>
+    </section>
+
+    <!-- Recado para o leitor de tela (escondido da tela, mas lido em voz alta). -->
+    <p class="escondido" id="aviso" role="status"></p>
+
+    <!-- Recado visível, preso no pé da tela depois de colar. -->
+    <div class="recado" id="recado" hidden>
+      <p class="recado-texto" id="recado-texto"></p>
+      <button class="recado-botao" type="button" id="recado-desfazer">Desfazer</button>
+      <button class="recado-botao" type="button" id="recado-fechar">Fechar</button>
     </div>
   </main>
 
@@ -84,7 +182,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next, com licença livre (OFL). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
       </div>
     </div>
   </footer>
