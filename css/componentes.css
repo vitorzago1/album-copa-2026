@@ -2,7 +2,8 @@
    componentes.css
    --------------------------------------------------------------------------
    As peças que se repetem pelo site: botão, etiqueta, cartão, vaga,
-   figurinha, tira de grupos e campo de formulário.
+   figurinha (parada e que vira), barra de progresso, abas, tira de grupos,
+   cartela, conquista, recado, pacotinho e campo de formulário.
 
    Regra dos cantos (vem de tokens.css):
    - canto vivo  = o que está impresso na página (vaga, tira)
@@ -65,6 +66,13 @@
   cursor: not-allowed;
 }
 
+/* Botão menor, para caber dentro da vaga e embaixo da figurinha.
+   A altura continua 44 px: só o texto e as laterais diminuem. */
+.botao-pequeno {
+  padding: 0 var(--espaco-3);
+  font-size: var(--texto-pequeno);
+}
+
 /* ---------- Etiqueta ----------
    O negativo da tinta: destaca "Nova" e "Repetida" sem trazer cor nova. */
 
@@ -113,6 +121,7 @@
   gap: var(--espaco-1);
   background: var(--cor-vaga);
   color: var(--cor-texto-secundario);
+  padding: var(--espaco-2);
   border: 2px solid var(--cor-borda);
   border-radius: var(--raio-impresso);
   text-align: center;
@@ -128,6 +137,31 @@
 .vaga-legenda {
   font-size: var(--texto-pequeno);
   font-weight: 600;
+}
+
+/* O nome de quem vai ali, impresso na página como nos álbuns de papel */
+.vaga-nome {
+  color: var(--cor-texto);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* A figurinha desta vaga já saiu e está na mão: moldura mais grossa e botão "Colar" */
+.vaga-na-mao {
+  border-width: 4px;
+  border-color: var(--cor-texto);
+}
+
+/* Enquanto uma figurinha é arrastada, a vaga dela fica marcada... */
+.casa-alvo .vaga {
+  outline: 3px solid var(--cor-acao);
+  outline-offset: 3px;
+}
+
+/* ...e clareia quando a figurinha passa por cima */
+.casa-em-cima .vaga {
+  background: var(--cor-superficie);
 }
 
 /* ---------- Figurinha ----------
@@ -236,6 +270,31 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Última linha da tarja: raridade de um lado, número do outro.
+   Se não couberem lado a lado, o número desce para a linha de baixo. */
+.figurinha-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 0.5em;
+}
+
+.figurinha-linha .figurinha-numero {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Figurinha de bandeira: a bandeira no meio do retrato, com moldura de papel */
+.figurinha-bandeira {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 80%;
+  border: 2px solid var(--cor-figurinha-papel);
+  outline: 1px solid var(--cor-figurinha-tinta);
+}
+
 /* Comum: fosca, sem textura */
 .figurinha-comum {
   --material: var(--cor-figurinha-papel);
@@ -275,6 +334,140 @@
   background: var(--cor-figurinha-tinta);
   color: var(--cor-figurinha-papel);
   outline: 2px solid var(--cor-figurinha-papel);
+}
+
+.figurinha-selecao {
+  font-size: 0.75rem;
+}
+
+/* ---------- Figurinha que vira ----------
+   É um <button> com as faces uma em cima da outra (todas na mesma casa de uma
+   grade). O atributo data-face diz qual aparece:
+     frente = o retrato      verso = as informações      costas = ainda fechada
+
+   O giro: a figurinha roda meia volta (180 graus) em torno do eixo vertical.
+   Bem no meio do caminho, quando ela está de lado e não dá para ver nada,
+   a face que aparece é trocada (a "visibility" muda com meio tempo de atraso).
+
+   O verso é desenhado espelhado: como a figurinha inteira está virada ao
+   contrário, o espelhado volta a ficar legível. */
+
+.figurinha-vira {
+  --tempo-de-virar: 420ms;
+  --meia-volta: 180deg;
+  display: grid;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateY(0deg);
+  transition: transform var(--tempo-de-virar) ease-in-out;
+}
+
+.figurinha-vira[data-face="verso"],
+.figurinha-vira[data-face="costas"] {
+  transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateY(var(--meia-volta));
+}
+
+.figurinha-face {
+  grid-area: 1 / 1;   /* todas as faces na mesma casa da grade: uma em cima da outra */
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  border-radius: var(--raio-adesivo);
+  visibility: hidden;
+  transition: visibility 0s linear calc(var(--tempo-de-virar) / 2);
+}
+
+.figurinha-vira[data-face="frente"] .figurinha-frente,
+.figurinha-vira[data-face="verso"] .figurinha-verso,
+.figurinha-vira[data-face="costas"] .figurinha-costas {
+  visibility: visible;
+}
+
+.figurinha-verso,
+.figurinha-costas {
+  transform: rotateY(var(--meia-volta));
+}
+
+/* Verso: número, nome, dois dados e a curiosidade */
+.figurinha-verso {
+  gap: 1px;
+  padding: 9px 8px;
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.verso-numero {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.verso-nome {
+  font-size: 0.875rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.verso-texto {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1.5px solid currentColor;
+}
+
+/* Costas: a figurinha que acabou de sair do pacotinho. Cobre a moldura inteira,
+   para a cor da raridade não entregar a surpresa antes da hora. */
+.figurinha-costas {
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-figurinha-tinta);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.25) 1px, transparent 1.4px);
+  background-size: 6px 6px;
+  color: var(--cor-figurinha-papel);
+}
+
+.costas-marca {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 1.75rem;
+  line-height: 1;
+  rotate: -8deg;
+}
+
+/* Colar: a figurinha chega maior e mais torta e assenta no lugar.
+   ("scale" e "rotate" são propriedades separadas do "transform",
+   por isso não atrapalham o giro de virar.) */
+.figurinha-colando {
+  animation: colar 280ms cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+@keyframes colar {
+  from {
+    scale: 1.14;
+    rotate: 5deg;
+    box-shadow: none;
+  }
+}
+
+/* Revelar: o reflexo passa uma vez pela brilhante e pela lendária,
+   e a lendária dá um pulinho. */
+.figurinha-revelada .figurinha-arte::before {
+  animation: reflexo 800ms ease-out 250ms backwards;
+}
+
+.figurinha-lendaria.figurinha-revelada {
+  animation: pulo 520ms ease-out 300ms;
+}
+
+@keyframes reflexo {
+  from { transform: translateX(-130%); }
+}
+
+@keyframes pulo {
+  40% { scale: 1.08; }
 }
 
 /* ---------- Raridade: palavra + ícone ---------- */
@@ -456,4 +649,262 @@ textarea.campo-entrada {
   margin: 0;
   accent-color: var(--cor-acao);
   cursor: pointer;
+}
+
+/* ---------- Barra de progresso ----------
+   Impressa na página (canto vivo). A variável --parte vai de 0 a 1.
+   O número sempre vem escrito ao lado: a barra é só o desenho. */
+
+.barra {
+  height: 0.875rem;
+  max-width: 28rem;
+  background: var(--cor-vaga);
+  border: 2px solid var(--cor-borda);
+}
+
+.barra-cheia {
+  display: block;
+  height: 100%;
+  width: calc(var(--parte, 0) * 100%);
+  background: var(--cor-texto);
+  transition: width var(--duracao) ease-out;
+}
+
+/* ---------- Abas ----------
+   Escolhem quais figurinhas aparecem. A aba escolhida fica no negativo da
+   tinta, mais pesada e sublinhada: não depende só da cor. */
+
+.abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+.aba {
+  min-height: 2.75rem;
+  padding: 0 var(--espaco-4);
+  background: transparent;
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-texto);
+  border-radius: var(--raio-ferramenta);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.aba[aria-selected="true"] {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+
+.aba-conta {
+  margin-left: 0.3em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Conquista ----------
+   Um quadro impresso na página. Quando a conquista é feita, ganha um carimbo:
+   posto à mão, por isso levemente torto. */
+
+.conquistas {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--espaco-3);
+}
+
+.conquista {
+  display: grid;
+  gap: var(--espaco-1);
+  align-content: start;
+  padding: var(--espaco-4);
+  border: 2px solid var(--cor-borda);
+}
+
+.conquista-nome {
+  font-size: var(--texto-medio);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.conquista-como {
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+.conquista-estado {
+  justify-self: start;
+  margin-top: var(--espaco-2);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+.conquista-feita .conquista-estado {
+  padding: 0.15em 0.6em;
+  color: var(--cor-sucesso);
+  border: 2px solid var(--cor-sucesso);
+  rotate: -3deg;
+}
+
+@media (min-width: 40rem) {
+  .conquistas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .conquistas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Recado ----------
+   Aviso preso no pé da tela depois de colar: confirma o que aconteceu e
+   oferece "Desfazer". Não some sozinho: fica até a próxima ação ou até fechar. */
+
+.recado {
+  position: fixed;
+  left: var(--espaco-3);
+  right: var(--espaco-3);
+  bottom: var(--espaco-3);
+  z-index: 20;
+  max-width: 36rem;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border: 2px solid var(--cor-etiqueta-texto);
+  border-radius: var(--raio-ferramenta);
+}
+
+.recado-texto {
+  flex: 1 1 14rem;
+  font-weight: 600;
+}
+
+.recado-botao {
+  min-height: 2.75rem;
+  padding: 0 var(--espaco-3);
+  background: transparent;
+  color: inherit;
+  border: 2px solid currentColor;
+  border-radius: var(--raio-ferramenta);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Pacotinho ----------
+   O envelope fechado. É uma peça só de desenho: quem abre é o botão
+   "Rasgar o pacotinho". A linha tracejada é o picote, e a parte de cima
+   (a aba) é a que sai quando rasga. */
+
+.pacotinho {
+  width: min(15rem, 72%);
+  aspect-ratio: 5 / 7;
+  display: flex;
+  flex-direction: column;
+  color: var(--cor-etiqueta-texto);
+  rotate: -3deg;   /* posto à mão em cima da página */
+  cursor: pointer;
+}
+
+.pacotinho-aba,
+.pacotinho-corpo {
+  position: relative;
+  background: var(--cor-etiqueta-fundo);
+}
+
+/* Retícula do pacotinho: pontinhos na cor do texto, bem fracos (30% de opacidade) */
+.pacotinho-aba::before,
+.pacotinho-corpo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.8px, transparent 1.2px) 0 0 / 7px 7px;
+  opacity: 0.3;
+}
+
+.pacotinho-aba {
+  flex: none;
+  height: 14%;
+  display: grid;
+  place-items: center;
+  border-radius: var(--raio-adesivo) var(--raio-adesivo) 0 0;
+  border-bottom: 2px dashed var(--cor-etiqueta-texto);
+}
+
+/* Os textos ficam em cima de uma faixa lisa, para os pontinhos não atrapalharem a leitura */
+.pacotinho-aba span,
+.pacotinho-marca,
+.pacotinho-texto {
+  position: relative;   /* fica na frente dos pontinhos */
+  padding: 0 0.4em;
+  background: var(--cor-etiqueta-fundo);
+}
+
+.pacotinho-aba span {
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+.pacotinho-corpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-3);
+  border-radius: 0 0 var(--raio-adesivo) var(--raio-adesivo);
+}
+
+.pacotinho-marca {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 3.25rem;
+  line-height: 1.05;
+  rotate: -6deg;
+}
+
+.pacotinho-texto {
+  font-weight: 700;
+}
+
+/* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
+   Este é o único momento "ensaiado" do site. */
+.pacotinho-rasgando .pacotinho-aba {
+  animation: rasgar 520ms ease-in forwards;
+}
+
+.pacotinho-rasgando .pacotinho-corpo {
+  animation: esvaziar 360ms ease-in 440ms forwards;
+}
+
+@keyframes rasgar {
+  30% { transform: translateX(-5%) rotate(-5deg); }
+  to { transform: translate(65%, -170%) rotate(40deg); opacity: 0; }
+}
+
+@keyframes esvaziar {
+  to { transform: translateY(16%); opacity: 0; }
+}
+
+/* As figurinhas saem do pacotinho uma depois da outra.
+   --ordem (0 a 4) vem do HTML e atrasa cada uma um pouco mais que a anterior. */
+.mesa > li {
+  animation: sair-do-pacotinho 440ms cubic-bezier(0.2, 0.8, 0.3, 1.15) backwards;
+  animation-delay: calc(var(--ordem, 0) * 120ms);
+}
+
+@keyframes sair-do-pacotinho {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem) rotate(-10deg) scale(0.7);
+  }
 }
