@@ -1,6 +1,6 @@
 # Referências
 
-Tudo o que o projeto usa e de onde veio. Atualizado até a versão `v0.3-album`.
+Tudo o que o projeto usa e de onde veio. Atualizado até a versão `v0.4-acessibilidade`.
 
 ## Fontes tipográficas
 
