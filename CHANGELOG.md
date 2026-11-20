@@ -2,7 +2,14 @@
 
 O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 
-## A caminho da v0.4 (ainda sem marca)
+## v0.4-acessibilidade (20/11/2026)
+
+- Auditoria de estrutura em 15 telas e teste só com o teclado em 9 telas, sem problemas restantes.
+- Corrigido: o recado de "Desfazer" podia cobrir os últimos links do rodapé quando eles recebiam o foco.
+- "Mais espaço no texto" passou a valer também para botões, campos e figurinhas.
+- Zoom de 200% e de 400% conferido nas 7 páginas, sem rolagem lateral.
+- Script de contraste confere também as cores das 48 seleções: 236 pares, 0 reprovados.
+- Tabela "Onde está cada item pedido pelo professor" no README.
 
 - Página Entrar: criar conta, entrar e sair, com a senha guardada só como hash (SHA-256 com sal). Simulação, sem servidor.
 - Álbum separado por conta; as figurinhas de visitante vão para a conta nova; o menu mostra "Minha conta".

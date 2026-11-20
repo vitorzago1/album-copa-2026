@@ -1,6 +1,6 @@
 # Decisões de design
 
-Registro curto, em tópicos, do que foi decidido e de onde cada critério aparece no site. Atualizado até a versão `v0.3-album`.
+Registro curto, em tópicos, do que foi decidido e de onde cada critério aparece no site. Atualizado até a versão `v0.4-acessibilidade`.
 
 ## Direção visual
 
@@ -96,18 +96,18 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 1.3.1 Informações e relações | `header`, `nav`, `main`, `footer`; títulos em ordem; `fieldset` e `legend` no painel; `label` em todo campo; ficha da seleção em lista de termos (`dl`) | os 7 HTML, `js/tema-acessibilidade.js`, `js/album.js` |
 | 1.3.5 Identificar o objetivo da entrada | `autocomplete` em nome, e-mail e senha (`name`, `email`, `current-password`, `new-password`) | `login.html`, `contato.html` |
 | 1.4.1 Uso de cor | Raridade com palavra, ícone e textura; seleção escrita na figurinha; vaga com "Falta" ou "Está na sua mão"; aba escolhida mais pesada e sublinhada; dia carimbado com um círculo; link sempre sublinhado; erro com ícone e frase | `css/componentes.css`, `css/base.css`, `js/figurinha.js` |
-| 1.4.3 Contraste (mínimo) | 140 pares calculados, 0 reprovados | `docs/cores.md`, `scripts/contraste.js` |
+| 1.4.3 Contraste (mínimo) | 236 pares calculados, 0 reprovados (página nos 4 temas e cores das 48 seleções) | `docs/cores.md`, `scripts/contraste.js` |
 | 1.4.4 Redimensionar texto | Medidas em `rem`; letra em 3 tamanhos (100%, 112,5% e 125%); a figurinha cresce na altura se o texto não couber | `css/tokens.css`, `css/acessibilidade.css`, `css/paginas.css` |
 | 1.4.10 Refluxo | Sem rolagem lateral em 320 px, inclusive com letra maior (início, álbum, pacotinhos e sobre) | `css/base.css`, `css/paginas.css` |
 | 1.4.11 Contraste não textual | Bordas, anel de foco, barra e botão dentro da vaga com pelo menos 3:1 | `docs/cores.md` |
-| 1.4.12 Espaçamento de texto | Opção "Mais espaço no texto" | `css/acessibilidade.css` |
+| 1.4.12 Espaçamento de texto | Opção "Mais espaço no texto", que vale também para botões, campos e figurinhas; nada corta nem sai da tela | `css/acessibilidade.css`, `css/base.css` |
 | 2.1.1 Teclado | Só botões e links nativos; painel em `<dialog>`; figurinha vira com Enter ou Espaço; abas com setas, Home e End; colar pelo botão | os 7 HTML, `js/figurinha.js`, `js/album.js` |
 | 2.2.1 Tempo ajustável | O recado com "Desfazer" não some sozinho | `js/album.js` |
 | 2.3.3 e 2.2.2 Movimento | Opção "Reduzir animações" e respeito a `prefers-reduced-motion`: a figurinha troca de face sem girar e o pacotinho abre sem espera; o carrossel não passa sozinho | `css/acessibilidade.css`, `js/pacotinho.js`, `js/carrossel.js` |
 | 2.4.1 Ignorar blocos | Link "Pular para o conteúdo" | os 7 HTML, `css/base.css` |
 | 2.4.3 Ordem do foco | A ordem do Tab segue a ordem da página; depois de colar, desfazer ou rasgar, o foco vai para um lugar que existe (a figurinha colada, o botão vizinho, o título das figurinhas) | os 7 HTML, `js/album.js`, `js/pacotinho.js` |
 | 2.4.7 Foco visível | Anel de 3 px em dois tons (anel e vão) | `css/base.css` |
-| 2.4.11 Foco não encoberto | O cabeçalho não é fixo; a página deixa uma folga de rolagem para o recado do pé da tela (`scroll-padding-bottom`) | `css/base.css`, `css/paginas.css` |
+| 2.4.11 Foco não encoberto | O cabeçalho não é fixo; a página deixa uma folga de rolagem para o recado do pé da tela (`scroll-padding-bottom`) e ganha espaço no fim enquanto o recado está aberto | `css/base.css`, `css/paginas.css`, `js/album.js` |
 | 2.5.7 Movimentos de arrastar | Tudo o que se faz arrastando também se faz pelo botão "Colar" | `js/album.js` |
 | 2.5.8 Tamanho do alvo | Botões, abas e links de menu com 44 px de altura | `css/base.css`, `css/componentes.css` |
 | 3.1.1 Idioma da página | `lang="pt-BR"` | os 7 HTML |
@@ -134,6 +134,17 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 9. Ajudar a reconhecer e corrigir erros | Busca sem resultado explica o que houve e oferece limpar os filtros; nos formulários, frase específica com ícone embaixo do campo, resumo com link para cada campo e foco levado ao primeiro problema |
 | 10. Ajuda e documentação | Seção "Como funciona" na página inicial; texto da bandeja explica os dois jeitos de colar; texto de apoio no painel; passo a passo do modo demonstração no README |
 
+## Verificação feita na etapa 8 (v0.4)
+
+- Auditoria de estrutura, por script próprio, em 15 telas: `lang`, título da página, um `main`, um `header`, um `footer` e um `h1`; `alt` em toda imagem; rótulo em todo campo; nome em todo botão, link e aba; nenhum `id` repetido; `aria-labelledby`, `aria-describedby` e `aria-controls` apontando para elementos que existem; títulos sem pular nível; listas só com itens de lista; `fieldset` com `legend`; nenhum controle dentro de outro; nenhum controle dentro de área escondida do leitor de tela; cada `nav` com nome próprio. Resultado: 0 problemas.
+- Só teclado, em 9 telas (computador e celular): o Tab passa por todos os controles visíveis; em cada parada o elemento está na tela, tem anel de foco e não está coberto. A janela de "Zerar álbum" prende o foco.
+- Problema achado nessa rodada e corrigido: o recado fixo no pé da tela cobria os últimos links do rodapé (critério 2.4.11).
+- Zoom de 200% (janela de 640 px) e de 400% (320 px), com letra maior e mais espaço no texto: 7 páginas sem rolagem lateral e sem texto cortado em botão.
+- Contraste: 236 pares, 0 reprovados (140 da página nos 4 temas e 96 das cores das 48 seleções).
+- Total de verificações automáticas na v0.4: 254.
+- Não foi rodado: Lighthouse e axe. A tentativa de rodar o axe pelo script de teste foi barrada pelas permissões da sessão de IA. O README explica como rodar o Lighthouse pelo próprio navegador.
+- Ainda não verificado: leitor de tela real (NVDA), Firefox, Safari, celular de verdade, arrastar com mouse e com dedo, e o site no endereço publicado.
+
 ## Verificação feita na etapa 7
 
 - Consistência dos dados, por script: 288 figurinhas numeradas de 1 a 288 sem buraco; 6 por seleção, começando pela bandeira; 1 lendária por seleção; 4 seleções por grupo; toda fonte citada existe na lista; toda bandeira tem arquivo.
@@ -159,7 +170,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Pendências conhecidas
 
-- A opção "Mais espaço no texto" ainda não afasta as letras dentro de botões e figurinhas (fica para a etapa de acessibilidade).
+- Lighthouse ou axe ainda não foram rodados (ver o README, "Como conferir a acessibilidade").
 - A lista oficial de elencos da FIFA em PDF não foi lida (ver `docs/referencias.md`).
 
 ## Verificação feita na v0.2

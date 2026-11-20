@@ -119,15 +119,43 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 8. **Bandeiras.** As 48 bandeiras vêm da `flag-icons` (licença MIT).
 9. **Testes.** As verificações automáticas foram atualizadas para o álbum completo: 224 no total, todas passando. A página do álbum, com as 288 casas, é montada em menos de um décimo de segundo.
 
-## Como conferir o contraste
+### Etapa 8: acessibilidade e polimento (versão `v0.4-acessibilidade`)
 
-Com o Node.js instalado, na pasta do projeto:
+1. **Auditoria de estrutura em 15 telas** (todas as páginas, com erros de formulário, janelas abertas e os dois temas): toda imagem com `alt`, todo campo com rótulo, todo botão e link com nome, nenhum `id` repetido, toda referência ARIA apontando para algo que existe, títulos em ordem, listas bem formadas. Nenhum problema encontrado.
+2. **Teste só com o teclado em 9 telas.** Um script aperta Tab até dar a volta na página e confere, em cada parada, se o elemento está na tela, se tem o anel de foco e se nada o cobre. Também confere se algum controle ficou sem receber foco.
+3. **Problema achado e corrigido.** Com o recado de "Desfazer" aberto, os últimos links do rodapé ficavam embaixo dele ao receber o foco. Agora a página ganha uma folga no fim enquanto o recado está na tela.
+4. **Zoom.** Com 200% e com 400% de zoom (janelas de 640 e 320 px), com letra maior e mais espaço no texto, as 7 páginas ficam sem rolagem lateral e sem texto cortado.
+5. **Mais espaço no texto também nos botões.** A opção do painel passou a valer para botões, campos e figurinhas.
+6. **Contraste das cores das seleções.** O script de contraste passou a conferir também o desenho de cada seleção (número sobre a camisa e silhueta sobre o campo): 236 pares no total, 0 reprovados.
+7. **Total de verificações automáticas:** 254, todas passando.
 
-```
-node scripts/contraste.js
-```
+## Onde está cada item pedido pelo professor
 
-O script reescreve `docs/cores.md` e avisa se algum par de cores reprovar.
+| Item | Onde está |
+|---|---|
+| Cartões | Figurinhas (`album.html`, `pacotinhos.html`), cartões "É uma simulação" (`login.html`, `contato.html`), cupom do pacotinho e bilhete de troca (`index.html`) |
+| Abas de pesquisa | `album.html`: busca, abas Todas, Tenho, Faltam e Repetidas, e filtros de grupo, seleção, posição e raridade |
+| Contato com formulário | `contato.html` |
+| Carrossel de imagens | `index.html`, seção "As 16 sedes" |
+| Imagens | Fotos dos 16 estádios (`assets/img/sedes/`), 48 bandeiras (`assets/bandeiras/`) e desenhos próprios em SVG e CSS |
+| Cartões explicativos | `index.html`: "Como funciona", "Pacotinho do dia", "Raridades" e "Como trocar" |
+| Modo escuro e claro | Painel de acessibilidade (botão no cabeçalho de todas as páginas); cores em `css/tokens.css` |
+| Rodapé | Igual nas 7 páginas, com navegação, link do GitHub e créditos |
+| Página de login | `login.html` (simulação, com a senha guardada só como hash) |
+| Aba de acessibilidade | Botão "Acessibilidade" no cabeçalho: tema, tamanho da letra, alto contraste, reduzir animações, mais espaço no texto e destacar links |
+| WCAG e análise de contraste | `docs/decisoes.md` (critério por critério) e `docs/cores.md` (tabela calculada por `scripts/contraste.js`) |
+| Psicologia das cores | `docs/cores.md`, coluna "Motivo" |
+| GitHub com versões | Histórico de commits e marcas `v0.1` a `v0.4`; `CHANGELOG.md` |
+| README passo a passo | Este arquivo |
+| Referências e IAs usadas | `docs/referencias.md` e página Sobre |
+| Site publicado | A definir (depende da publicação no GitHub Pages) |
+
+## Como conferir a acessibilidade
+
+- **Contraste.** Com o Node.js instalado, na pasta do projeto, rode `node scripts/contraste.js`. O script reescreve `docs/cores.md` e avisa se algum par de cores reprovar.
+- **Lighthouse (ainda não rodado).** No Edge ou no Chrome, abra o site, aperte F12, escolha a aba "Lighthouse", marque só "Acessibilidade" e clique em "Analisar carregamento de página". Anote a nota de cada página em `docs/decisoes.md`.
+- **Só teclado.** Use Tab, Shift+Tab, Enter, Espaço, as setas (nas abas do álbum) e Esc (para fechar o painel e o menu).
+- **Leitor de tela (ainda não testado).** No Windows, o NVDA é gratuito: https://www.nvaccess.org/
 
 ## Tecnologias
 
