@@ -89,6 +89,9 @@ img {
 button, input, select, textarea {
   font: inherit;   /* campos e botões usam a mesma letra do resto da página */
   color: inherit;
+  /* e acompanham a opção "Mais espaço no texto" do painel de acessibilidade */
+  letter-spacing: inherit;
+  word-spacing: inherit;
 }
 
 /* O atributo "hidden" do HTML esconde um elemento. Sem esta regra, qualquer
