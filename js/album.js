@@ -410,6 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('recado-texto').textContent = texto;
     document.getElementById('recado-desfazer').hidden = !podeDesfazer;
     recado.hidden = false;
+    document.body.classList.add('com-recado');   // abre uma folga no fim da página (ver css/paginas.css)
     avisar(texto);   // o mesmo texto, lido pelo leitor de tela
   }
 
@@ -474,6 +475,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function fecharRecado() {
     recado.hidden = true;
+    document.body.classList.remove('com-recado');
     // O foco estava no recado, que sumiu: volta para o começo do conteúdo, sem rolar a página
     document.getElementById('conteudo').focus({ preventScroll: true });
   }
