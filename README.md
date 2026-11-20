@@ -107,6 +107,18 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 8. **Sobre (`sobre.html` e `js/sobre.js`).** O que é o projeto, o que é de verdade e o que é simulado, como foi feito, os créditos de fontes, bandeiras e fotos, e as fontes dos dados.
 9. **Testes.** 67 verificações automáticas novas (conta, hash, erros de formulário, trocas, carrossel, créditos). Somando as etapas anteriores, são 223.
 
+### Etapa 7: os 12 grupos (entra na versão `v0.4-acessibilidade`)
+
+1. **De 1 para 12 grupos.** O álbum passou de 24 para 288 figurinhas: 48 seleções, cada uma com a bandeira e 5 jogadores. A numeração segue a ordem do sorteio: Grupo A da 1 à 24, Grupo B da 25 à 48 e assim por diante.
+2. **Dados lidos por script, não digitados.** Os elencos, os 72 jogos da fase de grupos e os 32 do mata-mata foram lidos das páginas da Wikipedia listadas em `js/dados.js`. Digitar 220 jogadores à mão daria muito mais chance de erro.
+3. **Conferência.** Número, nome e clube de cada jogador foram cruzados com uma segunda lista (Football365): 212 bateram por completo e 7 só por nome e clube, porque a segunda lista não trazia o número. O caso que sobrou é explicado pela própria fonte (jogador que entrou no lugar de um machucado). A soma dos gols de cada jogador bate com o placar nos 104 jogos.
+4. **Regra para escolher os 5 jogadores** (todos os grupos menos o C, que foi escolhido à mão): o capitão; o camisa 10; quem fez mais gols pela seleção na Copa; o goleiro com mais jogos pela seleção; e os jogadores com mais jogos pela seleção, primeiro nas posições que ainda não têm ninguém.
+5. **Textos montados a partir dos dados.** A campanha de cada seleção, o que ela fez no mata-mata e a curiosidade de cada jogador são frases montadas com os números lidos (jogos, gols, idade, resultados). Nada foi escrito de cabeça.
+6. **Como terminou.** A última página do álbum mostra a campeã, os quatro primeiros, a final e os prêmios. O resultado da final foi conferido em três reportagens além da Wikipedia.
+7. **Índice de grupos.** No topo do álbum, 12 casas levam direto a cada grupo e enchem conforme o grupo é colado.
+8. **Bandeiras.** As 48 bandeiras vêm da `flag-icons` (licença MIT).
+9. **Testes.** As verificações automáticas foram atualizadas para o álbum completo: 224 no total, todas passando. A página do álbum, com as 288 casas, é montada em menos de um décimo de segundo.
+
 ## Como conferir o contraste
 
 Com o Node.js instalado, na pasta do projeto:
