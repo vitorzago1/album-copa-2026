@@ -42,6 +42,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Texto de apoio sobre o fundo | `#474C7A` | `#F6CDD7` | 5,67:1 | 4,5:1 | Passa AA |
 | Texto de apoio sobre cartão e campo | `#474C7A` | `#FDF1F4` | 7,38:1 | 4,5:1 | Passa AAA |
 | Número e legenda dentro do espaço vazio | `#474C7A` | `#EDB5C3` | 4,65:1 | 4,5:1 | Passa AA |
+| Nome impresso dentro do espaço vazio | `#14204F` | `#EDB5C3` | 8,89:1 | 4,5:1 | Passa AAA |
+| Texto da aba escolhida e do dia carimbado na cartela | `#F6CDD7` | `#14204F` | 10,84:1 | 4,5:1 | Passa AAA |
 | Link sobre o fundo | `#2340C4` | `#F6CDD7` | 5,62:1 | 4,5:1 | Passa AA |
 | Link sobre cartão | `#2340C4` | `#FDF1F4` | 7,33:1 | 4,5:1 | Passa AAA |
 | Texto do botão principal | `#FDF1F4` | `#2340C4` | 7,33:1 | 4,5:1 | Passa AAA |
@@ -59,6 +61,7 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo sobre cartão | `#4F5487` | `#FDF1F4` | 6,46:1 | 3:1 | Passa (3:1) |
 | Moldura da vaga sobre o preenchimento da vaga | `#4F5487` | `#EDB5C3` | 4,07:1 | 3:1 | Passa (3:1) |
 | Botão principal como forma sobre o fundo | `#2340C4` | `#F6CDD7` | 5,62:1 | 3:1 | Passa (3:1) |
+| Botão "Colar" como forma dentro do espaço vazio | `#2340C4` | `#EDB5C3` | 4,61:1 | 3:1 | Passa (3:1) |
 | Preenchimento da barra de progresso sobre o trilho | `#14204F` | `#EDB5C3` | 8,89:1 | 3:1 | Passa (3:1) |
 | Texto da etiqueta colada na figurinha | `#FFFFFF` | `#14204F` | 15,56:1 | 4,5:1 | Passa AAA |
 | Etiqueta da figurinha (fundo ou contorno) sobre a página | `#14204F` | `#F6CDD7` | 10,84:1 | 3:1 | Passa (3:1) |
@@ -79,6 +82,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Texto de apoio sobre o fundo | `#C9B4CC` | `#1B2A80` | 6,44:1 | 4,5:1 | Passa AA |
 | Texto de apoio sobre cartão e campo | `#C9B4CC` | `#25359A` | 5,30:1 | 4,5:1 | Passa AA |
 | Número e legenda dentro do espaço vazio | `#C9B4CC` | `#131D4A` | 8,36:1 | 4,5:1 | Passa AAA |
+| Nome impresso dentro do espaço vazio | `#FBE3E9` | `#131D4A` | 13,26:1 | 4,5:1 | Passa AAA |
+| Texto da aba escolhida e do dia carimbado na cartela | `#1B2A80` | `#FBE3E9` | 10,22:1 | 4,5:1 | Passa AAA |
 | Link sobre o fundo | `#A9BEFF` | `#1B2A80` | 6,80:1 | 4,5:1 | Passa AA |
 | Link sobre cartão | `#A9BEFF` | `#25359A` | 5,60:1 | 4,5:1 | Passa AA |
 | Texto do botão principal | `#1B2A80` | `#A9BEFF` | 6,80:1 | 4,5:1 | Passa AA |
@@ -96,6 +101,7 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo sobre cartão | `#9AA3E6` | `#25359A` | 4,26:1 | 3:1 | Passa (3:1) |
 | Moldura da vaga sobre o preenchimento da vaga | `#9AA3E6` | `#131D4A` | 6,72:1 | 3:1 | Passa (3:1) |
 | Botão principal como forma sobre o fundo | `#A9BEFF` | `#1B2A80` | 6,80:1 | 3:1 | Passa (3:1) |
+| Botão "Colar" como forma dentro do espaço vazio | `#A9BEFF` | `#131D4A` | 8,83:1 | 3:1 | Passa (3:1) |
 | Preenchimento da barra de progresso sobre o trilho | `#FBE3E9` | `#131D4A` | 13,26:1 | 3:1 | Passa (3:1) |
 | Texto da etiqueta colada na figurinha | `#EFE6EC` | `#14204F` | 12,75:1 | 4,5:1 | Passa AAA |
 | Etiqueta da figurinha (fundo ou contorno) sobre a página | `#EFE6EC` | `#1B2A80` | 10,18:1 | 3:1 | Passa (3:1) |
@@ -116,6 +122,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Texto de apoio sobre o fundo | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
 | Texto de apoio sobre cartão e campo | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
 | Número e legenda dentro do espaço vazio | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
+| Nome impresso dentro do espaço vazio | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto da aba escolhida e do dia carimbado na cartela | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
 | Link sobre o fundo | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
 | Link sobre cartão | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
 | Texto do botão principal | `#FFFFFF` | `#0A1FA8` | 11,84:1 | 4,5:1 | Passa AAA |
@@ -133,6 +141,7 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo sobre cartão | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 | Moldura da vaga sobre o preenchimento da vaga | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 | Botão principal como forma sobre o fundo | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
+| Botão "Colar" como forma dentro do espaço vazio | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
 | Preenchimento da barra de progresso sobre o trilho | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 | Texto da etiqueta colada na figurinha | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
 | Etiqueta da figurinha (fundo ou contorno) sobre a página | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
@@ -153,6 +162,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Texto de apoio sobre o fundo | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
 | Texto de apoio sobre cartão e campo | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
 | Número e legenda dentro do espaço vazio | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
+| Nome impresso dentro do espaço vazio | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto da aba escolhida e do dia carimbado na cartela | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
 | Link sobre o fundo | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
 | Link sobre cartão | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
 | Texto do botão principal | `#000000` | `#9CB4FF` | 10,39:1 | 4,5:1 | Passa AAA |
@@ -170,6 +181,7 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo sobre cartão | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
 | Moldura da vaga sobre o preenchimento da vaga | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
 | Botão principal como forma sobre o fundo | `#9CB4FF` | `#000000` | 10,39:1 | 3:1 | Passa (3:1) |
+| Botão "Colar" como forma dentro do espaço vazio | `#9CB4FF` | `#000000` | 10,39:1 | 3:1 | Passa (3:1) |
 | Preenchimento da barra de progresso sobre o trilho | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
 | Texto da etiqueta colada na figurinha | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
 | Etiqueta da figurinha (fundo ou contorno) sobre a página | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
@@ -183,7 +195,7 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 
 ## Resumo
 
-- Pares conferidos: 128 (32 pares em 4 temas).
+- Pares conferidos: 140 (35 pares em 4 temas).
 - Reprovados: 0.
 - A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.
 - As cores das seleções (dentro das figurinhas) não entram nesta tabela: nenhum texto é escrito em cima delas.
