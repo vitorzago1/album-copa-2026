@@ -37,7 +37,22 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - Conquistas (6): cada uma vale um pacotinho extra. Conquista feita continua feita, mesmo se a colagem for desfeita.
 - Progresso em `localStorage`, na chave `colei.album.` mais o usuário (`visitante` enquanto não há login). Se o navegador bloquear o `localStorage`, o álbum vale só até fechar a página.
 - Modo demonstração na página Sobre: 5 pacotinhos extras por clique e "Zerar álbum" com janela de confirmação.
-- As páginas dos outros 11 grupos ainda não existem. O álbum avisa isso no topo.
+- Na v0.3 o álbum tinha só o Grupo C. Os outros 11 grupos entraram na etapa 7.
+
+## Os 12 grupos (etapa 7)
+
+- 288 figurinhas: 48 seleções com a bandeira e 5 jogadores. Numeração pela ordem do sorteio (A1, A2, A3, A4, B1...).
+- O Grupo C continua como foi pesquisado e escrito à mão. Os outros 11 grupos foram lidos por script das páginas da Wikipedia (elencos, grupos e mata-mata).
+- Regra fixa para escolher os 5 jogadores: capitão; camisa 10; quem fez mais gols pela seleção na Copa; goleiro com mais jogos pela seleção; depois os com mais jogos pela seleção, primeiro nas posições sem ninguém.
+- Raridade igual à do Grupo C: lendária é o camisa 10; brilhante é a bandeira e o capitão; comum são as demais. Capitão que veste a 10 é lendária. Total: 48 lendárias, 85 brilhantes e 155 comuns.
+- A curiosidade de cada jogador desses grupos é uma frase montada com dados da lista de elencos (jogos e gols pela seleção até o começo da Copa, idade em 11/06/2026) e com os gols na Copa, somados jogo a jogo.
+- A campanha e o "depois do grupo" de cada seleção são montados a partir dos placares. A posição no grupo foi calculada por pontos, saldo e gols, e conferida com a frase da fonte que diz quem ficou em primeiro e em segundo.
+- "Jogos" e "gols pela seleção" vêm de uma fonte só (Wikipedia). Número, nome e clube foram cruzados com a lista do Football365.
+- Cores do desenho de cada seleção (campo, camisa e número): escolhidas a partir do uniforme e da bandeira e conferidas por script (número sobre a camisa e silhueta sobre o campo com pelo menos 3:1).
+- "Holanda" foi o nome usado para a seleção dos Países Baixos, por ser o mais comum no Brasil.
+- "Como terminou": página final do álbum com a campeã, os quatro primeiros, a final e os prêmios. Fica sempre visível, fora da busca e dos filtros.
+- Índice de grupos no topo do álbum: reaproveita a tira de 12 casas da página inicial, agora com links.
+- Não foram feitas as figurinhas das 16 sedes nem as especiais, que o enunciado dava como sugestão. As sedes aparecem no carrossel da página inicial.
 
 ## Entrar, contato, trocas, carrossel e sobre (etapa 6)
 
@@ -119,6 +134,14 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 9. Ajudar a reconhecer e corrigir erros | Busca sem resultado explica o que houve e oferece limpar os filtros; nos formulários, frase específica com ícone embaixo do campo, resumo com link para cada campo e foco levado ao primeiro problema |
 | 10. Ajuda e documentação | Seção "Como funciona" na página inicial; texto da bandeja explica os dois jeitos de colar; texto de apoio no painel; passo a passo do modo demonstração no README |
 
+## Verificação feita na etapa 7
+
+- Consistência dos dados, por script: 288 figurinhas numeradas de 1 a 288 sem buraco; 6 por seleção, começando pela bandeira; 1 lendária por seleção; 4 seleções por grupo; toda fonte citada existe na lista; toda bandeira tem arquivo.
+- Leitura das fontes: 48 elencos com 26 jogadores, um capitão e um camisa 10 cada; a soma dos gols por jogador bate com o placar nos 104 jogos; os vencedores de cada fase do mata-mata são os que aparecem na fase seguinte.
+- Segunda lista (Football365): dos 220 jogadores dos grupos novos, 212 bateram em número, nome e clube; 7 só em nome e clube (Senegal e dois da Croácia, sem número na segunda lista); 1 é o substituto do Uzbequistão, explicado na Wikipedia. Em 8 jogadores a segunda lista dá outra posição (por exemplo, Kimmich como meio-campista); o álbum segue a posição da lista oficial da FIFA, que é a usada pela Wikipedia.
+- Artilheiro somado jogo a jogo (Mbappé, 10 gols) igual ao da tabela de prêmios da fonte. Final (Espanha 1 a 0 Argentina, na prorrogação) conferida em ESPN, NPR e CBS News.
+- As 224 verificações automáticas passam com o álbum completo. A página do álbum monta as 288 casas em cerca de 40 milésimos de segundo no computador de teste.
+
 ## Verificação feita na etapa 6
 
 - 67 verificações automáticas novas: criar conta, hash e sal guardados no lugar da senha, entrar, sair, álbum separado por conta, mensagens de erro, mostrar senha, resumo de erros do contato, mensagem de sucesso, listas de troca, link do WhatsApp, banca de trocas, carrossel (teclado, volta do fim para o começo, sem passar sozinho), as 16 fotos com texto alternativo e crédito, 320 px com letra maior, títulos em ordem e console sem erros.
@@ -137,7 +160,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 ## Pendências conhecidas
 
 - A opção "Mais espaço no texto" ainda não afasta as letras dentro de botões e figurinhas (fica para a etapa de acessibilidade).
-- "Depois do grupo" de Brasil e Marrocos está como "a confirmar".
+- A lista oficial de elencos da FIFA em PDF não foi lida (ver `docs/referencias.md`).
 
 ## Verificação feita na v0.2
 

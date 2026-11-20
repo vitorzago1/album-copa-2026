@@ -16,7 +16,7 @@ As duas licenças estão copiadas em `assets/fontes/LICENCA-*.txt`, do repositó
 - Retrato das figurinhas: desenho próprio em SVG (busto genérico, sem representar nenhuma pessoa).
 - Ícone do site (`assets/svg/favicon.svg`): desenho próprio.
 - Pacotinho, costas da figurinha, cartela e carimbos: desenhados em CSS, sem imagem.
-- Bandeiras (`assets/bandeiras/`: `br`, `ma`, `ht` e `gb-sct` das seleções; `mx`, `us` e `ca` dos países-sede): biblioteca `flag-icons`, de Panayiotis Lipiridis, licença MIT. Origem: https://github.com/lipis/flag-icons (pasta `flags/4x3`). Copiadas em 19 e 20/11/2026, sem alteração. A licença está em `assets/bandeiras/LICENCA-flag-icons.txt`. Só as imagens foram usadas: nenhum código da biblioteca roda no site.
+- Bandeiras (`assets/bandeiras/`, as 48 seleções): biblioteca `flag-icons`, de Panayiotis Lipiridis, licença MIT. Origem: https://github.com/lipis/flag-icons (pasta `flags/4x3`). Copiadas em 19 e 20/11/2026, sem alteração. A licença está em `assets/bandeiras/LICENCA-flag-icons.txt`. Só as imagens foram usadas: nenhum código da biblioteca roda no site.
 
 ### Fotos dos estádios (carrossel da página inicial)
 
@@ -51,19 +51,33 @@ Observações sobre as fotos:
 
 ## Dados da Copa de 2026
 
-Consulta feita em 19/11/2026. Cada registro de `js/dados.js` tem um campo `fonte` que aponta para uma ou mais destas fontes. Por enquanto só o Grupo C (Brasil, Marrocos, Haiti e Escócia) foi pesquisado.
+Consultas feitas em 19 e 20/11/2026. Cada registro de `js/dados.js` tem um campo `fonte` que aponta para uma ou mais destas fontes. A lista completa, com os endereços, é o objeto `FONTES` no começo de `js/dados.js`, e aparece também na página Sobre.
 
-Como foi conferido:
+Como foi conferido, no Grupo C (pesquisado à mão):
 
 - Número da camisa, posição e clube: duas listas independentes, que bateram nos 20 jogadores escolhidos (Wikipedia e Football365).
 - Capitães e curiosidades: comunicado da FIFA, confederações (UEFA e Concacaf) e imprensa.
 - Classificação e placares do grupo: página do Grupo C na Wikipedia e relatos de jogo da imprensa.
 
+Como foi conferido, nos outros 11 grupos (lidos por script):
+
+- Elencos (número, posição, nome, clube, capitão, técnico, jogos e gols pela seleção, data de nascimento): página de elencos da Wikipedia.
+- Número, nome e clube dos 220 jogadores escolhidos: cruzados com a lista do Football365. Bateram 212; em 7 a segunda lista não traz o número (confere só nome e clube); 1 é um substituto de última hora, explicado na Wikipedia.
+- Jogos da fase de grupos e do mata-mata, com quem marcou cada gol: páginas da Wikipedia de cada grupo, dos 16 avos de final, do mata-mata e da final. A soma dos gols por jogador bate com o placar nos 104 jogos.
+- Final e campeã: conferidas em ESPN, NPR e CBS News.
+- Prêmios (artilheiro, melhor jogador, melhor goleiro, melhor jovem): artigo principal da Copa na Wikipedia. O artilheiro foi confirmado pela soma dos gols jogo a jogo.
+
 Fontes:
 
 - FIFA. World Cup 2026: 48 squads confirmed (2 de junho de 2026): https://inside.fifa.com/media-releases/world-cup-2026-48-squads-confirmed
 - Wikipedia. 2026 FIFA World Cup squads: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_squads
-- Wikipedia. 2026 FIFA World Cup Group C: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_C
+- Wikipedia. 2026 FIFA World Cup Group A até Group L (12 páginas, uma por grupo). Exemplo: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_Group_C
+- Wikipedia. 2026 FIFA World Cup knockout stage: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_knockout_stage
+- Wikipedia. 2026 FIFA World Cup round of 32: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_round_of_32
+- Wikipedia. 2026 FIFA World Cup final: https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_final
+- ESPN. Spain 1-0 Argentina (Jul 19, 2026) Final Score: https://www.espn.com/soccer/match/_/gameId/760517/argentina-spain
+- NPR. Spain is the 2026 World Cup champion, defeating Argentina for its 2nd title: https://www.npr.org/2026/07/19/nx-s1-5899071/2026-world-cup-fifa-argentina-spain-final-championship
+- CBS News. Spain wins 2026 FIFA World Cup with grueling 1-0 victory over Argentina: https://www.cbsnews.com/news/2026-fifa-world-cup-final-spain-argentina-sunday/
 - Wikipedia. 2026 FIFA World Cup (seção Venues: as 16 sedes, com estádio, número de jogos e capacidade; consulta em 20/11/2026): https://en.wikipedia.org/wiki/2026_FIFA_World_Cup
 - Football365. Final confirmed squad lists and squad numbers for all 48 nations: https://www.football365.com/news/2026-world-cup-squads-full-48-teams-every-player
 - UEFA. Scotland at the World Cup 2026: https://www.uefa.com/european-qualifiers/news/02a6-20d159741fe9-a2a8fac9839d-1000--scotland-at-the-world-cup-2026-squad-fixtures-group-and-hi/
@@ -72,8 +86,10 @@ Fontes:
 
 Pendências desta pesquisa:
 
-- A lista oficial de elencos da FIFA em PDF (https://fdp.fifa.org/assetspublic/ce281/pdf/SquadLists-English.pdf) não pôde ser lida de forma automática. Vale abrir e conferir os 20 nomes à mão.
-- O que cada seleção fez depois da fase de grupos está marcado como "a confirmar": a fonte consultada veio com dados confusos.
+- A lista oficial de elencos da FIFA em PDF (https://fdp.fifa.org/assetspublic/ce281/pdf/SquadLists-English.pdf) não pôde ser lida de forma automática. Vale abrir e conferir alguns nomes à mão.
+- "Jogos" e "gols pela seleção" de cada jogador vêm de uma fonte só (Wikipedia). São os números usados nas curiosidades dos 11 grupos lidos por script.
+- Os resultados do mata-mata vêm das páginas da Wikipedia. Só a final foi conferida em outras fontes. Como conferência interna, os vencedores de cada fase são os mesmos que aparecem na fase seguinte.
+- Em 8 jogadores a segunda lista dá outra posição. O álbum segue a da lista oficial da FIFA, que é a usada pela Wikipedia.
 - Três curiosidades foram deduzidas da lista de elencos, e não de uma reportagem: El Kaabi (mais gols no elenco), Ricardo Adé (defensor mais velho do elenco) e Brahim Díaz (camisa 10).
 - Os dados das 16 sedes vêm de uma fonte só (a tabela da Wikipedia). As notas "o estádio que mais recebeu jogos" e "o menor dos 16 estádios" foram tiradas da comparação dos números dessa tabela.
 
@@ -111,6 +127,7 @@ Pendências desta pesquisa:
 - **Claude Code (modelo Claude, da Anthropic).** Usado para:
   - propor e comparar as direções visuais (5 designers de IA independentes, dos quais 3 concluíram, e 3 jurados de IA);
   - pesquisar os dados do Grupo C nas fontes listadas acima e cruzar as listas de elencos;
+  - escrever os scripts que leram os elencos e os jogos dos outros 11 grupos nas fontes e montaram os registros de `js/dados.js`;
   - escrever o HTML, o CSS, o JavaScript e os scripts, a partir do prompt e das escolhas do aluno;
   - calcular o contraste das cores e rodar os testes automáticos;
   - escrever esta documentação técnica.

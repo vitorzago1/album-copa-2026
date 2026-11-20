@@ -13,6 +13,12 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Dados das 16 sedes em `js/dados.js`, com fonte.
 - Página Sobre: o que é o projeto, o que é simulado, créditos e fontes dos dados.
 - Crédito das fotos no rodapé.
+- Álbum completo: 12 grupos, 48 seleções e 288 figurinhas, com fonte em cada registro.
+- "Depois do grupo" de todas as seleções, inclusive Brasil e Marrocos (antes "a confirmar").
+- Página "Como terminou" no fim do álbum: campeã, quatro primeiros, final e prêmios.
+- Índice de grupos no topo do álbum.
+- Bandeiras das 48 seleções.
+- Na página de trocas, a lista do que falta fica em uma gaveta quando é longa.
 
 ## v0.3-album (20/11/2026)
 
