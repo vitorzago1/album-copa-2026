@@ -12,6 +12,13 @@
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
 
+  <!-- Os scripts das trocas, nesta ordem: os dados, o caderninho do progresso,
+       os ajudantes da figurinha e, por último, a página. -->
+  <script src="js/dados.js" defer></script>
+  <script src="js/estado.js" defer></script>
+  <script src="js/figurinha.js" defer></script>
+  <script src="js/trocas.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -54,10 +61,70 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura">
-      <h1>Trocas</h1>
-      <p>Aqui você vai ver as repetidas, as que faltam e montar a lista para trocar com os amigos. Chega em uma das próximas versões.</p>
-    </div>
+
+    <!-- Página dupla: à esquerda o que tenho e o que falta; à direita a lista pronta para mandar.
+         Tudo é preenchido pelo js/trocas.js, a partir do álbum guardado. -->
+    <section class="largura dobra">
+      <div class="fluxo">
+        <h1>Trocas</h1>
+        <p class="abertura-texto">Repetida parada não completa o álbum de ninguém. Veja o que você tem para trocar e o que ainda falta.</p>
+        <noscript><p>As listas de troca precisam do JavaScript ligado no navegador.</p></noscript>
+
+        <h2 id="titulo-tenho">Tenho para trocar</h2>
+        <p id="repetidas-texto"></p>
+        <ul class="lista-troca" id="lista-repetidas" aria-labelledby="titulo-tenho"></ul>
+
+        <h2 id="titulo-preciso">Preciso</h2>
+        <p id="faltam-texto"></p>
+        <ul class="lista-faltam" id="lista-faltam" aria-labelledby="titulo-preciso"></ul>
+      </div>
+
+      <div class="fluxo">
+        <h2>Lista de troca</h2>
+        <p>O texto abaixo já vem pronto para mandar aos amigos. Ele muda sozinho quando o álbum muda.</p>
+
+        <div class="cartao bilhete">
+          <div class="campo">
+            <label class="campo-rotulo" for="texto-troca">Sua lista</label>
+            <!-- "readonly": dá para selecionar e copiar, mas não para editar. -->
+            <textarea class="campo-entrada" id="texto-troca" rows="7" readonly></textarea>
+          </div>
+          <p class="guia-linha">
+            <button class="botao" type="button" id="copiar-lista">Copiar lista</button>
+            <!-- O endereço wa.me abre o WhatsApp com o texto já escrito. O js/trocas.js completa o link. -->
+            <a class="botao botao-contorno" id="mandar-whatsapp" href="https://wa.me/" target="_blank" rel="noopener">Mandar pelo WhatsApp<span class="escondido"> (abre em outra aba)</span></a>
+          </p>
+          <p class="painel-aviso" id="copiar-aviso" role="status"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANCA DE TROCAS: a simulação de uma troca. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-banca">
+      <h2 id="titulo-banca">Banca de trocas</h2>
+      <p>Como o site não tem servidor, aqui a troca é uma simulação: a banca sorteia três figurinhas que você ainda não tem. Escolha uma repetida para dar e uma da banca para receber.</p>
+
+      <p class="aviso-sucesso" id="troca-aviso" role="status" tabindex="-1"></p>
+      <p id="banca-vazia" hidden></p>
+
+      <form class="fluxo" id="form-troca" hidden>
+        <div class="banca-grade">
+          <!-- fieldset + legend: o leitor de tela diz a pergunta antes de cada opção. -->
+          <fieldset class="painel-grupo">
+            <legend>Você dá (uma repetida)</legend>
+            <div id="opcoes-dou"></div>
+          </fieldset>
+          <fieldset class="painel-grupo">
+            <legend>Você recebe (oferta da banca)</legend>
+            <div id="opcoes-recebo"></div>
+          </fieldset>
+        </div>
+        <p class="guia-linha">
+          <button class="botao" type="submit">Trocar</button>
+          <button class="botao botao-contorno" type="button" id="outras-ofertas">Ver outras ofertas</button>
+        </p>
+      </form>
+    </section>
   </main>
 
   <!-- RODAPÉ. É igual nas 7 páginas. -->
@@ -84,7 +151,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Fotos dos estádios: Wikimedia Commons. Os créditos completos ficam na página <a href="sobre.html#creditos">Sobre</a>.</p>
       </div>
     </div>
   </footer>

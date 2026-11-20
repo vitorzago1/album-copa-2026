@@ -30,6 +30,7 @@ const CONQUISTAS = [
   { id: 'tres-dias', nome: 'Três dias seguidos', como: 'Abra o pacotinho do dia três dias seguidos.' },
   { id: 'meio-album', nome: 'Meio álbum', como: 'Cole metade das figurinhas do álbum.' },
   { id: 'grupo-fechado', nome: 'Grupo fechado', como: 'Cole todas as figurinhas de um grupo.' },
+  { id: 'primeira-troca', nome: 'Primeira troca', como: 'Troque uma repetida na banca de trocas.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -59,6 +60,7 @@ function albumVazio() {
     coladas: [],      // números das figurinhas coladas: [50, 54]
     extras: 0,        // pacotinhos extras guardados
     pacotinhos: 0,    // quantos pacotinhos já foram abertos
+    trocas: 0,        // quantas trocas já foram feitas na banca
     ultimoDia: '',    // dia do último pacotinho grátis, no formato "2026-11-19"
     sequencia: 0,     // dias seguidos abrindo o pacotinho grátis
     conquistas: {},   // conquistas feitas e o dia de cada uma: { "primeira-colada": "2026-11-19" }
@@ -255,6 +257,9 @@ function conquistaFeita(id, album) {
       return contarColadas(album, lista) === lista.length;
     });
   }
+  if (id === 'primeira-troca') {
+    return album.trocas >= 1;
+  }
   return false;
 }
 
@@ -352,6 +357,23 @@ function descolarFigurinha(numero) {
   const album = lerAlbum();
   album.coladas = album.coladas.filter(function (colada) { return colada !== numero; });
   salvarAlbum(album);
+}
+
+// Troca na banca (simulação): sai uma repetida e chega uma figurinha que faltava.
+// Devolve os nomes das conquistas novas, ou null se a troca não vale
+// (a figurinha dada não é repetida, ou a recebida a pessoa já tem).
+function trocarFigurinha(numeroQueSai, numeroQueChega) {
+  const album = lerAlbum();
+  if (repetidasDe(album, numeroQueSai) < 1) return null;
+  if (quantasTenho(album, numeroQueChega) > 0) return null;
+
+  album.quantidade[numeroQueSai] -= 1;
+  album.quantidade[numeroQueChega] = 1;
+  album.trocas += 1;
+
+  const conquistas = conferirConquistas(album);
+  salvarAlbum(album);
+  return conquistas;
 }
 
 // Modo demonstração: ganha pacotinhos extras de uma vez
