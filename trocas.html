@@ -76,7 +76,12 @@
 
         <h2 id="titulo-preciso">Preciso</h2>
         <p id="faltam-texto"></p>
-        <ul class="lista-faltam" id="lista-faltam" aria-labelledby="titulo-preciso"></ul>
+        <!-- <details> é uma gaveta do próprio HTML: abre e fecha ao clicar no resumo, sem JavaScript.
+             A lista pode ter quase 300 números, por isso começa fechada quando é longa. -->
+        <details id="faltam-gaveta">
+          <summary id="faltam-resumo">Ver a lista</summary>
+          <ul class="lista-faltam" id="lista-faltam" aria-labelledby="titulo-preciso"></ul>
+        </details>
       </div>
 
       <div class="fluxo">
