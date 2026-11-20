@@ -12,6 +12,11 @@
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
 
+  <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
+  <script src="js/dados.js" defer></script>
+  <script src="js/estado.js" defer></script>
+  <script src="js/inicio.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -86,8 +91,8 @@
       </div>
     </section>
 
-    <!-- PROGRESSO. Uma casa por grupo, de A a L. Por enquanto começa vazia;
-         na etapa do álbum ela passa a mostrar o que foi colado. -->
+    <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
+         conforme as figurinhas do grupo são coladas e troca o texto de baixo. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-progresso">
       <h2 id="titulo-progresso">Seu álbum até agora</h2>
       <ol class="tira" aria-label="Progresso por grupo">
@@ -104,7 +109,7 @@
         <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>K</span></li>
         <li class="tira-casa"><span class="tira-quadro" style="--parte: 0"></span><span><span class="escondido">Grupo </span>L</span></li>
       </ol>
-      <p>Nenhuma figurinha colada ainda. Cada casa é um grupo, de A a L, e vai enchendo conforme você cola.</p>
+      <p id="progresso-texto">Nenhuma figurinha colada ainda. Cada casa é um grupo, de A a L, e vai enchendo conforme você cola.</p>
     </section>
 
     <!-- COMO FUNCIONA. É uma sequência de verdade, por isso é uma lista numerada. -->
@@ -131,13 +136,13 @@
       <div>
         <article class="cartao" aria-labelledby="titulo-pacotinho">
           <h2 id="titulo-pacotinho">Pacotinho do dia</h2>
-          <p>Um pacotinho grátis por dia, com cinco figurinhas. Amanhã tem outro.</p>
+          <p id="pacotinho-texto">Um pacotinho grátis por dia, com cinco figurinhas. Amanhã tem outro.</p>
           <p><a class="botao" href="pacotinhos.html">Ir para os pacotinhos</a></p>
 
           <!-- O canhoto do cupom: a cartela da sequência de dias. -->
           <div class="cupom-canhoto fluxo">
             <h3>Sua sequência</h3>
-            <ol class="cartela" aria-label="Cartela de sete dias seguidos">
+            <ol class="cartela" id="cartela" aria-label="Cartela de sete dias seguidos">
               <li><span class="escondido">Dia </span>1</li>
               <li><span class="escondido">Dia </span>2</li>
               <li><span class="escondido">Dia </span>3</li>
@@ -146,7 +151,7 @@
               <li><span class="escondido">Dia </span>6</li>
               <li><span class="escondido">Dia </span>7</li>
             </ol>
-            <p class="texto-apoio">Nenhum dia marcado ainda. Cada pacotinho aberto ganha um carimbo.</p>
+            <p class="texto-apoio" id="sequencia-texto">Nenhum dia marcado ainda. Cada pacotinho aberto ganha um carimbo.</p>
           </div>
         </article>
       </div>
@@ -263,7 +268,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next, com licença livre (OFL). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
       </div>
     </div>
   </footer>
