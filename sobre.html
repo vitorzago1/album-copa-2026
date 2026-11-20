@@ -12,6 +12,11 @@
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
 
+  <!-- Para o modo demonstração: os dados, o caderninho do progresso e os dois botões. -->
+  <script src="js/dados.js" defer></script>
+  <script src="js/estado.js" defer></script>
+  <script src="js/demonstracao.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -58,6 +63,33 @@
       <h1>Sobre o projeto</h1>
       <p>Este site é o Projeto Final da disciplina Desenvolvimento de Interfaces (CEUB, 2/2026). Os detalhes da construção entram aqui em uma das próximas versões.</p>
     </div>
+
+    <!-- MODO DEMONSTRAÇÃO: para testar o álbum na apresentação sem esperar um pacotinho por dia.
+         Os botões são ligados pelo js/demonstracao.js. -->
+    <section class="largura secao fluxo" id="demonstracao" aria-labelledby="titulo-demonstracao">
+      <h2 id="titulo-demonstracao">Modo demonstração</h2>
+      <p>Feito para a apresentação: dá para testar o álbum inteiro sem esperar um pacotinho por dia. Vale só para este navegador.</p>
+      <p class="guia-linha">
+        <button class="botao" type="button" id="demo-extras">Ganhar 5 pacotinhos extras</button>
+        <button class="botao botao-contorno" type="button" id="demo-zerar">Zerar álbum</button>
+      </p>
+      <!-- role="status": o leitor de tela lê este texto quando ele muda. -->
+      <p class="painel-aviso" id="demo-aviso" role="status"></p>
+    </section>
+
+    <!-- Janela de confirmação do "Zerar álbum". O <dialog> prende o foco e fecha com Esc. -->
+    <dialog class="painel" id="dialogo-zerar" aria-labelledby="titulo-zerar">
+      <div class="painel-dentro">
+        <div class="painel-cabeca">
+          <h2 id="titulo-zerar">Zerar o álbum?</h2>
+        </div>
+        <p>Isso apaga as figurinhas, as coladas, os pacotinhos extras, a sequência e as conquistas guardadas neste navegador. Não dá para desfazer.</p>
+        <div class="painel-pe">
+          <button class="botao botao-contorno" type="button" id="zerar-cancelar">Cancelar</button>
+          <button class="botao" type="button" id="zerar-confirmar">Zerar álbum</button>
+        </div>
+      </div>
+    </dialog>
 
     <!-- GUIA DE ESTILO: as peças do site, todas juntas. Serve de consulta e de teste dos temas. -->
     <section class="largura secao fluxo guia" aria-labelledby="titulo-guia">
@@ -174,7 +206,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next, com licença livre (OFL). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
       </div>
     </div>
   </footer>
