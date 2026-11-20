@@ -12,6 +12,13 @@
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
 
+  <!-- Os scripts da conta: os dados e o caderninho do progresso (para mostrar o álbum de
+       quem entrou), os ajudantes de formulário e, por último, a página. -->
+  <script src="js/dados.js" defer></script>
+  <script src="js/estado.js" defer></script>
+  <script src="js/formulario.js" defer></script>
+  <script src="js/login.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
@@ -54,10 +61,92 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <div class="largura">
-      <h1>Entrar</h1>
-      <p>A tela de entrada chega em uma das próximas versões. O login deste site é uma simulação: não existe servidor.</p>
-    </div>
+
+    <!-- Página dupla: à esquerda a explicação, à direita a conta (ou os formulários).
+         Só uma das três partes da direita aparece por vez; quem escolhe é o js/login.js. -->
+    <section class="largura dobra">
+      <div class="fluxo">
+        <h1>Entrar</h1>
+        <p class="abertura-texto">Com uma conta, o seu álbum fica separado do álbum de quem mais usar este navegador.</p>
+
+        <div class="cartao">
+          <h2 class="titulo-menor">É uma simulação</h2>
+          <p>Este site não tem servidor. A conta fica guardada só neste navegador e existe para mostrar como um login funciona. Não use aqui uma senha que você usa em outro lugar.</p>
+          <p>A senha em si não é guardada. Fica guardado só o resultado de uma conta feita com ela, que não dá para desfazer.</p>
+        </div>
+        <noscript><p>Entrar e criar conta precisam do JavaScript ligado no navegador.</p></noscript>
+      </div>
+
+      <div class="fluxo">
+        <!-- Recado geral ("Conta criada", "Você saiu"). role="status": o leitor de tela lê quando muda. -->
+        <p class="aviso-sucesso" id="conta-aviso" role="status" tabindex="-1"></p>
+
+        <!-- 1. QUEM JÁ ENTROU -->
+        <section class="fluxo" id="painel-conta" aria-labelledby="titulo-conta" hidden>
+          <h2 id="titulo-conta" tabindex="-1">Sua conta</h2>
+          <p id="conta-quem"></p>
+          <p id="conta-album"></p>
+          <p class="guia-linha">
+            <a class="botao" href="album.html">Ir para o álbum</a>
+            <button class="botao botao-contorno" type="button" id="sair">Sair</button>
+          </p>
+        </section>
+
+        <!-- 2. ENTRAR. "novalidate" desliga os balões do navegador: as mensagens são as do site. -->
+        <form class="formulario" id="form-entrar" aria-labelledby="titulo-entrar" novalidate hidden>
+          <h2 id="titulo-entrar" tabindex="-1">Já tenho conta</h2>
+
+          <div class="campo">
+            <label class="campo-rotulo" for="entrar-email">E-mail</label>
+            <input class="campo-entrada" type="email" id="entrar-email" name="email" autocomplete="email" required aria-describedby="entrar-email-erro">
+            <p class="campo-erro" id="entrar-email-erro" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label class="campo-rotulo" for="entrar-senha">Senha</label>
+            <input class="campo-entrada" type="password" id="entrar-senha" name="senha" autocomplete="current-password" required aria-describedby="entrar-senha-erro">
+            <button class="botao botao-contorno botao-pequeno" type="button" data-mostrar-senha="entrar-senha">Mostrar senha</button>
+            <p class="campo-erro" id="entrar-senha-erro" hidden></p>
+          </div>
+
+          <!-- Erro do formulário inteiro ("e-mail ou senha não conferem"). role="alert": lido na hora. -->
+          <p class="campo-erro" id="entrar-erro" role="alert" hidden></p>
+
+          <p><button class="botao" type="submit">Entrar</button></p>
+          <p>Ainda não tem conta? <button class="botao-link" type="button" id="ir-criar">Criar conta</button></p>
+        </form>
+
+        <!-- 3. CRIAR CONTA -->
+        <form class="formulario" id="form-criar" aria-labelledby="titulo-criar" novalidate hidden>
+          <h2 id="titulo-criar" tabindex="-1">Criar conta</h2>
+
+          <div class="campo">
+            <label class="campo-rotulo" for="criar-nome">Nome</label>
+            <input class="campo-entrada" type="text" id="criar-nome" name="nome" autocomplete="name" required aria-describedby="criar-nome-erro">
+            <p class="campo-erro" id="criar-nome-erro" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label class="campo-rotulo" for="criar-email">E-mail</label>
+            <input class="campo-entrada" type="email" id="criar-email" name="email" autocomplete="email" required aria-describedby="criar-email-erro">
+            <p class="campo-erro" id="criar-email-erro" hidden></p>
+          </div>
+
+          <div class="campo">
+            <label class="campo-rotulo" for="criar-senha">Senha</label>
+            <span class="campo-dica" id="criar-senha-dica">Pelo menos 8 caracteres. Pode colar e pode usar o gerenciador de senhas.</span>
+            <input class="campo-entrada" type="password" id="criar-senha" name="senha" autocomplete="new-password" required minlength="8" aria-describedby="criar-senha-dica criar-senha-erro">
+            <button class="botao botao-contorno botao-pequeno" type="button" data-mostrar-senha="criar-senha">Mostrar senha</button>
+            <p class="campo-erro" id="criar-senha-erro" hidden></p>
+          </div>
+
+          <p class="campo-erro" id="criar-erro" role="alert" hidden></p>
+
+          <p><button class="botao" type="submit">Criar conta</button></p>
+          <p>Já tem conta? <button class="botao-link" type="button" id="ir-entrar">Entrar</button></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <!-- RODAPÉ. É igual nas 7 páginas. -->
@@ -84,7 +173,7 @@
       <div class="rodape-creditos">
         <p>Projeto acadêmico de Vitor Zago Pontes Morais. Desenvolvimento de Interfaces, 2/2026, CEUB. Prof. Dr. Felipe Batista da Silva.</p>
         <p>Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou as federações.</p>
-        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Os créditos completos ficam na página <a href="sobre.html">Sobre</a>.</p>
+        <p>Fontes tipográficas: Londrina Solid e Atkinson Hyperlegible Next (licença OFL). Bandeiras: flag-icons (licença MIT). Fotos dos estádios: Wikimedia Commons. Os créditos completos ficam na página <a href="sobre.html#creditos">Sobre</a>.</p>
       </div>
     </div>
   </footer>
