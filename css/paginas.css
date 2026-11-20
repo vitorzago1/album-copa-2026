@@ -139,7 +139,14 @@
 /* O recado fica preso no pé da tela. Esta folga faz o navegador parar a
    rolagem um pouco antes, para o recado nunca cobrir o que está em foco. */
 html {
-  scroll-padding-bottom: 7rem;
+  scroll-padding-bottom: 10rem;
+}
+
+/* Enquanto o recado está na tela, a página ganha um espaço a mais no fim.
+   Sem ele, os últimos links do rodapé não teriam para onde subir e ficariam
+   embaixo do recado. (A classe é posta e tirada pelo js/album.js.) */
+.com-recado {
+  padding-bottom: 10rem;
 }
 
 .album-topo {
