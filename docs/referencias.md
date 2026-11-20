@@ -1,6 +1,6 @@
 # Referências
 
-Tudo o que o projeto usa e de onde veio. Atualizado até a versão `v0.2-design`.
+Tudo o que o projeto usa e de onde veio. Atualizado até a versão `v0.3-album`.
 
 ## Fontes tipográficas
 
@@ -15,7 +15,8 @@ As duas licenças estão copiadas em `assets/fontes/LICENCA-*.txt`, do repositó
 
 - Retrato das figurinhas: desenho próprio em SVG (busto genérico, sem representar nenhuma pessoa).
 - Ícone do site (`assets/svg/favicon.svg`): desenho próprio.
-- Bandeiras: a definir na etapa dos dados (previsto: biblioteca `flag-icons`, licença MIT).
+- Pacotinho, costas da figurinha, cartela e carimbos: desenhados em CSS, sem imagem.
+- Bandeiras (`assets/bandeiras/br.svg`, `ma.svg`, `ht.svg` e `gb-sct.svg`): biblioteca `flag-icons`, de Panayiotis Lipiridis, licença MIT. Origem: https://github.com/lipis/flag-icons (pasta `flags/4x3`). Copiadas em 19/11/2026, sem alteração. A licença está em `assets/bandeiras/LICENCA-flag-icons.txt`. Só as imagens foram usadas: nenhum código da biblioteca roda no site.
 
 ## Dados da Copa de 2026
 
@@ -49,6 +50,11 @@ Pendências desta pesquisa:
 - W3C. Definição de razão de contraste, usada em `scripts/contraste.js`: https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio
 - W3C WAI. ARIA Authoring Practices Guide, padrão de diálogo modal: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 - W3C WAI. ARIA Authoring Practices Guide, padrão de abrir e fechar (disclosure), usado no botão Menu: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+- W3C WAI. ARIA Authoring Practices Guide, padrão de abas (tabs), usado na página do álbum: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+- W3C WAI. Entendendo o critério 2.5.7, Movimentos de arrastar (motivo do botão "Colar"): https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html
+- MDN Web Docs. API de arrastar e soltar do HTML, usada para colar a figurinha: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+- MDN Web Docs. `localStorage`, onde o progresso fica guardado: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+- MDN Web Docs. `rotateY()`, usado no giro da figurinha: https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateY
 - MDN Web Docs. Elemento `<dialog>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 - MDN Web Docs. `prefers-color-scheme` e `prefers-reduced-motion`: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
 - Nielsen Norman Group. 10 Usability Heuristics for User Interface Design: https://www.nngroup.com/articles/ten-usability-heuristics/
@@ -63,6 +69,7 @@ Pendências desta pesquisa:
 
 - **Claude Code (modelo Claude, da Anthropic).** Usado para:
   - propor e comparar as direções visuais (5 designers de IA independentes, dos quais 3 concluíram, e 3 jurados de IA);
+  - pesquisar os dados do Grupo C nas fontes listadas acima e cruzar as listas de elencos;
   - escrever o HTML, o CSS, o JavaScript e os scripts, a partir do prompt e das escolhas do aluno;
   - calcular o contraste das cores e rodar os testes automáticos;
   - escrever esta documentação técnica.
