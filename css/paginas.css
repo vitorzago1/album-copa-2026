@@ -163,6 +163,59 @@ html {
   line-height: 0.9;
 }
 
+/* Índice dos grupos: a tira de 12 casas, cada casa é um link para o grupo */
+.tira-indice a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espaco-1);
+  width: 100%;
+  color: var(--cor-texto);
+}
+
+.tira-indice a:hover .tira-quadro {
+  border-color: var(--cor-acao);
+  border-width: 3px;
+}
+
+/* Como terminou: a seleção campeã em destaque e os quatro primeiros em lista */
+.final-campea {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2) var(--espaco-3);
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: var(--titulo-3);
+  line-height: 1.1;
+}
+
+.podio {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--espaco-2);
+}
+
+.podio > li {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-weight: 700;
+}
+
+.podio-lugar {
+  min-width: 2ch;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: var(--titulo-3);
+  line-height: 1;
+}
+
+.podio .bandeirinha {
+  width: 2.25rem;
+}
+
 /* Bandeja: as figurinhas na mão, cada uma com o seu botão "Colar" embaixo */
 .bandeja {
   list-style: none;
@@ -375,6 +428,29 @@ html {
   color: var(--cor-texto);
   border: 2px solid var(--cor-borda);
   font-size: var(--texto-pequeno);
+}
+
+/* O resumo da gaveta "Ver os números que faltam": área de toque de 44 px */
+#faltam-gaveta summary {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  color: var(--cor-acao);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+/* Um sinal de mais ou de menos na frente mostra se a gaveta está fechada ou aberta */
+#faltam-gaveta summary::before {
+  content: "+";
+  font-weight: 800;
+}
+
+#faltam-gaveta[open] summary::before {
+  content: "−";
 }
 
 /* A lista pronta ocupa o cartão inteiro */
