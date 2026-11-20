@@ -67,13 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ficha = criarElemento('div', 'fluxo');
     const titulo = criarElemento('h3', 'selecao-titulo');
     titulo.id = 'titulo-' + selecao.id;
-    const bandeira = document.createElement('img');
-    bandeira.className = 'bandeirinha';
-    bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
-    bandeira.alt = '';   // decorativa: o nome da seleção vem escrito logo ao lado
-    bandeira.width = 48;
-    bandeira.height = 36;
-    titulo.append(bandeira, selecao.nome);
+    titulo.append(criarBandeirinha(selecao), selecao.nome);
 
     const conta = criarElemento('p', 'selecao-conta');
     conta.id = 'conta-selecao-' + selecao.id;
@@ -106,6 +100,74 @@ document.addEventListener('DOMContentLoaded', function () {
 
     pagina.append(ficha, direita);
     return pagina;
+  }
+
+  // A bandeirinha que acompanha o nome de uma seleção.
+  // É decorativa (alt vazio): o nome vem sempre escrito ao lado.
+  function criarBandeirinha(selecao) {
+    const bandeira = document.createElement('img');
+    bandeira.className = 'bandeirinha';
+    bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
+    bandeira.alt = '';
+    bandeira.width = 48;
+    bandeira.height = 36;
+    bandeira.loading = 'lazy';   // só baixa a imagem quando ela está perto de aparecer na tela
+    return bandeira;
+  }
+
+  // O índice: uma casa por grupo, que é um link para o grupo.
+  // O preenchimento de cada casa é atualizado em atualizarPlacar().
+  function montarIndice() {
+    const indice = document.getElementById('indice-grupos');
+    for (const grupo of gruposDoAlbum()) {
+      const link = document.createElement('a');
+      link.href = '#titulo-grupo-' + grupo;
+      link.dataset.grupo = grupo;
+
+      const quadro = criarElemento('span', 'tira-quadro');
+      quadro.id = 'indice-quadro-' + grupo;
+      const letra = document.createElement('span');
+      const conta = criarElemento('span', 'escondido');
+      conta.id = 'indice-conta-' + grupo;
+      letra.append(criarElemento('span', 'escondido', 'Grupo '), grupo, conta);
+      link.append(quadro, letra);
+
+      // Se a busca ou um filtro estiver escondendo o grupo, limpa tudo antes de ir até ele
+      link.addEventListener('click', function () {
+        if (document.getElementById('titulo-grupo-' + grupo).closest('.grupo').hidden) limparFiltros();
+      });
+
+      const item = criarElemento('li', 'tira-casa');
+      item.append(link);
+      indice.append(item);
+    }
+  }
+
+  // A última página do álbum: como a Copa terminou
+  function montarFinal() {
+    const campea = selecaoPorId(COPA.campea);
+    const titulo = document.getElementById('final-campea');
+    titulo.append(criarBandeirinha(campea), 'Seleção campeã: ' + campea.nome);
+
+    document.getElementById('final-placar').textContent = COPA.final.placar + '. Gol de ' + COPA.final.gol + '.';
+    document.getElementById('final-onde').textContent = 'A final foi em ' + COPA.final.data + ', no ' + COPA.final.estadio + '.';
+    document.getElementById('final-numeros').textContent = 'A Copa teve ' + COPA.numeros.jogos + ' jogos e ' + COPA.numeros.gols + ' gols.';
+
+    const podio = document.getElementById('final-podio');
+    [COPA.campea, COPA.vice, COPA.terceiro, COPA.quarto].forEach(function (id, posicao) {
+      const selecao = selecaoPorId(id);
+      const item = document.createElement('li');
+      item.append(criarElemento('span', 'podio-lugar', (posicao + 1) + 'º'), criarBandeirinha(selecao), selecao.nome);
+      podio.append(item);
+    });
+    document.getElementById('final-terceiro').textContent = 'Disputa do terceiro lugar: ' + COPA.terceiroLugar.placar + ', em ' + COPA.terceiroLugar.data + '.';
+
+    const premios = document.getElementById('final-premios');
+    for (const premio of COPA.premios) {
+      let quem = premio.nome + ' (' + selecaoPorId(premio.selecao).nome + ')';
+      if (premio.detalhe) quem += ', ' + premio.detalhe;
+      acrescentarDado(premios, premio.premio, quem);
+    }
   }
 
   function montarPaginas() {
@@ -230,7 +292,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const grupo of gruposDoAlbum()) {
       const lista = figurinhasDoGrupo(grupo);
-      document.getElementById('conta-grupo-' + grupo).textContent = textoDeColadas(contarColadas(album, lista), lista.length);
+      const coladas = contarColadas(album, lista);
+      document.getElementById('conta-grupo-' + grupo).textContent = textoDeColadas(coladas, lista.length);
+      // A casa do grupo no índice enche junto, e o leitor de tela ouve a conta
+      document.getElementById('indice-quadro-' + grupo).style.setProperty('--parte', coladas / lista.length);
+      document.getElementById('indice-conta-' + grupo).textContent = ': ' + textoDeColadas(coladas, lista.length);
     }
     for (const selecao of SELECOES) {
       const lista = figurinhasDaSelecao(selecao.id);
@@ -448,7 +514,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  document.getElementById('limpar-filtros').addEventListener('click', function () {
+  // Volta tudo ao começo: busca vazia, filtros em "Todos" e aba "Todas"
+  function limparFiltros() {
     campoBusca.value = '';
     escolha.busca = '';
     for (const nome in filtros) {
@@ -456,6 +523,10 @@ document.addEventListener('DOMContentLoaded', function () {
       escolha[nome] = '';
     }
     escolherAba(abas[0]);
+  }
+
+  document.getElementById('limpar-filtros').addEventListener('click', function () {
+    limparFiltros();
     campoBusca.focus();
   });
 
@@ -534,7 +605,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // -------------------------------------------------------------------------
 
   montarFiltros();
+  montarIndice();
   montarPaginas();
+  montarFinal();
   for (const fig of FIGURINHAS) desenharCasa(fig.numero);
   atualizarTudo();
 

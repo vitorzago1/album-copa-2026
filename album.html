@@ -74,7 +74,13 @@
         <!-- A barra é só desenho: o número já está escrito acima. -->
         <div class="barra" aria-hidden="true"><span class="barra-cheia" id="placar-barra"></span></div>
         <p id="placar-texto">Falta colar tudo: o álbum está novinho.</p>
-        <p class="texto-apoio">Por enquanto o álbum tem só o Grupo C. Os outros 11 grupos chegam em uma próxima versão.</p>
+
+        <!-- ÍNDICE DOS GRUPOS. Cada casa leva ao grupo e enche conforme ele é colado.
+             As casas são montadas pelo js/album.js. -->
+        <nav class="fluxo" aria-labelledby="titulo-indice">
+          <h2 class="titulo-menor" id="titulo-indice">Ir para um grupo</h2>
+          <ol class="tira tira-indice" id="indice-grupos"></ol>
+        </nav>
         <noscript><p>O álbum precisa do JavaScript ligado no navegador para mostrar e colar as figurinhas.</p></noscript>
       </div>
 
@@ -139,6 +145,28 @@
         <p>Nenhuma figurinha combina com essa busca. Tente outra palavra ou limpe os filtros.</p>
       </div>
     </div>
+
+    <!-- COMO TERMINOU. A última página do álbum: o resultado da Copa.
+         Os textos são preenchidos pelo js/album.js, a partir do objeto COPA de js/dados.js. -->
+    <section class="largura secao" aria-labelledby="titulo-final">
+      <div class="dobra">
+        <div class="fluxo">
+          <h2 id="titulo-final">Como terminou</h2>
+          <p class="final-campea" id="final-campea"></p>
+          <p id="final-placar"></p>
+          <p id="final-onde"></p>
+          <p id="final-numeros"></p>
+        </div>
+
+        <div class="fluxo">
+          <h3>Os quatro primeiros</h3>
+          <ol class="podio" id="final-podio"></ol>
+          <p id="final-terceiro"></p>
+          <h3>Prêmios</h3>
+          <dl class="selecao-dados" id="final-premios"></dl>
+        </div>
+      </div>
+    </section>
 
     <!-- CONQUISTAS. Cada uma vale um pacotinho extra. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-conquistas">
