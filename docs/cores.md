@@ -32,6 +32,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Laminada | `--cor-prata` | `#C5CAD6` | `#AEB6C6` | Listras da figurinha brilhante | Prata é o segundo degrau do pódio: valor acima do comum, sem competir com o ouro. |
 | Laminada clara | `--cor-prata-clara` | `#ECEEF3` | `#DDE1E9` | Base da figurinha brilhante | O claro e o escuro alternados é o que o olho lê como brilho de metal. |
 | Holográfica | `--cor-ouro` | `#F2C230` | `#E0AC1F` | Figurinha lendária | Ouro é a cor do prêmio máximo: quente e rara na página. |
+| Sombra da foto | `--cor-foto-sombra` | `#14204F` | `#131D4A` | Partes escuras das fotos dos estádios | A foto é mostrada como se fosse impressa com a tinta da página: assim ela não quebra a regra de uma tinta só e a cor continua reservada às figurinhas. |
+| Luz da foto | `--cor-foto-luz` | `#F6CDD7` | `#FBE3E9` | Partes claras das fotos dos estádios | A cor do papel (no escuro, a da tinta rosa): a foto parece pertencer à página em vez de ser um retângulo colado nela. |
 
 ## Contraste: tema claro
 

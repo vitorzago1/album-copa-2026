@@ -155,6 +155,8 @@ const DESCRICAO = [
   { token: 'prata', nome: 'Laminada', onde: 'Listras da figurinha brilhante', motivo: 'Prata é o segundo degrau do pódio: valor acima do comum, sem competir com o ouro.' },
   { token: 'prata-clara', nome: 'Laminada clara', onde: 'Base da figurinha brilhante', motivo: 'O claro e o escuro alternados é o que o olho lê como brilho de metal.' },
   { token: 'ouro', nome: 'Holográfica', onde: 'Figurinha lendária', motivo: 'Ouro é a cor do prêmio máximo: quente e rara na página.' },
+  { token: 'foto-sombra', nome: 'Sombra da foto', onde: 'Partes escuras das fotos dos estádios', motivo: 'A foto é mostrada como se fosse impressa com a tinta da página: assim ela não quebra a regra de uma tinta só e a cor continua reservada às figurinhas.' },
+  { token: 'foto-luz', nome: 'Luz da foto', onde: 'Partes claras das fotos dos estádios', motivo: 'A cor do papel (no escuro, a da tinta rosa): a foto parece pertencer à página em vez de ser um retângulo colado nela.' },
 ];
 
 // ---------------------------------------------------------------------------

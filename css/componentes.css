@@ -633,6 +633,81 @@ textarea.campo-entrada {
   stroke: var(--cor-superficie);
 }
 
+/* Formulário: os campos empilhados, com o mesmo espaço entre eles */
+.formulario {
+  display: grid;
+  gap: var(--espaco-4);
+  max-width: 28rem;
+}
+
+/* O botão "Mostrar senha" fica embaixo do campo, do tamanho do próprio texto */
+.campo > .botao {
+  align-self: start;
+}
+
+/* Título de segundo nível em tamanho menor, para dentro de cartões e formulários */
+.titulo-menor {
+  font-size: var(--titulo-3);
+  line-height: 1.1;
+}
+
+/* Botão com cara de link: para ações pequenas no meio de uma frase */
+.botao-link {
+  min-height: 2.75rem;
+  padding: 0 var(--espaco-1);
+  background: none;
+  color: var(--cor-acao);
+  border: 0;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.botao-link:hover {
+  color: var(--cor-acao-forte);
+  text-decoration-thickness: 0.16em;
+}
+
+/* Resumo dos erros: aparece no topo do formulário quando o envio falha */
+.resumo-erros {
+  max-width: 28rem;
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 3px solid var(--cor-erro);
+  border-radius: var(--raio-ferramenta);
+}
+
+.resumo-erros h2 {
+  color: var(--cor-erro);
+}
+
+.resumo-erros ul {
+  margin-top: var(--espaco-2);
+  padding-left: 1.2em;
+}
+
+.resumo-erros a {
+  display: inline-block;
+  padding-block: var(--espaco-1);
+}
+
+/* Recado de "deu certo". A caixa existe sempre (o leitor de tela precisa dela
+   pronta para ler o texto quando ele chegar), mas só ganha moldura quando tem texto. */
+.aviso-sucesso:empty {
+  margin: 0;
+}
+
+.aviso-sucesso:not(:empty) {
+  max-width: 28rem;
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-sucesso);
+  border-left-width: 8px;
+  border-radius: var(--raio-ferramenta);
+  font-weight: 600;
+}
+
 /* Caixas de marcar e de escolher: maiores e na cor da ação */
 .opcao {
   display: flex;
@@ -907,4 +982,127 @@ textarea.campo-entrada {
     opacity: 0;
     transform: translateY(-3rem) rotate(-10deg) scale(0.7);
   }
+}
+
+/* ---------- Foto em uma tinta só ----------
+   O arquivo da foto é colorido. Aqui ela é mostrada como se tivesse sido
+   impressa com a tinta da página, em três passos:
+     1. a foto vira preto e branco (filter: grayscale);
+     2. uma camada na cor da sombra, misturada no modo "screen", tinge as
+        partes escuras e deixa as claras brancas;
+     3. uma camada na cor da luz, no modo "multiply", tinge as partes claras.
+   Pense em duas folhas de celofane colorido em cima de uma foto em preto e branco. */
+
+.foto {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;   /* as misturas de cor valem só aqui dentro */
+  aspect-ratio: 16 / 10;
+  background: var(--cor-foto-luz);
+  border: 2px solid var(--cor-texto);
+}
+
+.foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* a foto preenche a moldura, cortando a sobra */
+  filter: grayscale(1) contrast(1.15);
+}
+
+.foto::before,
+.foto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.foto::before {
+  background: var(--cor-foto-sombra);
+  mix-blend-mode: screen;
+}
+
+.foto::after {
+  background: var(--cor-foto-luz);
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Carrossel ----------
+   Uma sede por vez. Os botões e os números ficam embaixo da foto. */
+
+.carrossel-cidade {
+  font-size: var(--titulo-2);
+}
+
+.carrossel-estadio {
+  font-size: var(--texto-medio);
+  font-weight: 700;
+}
+
+.carrossel-dados dt {
+  font-weight: 700;
+}
+
+.carrossel-dados dd + dt {
+  margin-top: var(--espaco-3);
+}
+
+.carrossel-dados dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--espaco-2);
+}
+
+.carrossel-dados .bandeirinha {
+  width: 2rem;
+}
+
+.carrossel-figura figcaption {
+  margin-top: var(--espaco-2);
+}
+
+.carrossel-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+.carrossel-posicao {
+  flex: 1 1 8rem;
+  max-width: none;
+  font-weight: 700;
+  text-align: center;
+}
+
+.carrossel-indicadores {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+}
+
+/* Indicador: um quadro numerado, impresso como as casas da tira de grupos.
+   O da sede atual fica no negativo da tinta e sublinhado. */
+.carrossel-numero {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: transparent;
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-borda);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.carrossel-numero[aria-current="true"] {
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  border-color: var(--cor-texto);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
 }
