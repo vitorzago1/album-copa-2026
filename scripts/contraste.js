@@ -225,12 +225,52 @@ for (const tema of TEMAS) {
   linhas.push('');
 }
 
+// ---------------------------------------------------------------------------
+// 6. As cores das seleções (o desenho dentro da figurinha)
+// ---------------------------------------------------------------------------
+// Cada seleção tem três cores em js/dados.js: campo, camisa e número.
+// O desenho precisa de dois contrastes de pelo menos 3:1:
+//   - o número sobre a camisa (é um número grande, em negrito);
+//   - a silhueta, na tinta da figurinha, sobre o campo.
+// A figurinha não muda de cor com o tema; só a tinta muda no alto contraste.
+
+// Lê a lista SELECOES de js/dados.js. O arquivo é um script de navegador,
+// sem "exports"; por isso ele é executado dentro de uma função que devolve a lista.
+const codigoDosDados = fs.readFileSync(path.join(__dirname, '..', 'js', 'dados.js'), 'utf8');
+const SELECOES = new Function(codigoDosDados + '; return SELECOES;')();
+
+const TINTAS = [
+  { nome: 'tinta normal', cor: claro['figurinha-tinta'] },
+  { nome: 'tinta do alto contraste', cor: altoClaro['figurinha-tinta'] },
+];
+
+linhas.push('## Contraste: cores das seleções');
+linhas.push('');
+linhas.push('O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.');
+linhas.push('');
+linhas.push('| Seleção | Campo | Camisa | Número | Número sobre a camisa | Silhueta sobre o campo | Resultado |');
+linhas.push('|---|---|---|---|---|---|---|');
+for (const selecao of SELECOES) {
+  const cores = selecao.cores;
+  const numeroNaCamisa = contraste(cores.numero, cores.camisa);
+  let silhuetaNoCampo = 21;
+  for (const tinta of TINTAS) silhuetaNoCampo = Math.min(silhuetaNoCampo, contraste(tinta.cor, cores.campo));
+  const passou = numeroNaCamisa >= 3 && silhuetaNoCampo >= 3;
+  total += 2;
+  if (!passou) {
+    reprovados += 1;
+    console.log(`REPROVA  Seleção ${selecao.nome}: número/camisa ${formatar(numeroNaCamisa)}, silhueta/campo ${formatar(silhuetaNoCampo)}`);
+  }
+  linhas.push(`| ${selecao.nome} | \`${cores.campo}\` | \`${cores.camisa}\` | \`${cores.numero}\` | ${formatar(numeroNaCamisa)} | ${formatar(silhuetaNoCampo)} | ${passou ? 'Passa (3:1)' : 'REPROVA'} |`);
+}
+linhas.push('');
+
 linhas.push('## Resumo');
 linhas.push('');
-linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares em ${TEMAS.length} temas).`);
+linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
 linhas.push(`- Reprovados: ${reprovados}.`);
 linhas.push('- A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.');
-linhas.push('- As cores das seleções (dentro das figurinhas) não entram nesta tabela: nenhum texto é escrito em cima delas.');
+linhas.push('- A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.');
 linhas.push('');
 
 fs.writeFileSync(ARQUIVO_SAIDA, linhas.join('\n'), 'utf8');
