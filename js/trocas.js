@@ -70,6 +70,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (listas.faltam.length === 0) textoFaltam = 'Não falta nenhuma: todas as figurinhas já saíram para você.';
     document.getElementById('faltam-texto').textContent = textoFaltam;
 
+    // A gaveta da lista some se não falta nada e já vem aberta se a lista é curta
+    const gaveta = document.getElementById('faltam-gaveta');
+    gaveta.hidden = listas.faltam.length === 0;
+    gaveta.open = listas.faltam.length <= 40;
+    document.getElementById('faltam-resumo').textContent = 'Ver os números que faltam (' + listas.faltam.length + ')';
+
     // O texto da lista de troca, uma linha para cada parte
     const tenho = listas.repetidas.map(function (fig) {
       return fig.numero + ' ' + (fig.tipo === 'bandeira' ? 'Bandeira ' + fig.nome : fig.nome) + ' (x' + repetidasDe(album, fig.numero) + ')';
