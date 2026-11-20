@@ -95,6 +95,8 @@ const PARES = [
   { frente: 'texto-secundario', fundo: 'fundo', tipo: 'texto', uso: 'Texto de apoio sobre o fundo' },
   { frente: 'texto-secundario', fundo: 'superficie', tipo: 'texto', uso: 'Texto de apoio sobre cartão e campo' },
   { frente: 'texto-secundario', fundo: 'vaga', tipo: 'texto', uso: 'Número e legenda dentro do espaço vazio' },
+  { frente: 'texto', fundo: 'vaga', tipo: 'texto', uso: 'Nome impresso dentro do espaço vazio' },
+  { frente: 'fundo', fundo: 'texto', tipo: 'texto', uso: 'Texto da aba escolhida e do dia carimbado na cartela' },
   { frente: 'acao', fundo: 'fundo', tipo: 'texto', uso: 'Link sobre o fundo' },
   { frente: 'acao', fundo: 'superficie', tipo: 'texto', uso: 'Link sobre cartão' },
   { frente: 'sobre-acao', fundo: 'acao', tipo: 'texto', uso: 'Texto do botão principal' },
@@ -112,6 +114,7 @@ const PARES = [
   { frente: 'borda', fundo: 'superficie', tipo: 'componente', uso: 'Borda de campo sobre cartão' },
   { frente: 'borda', fundo: 'vaga', tipo: 'componente', uso: 'Moldura da vaga sobre o preenchimento da vaga' },
   { frente: 'acao', fundo: 'fundo', tipo: 'componente', uso: 'Botão principal como forma sobre o fundo' },
+  { frente: 'acao', fundo: 'vaga', tipo: 'componente', uso: 'Botão "Colar" como forma dentro do espaço vazio' },
   { frente: 'texto', fundo: 'vaga', tipo: 'componente', uso: 'Preenchimento da barra de progresso sobre o trilho' },
   { frente: 'figurinha-papel', fundo: 'figurinha-tinta', tipo: 'texto', uso: 'Texto da etiqueta colada na figurinha' },
 
