@@ -131,6 +131,14 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 6. **Contraste das cores das seleções.** O script de contraste passou a conferir também o desenho de cada seleção (número sobre a camisa e silhueta sobre o campo): 236 pares no total, 0 reprovados.
 7. **Total de verificações automáticas:** 254, todas passando.
 
+### Etapa 9: publicação e documentação
+
+1. **Repositório no GitHub.** O projeto foi enviado para `github.com/vitorzago1/album-copa-2026`, com todo o histórico de commits e as marcas de versão.
+2. **GitHub Pages.** O site é servido direto do ramo `main`, sem etapa de build, em `https://vitorzago1.github.io/album-copa-2026/`.
+3. **Conferência no endereço publicado.** As mesmas 254 verificações automáticas rodadas no computador foram rodadas no site no ar, e todas passaram. Isso inclui criar conta e entrar, que dependem de `https` para proteger a senha.
+4. **Anexo de código.** `node scripts/gerar-anexo.js` junta todos os arquivos HTML, CSS e JavaScript em `docs/anexo-codigo.md`.
+5. **Links.** O endereço do site está no começo deste README, no rodapé das 7 páginas e na página Sobre.
+
 ## Onde está cada item pedido pelo professor
 
 | Item | Onde está |

@@ -134,6 +134,14 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 9. Ajudar a reconhecer e corrigir erros | Busca sem resultado explica o que houve e oferece limpar os filtros; nos formulários, frase específica com ícone embaixo do campo, resumo com link para cada campo e foco levado ao primeiro problema |
 | 10. Ajuda e documentação | Seção "Como funciona" na página inicial; texto da bandeja explica os dois jeitos de colar; texto de apoio no painel; passo a passo do modo demonstração no README |
 
+## Verificação no endereço publicado (etapa 9)
+
+- Feita em 21/11/2026, em `https://vitorzago1.github.io/album-copa-2026/`, com o Microsoft Edge sem janela.
+- As 254 verificações automáticas passaram no site no ar: 42 da base (temas, painel, menu), 114 do álbum e dos pacotinhos, 68 das outras páginas e 30 da auditoria de estrutura, teclado e zoom.
+- A página, as 7 folhas de HTML, os estilos, os scripts, as fontes, as bandeiras e as fotos respondem sem erro. Console sem erros.
+- A página é considerada segura pelo navegador (`https`), e a ferramenta de hash da senha (`crypto.subtle`) funciona: criar conta, sair e entrar passaram.
+- Continua sem verificação: Lighthouse ou axe, leitor de tela real (NVDA), Firefox, Safari, celular de verdade, e arrastar com mouse e com dedo.
+
 ## Verificação feita na etapa 8 (v0.4)
 
 - Auditoria de estrutura, por script próprio, em 15 telas: `lang`, título da página, um `main`, um `header`, um `footer` e um `h1`; `alt` em toda imagem; rótulo em todo campo; nome em todo botão, link e aba; nenhum `id` repetido; `aria-labelledby`, `aria-describedby` e `aria-controls` apontando para elementos que existem; títulos sem pular nível; listas só com itens de lista; `fieldset` com `legend`; nenhum controle dentro de outro; nenhum controle dentro de área escondida do leitor de tela; cada `nav` com nome próprio. Resultado: 0 problemas.

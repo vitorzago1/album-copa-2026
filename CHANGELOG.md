@@ -8,6 +8,8 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Link do site publicado no rodapé das 7 páginas, na página Sobre e no README.
 - Passo a passo de publicação no GitHub Pages no README.
 - Anexo de código (`docs/anexo-codigo.md`), gerado por `scripts/gerar-anexo.js`.
+- Site publicado no GitHub Pages: https://vitorzago1.github.io/album-copa-2026/
+- As 254 verificações automáticas passam também no endereço publicado.
 
 ## v0.4-acessibilidade (20/11/2026)
 
