@@ -24,7 +24,7 @@
     tema: 'automatico',      // claro, escuro ou automatico (segue o aparelho)
     fonte: 'normal',         // normal, grande ou maior
     contraste: 'normal',     // normal ou alto
-    movimento: 'normal',     // normal ou reduzido
+    movimento: 'normal',     // normal (segue o aparelho), reduzido ou completo
     espacamento: 'normal',   // normal ou amplo
     links: 'normal',         // normal ou destacados
   };
@@ -34,7 +34,7 @@
     tema: ['claro', 'escuro', 'automatico'],
     fonte: ['normal', 'grande', 'maior'],
     contraste: ['normal', 'alto'],
-    movimento: ['normal', 'reduzido'],
+    movimento: ['normal', 'reduzido', 'completo'],
     espacamento: ['normal', 'amplo'],
     links: ['normal', 'destacados'],
   };
@@ -98,6 +98,15 @@
   // Se o aparelho trocar de claro para escuro com a página aberta, acompanha
   sistemaEscuro.addEventListener('change', aplicar);
 
+  // Deixa outro script do site guardar uma preferência, do mesmo jeito que o
+  // painel faz. Exemplo: guardarPreferencia('movimento', 'completo').
+  window.guardarPreferencia = function (nome, valor) {
+    if (!VALORES[nome] || !VALORES[nome].includes(valor)) return;
+    preferencias[nome] = valor;
+    salvarPreferencias();
+    aplicar();
+  };
+
   // -------------------------------------------------------------------------
   // 2. O painel
   // -------------------------------------------------------------------------
@@ -130,6 +139,7 @@
           <legend>Ajustes de leitura</legend>
           <label class="opcao"><input type="checkbox" name="contraste" value="alto"> Alto contraste</label>
           <label class="opcao"><input type="checkbox" name="movimento" value="reduzido"> Reduzir animações</label>
+          <label class="opcao" data-so-com-menos-movimento><input type="checkbox" name="movimento" value="completo"> Mostrar as animações, mesmo com o aparelho pedindo menos</label>
           <label class="opcao"><input type="checkbox" name="espacamento" value="amplo"> Mais espaço no texto</label>
           <label class="opcao"><input type="checkbox" name="links" value="destacados"> Destacar links</label>
         </fieldset>
@@ -164,7 +174,11 @@
       });
     }
 
+    // A opção de mostrar as animações só faz sentido quando o aparelho pede menos movimento
+    const pedeMenosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     botaoAbrir.addEventListener('click', function () {
+      painel.querySelector('[data-so-com-menos-movimento]').hidden = !pedeMenosMovimento.matches;
       mostrarNosCampos();
       aviso.textContent = '';
       painel.showModal(); // abre por cima da página e prende o foco dentro
@@ -194,6 +208,7 @@
 
         salvarPreferencias();
         aplicar();
+        mostrarNosCampos();   // "reduzir" e "mostrar" são a mesma preferência: marcar uma desmarca a outra
       });
     });
 
