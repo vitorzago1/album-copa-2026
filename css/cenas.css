@@ -1,0 +1,1021 @@
+/* ==========================================================================
+   cenas.css
+   --------------------------------------------------------------------------
+   As cenas presas à rolagem da página inicial (index.html).
+
+   Cada cena existe de dois jeitos:
+
+   1. PARADA (o padrão deste arquivo). É uma seção comum, com tudo já no
+      lugar. Vale sem JavaScript e para quem pede menos movimento.
+
+   2. EM MOVIMENTO. Quando o js/cenas.js põe a classe "com-cenas" no <html>:
+        .cena        vira uma seção bem alta (240vh = quase duas telas e meia);
+        .cena-palco  gruda no topo da tela (position: sticky) e fica parado
+                     enquanto a pessoa rola por dentro da cena.
+      O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
+      js/cenas-inicio.js, escrevendo "transform" e "opacity" no elemento.
+
+   Partes:
+   1. A cena e o palco
+   2. Abertura: a retícula forma a marca
+   3. A frase acende
+   4. O pacotinho gira e abre
+   5. O álbum abre
+   6. Mergulho na figurinha
+   7. Os números contam
+   8. Os grupos andam para o lado
+   9. Voo pelas figurinhas
+   ========================================================================== */
+
+/* ---------- 1. A cena e o palco ---------- */
+
+/* O site reserva uma folga no pé da tela para o recado do álbum (ver
+   paginas.css). Esta página não tem recado, e a folga faria o navegador rolar
+   a página sozinho ao dar o foco em um botão de dentro de uma cena. */
+html:has(.cena) {
+  scroll-padding-bottom: 0;
+}
+
+/* Parada: o palco é uma seção igual às outras, no miolo da página */
+.cena-palco {
+  position: relative;
+  max-width: var(--largura-maxima);
+  margin-inline: auto;
+  padding: var(--espaco-6) var(--espaco-4);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.cena + .secao {
+  border-top: 2px solid var(--cor-texto);
+}
+
+/* Em movimento. A altura vem do HTML: style="--altura: 240vh". Quanto mais
+   alta a cena, mais devagar ela anda, porque há mais rolagem para gastar. */
+.com-cenas .cena {
+  height: var(--altura, 300vh);
+}
+
+.com-cenas .cena-palco {
+  position: sticky;
+  top: 0;
+  max-width: none;
+  height: 100vh;
+  height: 100svh;   /* no celular, desconta a barra de endereço do navegador */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  overflow: hidden;
+}
+
+/* No celular a tela é mais alta que larga e o dedo rola menos por vez:
+   as cenas ficam 20% mais curtas */
+@media (max-width: 47.99rem) {
+  .com-cenas .cena {
+    height: calc(var(--altura, 300vh) * 0.8);
+  }
+}
+
+/* Título de cena. Parado, é um título comum. */
+.cena-titulo {
+  max-width: none;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.75rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.cena-titulo + .cena-titulo {
+  margin-top: var(--espaco-2);
+}
+
+/* Em movimento, fica no alto do palco, no meio */
+.com-cenas .cena-titulo {
+  position: absolute;
+  z-index: 4;
+  top: 7vh;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding-inline: var(--espaco-4);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* O que foi montado pelo JavaScript some quando ele está desligado */
+html:not(.com-js) .so-com-js {
+  display: none;
+}
+
+/* "Role para ver": um fio que desce. Só existe com as cenas em movimento. */
+.rolar-dica {
+  display: none;
+}
+
+.com-cenas .rolar-dica {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-weight: 700;
+}
+
+.rolar-dica i {
+  display: block;
+  width: 2px;
+  height: 2.25rem;
+  background: var(--cor-texto);
+  transform-origin: top;
+  animation: fio-descendo 1.6s ease-in-out 3;   /* três vezes e para */
+}
+
+@keyframes fio-descendo {
+  0% { transform: scaleY(0); }
+  60% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- 2. Abertura: a retícula forma a marca ---------- */
+
+/* Na página inicial a abertura encosta no cabeçalho, sem a folga de cima do <main> */
+main:has(> .cena-abertura) {
+  padding-top: 0;
+}
+
+.cena-abertura .cena-palco {
+  display: grid;
+  gap: var(--espaco-5);
+  align-items: center;
+  border-top: 0;
+}
+
+.abertura-convite {
+  order: -1;   /* no celular, o convite vem antes do desenho */
+}
+
+.abertura-convite > * + * {
+  margin-top: var(--espaco-5);
+}
+
+.abertura-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+}
+
+/* A tela de desenho (canvas) onde os pontinhos são desenhados.
+   Parada, mostra a marca já formada. */
+.reticula-tela {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+}
+
+.abertura-assinatura {
+  max-width: none;
+  text-align: center;
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  line-height: 1.1;
+}
+
+/* O aviso para quem está vendo a página parada sem ter pedido isso no site */
+.aviso-movimento {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 2px dashed var(--cor-borda);
+  font-size: var(--texto-pequeno);
+}
+
+@media (min-width: 48rem) {
+  .cena-abertura .cena-palco {
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--espaco-6);
+  }
+
+  .abertura-convite {
+    grid-row: 1 / span 2;
+  }
+
+  .aviso-movimento {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Em movimento: o desenho cobre o palco inteiro e o convite fica embaixo,
+   à esquerda, como em um cartaz */
+.com-cenas .cena-abertura .cena-palco {
+  display: block;
+}
+
+.com-cenas .reticula-tela {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.com-cenas .abertura-convite {
+  position: absolute;
+  z-index: 2;
+  left: max(var(--espaco-4), 6vw);
+  right: max(var(--espaco-4), 6vw);
+  /* A folga de baixo é a altura do cabeçalho ("--cabecalho" vem do JavaScript):
+     assim o convite aparece inteiro na primeira tela, com o cabeçalho ainda em cima */
+  bottom: max(calc(var(--cabecalho, 5rem) + 1.5rem), 12vh);
+  max-width: 46rem;
+}
+
+.com-cenas .abertura-convite h1 {
+  font-size: clamp(3rem, 1.25rem + 7.5vw, 7rem);
+}
+
+.com-cenas .abertura-assinatura {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70%;   /* o JavaScript acerta a altura, logo abaixo das letras */
+  padding-inline: var(--espaco-4);
+  opacity: 0;
+}
+
+/* ---------- 3. A frase acende ---------- */
+
+.frase {
+  max-width: 24ch;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(2rem, 1rem + 4.4vw, 4.5rem);
+  line-height: 1.04;
+}
+
+/* O sublinhado de caneta: o traço inteiro mede 1 (pathLength="1" no HTML).
+   "--falta" diz quanto do traço ainda não foi desenhado. */
+.frase-traco {
+  display: block;
+  width: min(100%, 24rem);
+  height: 1.75rem;
+  margin-top: var(--espaco-3);
+  overflow: visible;
+}
+
+.frase-traco path {
+  fill: none;
+  stroke: var(--cor-acao);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--falta, 0);
+}
+
+.com-cenas .frase-caixa {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  padding-inline: var(--espaco-4);
+}
+
+/* Em movimento, a palavra que ainda não acendeu fica com a tinta bem diluída */
+.com-cenas .frase span {
+  transition: color 260ms ease-out;
+}
+
+.com-cenas .frase span:not(.acesa) {
+  color: var(--cor-vaga);
+  color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
+}
+
+/* ---------- 4. O pacotinho gira e abre ---------- */
+
+/* Parada: o pacotinho de um lado e as cinco figurinhas do outro */
+.pacote-cena {
+  --pacote-l: 9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-5);
+  margin-top: var(--espaco-5);
+}
+
+.pacote3d {
+  order: -1;
+  position: relative;
+  flex: none;
+  width: var(--pacote-l);
+  height: calc(var(--pacote-l) * 1.4);
+  rotate: -3deg;
+}
+
+.pacote3d .pacotinho {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  rotate: none;
+  cursor: default;
+}
+
+.pacote3d .pacotinho-marca {
+  font-size: calc(var(--pacote-l) * 0.3);
+}
+
+.pacote3d-costas {
+  display: none;
+}
+
+.pacote-figurinhas {
+  flex: 1 1 18rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--espaco-4);
+}
+
+/* Em movimento: tudo no mesmo ponto do espaço, uma peça na frente da outra.
+   "perspective" é a distância do olho até a tela. Sem ela, girar em 3D
+   pareceria só achatar a peça. */
+.com-cenas .palco-3d {
+  perspective: 1100px;
+}
+
+.com-cenas .pacote-cena {
+  --pacote-l: clamp(9rem, 27vmin, 15rem);
+  position: relative;
+  display: block;
+  width: var(--pacote-l);
+  height: calc(var(--pacote-l) * 1.4);
+  margin-top: 9vh;
+  transform-style: preserve-3d;   /* os filhos ficam no mesmo espaço 3D */
+}
+
+.com-cenas .pacote3d {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  rotate: none;
+  transform-style: preserve-3d;
+}
+
+/* As duas faces ocupam o mesmo lugar. "backface-visibility: hidden" esconde
+   a face que está de costas para quem olha. */
+.com-cenas .pacote3d-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.com-cenas .pacote3d-costas {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-radius: var(--raio-adesivo);
+  text-align: center;
+}
+
+.pacote3d-costas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.8px, transparent 1.2px) 0 0 / 7px 7px;
+  opacity: 0.3;
+}
+
+.com-cenas .pacote-figurinhas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+}
+
+/* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
+.com-cenas .pacote-carta {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--pacote-l) * 0.8);
+  margin-left: calc(var(--pacote-l) * -0.4);
+  margin-top: calc(var(--pacote-l) * -0.5333);
+  opacity: 0;
+}
+
+/* ---------- 5. O álbum abre ---------- */
+
+/* Parada: o álbum já aberto, com duas páginas lado a lado */
+.livro {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 40rem;
+  margin-top: var(--espaco-5);
+}
+
+.folha {
+  display: contents;   /* a folha "some" e as faces dela viram filhas diretas da grade */
+}
+
+.face {
+  position: relative;
+  aspect-ratio: 1 / 1.35;
+  overflow: hidden;
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-texto);
+}
+
+/* Parada, só aparecem as duas páginas da primeira abertura */
+html:not(.com-cenas) .capa,
+html:not(.com-cenas) #pagina-3,
+html:not(.com-cenas) #pagina-base {
+  display: none;
+}
+
+#pagina-1 { order: 1; }
+#pagina-2 { order: 2; }
+
+.cena-acao {
+  margin-top: var(--espaco-5);
+}
+
+/* Em movimento. A caixa do livro tem o tamanho de UMA página (a da direita).
+   As folhas giram em torno da borda esquerda dela, que é a lombada. */
+.com-cenas .livro {
+  --pagina-l: min(46vw, 22rem, calc((100vh - 15rem) / 1.35));
+  position: relative;
+  display: block;
+  width: var(--pagina-l);
+  max-width: none;
+  height: calc(var(--pagina-l) * 1.35);
+  margin-top: 5vh;
+  transform-style: preserve-3d;
+}
+
+@supports (height: 100svh) {
+  .com-cenas .livro {
+    --pagina-l: min(46vw, 22rem, calc((100svh - 15rem) / 1.35));
+  }
+}
+
+.com-cenas .folha {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;   /* gira em torno da lombada */
+  transform-style: preserve-3d;
+}
+
+/* Cada folha tem duas faces: a frente e o verso (este já nasce virado) */
+.com-cenas .face {
+  display: block;
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  backface-visibility: hidden;
+}
+
+.com-cenas .face-verso {
+  transform: rotateY(180deg);
+}
+
+/* Enquanto a folha vira, o lado da lombada escurece ("--sombra" vem do JavaScript) */
+.com-cenas .face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(10, 16, 40, 0.6), transparent 55%);
+  opacity: var(--sombra, 0);
+}
+
+.com-cenas .face-verso::after {
+  background: linear-gradient(to left, rgba(10, 16, 40, 0.6), transparent 55%);
+}
+
+/* A capa: o negativo da página, como o pacotinho */
+.com-cenas .capa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--pagina-l) * 0.03);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-color: var(--cor-etiqueta-fundo);
+  text-align: center;
+}
+
+.capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.9px, transparent 1.3px) 0 0 / 8px 8px;
+  opacity: 0.3;
+}
+
+.capa span {
+  position: relative;   /* na frente dos pontinhos */
+  padding: 0 0.3em;
+  background: var(--cor-etiqueta-fundo);
+}
+
+.capa-marca {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: calc(var(--pagina-l) * 0.34);
+  line-height: 1;
+  rotate: -6deg;
+}
+
+.capa-texto {
+  font-weight: 700;
+  font-size: calc(var(--pagina-l) * 0.06);
+}
+
+.capa-ano {
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: calc(var(--pagina-l) * 0.13);
+  line-height: 1;
+}
+
+.com-cenas .cena-acao {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 5vh;
+  margin: 0;
+  max-width: none;
+  text-align: center;
+  opacity: 0;
+}
+
+/* O miolo da página é desenhado sempre com 480 por 648 pixels e depois
+   encolhido ou aumentado ("--escala" vem do JavaScript) para caber na folha.
+   Assim a página do álbum se comporta como uma gravura: tudo cresce junto. */
+.miolo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 480px;
+  height: 648px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 22px;
+  transform-origin: 0 0;
+  transform: scale(var(--escala, 1));
+}
+
+.miolo-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--cor-texto);
+}
+
+.miolo-cabeca img {
+  flex: none;
+  width: 56px;
+  border: 1px solid var(--cor-texto);
+}
+
+.miolo-nome {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.miolo-grupo {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.miolo-grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 12px;
+  align-content: start;
+}
+
+.miolo-grade > * {
+  min-width: 0;
+}
+
+.miolo .vaga {
+  padding: 4px;
+}
+
+.miolo .vaga-numero {
+  font-size: 40px;
+}
+
+.miolo .vaga-nome {
+  font-size: 14px;
+}
+
+.miolo-pe {
+  color: var(--cor-texto-secundario);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ---------- 6. Mergulho na figurinha ---------- */
+
+/* Parada: só a faixa de cor com a etiqueta. A figurinha que cresce não aparece. */
+.mergulho {
+  display: none;
+}
+
+/* A camada de cor. A cor é a do retrato da figurinha ("--campo", posta pelo
+   JavaScript; sem ele, fica a tinta da página). */
+.mergulho-fim {
+  display: grid;
+  place-items: center;
+  padding: var(--espaco-7) var(--espaco-4);
+  background-color: var(--campo, var(--cor-texto));
+  background-image: radial-gradient(circle, rgba(20, 32, 79, 0.3) 1.2px, transparent 1.7px);
+  background-size: 9px 9px;
+}
+
+/* Nenhum texto é escrito direto em cima da cor da seleção: a frase vem em
+   uma etiqueta de papel branco, colada como uma figurinha. */
+.mergulho-etiqueta {
+  max-width: 15ch;
+  padding: var(--espaco-5);
+  background: var(--cor-figurinha-papel);
+  color: var(--cor-figurinha-tinta);
+  border-radius: var(--raio-adesivo);
+  box-shadow: var(--sombra-colada);
+  rotate: -1.5deg;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.75rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.com-cenas .mergulho {
+  display: block;
+  width: clamp(9rem, 30vmin, 14rem);
+}
+
+.com-cenas .mergulho-fim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+}
+
+/* ---------- 7. Os números contam ---------- */
+
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-6) var(--espaco-4);
+  margin-top: var(--espaco-6);
+}
+
+@media (min-width: 60rem) {
+  .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* "--aceso" vai de 0 a 1 conforme chega a vez do número. Parado, vale 1. */
+.numero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column-reverse;   /* no HTML vem a legenda e depois o número; na tela, o número fica em cima */
+  opacity: calc(0.22 + var(--aceso, 1) * 0.78);
+}
+
+.numero dd {
+  margin: 0;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(4rem, 1.5rem + 10vw, 9rem);
+  line-height: 0.9;
+}
+
+.numero dt {
+  font-weight: 700;
+}
+
+/* A mancha de retícula atrás do número: bolinhas que somem em direção à borda */
+.numero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2rem -1rem 1.5rem 15%;
+  background: radial-gradient(circle, var(--cor-texto) 1.5px, transparent 2px) 0 0 / 9px 9px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 15%, transparent 95%);
+  mask-image: radial-gradient(closest-side, #000 15%, transparent 95%);
+  opacity: calc(var(--aceso, 1) * 0.45);
+}
+
+.com-cenas .numeros {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  margin-top: 9vh;
+  padding-inline: var(--espaco-4);
+}
+
+/* ---------- 8. Os grupos andam para o lado ---------- */
+
+/* Parada: os doze grupos em uma grade */
+.trilha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--espaco-6) var(--espaco-5);
+}
+
+.trilha-abre {
+  grid-column: 1 / -1;
+}
+
+.trilha-abre p {
+  margin-top: var(--espaco-4);
+  font-size: var(--texto-medio);
+}
+
+.grupo {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+  padding-top: var(--espaco-3);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.grupo h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  font-size: var(--titulo-3);
+}
+
+/* A letra do grupo, bem grande */
+.grupo-letra {
+  font-size: clamp(4.5rem, 3rem + 6vw, 7.5rem);
+  line-height: 0.8;
+}
+
+.grupo-selecoes {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-4) var(--espaco-3);
+}
+
+.grupo-selecoes li {
+  display: grid;
+  gap: var(--espaco-2);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* O selo: a bandeira de uma seleção.
+   "--f" vai de 0 (grupo longe do meio da tela) a 1 (grupo no meio).
+   Com 0 ele é uma vaga impressa em uma tinta só, de canto vivo.
+   Com 1 ele é uma figurinha: colorida, de canto arredondado e um pouco torta.
+   A impressão em uma tinta usa a mesma receita das fotos do site
+   (ver "Foto em uma tinta só", em componentes.css). */
+.selo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  background: var(--cor-foto-luz);
+  border: 2px solid var(--cor-texto);
+  border-radius: calc(var(--f, 1) * var(--raio-adesivo));
+  rotate: calc(var(--f, 1) * var(--torto, -1.5deg));
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.grupo-selecoes li:nth-child(even) .selo {
+  --torto: 1.2deg;
+}
+
+.selo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(calc(1 - var(--f, 1)));
+}
+
+.selo::before,
+.selo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: calc(1 - var(--f, 1));
+}
+
+.selo::before {
+  background: var(--cor-foto-sombra);
+  mix-blend-mode: screen;
+}
+
+.selo::after {
+  background: var(--cor-foto-luz);
+  mix-blend-mode: multiply;
+}
+
+/* Passou da metade do caminho: ganha a borda branca e a sombra de quem foi colado */
+.grupo-colado .selo {
+  border-color: var(--cor-figurinha-papel);
+  box-shadow: 0 0 0 2px var(--cor-figurinha-papel), var(--sombra-colada);
+}
+
+.grupo-numeros {
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+.grupo a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;   /* 44 px: alvo de toque confortável */
+  font-weight: 700;
+}
+
+/* Em movimento: a faixa vira uma fila única, bem mais larga que a tela.
+   A rolagem para baixo empurra a fila para a esquerda. */
+.com-cenas .trilha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 7vw, 6rem);
+  padding-inline: max(var(--espaco-4), 9vw);
+}
+
+.com-cenas .trilha-abre {
+  flex: none;
+  width: min(78vw, 26rem);
+}
+
+.com-cenas .grupo {
+  flex: none;
+  width: min(78vw, 24rem);
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* ---------- 9. Voo pelas figurinhas ---------- */
+
+/* Parada: só o título e o botão */
+.voo {
+  display: none;
+}
+
+.voo-fim > * + * {
+  margin-top: var(--espaco-5);
+}
+
+.com-cenas .palco-voo {
+  perspective: 900px;
+}
+
+/* Um ponto no meio do palco. As figurinhas são espalhadas em volta dele,
+   cada uma com a sua profundidade (translateZ). */
+.com-cenas .voo {
+  --voo-l: clamp(8rem, 22vmin, 11rem);
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.voo-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--voo-l);
+  margin: calc(var(--voo-l) * -0.667) 0 0 calc(var(--voo-l) * -0.5);
+}
+
+.com-cenas .voo-fim {
+  position: relative;
+  z-index: 4;
+  padding-inline: var(--espaco-4);
+  text-align: center;
+  opacity: 0;
+}
+
+.com-cenas .voo-fim .cena-titulo {
+  position: static;
+  pointer-events: auto;
+}
+
+/* ---------- Tela baixa (celular deitado, janela pequena) ----------
+   Com menos de 480 px de altura, as peças encolhem para caber no palco. */
+@media (max-height: 30rem) {
+  .com-cenas .cena-titulo,
+  .com-cenas .mergulho-etiqueta {
+    font-size: 1.5rem;
+  }
+
+  .com-cenas .cena-titulo {
+    top: 0.75rem;
+  }
+
+  .com-cenas .abertura-convite {
+    bottom: calc(var(--cabecalho, 4rem) + 0.5rem);
+  }
+
+  .com-cenas .abertura-convite h1 {
+    font-size: 2rem;
+  }
+
+  .com-cenas .abertura-convite > * + * {
+    margin-top: var(--espaco-3);
+  }
+
+  .com-cenas .rolar-dica {
+    display: none;
+  }
+
+  .com-cenas .pacote-cena {
+    --pacote-l: 30vh;
+    margin-top: 2.5rem;
+  }
+
+  .com-cenas .frase {
+    max-width: none;
+    font-size: 1.5rem;
+  }
+
+  .com-cenas .livro {
+    --pagina-l: min(46vw, calc((100vh - 6.5rem) / 1.35));
+    margin-top: 0;
+  }
+
+  .com-cenas .cena-acao {
+    bottom: 0.5rem;
+  }
+
+  .com-cenas .mergulho {
+    width: 34vh;
+  }
+
+  .com-cenas .mergulho-etiqueta {
+    padding: var(--espaco-3);
+  }
+
+  .com-cenas .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--espaco-3);
+    margin-top: 2.5rem;
+  }
+
+  .com-cenas .numero dd {
+    font-size: 2.5rem;
+  }
+
+  .com-cenas .numero dt {
+    font-size: var(--texto-pequeno);
+    line-height: 1.25;
+  }
+
+  .com-cenas .grupo {
+    grid-template-columns: auto 1fr;
+    column-gap: var(--espaco-5);
+    width: min(88vw, 34rem);
+  }
+
+  .com-cenas .grupo-letra {
+    font-size: 3.5rem;
+  }
+
+  .com-cenas .grupo-selecoes {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    font-size: var(--texto-pequeno);
+  }
+
+  .com-cenas .voo {
+    --voo-l: 34vh;
+  }
+}

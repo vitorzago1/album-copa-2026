@@ -15,14 +15,20 @@
   <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
+  <script src="js/figurinha.js" defer></script>
   <script src="js/inicio.js" defer></script>
   <script src="js/carrossel.js" defer></script>
+
+  <!-- As cenas presas à rolagem: o motor e, depois, as oito cenas desta página. -->
+  <script src="js/cenas.js" defer></script>
+  <script src="js/cenas-inicio.js" defer></script>
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
   <link rel="stylesheet" href="css/paginas.css">
   <link rel="stylesheet" href="css/acessibilidade.css">
+  <link rel="stylesheet" href="css/cenas.css">
 </head>
 <body>
   <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
@@ -61,36 +67,44 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ABERTURA. Página dupla: à esquerda o convite, à direita uma página de amostra do álbum. -->
-    <section class="largura abertura dobra" aria-labelledby="titulo-abertura">
-      <div class="fluxo">
-        <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
-        <p class="abertura-texto">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
-        <p><a class="botao" href="album.html">Abrir o álbum</a></p>
-      </div>
+    <!-- ABERTURA (cena 1). Os pontinhos de impressão se juntam e formam "Colei!".
+         Parada, a cena mostra o convite ao lado da marca já formada.
+         O desenho é feito pelo js/cenas-inicio.js dentro do <canvas>. -->
+    <section class="cena cena-abertura" style="--altura: 240vh" aria-labelledby="titulo-abertura">
+      <div class="cena-palco">
+        <canvas class="reticula-tela so-com-js" id="reticula-tela" aria-hidden="true"></canvas>
 
-      <!-- O desenho inteiro é lido como uma imagem só, com a descrição do aria-label. -->
-      <div class="amostra" role="img" aria-label="Página de amostra do álbum: três espaços vazios numerados e uma figurinha solta, pronta para colar.">
-        <div class="amostra-vagas">
-          <div class="vaga"><span class="vaga-numero">001</span><span class="vaga-legenda">Falta</span></div>
-          <div class="vaga"><span class="vaga-numero">002</span><span class="vaga-legenda">Falta</span></div>
-          <div class="vaga"><span class="vaga-numero">003</span><span class="vaga-legenda">Falta</span></div>
+        <div class="abertura-convite" id="abertura-convite">
+          <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
+          <!-- data-visivel-em="0": estes botões aparecem no começo da cena (ver js/cenas.js). -->
+          <p class="abertura-botoes" data-visivel-em="0">
+            <a class="botao" href="album.html">Abrir o álbum</a>
+            <a class="botao botao-contorno" href="pacotinhos.html">Ir para os pacotinhos</a>
+          </p>
+          <p class="rolar-dica" aria-hidden="true"><i></i>Role para ver a apresentação</p>
         </div>
-        <div class="figurinha figurinha-comum figurinha-solta amostra-solta" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F">
-          <div class="figurinha-arte">
-            <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
-              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-              <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
-            </svg>
-          </div>
-          <div class="figurinha-tarja">
-            <span class="figurinha-nome">Sua primeira</span>
-            <span class="figurinha-numero">Nº 003</span>
-          </div>
+
+        <p class="abertura-assinatura" id="abertura-assinatura">O álbum de figurinhas da Copa de 2026</p>
+
+        <!-- Só aparece para quem vê a página parada porque o aparelho pede menos movimento. -->
+        <div class="aviso-movimento" id="aviso-movimento" hidden>
+          <p>A apresentação desta página está parada porque o seu aparelho pede menos movimento.</p>
+          <button class="botao botao-contorno botao-pequeno" type="button" id="ligar-movimento">Ligar as animações neste site</button>
         </div>
       </div>
     </section>
+
+    <!-- A FRASE ACENDE (cena 2). Cada palavra acende quando a rolagem chega nela. -->
+    <div class="cena cena-frase" style="--altura: 220vh">
+      <div class="cena-palco">
+        <div class="frase-caixa">
+          <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
+          <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path id="frase-traco" pathLength="1" d="M6 10c60-7 150-8 288-3M14 19c80-6 170-7 262-2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
 
     <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
          conforme as figurinhas do grupo são coladas e troca o texto de baixo. -->
@@ -132,44 +146,28 @@
       </ol>
     </section>
 
-    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
-         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
-         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
-    <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
-      <h2 id="titulo-sedes">As 16 sedes</h2>
-      <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
-      <noscript><p>As fotos das sedes aparecem com o JavaScript ligado no navegador.</p></noscript>
-
-      <div class="carrossel fluxo" id="carrossel" hidden>
-        <div class="dobra" role="group" aria-roledescription="slide" aria-labelledby="sede-cidade">
-          <div class="fluxo">
-            <h3 class="carrossel-cidade" id="sede-cidade"></h3>
-            <p class="carrossel-estadio" id="sede-estadio"></p>
-            <dl class="carrossel-dados">
-              <dt>Onde fica</dt>
-              <dd><img class="bandeirinha" id="sede-bandeira" src="assets/bandeiras/mx.svg" alt="" width="48" height="36"> <span id="sede-pais"></span></dd>
-              <dt>Na Copa de 2026</dt>
-              <dd id="sede-numeros"></dd>
-              <dt>Nome usado no torneio</dt>
-              <dd id="sede-nome-na-copa"></dd>
-            </dl>
-            <p id="sede-nota"></p>
+    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho tem frente e costas no espaço 3D
+         do CSS. As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
+    <section class="cena cena-pacote" style="--altura: 360vh" aria-labelledby="titulo-cena-pacote">
+      <div class="cena-palco palco-3d">
+        <h2 class="cena-titulo" id="titulo-cena-pacote">Todo dia, um pacotinho.</h2>
+        <p class="cena-titulo" id="pacote-titulo-2">Dentro dele, cinco figurinhas.</p>
+        <div class="pacote-cena">
+          <div class="pacote-figurinhas so-com-js" id="pacote-figurinhas"></div>
+          <div class="pacote3d" id="pacote3d" aria-hidden="true">
+            <div class="pacote3d-face pacotinho">
+              <span class="pacotinho-aba" id="pacote3d-aba"><span>Rasgue aqui</span></span>
+              <span class="pacotinho-corpo">
+                <span class="pacotinho-marca">Colei!</span>
+                <span class="pacotinho-texto">5 figurinhas</span>
+              </span>
+            </div>
+            <div class="pacote3d-face pacote3d-costas">
+              <span class="pacotinho-texto">Álbum da Copa 2026</span>
+              <span class="pacotinho-texto">Abra pelo picote</span>
+            </div>
           </div>
-
-          <figure class="carrossel-figura">
-            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
-            <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
-            <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
-          </figure>
         </div>
-
-        <div class="carrossel-controles">
-          <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
-          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
-          <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
-          <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
-        </div>
-        <ol class="carrossel-indicadores" id="sede-indicadores" aria-label="Ir direto para uma sede"></ol>
       </div>
     </section>
 
@@ -263,6 +261,111 @@
       </div>
     </section>
 
+    <!-- O ÁLBUM ABRE (cena 4). Três folhas empilhadas; cada uma tem frente e verso.
+         As páginas (Grupo C, como amostra) são montadas pelo js/cenas-inicio.js. -->
+    <section class="cena cena-album" style="--altura: 360vh" aria-labelledby="titulo-cena-album">
+      <div class="cena-palco palco-3d">
+        <h2 class="cena-titulo" id="titulo-cena-album">O álbum abre na sua frente.</h2>
+        <p class="escondido">Ilustração: a capa do álbum vira e aparecem as páginas do Grupo C, com figurinhas coladas e vagas.</p>
+        <div class="livro so-com-js" id="livro" aria-hidden="true">
+          <div class="folha folha-base"><div class="face face-frente" id="pagina-base"></div></div>
+          <div class="folha" id="folha-1">
+            <div class="face face-frente" id="pagina-2"></div>
+            <div class="face face-verso" id="pagina-3"></div>
+          </div>
+          <div class="folha" id="folha-capa">
+            <div class="face face-frente capa">
+              <span class="capa-marca">Colei!</span>
+              <span class="capa-texto">Álbum de figurinhas</span>
+              <span class="capa-ano">Copa 2026</span>
+            </div>
+            <div class="face face-verso" id="pagina-1"></div>
+          </div>
+        </div>
+        <!-- data-visivel-em="1": este botão só aparece no fim da cena. -->
+        <p class="cena-acao" id="acao-do-album" data-visivel-em="1"><a class="botao" href="album.html">Abrir o meu álbum</a></p>
+      </div>
+    </section>
+
+    <!-- MERGULHO NA FIGURINHA (cena 5). A figurinha cresce até a tela ficar da cor dela. -->
+    <div class="cena cena-mergulho" style="--altura: 240vh">
+      <div class="cena-palco">
+        <div class="mergulho so-com-js" id="mergulho" aria-hidden="true"></div>
+        <div class="mergulho-fim" id="mergulho-fim">
+          <p class="mergulho-etiqueta">Neste álbum, a cor só chega pelas figurinhas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OS NÚMEROS CONTAM (cena 6). Os valores escritos aqui são os finais; o
+         js/cenas-inicio.js confere com os dados e faz a contagem. -->
+    <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
+      <div class="cena-palco">
+        <h2 class="cena-titulo" id="titulo-numeros">A Copa de 2026 em números</h2>
+        <dl class="numeros" id="numeros">
+          <div class="numero"><dt>seleções</dt><dd>48</dd></div>
+          <div class="numero"><dt>figurinhas no álbum</dt><dd>288</dd></div>
+          <div class="numero"><dt>cidades-sede</dt><dd>16</dd></div>
+          <div class="numero"><dt>jogos</dt><dd>104</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- OS GRUPOS ANDAM PARA O LADO (cena 7). A rolagem para baixo move a faixa para
+         o lado. Os doze painéis são postos pelo js/cenas-inicio.js. -->
+    <section class="cena cena-grupos" style="--altura: 420vh" aria-labelledby="titulo-grupos">
+      <div class="cena-palco">
+        <div class="trilha" id="trilha">
+          <div class="trilha-abre">
+            <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
+            <p>A bandeira chega impressa em uma tinta só. No meio da tela, ela vira figurinha e ganha a cor de verdade.</p>
+            <noscript><p>A lista dos grupos aparece com o JavaScript ligado. No <a href="album.html">álbum</a> eles estão todos.</p></noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
+         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
+         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
+      <h2 id="titulo-sedes">As 16 sedes</h2>
+      <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
+      <noscript><p>As fotos das sedes aparecem com o JavaScript ligado no navegador.</p></noscript>
+
+      <div class="carrossel fluxo" id="carrossel" hidden>
+        <div class="dobra" role="group" aria-roledescription="slide" aria-labelledby="sede-cidade">
+          <div class="fluxo">
+            <h3 class="carrossel-cidade" id="sede-cidade"></h3>
+            <p class="carrossel-estadio" id="sede-estadio"></p>
+            <dl class="carrossel-dados">
+              <dt>Onde fica</dt>
+              <dd><img class="bandeirinha" id="sede-bandeira" src="assets/bandeiras/mx.svg" alt="" width="48" height="36"> <span id="sede-pais"></span></dd>
+              <dt>Na Copa de 2026</dt>
+              <dd id="sede-numeros"></dd>
+              <dt>Nome usado no torneio</dt>
+              <dd id="sede-nome-na-copa"></dd>
+            </dl>
+            <p id="sede-nota"></p>
+          </div>
+
+          <figure class="carrossel-figura">
+            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
+            <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
+            <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
+          </figure>
+        </div>
+
+        <div class="carrossel-controles">
+          <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
+          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
+          <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
+          <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
+        </div>
+        <ol class="carrossel-indicadores" id="sede-indicadores" aria-label="Ir direto para uma sede"></ol>
+      </div>
+    </section>
+
     <!-- COMO TROCAR. À direita, um bilhete com um exemplo de lista de troca. -->
     <section class="largura secao dobra" aria-labelledby="titulo-trocar">
       <div class="fluxo">
@@ -280,6 +383,18 @@
             <dt>Preciso</dt>
             <dd>007, 088, 133</dd>
           </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOO PELAS FIGURINHAS (cena 8). As figurinhas ficam espalhadas em profundidade
+         e a rolagem leva a câmera por entre elas. -->
+    <section class="cena cena-voo" style="--altura: 300vh" aria-labelledby="voo-titulo">
+      <div class="cena-palco palco-voo">
+        <div class="voo so-com-js" id="voo" aria-hidden="true"></div>
+        <div class="voo-fim" id="voo-fim" data-visivel-em="1">
+          <h2 class="cena-titulo" id="voo-titulo">São 288 para colar.</h2>
+          <p><a class="botao" href="pacotinhos.html">Abrir o pacotinho de hoje</a></p>
         </div>
       </div>
     </section>

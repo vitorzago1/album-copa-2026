@@ -7,42 +7,9 @@
 
 /* ---------- Início ---------- */
 
-/* Abertura: o título de um lado e a página de amostra do outro */
-.abertura {
-  padding-block: var(--espaco-4) var(--espaco-7);
-  align-items: center;
-}
-
+/* O primeiro parágrafo de cada página, um pouco maior que o texto comum */
 .abertura-texto {
   font-size: var(--texto-medio);
-}
-
-/* Página de amostra: três vagas e uma figurinha solta por cima, torta,
-   como se estivesse na mão, prestes a ser colada */
-.amostra {
-  position: relative;
-  max-width: 34rem;
-  padding-bottom: var(--espaco-7);
-}
-
-.amostra-vagas {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--espaco-3);
-}
-
-.amostra-solta {
-  position: absolute;
-  right: 3%;
-  bottom: 0;
-  width: 37%;   /* no celular a figurinha é maior, para o texto dela caber */
-  --giro: 7deg;
-}
-
-@media (min-width: 48rem) {
-  .amostra-solta {
-    width: 31%;
-  }
 }
 
 /* Raridades: no celular, figurinha à esquerda e texto à direita;
