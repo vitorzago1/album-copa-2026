@@ -1,0 +1,1006 @@
+/* ==========================================================================
+   laboratorio.css
+   --------------------------------------------------------------------------
+   Estilos da página de testes (laboratorio.html). Não é usada pelas 7 páginas
+   do site. Cada efeito aprovado sai daqui e vai para o CSS do site.
+
+   Partes:
+   1. A página do laboratório (cartões, palcos, fichas)
+   2. A folha de prova e as nove camadas de fundo
+   3. As dez animações
+   4. Tecnologias e lista de escolhas
+   ========================================================================== */
+
+/* ---------- 1. A página do laboratório ---------- */
+
+.lab {
+  /* Chuvisco desenhado por um filtro do SVG (feTurbulence), guardado em uma
+     variável para ser usado como imagem de fundo. Um para papel claro (grãos
+     escuros) e outro para papel escuro (grãos claros). */
+  --ruido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.08 0 0 0 0 0.12 0 0 0 0 0.31 0 0 0 0.9 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
+  --ruido-claro: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.98 0 0 0 0 0.89 0 0 0 0 0.91 0 0 0 0.9 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
+  /* Máscara de falhas: quase toda opaca, com pontinhos transparentes */
+  --falha: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 0 0 0 6.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
+.lab-selo {
+  grid-area: botao-menu;
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Em tela bem estreita não cabe: o título da página já diz "Laboratório" */
+@media (max-width: 29.99rem) {
+  .lab-selo {
+    display: none;
+  }
+}
+
+.lab-passos {
+  padding-left: 1.3em;
+  max-width: var(--largura-leitura);
+}
+
+.lab-passos li + li {
+  margin-top: var(--espaco-2);
+}
+
+.lab-cabeca {
+  margin-bottom: var(--espaco-5);
+}
+
+.lab-aviso {
+  margin-block: var(--espaco-5);
+  border-width: 3px;
+  border-color: var(--cor-texto);
+}
+
+/* A ficha de cada ideia: número, nome, resumo, chave "quero" e detalhes */
+.lab-nome {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-size: var(--titulo-3);
+}
+
+.lab-numero {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding-inline: 0.2em;
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.lab-resumo {
+  max-width: none;
+}
+
+.lab-quero {
+  font-weight: 700;
+}
+
+.lab-detalhes summary {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  color: var(--cor-acao);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.lab-detalhes summary::before {
+  content: "+";
+  font-weight: 800;
+}
+
+.lab-detalhes[open] summary::before {
+  content: "−";
+}
+
+.lab-detalhes dl {
+  font-size: var(--texto-pequeno);
+}
+
+.lab-detalhes dt {
+  font-weight: 700;
+}
+
+.lab-detalhes dd + dt {
+  margin-top: var(--espaco-2);
+}
+
+/* Fundo e detalhes: a folha de prova de um lado, as nove chaves do outro */
+.lab-fundo {
+  display: grid;
+  gap: var(--espaco-6);
+}
+
+.lab-lista {
+  display: grid;
+  gap: var(--espaco-4);
+}
+
+.lab-lista .lab-ficha {
+  display: grid;
+  gap: var(--espaco-1);
+  padding-bottom: var(--espaco-3);
+  border-bottom: 1.5px solid var(--cor-borda);
+}
+
+@media (min-width: 60rem) {
+  .lab-fundo {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    align-items: start;
+  }
+
+  /* A folha de prova acompanha a rolagem enquanto as chaves passam */
+  .lab-prova-coluna {
+    position: sticky;
+    top: var(--espaco-4);
+  }
+}
+
+/* Movimento e tecnologias: uma grade de cartões */
+.lab-grade {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+@media (min-width: 48rem) {
+  .lab-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.lab-item {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+  min-width: 0;
+  padding: var(--espaco-4);
+  border: 2px solid var(--cor-borda);
+}
+
+/* O palco: onde a demonstração acontece */
+.lab-palco {
+  position: relative;
+  min-height: 15rem;
+  display: grid;
+  place-items: center;
+  padding: var(--espaco-4);
+  overflow: hidden;
+  background: var(--cor-vaga);
+  border: 2px solid var(--cor-borda);
+}
+
+.lab-palco-alto {
+  min-height: 25rem;
+  padding-bottom: var(--espaco-5);
+}
+
+.lab-palco .figurinha,
+.lab-palco .vaga {
+  width: 8.5rem;
+}
+
+.lab-palco-texto {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: var(--titulo-3);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.lab-palco-texto-menor {
+  font-family: var(--fonte-leitura);
+  font-weight: 600;
+  font-size: var(--texto-base);
+  line-height: var(--entrelinha);
+}
+
+.lab-palco-botoes {
+  min-height: 8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-3);
+}
+
+.lab-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2);
+  max-width: none;
+}
+
+/* ---------- 2. A folha de prova ---------- */
+
+.prova {
+  position: relative;
+  isolation: isolate;   /* as misturas de cor das camadas ficam aqui dentro */
+  overflow: hidden;
+  padding: var(--espaco-7) var(--espaco-6) var(--espaco-6);
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-texto);
+}
+
+.prova-conteudo {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.prova-titulo {
+  position: relative;
+  display: inline-block;
+  font-size: var(--titulo-2);
+}
+
+.prova-casas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco-3);
+  align-items: start;
+}
+
+.prova-casas > * {
+  position: relative;
+  min-width: 0;
+}
+
+.prova-seguinte {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--espaco-3);
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+@media (min-width: 36rem) {
+  .prova-conteudo {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--espaco-6);
+  }
+}
+
+/* Toda camada de efeito começa invisível e aparece com a classe dela na folha */
+.prova-campo,
+.prova-reticula,
+.prova-dobra,
+.prova-marcas,
+.prova-grao {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+/* 1. Grão de papel: o chuvisco por cima de tudo, bem fraco */
+.prova-grao {
+  z-index: 3;
+  background-image: var(--ruido);
+  mix-blend-mode: multiply;
+}
+
+.ef-grao .prova-grao {
+  opacity: 0.42;
+}
+
+[data-tema="escuro"] .prova-grao {
+  background-image: var(--ruido-claro);
+  mix-blend-mode: screen;
+}
+
+[data-tema="escuro"] .ef-grao .prova-grao {
+  opacity: 0.3;
+}
+
+/* 2. Retícula nos cantos: três camadas de bolinhas na mesma grade. A de
+      bolinhas maiores só aparece bem perto do canto, por causa da máscara:
+      o resultado são pontos que crescem em direção ao canto. */
+.prova-reticula,
+.prova-reticula::before,
+.prova-reticula::after {
+  background-size: 10px 10px;
+}
+
+.prova-reticula {
+  background-image: radial-gradient(circle, var(--cor-texto) 1px, transparent 1.4px);
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 100% 0, #000, transparent 70%), radial-gradient(ellipse 55% 60% at 0 100%, #000, transparent 70%);
+  mask-image: radial-gradient(ellipse 75% 85% at 100% 0, #000, transparent 70%), radial-gradient(ellipse 55% 60% at 0 100%, #000, transparent 70%);
+}
+
+.prova-reticula::before,
+.prova-reticula::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.prova-reticula::before {
+  background-image: radial-gradient(circle, var(--cor-texto) 2.1px, transparent 2.5px);
+  -webkit-mask-image: radial-gradient(ellipse 50% 60% at 100% 0, #000, transparent 70%), radial-gradient(ellipse 34% 38% at 0 100%, #000, transparent 70%);
+  mask-image: radial-gradient(ellipse 50% 60% at 100% 0, #000, transparent 70%), radial-gradient(ellipse 34% 38% at 0 100%, #000, transparent 70%);
+}
+
+.prova-reticula::after {
+  background-image: radial-gradient(circle, var(--cor-texto) 3.4px, transparent 3.8px);
+  -webkit-mask-image: radial-gradient(ellipse 28% 36% at 100% 0, #000, transparent 70%), radial-gradient(ellipse 18% 22% at 0 100%, #000, transparent 70%);
+  mask-image: radial-gradient(ellipse 28% 36% at 100% 0, #000, transparent 70%), radial-gradient(ellipse 18% 22% at 0 100%, #000, transparent 70%);
+}
+
+.ef-reticula .prova-reticula {
+  opacity: 0.32;
+}
+
+/* 3. Marcas de gráfica */
+.ef-marcas .prova-marcas {
+  opacity: 1;
+}
+
+/* Marca de corte: dois tracinhos em cada canto, um deitado e um em pé */
+.marca-corte {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background:
+    linear-gradient(var(--cor-texto), var(--cor-texto)) left 8px top 0 / 1.5px 6px no-repeat,
+    linear-gradient(var(--cor-texto), var(--cor-texto)) left 0 top 8px / 6px 1.5px no-repeat;
+}
+
+.marca-corte-1 { left: 6px; top: 6px; }
+.marca-corte-2 { right: 6px; top: 6px; rotate: 90deg; }
+.marca-corte-3 { right: 6px; bottom: 6px; rotate: 180deg; }
+.marca-corte-4 { left: 6px; bottom: 6px; rotate: 270deg; }
+
+/* Cruz de registro: um círculo com uma cruz, usada na gráfica para alinhar as tintas */
+.marca-registro {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--cor-texto);
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--cor-texto), var(--cor-texto)) center / 26px 1.5px no-repeat,
+    linear-gradient(var(--cor-texto), var(--cor-texto)) center / 1.5px 26px no-repeat;
+}
+
+.marca-registro-1 { left: 50%; top: 5px; translate: -50% 0; }
+.marca-registro-2 { left: 50%; bottom: 5px; translate: -50% 0; }
+
+/* Barra de tons: a mesma tinta de 12% a 100%, para conferir a impressão */
+.barra-de-tons {
+  position: absolute;
+  right: 34px;
+  bottom: 8px;
+  display: flex;
+}
+
+.barra-de-tons i {
+  width: 12px;
+  height: 12px;
+  background: var(--cor-texto);
+}
+
+.barra-de-tons i:nth-child(1) { opacity: 0.12; }
+.barra-de-tons i:nth-child(2) { opacity: 0.24; }
+.barra-de-tons i:nth-child(3) { opacity: 0.36; }
+.barra-de-tons i:nth-child(4) { opacity: 0.5; }
+.barra-de-tons i:nth-child(5) { opacity: 0.62; }
+.barra-de-tons i:nth-child(6) { opacity: 0.75; }
+.barra-de-tons i:nth-child(7) { opacity: 0.88; }
+
+.marca-pagina {
+  position: absolute;
+  right: 4px;
+  top: 34px;
+  writing-mode: vertical-rl;   /* texto de cima para baixo, na margem */
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* 4. Linhas do campo */
+.prova-campo {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 2;
+}
+
+.prova-campo * {
+  vector-effect: non-scaling-stroke;   /* o traço não engrossa quando o desenho estica */
+}
+
+.ef-campo .prova-campo {
+  opacity: 0.17;
+}
+
+/* 5. Dobra e grampos (só quando a folha tem duas colunas) */
+.prova-dobra {
+  display: none;
+}
+
+@media (min-width: 36rem) {
+  .prova-dobra {
+    display: block;
+    left: calc(5 / 12 * 100% - 30px);
+    right: auto;
+    width: 64px;
+    background: linear-gradient(to right, transparent, color-mix(in srgb, var(--cor-texto) 16%, transparent) 46%, color-mix(in srgb, var(--cor-texto) 34%, transparent) 50%, color-mix(in srgb, var(--cor-texto) 16%, transparent) 54%, transparent);
+  }
+}
+
+.ef-dobra .prova-dobra {
+  opacity: 1;
+}
+
+.grampo {
+  position: absolute;
+  left: 50%;
+  width: 5px;
+  height: 28px;
+  translate: -50% 0;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--cor-prata-clara), var(--cor-prata) 55%, #7d8496);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cor-figurinha-tinta) 60%, transparent);
+}
+
+.grampo:nth-child(1) { top: 20%; }
+.grampo:nth-child(2) { top: 70%; }
+
+/* 6. Rabiscos de caneta: traços em SVG na cor da caneta.
+      pathLength="1" no HTML faz o traço "medir 1": assim o tracejado de
+      tamanho 1 cobre o traço inteiro e dá para animá-lo se desenhando. */
+.rabisco {
+  position: absolute;
+  z-index: 4;
+  overflow: visible;
+  fill: none;
+  stroke: var(--cor-acao);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.rabisco path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.ef-rabiscos .rabisco {
+  opacity: 1;
+}
+
+.ef-rabiscos .rabisco path {
+  animation: desenhar 700ms ease-out forwards;
+}
+
+.ef-rabiscos .rabisco-circulo path { animation-delay: 250ms; }
+.ef-rabiscos .rabisco-seta path { animation-delay: 700ms; }
+
+@keyframes desenhar {
+  to { stroke-dashoffset: 0; }
+}
+
+.rabisco-sublinhado {
+  left: -2%;
+  bottom: -0.35em;
+  width: 104%;
+  height: 0.45em;
+}
+
+.rabisco-circulo {
+  left: 12%;
+  top: 14%;
+  width: 76%;
+  height: 34%;
+}
+
+.rabisco-seta {
+  left: -28%;
+  top: 30%;
+  width: 42%;
+  height: 26%;
+}
+
+/* 7. Carimbos de tinta gasta */
+.carimbo {
+  display: inline-block;
+  padding: 0.15em 0.75em;
+  color: var(--cor-erro);
+  border: 3px double currentColor;
+  border-radius: 6px;
+  font-weight: 800;
+  line-height: 1.3;
+  rotate: -7deg;
+  filter: url(#tinta-gasta);   /* o filtro do SVG que entorta o contorno */
+}
+
+.carimbo-verde {
+  color: var(--cor-sucesso);
+}
+
+.prova .carimbo {
+  display: none;
+}
+
+.prova.ef-carimbos .carimbo {
+  display: inline-block;
+}
+
+/* 8. Títulos com tinta falhada: a máscara deixa o papel aparecer em pontinhos */
+.ef-falhada .prova-titulo,
+.ef-falhada .prova .vaga-numero {
+  -webkit-mask-image: var(--falha);
+  mask-image: var(--falha);
+  -webkit-mask-size: 180px 180px;
+  mask-size: 180px 180px;
+}
+
+/* 9. Picote com tesourinha: sem o efeito, é o fio liso que o site usa hoje */
+.prova-picote {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--espaco-5);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.prova-picote svg {
+  position: absolute;
+  left: 14px;
+  top: -11px;
+  display: none;
+  padding-inline: 4px;
+  background: var(--cor-fundo);
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.ef-picote .prova-picote {
+  border-top-style: dashed;
+}
+
+.ef-picote .prova-picote svg {
+  display: block;
+}
+
+/* ---------- 3. As animações ---------- */
+
+/* 10. Lendária holográfica. O JavaScript escreve a posição do ponteiro nas
+       variáveis --px e --py (de 0% a 100%) e a inclinação em --rx e --ry. */
+.holo {
+  --px: 50%;
+  --py: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+  --brilho: 0.35;
+  transform: perspective(42rem) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 180ms ease-out;
+  touch-action: none;   /* no celular, arrastar o dedo mexe o brilho em vez de rolar a página */
+}
+
+/* Duas camadas por cima da figurinha: o degradê colorido (::after) e o
+   reflexo branco que acompanha o ponteiro (::before). Os modos de mistura
+   "overlay" e "soft-light" tingem as cores de baixo sem apagar o texto. */
+.holo::before,
+.holo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 250ms ease-out;
+}
+
+.holo::after {
+  background: linear-gradient(115deg, #ff5d8f, #ffd166 22%, #5eead4 45%, #60a5fa 68%, #c084fc 90%) var(--px) var(--py) / 260% 260%;
+  mix-blend-mode: overlay;
+  opacity: calc(var(--brilho) * 0.8);
+}
+
+.holo::before {
+  background: radial-gradient(circle at var(--px) var(--py), rgba(255, 255, 255, 0.95), transparent 45%);
+  mix-blend-mode: soft-light;
+  opacity: var(--brilho);
+}
+
+/* 11. Colar com batida */
+.figurinha-batendo {
+  animation: bater 520ms cubic-bezier(0.3, 0.9, 0.4, 1) both;
+}
+
+@keyframes bater {
+  0% { transform: translateY(-70%) rotate(-16deg) scale(1.5); opacity: 0; }
+  55% { transform: translateY(0) rotate(var(--giro, 0deg)) scale(1); opacity: 1; }
+  70% { transform: rotate(var(--giro, 0deg)) scale(1.07, 0.92); }
+  100% { transform: rotate(var(--giro, 0deg)) scale(1); }
+}
+
+/* O anel de tinta que se abre em volta da figurinha na hora da batida */
+.casa-de-batida {
+  position: relative;
+  width: 8.5rem;
+}
+
+.casa-de-batida .figurinha,
+.casa-de-batida .vaga {
+  width: 100%;
+}
+
+.casa-de-batida.bateu::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--cor-texto);
+  border-radius: var(--raio-adesivo);
+  pointer-events: none;
+  animation: anel 560ms ease-out 280ms both;
+}
+
+.casa-de-batida.bateu {
+  animation: tremer 260ms linear 280ms;
+}
+
+@keyframes anel {
+  from { scale: 0.9; opacity: 0.8; }
+  to { scale: 1.45; opacity: 0; }
+}
+
+@keyframes tremer {
+  20% { translate: -2px 1px; }
+  45% { translate: 2px -1px; }
+  70% { translate: -1px 0; }
+}
+
+/* 12. Carimbo de conquista */
+.lab-conquista {
+  width: min(100%, 17rem);
+  background: var(--cor-fundo);
+}
+
+.lab-conquista .carimbo {
+  justify-self: start;
+  margin-top: var(--espaco-2);
+}
+
+.carimbo-batendo {
+  animation: carimbar 420ms cubic-bezier(0.3, 0.8, 0.4, 1) both;
+}
+
+.cartao-tremendo {
+  animation: tremer 240ms linear 230ms;
+}
+
+@keyframes carimbar {
+  0% { scale: 2.8; opacity: 0; rotate: -20deg; }
+  60% { scale: 0.92; opacity: 1; rotate: -7deg; }
+  80% { scale: 1.06; }
+  100% { scale: 1; }
+}
+
+/* 13. Pacotinho com rasgo de verdade */
+.pacotinho-2 {
+  position: relative;
+  z-index: 2;
+  width: 10.5rem;
+}
+
+.pacotinho-2 .pacotinho-marca {
+  font-size: 2.5rem;
+}
+
+/* Antes de rasgar, o pacotinho balança quando o mouse chega perto */
+.lab-palco:hover .pacotinho-2:not(.rasgado) {
+  animation: balancar 700ms ease-in-out;
+}
+
+@keyframes balancar {
+  0%, 100% { rotate: -3deg; }
+  30% { rotate: -7deg; }
+  70% { rotate: 1deg; }
+}
+
+/* O brilho de papel laminado que atravessa o pacotinho */
+.pacotinho-2 .pacotinho-corpo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  translate: -120% 0;
+}
+
+.lab-palco:hover .pacotinho-2 .pacotinho-corpo::after,
+.pacotinho-2.rasgado .pacotinho-corpo::after {
+  animation: laminado 900ms ease-out;
+}
+
+@keyframes laminado {
+  to { translate: 120% 0; }
+}
+
+/* Rasgado: a borda vira dente de serra (clip-path recorta a forma) e a aba sai voando */
+.pacotinho-2.rasgado .pacotinho-aba {
+  border-bottom-color: transparent;
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 84% 78%, 76% 100%, 68% 78%, 60% 100%, 52% 78%, 44% 100%, 36% 78%, 28% 100%, 20% 78%, 12% 100%, 4% 78%, 0 100%);
+  animation: rasgar-2 620ms ease-in forwards;
+}
+
+.pacotinho-2.rasgado .pacotinho-corpo {
+  clip-path: polygon(0 7px, 4% 0, 12% 7px, 20% 0, 28% 7px, 36% 0, 44% 7px, 52% 0, 60% 7px, 68% 0, 76% 7px, 84% 0, 92% 7px, 100% 0, 100% 100%, 0 100%);
+}
+
+@keyframes rasgar-2 {
+  25% { transform: translateX(-6%) rotate(-6deg); }
+  100% { transform: translate(80%, -190%) rotate(48deg); opacity: 0; }
+}
+
+/* As figurinhas saem de trás do pacotinho e se abrem em leque */
+.pacote-conjunto {
+  position: relative;
+  align-self: end;   /* o conjunto fica no pé do palco: sobra espaço em cima para o leque */
+}
+
+.leque {
+  position: absolute;
+  left: 50%;
+  top: 14%;
+  z-index: 1;
+  width: 6.5rem;
+  translate: -50% 0;
+}
+
+.leque-carta {
+  position: absolute;
+  inset: 0 0 auto;
+  aspect-ratio: 3 / 4;
+  background-color: var(--cor-figurinha-tinta);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.25) 1px, transparent 1.4px);
+  background-size: 6px 6px;
+  border: 3px solid var(--cor-figurinha-papel);
+  border-radius: var(--raio-adesivo);
+  transform-origin: 50% 120%;
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.3, 1.2);
+}
+
+.leque.aberto .leque-carta:nth-child(1) { transform: translateY(-62%) rotate(-26deg); transition-delay: 420ms; }
+.leque.aberto .leque-carta:nth-child(2) { transform: translateY(-78%) rotate(0deg); transition-delay: 520ms; }
+.leque.aberto .leque-carta:nth-child(3) { transform: translateY(-62%) rotate(26deg); transition-delay: 620ms; }
+
+/* 14. Virar a página. A View Transitions API tira um retrato do estado
+       velho e do novo do elemento que tem view-transition-name, e estas
+       regras dizem como um sai e o outro entra. */
+.folha-de-album {
+  width: min(100%, 19rem);
+  display: grid;
+  gap: var(--espaco-2);
+  padding: var(--espaco-4);
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-texto);
+  view-transition-name: folha-de-album;
+}
+
+.folha-de-album h4 {
+  margin: 0;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: var(--titulo-3);
+  line-height: 1;
+}
+
+.folha-de-album-casas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--espaco-2);
+}
+
+.folha-de-album-casas span {
+  aspect-ratio: 3 / 4;
+  display: grid;
+  place-items: center;
+  background: var(--cor-vaga);
+  border: 2px solid var(--cor-borda);
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+::view-transition-old(folha-de-album) {
+  transform-origin: left center;
+  animation: folha-sai 360ms ease-in both;
+}
+
+::view-transition-new(folha-de-album) {
+  transform-origin: left center;
+  animation: folha-entra 420ms ease-out both;
+}
+
+/* Voltando, a folha vira para o outro lado */
+[data-virada="voltar"]::view-transition-old(folha-de-album),
+[data-virada="voltar"]::view-transition-new(folha-de-album) {
+  transform-origin: right center;
+}
+
+@keyframes folha-sai {
+  to { transform: perspective(50rem) rotateY(-84deg); opacity: 0; }
+}
+
+@keyframes folha-entra {
+  from { transform: perspective(50rem) rotateY(70deg); opacity: 0; }
+}
+
+/* 15. Entrar ao rolar. "animation-timeline: view()" prende o andamento da
+       animação à rolagem: o item anima enquanto entra na área visível. */
+.rolagem-caixa {
+  display: block;
+  height: 16rem;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.rolagem-grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco-4);
+  padding-block: 8rem 1rem;
+}
+
+.rolagem-grade .figurinha,
+.rolagem-grade .vaga {
+  width: 100%;
+}
+
+@supports (animation-timeline: view()) {
+  .rolagem-item {
+    animation: assentar linear both;
+    animation-timeline: view(block);
+    animation-range: entry 0% entry 95%;
+  }
+}
+
+@keyframes assentar {
+  from { opacity: 0; transform: translateY(2.5rem) rotate(-8deg) scale(0.88); }
+}
+
+/* 16. Papel picado: o <canvas> cobre o palco e fica por cima do texto */
+.confete-tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 17. Placar girando: cada casa é uma janelinha de 1 linha de altura que
+       mostra uma fita com os números de 0 a 9, um embaixo do outro. */
+.odometro {
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.odo-casa {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odo-fita {
+  display: grid;
+  transform: translateY(calc(var(--digito, 0) * -1em));
+  transition: transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.odo-fita span {
+  height: 1em;
+}
+
+/* 18. Retícula que acende: os pontinhos cobrem o quadro, mas a máscara só
+       deixa ver os que estão perto do ponteiro (posição em --x e --y). */
+.vivo-palco {
+  --x: 50%;
+  --y: 50%;
+  background: var(--cor-fundo);
+}
+
+.vivo-palco::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--cor-texto) 1.7px, transparent 2.1px) 0 0 / 11px 11px;
+  -webkit-mask-image: radial-gradient(circle 8.5rem at var(--x) var(--y), #000, transparent);
+  mask-image: radial-gradient(circle 8.5rem at var(--x) var(--y), #000, transparent);
+  opacity: 0.5;
+}
+
+.vivo-palco > * {
+  position: relative;
+}
+
+/* 19. Traço que se desenha */
+.traco-campo {
+  width: min(100%, 22rem);
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.traco-campo * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.traco-campo.desenhando * {
+  animation: desenhar-campo 1500ms ease-in-out both;
+}
+
+.traco-campo.desenhando :nth-child(n + 4) { animation-delay: 500ms; }
+.traco-campo.desenhando :nth-child(n + 7) { animation-delay: 900ms; }
+
+@keyframes desenhar-campo {
+  from { stroke-dashoffset: 1; }
+}
+
+/* ---------- 4. Tecnologias e lista de escolhas ---------- */
+
+.lab-icone-app {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--cor-texto);
+  color: var(--cor-fundo);
+  border-radius: 1rem;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.lab-escolhidas {
+  list-style: none;
+  padding: 0;
+}
+
+.lab-escolhidas li {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  padding-block: var(--espaco-2);
+  border-bottom: 1.5px solid var(--cor-borda);
+  font-weight: 600;
+}
+
+.lab-escolhidas .lab-numero {
+  min-width: 1.75rem;
+  height: 1.75rem;
+  font-family: var(--fonte-leitura);
+  font-weight: 800;
+  font-size: var(--texto-pequeno);
+}
+
+.lab-campo-largo {
+  max-width: none;
+}

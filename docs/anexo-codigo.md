@@ -5,7 +5,7 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 29.
-- Linhas de código (com comentários): 9492.
+- Linhas de código (com comentários): 9500.
 
 | Arquivo | Linhas |
 |---|---|
@@ -20,11 +20,11 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `css/base.css` | 479 |
 | `css/componentes.css` | 1108 |
 | `css/paginas.css` | 546 |
-| `css/acessibilidade.css` | 175 |
+| `css/acessibilidade.css` | 177 |
 | `js/tema-acessibilidade.js` | 211 |
 | `js/menu.js` | 52 |
 | `js/estado.js` | 417 |
-| `js/figurinha.js` | 222 |
+| `js/figurinha.js` | 225 |
 | `js/album.js` | 622 |
 | `js/pacotinho.js` | 233 |
 | `js/trocas.js` | 200 |
@@ -37,7 +37,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/demonstracao.js` | 39 |
 | `js/dados.js` | 2474 |
 | `scripts/contraste.js` | 281 |
-| `scripts/gerar-anexo.js` | 93 |
+| `scripts/gerar-anexo.js` | 96 |
 
 ## Páginas (HTML)
 
@@ -4036,11 +4036,13 @@ html[data-fonte="maior"] { font-size: 125%; }
   --tempo-de-virar: 0s;
 }
 
-/* ...ou se o próprio aparelho já pede menos movimento */
+/* ...ou se o próprio aparelho já pede menos movimento.
+   A exceção é quando a pessoa pede as animações de propósito
+   (data-movimento="completo", usado pela página do laboratório). */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html:not([data-movimento="completo"]) *,
+  html:not([data-movimento="completo"]) *::before,
+  html:not([data-movimento="completo"]) *::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
@@ -4048,7 +4050,7 @@ html[data-fonte="maior"] { font-size: 125%; }
     scroll-behavior: auto !important;
   }
 
-  .figurinha-vira {
+  html:not([data-movimento="completo"]) .figurinha-vira {
     --meia-volta: 0deg;
     --tempo-de-virar: 0s;
   }
@@ -4849,9 +4851,12 @@ function linhasDoVerso(fig) {
 }
 
 // A pessoa pediu menos movimento? (no painel de acessibilidade ou no aparelho)
+// "completo" é o pedido contrário: ver as animações mesmo que o aparelho peça menos.
 function movimentoReduzido() {
-  return document.documentElement.dataset.movimento === 'reduzido' ||
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pedido = document.documentElement.dataset.movimento;
+  if (pedido === 'reduzido') return true;
+  if (pedido === 'completo') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 // Escreve um recado para o leitor de tela. A página tem um parágrafo escondido
@@ -9629,10 +9634,13 @@ const GRUPOS = [
   },
 ];
 
+// Arquivos de trabalho, que não fazem parte do site entregue: ficam fora do anexo
+const FORA_DO_ANEXO = ['laboratorio.html', 'laboratorio.css', 'laboratorio.js'];
+
 // Lista os arquivos de um grupo: primeiro os da lista "primeiro", depois os outros
 function arquivosDoGrupo(grupo) {
   const pasta = path.join(RAIZ, grupo.pasta);
-  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao); }).sort();
+  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao) && !FORA_DO_ANEXO.includes(nome); }).sort();
   const naFrente = grupo.primeiro.filter(function (nome) { return todos.includes(nome); });
   const resto = todos.filter(function (nome) { return !grupo.primeiro.includes(nome); });
   return naFrente.concat(resto);

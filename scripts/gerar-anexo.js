@@ -38,10 +38,13 @@ const GRUPOS = [
   },
 ];
 
+// Arquivos de trabalho, que não fazem parte do site entregue: ficam fora do anexo
+const FORA_DO_ANEXO = ['laboratorio.html', 'laboratorio.css', 'laboratorio.js'];
+
 // Lista os arquivos de um grupo: primeiro os da lista "primeiro", depois os outros
 function arquivosDoGrupo(grupo) {
   const pasta = path.join(RAIZ, grupo.pasta);
-  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao); }).sort();
+  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao) && !FORA_DO_ANEXO.includes(nome); }).sort();
   const naFrente = grupo.primeiro.filter(function (nome) { return todos.includes(nome); });
   const resto = todos.filter(function (nome) { return !grupo.primeiro.includes(nome); });
   return naFrente.concat(resto);

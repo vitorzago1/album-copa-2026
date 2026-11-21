@@ -62,9 +62,12 @@ function linhasDoVerso(fig) {
 }
 
 // A pessoa pediu menos movimento? (no painel de acessibilidade ou no aparelho)
+// "completo" é o pedido contrário: ver as animações mesmo que o aparelho peça menos.
 function movimentoReduzido() {
-  return document.documentElement.dataset.movimento === 'reduzido' ||
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pedido = document.documentElement.dataset.movimento;
+  if (pedido === 'reduzido') return true;
+  if (pedido === 'completo') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 // Escreve um recado para o leitor de tela. A página tem um parágrafo escondido

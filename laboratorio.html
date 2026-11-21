@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laboratório | Colei!</title>
+  <meta name="description" content="Página de testes: efeitos de fundo, animações e tecnologias do navegador para escolher o que entra no site.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+
+  <!-- PÁGINA DE TRABALHO. Não faz parte do site entregue: serve para testar
+       ideias de visual antes de aplicar nas 7 páginas. Usa os mesmos estilos,
+       as mesmas fontes e as mesmas figurinhas do site de verdade. -->
+  <script src="js/tema-acessibilidade.js"></script>
+  <script src="js/dados.js" defer></script>
+  <script src="js/figurinha.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/paginas.css">
+  <link rel="stylesheet" href="css/acessibilidade.css">
+  <link rel="stylesheet" href="css/laboratorio.css">
+</head>
+<body class="lab">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Filtro do SVG usado pelos carimbos: entorta de leve o contorno, como tinta gasta. -->
+  <svg class="escondido" aria-hidden="true" focusable="false" width="0" height="0">
+    <filter id="tinta-gasta">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="chuvisco"/>
+      <feDisplacementMap in="SourceGraphic" in2="chuvisco" scale="2.6"/>
+    </filter>
+  </svg>
+
+  <header class="cabecalho">
+    <div class="largura cabecalho-grade">
+      <a class="marca" href="index.html" aria-label="Colei!, voltar ao site">Colei!</a>
+      <p class="lab-selo">Laboratório</p>
+      <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
+        <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
+          <path d="M4 8.5h16M12 8.5v6M8 21l4-6.5 4 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="botao-acessibilidade-texto">Acessibilidade</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+
+    <!-- ABERTURA -->
+    <section class="largura dobra">
+      <div class="fluxo">
+        <h1>Laboratório</h1>
+        <p class="abertura-texto">Aqui a gente testa antes de imprimir. São 24 ideias para o Colei! deixar de parecer genérico, todas funcionando sobre as peças de verdade do site.</p>
+        <p>Use o botão Acessibilidade, lá em cima, para trocar entre o tema claro e o escuro e ver cada ideia nos dois.</p>
+      </div>
+      <div class="fluxo">
+        <h2 class="titulo-menor">Como usar</h2>
+        <ol class="lab-passos">
+          <li>Ligue e desligue os efeitos de fundo e veja o resultado na folha de prova.</li>
+          <li>Experimente cada animação e cada tecnologia no próprio cartão.</li>
+          <li>Marque "Quero no site" no que gostar.</li>
+          <li>No fim da página, copie a lista e mande para o Claude.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- AVISO: só aparece se o aparelho estiver pedindo menos movimento. -->
+    <section class="largura" id="aviso-movimento" hidden>
+      <div class="cartao lab-aviso">
+        <h2 class="titulo-menor">Seu computador está pedindo menos movimento</h2>
+        <p>Com esse ajuste ligado, o site troca as animações por mudanças secas. É o comportamento certo para quem precisa, mas esconde tudo o que se mexe, inclusive o que o site já tinha: o pacotinho rasgando e a figurinha virando.</p>
+        <p>No Windows, o ajuste fica em Configurações, Acessibilidade, Efeitos visuais, "Efeitos de animação".</p>
+        <p><button class="botao" type="button" id="forcar-movimento">Mostrar as animações nesta página</button></p>
+        <p class="painel-aviso" id="forcar-aviso" role="status"></p>
+      </div>
+    </section>
+
+    <!-- 1. FUNDO E DETALHES -->
+    <section class="largura secao" aria-labelledby="titulo-fundo">
+      <div class="fluxo lab-cabeca">
+        <h2 id="titulo-fundo">Fundo e detalhes</h2>
+        <p>Nove ideias para a página deixar de ser uma cor lisa. Elas se somam: ligue várias e veja como ficam juntas na folha de prova.</p>
+      </div>
+
+      <div class="lab-fundo">
+        <!-- A FOLHA DE PROVA: um pedaço do álbum de verdade. Cada efeito é uma
+             camada que aparece quando a classe ef-(nome) entra na folha. -->
+        <div class="lab-prova-coluna">
+          <div class="prova" id="prova">
+            <svg class="prova-campo" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+              <rect x="20" y="20" width="560" height="360"/>
+              <line x1="300" y1="20" x2="300" y2="380"/>
+              <circle cx="300" cy="200" r="62"/>
+              <circle cx="300" cy="200" r="3"/>
+              <rect x="20" y="105" width="92" height="190"/>
+              <rect x="20" y="155" width="36" height="90"/>
+              <path d="M112 160a50 50 0 0 1 0 80"/>
+              <rect x="488" y="105" width="92" height="190"/>
+              <rect x="544" y="155" width="36" height="90"/>
+              <path d="M488 160a50 50 0 0 0 0 80"/>
+            </svg>
+            <div class="prova-reticula" aria-hidden="true"></div>
+            <div class="prova-dobra" aria-hidden="true"><span class="grampo"></span><span class="grampo"></span></div>
+
+            <div class="prova-marcas" aria-hidden="true">
+              <span class="marca-corte marca-corte-1"></span>
+              <span class="marca-corte marca-corte-2"></span>
+              <span class="marca-corte marca-corte-3"></span>
+              <span class="marca-corte marca-corte-4"></span>
+              <span class="marca-registro marca-registro-1"></span>
+              <span class="marca-registro marca-registro-2"></span>
+              <span class="barra-de-tons"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="marca-pagina">Colei! prova 3, pág. 14</span>
+            </div>
+
+            <div class="prova-conteudo">
+              <div class="fluxo">
+                <h3 class="prova-titulo">Grupo C
+                  <svg class="rabisco rabisco-sublinhado" viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                    <path pathLength="1" d="M4 9c38-5 92-6 190-2M10 15c50-4 110-5 176-1"/>
+                  </svg>
+                </h3>
+                <p>Brasil, Marrocos, Haiti e Escócia.</p>
+                <p class="selecao-conta">5 de 24 coladas</p>
+                <div class="barra" aria-hidden="true"><span class="barra-cheia" style="--parte: 0.21"></span></div>
+                <p><span class="carimbo">Conferido</span></p>
+              </div>
+
+              <div class="prova-casas" id="prova-casas">
+                <!-- duas figurinhas coladas e uma vaga: postas pelo js/laboratorio.js -->
+              </div>
+            </div>
+
+            <div class="prova-picote" aria-hidden="true">
+              <svg viewBox="0 0 28 20" width="28" height="20" focusable="false">
+                <circle cx="6" cy="5" r="3.2"/><circle cx="6" cy="15" r="3.2"/>
+                <path d="M8.5 6.5 26 16M8.5 13.5 26 4"/>
+              </svg>
+            </div>
+            <p class="prova-seguinte">Aqui embaixo começaria a próxima seleção.</p>
+
+            <div class="prova-grao" aria-hidden="true"></div>
+          </div>
+          <p class="texto-apoio">Folha de prova: um pedaço do álbum de verdade, com as figurinhas e as cores do site.</p>
+        </div>
+
+        <!-- As nove chaves. Os cartões são preenchidos pelo js/laboratorio.js. -->
+        <div class="lab-lista" id="lista-fundo"></div>
+      </div>
+    </section>
+
+    <!-- 2. MOVIMENTO -->
+    <section class="largura secao" aria-labelledby="titulo-movimento">
+      <div class="fluxo lab-cabeca">
+        <h2 id="titulo-movimento">Movimento</h2>
+        <p>Dez animações. Cada uma responde a uma ação de quem usa o site, e todas ficam quietas para quem pediu menos movimento.</p>
+      </div>
+
+      <div class="lab-grade">
+        <article class="lab-item" data-id="holografica">
+          <div class="lab-palco lab-palco-claro" id="palco-holografica"></div>
+          <p class="texto-apoio">Passe o mouse (ou arraste o dedo) por cima da figurinha.</p>
+        </article>
+
+        <article class="lab-item" data-id="batida">
+          <div class="lab-palco" id="palco-batida"></div>
+          <p class="lab-botoes"><button class="botao botao-pequeno" type="button" id="batida-colar">Colar</button> <button class="botao botao-contorno botao-pequeno" type="button" id="batida-desfazer">Desfazer</button></p>
+        </article>
+
+        <article class="lab-item" data-id="carimbada">
+          <div class="lab-palco" id="palco-carimbada">
+            <div class="conquista lab-conquista" id="carimbada-cartao">
+              <span class="conquista-nome">Seleção completa</span>
+              <span class="conquista-como">Cole as 6 figurinhas de uma seleção.</span>
+              <span class="carimbo carimbo-verde" id="carimbada-carimbo" hidden>Feita em 21/11</span>
+            </div>
+          </div>
+          <p class="lab-botoes"><button class="botao botao-pequeno" type="button" id="carimbada-bater">Carimbar</button> <button class="botao botao-contorno botao-pequeno" type="button" id="carimbada-limpar">Limpar</button></p>
+        </article>
+
+        <article class="lab-item" data-id="pacote">
+          <div class="lab-palco lab-palco-alto" id="palco-pacote">
+            <!-- O conjunto junta o leque de figurinhas (atrás) e o pacotinho (na frente) -->
+            <div class="pacote-conjunto">
+              <div class="leque" aria-hidden="true"><span class="leque-carta"></span><span class="leque-carta"></span><span class="leque-carta"></span></div>
+              <div class="pacotinho pacotinho-2" id="pacote-2" aria-hidden="true">
+                <span class="pacotinho-aba"><span>Rasgue aqui</span></span>
+                <span class="pacotinho-corpo">
+                  <span class="pacotinho-marca">Colei!</span>
+                  <span class="pacotinho-texto">5 figurinhas</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <p class="lab-botoes"><button class="botao botao-pequeno" type="button" id="pacote-rasgar">Rasgar</button> <button class="botao botao-contorno botao-pequeno" type="button" id="pacote-fechar">Fechar de novo</button></p>
+        </article>
+
+        <article class="lab-item" data-id="pagina">
+          <div class="lab-palco" id="palco-pagina">
+            <div class="folha-de-album" id="folha-de-album"></div>
+          </div>
+          <p class="lab-botoes"><button class="botao botao-contorno botao-pequeno" type="button" id="pagina-anterior">Página anterior</button> <button class="botao botao-pequeno" type="button" id="pagina-proxima">Próxima página</button></p>
+          <p class="texto-apoio" id="pagina-suporte"></p>
+        </article>
+
+        <article class="lab-item" data-id="rolagem">
+          <!-- tabindex="0": a caixa rola também pelo teclado -->
+          <div class="lab-palco rolagem-caixa" id="palco-rolagem" tabindex="0" role="region" aria-label="Caixa de rolagem de exemplo"></div>
+          <p class="texto-apoio" id="rolagem-suporte">Role a caixa para baixo.</p>
+        </article>
+
+        <article class="lab-item" data-id="confete">
+          <div class="lab-palco" id="palco-confete">
+            <p class="lab-palco-texto">Brasil: 6 de 6 coladas</p>
+            <canvas class="confete-tela" id="confete-tela" aria-hidden="true"></canvas>
+          </div>
+          <p class="lab-botoes"><button class="botao botao-pequeno" type="button" id="confete-soltar">Completar a seleção</button></p>
+        </article>
+
+        <article class="lab-item" data-id="placar">
+          <div class="lab-palco" id="palco-placar">
+            <p class="placar"><span class="placar-numero odometro" id="odometro" aria-label="0"></span> <span>de 288 figurinhas coladas</span></p>
+          </div>
+          <p class="lab-botoes"><button class="botao botao-pequeno" type="button" id="placar-girar">Girar até 127</button> <button class="botao botao-contorno botao-pequeno" type="button" id="placar-zerar">Zerar</button></p>
+        </article>
+
+        <article class="lab-item" data-id="vivo">
+          <div class="lab-palco vivo-palco" id="palco-vivo">
+            <p class="lab-palco-texto">A Copa acabou.<br>Seu álbum, não.</p>
+          </div>
+          <p class="texto-apoio">Passe o mouse pelo quadro.</p>
+        </article>
+
+        <article class="lab-item" data-id="traco">
+          <div class="lab-palco" id="palco-traco">
+            <svg class="traco-campo" id="traco-campo" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+              <rect pathLength="1" x="20" y="20" width="560" height="360"/>
+              <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
+              <circle pathLength="1" cx="300" cy="200" r="62"/>
+              <rect pathLength="1" x="20" y="105" width="92" height="190"/>
+              <rect pathLength="1" x="20" y="155" width="36" height="90"/>
+              <path pathLength="1" d="M112 160a50 50 0 0 1 0 80"/>
+              <rect pathLength="1" x="488" y="105" width="92" height="190"/>
+              <rect pathLength="1" x="544" y="155" width="36" height="90"/>
+              <path pathLength="1" d="M488 160a50 50 0 0 0 0 80"/>
+            </svg>
+          </div>
+          <p class="lab-botoes"><button class="botao botao-pequeno" type="button" id="traco-desenhar">Desenhar</button></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. TECNOLOGIAS DO NAVEGADOR -->
+    <section class="largura secao" aria-labelledby="titulo-tecnologias">
+      <div class="fluxo lab-cabeca">
+        <h2 id="titulo-tecnologias">Tecnologias do navegador</h2>
+        <p>Cinco recursos que o próprio navegador oferece, sem biblioteca. Alguns só funcionam no celular ou no site publicado: o cartão avisa.</p>
+      </div>
+
+      <div class="lab-grade">
+        <article class="lab-item" data-id="sons">
+          <div class="lab-palco lab-palco-botoes">
+            <button class="botao botao-contorno botao-pequeno" type="button" data-som="rasgar">Rasgar</button>
+            <button class="botao botao-contorno botao-pequeno" type="button" data-som="colar">Colar</button>
+            <button class="botao botao-contorno botao-pequeno" type="button" data-som="virar">Virar</button>
+            <button class="botao botao-contorno botao-pequeno" type="button" data-som="carimbar">Carimbar</button>
+          </div>
+          <p class="texto-apoio">Aperte para ouvir. Confira se o som do computador está ligado.</p>
+        </article>
+
+        <article class="lab-item" data-id="vibracao">
+          <div class="lab-palco lab-palco-botoes">
+            <button class="botao botao-contorno botao-pequeno" type="button" id="vibrar">Testar vibração</button>
+          </div>
+          <p class="painel-aviso" id="vibrar-aviso" role="status"></p>
+        </article>
+
+        <article class="lab-item" data-id="inclinacao">
+          <div class="lab-palco lab-palco-botoes">
+            <p class="lab-palco-texto lab-palco-texto-menor">Só dá para ver no celular: a figurinha lendária brilha conforme o aparelho inclina.</p>
+          </div>
+        </article>
+
+        <article class="lab-item" data-id="app">
+          <div class="lab-palco lab-palco-botoes">
+            <span class="lab-icone-app" aria-hidden="true">C!</span>
+            <p class="lab-palco-texto lab-palco-texto-menor">O Colei! com ícone na tela do celular, abrindo sem internet.</p>
+          </div>
+        </article>
+
+        <article class="lab-item" data-id="compartilhar">
+          <div class="lab-palco lab-palco-botoes">
+            <button class="botao botao-contorno botao-pequeno" type="button" id="compartilhar">Testar compartilhar</button>
+          </div>
+          <p class="painel-aviso" id="compartilhar-aviso" role="status"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. AS ESCOLHAS -->
+    <section class="largura secao" aria-labelledby="titulo-escolhas">
+      <div class="dobra">
+        <div class="fluxo">
+          <h2 id="titulo-escolhas">Suas escolhas</h2>
+          <p id="escolhas-conta" role="status">Nada marcado ainda.</p>
+          <ul class="lab-escolhidas" id="escolhas-lista"></ul>
+          <p><button class="botao botao-contorno botao-pequeno" type="button" id="escolhas-limpar">Desmarcar tudo</button></p>
+        </div>
+
+        <div class="fluxo">
+          <div class="campo lab-campo-largo">
+            <label class="campo-rotulo" for="escolhas-notas">Quer dizer mais alguma coisa?</label>
+            <span class="campo-dica" id="escolhas-notas-dica">O que achou forte demais, fraco demais, ou uma ideia que não está na lista.</span>
+            <textarea class="campo-entrada" id="escolhas-notas" rows="4" aria-describedby="escolhas-notas-dica"></textarea>
+          </div>
+          <div class="campo lab-campo-largo">
+            <label class="campo-rotulo" for="escolhas-texto">Lista para mandar ao Claude</label>
+            <textarea class="campo-entrada" id="escolhas-texto" rows="7" readonly></textarea>
+          </div>
+          <p><button class="botao" type="button" id="escolhas-copiar">Copiar a lista</button></p>
+          <p class="painel-aviso" id="escolhas-aviso" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="largura">
+      <p>Página de trabalho do projeto Colei!. Não faz parte do site entregue. <a href="index.html">Voltar ao site</a></p>
+    </div>
+  </footer>
+</body>
+</html>

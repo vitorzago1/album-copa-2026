@@ -126,11 +126,13 @@ html[data-fonte="maior"] { font-size: 125%; }
   --tempo-de-virar: 0s;
 }
 
-/* ...ou se o próprio aparelho já pede menos movimento */
+/* ...ou se o próprio aparelho já pede menos movimento.
+   A exceção é quando a pessoa pede as animações de propósito
+   (data-movimento="completo", usado pela página do laboratório). */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html:not([data-movimento="completo"]) *,
+  html:not([data-movimento="completo"]) *::before,
+  html:not([data-movimento="completo"]) *::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
@@ -138,7 +140,7 @@ html[data-fonte="maior"] { font-size: 125%; }
     scroll-behavior: auto !important;
   }
 
-  .figurinha-vira {
+  html:not([data-movimento="completo"]) .figurinha-vira {
     --meia-volta: 0deg;
     --tempo-de-virar: 0s;
   }
