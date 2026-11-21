@@ -1,0 +1,980 @@
+/* ==========================================================================
+   laboratorio-2.css
+   --------------------------------------------------------------------------
+   Estilos da segunda página de testes (laboratorio-2.html): oito cenas presas
+   à rolagem. Não é usada pelas 7 páginas do site.
+
+   O truque que se repete em todas as cenas:
+     .cena   é uma seção bem alta (300vh = três telas de altura);
+     .palco  fica grudado no topo da tela (position: sticky) enquanto a pessoa
+             rola por dentro da cena.
+   O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
+   js/laboratorio-2.js, escrevendo "transform" e "opacity" direto no elemento.
+
+   Partes:
+   1. A página (barra fixa, abertura)
+   2. A cena, o palco, a ficha e o medidor
+   3. As oito cenas, na ordem
+   4. A lista de escolhas
+   ========================================================================== */
+
+/* ---------- 1. A página ---------- */
+
+/* A barra fixa cobre o topo: ao andar com o Tab, o navegador deixa esse
+   espaço livre para o foco nunca ficar escondido atrás dela. */
+html:has(.lab2) {
+  scroll-padding-top: 5rem;
+}
+
+.lab2 {
+  --barra: 3.5rem;             /* altura da barra fixa */
+  --pe-da-cena: 5.5rem;        /* espaço da ficha, embaixo de cada palco */
+  --gota: 7px 8px 0 0 rgba(20, 32, 79, 0.55);   /* a sombra de quem foi colado */
+}
+
+/* No escuro e no alto contraste não se vê sombra (igual às figurinhas do site) */
+[data-tema="escuro"] .lab2,
+[data-contraste="alto"] .lab2 {
+  --gota: 0 0 0 0 transparent;
+}
+
+.lab2 main {
+  padding-block: 0;
+}
+
+.lab2 .pular {
+  position: fixed;
+  z-index: 30;
+}
+
+.lab2-barra {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  height: var(--barra);
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  padding-inline: var(--espaco-4);
+  background: var(--cor-fundo);
+  border-bottom: 2px solid var(--cor-texto);
+}
+
+.lab2-barra .marca {
+  padding-block: 0;
+  font-size: 1.75rem;
+}
+
+/* O nome da cena que está na tela */
+.lab2-cena-atual {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Abertura */
+.lab2-abertura {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: var(--espaco-6);
+  padding-top: calc(var(--barra) + var(--espaco-6));
+  padding-bottom: var(--espaco-7);
+}
+
+.lab2-abertura h1 {
+  font-size: clamp(3.75rem, 1.5rem + 11vw, 9rem);
+}
+
+@media (min-width: 56rem) {
+  .lab2-abertura {
+    grid-template-columns: 6fr 5fr;
+    column-gap: var(--espaco-7);
+    align-items: end;
+  }
+
+  .lab2-aviso,
+  .lab2-dica {
+    grid-column: 1 / -1;
+  }
+}
+
+/* O programa: as oito cenas, com o número que continua a contagem do laboratório 1 */
+.lab2-programa {
+  list-style: none;
+  padding: 0;
+  border-top: 2px solid var(--cor-texto);
+}
+
+.lab2-programa li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  padding-block: var(--espaco-2);
+  border-bottom: 1px solid var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+.lab2-programa strong {
+  display: block;
+  color: var(--cor-texto);
+  font-size: var(--texto-base);
+}
+
+.lab2-n {
+  flex: none;
+  min-width: 2.25rem;
+  color: var(--cor-texto);
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.lab2-aviso {
+  border-width: 3px;
+  border-color: var(--cor-texto);
+}
+
+/* "Role para começar": um fio que desce */
+.lab2-dica {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-weight: 700;
+}
+
+.lab2-dica i {
+  display: block;
+  width: 2px;
+  height: 2.5rem;
+  background: var(--cor-texto);
+  transform-origin: top;
+  animation: fio-descendo 1.6s ease-in-out infinite;
+}
+
+@keyframes fio-descendo {
+  0% { transform: scaleY(0); }
+  60% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- 2. A cena, o palco, a ficha e o medidor ---------- */
+
+/* A altura vem do HTML: style="--altura: 300vh". Quanto mais alta a cena,
+   mais devagar a animação anda, porque há mais rolagem para gastar. */
+.cena {
+  position: relative;
+  height: var(--altura, 300vh);
+}
+
+/* O palco gruda no topo e fica parado enquanto a cena passa por trás dele.
+   (O seletor ".cena > .palco" ganha do ".palco" da página Pacotinhos.) */
+.cena > .palco {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;   /* no celular, desconta a barra de endereço do navegador */
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0;
+  padding: var(--barra) 0 var(--pe-da-cena);
+  overflow: hidden;
+}
+
+/* A ficha: o nome da técnica de um lado e o medidor do outro */
+.cena-ficha {
+  position: absolute;
+  z-index: 6;
+  left: var(--espaco-4);
+  right: var(--espaco-4);
+  bottom: var(--espaco-3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espaco-2) var(--espaco-5);
+  pointer-events: none;   /* a ficha não atrapalha o mouse da cena */
+}
+
+/* Fundo de papel atrás do texto, para ele ser lido por cima de qualquer cena */
+.cena-info,
+.medidor {
+  padding: var(--espaco-1) var(--espaco-2);
+  background: var(--cor-fundo);
+}
+
+.cena-info {
+  max-width: 36rem;
+  font-size: var(--texto-pequeno);
+  line-height: 1.4;
+}
+
+.cena-info strong {
+  display: block;
+}
+
+/* No celular não cabe a explicação inteira: fica só o nome da técnica.
+   (A explicação está também na lista do fim da página.) */
+.cena-info span {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .cena-info span {
+    display: inline;
+  }
+}
+
+/* O medidor mostra o progresso que a rolagem está comandando, de 0 a 100 */
+.medidor {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.medidor b {
+  min-width: 3ch;
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.medidor-trilho {
+  align-self: center;
+  width: 4.5rem;
+  height: 4px;
+  margin-left: var(--espaco-2);
+  background: var(--cor-vaga);
+}
+
+.medidor-trilho i {
+  display: block;
+  height: 100%;
+  background: var(--cor-texto);
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+}
+
+/* Título de cena: grande, no alto do palco. Começa invisível: quem mostra é o JavaScript. */
+.cena-titulo {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--barra) + 4vh);
+  left: 0;
+  right: 0;
+  padding-inline: var(--espaco-4);
+  text-align: center;
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.75rem);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cena-titulo-topo {
+  opacity: 1;
+}
+
+.cena-titulo-meio {
+  top: 50%;
+  translate: 0 -70%;
+}
+
+.cena-titulo-estatico {
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.75rem);
+}
+
+/* ---------- 3. As oito cenas ---------- */
+
+/* ----- Cena 25: a retícula forma a marca ----- */
+
+/* A tela de desenho (canvas) cobre o palco inteiro */
+.palco-tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cena-convite {
+  position: absolute;
+  left: var(--espaco-4);
+  right: var(--espaco-4);
+  bottom: calc(var(--pe-da-cena) + 5vh);
+  width: fit-content;
+  max-width: 34ch;
+  margin-inline: auto;
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-fundo);
+  text-align: center;
+  font-size: var(--texto-medio);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.cena-assinatura {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70%;   /* o JavaScript acerta a altura, logo abaixo das letras */
+  text-align: center;
+  opacity: 0;
+}
+
+.cena-assinatura p {
+  max-width: none;
+  padding-inline: var(--espaco-4);
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  line-height: 1.1;
+}
+
+/* ----- Cena 26: o pacotinho gira e abre ----- */
+
+/* "perspective" é a distância do olho até a tela. Sem ela, girar em 3D
+   pareceria só achatar a peça. */
+.palco-3d {
+  perspective: 1100px;
+}
+
+.pacote-cena {
+  --pacote-l: clamp(9rem, 27vmin, 15rem);
+  position: relative;
+  width: var(--pacote-l);
+  height: calc(var(--pacote-l) * 1.4);
+  margin-top: 9vh;
+  transform-style: preserve-3d;   /* os filhos ficam no mesmo espaço 3D */
+}
+
+.pacote3d {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* As duas faces ocupam o mesmo lugar. "backface-visibility: hidden" esconde
+   a face que está de costas para quem olha. */
+.pacote3d-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.pacote3d .pacotinho {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  rotate: none;
+  cursor: default;
+}
+
+.pacote3d .pacotinho-marca {
+  font-size: calc(var(--pacote-l) * 0.3);
+}
+
+.pacote3d-costas {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-radius: var(--raio-adesivo);
+  text-align: center;
+}
+
+.pacote3d-costas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.8px, transparent 1.2px) 0 0 / 7px 7px;
+  opacity: 0.3;
+}
+
+.pacote-figurinhas {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
+.pacote-carta {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--pacote-l) * 0.8);
+  margin-left: calc(var(--pacote-l) * -0.4);
+  margin-top: calc(var(--pacote-l) * -0.5333);
+  opacity: 0;
+}
+
+/* ----- Cena 27: a frase acende ----- */
+
+.frase {
+  max-width: 22ch;
+  font-size: clamp(2rem, 1rem + 4.4vw, 4.5rem);
+  line-height: 1.04;
+}
+
+/* Palavra apagada: a mesma tinta, bem diluída */
+.frase span {
+  color: var(--cor-vaga);
+  color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
+  transition: color 260ms ease-out;
+}
+
+.frase span.acesa {
+  color: var(--cor-texto);
+}
+
+/* O sublinhado de caneta: o traço inteiro mede 1 (pathLength="1" no HTML).
+   "--falta" diz quanto do traço ainda não foi desenhado. */
+.frase-traco {
+  display: block;
+  width: min(100%, 24rem);
+  height: 1.75rem;
+  margin-top: var(--espaco-3);
+  overflow: visible;
+}
+
+.frase-traco path {
+  fill: none;
+  stroke: var(--cor-acao);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--falta, 1);
+}
+
+/* ----- Cena 28: o álbum abre ----- */
+
+/* A caixa do livro tem o tamanho de UMA página (a da direita). As folhas
+   giram em torno da borda esquerda dela, que é a lombada. */
+.livro {
+  --pagina-l: min(46vw, 22rem, calc((100vh - 17rem) / 1.35));
+  position: relative;
+  width: var(--pagina-l);
+  height: calc(var(--pagina-l) * 1.35);
+  margin-top: 6vh;
+  transform-style: preserve-3d;
+}
+
+@supports (height: 100svh) {
+  .livro {
+    --pagina-l: min(46vw, 22rem, calc((100svh - 17rem) / 1.35));
+  }
+}
+
+.folha {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;   /* gira em torno da lombada */
+  transform-style: preserve-3d;
+}
+
+/* Cada folha tem duas faces: a frente e o verso (este já nasce virado) */
+.face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-texto);
+}
+
+.face-verso {
+  transform: rotateY(180deg);
+}
+
+/* Enquanto a folha vira, o lado da lombada escurece ("--sombra" vem do JavaScript) */
+.face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(10, 16, 40, 0.6), transparent 55%);
+  opacity: var(--sombra, 0);
+}
+
+.face-verso::after {
+  background: linear-gradient(to left, rgba(10, 16, 40, 0.6), transparent 55%);
+}
+
+/* A capa: o negativo da página, como o pacotinho */
+.capa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--pagina-l) * 0.03);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-color: var(--cor-etiqueta-fundo);
+  text-align: center;
+}
+
+.capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.9px, transparent 1.3px) 0 0 / 8px 8px;
+  opacity: 0.3;
+}
+
+.capa span {
+  position: relative;   /* na frente dos pontinhos */
+  padding: 0 0.3em;
+  background: var(--cor-etiqueta-fundo);
+}
+
+.capa-marca {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: calc(var(--pagina-l) * 0.34);
+  line-height: 1;
+  rotate: -6deg;
+}
+
+.capa-texto {
+  font-weight: 700;
+  font-size: calc(var(--pagina-l) * 0.06);
+}
+
+.capa-ano {
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: calc(var(--pagina-l) * 0.13);
+  line-height: 1;
+}
+
+/* O miolo da página é desenhado sempre com 480 por 648 pixels e depois
+   encolhido ou aumentado ("--escala" vem do JavaScript) para caber na folha.
+   Assim a página do álbum se comporta como uma gravura: tudo cresce junto. */
+.miolo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 480px;
+  height: 648px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 22px;
+  transform-origin: 0 0;
+  transform: scale(var(--escala, 1));
+}
+
+.miolo-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--cor-texto);
+}
+
+.miolo-cabeca img {
+  flex: none;
+  width: 56px;
+  border: 1px solid var(--cor-texto);
+}
+
+.miolo-nome {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.miolo-grupo {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.miolo-grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 12px;
+  align-content: start;
+}
+
+.miolo-grade > * {
+  min-width: 0;
+}
+
+.miolo .vaga {
+  padding: 4px;
+}
+
+.miolo .vaga-numero {
+  font-size: 40px;
+}
+
+.miolo .vaga-nome {
+  font-size: 14px;
+}
+
+.miolo-pe {
+  color: var(--cor-texto-secundario);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ----- Cena 29: mergulho na figurinha ----- */
+
+.mergulho {
+  width: clamp(9rem, 30vmin, 14rem);
+}
+
+/* A camada de cor que toma a tela no fim do mergulho. A cor é a do retrato
+   da figurinha ("--campo", posta pelo JavaScript). */
+.mergulho-fim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  padding: var(--barra) var(--espaco-4) var(--pe-da-cena);
+  background-color: var(--campo, var(--cor-texto));
+  background-image: radial-gradient(circle, rgba(20, 32, 79, 0.3) 1.2px, transparent 1.7px);
+  background-size: 9px 9px;
+  opacity: 0;
+}
+
+/* Nenhum texto é escrito direto em cima da cor da seleção: o título vem em
+   uma etiqueta de papel branco, colada como uma figurinha. */
+.mergulho-fim .cena-titulo-estatico {
+  max-width: 15ch;
+  padding: var(--espaco-5);
+  background: var(--cor-figurinha-papel);
+  color: var(--cor-figurinha-tinta);
+  border-radius: var(--raio-adesivo);
+  box-shadow: 0 0 0 1.5px var(--cor-figurinha-tinta), var(--gota);
+  rotate: -1.5deg;
+}
+
+/* ----- Cena 30: os números contam ----- */
+
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-6) var(--espaco-4);
+  margin-top: 9vh;
+}
+
+@media (min-width: 60rem) {
+  .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* "--aceso" vai de 0 a 1 conforme chega a vez do número */
+.numero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  max-width: none;
+  opacity: calc(0.22 + var(--aceso, 0) * 0.78);
+}
+
+.numero-valor {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(4rem, 1.5rem + 10vw, 9rem);
+  line-height: 0.9;
+}
+
+.numero-legenda {
+  font-weight: 700;
+}
+
+/* A mancha de retícula atrás do número: bolinhas que somem em direção à borda */
+.numero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2rem -1rem 1.5rem 15%;
+  background: radial-gradient(circle, var(--cor-texto) 1.5px, transparent 2px) 0 0 / 9px 9px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 15%, transparent 95%);
+  mask-image: radial-gradient(closest-side, #000 15%, transparent 95%);
+  opacity: calc(var(--aceso, 0) * 0.45);
+}
+
+/* ----- Cena 31: as sedes andam para o lado ----- */
+
+/* A faixa é uma fila única, bem mais larga que a tela */
+.trilha {
+  position: absolute;
+  top: var(--barra);
+  bottom: var(--pe-da-cena);
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 6vw, 5rem);
+  padding-inline: max(var(--espaco-4), 9vw);
+}
+
+.trilha-abre {
+  flex: none;
+  width: min(78vw, 26rem);
+}
+
+.trilha-abre p {
+  margin-top: var(--espaco-4);
+  font-size: var(--texto-medio);
+}
+
+.sede {
+  flex: none;
+  width: min(76vw, 30rem, 62vh);
+  margin: 0;
+}
+
+/* "--f" vai de 0 (foto longe do meio da tela) a 1 (foto no meio).
+   Com 0 ela é a foto em uma tinta só do site. Com 1 ela é uma figurinha:
+   colorida, de canto arredondado e um pouco torta. */
+.sede .foto {
+  --f: 0;
+  border-radius: calc(var(--f) * var(--raio-adesivo));
+  rotate: calc(var(--f) * var(--torto, -1.4deg));
+  scale: calc(0.92 + var(--f) * 0.08);
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.sede .foto img {
+  filter: grayscale(calc(1 - var(--f))) contrast(calc(1.15 - var(--f) * 0.15));
+}
+
+.sede .foto::before,
+.sede .foto::after {
+  opacity: calc(1 - var(--f));
+}
+
+/* Passou da metade do caminho: ganha a borda branca e a sombra de quem foi colado */
+.sede-colada .foto {
+  border-color: var(--cor-figurinha-papel);
+  box-shadow: 0 0 0 4px var(--cor-figurinha-papel), 0 0 0 5.5px var(--cor-borda), var(--gota);
+}
+
+.sede figcaption {
+  display: grid;
+  gap: 2px;
+  margin-top: var(--espaco-4);
+}
+
+.sede-conta {
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+}
+
+.sede-cidade {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  line-height: 1;
+}
+
+.sede-estadio {
+  font-weight: 600;
+}
+
+.sede-credito {
+  color: var(--cor-texto-secundario);
+  font-size: 0.75rem;
+}
+
+/* ----- Cena 32: voo pelas figurinhas ----- */
+
+.palco-voo {
+  perspective: 900px;
+}
+
+/* Um ponto no meio do palco. As figurinhas são espalhadas em volta dele,
+   cada uma com a sua profundidade (translateZ). */
+.voo {
+  --voo-l: clamp(8rem, 22vmin, 11rem);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.voo-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--voo-l);
+  margin: calc(var(--voo-l) * -0.667) 0 0 calc(var(--voo-l) * -0.5);
+}
+
+/* ----- Tela baixa (celular deitado, janela pequena) -----
+   Com menos de 480 px de altura, as peças encolhem para caber entre a barra
+   e o medidor, e a ficha de texto dá lugar à cena. */
+@media (max-height: 30rem) {
+  .lab2 {
+    --pe-da-cena: 3.25rem;
+  }
+
+  .cena-info {
+    display: none;
+  }
+
+  .cena-ficha {
+    justify-content: flex-end;
+  }
+
+  .cena-titulo,
+  .cena-titulo-estatico {
+    font-size: 1.5rem;
+  }
+
+  .cena-titulo {
+    top: calc(var(--barra) + 0.5rem);
+  }
+
+  .cena-convite {
+    bottom: calc(var(--pe-da-cena) + 0.25rem);
+    font-size: var(--texto-pequeno);
+  }
+
+  .pacote-cena {
+    --pacote-l: 26vh;
+    margin-top: 2.25rem;
+  }
+
+  .frase {
+    max-width: none;
+    font-size: 1.5rem;
+  }
+
+  .livro {
+    --pagina-l: min(46vw, calc((100vh - 9rem) / 1.35));
+    margin-top: 1.5rem;
+  }
+
+  .mergulho {
+    width: 30vh;
+  }
+
+  .mergulho-fim .cena-titulo-estatico {
+    padding: var(--espaco-3);
+  }
+
+  .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--espaco-3);
+    margin-top: 2.25rem;
+  }
+
+  .numero-valor {
+    font-size: 2.5rem;
+  }
+
+  .numero-legenda {
+    font-size: var(--texto-pequeno);
+    line-height: 1.25;
+  }
+
+  .sede {
+    width: min(76vw, 50vh);
+  }
+
+  .sede figcaption {
+    margin-top: var(--espaco-2);
+  }
+
+  .sede-cidade {
+    font-size: 1.5rem;
+  }
+
+  .sede-estadio {
+    font-size: var(--texto-pequeno);
+  }
+
+  .voo {
+    --voo-l: 30vh;
+  }
+}
+
+/* ---------- 4. A lista de escolhas ---------- */
+
+.lab2-fim {
+  padding-block: var(--espaco-8);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.lab2-fim > h3 {
+  margin-top: var(--espaco-7);
+}
+
+/* As fichas se arrumam em colunas: quantas couberem, com pelo menos 19rem cada */
+.lab2-escolhas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: var(--espaco-4) var(--espaco-6);
+}
+
+.lab2-escolha {
+  padding-bottom: var(--espaco-4);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.lab2-escolha h3,
+.lab2-escolha h4 {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: var(--titulo-3);
+  line-height: 1.1;
+}
+
+.lab2-escolha p,
+.lab2-escolha dl {
+  margin-top: var(--espaco-2);
+  font-size: var(--texto-pequeno);
+}
+
+.lab2-escolha dt {
+  font-weight: 700;
+}
+
+.lab2-escolha dd {
+  margin: 0;
+}
+
+.lab2-escolha dd + dt {
+  margin-top: var(--espaco-2);
+}
+
+.lab-quero {
+  font-weight: 700;
+}
+
+.lab-campo-largo {
+  max-width: none;
+}

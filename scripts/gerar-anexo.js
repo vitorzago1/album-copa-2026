@@ -39,7 +39,10 @@ const GRUPOS = [
 ];
 
 // Arquivos de trabalho, que não fazem parte do site entregue: ficam fora do anexo
-const FORA_DO_ANEXO = ['laboratorio.html', 'laboratorio.css', 'laboratorio.js'];
+const FORA_DO_ANEXO = [
+  'laboratorio.html', 'laboratorio.css', 'laboratorio.js',
+  'laboratorio-2.html', 'laboratorio-2.css', 'laboratorio-2.js',
+];
 
 // Lista os arquivos de um grupo: primeiro os da lista "primeiro", depois os outros
 function arquivosDoGrupo(grupo) {

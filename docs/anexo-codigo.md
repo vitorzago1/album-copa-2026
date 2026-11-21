@@ -5,7 +5,7 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 29.
-- Linhas de código (com comentários): 9500.
+- Linhas de código (com comentários): 9503.
 
 | Arquivo | Linhas |
 |---|---|
@@ -37,7 +37,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/demonstracao.js` | 39 |
 | `js/dados.js` | 2474 |
 | `scripts/contraste.js` | 281 |
-| `scripts/gerar-anexo.js` | 96 |
+| `scripts/gerar-anexo.js` | 99 |
 
 ## Páginas (HTML)
 
@@ -9635,7 +9635,10 @@ const GRUPOS = [
 ];
 
 // Arquivos de trabalho, que não fazem parte do site entregue: ficam fora do anexo
-const FORA_DO_ANEXO = ['laboratorio.html', 'laboratorio.css', 'laboratorio.js'];
+const FORA_DO_ANEXO = [
+  'laboratorio.html', 'laboratorio.css', 'laboratorio.js',
+  'laboratorio-2.html', 'laboratorio-2.css', 'laboratorio-2.js',
+];
 
 // Lista os arquivos de um grupo: primeiro os da lista "primeiro", depois os outros
 function arquivosDoGrupo(grupo) {
