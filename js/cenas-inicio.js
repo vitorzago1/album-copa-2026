@@ -268,7 +268,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // O botão do aviso: liga as animações neste site mesmo com o aparelho
   // pedindo menos movimento. A escolha fica guardada (js/tema-acessibilidade.js).
   document.getElementById('ligar-movimento').addEventListener('click', function () {
-    guardarPreferencia('movimento', 'completo');
+    if (typeof guardarPreferencia === 'function') {
+      guardarPreferencia('movimento', 'completo');
+    } else {
+      // O navegador pode estar com uma cópia antiga do tema-acessibilidade.js na
+      // memória, ainda sem essa função. Aí a escolha vale só até fechar a página.
+      document.documentElement.dataset.movimento = 'completo';
+    }
     // O aviso some com o botão dentro: o foco vai para o primeiro botão do convite
     convite.querySelector('a').focus();
   });

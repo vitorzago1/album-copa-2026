@@ -5,7 +5,7 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 32.
-- Linhas de código (com comentários): 11621.
+- Linhas de código (com comentários): 11627.
 
 | Arquivo | Linhas |
 |---|---|
@@ -32,7 +32,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/inicio.js` | 53 |
 | `js/carrossel.js` | 92 |
 | `js/cenas.js` | 254 |
-| `js/cenas-inicio.js` | 746 |
+| `js/cenas-inicio.js` | 752 |
 | `js/formulario.js` | 53 |
 | `js/login.js` | 312 |
 | `js/contato.js` | 112 |
@@ -7897,7 +7897,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // O botão do aviso: liga as animações neste site mesmo com o aparelho
   // pedindo menos movimento. A escolha fica guardada (js/tema-acessibilidade.js).
   document.getElementById('ligar-movimento').addEventListener('click', function () {
-    guardarPreferencia('movimento', 'completo');
+    if (typeof guardarPreferencia === 'function') {
+      guardarPreferencia('movimento', 'completo');
+    } else {
+      // O navegador pode estar com uma cópia antiga do tema-acessibilidade.js na
+      // memória, ainda sem essa função. Aí a escolha vale só até fechar a página.
+      document.documentElement.dataset.movimento = 'completo';
+    }
     // O aviso some com o botão dentro: o foco vai para o primeiro botão do convite
     convite.querySelector('a').focus();
   });
