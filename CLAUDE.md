@@ -24,7 +24,7 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
   - fontes guardadas em `assets/fontes/`, sem depender de outro site.
 - Código comentado em português simples, explicando o porquê. Clareza vale mais que esperteza: o Vitor precisa explicar cada parte na apresentação.
 - Mobile first. Tem que funcionar em 320 px de largura.
-- Biblioteca externa só com autorização dele, e justificada no README.
+- Biblioteca externa só com autorização dele, e justificada no README. Autorizada até agora: Three.js (em 21/11/2026, para o pacotinho em 3D; ainda não usada).
 - Cabeçalho e rodapé são repetidos nas 7 páginas. Ao mudar um, mudar nos 7 arquivos.
 
 ## Acessibilidade (WCAG 2.2 nível AA, nos dois temas)
@@ -44,7 +44,7 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
 - Linha tracejada significa picote ("dá para destacar").
 - Nada de emoji no lugar de ícone, rótulos em caixa-alta, seta no fim de botão ou cards todos iguais.
 - A figurinha é numerada em sequência ("Nº 127"). Não usar código de três letras mais número.
-- Um único momento orquestrado: a abertura do pacotinho. O resto fica quieto.
+- Movimento: a página inicial é uma apresentação em cenas presas à rolagem (decisão do Vitor em 21/11/2026, depois dos dois laboratórios). Nas outras páginas, o movimento só responde a uma ação da pessoa. Toda cena tem uma versão parada, usada com menos movimento, com letra maior e sem JavaScript.
 
 ## Conteúdo e direitos
 

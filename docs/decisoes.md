@@ -134,6 +134,42 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 9. Ajudar a reconhecer e corrigir erros | Busca sem resultado explica o que houve e oferece limpar os filtros; nos formulários, frase específica com ícone embaixo do campo, resumo com link para cada campo e foco levado ao primeiro problema |
 | 10. Ajuda e documentação | Seção "Como funciona" na página inicial; texto da bandeja explica os dois jeitos de colar; texto de apoio no painel; passo a passo do modo demonstração no README |
 
+## Cenas presas à rolagem na página inicial (etapa 10)
+
+- **Mudança de direção no movimento.** A regra "um único momento orquestrado" valia até a v0.4. Em 21/11/2026 o site pronto foi avaliado como genérico, e a escolha, feita em duas páginas de teste, foi por uma página inicial em cenas presas à rolagem. Nas outras páginas, o movimento continua só respondendo a ações.
+- **O que não mudou.** Uma tinta só, com a cor chegando pelas figurinhas; as duas fontes; o significado dos cantos; raridade sempre por escrito.
+- **A cor só pelas figurinhas, também nas cenas.** Na faixa dos grupos, a bandeira aparece impressa em uma tinta e ganha cor quando vira figurinha, no meio da tela. No mergulho, a cor que toma a tela é a do retrato de uma figurinha, e a frase vem em uma etiqueta de papel branco: nenhum texto é escrito direto sobre a cor de uma seleção.
+- **Sem biblioteca.** As cenas usam `position: sticky`, transformações 3D do CSS, `<canvas>` e `requestAnimationFrame`.
+- **Uma página, dois jeitos.** O CSS padrão é a versão parada. A classe `com-cenas`, posta no `<html>` pelo `js/cenas.js`, liga a versão em movimento.
+- **Quando a versão parada é usada:** "Reduzir animações" no painel; aparelho pedindo menos movimento; letra maior que o normal ou "Mais espaço no texto"; JavaScript desligado.
+- **Por que letra maior pede a versão parada.** O palco tem a altura exata da tela. Um texto maior poderia não caber e ficar cortado. Na versão parada, o texto cresce sem limite.
+- **Aparelho pedindo menos movimento.** O pedido é respeitado. A página mostra um aviso com o botão "Ligar as animações neste site", e a escolha fica guardada (`movimento: completo` nas preferências).
+- **Faixa dos grupos, e não das sedes.** O carrossel das 16 sedes é item do trabalho e ficou como estava. A faixa horizontal mostra os 12 grupos e leva a cada um no álbum.
+- **Páginas do álbum em 3D.** São uma amostra fixa do Grupo C, com algumas vagas. Não mostram o álbum da pessoa. Para o leitor de tela, a ilustração tem uma descrição em texto.
+- **Números.** 48, 288, 16 e 104 estão escritos no HTML e são conferidos com `js/dados.js` pelo script. O número que conta fica escondido do leitor de tela, que lê o valor final.
+
+### WCAG 2.2 nas cenas
+
+| Critério | Como foi atendido |
+|---|---|
+| 1.3.4 Orientação | As cenas funcionam em pé e deitado. Com menos de 480 px de altura, as peças encolhem. |
+| 1.4.4 e 1.4.12 Texto maior e espaçamento | Com letra maior ou mais espaço no texto, a página usa a versão parada. |
+| 1.4.10 Reflow | Sem rolagem lateral em 320 px, em movimento e parada. |
+| 2.1.1 Teclado | Todos os botões e links das cenas recebem foco. A rolagem pelas cenas funciona com as setas, Espaço e Page Down. |
+| 2.2.2 Pausar, parar, ocultar | Nada se mexe sozinho por mais de 5 segundos. O balanço dos pontinhos para depois do último gesto. O fio de "Role para ver" repete 3 vezes. |
+| 2.3.3 Animação por interação | "Reduzir animações" troca todas as cenas pela versão parada. |
+| 2.4.3 e 2.4.7 Ordem e foco visível | A ordem do foco segue a ordem da página. Ao focar um botão de dentro de uma cena, a rolagem vai até o ponto em que ele aparece. |
+| 2.4.11 Foco não encoberto | Nenhum botão focado fica atrás de outra peça (conferido no passeio com o Tab). |
+| 4.1.2 Nome, função, valor | As peças só de enfeite (canvas, álbum em 3D, figurinhas do voo) ficam fora da leitura (`aria-hidden`), com texto equivalente ao lado quando informam algo. |
+
+## Verificação feita na etapa 10
+
+- 81 verificações automáticas novas no Microsoft Edge sem janela: palco grudado em cada cena, estado de cada cena no começo e no fim, nenhum pontinho atrás do texto da abertura, balanço que para em 5 segundos, foco pelo teclado nos botões das cenas e nos links dos grupos, troca entre movimento e parado pelo painel, botão do aviso, escolha guardada, página sem JavaScript, 320 px, 390 px, celular deitado, letra maior e console sem erros.
+- As 254 verificações anteriores continuam passando.
+- Defeito achado pelo passeio com o Tab e corrigido: ao focar um botão de dentro de uma cena, o navegador rolava a página por conta própria e o botão sumia.
+- O teste roda sem placa de vídeo. A fluidez das cenas em um computador e em um celular de verdade ainda não foi medida.
+- Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
+
 ## Verificação no endereço publicado (etapa 9)
 
 - Feita em 21/11/2026, em `https://vitorzago1.github.io/album-copa-2026/`, com o Microsoft Edge sem janela.

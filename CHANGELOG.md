@@ -10,6 +10,13 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Anexo de código (`docs/anexo-codigo.md`), gerado por `scripts/gerar-anexo.js`.
 - Site publicado no GitHub Pages: https://vitorzago1.github.io/album-copa-2026/
 - As 254 verificações automáticas passam também no endereço publicado.
+- Duas páginas de teste, fora do site entregue, para escolher efeitos: `laboratorio.html` (24 ideias) e `laboratorio-2.html` (8 cenas presas à rolagem).
+- Página inicial refeita como uma apresentação em oito cenas presas à rolagem: retícula que forma a marca, frase que acende, pacotinho em 3D, álbum em 3D, mergulho na figurinha, números que contam, faixa dos 12 grupos e voo pelas figurinhas.
+- Toda cena tem uma versão parada, usada com "Reduzir animações", com letra maior, com mais espaço no texto e sem JavaScript.
+- Painel de acessibilidade: nova opção "Mostrar as animações, mesmo com o aparelho pedindo menos". Aparece só quando o aparelho pede menos movimento.
+- Aviso na página inicial, com botão, para quem vê a versão parada por causa do aparelho.
+- Saiu da abertura a página de amostra com três vagas: o álbum em 3D faz esse papel.
+- 81 verificações automáticas novas (335 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

@@ -30,12 +30,13 @@ O progresso fica guardado só no navegador em que o site foi aberto (não existe
 ```
 album-copa-2026/
 ├── index.html, album.html, pacotinhos.html, trocas.html, login.html, contato.html, sobre.html
-├── css/      estilos (cores, base, componentes, páginas, acessibilidade)
+├── css/      estilos (cores, base, componentes, páginas, acessibilidade e cenas)
 ├── js/       comportamento, um arquivo por assunto:
 │             dados.js (seleções e figurinhas), estado.js (progresso guardado),
 │             figurinha.js (desenho e virar), album.js, pacotinho.js, trocas.js,
 │             inicio.js, carrossel.js, login.js, contato.js, formulario.js,
-│             sobre.js, demonstracao.js, menu.js e tema-acessibilidade.js
+│             sobre.js, demonstracao.js, menu.js, tema-acessibilidade.js,
+│             cenas.js (motor das cenas) e cenas-inicio.js (as oito cenas)
 ├── assets/   bandeiras, fotos dos estádios, SVG e fontes
 ├── docs/     cores, decisões, referências, prints e anexo de código
 ├── scripts/  ferramentas de apoio (contraste, anexo de código)
@@ -139,6 +140,27 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 4. **Anexo de código.** `node scripts/gerar-anexo.js` junta todos os arquivos HTML, CSS e JavaScript em `docs/anexo-codigo.md`.
 5. **Links.** O endereço do site está no começo deste README, no rodapé das 7 páginas e na página Sobre.
 
+### Etapa 10: página inicial em cenas presas à rolagem
+
+Depois da publicação, o site foi avaliado como "genérico". Duas páginas de teste (`laboratorio.html` e `laboratorio-2.html`, que não fazem parte do site) serviram para escolher efeitos com tudo funcionando. Esta etapa aplica as oito cenas escolhidas no segundo laboratório.
+
+1. **Como uma cena funciona.** A cena é uma seção bem alta (por exemplo, 240vh, quase duas telas e meia). Dentro dela, o palco fica grudado na tela (`position: sticky`). Enquanto a pessoa rola por dentro da cena, o `js/cenas.js` transforma a rolagem em um número de 0 a 1, o progresso, e chama a função de desenho da cena. Rolar para cima desfaz tudo.
+2. **As oito cenas** (`js/cenas-inicio.js` e `css/cenas.css`):
+   - abertura: os pontinhos de impressão se juntam e formam "Colei!", desenhados em um `<canvas>`;
+   - a frase que acende, palavra por palavra;
+   - o pacotinho que gira, rasga e solta cinco figurinhas (3D em CSS);
+   - o álbum que abre, com capa e folhas girando em torno da lombada (3D em CSS);
+   - o mergulho na figurinha, um aumento que toma a tela;
+   - os números que contam (48, 288, 16 e 104, lidos de `js/dados.js`);
+   - os 12 grupos em uma faixa que anda para o lado, com as bandeiras virando figurinha no meio da tela;
+   - o voo por entre as figurinhas, em profundidade.
+3. **O que já existia continua.** O progresso, "Como funciona", "Pacotinho do dia", "Raridades", o carrossel das 16 sedes e "Como trocar" ficam entre as cenas, do mesmo jeito de antes.
+4. **Versão parada.** Sem a classe `com-cenas` no `<html>`, cada cena é uma seção comum, com tudo já no lugar. É o que aparece com "Reduzir animações", com o aparelho pedindo menos movimento, com letra maior ou mais espaço no texto (o palco tem a altura exata da tela e um texto maior poderia ficar cortado) e sem JavaScript.
+5. **Quem tem o aparelho pedindo menos movimento** vê a versão parada e um aviso com o botão "Ligar as animações neste site". A escolha fica guardada e também aparece no painel de acessibilidade.
+6. **Teclado.** Um botão dentro de uma cena pode estar invisível no ponto em que a rolagem está. Quando ele recebe o foco, a rolagem vai até o ponto em que ele aparece (atributo `data-visivel-em`). Na faixa dos grupos, o foco em um link leva a faixa até aquele grupo.
+7. **Nada se mexe sozinho por mais de 5 segundos.** O balanço dos pontinhos da abertura para 5 segundos depois do último gesto.
+8. **Verificações automáticas novas:** 81. Com as 254 anteriores, são 335, todas passando.
+
 ## Onde está cada item pedido pelo professor
 
 | Item | Onde está |
@@ -149,10 +171,11 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 | Carrossel de imagens | `index.html`, seção "As 16 sedes" |
 | Imagens | Fotos dos 16 estádios (`assets/img/sedes/`), 48 bandeiras (`assets/bandeiras/`) e desenhos próprios em SVG e CSS |
 | Cartões explicativos | `index.html`: "Como funciona", "Pacotinho do dia", "Raridades" e "Como trocar" |
+| Animações e 3D | `index.html`: oito cenas presas à rolagem (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada |
 | Modo escuro e claro | Painel de acessibilidade (botão no cabeçalho de todas as páginas); cores em `css/tokens.css` |
 | Rodapé | Igual nas 7 páginas, com navegação, link do GitHub e créditos |
 | Página de login | `login.html` (simulação, com a senha guardada só como hash) |
-| Aba de acessibilidade | Botão "Acessibilidade" no cabeçalho: tema, tamanho da letra, alto contraste, reduzir animações, mais espaço no texto e destacar links |
+| Aba de acessibilidade | Botão "Acessibilidade" no cabeçalho: tema, tamanho da letra, alto contraste, reduzir animações (ou mostrá-las, quando o aparelho pede menos), mais espaço no texto e destacar links |
 | WCAG e análise de contraste | `docs/decisoes.md` (critério por critério) e `docs/cores.md` (tabela calculada por `scripts/contraste.js`) |
 | Psicologia das cores | `docs/cores.md`, coluna "Motivo" |
 | GitHub com versões | Histórico de commits e marcas `v0.1` a `v0.4`; `CHANGELOG.md` |
@@ -165,6 +188,7 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 - **Contraste.** Com o Node.js instalado, na pasta do projeto, rode `node scripts/contraste.js`. O script reescreve `docs/cores.md` e avisa se algum par de cores reprovar.
 - **Lighthouse (ainda não rodado).** No Edge ou no Chrome, abra o site, aperte F12, escolha a aba "Lighthouse", marque só "Acessibilidade" e clique em "Analisar carregamento de página". Anote a nota de cada página em `docs/decisoes.md`.
 - **Só teclado.** Use Tab, Shift+Tab, Enter, Espaço, as setas (nas abas do álbum) e Esc (para fechar o painel e o menu).
+- **Menos movimento.** No painel de acessibilidade, ligue "Reduzir animações": a página inicial passa a mostrar cada cena parada. No Windows, o mesmo acontece com Configurações, Acessibilidade, Efeitos visuais, "Efeitos de animação" desligado.
 - **Leitor de tela (ainda não testado).** No Windows, o NVDA é gratuito: https://www.nvaccess.org/
 
 ## Tecnologias
@@ -175,6 +199,7 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 - `flag-icons` (licença MIT): só as imagens das bandeiras, copiadas para dentro do projeto. Motivo: desenhar à mão cada bandeira com fidelidade daria muito trabalho e mais chance de erro, e o enunciado do projeto permite bandeiras de fonte com licença livre.
 - Fotos do Wikimedia Commons (licenças CC BY, CC BY-SA, CC0 e domínio público), com autor e licença de cada uma na página Sobre e em `docs/referencias.md`.
 - `crypto.subtle` (já vem no navegador): calcula o hash da senha. Não é biblioteca externa.
+- As cenas da página inicial usam só recursos do navegador: `position: sticky`, transformações 3D do CSS (`perspective`, `rotateY`, `translateZ`), `<canvas>` e `requestAnimationFrame`. Nenhuma biblioteca.
 
 ## Documentação
 

@@ -26,11 +26,11 @@ const GRUPOS = [
   },
   {
     titulo: 'Estilos (CSS)', pasta: 'css', extensao: '.css', linguagem: 'css',
-    primeiro: ['tokens.css', 'base.css', 'componentes.css', 'paginas.css', 'acessibilidade.css'],
+    primeiro: ['tokens.css', 'base.css', 'componentes.css', 'paginas.css', 'acessibilidade.css', 'cenas.css'],
   },
   {
     titulo: 'Comportamento (JavaScript)', pasta: 'js', extensao: '.js', linguagem: 'js',
-    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
+    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',

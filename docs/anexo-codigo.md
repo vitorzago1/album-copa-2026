@@ -4,12 +4,12 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
-- Arquivos: 29.
-- Linhas de código (com comentários): 9503.
+- Arquivos: 32.
+- Linhas de código (com comentários): 11621.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 319 |
+| `index.html` | 434 |
 | `album.html` | 219 |
 | `pacotinhos.html` | 129 |
 | `trocas.html` | 165 |
@@ -19,9 +19,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `css/tokens.css` | 204 |
 | `css/base.css` | 479 |
 | `css/componentes.css` | 1108 |
-| `css/paginas.css` | 546 |
+| `css/paginas.css` | 513 |
 | `css/acessibilidade.css` | 177 |
-| `js/tema-acessibilidade.js` | 211 |
+| `css/cenas.css` | 1021 |
+| `js/tema-acessibilidade.js` | 226 |
 | `js/menu.js` | 52 |
 | `js/estado.js` | 417 |
 | `js/figurinha.js` | 225 |
@@ -30,6 +31,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/trocas.js` | 200 |
 | `js/inicio.js` | 53 |
 | `js/carrossel.js` | 92 |
+| `js/cenas.js` | 254 |
+| `js/cenas-inicio.js` | 746 |
 | `js/formulario.js` | 53 |
 | `js/login.js` | 312 |
 | `js/contato.js` | 112 |
@@ -61,14 +64,20 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
+  <script src="js/figurinha.js" defer></script>
   <script src="js/inicio.js" defer></script>
   <script src="js/carrossel.js" defer></script>
+
+  <!-- As cenas presas à rolagem: o motor e, depois, as oito cenas desta página. -->
+  <script src="js/cenas.js" defer></script>
+  <script src="js/cenas-inicio.js" defer></script>
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
   <link rel="stylesheet" href="css/paginas.css">
   <link rel="stylesheet" href="css/acessibilidade.css">
+  <link rel="stylesheet" href="css/cenas.css">
 </head>
 <body>
   <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
@@ -107,36 +116,44 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ABERTURA. Página dupla: à esquerda o convite, à direita uma página de amostra do álbum. -->
-    <section class="largura abertura dobra" aria-labelledby="titulo-abertura">
-      <div class="fluxo">
-        <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
-        <p class="abertura-texto">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
-        <p><a class="botao" href="album.html">Abrir o álbum</a></p>
-      </div>
+    <!-- ABERTURA (cena 1). Os pontinhos de impressão se juntam e formam "Colei!".
+         Parada, a cena mostra o convite ao lado da marca já formada.
+         O desenho é feito pelo js/cenas-inicio.js dentro do <canvas>. -->
+    <section class="cena cena-abertura" style="--altura: 240vh" aria-labelledby="titulo-abertura">
+      <div class="cena-palco">
+        <canvas class="reticula-tela so-com-js" id="reticula-tela" aria-hidden="true"></canvas>
 
-      <!-- O desenho inteiro é lido como uma imagem só, com a descrição do aria-label. -->
-      <div class="amostra" role="img" aria-label="Página de amostra do álbum: três espaços vazios numerados e uma figurinha solta, pronta para colar.">
-        <div class="amostra-vagas">
-          <div class="vaga"><span class="vaga-numero">001</span><span class="vaga-legenda">Falta</span></div>
-          <div class="vaga"><span class="vaga-numero">002</span><span class="vaga-legenda">Falta</span></div>
-          <div class="vaga"><span class="vaga-numero">003</span><span class="vaga-legenda">Falta</span></div>
+        <div class="abertura-convite" id="abertura-convite">
+          <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
+          <!-- data-visivel-em="0": estes botões aparecem no começo da cena (ver js/cenas.js). -->
+          <p class="abertura-botoes" data-visivel-em="0">
+            <a class="botao" href="album.html">Abrir o álbum</a>
+            <a class="botao botao-contorno" href="pacotinhos.html">Ir para os pacotinhos</a>
+          </p>
+          <p class="rolar-dica" aria-hidden="true"><i></i>Role para ver a apresentação</p>
         </div>
-        <div class="figurinha figurinha-comum figurinha-solta amostra-solta" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F">
-          <div class="figurinha-arte">
-            <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
-              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-              <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
-            </svg>
-          </div>
-          <div class="figurinha-tarja">
-            <span class="figurinha-nome">Sua primeira</span>
-            <span class="figurinha-numero">Nº 003</span>
-          </div>
+
+        <p class="abertura-assinatura" id="abertura-assinatura">O álbum de figurinhas da Copa de 2026</p>
+
+        <!-- Só aparece para quem vê a página parada porque o aparelho pede menos movimento. -->
+        <div class="aviso-movimento" id="aviso-movimento" hidden>
+          <p>A apresentação desta página está parada porque o seu aparelho pede menos movimento.</p>
+          <button class="botao botao-contorno botao-pequeno" type="button" id="ligar-movimento">Ligar as animações neste site</button>
         </div>
       </div>
     </section>
+
+    <!-- A FRASE ACENDE (cena 2). Cada palavra acende quando a rolagem chega nela. -->
+    <div class="cena cena-frase" style="--altura: 220vh">
+      <div class="cena-palco">
+        <div class="frase-caixa">
+          <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
+          <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path id="frase-traco" pathLength="1" d="M6 10c60-7 150-8 288-3M14 19c80-6 170-7 262-2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
 
     <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
          conforme as figurinhas do grupo são coladas e troca o texto de baixo. -->
@@ -178,44 +195,28 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </ol>
     </section>
 
-    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
-         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
-         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
-    <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
-      <h2 id="titulo-sedes">As 16 sedes</h2>
-      <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
-      <noscript><p>As fotos das sedes aparecem com o JavaScript ligado no navegador.</p></noscript>
-
-      <div class="carrossel fluxo" id="carrossel" hidden>
-        <div class="dobra" role="group" aria-roledescription="slide" aria-labelledby="sede-cidade">
-          <div class="fluxo">
-            <h3 class="carrossel-cidade" id="sede-cidade"></h3>
-            <p class="carrossel-estadio" id="sede-estadio"></p>
-            <dl class="carrossel-dados">
-              <dt>Onde fica</dt>
-              <dd><img class="bandeirinha" id="sede-bandeira" src="assets/bandeiras/mx.svg" alt="" width="48" height="36"> <span id="sede-pais"></span></dd>
-              <dt>Na Copa de 2026</dt>
-              <dd id="sede-numeros"></dd>
-              <dt>Nome usado no torneio</dt>
-              <dd id="sede-nome-na-copa"></dd>
-            </dl>
-            <p id="sede-nota"></p>
+    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho tem frente e costas no espaço 3D
+         do CSS. As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
+    <section class="cena cena-pacote" style="--altura: 360vh" aria-labelledby="titulo-cena-pacote">
+      <div class="cena-palco palco-3d">
+        <h2 class="cena-titulo" id="titulo-cena-pacote">Todo dia, um pacotinho.</h2>
+        <p class="cena-titulo" id="pacote-titulo-2">Dentro dele, cinco figurinhas.</p>
+        <div class="pacote-cena">
+          <div class="pacote-figurinhas so-com-js" id="pacote-figurinhas"></div>
+          <div class="pacote3d" id="pacote3d" aria-hidden="true">
+            <div class="pacote3d-face pacotinho">
+              <span class="pacotinho-aba" id="pacote3d-aba"><span>Rasgue aqui</span></span>
+              <span class="pacotinho-corpo">
+                <span class="pacotinho-marca">Colei!</span>
+                <span class="pacotinho-texto">5 figurinhas</span>
+              </span>
+            </div>
+            <div class="pacote3d-face pacote3d-costas">
+              <span class="pacotinho-texto">Álbum da Copa 2026</span>
+              <span class="pacotinho-texto">Abra pelo picote</span>
+            </div>
           </div>
-
-          <figure class="carrossel-figura">
-            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
-            <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
-            <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
-          </figure>
         </div>
-
-        <div class="carrossel-controles">
-          <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
-          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
-          <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
-          <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
-        </div>
-        <ol class="carrossel-indicadores" id="sede-indicadores" aria-label="Ir direto para uma sede"></ol>
       </div>
     </section>
 
@@ -309,6 +310,111 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
+    <!-- O ÁLBUM ABRE (cena 4). Três folhas empilhadas; cada uma tem frente e verso.
+         As páginas (Grupo C, como amostra) são montadas pelo js/cenas-inicio.js. -->
+    <section class="cena cena-album" style="--altura: 360vh" aria-labelledby="titulo-cena-album">
+      <div class="cena-palco palco-3d">
+        <h2 class="cena-titulo" id="titulo-cena-album">O álbum abre na sua frente.</h2>
+        <p class="escondido">Ilustração: a capa do álbum vira e aparecem as páginas do Grupo C, com figurinhas coladas e vagas.</p>
+        <div class="livro so-com-js" id="livro" aria-hidden="true">
+          <div class="folha folha-base"><div class="face face-frente" id="pagina-base"></div></div>
+          <div class="folha" id="folha-1">
+            <div class="face face-frente" id="pagina-2"></div>
+            <div class="face face-verso" id="pagina-3"></div>
+          </div>
+          <div class="folha" id="folha-capa">
+            <div class="face face-frente capa">
+              <span class="capa-marca">Colei!</span>
+              <span class="capa-texto">Álbum de figurinhas</span>
+              <span class="capa-ano">Copa 2026</span>
+            </div>
+            <div class="face face-verso" id="pagina-1"></div>
+          </div>
+        </div>
+        <!-- data-visivel-em="1": este botão só aparece no fim da cena. -->
+        <p class="cena-acao" id="acao-do-album" data-visivel-em="1"><a class="botao" href="album.html">Abrir o meu álbum</a></p>
+      </div>
+    </section>
+
+    <!-- MERGULHO NA FIGURINHA (cena 5). A figurinha cresce até a tela ficar da cor dela. -->
+    <div class="cena cena-mergulho" style="--altura: 240vh">
+      <div class="cena-palco">
+        <div class="mergulho so-com-js" id="mergulho" aria-hidden="true"></div>
+        <div class="mergulho-fim" id="mergulho-fim">
+          <p class="mergulho-etiqueta">Neste álbum, a cor só chega pelas figurinhas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OS NÚMEROS CONTAM (cena 6). Os valores escritos aqui são os finais; o
+         js/cenas-inicio.js confere com os dados e faz a contagem. -->
+    <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
+      <div class="cena-palco">
+        <h2 class="cena-titulo" id="titulo-numeros">A Copa de 2026 em números</h2>
+        <dl class="numeros" id="numeros">
+          <div class="numero"><dt>seleções</dt><dd>48</dd></div>
+          <div class="numero"><dt>figurinhas no álbum</dt><dd>288</dd></div>
+          <div class="numero"><dt>cidades-sede</dt><dd>16</dd></div>
+          <div class="numero"><dt>jogos</dt><dd>104</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- OS GRUPOS ANDAM PARA O LADO (cena 7). A rolagem para baixo move a faixa para
+         o lado. Os doze painéis são postos pelo js/cenas-inicio.js. -->
+    <section class="cena cena-grupos" style="--altura: 420vh" aria-labelledby="titulo-grupos">
+      <div class="cena-palco">
+        <div class="trilha" id="trilha">
+          <div class="trilha-abre">
+            <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
+            <p>A bandeira chega impressa em uma tinta só. No meio da tela, ela vira figurinha e ganha a cor de verdade.</p>
+            <noscript><p>A lista dos grupos aparece com o JavaScript ligado. No <a href="album.html">álbum</a> eles estão todos.</p></noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
+         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
+         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
+    <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
+      <h2 id="titulo-sedes">As 16 sedes</h2>
+      <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
+      <noscript><p>As fotos das sedes aparecem com o JavaScript ligado no navegador.</p></noscript>
+
+      <div class="carrossel fluxo" id="carrossel" hidden>
+        <div class="dobra" role="group" aria-roledescription="slide" aria-labelledby="sede-cidade">
+          <div class="fluxo">
+            <h3 class="carrossel-cidade" id="sede-cidade"></h3>
+            <p class="carrossel-estadio" id="sede-estadio"></p>
+            <dl class="carrossel-dados">
+              <dt>Onde fica</dt>
+              <dd><img class="bandeirinha" id="sede-bandeira" src="assets/bandeiras/mx.svg" alt="" width="48" height="36"> <span id="sede-pais"></span></dd>
+              <dt>Na Copa de 2026</dt>
+              <dd id="sede-numeros"></dd>
+              <dt>Nome usado no torneio</dt>
+              <dd id="sede-nome-na-copa"></dd>
+            </dl>
+            <p id="sede-nota"></p>
+          </div>
+
+          <figure class="carrossel-figura">
+            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
+            <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
+            <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
+          </figure>
+        </div>
+
+        <div class="carrossel-controles">
+          <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
+          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
+          <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
+          <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
+        </div>
+        <ol class="carrossel-indicadores" id="sede-indicadores" aria-label="Ir direto para uma sede"></ol>
+      </div>
+    </section>
+
     <!-- COMO TROCAR. À direita, um bilhete com um exemplo de lista de troca. -->
     <section class="largura secao dobra" aria-labelledby="titulo-trocar">
       <div class="fluxo">
@@ -326,6 +432,18 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <dt>Preciso</dt>
             <dd>007, 088, 133</dd>
           </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOO PELAS FIGURINHAS (cena 8). As figurinhas ficam espalhadas em profundidade
+         e a rolagem leva a câmera por entre elas. -->
+    <section class="cena cena-voo" style="--altura: 300vh" aria-labelledby="voo-titulo">
+      <div class="cena-palco palco-voo">
+        <div class="voo so-com-js" id="voo" aria-hidden="true"></div>
+        <div class="voo-fim" id="voo-fim" data-visivel-em="1">
+          <h2 class="cena-titulo" id="voo-titulo">São 288 para colar.</h2>
+          <p><a class="botao" href="pacotinhos.html">Abrir o pacotinho de hoje</a></p>
         </div>
       </div>
     </section>
@@ -3366,42 +3484,9 @@ textarea.campo-entrada {
 
 /* ---------- Início ---------- */
 
-/* Abertura: o título de um lado e a página de amostra do outro */
-.abertura {
-  padding-block: var(--espaco-4) var(--espaco-7);
-  align-items: center;
-}
-
+/* O primeiro parágrafo de cada página, um pouco maior que o texto comum */
 .abertura-texto {
   font-size: var(--texto-medio);
-}
-
-/* Página de amostra: três vagas e uma figurinha solta por cima, torta,
-   como se estivesse na mão, prestes a ser colada */
-.amostra {
-  position: relative;
-  max-width: 34rem;
-  padding-bottom: var(--espaco-7);
-}
-
-.amostra-vagas {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--espaco-3);
-}
-
-.amostra-solta {
-  position: absolute;
-  right: 3%;
-  bottom: 0;
-  width: 37%;   /* no celular a figurinha é maior, para o texto dela caber */
-  --giro: 7deg;
-}
-
-@media (min-width: 48rem) {
-  .amostra-solta {
-    width: 31%;
-  }
 }
 
 /* Raridades: no celular, figurinha à esquerda e texto à direita;
@@ -4087,6 +4172,1032 @@ html[data-fonte="maior"] { font-size: 125%; }
 }
 ````
 
+### css/cenas.css
+
+````css
+/* ==========================================================================
+   cenas.css
+   --------------------------------------------------------------------------
+   As cenas presas à rolagem da página inicial (index.html).
+
+   Cada cena existe de dois jeitos:
+
+   1. PARADA (o padrão deste arquivo). É uma seção comum, com tudo já no
+      lugar. Vale sem JavaScript e para quem pede menos movimento.
+
+   2. EM MOVIMENTO. Quando o js/cenas.js põe a classe "com-cenas" no <html>:
+        .cena        vira uma seção bem alta (240vh = quase duas telas e meia);
+        .cena-palco  gruda no topo da tela (position: sticky) e fica parado
+                     enquanto a pessoa rola por dentro da cena.
+      O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
+      js/cenas-inicio.js, escrevendo "transform" e "opacity" no elemento.
+
+   Partes:
+   1. A cena e o palco
+   2. Abertura: a retícula forma a marca
+   3. A frase acende
+   4. O pacotinho gira e abre
+   5. O álbum abre
+   6. Mergulho na figurinha
+   7. Os números contam
+   8. Os grupos andam para o lado
+   9. Voo pelas figurinhas
+   ========================================================================== */
+
+/* ---------- 1. A cena e o palco ---------- */
+
+/* O site reserva uma folga no pé da tela para o recado do álbum (ver
+   paginas.css). Esta página não tem recado, e a folga faria o navegador rolar
+   a página sozinho ao dar o foco em um botão de dentro de uma cena. */
+html:has(.cena) {
+  scroll-padding-bottom: 0;
+}
+
+/* Parada: o palco é uma seção igual às outras, no miolo da página */
+.cena-palco {
+  position: relative;
+  max-width: var(--largura-maxima);
+  margin-inline: auto;
+  padding: var(--espaco-6) var(--espaco-4);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.cena + .secao {
+  border-top: 2px solid var(--cor-texto);
+}
+
+/* Em movimento. A altura vem do HTML: style="--altura: 240vh". Quanto mais
+   alta a cena, mais devagar ela anda, porque há mais rolagem para gastar. */
+.com-cenas .cena {
+  height: var(--altura, 300vh);
+}
+
+.com-cenas .cena-palco {
+  position: sticky;
+  top: 0;
+  max-width: none;
+  height: 100vh;
+  height: 100svh;   /* no celular, desconta a barra de endereço do navegador */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  overflow: hidden;
+}
+
+/* No celular a tela é mais alta que larga e o dedo rola menos por vez:
+   as cenas ficam 20% mais curtas */
+@media (max-width: 47.99rem) {
+  .com-cenas .cena {
+    height: calc(var(--altura, 300vh) * 0.8);
+  }
+}
+
+/* Título de cena. Parado, é um título comum. */
+.cena-titulo {
+  max-width: none;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.75rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.cena-titulo + .cena-titulo {
+  margin-top: var(--espaco-2);
+}
+
+/* Em movimento, fica no alto do palco, no meio */
+.com-cenas .cena-titulo {
+  position: absolute;
+  z-index: 4;
+  top: 7vh;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding-inline: var(--espaco-4);
+  text-align: center;
+  pointer-events: none;
+}
+
+/* O que foi montado pelo JavaScript some quando ele está desligado */
+html:not(.com-js) .so-com-js {
+  display: none;
+}
+
+/* "Role para ver": um fio que desce. Só existe com as cenas em movimento. */
+.rolar-dica {
+  display: none;
+}
+
+.com-cenas .rolar-dica {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  font-weight: 700;
+}
+
+.rolar-dica i {
+  display: block;
+  width: 2px;
+  height: 2.25rem;
+  background: var(--cor-texto);
+  transform-origin: top;
+  animation: fio-descendo 1.6s ease-in-out 3;   /* três vezes e para */
+}
+
+@keyframes fio-descendo {
+  0% { transform: scaleY(0); }
+  60% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* ---------- 2. Abertura: a retícula forma a marca ---------- */
+
+/* Na página inicial a abertura encosta no cabeçalho, sem a folga de cima do <main> */
+main:has(> .cena-abertura) {
+  padding-top: 0;
+}
+
+.cena-abertura .cena-palco {
+  display: grid;
+  gap: var(--espaco-5);
+  align-items: center;
+  border-top: 0;
+}
+
+.abertura-convite {
+  order: -1;   /* no celular, o convite vem antes do desenho */
+}
+
+.abertura-convite > * + * {
+  margin-top: var(--espaco-5);
+}
+
+.abertura-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-3);
+}
+
+/* A tela de desenho (canvas) onde os pontinhos são desenhados.
+   Parada, mostra a marca já formada. */
+.reticula-tela {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+}
+
+.abertura-assinatura {
+  max-width: none;
+  text-align: center;
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  line-height: 1.1;
+}
+
+/* O aviso para quem está vendo a página parada sem ter pedido isso no site */
+.aviso-movimento {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3) var(--espaco-4);
+  border: 2px dashed var(--cor-borda);
+  font-size: var(--texto-pequeno);
+}
+
+@media (min-width: 48rem) {
+  .cena-abertura .cena-palco {
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--espaco-6);
+  }
+
+  .abertura-convite {
+    grid-row: 1 / span 2;
+  }
+
+  .aviso-movimento {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Em movimento: o desenho cobre o palco inteiro e o convite fica embaixo,
+   à esquerda, como em um cartaz */
+.com-cenas .cena-abertura .cena-palco {
+  display: block;
+}
+
+.com-cenas .reticula-tela {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.com-cenas .abertura-convite {
+  position: absolute;
+  z-index: 2;
+  left: max(var(--espaco-4), 6vw);
+  right: max(var(--espaco-4), 6vw);
+  /* A folga de baixo é a altura do cabeçalho ("--cabecalho" vem do JavaScript):
+     assim o convite aparece inteiro na primeira tela, com o cabeçalho ainda em cima */
+  bottom: max(calc(var(--cabecalho, 5rem) + 1.5rem), 12vh);
+  max-width: 46rem;
+}
+
+.com-cenas .abertura-convite h1 {
+  font-size: clamp(3rem, 1.25rem + 7.5vw, 7rem);
+}
+
+.com-cenas .abertura-assinatura {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70%;   /* o JavaScript acerta a altura, logo abaixo das letras */
+  padding-inline: var(--espaco-4);
+  opacity: 0;
+}
+
+/* ---------- 3. A frase acende ---------- */
+
+.frase {
+  max-width: 24ch;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(2rem, 1rem + 4.4vw, 4.5rem);
+  line-height: 1.04;
+}
+
+/* O sublinhado de caneta: o traço inteiro mede 1 (pathLength="1" no HTML).
+   "--falta" diz quanto do traço ainda não foi desenhado. */
+.frase-traco {
+  display: block;
+  width: min(100%, 24rem);
+  height: 1.75rem;
+  margin-top: var(--espaco-3);
+  overflow: visible;
+}
+
+.frase-traco path {
+  fill: none;
+  stroke: var(--cor-acao);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--falta, 0);
+}
+
+.com-cenas .frase-caixa {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  padding-inline: var(--espaco-4);
+}
+
+/* Em movimento, a palavra que ainda não acendeu fica com a tinta bem diluída */
+.com-cenas .frase span {
+  transition: color 260ms ease-out;
+}
+
+.com-cenas .frase span:not(.acesa) {
+  color: var(--cor-vaga);
+  color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
+}
+
+/* ---------- 4. O pacotinho gira e abre ---------- */
+
+/* Parada: o pacotinho de um lado e as cinco figurinhas do outro */
+.pacote-cena {
+  --pacote-l: 9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-5);
+  margin-top: var(--espaco-5);
+}
+
+.pacote3d {
+  order: -1;
+  position: relative;
+  flex: none;
+  width: var(--pacote-l);
+  height: calc(var(--pacote-l) * 1.4);
+  rotate: -3deg;
+}
+
+.pacote3d .pacotinho {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  rotate: none;
+  cursor: default;
+}
+
+.pacote3d .pacotinho-marca {
+  font-size: calc(var(--pacote-l) * 0.3);
+}
+
+.pacote3d-costas {
+  display: none;
+}
+
+.pacote-figurinhas {
+  flex: 1 1 18rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--espaco-4);
+}
+
+/* Em movimento: tudo no mesmo ponto do espaço, uma peça na frente da outra.
+   "perspective" é a distância do olho até a tela. Sem ela, girar em 3D
+   pareceria só achatar a peça. */
+.com-cenas .palco-3d {
+  perspective: 1100px;
+}
+
+.com-cenas .pacote-cena {
+  --pacote-l: clamp(9rem, 27vmin, 15rem);
+  position: relative;
+  display: block;
+  width: var(--pacote-l);
+  height: calc(var(--pacote-l) * 1.4);
+  margin-top: 9vh;
+  transform-style: preserve-3d;   /* os filhos ficam no mesmo espaço 3D */
+}
+
+.com-cenas .pacote3d {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  rotate: none;
+  transform-style: preserve-3d;
+}
+
+/* As duas faces ocupam o mesmo lugar. "backface-visibility: hidden" esconde
+   a face que está de costas para quem olha. */
+.com-cenas .pacote3d-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.com-cenas .pacote3d-costas {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espaco-3);
+  padding: var(--espaco-3);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-radius: var(--raio-adesivo);
+  text-align: center;
+}
+
+.pacote3d-costas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.8px, transparent 1.2px) 0 0 / 7px 7px;
+  opacity: 0.3;
+}
+
+.com-cenas .pacote-figurinhas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+}
+
+/* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
+.com-cenas .pacote-carta {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--pacote-l) * 0.8);
+  margin-left: calc(var(--pacote-l) * -0.4);
+  margin-top: calc(var(--pacote-l) * -0.5333);
+  opacity: 0;
+}
+
+/* ---------- 5. O álbum abre ---------- */
+
+/* Parada: o álbum já aberto, com duas páginas lado a lado */
+.livro {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 40rem;
+  margin-top: var(--espaco-5);
+}
+
+.folha {
+  display: contents;   /* a folha "some" e as faces dela viram filhas diretas da grade */
+}
+
+.face {
+  position: relative;
+  aspect-ratio: 1 / 1.35;
+  overflow: hidden;
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-texto);
+}
+
+/* Parada, só aparecem as duas páginas da primeira abertura */
+html:not(.com-cenas) .capa,
+html:not(.com-cenas) #pagina-3,
+html:not(.com-cenas) #pagina-base {
+  display: none;
+}
+
+#pagina-1 { order: 1; }
+#pagina-2 { order: 2; }
+
+.cena-acao {
+  margin-top: var(--espaco-5);
+}
+
+/* Em movimento. A caixa do livro tem o tamanho de UMA página (a da direita).
+   As folhas giram em torno da borda esquerda dela, que é a lombada. */
+.com-cenas .livro {
+  --pagina-l: min(46vw, 22rem, calc((100vh - 15rem) / 1.35));
+  position: relative;
+  display: block;
+  width: var(--pagina-l);
+  max-width: none;
+  height: calc(var(--pagina-l) * 1.35);
+  margin-top: 5vh;
+  transform-style: preserve-3d;
+}
+
+@supports (height: 100svh) {
+  .com-cenas .livro {
+    --pagina-l: min(46vw, 22rem, calc((100svh - 15rem) / 1.35));
+  }
+}
+
+.com-cenas .folha {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;   /* gira em torno da lombada */
+  transform-style: preserve-3d;
+}
+
+/* Cada folha tem duas faces: a frente e o verso (este já nasce virado) */
+.com-cenas .face {
+  display: block;
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  backface-visibility: hidden;
+}
+
+.com-cenas .face-verso {
+  transform: rotateY(180deg);
+}
+
+/* Enquanto a folha vira, o lado da lombada escurece ("--sombra" vem do JavaScript) */
+.com-cenas .face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(10, 16, 40, 0.6), transparent 55%);
+  opacity: var(--sombra, 0);
+}
+
+.com-cenas .face-verso::after {
+  background: linear-gradient(to left, rgba(10, 16, 40, 0.6), transparent 55%);
+}
+
+/* A capa: o negativo da página, como o pacotinho */
+.com-cenas .capa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--pagina-l) * 0.03);
+  background: var(--cor-etiqueta-fundo);
+  color: var(--cor-etiqueta-texto);
+  border-color: var(--cor-etiqueta-fundo);
+  text-align: center;
+}
+
+.capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 0.9px, transparent 1.3px) 0 0 / 8px 8px;
+  opacity: 0.3;
+}
+
+.capa span {
+  position: relative;   /* na frente dos pontinhos */
+  padding: 0 0.3em;
+  background: var(--cor-etiqueta-fundo);
+}
+
+.capa-marca {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: calc(var(--pagina-l) * 0.34);
+  line-height: 1;
+  rotate: -6deg;
+}
+
+.capa-texto {
+  font-weight: 700;
+  font-size: calc(var(--pagina-l) * 0.06);
+}
+
+.capa-ano {
+  font-family: var(--fonte-destaque);
+  font-weight: 300;
+  font-size: calc(var(--pagina-l) * 0.13);
+  line-height: 1;
+}
+
+.com-cenas .cena-acao {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 5vh;
+  margin: 0;
+  max-width: none;
+  text-align: center;
+  opacity: 0;
+}
+
+/* O miolo da página é desenhado sempre com 480 por 648 pixels e depois
+   encolhido ou aumentado ("--escala" vem do JavaScript) para caber na folha.
+   Assim a página do álbum se comporta como uma gravura: tudo cresce junto. */
+.miolo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 480px;
+  height: 648px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px;
+  padding: 22px;
+  transform-origin: 0 0;
+  transform: scale(var(--escala, 1));
+}
+
+.miolo-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--cor-texto);
+}
+
+.miolo-cabeca img {
+  flex: none;
+  width: 56px;
+  border: 1px solid var(--cor-texto);
+}
+
+.miolo-nome {
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.miolo-grupo {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.miolo-grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 12px;
+  align-content: start;
+}
+
+.miolo-grade > * {
+  min-width: 0;
+}
+
+.miolo .vaga {
+  padding: 4px;
+}
+
+.miolo .vaga-numero {
+  font-size: 40px;
+}
+
+.miolo .vaga-nome {
+  font-size: 14px;
+}
+
+.miolo-pe {
+  color: var(--cor-texto-secundario);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ---------- 6. Mergulho na figurinha ---------- */
+
+/* Parada: só a faixa de cor com a etiqueta. A figurinha que cresce não aparece. */
+.mergulho {
+  display: none;
+}
+
+/* A camada de cor. A cor é a do retrato da figurinha ("--campo", posta pelo
+   JavaScript; sem ele, fica a tinta da página). */
+.mergulho-fim {
+  display: grid;
+  place-items: center;
+  padding: var(--espaco-7) var(--espaco-4);
+  background-color: var(--campo, var(--cor-texto));
+  background-image: radial-gradient(circle, rgba(20, 32, 79, 0.3) 1.2px, transparent 1.7px);
+  background-size: 9px 9px;
+}
+
+/* Nenhum texto é escrito direto em cima da cor da seleção: a frase vem em
+   uma etiqueta de papel branco, colada como uma figurinha. */
+.mergulho-etiqueta {
+  max-width: 15ch;
+  padding: var(--espaco-5);
+  background: var(--cor-figurinha-papel);
+  color: var(--cor-figurinha-tinta);
+  border-radius: var(--raio-adesivo);
+  box-shadow: var(--sombra-colada);
+  rotate: -1.5deg;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.75rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.com-cenas .mergulho {
+  display: block;
+  width: clamp(9rem, 30vmin, 14rem);
+}
+
+.com-cenas .mergulho-fim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+}
+
+/* ---------- 7. Os números contam ---------- */
+
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-6) var(--espaco-4);
+  margin-top: var(--espaco-6);
+}
+
+@media (min-width: 60rem) {
+  .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* "--aceso" vai de 0 a 1 conforme chega a vez do número. Parado, vale 1. */
+.numero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column-reverse;   /* no HTML vem a legenda e depois o número; na tela, o número fica em cima */
+  opacity: calc(0.22 + var(--aceso, 1) * 0.78);
+}
+
+.numero dd {
+  margin: 0;
+  font-family: var(--fonte-destaque);
+  font-weight: 900;
+  font-size: clamp(4rem, 1.5rem + 10vw, 9rem);
+  line-height: 0.9;
+}
+
+.numero dt {
+  font-weight: 700;
+}
+
+/* A mancha de retícula atrás do número: bolinhas que somem em direção à borda */
+.numero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2rem -1rem 1.5rem 15%;
+  background: radial-gradient(circle, var(--cor-texto) 1.5px, transparent 2px) 0 0 / 9px 9px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 15%, transparent 95%);
+  mask-image: radial-gradient(closest-side, #000 15%, transparent 95%);
+  opacity: calc(var(--aceso, 1) * 0.45);
+}
+
+.com-cenas .numeros {
+  width: 100%;
+  max-width: var(--largura-maxima);
+  margin-top: 9vh;
+  padding-inline: var(--espaco-4);
+}
+
+/* ---------- 8. Os grupos andam para o lado ---------- */
+
+/* Parada: os doze grupos em uma grade */
+.trilha {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--espaco-6) var(--espaco-5);
+}
+
+.trilha-abre {
+  grid-column: 1 / -1;
+}
+
+.trilha-abre p {
+  margin-top: var(--espaco-4);
+  font-size: var(--texto-medio);
+}
+
+.grupo {
+  display: grid;
+  gap: var(--espaco-3);
+  align-content: start;
+  padding-top: var(--espaco-3);
+  border-top: 2px solid var(--cor-texto);
+}
+
+.grupo h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  font-size: var(--titulo-3);
+}
+
+/* A letra do grupo, bem grande */
+.grupo-letra {
+  font-size: clamp(4.5rem, 3rem + 6vw, 7.5rem);
+  line-height: 0.8;
+}
+
+.grupo-selecoes {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco-4) var(--espaco-3);
+}
+
+.grupo-selecoes li {
+  display: grid;
+  gap: var(--espaco-2);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* O selo: a bandeira de uma seleção.
+   "--f" vai de 0 (grupo longe do meio da tela) a 1 (grupo no meio).
+   Com 0 ele é uma vaga impressa em uma tinta só, de canto vivo.
+   Com 1 ele é uma figurinha: colorida, de canto arredondado e um pouco torta.
+   A impressão em uma tinta usa a mesma receita das fotos do site
+   (ver "Foto em uma tinta só", em componentes.css). */
+.selo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  background: var(--cor-foto-luz);
+  border: 2px solid var(--cor-texto);
+  border-radius: calc(var(--f, 1) * var(--raio-adesivo));
+  rotate: calc(var(--f, 1) * var(--torto, -1.5deg));
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.grupo-selecoes li:nth-child(even) .selo {
+  --torto: 1.2deg;
+}
+
+.selo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(calc(1 - var(--f, 1)));
+}
+
+.selo::before,
+.selo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: calc(1 - var(--f, 1));
+}
+
+.selo::before {
+  background: var(--cor-foto-sombra);
+  mix-blend-mode: screen;
+}
+
+.selo::after {
+  background: var(--cor-foto-luz);
+  mix-blend-mode: multiply;
+}
+
+/* Passou da metade do caminho: ganha a borda branca e a sombra de quem foi colado */
+.grupo-colado .selo {
+  border-color: var(--cor-figurinha-papel);
+  box-shadow: 0 0 0 2px var(--cor-figurinha-papel), var(--sombra-colada);
+}
+
+.grupo-numeros {
+  color: var(--cor-texto-secundario);
+  font-size: var(--texto-pequeno);
+}
+
+.grupo a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;   /* 44 px: alvo de toque confortável */
+  font-weight: 700;
+}
+
+/* Em movimento: a faixa vira uma fila única, bem mais larga que a tela.
+   A rolagem para baixo empurra a fila para a esquerda. */
+.com-cenas .trilha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 7vw, 6rem);
+  padding-inline: max(var(--espaco-4), 9vw);
+}
+
+.com-cenas .trilha-abre {
+  flex: none;
+  width: min(78vw, 26rem);
+}
+
+.com-cenas .grupo {
+  flex: none;
+  width: min(78vw, 24rem);
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* ---------- 9. Voo pelas figurinhas ---------- */
+
+/* Parada: só o título e o botão */
+.voo {
+  display: none;
+}
+
+.voo-fim > * + * {
+  margin-top: var(--espaco-5);
+}
+
+.com-cenas .palco-voo {
+  perspective: 900px;
+}
+
+/* Um ponto no meio do palco. As figurinhas são espalhadas em volta dele,
+   cada uma com a sua profundidade (translateZ). */
+.com-cenas .voo {
+  --voo-l: clamp(8rem, 22vmin, 11rem);
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.voo-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--voo-l);
+  margin: calc(var(--voo-l) * -0.667) 0 0 calc(var(--voo-l) * -0.5);
+}
+
+.com-cenas .voo-fim {
+  position: relative;
+  z-index: 4;
+  padding-inline: var(--espaco-4);
+  text-align: center;
+  opacity: 0;
+}
+
+.com-cenas .voo-fim .cena-titulo {
+  position: static;
+  pointer-events: auto;
+}
+
+/* ---------- Tela baixa (celular deitado, janela pequena) ----------
+   Com menos de 480 px de altura, as peças encolhem para caber no palco. */
+@media (max-height: 30rem) {
+  .com-cenas .cena-titulo,
+  .com-cenas .mergulho-etiqueta {
+    font-size: 1.5rem;
+  }
+
+  .com-cenas .cena-titulo {
+    top: 0.75rem;
+  }
+
+  .com-cenas .abertura-convite {
+    bottom: calc(var(--cabecalho, 4rem) + 0.5rem);
+  }
+
+  .com-cenas .abertura-convite h1 {
+    font-size: 2rem;
+  }
+
+  .com-cenas .abertura-convite > * + * {
+    margin-top: var(--espaco-3);
+  }
+
+  .com-cenas .rolar-dica {
+    display: none;
+  }
+
+  .com-cenas .pacote-cena {
+    --pacote-l: 30vh;
+    margin-top: 2.5rem;
+  }
+
+  .com-cenas .frase {
+    max-width: none;
+    font-size: 1.5rem;
+  }
+
+  .com-cenas .livro {
+    --pagina-l: min(46vw, calc((100vh - 6.5rem) / 1.35));
+    margin-top: 0;
+  }
+
+  .com-cenas .cena-acao {
+    bottom: 0.5rem;
+  }
+
+  .com-cenas .mergulho {
+    width: 34vh;
+  }
+
+  .com-cenas .mergulho-etiqueta {
+    padding: var(--espaco-3);
+  }
+
+  .com-cenas .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--espaco-3);
+    margin-top: 2.5rem;
+  }
+
+  .com-cenas .numero dd {
+    font-size: 2.5rem;
+  }
+
+  .com-cenas .numero dt {
+    font-size: var(--texto-pequeno);
+    line-height: 1.25;
+  }
+
+  .com-cenas .grupo {
+    grid-template-columns: auto 1fr;
+    column-gap: var(--espaco-5);
+    width: min(88vw, 34rem);
+  }
+
+  .com-cenas .grupo-letra {
+    font-size: 3.5rem;
+  }
+
+  .com-cenas .grupo-selecoes {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    font-size: var(--texto-pequeno);
+  }
+
+  .com-cenas .voo {
+    --voo-l: 34vh;
+  }
+}
+````
+
 ## Comportamento (JavaScript)
 
 ### js/tema-acessibilidade.js
@@ -4118,7 +5229,7 @@ html[data-fonte="maior"] { font-size: 125%; }
     tema: 'automatico',      // claro, escuro ou automatico (segue o aparelho)
     fonte: 'normal',         // normal, grande ou maior
     contraste: 'normal',     // normal ou alto
-    movimento: 'normal',     // normal ou reduzido
+    movimento: 'normal',     // normal (segue o aparelho), reduzido ou completo
     espacamento: 'normal',   // normal ou amplo
     links: 'normal',         // normal ou destacados
   };
@@ -4128,7 +5239,7 @@ html[data-fonte="maior"] { font-size: 125%; }
     tema: ['claro', 'escuro', 'automatico'],
     fonte: ['normal', 'grande', 'maior'],
     contraste: ['normal', 'alto'],
-    movimento: ['normal', 'reduzido'],
+    movimento: ['normal', 'reduzido', 'completo'],
     espacamento: ['normal', 'amplo'],
     links: ['normal', 'destacados'],
   };
@@ -4192,6 +5303,15 @@ html[data-fonte="maior"] { font-size: 125%; }
   // Se o aparelho trocar de claro para escuro com a página aberta, acompanha
   sistemaEscuro.addEventListener('change', aplicar);
 
+  // Deixa outro script do site guardar uma preferência, do mesmo jeito que o
+  // painel faz. Exemplo: guardarPreferencia('movimento', 'completo').
+  window.guardarPreferencia = function (nome, valor) {
+    if (!VALORES[nome] || !VALORES[nome].includes(valor)) return;
+    preferencias[nome] = valor;
+    salvarPreferencias();
+    aplicar();
+  };
+
   // -------------------------------------------------------------------------
   // 2. O painel
   // -------------------------------------------------------------------------
@@ -4224,6 +5344,7 @@ html[data-fonte="maior"] { font-size: 125%; }
           <legend>Ajustes de leitura</legend>
           <label class="opcao"><input type="checkbox" name="contraste" value="alto"> Alto contraste</label>
           <label class="opcao"><input type="checkbox" name="movimento" value="reduzido"> Reduzir animações</label>
+          <label class="opcao" data-so-com-menos-movimento><input type="checkbox" name="movimento" value="completo"> Mostrar as animações, mesmo com o aparelho pedindo menos</label>
           <label class="opcao"><input type="checkbox" name="espacamento" value="amplo"> Mais espaço no texto</label>
           <label class="opcao"><input type="checkbox" name="links" value="destacados"> Destacar links</label>
         </fieldset>
@@ -4258,7 +5379,11 @@ html[data-fonte="maior"] { font-size: 125%; }
       });
     }
 
+    // A opção de mostrar as animações só faz sentido quando o aparelho pede menos movimento
+    const pedeMenosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     botaoAbrir.addEventListener('click', function () {
+      painel.querySelector('[data-so-com-menos-movimento]').hidden = !pedeMenosMovimento.matches;
       mostrarNosCampos();
       aviso.textContent = '';
       painel.showModal(); // abre por cima da página e prende o foco dentro
@@ -4288,6 +5413,7 @@ html[data-fonte="maior"] { font-size: 125%; }
 
         salvarPreferencias();
         aplicar();
+        mostrarNosCampos();   // "reduzir" e "mostrar" são a mesma preferência: marcar uma desmarca a outra
       });
     });
 
@@ -6236,6 +7362,1016 @@ document.addEventListener('DOMContentLoaded', function () {
 
   carrossel.hidden = false;   // o carrossel só aparece se o JavaScript estiver ligado
   mostrar(0);
+});
+````
+
+### js/cenas.js
+
+````js
+// ============================================================================
+// cenas.js
+// ----------------------------------------------------------------------------
+// O motor das cenas presas à rolagem. Ele não sabe o que cada cena desenha:
+// só mede a rolagem e avisa cada cena do quanto ela já andou.
+//
+// A ideia:
+//   1. A cena é uma seção bem alta (240vh = quase duas telas e meia).
+//   2. Dentro dela, o palco fica grudado na tela (position: sticky, no CSS).
+//   3. Enquanto a pessoa rola por dentro da cena, o motor transforma a rolagem
+//      em um número de 0 a 1: o "progresso".
+//   4. Cada cena tem uma função desenhar(progresso), que põe cada peça no lugar
+//      certo para aquele progresso. Rolar para cima desfaz tudo.
+//
+// As cenas existem de dois jeitos (ver css/cenas.css):
+//   - em movimento: o <html> ganha a classe "com-cenas";
+//   - paradas: para quem pede menos movimento, cada cena vira uma seção comum.
+//
+// Quem cria as cenas da página inicial é o js/cenas-inicio.js.
+// Depende de: js/figurinha.js (a função movimentoReduzido).
+// ============================================================================
+
+// ---------------------------------------------------------------------------
+// Contas que as cenas usam
+// ---------------------------------------------------------------------------
+
+// Prende um número entre 0 e 1
+function limitar(valor) {
+  return Math.min(1, Math.max(0, valor));
+}
+
+// "Quanto deste trecho já passou?" Devolve 0 antes de "inicio", 1 depois de
+// "fim" e, no meio, um valor que arranca e freia com suavidade.
+// Exemplo: trecho(0.2, 0.5, p) faz uma peça se mover só entre 20% e 50% da cena.
+function trecho(inicio, fim, p) {
+  const t = limitar((p - inicio) / (fim - inicio));
+  return t * t * (3 - 2 * t);
+}
+
+// O valor que fica entre "a" e "b": com t = 0 é "a", com t = 1 é "b"
+function misturar(a, b, t) {
+  return a + (b - a) * t;
+}
+
+// Um sorteio que se repete: dá sempre a mesma sequência de números "ao acaso".
+// Assim a cena fica igual toda vez que a página é aberta.
+function sorteador(semente) {
+  return function () {
+    semente = (semente * 1664525 + 1013904223) % 4294967296;
+    return semente / 4294967296;
+  };
+}
+
+// Tira os estilos que o JavaScript escreveu direto nos elementos,
+// para eles voltarem a obedecer só ao CSS
+function limparEstilos(elementos) {
+  for (const elemento of elementos) elemento.removeAttribute('style');
+}
+
+// ---------------------------------------------------------------------------
+// A lista de cenas
+// ---------------------------------------------------------------------------
+
+const CENAS = [];
+let cenasEmMovimento = false;   // as cenas estão presas à rolagem agora?
+let quadroPedido = false;       // já existe um próximo quadro agendado?
+
+// Guarda uma cena. "cena" é um objeto com até quatro funções:
+//   medir()               mede o que depende do tamanho da tela
+//   desenhar(p, agora)    põe as peças no lugar para o progresso p (de 0 a 1)
+//   parar()               deixa a cena pronta para ser vista parada
+//   viva(agora)           (opcional) responde se a cena se mexe sozinha agora
+function registrarCena(elemento, cena) {
+  cena.elemento = elemento;
+  cena.alvo = 0;          // o progresso que a rolagem pede agora
+  cena.p = 0;             // o progresso mostrado (corre atrás do alvo, com suavidade)
+  cena.naTela = false;
+  cena.suja = true;       // "precisa ser redesenhada"
+  cena.comecou = false;
+  CENAS.push(cena);
+  return cena;
+}
+
+// Põe a cena direto no progresso p, sem a suavização. Usado quando um botão
+// recebe o foco do teclado: ele precisa aparecer na hora, não meio segundo depois.
+function mostrarJa(cena, p) {
+  cena.p = p;
+  cena.comecou = true;
+  cena.suja = true;
+}
+
+// Alguém dentro da cena recebeu o foco do teclado e só aparece no progresso p.
+// Ao dar o foco, o navegador pode rolar a página por conta própria, tentando
+// "mostrar" o elemento, e com isso a cena andaria e o esconderia. Por isso a
+// correção espera o próximo quadro: aí mede onde a rolagem foi parar e a põe
+// no ponto certo.
+function focarNaCena(cena, p) {
+  requestAnimationFrame(function () {
+    medirRolagem();
+    if (Math.abs(cena.alvo - p) > 0.02) irParaProgresso(cena, p);
+    mostrarJa(cena, p);
+  });
+}
+
+// Leva a rolagem da página até o ponto em que a cena está no progresso p
+function irParaProgresso(cena, p) {
+  const topo = cena.elemento.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo(0, topo + p * (cena.elemento.offsetHeight - window.innerHeight));
+}
+
+// ---------------------------------------------------------------------------
+// O laço: mede a rolagem e chama o desenho de cada cena
+// ---------------------------------------------------------------------------
+
+// Transforma a posição de cada cena na tela em progresso de 0 a 1.
+// caixa.top é a distância do topo da cena até o topo da tela: começa em 0
+// (a cena acabou de grudar) e vai ficando negativa conforme a pessoa rola.
+function medirRolagem() {
+  const alturaDaTela = window.innerHeight;
+  for (const cena of CENAS) {
+    const caixa = cena.elemento.getBoundingClientRect();
+    cena.alvo = limitar(-caixa.top / (caixa.height - alturaDaTela));
+    cena.naTela = caixa.bottom > 0 && caixa.top < alturaDaTela;
+  }
+}
+
+// Um "quadro": o navegador chama esta função cerca de 60 vezes por segundo
+function quadro(agora) {
+  quadroPedido = false;
+  if (!cenasEmMovimento) return;
+
+  medirRolagem();
+  for (const cena of CENAS) {
+    if (!cena.naTela) continue;
+
+    const antes = cena.p;
+    if (!cena.comecou) {
+      cena.p = cena.alvo;   // na primeira vez, vai direto para onde a rolagem está
+      cena.comecou = true;
+    } else {
+      // Suavização: a cada quadro, anda 14% do caminho que falta até o alvo
+      cena.p += (cena.alvo - cena.p) * 0.14;
+      if (Math.abs(cena.alvo - cena.p) < 0.0004) cena.p = cena.alvo;
+    }
+
+    if (cena.p !== antes || cena.suja || (cena.viva && cena.viva(agora))) {
+      cena.desenhar(cena.p, agora);
+      cena.suja = false;
+    }
+  }
+  pedirQuadro();
+}
+
+function pedirQuadro() {
+  if (quadroPedido) return;
+  quadroPedido = true;
+  requestAnimationFrame(quadro);
+}
+
+// ---------------------------------------------------------------------------
+// Ligar e desligar
+// ---------------------------------------------------------------------------
+
+function medirCenas() {
+  for (const cena of CENAS) {
+    if (cena.medir) cena.medir();
+    cena.suja = true;
+  }
+}
+
+// As cenas podem ficar em movimento? Duas coisas pedem a versão parada:
+//   1. a pessoa (ou o aparelho dela) pediu menos movimento;
+//   2. a letra está maior que o normal ou o texto está com mais espaço. O palco
+//      tem a altura exata da tela: um texto que cresce poderia não caber e
+//      ficar cortado. Parada, a página deixa o texto crescer à vontade.
+function cenasPodemMover() {
+  const raiz = document.documentElement;
+  const letraNormal = parseFloat(getComputedStyle(raiz).fontSize) <= 17;
+  return !movimentoReduzido() && letraNormal && raiz.dataset.espacamento !== 'amplo';
+}
+
+// Decide se as cenas ficam em movimento ou paradas e arruma a página para isso.
+// É chamada ao abrir a página e sempre que uma preferência muda.
+function aplicarModoDasCenas() {
+  cenasEmMovimento = cenasPodemMover();
+  document.documentElement.classList.toggle('com-cenas', cenasEmMovimento);
+
+  // Primeiro tudo volta ao que o CSS manda; depois cada cena mede a tela nova
+  for (const cena of CENAS) {
+    cena.parar();
+    cena.comecou = false;
+  }
+  medirCenas();
+
+  if (cenasEmMovimento) pedirQuadro();
+  else for (const cena of CENAS) cena.parar();
+
+  // Quem vê a página parada só porque o aparelho pede menos movimento (sem ter
+  // escolhido nada no painel) recebe um aviso com um botão para ligar as animações
+  const aviso = document.getElementById('aviso-movimento');
+  const soPeloAparelho = document.documentElement.dataset.movimento === 'normal' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (aviso) aviso.hidden = !soPeloAparelho;
+}
+
+// Chamada pelo js/cenas-inicio.js depois de registrar todas as cenas
+function comecarCenas() {
+  aplicarModoDasCenas();
+
+  // A janela mudou de tamanho: espera a pessoa parar de arrastar e mede de novo
+  let espera = 0;
+  window.addEventListener('resize', function () {
+    clearTimeout(espera);
+    espera = setTimeout(function () {
+      medirCenas();
+      if (!cenasEmMovimento) for (const cena of CENAS) cena.parar();
+    }, 150);
+  });
+
+  // O painel de acessibilidade mexe nos atributos do <html>. Um vigia avisa
+  // quando isso acontece. Se a mudança troca o modo (movimento, letra ou
+  // espaço), a página é arrumada de novo; se muda só cores ou medidas, basta
+  // medir e desenhar de novo.
+  new MutationObserver(function (mudancas) {
+    const mudouOMovimento = mudancas.some(function (mudanca) { return mudanca.attributeName === 'data-movimento'; });
+    if (mudouOMovimento || cenasPodemMover() !== cenasEmMovimento) {
+      aplicarModoDasCenas();
+      return;
+    }
+    medirCenas();
+    if (!cenasEmMovimento) for (const cena of CENAS) cena.parar();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-movimento', 'data-tema', 'data-contraste', 'data-fonte', 'data-espacamento'] });
+
+  // O aparelho também pode mudar de ideia com a página aberta
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', aplicarModoDasCenas);
+
+  // As fontes e as imagens chegam depois e mudam medidas
+  window.addEventListener('load', function () {
+    medirCenas();
+    if (!cenasEmMovimento) for (const cena of CENAS) cena.parar();
+  });
+
+  // Teclado: um botão ou link dentro de uma cena pode estar invisível no ponto
+  // em que a rolagem está (ele só aparece no fim da cena, por exemplo).
+  // O atributo data-visivel-em="1" diz em que progresso ele aparece: quando
+  // ele recebe o foco, a rolagem vai até lá. Assim o foco nunca fica escondido.
+  document.addEventListener('focusin', function (evento) {
+    if (!cenasEmMovimento || !evento.target.closest) return;
+    const marcado = evento.target.closest('[data-visivel-em]');
+    if (!marcado) return;
+    const cena = CENAS.find(function (c) { return c.elemento.contains(marcado); });
+    if (!cena) return;
+    focarNaCena(cena, Number(marcado.dataset.visivelEm));
+  });
+}
+````
+
+### js/cenas-inicio.js
+
+````js
+// ============================================================================
+// cenas-inicio.js
+// ----------------------------------------------------------------------------
+// As oito cenas da página inicial. Cada uma é registrada no motor
+// (js/cenas.js) com três funções:
+//   medir()             mede o que depende do tamanho da tela;
+//   desenhar(p, agora)  põe as peças no lugar para o progresso p, de 0 a 1;
+//   parar()             deixa a cena pronta para ser vista parada.
+//
+// As cenas, na ordem em que aparecem na página:
+//   1. Abertura: a retícula forma a marca (partículas em canvas)
+//   2. A frase acende (texto preso à rolagem)
+//   3. O pacotinho gira e abre (3D em CSS)
+//   4. O álbum abre (livro 3D em CSS)
+//   5. Mergulho na figurinha (zoom que atravessa)
+//   6. Os números contam (contador preso à rolagem)
+//   7. Os grupos andam para o lado (rolagem horizontal)
+//   8. Voo pelas figurinhas (câmera em profundidade)
+//
+// Depende de: js/dados.js, js/estado.js, js/figurinha.js e js/cenas.js.
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  // -------------------------------------------------------------------------
+  // 1. Abertura: a retícula forma a marca
+  // -------------------------------------------------------------------------
+  // Passos:
+  //   a) escrever "Colei!" em uma tela escondida;
+  //   b) olhar essa tela ponto por ponto e guardar onde há tinta;
+  //   c) dar a cada ponto um lugar "solto", em uma retícula que cobre o palco;
+  //   d) a cada quadro, desenhar cada pontinho entre o lugar solto e o lugar
+  //      final, conforme o progresso.
+
+  const telaReticula = document.getElementById('reticula-tela');
+  const pincel = telaReticula.getContext('2d');
+  const palcoDaAbertura = telaReticula.parentElement;
+  const convite = document.getElementById('abertura-convite');
+  const assinatura = document.getElementById('abertura-assinatura');
+  let pontos = [];
+  let larguraDaTela = 0;
+  let alturaDaTela = 0;
+  let vaoSolto = 10;
+  let corDaTinta = '#14204F';
+  const ponteiro = { x: -9999, y: -9999 };
+  let ultimoGesto = performance.now();   // a última vez em que a pessoa rolou ou mexeu o mouse
+  let medidasDaReticula = '';            // as medidas usadas na última montagem
+
+  function montarReticula() {
+    // Ao abrir a página, o cabeçalho ainda está em cima do palco. O CSS usa a
+    // altura dele (a distância do topo da página até a cena) para subir o
+    // convite e deixá-lo inteiro na primeira tela.
+    const topoDaCena = Math.round(palcoDaAbertura.parentElement.getBoundingClientRect().top + window.scrollY);
+    palcoDaAbertura.style.setProperty('--cabecalho', topoDaCena + 'px');
+
+    const caixa = telaReticula.getBoundingClientRect();
+    const largura = Math.round(caixa.width);
+    const altura = Math.round(caixa.height);
+    const tinta = getComputedStyle(document.documentElement).getPropertyValue('--cor-texto').trim() || '#14204F';
+
+    // Montar a retícula dá trabalho. Se nada do que ela usa mudou (o tamanho
+    // da tela, a cor, o modo, a fonte, o tamanho do convite), fica a que já existe.
+    // No celular isso acontece toda hora: a barra de endereço some e volta.
+    const fonteChegou = !document.fonts || document.fonts.check('900 100px "Londrina Solid"');
+    const medidas = [largura, altura, tinta, cenasEmMovimento, fonteChegou, convite.offsetWidth, convite.offsetHeight].join('|');
+    if (medidas === medidasDaReticula) return;
+    medidasDaReticula = medidas;
+
+    pontos = [];
+    if (largura < 20 || altura < 20) return;
+
+    // Em tela de celular, cada pixel do CSS tem 2 ou 3 pixels de verdade:
+    // a tela de desenho é criada maior para os pontinhos saírem nítidos.
+    const nitidez = Math.min(window.devicePixelRatio || 1, 2);
+    telaReticula.width = largura * nitidez;
+    telaReticula.height = altura * nitidez;
+    pincel.setTransform(nitidez, 0, 0, nitidez, 0, 0);
+    larguraDaTela = largura;
+    alturaDaTela = altura;
+    corDaTinta = tinta;
+
+    // a) A palavra, em uma tela escondida do mesmo tamanho.
+    //    Em movimento, a tela é o palco inteiro; parada, é uma faixa baixa.
+    const rascunho = document.createElement('canvas');
+    rascunho.width = largura;
+    rascunho.height = altura;
+    const lapis = rascunho.getContext('2d', { willReadFrequently: true });
+    let corpo = cenasEmMovimento ? Math.min(altura * 0.42, largura * 0.36) : Math.min(altura * 0.86, largura * 0.4);
+    const fonte = function () { return '900 ' + corpo + 'px "Londrina Solid", "Arial Black", sans-serif'; };
+    lapis.font = fonte();
+    const larguraDaPalavra = lapis.measureText('Colei!').width;
+    if (larguraDaPalavra > largura * 0.86) corpo *= (largura * 0.86) / larguraDaPalavra;
+    lapis.font = fonte();
+    lapis.textAlign = 'center';
+    lapis.textBaseline = 'middle';
+    const meioX = largura / 2;
+    const meioY = cenasEmMovimento ? altura * 0.44 : altura / 2;
+    lapis.fillText('Colei!', meioX, meioY);
+    if (cenasEmMovimento) assinatura.style.top = Math.round(meioY + corpo * 0.5) + 'px';
+
+    // b) Onde há tinta? As linhas são desencontradas, como na retícula de jornal.
+    const pixels = lapis.getImageData(0, 0, largura, altura).data;
+    const passo = Math.max(3, corpo / 52);
+    const finais = [];
+    let topo = altura;
+    let base = 0;
+    let linha = 0;
+    for (let y = passo / 2; y < altura; y += passo * 0.866) {
+      for (let x = (linha % 2) * passo / 2; x < largura; x += passo) {
+        const transparencia = pixels[(Math.floor(y) * largura + Math.floor(x)) * 4 + 3];
+        if (transparencia > 128) {
+          finais.push({ x: x, y: y });
+          if (y < topo) topo = y;
+          if (y > base) base = y;
+        }
+      }
+      linha += 1;
+    }
+    const quantos = finais.length;
+    if (quantos === 0) return;
+
+    // c) Os lugares soltos: uma retícula comum, cobrindo o palco inteiro, com
+    //    (quase) a mesma quantidade de pontos. Ela deixa uma janela em volta
+    //    do convite, para nenhum pontinho passar por trás do texto.
+    const janela = {
+      esquerda: convite.offsetLeft - 16,
+      direita: convite.offsetLeft + convite.offsetWidth + 16,
+      topo: convite.offsetTop - 16,
+      base: convite.offsetTop + convite.offsetHeight + 16,
+    };
+    const areaDaJanela = cenasEmMovimento ? (janela.direita - janela.esquerda) * (janela.base - janela.topo) : 0;
+    const areaLivre = Math.max(largura * altura * 0.3, largura * altura - areaDaJanela);
+    vaoSolto = Math.sqrt(areaLivre / (quantos * 0.866)) * 0.98;
+    let soltos = [];
+    linha = 0;
+    for (let y = vaoSolto / 2; y < altura; y += vaoSolto * 0.866) {
+      for (let x = (linha % 2) * vaoSolto / 2; x < largura; x += vaoSolto) {
+        const naJanela = cenasEmMovimento && x > janela.esquerda && x < janela.direita && y > janela.topo && y < janela.base;
+        if (!naJanela) soltos.push({ x: x, y: y });
+      }
+      linha += 1;
+    }
+    // Sobrou lugar? Tira alguns, espalhados por igual.
+    const sobra = soltos.length;
+    if (sobra > quantos) {
+      soltos = soltos.filter(function (lugar, i) {
+        return Math.floor(i * quantos / sobra) !== Math.floor((i - 1) * quantos / sobra);
+      });
+    }
+
+    // Quem vai para onde: as duas listas são postas na mesma ordem (da
+    // esquerda para a direita e, dentro de cada faixa, de cima para baixo).
+    // Assim cada pedaço do palco desce para o pedaço da palavra que fica na
+    // mesma direção, e os caminhos não se embaralham.
+    function ordenarEmFaixas(lista) {
+      lista.sort(function (a, b) { return a.x - b.x; });
+      const tamanho = Math.max(1, Math.round(Math.sqrt(lista.length)));
+      const arrumada = [];
+      for (let i = 0; i < lista.length; i += tamanho) {
+        const faixa = lista.slice(i, i + tamanho).sort(function (a, b) { return a.y - b.y; });
+        for (const item of faixa) arrumada.push(item);
+      }
+      return arrumada;
+    }
+    const finaisEmOrdem = ordenarEmFaixas(finais);
+    const soltosEmOrdem = ordenarEmFaixas(soltos);
+
+    const acaso = sorteador(2026);
+    const maiorDistancia = Math.hypot(largura / 2, altura / 2);
+    pontos = finaisEmOrdem.map(function (fim, i) {
+      const solto = soltosEmOrdem[i % soltosEmOrdem.length];
+      // Retícula de verdade: os pontinhos de baixo são maiores que os de cima
+      const descida = (fim.y - topo) / Math.max(1, base - topo);
+      return {
+        xSolto: solto.x, ySolto: solto.y,
+        xFim: fim.x, yFim: fim.y,
+        raioFim: passo * misturar(0.3, 0.57, descida),
+        // Quem está mais perto do meio chega primeiro
+        atraso: 0.3 * Math.hypot(solto.x - meioX, solto.y - meioY) / maiorDistancia + 0.08 * acaso(),
+        fase: acaso() * 6.283,
+      };
+    });
+  }
+
+  // Desenha todos os pontinhos. "andamento" vai de 0 (soltos) a 1 (palavra
+  // formada); "balanco" vai de 0 (parados) a 1 (balançando de leve).
+  function desenharPontos(andamento, agora, balanco) {
+    const raioSolto = vaoSolto * 0.13;
+    pincel.clearRect(0, 0, larguraDaTela, alturaDaTela);
+    pincel.fillStyle = corDaTinta;
+    pincel.beginPath();
+
+    for (const ponto of pontos) {
+      const t = limitar((andamento - ponto.atraso) / 0.62);
+      const e = t * t * (3 - 2 * t);       // arranca e freia com suavidade
+      const falta = 1 - e;
+
+      // O caminho faz uma curva: um desvio para o lado, maior no meio do caminho
+      const dx = ponto.xFim - ponto.xSolto;
+      const dy = ponto.yFim - ponto.ySolto;
+      const curva = Math.sin(e * Math.PI) * 0.2;
+      let x = ponto.xSolto + dx * e - dy * curva;
+      let y = ponto.ySolto + dy * e + dx * curva;
+      let raio = misturar(raioSolto, ponto.raioFim, e);
+
+      if (falta > 0.01) {
+        // Enquanto está solto, o pontinho balança de leve...
+        x += Math.sin(agora / 900 + ponto.fase) * 2.5 * falta * balanco;
+        y += Math.cos(agora / 1100 + ponto.fase) * 2.5 * falta * balanco;
+        // ...e cresce perto do mouse, como uma lanterna passando no papel
+        const distancia = Math.hypot(x - ponteiro.x, y - ponteiro.y);
+        if (distancia < 150) {
+          const perto = 1 - distancia / 150;
+          raio *= 1 + 2.2 * perto * perto * falta;
+        }
+      }
+
+      pincel.moveTo(x + raio, y);
+      pincel.arc(x, y, raio, 0, 6.283);
+    }
+    pincel.fill();
+  }
+
+  const cenaDaAbertura = registrarCena(document.querySelector('.cena-abertura'), {
+    medir: montarReticula,
+
+    desenhar: function (p, agora) {
+      // O balanço dura 3 segundos depois do último gesto e some nos 2 seguintes:
+      // nada na página fica se mexendo sozinho por mais de 5 segundos.
+      const balanco = limitar(1 - (agora - ultimoGesto - 3000) / 2000);
+      desenharPontos(limitar((p - 0.08) / 0.72), agora, balanco);
+
+      // O convite sai de cena enquanto os pontinhos se juntam
+      const some = trecho(0.03, 0.18, p);
+      convite.style.opacity = 1 - some;
+      convite.style.transform = 'translateY(' + (some * -30) + 'px)';
+      convite.style.pointerEvents = some > 0.7 ? 'none' : '';
+
+      const chegou = trecho(0.8, 0.93, p);
+      assinatura.style.opacity = chegou;
+      assinatura.style.transform = 'translateY(' + ((1 - chegou) * 16) + 'px)';
+    },
+
+    parar: function () {
+      limparEstilos([convite, assinatura]);
+      desenharPontos(1, 0, 0);   // a marca já formada
+    },
+
+    viva: function (agora) {
+      return cenaDaAbertura.p < 0.9 && agora - ultimoGesto < 5200;
+    },
+  });
+
+  window.addEventListener('scroll', function () { ultimoGesto = performance.now(); }, { passive: true });
+  palcoDaAbertura.addEventListener('pointermove', function (evento) {
+    const caixa = telaReticula.getBoundingClientRect();
+    ponteiro.x = evento.clientX - caixa.left;
+    ponteiro.y = evento.clientY - caixa.top;
+    ultimoGesto = performance.now();
+    pedirQuadro();
+  });
+  palcoDaAbertura.addEventListener('pointerleave', function () {
+    ponteiro.x = -9999;
+    ponteiro.y = -9999;
+  });
+
+  // O botão do aviso: liga as animações neste site mesmo com o aparelho
+  // pedindo menos movimento. A escolha fica guardada (js/tema-acessibilidade.js).
+  document.getElementById('ligar-movimento').addEventListener('click', function () {
+    guardarPreferencia('movimento', 'completo');
+    // O aviso some com o botão dentro: o foco vai para o primeiro botão do convite
+    convite.querySelector('a').focus();
+  });
+
+  // -------------------------------------------------------------------------
+  // 2. A frase acende
+  // -------------------------------------------------------------------------
+
+  const frase = document.getElementById('frase');
+  const tracoDaFrase = document.getElementById('frase-traco');
+  // A frase é desmontada em palavras: cada uma vira um <span> para poder acender sozinha
+  const palavras = frase.textContent.trim().split(/\s+/).map(function (texto) {
+    return criarElemento('span', '', texto);
+  });
+  frase.textContent = '';
+  palavras.forEach(function (palavra, i) {
+    frase.append(palavra);
+    if (i < palavras.length - 1) frase.append(' ');
+  });
+
+  registrarCena(document.querySelector('.cena-frase'), {
+    desenhar: function (p) {
+      palavras.forEach(function (palavra, i) {
+        // A primeira palavra acende com 6% da cena; a última, com 76%
+        palavra.classList.toggle('acesa', p > 0.06 + (i / palavras.length) * 0.7);
+      });
+      tracoDaFrase.style.setProperty('--falta', (1 - trecho(0.8, 0.96, p)).toFixed(3));
+    },
+
+    parar: function () {
+      tracoDaFrase.style.removeProperty('--falta');   // o sublinhado aparece pronto
+    },
+  });
+
+  // -------------------------------------------------------------------------
+  // 3. O pacotinho gira e abre
+  // -------------------------------------------------------------------------
+
+  const pacote = document.getElementById('pacote3d');
+  const abaDoPacote = document.getElementById('pacote3d-aba');
+  const cenaDoPacote = pacote.parentElement;
+  const tituloDoPacote1 = document.getElementById('titulo-cena-pacote');
+  const tituloDoPacote2 = document.getElementById('pacote-titulo-2');
+  // Cinco figurinhas de verdade, uma de cada tipo: comum, brilhante, lendária e bandeira
+  const cartas = [50, 222, 54, 193, 276].map(function (numero) {
+    const carta = criarElemento('div', 'pacote-carta');
+    carta.append(criarFigurinha(figurinhaPorNumero(numero), {}));
+    document.getElementById('pacote-figurinhas').append(carta);
+    return carta;
+  });
+  let alturaDoPacote = 300;
+  let passoDoLeque = 120;
+
+  registrarCena(document.querySelector('.cena-pacote'), {
+    medir: function () {
+      alturaDoPacote = cenaDoPacote.offsetHeight;
+      const larguraDaCarta = cartas[0].offsetWidth;
+      // No celular as cinco não cabem lado a lado: o leque fica mais fechado
+      passoDoLeque = Math.min(larguraDaCarta * 1.08, (cenaDoPacote.parentElement.clientWidth - larguraDaCarta * 1.3 - 24) / 4);
+    },
+
+    desenhar: function (p) {
+      const chegada = trecho(0, 0.3, p);        // o pacotinho entra girando
+      const rasgo = trecho(0.3, 0.44, p);       // a aba sai pelo picote
+      const descida = trecho(0.55, 0.85, p);    // o pacotinho vazio desce e deita
+
+      const giro = misturar(-205, 0, chegada);
+      const tombo = misturar(22, 0, chegada) + descida * 55;
+      const sobe = misturar(alturaDoPacote * 0.5, 0, chegada) + descida * alturaDoPacote * 0.55;
+      const tamanho = misturar(0.7, 1, chegada);
+      pacote.style.transform = 'translateY(' + sobe + 'px) rotateX(' + tombo + 'deg) rotateY(' + giro + 'deg) scale(' + tamanho + ')';
+      pacote.style.opacity = trecho(0, 0.06, p) * (1 - trecho(0.66, 0.84, p));
+
+      abaDoPacote.style.transform = 'translate(' + (rasgo * 70) + '%, ' + (rasgo * -190) + '%) rotate(' + (rasgo * 38) + 'deg)';
+      abaDoPacote.style.opacity = 1 - trecho(0.36, 0.46, p);
+
+      // As cinco figurinhas: sobem por dentro do pacotinho, passam para a frente
+      // e abrem em leque. Cada uma começa um pouco depois da anterior.
+      cartas.forEach(function (carta, i) {
+        const t = trecho(0.42 + i * 0.03, 0.76 + i * 0.03, p);
+        const lado = i - 2;   // -2, -1, 0, 1, 2: a do meio fica no meio
+        const x = lado * passoDoLeque * t * t;
+        const y = misturar(0, alturaDoPacote * 0.04, t) - Math.sin(t * Math.PI) * alturaDoPacote * 0.6;
+        // Profundidade: começa atrás da frente do pacotinho e termina na frente de tudo
+        const z = misturar(-(34 + i * 2), 40 + (2 - Math.abs(lado)) * 16, trecho(0.5, 0.8, t));
+        const giroDaCarta = lado * 5 * t;
+        const viradaDaCarta = Math.sin(t * Math.PI) * -20;   // vira de lado só no meio do caminho
+        carta.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px) rotateY(' + viradaDaCarta + 'deg) rotate(' + giroDaCarta + 'deg)';
+        // Só aparece quando o pacotinho já está de frente (antes disso ficaria de fora, no giro)
+        carta.style.opacity = trecho(0.3, 0.34, p);
+      });
+
+      const entra1 = trecho(0.02, 0.1, p);
+      tituloDoPacote1.style.opacity = entra1 * (1 - trecho(0.26, 0.34, p));
+      tituloDoPacote1.style.transform = 'translateY(' + ((1 - entra1) * 18) + 'px)';
+      const entra2 = trecho(0.76, 0.88, p);
+      tituloDoPacote2.style.opacity = entra2;
+      tituloDoPacote2.style.transform = 'translateY(' + ((1 - entra2) * 18) + 'px)';
+    },
+
+    parar: function () {
+      limparEstilos([pacote, abaDoPacote, tituloDoPacote1, tituloDoPacote2].concat(cartas));
+    },
+  });
+
+  // -------------------------------------------------------------------------
+  // 4. O álbum abre
+  // -------------------------------------------------------------------------
+
+  const livro = document.getElementById('livro');
+  const folhaCapa = document.getElementById('folha-capa');
+  const folha1 = document.getElementById('folha-1');
+  const tituloDoLivro = document.getElementById('titulo-cena-album');
+  const acaoDoLivro = document.getElementById('acao-do-album');
+
+  // Monta uma página do álbum: o nome da seleção e as seis figurinhas dela,
+  // umas coladas e outras ainda em vaga. É uma amostra, não o álbum da pessoa.
+  function montarPagina(idDaFace, selecao) {
+    const miolo = criarElemento('div', 'miolo');
+
+    const cabeca = criarElemento('div', 'miolo-cabeca');
+    const bandeira = document.createElement('img');
+    bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
+    bandeira.alt = '';
+    cabeca.append(bandeira, criarElemento('span', 'miolo-nome', selecao.nome), criarElemento('span', 'miolo-grupo', 'Grupo ' + selecao.grupo));
+
+    const grade = criarElemento('div', 'miolo-grade');
+    const figurinhas = figurinhasDaSelecao(selecao.id);
+    for (const fig of figurinhas) {
+      if (fig.numero % 4 === 2) {
+        // Uma vaga: a figurinha que ainda falta
+        const vaga = criarElemento('div', 'vaga');
+        vaga.append(criarElemento('span', 'vaga-numero', String(fig.numero)), criarElemento('span', 'vaga-nome', fig.nome));
+        grade.append(vaga);
+      } else {
+        grade.append(criarFigurinha(fig, {}));
+      }
+    }
+
+    const primeira = figurinhas[0].numero;
+    const ultima = figurinhas[figurinhas.length - 1].numero;
+    miolo.append(cabeca, grade, criarElemento('p', 'miolo-pe', 'Nº ' + primeira + ' a ' + ultima));
+    document.getElementById(idDaFace).append(miolo);
+  }
+
+  const selecoesDoGrupoC = SELECOES.filter(function (selecao) { return selecao.grupo === 'C'; });
+  ['pagina-1', 'pagina-2', 'pagina-3', 'pagina-base'].forEach(function (idDaFace, i) {
+    montarPagina(idDaFace, selecoesDoGrupoC[i]);
+  });
+
+  registrarCena(document.querySelector('.cena-album'), {
+    medir: function () {
+      // O miolo foi desenhado com 480 px de largura: aqui se calcula o quanto
+      // encolher ou aumentar para caber na folha (descontando a borda de 2 px de cada lado)
+      const larguraDaPagina = document.getElementById('pagina-2').offsetWidth;
+      livro.style.setProperty('--escala', ((larguraDaPagina - 4) / 480).toFixed(4));
+    },
+
+    desenhar: function (p) {
+      const levanta = trecho(0, 0.16, p);    // o álbum deitado se levanta
+      const capa = trecho(0.14, 0.5, p);     // a capa vira
+      const folha = trecho(0.58, 0.86, p);   // a primeira folha vira
+
+      // Fechado, o álbum fica no meio do palco. Aberto, quem fica no meio é a
+      // lombada: por isso ele anda meia página para a direita enquanto a capa vira.
+      const inclinado = misturar(58, 14, levanta) - trecho(0.9, 1, p) * 6;
+      livro.style.transform = 'translateX(' + (capa * 50) + '%) rotateX(' + inclinado + 'deg) scale(' + misturar(0.72, 1, levanta) + ')';
+
+      // Cada folha gira até 180 graus em torno da lombada. As sobras de menos de
+      // um grau deixam a folha de cima um fio acima da de baixo, para o navegador
+      // nunca ficar em dúvida sobre qual está na frente.
+      folhaCapa.style.transform = 'rotateY(' + misturar(-0.6, -180, capa) + 'deg)';
+      folha1.style.transform = 'rotateY(' + misturar(-0.3, -179.7, folha) + 'deg)';
+      folhaCapa.style.zIndex = capa > 0.5 ? 1 : 3;
+      folha1.style.zIndex = 2;
+
+      // A sombra é mais forte com a folha em pé (90 graus) e some com ela deitada
+      folhaCapa.style.setProperty('--sombra', (Math.sin(capa * Math.PI) * 0.7).toFixed(3));
+      folha1.style.setProperty('--sombra', (Math.sin(folha * Math.PI) * 0.7).toFixed(3));
+
+      tituloDoLivro.style.opacity = 1 - trecho(0.2, 0.32, p);
+      const acao = trecho(0.88, 0.97, p);
+      acaoDoLivro.style.opacity = acao;
+      acaoDoLivro.style.pointerEvents = acao < 0.5 ? 'none' : '';
+    },
+
+    parar: function () {
+      const escala = livro.style.getPropertyValue('--escala');
+      limparEstilos([livro, folhaCapa, folha1, tituloDoLivro, acaoDoLivro]);
+      livro.style.setProperty('--escala', escala);
+    },
+  });
+
+  // -------------------------------------------------------------------------
+  // 5. Mergulho na figurinha
+  // -------------------------------------------------------------------------
+
+  const mergulho = document.getElementById('mergulho');
+  const fimDoMergulho = document.getElementById('mergulho-fim');
+  const etiquetaDoMergulho = fimDoMergulho.querySelector('.mergulho-etiqueta');
+  const figurinhaDoMergulho = criarFigurinha(figurinhaPorNumero(54), {});
+  const giroDoMergulho = giroDaFigurinha(54) + 4;
+  mergulho.append(figurinhaDoMergulho);
+  // A camada de cor do fim usa a mesma cor do retrato da figurinha
+  fimDoMergulho.style.setProperty('--campo', selecaoPorId(figurinhaPorNumero(54).selecao).cores.campo);
+  let aumentoMaximo = 30;
+
+  registrarCena(document.querySelector('.cena-mergulho'), {
+    medir: function () {
+      if (!cenasEmMovimento) return;   // parada, a figurinha nem aparece
+      // O mergulho mira em um ponto do retrato onde só existe a cor lisa:
+      // o canto de cima, à esquerda da cabeça e acima dos pontinhos.
+      const arte = figurinhaDoMergulho.querySelector('.figurinha-arte');
+      const folgaX = arte.offsetWidth * 0.18;
+      const folgaY = arte.offsetHeight * 0.17;
+      const miraX = arte.offsetLeft + folgaX;
+      const miraY = arte.offsetTop + folgaY;
+      mergulho.style.transformOrigin = miraX + 'px ' + miraY + 'px';
+
+      // Quanto aumentar para esse pedaço liso cobrir a tela inteira?
+      const palco = mergulho.parentElement;
+      const naTelaX = mergulho.offsetLeft + miraX;
+      const naTelaY = mergulho.offsetTop + miraY;
+      aumentoMaximo = 1.15 * Math.max(
+        naTelaX / folgaX,
+        (palco.clientWidth - naTelaX) / folgaX,
+        naTelaY / folgaY,
+        (palco.clientHeight - naTelaY) / folgaY
+      );
+    },
+
+    desenhar: function (p) {
+      // O aumento cresce como juros compostos (potência): assim a velocidade
+      // do mergulho parece constante, em vez de disparar no fim
+      const aumento = Math.pow(aumentoMaximo, trecho(0.1, 0.62, p));
+      const giro = giroDoMergulho * (1 - trecho(0.08, 0.3, p));
+      mergulho.style.transform = 'scale(' + aumento.toFixed(3) + ') rotate(' + giro.toFixed(2) + 'deg)';
+
+      const cor = trecho(0.5, 0.63, p);
+      fimDoMergulho.style.opacity = cor;
+      // Com a tela já tomada pela cor, a figurinha gigante deixa de ser desenhada
+      mergulho.style.visibility = cor >= 1 ? 'hidden' : 'visible';
+
+      const etiqueta = trecho(0.66, 0.82, p);
+      etiquetaDoMergulho.style.opacity = etiqueta;
+      etiquetaDoMergulho.style.transform = 'translateY(' + ((1 - etiqueta) * 40) + 'px)';
+    },
+
+    parar: function () {
+      const campo = fimDoMergulho.style.getPropertyValue('--campo');
+      limparEstilos([mergulho, fimDoMergulho, etiquetaDoMergulho]);
+      fimDoMergulho.style.setProperty('--campo', campo);
+    },
+  });
+
+  // -------------------------------------------------------------------------
+  // 6. Os números contam
+  // -------------------------------------------------------------------------
+
+  // Os valores vêm dos dados do site, na mesma ordem das casas do HTML:
+  // seleções, figurinhas, cidades-sede e jogos
+  const VALORES = [SELECOES.length, FIGURINHAS.length, SEDES.length, COPA.numeros.jogos];
+  const numeros = Array.from(document.querySelectorAll('#numeros .numero')).map(function (caixa, i) {
+    // O número que conta é só para os olhos. O leitor de tela lê o valor final.
+    const visor = criarElemento('span', '', String(VALORES[i]));
+    visor.setAttribute('aria-hidden', 'true');
+    const casa = caixa.querySelector('dd');
+    casa.textContent = '';
+    casa.append(visor, criarElemento('span', 'escondido', String(VALORES[i])));
+    return { caixa: caixa, visor: visor, valor: VALORES[i], mostrado: VALORES[i] };
+  });
+
+  function mostrarNumero(numero, valor) {
+    if (valor === numero.mostrado) return;
+    numero.mostrado = valor;
+    numero.visor.textContent = String(valor);
+  }
+
+  registrarCena(document.querySelector('.cena-numeros'), {
+    desenhar: function (p) {
+      numeros.forEach(function (numero, i) {
+        const t = trecho(0.08 + i * 0.2, 0.3 + i * 0.2, p);   // cada número tem a sua vez
+        mostrarNumero(numero, Math.round(numero.valor * t));
+        numero.caixa.style.setProperty('--aceso', t.toFixed(3));
+      });
+    },
+
+    parar: function () {
+      for (const numero of numeros) {
+        mostrarNumero(numero, numero.valor);
+        numero.caixa.style.removeProperty('--aceso');
+      }
+    },
+  });
+
+  // -------------------------------------------------------------------------
+  // 7. Os grupos andam para o lado
+  // -------------------------------------------------------------------------
+
+  const trilha = document.getElementById('trilha');
+  const palcoDaTrilha = trilha.parentElement;
+
+  // Um painel por grupo: a letra, as quatro seleções e o link para o álbum
+  const paineis = gruposDoAlbum().sort().map(function (letra) {
+    const painel = criarElemento('div', 'grupo');
+
+    const titulo = document.createElement('h3');
+    titulo.append('Grupo ', criarElemento('span', 'grupo-letra', letra));
+
+    const lista = criarElemento('ul', 'grupo-selecoes');
+    for (const selecao of SELECOES.filter(function (s) { return s.grupo === letra; })) {
+      const item = document.createElement('li');
+      const selo = criarElemento('span', 'selo');
+      const bandeira = document.createElement('img');
+      bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
+      bandeira.alt = '';              // o nome da seleção vem escrito logo abaixo
+      bandeira.loading = 'lazy';      // a imagem só é baixada quando está chegando perto da tela
+      selo.append(bandeira);
+      item.append(selo, selecao.nome);
+      lista.append(item);
+    }
+
+    const figurinhas = figurinhasDoGrupo(letra);
+    const numeros = criarElemento('p', 'grupo-numeros', figurinhas.length + ' figurinhas, da Nº ' + figurinhas[0].numero + ' à Nº ' + figurinhas[figurinhas.length - 1].numero);
+
+    const link = criarElemento('a', '', 'Ver o Grupo ' + letra + ' no álbum');
+    link.href = 'album.html#titulo-grupo-' + letra;
+
+    painel.append(titulo, lista, numeros, link);
+    trilha.append(painel);
+    return { elemento: painel, centro: 0, foco: -1 };
+  });
+  let sobraDaTrilha = 0;
+  let larguraDoPalcoDaTrilha = 0;
+
+  const cenaDosGrupos = registrarCena(document.querySelector('.cena-grupos'), {
+    medir: function () {
+      larguraDoPalcoDaTrilha = palcoDaTrilha.clientWidth;
+      sobraDaTrilha = Math.max(0, trilha.scrollWidth - larguraDoPalcoDaTrilha);   // o quanto a faixa passa da tela
+      for (const painel of paineis) {
+        painel.centro = painel.elemento.offsetLeft + painel.elemento.offsetWidth / 2;
+        painel.foco = -1;
+      }
+    },
+
+    desenhar: function (p) {
+      // A rolagem para baixo vira deslocamento para a esquerda
+      const deslocamento = limitar((p - 0.04) / 0.92) * sobraDaTrilha;
+      trilha.style.transform = 'translate3d(' + (-deslocamento).toFixed(1) + 'px, 0, 0)';
+
+      const meio = larguraDoPalcoDaTrilha / 2;
+      for (const painel of paineis) {
+        // A que distância este grupo está do meio da tela? 1 = bem no meio
+        const perto = limitar(1 - Math.abs(painel.centro - deslocamento - meio) / (larguraDoPalcoDaTrilha * 0.42));
+        const foco = Number((perto * perto * (3 - 2 * perto)).toFixed(3));
+        if (foco === painel.foco) continue;
+        painel.foco = foco;
+        painel.elemento.style.setProperty('--f', foco);
+        painel.elemento.classList.toggle('grupo-colado', foco > 0.55);
+      }
+    },
+
+    parar: function () {
+      trilha.removeAttribute('style');
+      for (const painel of paineis) {
+        painel.elemento.removeAttribute('style');
+        painel.elemento.classList.add('grupo-colado');   // parados, todos já são figurinha
+        painel.foco = -1;
+      }
+    },
+  });
+
+  // Teclado: quando um link de um grupo recebe o foco, a rolagem leva a faixa
+  // até esse grupo. Sem isto, o foco poderia cair em um link fora da tela.
+  trilha.addEventListener('focusin', function (evento) {
+    if (!cenasEmMovimento) return;
+    const painel = paineis.find(function (item) { return item.elemento.contains(evento.target); });
+    if (!painel || sobraDaTrilha === 0) return;
+    const deslocamento = limitar((painel.centro - larguraDoPalcoDaTrilha / 2) / sobraDaTrilha) * sobraDaTrilha;
+    const p = 0.04 + 0.92 * deslocamento / sobraDaTrilha;
+    focarNaCena(cenaDosGrupos, p);
+  });
+
+  // Ao dar o foco, o navegador pode tentar rolar o palco para o lado por conta
+  // própria. Quem move a faixa é só a cena: o palco volta para o lugar.
+  palcoDaTrilha.addEventListener('scroll', function () {
+    palcoDaTrilha.scrollLeft = 0;
+    palcoDaTrilha.scrollTop = 0;
+  });
+
+  // -------------------------------------------------------------------------
+  // 8. Voo pelas figurinhas
+  // -------------------------------------------------------------------------
+
+  const voo = document.getElementById('voo');
+  const fimDoVoo = document.getElementById('voo-fim');
+  const QUANTAS_NO_VOO = window.innerWidth < 640 ? 26 : 44;
+  const FUNDO_DO_VOO = 5200;   // a profundidade da figurinha mais distante, em pixels
+  const acasoDoVoo = sorteador(288);
+  const itensDoVoo = [];
+
+  for (let i = 0; i < QUANTAS_NO_VOO; i++) {
+    // 37 e 288 não têm divisor em comum: a conta passa por seleções bem diferentes
+    const figurinha = criarFigurinha(figurinhaPorNumero(1 + (i * 37) % FIGURINHAS.length), {});
+    figurinha.classList.add('voo-item');
+    voo.append(figurinha);
+    itensDoVoo.push({
+      elemento: figurinha,
+      lugarX: acasoDoVoo() * 2 - 1,     // de -1 (esquerda) a 1 (direita)
+      lugarY: acasoDoVoo() * 2 - 1,
+      z: -300 - (i / (QUANTAS_NO_VOO - 1)) * FUNDO_DO_VOO,
+      giro: (acasoDoVoo() * 2 - 1) * 12,
+      virada: (acasoDoVoo() * 2 - 1) * 22,
+      aparece: -1,
+    });
+  }
+
+  registrarCena(document.querySelector('.cena-voo'), {
+    medir: function () {
+      const palco = voo.parentElement;
+      const largura = palco.clientWidth;
+      const altura = palco.clientHeight;
+      for (const item of itensDoVoo) {
+        let x = item.lugarX * largura;
+        const y = item.lugarY * altura * 0.8;
+        // O meio fica livre: a câmera passa por ali, e é onde entra o título
+        if (Math.abs(x) < largura * 0.16 && Math.abs(y) < altura * 0.22) {
+          x = (item.lugarX < 0 ? -1 : 1) * largura * (0.16 + Math.abs(item.lugarY) * 0.2);
+        }
+        item.elemento.style.transform = 'translate3d(' + x.toFixed(0) + 'px, ' + y.toFixed(0) + 'px, ' + item.z.toFixed(0) + 'px) rotateY(' + item.virada.toFixed(1) + 'deg) rotate(' + item.giro.toFixed(1) + 'deg)';
+        item.aparece = -1;
+      }
+    },
+
+    desenhar: function (p) {
+      // A câmera não anda: é o conjunto das figurinhas que vem para a frente
+      const camera = trecho(0, 0.9, p) * (FUNDO_DO_VOO + 900);
+      voo.style.transform = 'translateZ(' + camera.toFixed(1) + 'px)';
+
+      for (const item of itensDoVoo) {
+        const distancia = item.z + camera;   // negativa = ainda longe; perto de 900 = encostando no olho
+        // Longe, a figurinha aparece aos poucos (neblina). Bem perto, some antes de bater na câmera.
+        const aparece = Number((limitar((distancia + 4200) / 1400) * limitar((700 - distancia) / 350)).toFixed(2));
+        if (aparece === item.aparece) continue;
+        item.aparece = aparece;
+        item.elemento.style.opacity = aparece;
+        item.elemento.style.visibility = aparece === 0 ? 'hidden' : 'visible';
+      }
+
+      const chegou = trecho(0.8, 0.94, p);
+      fimDoVoo.style.opacity = chegou;
+      fimDoVoo.style.scale = misturar(0.86, 1, chegou).toFixed(3);
+      fimDoVoo.style.pointerEvents = chegou < 0.5 ? 'none' : '';
+    },
+
+    parar: function () {
+      limparEstilos([voo, fimDoVoo]);
+    },
+  });
+
+  // -------------------------------------------------------------------------
+  // Começar
+  // -------------------------------------------------------------------------
+
+  comecarCenas();
+
+  // As letras de "Colei!" só podem ser lidas depois que a fonte do site chegar
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load('900 100px "Londrina Solid"').then(function () {
+      montarReticula();
+      cenaDaAbertura.suja = true;
+      if (!cenasEmMovimento) cenaDaAbertura.parar();
+    });
+  }
 });
 ````
 
@@ -9622,11 +11758,11 @@ const GRUPOS = [
   },
   {
     titulo: 'Estilos (CSS)', pasta: 'css', extensao: '.css', linguagem: 'css',
-    primeiro: ['tokens.css', 'base.css', 'componentes.css', 'paginas.css', 'acessibilidade.css'],
+    primeiro: ['tokens.css', 'base.css', 'componentes.css', 'paginas.css', 'acessibilidade.css', 'cenas.css'],
   },
   {
     titulo: 'Comportamento (JavaScript)', pasta: 'js', extensao: '.js', linguagem: 'js',
-    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
+    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',
