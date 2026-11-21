@@ -2,6 +2,13 @@
 
 O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 
+## A caminho da v1.0 (ainda sem marca)
+
+- Projeto enviado ao GitHub (ramo `main` e marcas de versão).
+- Link do site publicado no rodapé das 7 páginas, na página Sobre e no README.
+- Passo a passo de publicação no GitHub Pages no README.
+- Anexo de código (`docs/anexo-codigo.md`), gerado por `scripts/gerar-anexo.js`.
+
 ## v0.4-acessibilidade (20/11/2026)
 
 - Auditoria de estrutura em 15 telas e teste só com o teclado em 9 telas, sem problemas restantes.

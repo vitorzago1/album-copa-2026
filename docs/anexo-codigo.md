@@ -5,17 +5,17 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 29.
-- Linhas de código (com comentários): 9483.
+- Linhas de código (com comentários): 9492.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 318 |
-| `album.html` | 218 |
-| `pacotinhos.html` | 128 |
-| `trocas.html` | 164 |
-| `login.html` | 181 |
-| `contato.html` | 158 |
-| `sobre.html` | 294 |
+| `index.html` | 319 |
+| `album.html` | 219 |
+| `pacotinhos.html` | 129 |
+| `trocas.html` | 165 |
+| `login.html` | 182 |
+| `contato.html` | 159 |
+| `sobre.html` | 297 |
 | `css/tokens.css` | 204 |
 | `css/base.css` | 479 |
 | `css/componentes.css` | 1108 |
@@ -350,6 +350,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 
@@ -573,6 +574,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 
@@ -706,6 +708,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 
@@ -875,6 +878,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 
@@ -1061,6 +1065,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 
@@ -1224,6 +1229,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 
@@ -1321,6 +1327,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <dd>Prof. Dr. Felipe Batista da Silva</dd>
         <dt>Código e histórico de versões</dt>
         <dd><a href="https://github.com/vitorzago1/album-copa-2026">github.com/vitorzago1/album-copa-2026</a></dd>
+        <dt>Site publicado</dt>
+        <dd><a href="https://vitorzago1.github.io/album-copa-2026/">vitorzago1.github.io/album-copa-2026</a></dd>
       </dl>
     </section>
 
@@ -1523,6 +1531,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <li><a href="contato.html">Contato</a></li>
           <li><a href="login.html">Entrar</a></li>
           <li><a href="https://github.com/vitorzago1/album-copa-2026">Código no GitHub</a></li>
+          <li><a href="https://vitorzago1.github.io/album-copa-2026/">Site publicado</a></li>
         </ul>
       </nav>
 

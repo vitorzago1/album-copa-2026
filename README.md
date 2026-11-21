@@ -10,7 +10,9 @@ Projeto acadêmico, sem fins comerciais e sem vínculo com a FIFA, a Panini ou a
 
 Não precisa instalar nada. Abra o arquivo `index.html` no navegador (dois cliques).
 
-Link do site publicado: a definir (entra aqui depois da publicação no GitHub Pages).
+Site publicado: https://vitorzago1.github.io/album-copa-2026/
+
+Código e histórico de versões: https://github.com/vitorzago1/album-copa-2026
 
 ### Para testar rápido (modo demonstração)
 
@@ -148,7 +150,7 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 | GitHub com versões | Histórico de commits e marcas `v0.1` a `v0.4`; `CHANGELOG.md` |
 | README passo a passo | Este arquivo |
 | Referências e IAs usadas | `docs/referencias.md` e página Sobre |
-| Site publicado | A definir (depende da publicação no GitHub Pages) |
+| Site publicado | https://vitorzago1.github.io/album-copa-2026/ (GitHub Pages) |
 
 ## Como conferir a acessibilidade
 
