@@ -42,7 +42,7 @@ album-copa-2026/
 │             e vendor/three.min.js (a única biblioteca do site)
 ├── assets/   bandeiras, fotos dos estádios, quadros do pacotinho, SVG e fontes
 ├── docs/     cores, decisões, referências, prints e anexo de código
-├── scripts/  ferramentas de apoio (contraste, anexo de código, gerador de quadros)
+├── scripts/  ferramentas de apoio (contraste, fundo da página, anexo de código, gerador de quadros)
 ├── README.md
 ├── CHANGELOG.md
 └── CLAUDE.md regras do projeto para a IA que ajudou na construção
@@ -177,7 +177,7 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 
 ### Etapa 12: os nove efeitos escolhidos no primeiro laboratório
 
-O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhidas e aplicadas nesta etapa. As texturas de fundo não foram escolhidas e ficaram de fora.
+O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhidas e aplicadas nesta etapa. As texturas de fundo não foram escolhidas e ficaram de fora (o fundo com vários papéis veio depois, por um pedido à parte: etapa 13).
 
 | Efeito | Onde está | Como é feito |
 |---|---|---|
@@ -197,6 +197,20 @@ O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhi
 4. **Acessibilidade do placar.** As fitas que giram ficam fora da leitura de tela; o número é lido de um texto comum ao lado.
 5. **Correção de quebra.** A figurinha que acaba de ser colada chega maior e torta e passava alguns pixels da beirada da tela. A grade das casas agora corta essa sobra (`overflow-x: clip`) sem criar barra de rolagem.
 6. **Verificações automáticas novas:** 47. No total são 416, todas passando.
+
+### Etapa 13: fundo com vários papéis e aviso de descer
+
+Dois pedidos do aluno em 22/11/2026: um aviso "Desça para continuar" nas partes em que é preciso rolar a página, e um fundo que não fosse de uma cor só, com mais de uma cor e com detalhes.
+
+1. **Direção: "Uma tinta só, vários papéis".** A tinta continua uma só (azul no tema claro, rosa no escuro). O que muda é o papel: o fundo passa por quatro papéis conforme a página desce (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho) e volta ao primeiro.
+2. **Passagem em retícula.** Entre um papel e o seguinte, bolinhas da cor seguinte crescem linha a linha até se juntarem, como o degradê da impressão em papel. É uma imagem SVG estreita (16 por 4400 px), repetida para os lados e para baixo. Ela fica escrita dentro do `css/tokens.css`, e quem a desenha é o `scripts/gerar-fundo.js`.
+3. **Linhas de campo.** Por cima dos papéis há um campo de futebol visto de cima, espalhado pela página: círculo central, grande área com a meia-lua, cantos e duas cruzes de registro de gráfica. São 16 degradês de CSS (`linear-gradient` e `radial-gradient`) na tinta da página, bem fraca (9% no tema claro, 7% no escuro).
+4. **Onde fica.** Em uma camada só (`body::before`, no `css/base.css`), atrás de todo o conteúdo, nas 7 páginas. Não usa JavaScript, não se mexe e não recebe cliques.
+5. **Contraste.** Tudo o que fica direto sobre a página (texto, link, mensagens, borda e foco) foi conferido em cada papel, e o texto também com uma linha de campo por cima. O `node scripts/contraste.js` passou de 236 para 372 pares, com 0 reprovados. No alto contraste o fundo fica liso (branco ou preto), sem papéis e sem linhas.
+6. **Aviso "Desça para continuar".** Cada uma das oito cenas da página inicial mostra o aviso no pé do palco, com um fio que desce três vezes quando a cena chega à tela. O aviso some perto do fim da cena. Na abertura, o convite da primeira tela já traz a frase, e o aviso do palco entra quando o convite sai. Quem cria o aviso é o `js/cenas.js`, para toda cena registrada.
+7. **O aviso é só para os olhos.** Fica fora da leitura de tela (`aria-hidden`) e não recebe cliques. Na versão parada (menos movimento, letra maior ou sem JavaScript) ele não aparece, porque ali a página é comum.
+8. **Janela baixa.** Com menos de 640 px de altura, cada grupo da faixa dos 12 grupos fica mais estreito. Assim o link "Ver o Grupo no álbum" não fica debaixo do aviso.
+9. **Verificações automáticas novas:** 37. No total são 453, todas passando.
 
 ## Onde está cada item pedido pelo professor
 
@@ -222,7 +236,7 @@ O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhi
 
 ## Como conferir a acessibilidade
 
-- **Contraste.** Com o Node.js instalado, na pasta do projeto, rode `node scripts/contraste.js`. O script reescreve `docs/cores.md` e avisa se algum par de cores reprovar.
+- **Contraste.** Com o Node.js instalado, na pasta do projeto, rode `node scripts/contraste.js`. O script reescreve `docs/cores.md` e avisa se algum par de cores reprovar. Se mudar uma cor de papel do fundo, rode antes `node scripts/gerar-fundo.js`, que redesenha o fundo com a cor nova.
 - **Lighthouse (ainda não rodado).** No Edge ou no Chrome, abra o site, aperte F12, escolha a aba "Lighthouse", marque só "Acessibilidade" e clique em "Analisar carregamento de página". Anote a nota de cada página em `docs/decisoes.md`.
 - **Só teclado.** Use Tab, Shift+Tab, Enter, Espaço, as setas (nas abas do álbum) e Esc (para fechar o painel e o menu).
 - **Menos movimento.** No painel de acessibilidade, ligue "Reduzir animações": a página inicial passa a mostrar cada cena parada. No Windows, o mesmo acontece com Configurações, Acessibilidade, Efeitos visuais, "Efeitos de animação" desligado.
@@ -232,7 +246,8 @@ O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhi
 
 - HTML, CSS e JavaScript puros, sem framework e sem etapa de build.
 - Git e GitHub para o histórico de versões.
-- Node.js só para rodar o script de contraste (o site em si não precisa dele).
+- Node.js só para rodar os scripts de apoio: contraste, fundo da página e anexo de código (o site em si não precisa dele).
+- O fundo da página usa só CSS: uma imagem SVG escrita dentro do próprio CSS (`data:`), `linear-gradient` e `radial-gradient`.
 - `flag-icons` (licença MIT): só as imagens das bandeiras, copiadas para dentro do projeto. Motivo: desenhar à mão cada bandeira com fidelidade daria muito trabalho e mais chance de erro, e o enunciado do projeto permite bandeiras de fonte com licença livre.
 - Fotos do Wikimedia Commons (licenças CC BY, CC BY-SA, CC0 e domínio público), com autor e licença de cada uma na página Sobre e em `docs/referencias.md`.
 - `crypto.subtle` (já vem no navegador): calcula o hash da senha. Não é biblioteca externa.

@@ -34,7 +34,7 @@ const GRUPOS = [
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',
-    primeiro: ['contraste.js', 'gerar-anexo.js'],
+    primeiro: ['contraste.js', 'gerar-fundo.js', 'gerar-anexo.js'],
   },
   {
     titulo: 'Ferramentas de apoio (HTML)', pasta: 'scripts', extensao: '.html', linguagem: 'html',

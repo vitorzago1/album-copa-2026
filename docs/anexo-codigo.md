@@ -4,8 +4,8 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
-- Arquivos: 36.
-- Linhas de código (com comentários): 13152.
+- Arquivos: 37.
+- Linhas de código (com comentários): 13531.
 
 | Arquivo | Linhas |
 |---|---|
@@ -16,12 +16,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `login.html` | 183 |
 | `contato.html` | 160 |
 | `sobre.html` | 302 |
-| `css/tokens.css` | 207 |
-| `css/base.css` | 544 |
+| `css/tokens.css` | 247 |
+| `css/base.css` | 606 |
 | `css/componentes.css` | 1361 |
 | `css/paginas.css` | 537 |
 | `css/acessibilidade.css` | 222 |
-| `css/cenas.css` | 1069 |
+| `css/cenas.css` | 1120 |
 | `js/tema-acessibilidade.js` | 226 |
 | `js/menu.js` | 52 |
 | `js/efeitos.js` | 106 |
@@ -32,7 +32,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/trocas.js` | 200 |
 | `js/inicio.js` | 53 |
 | `js/carrossel.js` | 92 |
-| `js/cenas.js` | 254 |
+| `js/cenas.js` | 272 |
 | `js/cenas-inicio.js` | 827 |
 | `js/pacote3d.js` | 466 |
 | `js/pacotinho-3d.js` | 170 |
@@ -42,7 +42,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/sobre.js` | 44 |
 | `js/demonstracao.js` | 39 |
 | `js/dados.js` | 2474 |
-| `scripts/contraste.js` | 281 |
+| `scripts/contraste.js` | 358 |
+| `scripts/gerar-fundo.js` | 131 |
 | `scripts/gerar-anexo.js` | 103 |
 | `scripts/quadros.html` | 129 |
 
@@ -124,7 +125,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     <!-- ABERTURA (cena 1). Os pontinhos de impressão se juntam e formam "Colei!".
          Parada, a cena mostra o convite ao lado da marca já formada.
          O desenho é feito pelo js/cenas-inicio.js dentro do <canvas>. -->
-    <section class="cena cena-abertura" style="--altura: 240vh" aria-labelledby="titulo-abertura">
+    <section class="cena cena-abertura" style="--altura: 240vh" data-aviso-de="0.2" aria-labelledby="titulo-abertura">
       <div class="cena-palco">
         <canvas class="reticula-tela so-com-js" id="reticula-tela" aria-hidden="true"></canvas>
 
@@ -135,7 +136,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <a class="botao" href="album.html">Abrir o álbum</a>
             <a class="botao botao-contorno" href="pacotinhos.html">Ir para os pacotinhos</a>
           </p>
-          <p class="rolar-dica" aria-hidden="true"><i></i>Role para ver a apresentação</p>
+          <p class="rolar-dica" aria-hidden="true"><i></i>Desça para continuar</p>
         </div>
 
         <p class="abertura-assinatura" id="abertura-assinatura">O álbum de figurinhas da Copa de 2026</p>
@@ -1729,10 +1730,11 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
    "Token" é um valor com nome. Em vez de escrever #14204F em vinte lugares,
    o site inteiro usa var(--cor-texto). Para mudar a cor, muda-se uma linha só.
 
-   Direção visual: "Uma tinta só".
-   - Tema claro:  tinta azul sobre papel rosa.
-   - Tema escuro: tinta rosa sobre papel azul (papel e tinta trocam de lugar).
-   A cor de verdade só chega pelas figurinhas.
+   Direção visual: "Uma tinta só, vários papéis".
+   - Tema claro:  tinta azul sobre papel claro (rosa, pêssego, menta e lilás).
+   - Tema escuro: tinta rosa sobre papel fundo (azul, roxo, petróleo e vinho).
+   A tinta é uma só; o papel do fundo é que muda ao longo da página.
+   A cor viva só chega pelas figurinhas.
 
    IMPORTANTE: toda cor nova entra aqui, com nome começando em --cor-, e depois
    é conferida com:  node scripts/contraste.js
@@ -1744,6 +1746,14 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-fundo: #F6CDD7;              /* papel rosa: o fundo da página */
   --cor-superficie: #FDF1F4;         /* papel de cupom: cartões e campos */
   --cor-vaga: #EDB5C3;               /* rosa-sombra: espaço vazio e trilho da barra */
+
+  /* Os outros papéis. O fundo muda de cor ao longo da página, como as páginas
+     coloridas de um álbum. Todos são claros o bastante para a tinta azul. */
+  --cor-papel-2: #FBD9BF;            /* pêssego */
+  --cor-papel-3: #CDEBD8;            /* menta: lembra o gramado */
+  --cor-papel-4: #E1D5F5;            /* lilás */
+  /* As linhas de campo desenhadas no fundo: a própria tinta, bem fraca */
+  --cor-traco-do-fundo: rgba(20, 32, 79, 0.09);
 
   /* Tinta */
   --cor-texto: #14204F;              /* azul-tinteiro: a única tinta da página */
@@ -1792,6 +1802,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-superficie: #25359A;         /* papel azul claro: no escuro, o que está na frente fica mais claro */
   --cor-vaga: #131D4A;               /* rebaixo: mais escuro que a página */
 
+  /* Os outros papéis, no escuro: todos fundos o bastante para a tinta rosa */
+  --cor-papel-2: #3A1F87;            /* roxo */
+  --cor-papel-3: #0D3A63;            /* petróleo */
+  --cor-papel-4: #55195A;            /* vinho */
+  --cor-traco-do-fundo: rgba(251, 227, 233, 0.07);
+
   --cor-texto: #FBE3E9;              /* tinta rosa */
   --cor-texto-secundario: #C9B4CC;
   --cor-borda: #9AA3E6;
@@ -1829,6 +1845,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-fundo: #FFFFFF;
   --cor-superficie: #FFFFFF;
   --cor-vaga: #FFFFFF;
+  --cor-papel-2: #FFFFFF;            /* no alto contraste o fundo é liso */
+  --cor-papel-3: #FFFFFF;
+  --cor-papel-4: #FFFFFF;
+  --cor-traco-do-fundo: transparent;
 
   --cor-texto: #000000;
   --cor-texto-secundario: #1F1F1F;
@@ -1865,6 +1885,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-fundo: #000000;
   --cor-superficie: #000000;
   --cor-vaga: #000000;
+  --cor-papel-2: #000000;
+  --cor-papel-3: #000000;
+  --cor-papel-4: #000000;
 
   --cor-texto: #FFFFFF;
   --cor-texto-secundario: #E6E6E6;
@@ -1930,6 +1953,24 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   /* Movimento */
   --duracao: 200ms;
 }
+
+/* ---------- Fundo da página ----------
+   Gerado por:  node scripts/gerar-fundo.js   (não edite à mão o que está
+   entre as duas marcas: mude as cores de papel lá em cima e rode o script) */
+/* FUNDO-INICIO */
+:root {
+  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%23FBD9BF'/%3E%3Crect y='744' width='16' height='1080' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%23CDEBD8'/%3E%3Crect y='1824' width='16' height='1080' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%23E1D5F5'/%3E%3Crect y='2904' width='16' height='1080' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%23F6CDD7'/%3E%3Crect y='3984' width='16' height='416' fill='%23F6CDD7'/%3E%3C/svg%3E");
+}
+
+[data-tema="escuro"] {
+  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%233A1F87'/%3E%3Crect y='744' width='16' height='1080' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%230D3A63'/%3E%3Crect y='1824' width='16' height='1080' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%2355195A'/%3E%3Crect y='2904' width='16' height='1080' fill='%2355195A'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%231B2A80'/%3E%3Crect y='3984' width='16' height='416' fill='%231B2A80'/%3E%3C/svg%3E");
+}
+
+/* No alto contraste o fundo é liso: branco ou preto, sem desenho */
+[data-contraste="alto"] {
+  --fundo-papeis: none;
+}
+/* FUNDO-FIM */
 ````
 
 ### css/base.css
@@ -2046,6 +2087,7 @@ body {
   font-family: var(--fonte-leitura);
   font-size: var(--texto-base);
   line-height: var(--entrelinha);
+  position: relative;   /* o desenho do fundo (body::before, mais abaixo) se mede pela página inteira */
   background: var(--cor-fundo);
   color: var(--cor-texto);
   overflow-wrap: break-word;   /* palavra comprida demais quebra em vez de empurrar a página */
@@ -2478,6 +2520,67 @@ a:hover {
 
 @keyframes folha-entra {
   from { transform: perspective(60rem) rotateY(60deg); opacity: 0; }
+}
+
+/* ---------- O fundo da página ----------
+   Uma camada do tamanho da página inteira, atrás de todo o conteúdo. Ela tem
+   duas partes, uma por cima da outra:
+
+   1. OS PAPÉIS (a última linha do "background"). O fundo muda de cor conforme
+      a página desce: rosa, pêssego, menta, lilás e de novo rosa. Entre um
+      papel e outro, bolinhas da cor seguinte vão crescendo até se juntarem,
+      como o degradê da impressão em papel. É uma tira estreita, repetida para
+      os lados e para baixo, desenhada pelo scripts/gerar-fundo.js.
+
+   2. AS LINHAS DE CAMPO (as outras linhas). Um campo de futebol visto de cima,
+      espalhado pela página: o círculo central, a grande área e os cantos, mais
+      duas cruzes de registro de gráfica. Cada linha é um degradê com uma faixa
+      fininha de cor e o resto transparente. Todas se repetem a cada 4400 px,
+      a mesma altura da tira dos papéis.
+
+   A tinta continua uma só: as linhas são a tinta da página, bem fraca. */
+
+body::before {
+  --traco: var(--cor-traco-do-fundo);
+  --raio-do-centro: min(16rem, 38vw);
+  --raio-da-meia-lua: min(9rem, 20vw);
+
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    /* Cruz de registro, em cima à esquerda (um risco deitado e um em pé) */
+    linear-gradient(to bottom, transparent 379px, var(--traco) 379px 381px, transparent 381px) left 24px top 0 / 22px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 369px, var(--traco) 369px 391px, transparent 391px) left 34px top 0 / 2px 4400px repeat-y,
+    /* Cruz de registro, mais abaixo à direita */
+    linear-gradient(to bottom, transparent 3049px, var(--traco) 3049px 3051px, transparent 3051px) right 24px top 0 / 22px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 3039px, var(--traco) 3039px 3061px, transparent 3061px) right 34px top 0 / 2px 4400px repeat-y,
+
+    /* O círculo central: um anel, a linha do meio do campo e o ponto do pontapé inicial */
+    radial-gradient(circle at 50% 1180px, transparent calc(var(--raio-do-centro) - 4px), var(--traco) calc(var(--raio-do-centro) - 3px), var(--traco) var(--raio-do-centro), transparent calc(var(--raio-do-centro) + 1px)) 0 0 / 100% 4400px repeat-y,
+    linear-gradient(to bottom, transparent 1178px, var(--traco) 1178px 1181px, transparent 1181px) 0 0 / 100% 4400px repeat-y,
+    radial-gradient(circle at 50% 1180px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
+
+    /* A grande área: a linha de fundo, os dois lados, a linha da frente, a marca do pênalti... */
+    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2002px, transparent 2002px) 0 0 / 100% 4400px repeat-y,
+    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 27% 0 / 3px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 73% 0 / 3px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 2329px, var(--traco) 2329px 2332px, transparent 2332px) center top / 46% 4400px repeat-y,
+    radial-gradient(circle at 50% 2220px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
+    /* ...e a meia-lua. O anel tem o centro na marca do pênalti, mas esta camada
+       só começa na linha da frente da área: o que ficaria dentro da área não aparece. */
+    radial-gradient(circle at 50% -112px, transparent calc(var(--raio-da-meia-lua) - 4px), var(--traco) calc(var(--raio-da-meia-lua) - 3px), var(--traco) var(--raio-da-meia-lua), transparent calc(var(--raio-da-meia-lua) + 1px)) 0 2332px / 100% 4400px repeat-y,
+
+    /* Os cantos: outra linha de fundo e os dois quartos de círculo do escanteio.
+       Esta camada termina na linha: só aparece a metade de cima de cada anel. */
+    linear-gradient(to bottom, transparent 3399px, var(--traco) 3399px 3402px, transparent 3402px) 0 0 / 100% 4400px repeat-y,
+    radial-gradient(circle at 0 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
+    radial-gradient(circle at 100% 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
+
+    /* Os papéis e as passagens em retícula */
+    var(--fundo-papeis) 0 0 / 16px 4400px repeat;
 }
 ````
 
@@ -4731,7 +4834,7 @@ html:not(.com-js) .so-com-js {
   display: none;
 }
 
-/* "Role para ver": um fio que desce. Só existe com as cenas em movimento. */
+/* "Desça para continuar" da abertura: um fio que desce. Só existe com as cenas em movimento. */
 .rolar-dica {
   display: none;
 }
@@ -4743,13 +4846,50 @@ html:not(.com-js) .so-com-js {
   font-weight: 700;
 }
 
-.rolar-dica i {
+.rolar-dica i,
+.cena-desca i {
   display: block;
   width: 2px;
   height: 2.25rem;
   background: var(--cor-texto);
   transform-origin: top;
+}
+
+.rolar-dica i {
   animation: fio-descendo 1.6s ease-in-out 3;   /* três vezes e para */
+}
+
+/* O aviso "Desça para continuar", no pé de cada palco (posto pelo js/cenas.js).
+   Fica em uma etiqueta de papel claro, para ser lido por cima de qualquer cena. */
+.cena-desca {
+  display: none;
+}
+
+.com-cenas .cena-desca {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: var(--espaco-4);
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  max-width: none;
+  padding: var(--espaco-1) var(--espaco-3);
+  background: var(--cor-superficie);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.cena-desca i {
+  height: 1.5rem;
+}
+
+/* O fio desce três vezes cada vez que a cena chega à tela, e para */
+.cena-na-tela .cena-desca i {
+  animation: fio-descendo 1.6s ease-in-out 3;
 }
 
 @keyframes fio-descendo {
@@ -5528,7 +5668,7 @@ html:not(.com-cenas) #pagina-base {
 .com-cenas .trilha {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 3.25rem;   /* sobra o pé do palco para o aviso "Desça para continuar" */
   left: 0;
   display: flex;
   align-items: center;
@@ -5595,6 +5735,20 @@ html:not(.com-cenas) #pagina-base {
 .com-cenas .voo-fim .cena-titulo {
   position: static;
   pointer-events: auto;
+}
+
+/* ---------- Janela não muito alta (notebook, celular pequeno) ----------
+   Com menos de 640 px de altura, cada grupo fica mais estreito. As bandeiras
+   encolhem junto, e o link "Ver o Grupo no álbum" não fica debaixo do aviso
+   "Desça para continuar". */
+@media (max-height: 40rem) {
+  .com-cenas .grupo {
+    width: min(78vw, 16rem);
+  }
+
+  .com-cenas .grupo-letra {
+    font-size: 4.5rem;
+  }
 }
 
 /* ---------- Tela baixa (celular deitado, janela pequena) ----------
@@ -8137,6 +8291,18 @@ function registrarCena(elemento, cena) {
   cena.naTela = false;
   cena.suja = true;       // "precisa ser redesenhada"
   cena.comecou = false;
+
+  // O aviso "Desça para continuar", no pé do palco. Ele avisa que a cena só
+  // anda com a rolagem. Por padrão aparece desde o começo da cena; o atributo
+  // data-aviso-de="0.2" no HTML faz aparecer só a partir de 20%.
+  // É uma ajuda para os olhos: fica fora da leitura de tela.
+  cena.aviso = document.createElement('p');
+  cena.aviso.className = 'cena-desca';
+  cena.aviso.setAttribute('aria-hidden', 'true');
+  cena.aviso.append(document.createElement('i'), 'Desça para continuar');
+  elemento.querySelector('.cena-palco').append(cena.aviso);
+  cena.avisoDe = Number(elemento.dataset.avisoDe || -1);
+
   CENAS.push(cena);
   return cena;
 }
@@ -8180,7 +8346,10 @@ function medirRolagem() {
   for (const cena of CENAS) {
     const caixa = cena.elemento.getBoundingClientRect();
     cena.alvo = limitar(-caixa.top / (caixa.height - alturaDaTela));
-    cena.naTela = caixa.bottom > 0 && caixa.top < alturaDaTela;
+    const naTela = caixa.bottom > 0 && caixa.top < alturaDaTela;
+    // A classe "cena-na-tela" faz o fio do aviso descer de novo quando a cena chega
+    if (naTela !== cena.naTela) cena.elemento.classList.toggle('cena-na-tela', naTela);
+    cena.naTela = naTela;
   }
 }
 
@@ -8206,6 +8375,8 @@ function quadro(agora) {
     if (cena.p !== antes || cena.suja || (cena.viva && cena.viva(agora))) {
       cena.desenhar(cena.p, agora);
       cena.suja = false;
+      // O aviso de descer some perto do fim da cena, quando não há mais o que esperar
+      cena.aviso.style.opacity = String(trecho(cena.avisoDe, cena.avisoDe + 0.06, cena.p) * (1 - trecho(0.8, 0.88, cena.p)));
     }
   }
   pedirQuadro();
@@ -8248,6 +8419,7 @@ function aplicarModoDasCenas() {
   // Primeiro tudo volta ao que o CSS manda; depois cada cena mede a tela nova
   for (const cena of CENAS) {
     cena.parar();
+    cena.aviso.removeAttribute('style');
     cena.comecou = false;
   }
   medirCenas();
@@ -12993,12 +13165,35 @@ const PARES = [
   { frente: ['foco', 'foco-vao'], fundo: 'etiqueta-fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre área na cor da tinta' },
 ];
 
+// Os outros papéis do fundo. A página muda de papel conforme a pessoa rola,
+// então tudo o que fica direto sobre a página precisa passar em cada um deles.
+const PAPEIS = [
+  { token: 'papel-2', nome: 'papel 2' },
+  { token: 'papel-3', nome: 'papel 3' },
+  { token: 'papel-4', nome: 'papel 4' },
+];
+for (const papel of PAPEIS) {
+  PARES.push(
+    { frente: 'texto', fundo: papel.token, tipo: 'texto', uso: 'Texto principal sobre o ' + papel.nome },
+    { frente: 'texto-secundario', fundo: papel.token, tipo: 'texto', uso: 'Texto de apoio sobre o ' + papel.nome },
+    { frente: 'acao', fundo: papel.token, tipo: 'texto', uso: 'Link e botão principal sobre o ' + papel.nome },
+    { frente: 'sucesso', fundo: papel.token, tipo: 'texto', uso: 'Mensagem de sucesso sobre o ' + papel.nome },
+    { frente: 'erro', fundo: papel.token, tipo: 'texto', uso: 'Mensagem de erro sobre o ' + papel.nome },
+    { frente: 'borda', fundo: papel.token, tipo: 'componente', uso: 'Borda de campo e de vaga sobre o ' + papel.nome },
+    { frente: ['figurinha-tinta', 'figurinha-papel'], fundo: papel.token, tipo: 'componente', uso: 'Etiqueta da figurinha (fundo ou contorno) sobre o ' + papel.nome },
+    { frente: ['foco', 'foco-vao'], fundo: papel.token, tipo: 'componente', uso: 'Foco (anel ou vão) sobre o ' + papel.nome }
+  );
+}
+
 // ---------------------------------------------------------------------------
 // 4. O que cada cor é e por que foi escolhida (frases curtas, para o relatório)
 // ---------------------------------------------------------------------------
 
 const DESCRICAO = [
-  { token: 'fundo', nome: 'Papel rosa / papel azul', onde: 'Fundo de todas as páginas', motivo: 'Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto.' },
+  { token: 'fundo', nome: 'Papel rosa / papel azul', onde: 'Primeira faixa do fundo de todas as páginas (e a cor do cabeçalho)', motivo: 'Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto.' },
+  { token: 'papel-2', nome: 'Papel pêssego / papel roxo', onde: 'Segunda faixa do fundo', motivo: 'Vizinho do rosa no círculo das cores: o papel muda sem brigar com o anterior. No escuro, o roxo é o vizinho do azul.' },
+  { token: 'papel-3', nome: 'Papel menta / papel petróleo', onde: 'Terceira faixa do fundo', motivo: 'Verde claro lembra o gramado: é a faixa onde fica o desenho da grande área. No escuro, um azul-petróleo.' },
+  { token: 'papel-4', nome: 'Papel lilás / papel vinho', onde: 'Quarta faixa do fundo', motivo: 'Fica entre o verde e o rosa do começo, para o fundo emendar quando se repete em páginas compridas.' },
   { token: 'superficie', nome: 'Papel de cupom', onde: 'Cartões, campos de formulário e painel', motivo: 'Quase branco: passa limpeza e marca o que é papel solto em cima da página. No escuro, o que está na frente fica mais claro.' },
   { token: 'vaga', nome: 'Rosa-sombra / rebaixo', onde: 'Espaço vazio da figurinha e trilho da barra de progresso', motivo: 'O próprio papel um tom abaixo: comunica ausência e lugar reservado sem usar cinza.' },
   { token: 'texto', nome: 'Azul-tinteiro / tinta rosa', onde: 'Textos, títulos e fios', motivo: 'Azul-escuro transmite confiança e seriedade de coisa impressa. No escuro, um rosa quase branco é mais macio que o branco puro.' },
@@ -13050,7 +13245,7 @@ linhas.push('## Como ler');
 linhas.push('');
 linhas.push('- Contraste é a diferença de claridade entre duas cores, de 1:1 (iguais) a 21:1 (preto no branco).');
 linhas.push('- Mínimos do WCAG 2.2: texto normal 4,5:1 (nível AA) e 7:1 (nível AAA); texto grande, bordas, ícones, anel de foco e barras 3:1.');
-linhas.push('- Direção visual: "Uma tinta só". Tema claro é tinta azul sobre papel rosa; tema escuro é tinta rosa sobre papel azul.');
+linhas.push('- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página: são quatro papéis por tema.');
 linhas.push('');
 linhas.push('## Paleta e motivo de cada cor');
 linhas.push('');
@@ -13089,7 +13284,61 @@ for (const tema of TEMAS) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. As cores das seleções (o desenho dentro da figurinha)
+// 6. As linhas de campo desenhadas no fundo
+// ---------------------------------------------------------------------------
+// A linha é a própria tinta, bem fraca, por cima do papel (--cor-traco-do-fundo).
+// Um texto pode ficar em cima de uma linha. Por isso a conta é refeita com o
+// papel "riscado": a cor que o olho vê quando a linha se mistura com o papel.
+// No alto contraste não há linha (ela é transparente), então não há o que conferir.
+
+// Acha os dois valores no tokens.css, na ordem em que aparecem: claro e escuro.
+// Cada um tem o formato rgba(vermelho, verde, azul, força), com força de 0 a 1.
+const TRACOS = [...fs.readFileSync(ARQUIVO_TOKENS, 'utf8').matchAll(/--cor-traco-do-fundo:\s*rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/g)];
+
+// Mistura a linha com o papel e devolve a cor resultante em #HEX
+function papelRiscado(papelHex, traco) {
+  const forca = Number(traco[4]);
+  let hex = '#';
+  for (let canal = 0; canal < 3; canal++) {
+    const doPapel = parseInt(papelHex.slice(1 + canal * 2, 3 + canal * 2), 16);
+    const daLinha = Number(traco[1 + canal]);
+    const visto = Math.round(doPapel * (1 - forca) + daLinha * forca);
+    hex += visto.toString(16).padStart(2, '0');
+  }
+  return hex.toUpperCase();
+}
+
+const TEXTOS_SOBRE_A_PAGINA = ['texto', 'texto-secundario', 'acao', 'sucesso', 'erro'];
+let paresDasLinhas = 0;
+
+linhas.push('## Contraste: linhas de campo do fundo');
+linhas.push('');
+linhas.push('As linhas de campo são a tinta da página bem fraca, por cima do papel. A tabela mostra cada papel já com a linha por cima e o texto que menos contrasta com ele. Mínimo de 4,5:1. No alto contraste não há linhas.');
+linhas.push('');
+linhas.push('| Tema | Papel | Papel com a linha | Texto que menos contrasta | Contraste | Resultado |');
+linhas.push('|---|---|---|---|---|---|');
+[claro, escuro].forEach(function (cores, i) {
+  for (const papel of ['fundo', 'papel-2', 'papel-3', 'papel-4']) {
+    const riscado = papelRiscado(cores[papel], TRACOS[i]);
+    let pior = TEXTOS_SOBRE_A_PAGINA[0];
+    for (const nome of TEXTOS_SOBRE_A_PAGINA) {
+      if (contraste(cores[nome], riscado) < contraste(cores[pior], riscado)) pior = nome;
+    }
+    const razao = contraste(cores[pior], riscado);
+    const veredito = resultado(razao, 'texto');
+    total += TEXTOS_SOBRE_A_PAGINA.length;
+    paresDasLinhas += TEXTOS_SOBRE_A_PAGINA.length;
+    if (veredito === 'REPROVA') {
+      reprovados += 1;
+      console.log(`REPROVA  Linha do fundo, tema ${i === 0 ? 'claro' : 'escuro'}: --cor-${pior} sobre ${riscado} = ${formatar(razao)}`);
+    }
+    linhas.push(`| ${i === 0 ? 'Claro' : 'Escuro'} | \`${cores[papel]}\` | \`${riscado}\` | \`--cor-${pior}\` | ${formatar(razao)} | ${veredito} |`);
+  }
+});
+linhas.push('');
+
+// ---------------------------------------------------------------------------
+// 7. As cores das seleções (o desenho dentro da figurinha)
 // ---------------------------------------------------------------------------
 // Cada seleção tem três cores em js/dados.js: campo, camisa e número.
 // O desenho precisa de dois contrastes de pelo menos 3:1:
@@ -13130,7 +13379,7 @@ linhas.push('');
 
 linhas.push('## Resumo');
 linhas.push('');
-linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
+linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais ${paresDasLinhas} pares de texto sobre as linhas do fundo, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
 linhas.push(`- Reprovados: ${reprovados}.`);
 linhas.push('- A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.');
 linhas.push('- A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.');
@@ -13142,6 +13391,142 @@ console.log(`${total} pares conferidos, ${reprovados} reprovados. Tabela escrita
 
 // Se algum par reprovar, o script termina com erro (código 1), para ninguém deixar passar.
 process.exit(reprovados > 0 ? 1 : 0);
+````
+
+### scripts/gerar-fundo.js
+
+````js
+// ============================================================================
+// gerar-fundo.js
+// ----------------------------------------------------------------------------
+// O que faz: desenha o fundo da página (os papéis coloridos e as passagens em
+// retícula entre eles) e guarda o desenho no fim do css/tokens.css.
+//
+// Como rodar (na pasta do projeto):   node scripts/gerar-fundo.js
+// Rode de novo sempre que mudar uma cor de papel (--cor-fundo ou --cor-papel-2,
+// 3 e 4) no css/tokens.css.
+//
+// Por que um script: o fundo é uma imagem SVG escrita dentro do próprio CSS, e
+// uma imagem assim não consegue ler as variáveis de cor do site. O script lê
+// as cores no tokens.css e escreve a imagem com elas, uma para cada tema.
+//
+// Como é o desenho: uma tira bem estreita (16 px) e bem alta (4400 px), que o
+// navegador repete para os lados e para baixo. De cima para baixo:
+//   papel 1, passagem, papel 2, passagem, papel 3, passagem, papel 4, passagem
+// e volta ao papel 1. Em cada passagem, bolinhas da cor seguinte vão crescendo
+// linha a linha até se juntarem: é assim que a impressão em papel faz um
+// degradê (a retícula).
+// ============================================================================
+
+const fs = require('fs');
+const path = require('path');
+
+const ARQUIVO_TOKENS = path.join(__dirname, '..', 'css', 'tokens.css');
+
+const LARGURA = 16;         // largura da tira, igual à distância entre as bolinhas
+const ALTURA = 4400;        // altura da tira: depois disso o fundo se repete
+const LINHAS = 16;          // quantas linhas de bolinhas tem cada passagem
+const ENTRE_LINHAS = 14;    // distância de uma linha de bolinhas até a próxima
+const PASSAGEM = LINHAS * ENTRE_LINHAS;
+// Onde cada papel termina e começa a passagem para o próximo (em pixels, de cima para baixo)
+const FIM_DE_CADA_PAPEL = [520, 1600, 2680, 3760];
+
+const INICIO = '/* FUNDO-INICIO */';
+const FIM = '/* FUNDO-FIM */';
+
+// ---------------------------------------------------------------------------
+// 1. Ler as cores de papel de cada tema no tokens.css
+// ---------------------------------------------------------------------------
+
+function lerPapeis(css, seletor) {
+  const papeis = {};
+  let dentro = false;
+  for (const linha of css.split('\n')) {
+    if (linha.trim().endsWith('{')) dentro = linha.trim() === seletor + ' {';
+    if (linha.trim() === '}') dentro = false;
+    if (!dentro) continue;
+    const achado = /--cor-(fundo|papel-[234])\s*:\s*(#[0-9a-fA-F]{6})\s*;/.exec(linha);
+    if (achado) papeis[achado[1]] = achado[2];
+  }
+  return papeis;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Desenhar a tira
+// ---------------------------------------------------------------------------
+
+function desenharTira(cores) {
+  const papeis = [cores.fundo, cores['papel-2'], cores['papel-3'], cores['papel-4']];
+  const pecas = [];
+  let y = 0;
+
+  FIM_DE_CADA_PAPEL.forEach(function (fim, i) {
+    const seguinte = papeis[(i + 1) % papeis.length];
+
+    // A faixa lisa deste papel, que continua por baixo das bolinhas da passagem
+    pecas.push("<rect y='" + y + "' width='" + LARGURA + "' height='" + (fim + PASSAGEM - y) + "' fill='" + papeis[i] + "'/>");
+
+    // A passagem: bolinhas do papel seguinte, cada linha um pouco maiores.
+    // As linhas são desencontradas (uma no meio, a outra nas beiradas da tira),
+    // como na retícula de jornal.
+    for (let linha = 0; linha < LINHAS; linha++) {
+      const cy = fim + ENTRE_LINHAS / 2 + linha * ENTRE_LINHAS;
+      const raio = (1.5 + (linha / (LINHAS - 1)) * 8).toFixed(1);
+      const centros = linha % 2 === 0 ? [LARGURA / 2] : [0, LARGURA];
+      for (const cx of centros) {
+        pecas.push("<circle cx='" + cx + "' cy='" + cy + "' r='" + raio + "' fill='" + seguinte + "'/>");
+      }
+    }
+    y = fim + PASSAGEM;
+  });
+
+  // O resto da tira volta a ser o papel 1, que emenda com o começo da repetição
+  pecas.push("<rect y='" + y + "' width='" + LARGURA + "' height='" + (ALTURA - y) + "' fill='" + papeis[0] + "'/>");
+
+  const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + LARGURA + "' height='" + ALTURA + "'>" + pecas.join('') + '</svg>';
+  // Dentro de um url() do CSS, estes três sinais precisam ir disfarçados
+  return 'url("data:image/svg+xml,' + svg.replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E') + '")';
+}
+
+// ---------------------------------------------------------------------------
+// 3. Guardar no fim do tokens.css, entre as duas marcas
+// ---------------------------------------------------------------------------
+
+let css = fs.readFileSync(ARQUIVO_TOKENS, 'utf8').replace(/\r\n/g, '\n');
+
+const claro = lerPapeis(css, ':root');
+const escuro = Object.assign({}, claro, lerPapeis(css, '[data-tema="escuro"]'));
+for (const tema of [claro, escuro]) {
+  for (const nome of ['fundo', 'papel-2', 'papel-3', 'papel-4']) {
+    if (!tema[nome]) throw new Error('Não achei a cor --cor-' + nome + ' no tokens.css');
+  }
+}
+
+const bloco = [
+  INICIO,
+  ':root {',
+  '  --fundo-papeis: ' + desenharTira(claro) + ';',
+  '}',
+  '',
+  '[data-tema="escuro"] {',
+  '  --fundo-papeis: ' + desenharTira(escuro) + ';',
+  '}',
+  '',
+  '/* No alto contraste o fundo é liso: branco ou preto, sem desenho */',
+  '[data-contraste="alto"] {',
+  '  --fundo-papeis: none;',
+  '}',
+  FIM,
+].join('\n');
+
+if (css.includes(INICIO) && css.includes(FIM)) {
+  css = css.slice(0, css.indexOf(INICIO)) + bloco + css.slice(css.indexOf(FIM) + FIM.length);
+} else {
+  css = css.trimEnd() + '\n\n/* ---------- Fundo da página ----------\n   Gerado por:  node scripts/gerar-fundo.js   (não edite à mão o que está\n   entre as duas marcas: mude as cores de papel lá em cima e rode o script) */\n' + bloco + '\n';
+}
+
+fs.writeFileSync(ARQUIVO_TOKENS, css, 'utf8');
+console.log('Fundo desenhado para os temas claro e escuro. Guardado em css/tokens.css');
 ````
 
 ### scripts/gerar-anexo.js
@@ -13183,7 +13568,7 @@ const GRUPOS = [
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',
-    primeiro: ['contraste.js', 'gerar-anexo.js'],
+    primeiro: ['contraste.js', 'gerar-fundo.js', 'gerar-anexo.js'],
   },
   {
     titulo: 'Ferramentas de apoio (HTML)', pasta: 'scripts', extensao: '.html', linguagem: 'html',

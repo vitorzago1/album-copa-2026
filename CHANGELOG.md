@@ -26,6 +26,13 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Nove efeitos escolhidos no primeiro laboratório: lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque no pacotinho, virar a página entre as 7 páginas, casas do álbum que assentam ao rolar, placar girando, retícula que acende em volta do mouse e traço que se desenha (campo atrás dos números e no fim do álbum).
 - Corrigido: a figurinha recém-colada passava alguns pixels da beirada da tela durante a animação.
 - 47 verificações automáticas novas (416 no total).
+- Fundo das 7 páginas com quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula entre eles. A tinta continua uma só.
+- Linhas de campo bem fracas desenhadas no fundo: círculo central, grande área, cantos e cruzes de registro.
+- Script `scripts/gerar-fundo.js`, que desenha a tira dos papéis com as cores do `css/tokens.css`.
+- Aviso "Desça para continuar" nas oito cenas da página inicial.
+- Corrigido: em janela com menos de 640 px de altura, o link "Ver o Grupo no álbum" ficava muito perto do pé do palco.
+- Script de contraste confere também os papéis novos e o texto sobre as linhas do fundo: 372 pares, 0 reprovados.
+- 37 verificações automáticas novas (453 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

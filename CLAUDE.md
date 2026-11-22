@@ -35,17 +35,19 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
 - Arrastar sempre tem alternativa por botão.
 - Movimento respeita `prefers-reduced-motion` e a chave "Reduzir animações" do painel.
 
-## Design: direção "Uma tinta só"
+## Design: direção "Uma tinta só, vários papéis"
 
-- A página é impressa em uma tinta só: papel rosa com tinta azul no tema claro; papel azul com tinta rosa no escuro. A cor de verdade só chega pelas figurinhas.
+- A página é impressa em uma tinta só: tinta azul no tema claro, tinta rosa no escuro. A cor viva só chega pelas figurinhas.
+- O papel do fundo muda ao longo da página (pedido do Vitor em 22/11/2026): quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula e linhas de campo bem fracas. Fica tudo no `body::before` (`css/base.css`). No alto contraste o fundo é liso.
+- Ao mudar uma cor de papel em `css/tokens.css`: rodar `node scripts/gerar-fundo.js` (redesenha o fundo) e depois `node scripts/contraste.js`.
 - Fontes: Londrina Solid (títulos e números) e Atkinson Hyperlegible Next (leitura). No máximo essas duas famílias.
 - Cantos têm significado: canto vivo é o que está impresso na página (vaga, fio); 4 px é ferramenta (botão, campo); 10 px com borda branca é o que se cola (figurinha, pacotinho, cupom).
 - Só a figurinha colada tem sombra. Só o que foi posto à mão fica levemente torto.
 - Linha tracejada significa picote ("dá para destacar").
 - Nada de emoji no lugar de ícone, rótulos em caixa-alta, seta no fim de botão ou cards todos iguais.
 - A figurinha é numerada em sequência ("Nº 127"). Não usar código de três letras mais número.
-- Movimento: a página inicial é uma apresentação em cenas presas à rolagem (decisão do Vitor em 21/11/2026, depois dos dois laboratórios). Nas outras páginas, o movimento só responde a uma ação da pessoa. Toda cena tem uma versão parada, usada com menos movimento, com letra maior e sem JavaScript.
-- Efeitos escolhidos pelo Vitor no laboratório 1 e já aplicados (etapa 12): lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque, virar a página, entrar ao rolar, placar girando, retícula que acende e traço que se desenha. As texturas de fundo e as outras ideias do laboratório não foram escolhidas: não aplicar.
+- Movimento: a página inicial é uma apresentação em cenas presas à rolagem (decisão do Vitor em 21/11/2026, depois dos dois laboratórios). Nas outras páginas, o movimento só responde a uma ação da pessoa. Toda cena tem uma versão parada, usada com menos movimento, com letra maior e sem JavaScript. Toda cena em movimento mostra o aviso "Desça para continuar", criado pelo `js/cenas.js` (pedido do Vitor em 22/11/2026).
+- Efeitos escolhidos pelo Vitor no laboratório 1 e já aplicados (etapa 12): lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque, virar a página, entrar ao rolar, placar girando, retícula que acende e traço que se desenha. As outras ideias do laboratório (incluindo as texturas de fundo de lá) não foram escolhidas: não aplicar. O fundo com vários papéis não veio do laboratório; foi um pedido à parte.
 
 ## Conteúdo e direitos
 

@@ -9,6 +9,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - Conceito: a página é impressa em uma tinta só (papel rosa com tinta azul); a cor de verdade só chega pelas figurinhas coladas.
 - Tema escuro: papel e tinta trocam de lugar (papel azul com tinta rosa). Não é inversão automática de cores.
 - A figurinha é um objeto impresso: a tinta dela não muda quando o tema muda.
+- Em 22/11/2026 a direção passou a ser **Uma tinta só, vários papéis**: a tinta continua uma só, e o papel do fundo muda de cor ao longo da página (ver "Fundo com vários papéis e aviso de descer", mais abaixo).
 
 ## Regras visuais
 
@@ -156,7 +157,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 1.4.4 e 1.4.12 Texto maior e espaçamento | Com letra maior ou mais espaço no texto, a página usa a versão parada. |
 | 1.4.10 Reflow | Sem rolagem lateral em 320 px, em movimento e parada. |
 | 2.1.1 Teclado | Todos os botões e links das cenas recebem foco. A rolagem pelas cenas funciona com as setas, Espaço e Page Down. |
-| 2.2.2 Pausar, parar, ocultar | Nada se mexe sozinho por mais de 5 segundos. O balanço dos pontinhos para depois do último gesto. O fio de "Role para ver" repete 3 vezes. |
+| 2.2.2 Pausar, parar, ocultar | Nada se mexe sozinho por mais de 5 segundos. O balanço dos pontinhos para depois do último gesto. O fio de "Desça para continuar" repete 3 vezes. |
 | 2.3.3 Animação por interação | "Reduzir animações" troca todas as cenas pela versão parada. |
 | 2.4.3 e 2.4.7 Ordem e foco visível | A ordem do foco segue a ordem da página. Ao focar um botão de dentro de uma cena, a rolagem vai até o ponto em que ele aparece. |
 | 2.4.11 Foco não encoberto | Nenhum botão focado fica atrás de outra peça (conferido no passeio com o Tab). |
@@ -204,6 +205,49 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 2.3.3 Animação por interação | "Reduzir animações" desliga a inclinação, a batida, o carimbo, a entrada das casas, o desenho do campo, a retícula e a virada de página. |
 | 2.4.7 e 2.4.11 Foco | Uma casa com foco está inteira na tela e, portanto, assentada e opaca. Ao colar, o foco vai para a figurinha, como antes. |
 | 2.5.8 Tamanho do alvo | Os botões "Colar" continuam com 44 px de altura no lugar deles. |
+
+## Fundo com vários papéis e aviso de descer (etapa 13)
+
+- **Pedido do aluno em 22/11/2026.** Um fundo com mais de uma cor e com detalhes, no lugar da cor única, e um aviso "Desça para continuar" onde é preciso rolar. Na etapa 12 as texturas de fundo do laboratório tinham ficado de fora; este pedido veio depois e vale no lugar daquela decisão.
+- **O que mudou na direção.** De "Uma tinta só" para "Uma tinta só, vários papéis". Texto, fios e botões não ganharam cor nova. Os papéis são tons claros (no escuro, tons fundos), e a cor viva continua chegando só pelas figurinhas.
+- **Quatro papéis por tema.** Claro: rosa, pêssego, menta e lilás. Escuro: azul, roxo, petróleo e vinho. Depois do quarto papel o fundo volta ao primeiro e se repete a cada 4400 px, sem emenda.
+- **Passagem em retícula, e não degradê liso.** Bolinhas que crescem são a mesma linguagem dos pontinhos da abertura e do retrato das figurinhas: impressão em papel.
+- **Topo sempre no papel 1.** Toda página começa no rosa (ou no azul): o cabeçalho fica igual nas 7 páginas.
+- **Linhas de campo.** Círculo central, grande área com meia-lua, cantos e duas cruzes de registro. Desenho próprio, feito com degradês de CSS; não é logo nem emblema.
+- **Força das linhas.** 9% da tinta no tema claro e 7% no escuro. Com esses valores, o texto que menos contrasta ainda passa de 4,5:1 quando fica em cima de uma linha (pior caso: 4,76:1).
+- **Uma camada só.** Papéis e linhas ficam no `body::before`, do tamanho da página inteira, atrás do conteúdo. O fundo rola junto com a página e não se mexe.
+- **Por que um script desenha a tira.** A tira dos papéis é uma imagem SVG escrita dentro do CSS, e uma imagem assim não lê as variáveis de cor do site. O `scripts/gerar-fundo.js` lê os quatro papéis de cada tema no `css/tokens.css` e escreve a imagem com eles. Ao mudar uma cor de papel, roda-se o script de novo.
+- **Sem arquivo de imagem novo.** A tira fica dentro do CSS: funciona com o site aberto direto do arquivo e não faz pedido a mais.
+- **Alto contraste.** O fundo fica liso, branco ou preto, sem papéis e sem linhas.
+- **Aviso criado pelo motor das cenas.** O `js/cenas.js` põe o aviso em toda cena registrada; uma cena nova ganha o aviso sem código a mais. O atributo `data-aviso-de` no HTML atrasa a entrada (usado na abertura, com 0.2, porque o convite da primeira tela já traz a frase).
+- **Etiqueta de papel claro.** O aviso fica em uma etiqueta do papel de cupom, de canto vivo, para ser lido por cima de qualquer cena.
+- **Quando some.** Entre 80% e 88% da cena, quando a próxima seção já está chegando.
+- **No que o aviso encosta.** Em nenhum texto, botão ou link. Ele pode passar por cima do desenho das figurinhas do mergulho e do voo, que são enfeite em movimento.
+
+### WCAG 2.2 no fundo e no aviso
+
+| Critério | Como foi atendido |
+|---|---|
+| 1.1.1 Conteúdo não textual | O fundo é enfeite feito em CSS e não entra na leitura de tela. O aviso tem `aria-hidden`. |
+| 1.4.1 Uso da cor | A cor do papel não informa nada: nenhuma seção depende dela para ser entendida. |
+| 1.4.3 Contraste | Texto, link e mensagens conferidos nos quatro papéis dos dois temas. Menor valor sobre o papel liso: 5,62:1 (link sobre o papel rosa). Menor valor com uma linha de campo por cima: 4,76:1. Tabela em `docs/cores.md`. |
+| 1.4.11 Contraste não textual | Borda de campo e de vaga: de 4,86:1 a 5,58:1 nos quatro papéis. Foco: acima de 9:1. |
+| 1.4.4 e 1.4.12 Texto maior e espaçamento | Com letra maior ou mais espaço no texto, a página inicial usa a versão parada, sem aviso. |
+| 1.4.10 Reflow | A camada do fundo não cria rolagem lateral em 320 px, em nenhuma das 7 páginas. |
+| 2.2.2 Pausar, parar, ocultar | O fundo não se mexe. O fio do aviso desce 3 vezes (4,8 segundos) e para. |
+| 2.3.3 Animação por interação | Com "Reduzir animações" não há cena presa nem aviso. |
+| 2.4.11 Foco não encoberto | O aviso não cobre nenhum link ou botão (conferido em 6 tamanhos de tela e com um link de grupo focado pelo teclado). |
+
+## Verificação feita na etapa 13
+
+- 37 verificações automáticas novas no Microsoft Edge sem janela. Fundo: presente nas 7 páginas e nos dois temas; cor de cada papel lida nos pixels de um print (papéis 1, 2, 3, 4 e de novo 1); bolinhas da retícula que crescem; força da linha de campo; alto contraste liso; sem rolagem lateral em 320 px; links por cima do fundo continuam clicáveis; fundo igual sem JavaScript; a tira guardada no `tokens.css` é a que o script desenha com as cores atuais. Aviso: presente nas 8 cenas, fora da leitura de tela, aceso no meio e apagado no fim de cada cena, fio que desce 3 vezes, ausente na versão parada e sem JavaScript.
+- O aviso foi conferido em 6 tamanhos de tela (1280×720, 1366×625, 1024×600, 740×360, 360×740 e 320×568), em 6 pontos de cada cena: cabe na tela e não cobre texto, botão ou link.
+- Defeito achado por essa conferência e corrigido: em 1024×600 o aviso ficava por cima do link "Ver o Grupo no álbum".
+- As 416 verificações anteriores continuam passando.
+- Contraste: `node scripts/contraste.js` com 372 pares, 0 reprovados.
+- Limite conhecido: nos pontos em que duas linhas de campo se cruzam (pontos de poucos pixels, menores que uma letra) a força da linha dobra. Um texto exatamente em cima de um desses pontos teria ali 4,06:1 no pior caso. A conta de contraste considera uma linha por vez.
+- No navegador embutido do aplicativo de programação, a página inicial carregou os arquivos novos sem erro no console (tema escuro, 8 avisos, fundo com as 16 camadas).
+- Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 12
 
