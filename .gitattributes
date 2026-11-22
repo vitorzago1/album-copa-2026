@@ -1,0 +1,2 @@
+# A biblioteca externa fica exatamente como foi baixada: o git não troca as quebras de linha dela.
+js/vendor/* -text
