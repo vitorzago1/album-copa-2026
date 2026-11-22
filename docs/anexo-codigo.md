@@ -4,35 +4,36 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
-- Arquivos: 35.
-- Linhas de código (com comentários): 12527.
+- Arquivos: 36.
+- Linhas de código (com comentários): 13152.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 440 |
-| `album.html` | 219 |
-| `pacotinhos.html` | 136 |
-| `trocas.html` | 165 |
-| `login.html` | 182 |
-| `contato.html` | 159 |
-| `sobre.html` | 301 |
-| `css/tokens.css` | 204 |
-| `css/base.css` | 479 |
-| `css/componentes.css` | 1130 |
-| `css/paginas.css` | 513 |
-| `css/acessibilidade.css` | 177 |
-| `css/cenas.css` | 1044 |
+| `index.html` | 453 |
+| `album.html` | 234 |
+| `pacotinhos.html` | 137 |
+| `trocas.html` | 166 |
+| `login.html` | 183 |
+| `contato.html` | 160 |
+| `sobre.html` | 302 |
+| `css/tokens.css` | 207 |
+| `css/base.css` | 544 |
+| `css/componentes.css` | 1361 |
+| `css/paginas.css` | 537 |
+| `css/acessibilidade.css` | 222 |
+| `css/cenas.css` | 1069 |
 | `js/tema-acessibilidade.js` | 226 |
 | `js/menu.js` | 52 |
+| `js/efeitos.js` | 106 |
 | `js/estado.js` | 417 |
 | `js/figurinha.js` | 225 |
-| `js/album.js` | 622 |
-| `js/pacotinho.js` | 233 |
+| `js/album.js` | 700 |
+| `js/pacotinho.js` | 242 |
 | `js/trocas.js` | 200 |
 | `js/inicio.js` | 53 |
 | `js/carrossel.js` | 92 |
 | `js/cenas.js` | 254 |
-| `js/cenas-inicio.js` | 821 |
+| `js/cenas-inicio.js` | 827 |
 | `js/pacote3d.js` | 466 |
 | `js/pacotinho-3d.js` | 170 |
 | `js/formulario.js` | 53 |
@@ -63,6 +64,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
   <script src="js/dados.js" defer></script>
@@ -360,6 +362,18 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
       <div class="cena-palco">
         <h2 class="cena-titulo" id="titulo-numeros">A Copa de 2026 em números</h2>
+        <!-- Enfeite: as linhas de um campo, atrás dos números. A rolagem desenha o traço. -->
+        <svg class="campo-tracado campo-dos-numeros" id="campo-dos-numeros" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+          <rect pathLength="1" x="20" y="20" width="560" height="360"/>
+          <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
+          <circle pathLength="1" cx="300" cy="200" r="62"/>
+          <rect pathLength="1" x="20" y="105" width="92" height="190"/>
+          <rect pathLength="1" x="20" y="155" width="36" height="90"/>
+          <path pathLength="1" d="M112 160a50 50 0 0 1 0 80"/>
+          <rect pathLength="1" x="488" y="105" width="92" height="190"/>
+          <rect pathLength="1" x="544" y="155" width="36" height="90"/>
+          <path pathLength="1" d="M488 160a50 50 0 0 0 0 80"/>
+        </svg>
         <dl class="numeros" id="numeros">
           <div class="numero"><dt>seleções</dt><dd>48</dd></div>
           <div class="numero"><dt>figurinhas no álbum</dt><dd>288</dd></div>
@@ -508,6 +522,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Os scripts do álbum, nesta ordem: os dados, o caderninho do progresso,
        o desenho da figurinha e, por último, a página. O "defer" espera o HTML
@@ -565,7 +580,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <div class="fluxo">
         <h1>Álbum</h1>
         <p class="placar">
-          <span class="placar-numero" id="placar-coladas">0</span>
+          <!-- O número grande gira como um marcador antigo (js/album.js). Quem lê o
+               número para o leitor de tela é o texto escondido ao lado. -->
+          <span class="placar-numero"><span class="odometro" id="placar-odometro" aria-hidden="true"></span><span class="escondido" id="placar-coladas">0</span></span>
           <span>de <span id="placar-total">24</span> figurinhas coladas</span>
         </p>
         <!-- A barra é só desenho: o número já está escrito acima. -->
@@ -653,6 +670,18 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <p id="final-placar"></p>
           <p id="final-onde"></p>
           <p id="final-numeros"></p>
+          <!-- Enfeite: as linhas de um campo, que se desenham quando esta parte aparece na tela. -->
+          <svg class="campo-tracado" id="campo-do-final" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+            <rect pathLength="1" x="20" y="20" width="560" height="360"/>
+            <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
+            <circle pathLength="1" cx="300" cy="200" r="62"/>
+            <rect pathLength="1" x="20" y="105" width="92" height="190"/>
+            <rect pathLength="1" x="20" y="155" width="36" height="90"/>
+            <path pathLength="1" d="M112 160a50 50 0 0 1 0 80"/>
+            <rect pathLength="1" x="488" y="105" width="92" height="190"/>
+            <rect pathLength="1" x="544" y="155" width="36" height="90"/>
+            <path pathLength="1" d="M488 160a50 50 0 0 0 0 80"/>
+          </svg>
         </div>
 
         <div class="fluxo">
@@ -732,6 +761,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Os scripts dos pacotinhos, nesta ordem: os dados, o caderninho do progresso,
        o desenho da figurinha e, por último, a página. -->
@@ -873,6 +903,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Os scripts das trocas, nesta ordem: os dados, o caderninho do progresso,
        os ajudantes da figurinha e, por último, a página. -->
@@ -1043,6 +1074,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Os scripts da conta: os dados e o caderninho do progresso (para mostrar o álbum de
        quem entrou), os ajudantes de formulário e, por último, a página. -->
@@ -1230,6 +1262,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Os ajudantes de formulário e a conferência dos campos desta página. -->
   <script src="js/formulario.js" defer></script>
@@ -1394,6 +1427,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Para o modo demonstração: os dados, o caderninho do progresso e os dois botões. -->
   <script src="js/dados.js" defer></script>
@@ -1739,6 +1773,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-prata: #C5CAD6;              /* brilhante: laminado */
   --cor-prata-clara: #ECEEF3;
   --cor-ouro: #F2C230;               /* lendária: holográfico */
+  /* O arco-íris do papel holográfico. Fica por cima da lendária, bem fraco;
+     é brilho, não é texto nem fundo de texto. Não muda com o tema. */
+  --holografico: linear-gradient(115deg, #FF5D8F, #FFD166 22%, #5EEAD4 45%, #60A5FA 68%, #C084FC 90%);
 
   /* Foto impressa em uma tinta só: a parte escura da foto sai na cor da tinta
      e a parte clara fica na cor do papel */
@@ -2377,6 +2414,71 @@ a:hover {
 .secao + .secao {
   border-top: 2px solid var(--cor-texto);
 }
+
+/* ---------- Retícula que acende ----------
+   Uma camada do tamanho da tela, atrás de tudo, coberta de pontinhos de
+   impressão. A máscara só deixa ver os que estão perto do ponteiro: a posição
+   chega em --x e --y, escrita pelo js/efeitos.js. É só enfeite. */
+
+.lanterna {
+  position: fixed;
+  inset: 0;
+  z-index: -1;            /* atrás de todo o conteúdo, em cima só do papel */
+  pointer-events: none;
+  background: radial-gradient(circle, var(--cor-texto) 1.6px, transparent 2px) 0 0 / 11px 11px;
+  -webkit-mask-image: radial-gradient(circle 9rem at var(--x, 50%) var(--y, 50%), #000, transparent);
+  mask-image: radial-gradient(circle 9rem at var(--x, 50%) var(--y, 50%), #000, transparent);
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
+.lanterna-acesa {
+  opacity: 0.2;
+}
+
+/* Na página inicial em movimento a abertura já tem os seus pontinhos */
+.com-cenas .lanterna {
+  display: none;
+}
+
+/* ---------- Virar a página ----------
+   Ao ir de uma página do site para outra, o navegador tira um retrato da
+   página velha e um da nova e anima entre os dois (View Transitions API).
+   A regra abaixo liga isso para os links do próprio site. A página velha sai
+   como uma folha virando em torno da borda esquerda, e a nova chega.
+   Onde o navegador não conhece a regra (Firefox, por exemplo), ou com o site
+   aberto direto do arquivo, a troca é seca e nada quebra. */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* O cabeçalho e o rodapé são iguais em todas as páginas: ficam parados */
+.cabecalho {
+  view-transition-name: cabecalho;
+}
+
+.rodape {
+  view-transition-name: rodape;
+}
+
+::view-transition-old(root) {
+  transform-origin: left center;
+  animation: folha-sai 280ms ease-in both;
+}
+
+::view-transition-new(root) {
+  transform-origin: left center;
+  animation: folha-entra 360ms ease-out both;
+}
+
+@keyframes folha-sai {
+  to { transform: perspective(60rem) rotateY(-80deg); opacity: 0; }
+}
+
+@keyframes folha-entra {
+  from { transform: perspective(60rem) rotateY(60deg); opacity: 0; }
+}
 ````
 
 ### css/componentes.css
@@ -2708,6 +2810,70 @@ a:hover {
   background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
 }
 
+/* ---------- Lendária holográfica ----------
+   O js/efeitos.js escreve na figurinha a posição do ponteiro (--px e --py, de
+   0% a 100%) e a inclinação (--rx e --ry). Com isso a figurinha inclina e o
+   brilho corre. Sem ponteiro em cima, fica só um brilho fraco e parado. */
+.figurinha-lendaria {
+  --px: 50%;
+  --py: 50%;
+  --brilho: 0.3;
+}
+
+/* A que não vira (na mão, nas amostras) */
+.figurinha-lendaria:not(.figurinha-vira) {
+  transform: perspective(42rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 160ms ease-out;
+}
+
+/* A que vira (colada no álbum, saída do pacotinho): só inclina de frente */
+.figurinha-vira.figurinha-lendaria[data-face="frente"] {
+  transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+
+/* Duas camadas por cima da figurinha: o arco-íris (::after) e o reflexo
+   branco que acompanha o ponteiro (::before). Os modos de mistura "overlay" e
+   "soft-light" tingem as cores de baixo sem apagar o texto. */
+.figurinha-lendaria::before,
+.figurinha-lendaria::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 250ms ease-out;
+  /* Na faixa de baixo fica o texto: ali o brilho cai para um terço da força,
+     para o nome e a raridade continuarem fáceis de ler (contraste medido) */
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
+  mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
+}
+
+.figurinha-lendaria::after {
+  background: var(--holografico) var(--px) var(--py) / 260% 260%;
+  mix-blend-mode: overlay;
+  opacity: calc(var(--brilho) * 0.8);
+}
+
+.figurinha-lendaria::before {
+  background: radial-gradient(circle at var(--px) var(--py), rgba(255, 255, 255, 0.95), transparent 45%);
+  mix-blend-mode: soft-light;
+  opacity: var(--brilho);
+}
+
+/* De costas ou mostrando o verso, o brilho some: ali só há texto para ler.
+   Nas cenas da página inicial em que as figurinhas são enfeite, também. */
+.figurinha-lendaria[data-face="verso"]::before,
+.figurinha-lendaria[data-face="verso"]::after,
+.figurinha-lendaria[data-face="costas"]::before,
+.figurinha-lendaria[data-face="costas"]::after,
+.voo .figurinha-lendaria::before,
+.voo .figurinha-lendaria::after,
+.miolo .figurinha-lendaria::before,
+.miolo .figurinha-lendaria::after {
+  display: none;
+}
+
 /* Etiqueta presa na figurinha: usa a tinta e o papel da própria figurinha,
    porque a figurinha não muda de cor quando o tema muda. */
 .figurinha .etiqueta {
@@ -2746,7 +2912,8 @@ a:hover {
   text-align: left;
   cursor: pointer;
   transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateY(0deg);
-  transition: transform var(--tempo-de-virar) ease-in-out;
+  /* "--tempo-do-movimento" só existe enquanto a lendária acompanha o ponteiro (mais abaixo) */
+  transition: transform var(--tempo-do-movimento, var(--tempo-de-virar)) ease-in-out;
 }
 
 .figurinha-vira[data-face="verso"],
@@ -2825,15 +2992,48 @@ a:hover {
    ("scale" e "rotate" são propriedades separadas do "transform",
    por isso não atrapalham o giro de virar.) */
 .figurinha-colando {
-  animation: colar 280ms cubic-bezier(0.3, 1.4, 0.5, 1);
+  animation: bater 520ms cubic-bezier(0.3, 0.9, 0.4, 1) backwards;
 }
 
-@keyframes colar {
-  from {
-    scale: 1.14;
-    rotate: 5deg;
-    box-shadow: none;
-  }
+/* A batida: a figurinha desce torta e maior, bate no lugar (55%), amassa de
+   leve (70%) e volta ao tamanho. */
+@keyframes bater {
+  0% { translate: 0 -60%; rotate: -12deg; scale: 1.35; opacity: 0; box-shadow: none; }
+  55% { translate: 0 0; rotate: 0deg; scale: 1; opacity: 1; }
+  70% { scale: 1.07 0.92; }
+  100% { scale: 1; }
+}
+
+/* A casa em que a figurinha acabou de bater: abre um anel de tinta em volta
+   da figurinha e dá uma tremida. (A classe "bateu" é posta pelo js/album.js.) */
+/* (".vagas > .casa.bateu" precisa ganhar da regra de entrar ao rolar, em paginas.css) */
+.vagas > .casa.bateu {
+  animation: tremer 260ms linear 280ms;
+}
+
+.casa.bateu::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  aspect-ratio: 3 / 4;   /* o mesmo formato da figurinha, que fica no topo da casa */
+  border: 3px solid var(--cor-texto);
+  border-radius: var(--raio-adesivo);
+  pointer-events: none;
+  opacity: 0;
+  animation: anel 560ms ease-out 280ms;
+}
+
+@keyframes anel {
+  from { scale: 0.9; opacity: 0.8; }
+  to { scale: 1.18; opacity: 0; }
+}
+
+@keyframes tremer {
+  20% { translate: -2px 1px; }
+  45% { translate: 2px -1px; }
+  70% { translate: -1px 0; }
 }
 
 /* Revelar: o reflexo passa uma vez pela brilhante e pela lendária,
@@ -3208,6 +3408,28 @@ textarea.campo-entrada {
   rotate: -3deg;
 }
 
+/* Conquista que acabou de sair: o carimbo só aparece quando o quadro entra na
+   tela, e aí bate com força (as classes são postas pelo js/album.js) */
+.conquista-nova:not(.conquista-carimbando) .conquista-estado {
+  opacity: 0;
+}
+
+.conquista-carimbando {
+  animation: tremer 240ms linear 230ms;
+}
+
+.conquista-carimbando .conquista-estado {
+  animation: carimbar 420ms cubic-bezier(0.3, 0.8, 0.4, 1) backwards;
+}
+
+/* O carimbo chega grande, torto e transparente e encolhe até o tamanho certo */
+@keyframes carimbar {
+  0% { scale: 2.8; opacity: 0; rotate: -20deg; }
+  60% { scale: 0.92; opacity: 1; rotate: -7deg; }
+  80% { scale: 1.06; }
+  100% { scale: 1; }
+}
+
 @media (min-width: 40rem) {
   .conquistas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3359,11 +3581,49 @@ textarea.campo-entrada {
 
 /* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
    Este é o único momento "ensaiado" do site. */
+/* Antes de rasgar, o pacotinho balança quando o ponteiro passa por cima */
+.palco .pacotinho:hover:not(.pacotinho-rasgando) {
+  animation: balancar 700ms ease-in-out;
+}
+
+@keyframes balancar {
+  0%, 100% { rotate: -3deg; }
+  30% { rotate: -7deg; }
+  70% { rotate: 1deg; }
+}
+
+/* O brilho de papel laminado que atravessa o pacotinho de CSS */
+.pacotinho-corpo {
+  overflow: hidden;
+}
+
+.pacotinho-corpo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  translate: -120% 0;
+}
+
+.palco .pacotinho:hover .pacotinho-corpo::after,
+.pacotinho-rasgando .pacotinho-corpo::after {
+  animation: laminado 900ms ease-out;
+}
+
+@keyframes laminado {
+  to { translate: 120% 0; }
+}
+
+/* Rasgado: a borda do picote vira dente de serra. "clip-path" recorta a forma
+   por uma lista de pontos: sobe, desce, sobe, desce. */
 .pacotinho-rasgando .pacotinho-aba {
+  border-bottom-color: transparent;
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 84% 78%, 76% 100%, 68% 78%, 60% 100%, 52% 78%, 44% 100%, 36% 78%, 28% 100%, 20% 78%, 12% 100%, 4% 78%, 0 100%);
   animation: rasgar 520ms ease-in forwards;
 }
 
 .pacotinho-rasgando .pacotinho-corpo {
+  clip-path: polygon(0 7px, 4% 0, 12% 7px, 20% 0, 28% 7px, 36% 0, 44% 7px, 52% 0, 60% 7px, 68% 0, 76% 7px, 84% 0, 92% 7px, 100% 0, 100% 100%, 0 100%);
   animation: esvaziar 360ms ease-in 440ms forwards;
 }
 
@@ -3376,17 +3636,27 @@ textarea.campo-entrada {
   to { transform: translateY(16%); opacity: 0; }
 }
 
-/* As figurinhas saem do pacotinho uma depois da outra.
-   --ordem (0 a 4) vem do HTML e atrasa cada uma um pouco mais que a anterior. */
+/* As figurinhas saem do pacotinho em leque. Todas partem do mesmo ponto (a
+   distância até ele vem em --dx e --dy, postas pelo js/pacotinho.js), abrem
+   como um leque de cartas (40%) e depois cada uma vai para a sua casa.
+   --ordem (0 a 4) dá o ângulo de cada uma no leque e o pequeno atraso. */
 .mesa > li {
-  animation: sair-do-pacotinho 440ms cubic-bezier(0.2, 0.8, 0.3, 1.15) backwards;
-  animation-delay: calc(var(--ordem, 0) * 120ms);
+  animation: sair-em-leque 720ms cubic-bezier(0.2, 0.8, 0.3, 1.1) backwards;
+  animation-delay: calc(var(--ordem, 0) * 90ms);
 }
 
-@keyframes sair-do-pacotinho {
-  from {
+@keyframes sair-em-leque {
+  0% {
     opacity: 0;
-    transform: translateY(-3rem) rotate(-10deg) scale(0.7);
+    translate: var(--dx, 0px) var(--dy, 0px);
+    rotate: 0deg;
+    scale: 0.5;
+  }
+  40% {
+    opacity: 1;
+    translate: calc(var(--dx, 0px) + (var(--ordem, 0) - 2) * 1.5rem) calc(var(--dy, 0px) - 0.5rem);
+    rotate: calc((var(--ordem, 0) - 2) * 12deg);
+    scale: 0.62;
   }
 }
 
@@ -3511,6 +3781,69 @@ textarea.campo-entrada {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
+}
+
+/* ---------- Placar girando ----------
+   Cada casa do número é uma janelinha com a altura de uma linha, que mostra
+   uma fita com os algarismos de 0 a 9, um embaixo do outro. "--digito" (posto
+   pelo js/album.js) diz quantos degraus a fita sobe. */
+
+.odometro {
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.odo-casa {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odo-fita {
+  display: grid;
+  transform: translateY(calc(var(--digito, 0) * -1em));
+  transition: transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.odo-fita span {
+  height: 1em;
+}
+
+/* ---------- Traço que se desenha ----------
+   As linhas de um campo de futebol. Cada linha "mede 1" (pathLength="1" no
+   HTML) e é tracejada com um traço de tamanho 1: escondendo o traço inteiro
+   (stroke-dashoffset: 1) a linha some; trazendo de volta aos poucos, ela se
+   desenha como uma caneta percorrendo o papel. */
+
+.campo-tracado {
+  display: block;
+  width: min(100%, 20rem);
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.campo-tracado * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--falta, 0);   /* a página inicial manda "--falta" pela rolagem */
+}
+
+/* Antes de aparecer na tela (página do álbum), as linhas ficam escondidas */
+.campo-tracado.por-desenhar * {
+  stroke-dashoffset: 1;
+}
+
+.campo-tracado.desenhando * {
+  animation: desenhar-campo 1500ms ease-in-out backwards;
+}
+
+.campo-tracado.desenhando :nth-child(n + 4) { animation-delay: 500ms; }
+.campo-tracado.desenhando :nth-child(n + 7) { animation-delay: 900ms; }
+
+@keyframes desenhar-campo {
+  from { stroke-dashoffset: 1; }
 }
 ````
 
@@ -3802,6 +4135,13 @@ html {
 .vagas {
   list-style: none;
   padding: 0;
+  /* A figurinha que acabou de ser colada chega maior e torta, e passaria da
+     beirada da tela. "overflow-x: clip" corta essa sobra sem criar barra de
+     rolagem. A margem negativa com o mesmo tanto de respiro leva o corte um
+     pouco para fora da grade, até a beira da página. */
+  overflow-x: clip;
+  margin-inline: calc(var(--espaco-4) * -1);
+  padding-inline: var(--espaco-4);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 12rem));
   gap: var(--espaco-5) var(--espaco-4);
@@ -3822,9 +4162,26 @@ html {
 
 /* A casa empilha a figurinha (ou a vaga) e, se houver, o botão "Desfazer" */
 .casa {
+  position: relative;   /* o anel da batida se mede por ela */
   display: grid;
   gap: var(--espaco-2);
   align-content: start;
+}
+
+/* Entrar ao rolar: cada casa do álbum assenta no lugar enquanto entra na tela.
+   "animation-timeline: view()" troca o relógio da animação pela rolagem: ela
+   anda conforme a casa aparece e termina com a casa inteira à vista.
+   Onde o navegador não conhece isso, as casas simplesmente já estão no lugar. */
+@supports (animation-timeline: view()) {
+  .vagas > .casa {
+    animation: assentar linear both;
+    animation-timeline: view(block);
+    animation-range: entry 0% entry 90%;
+  }
+}
+
+@keyframes assentar {
+  from { opacity: 0; translate: 0 2rem; rotate: -4deg; scale: 0.86; }
 }
 
 /* A largura de cada casa é a da coluna, e pronto: "minmax(0, 1fr)" proíbe o
@@ -4211,6 +4568,51 @@ html[data-fonte="maior"] { font-size: 125%; }
 
 [data-contraste="alto"] a {
   text-decoration-thickness: 2px;
+}
+
+/* No alto contraste, somem também o brilho colorido da lendária e a retícula
+   que segue o ponteiro */
+[data-contraste="alto"] .figurinha-lendaria::before,
+[data-contraste="alto"] .figurinha-lendaria::after,
+[data-contraste="alto"] .lanterna {
+  display: none;
+}
+
+/* Reduzir animações vale também para a virada de página: a troca fica seca.
+   (Os retratos da página velha e da nova são peças do próprio navegador,
+   por isso não entram na regra geral lá de cima e precisam desta.) */
+html[data-movimento="reduzido"]::view-transition-group(*),
+html[data-movimento="reduzido"]::view-transition-old(*),
+html[data-movimento="reduzido"]::view-transition-new(*) {
+  animation: none !important;
+}
+
+[data-movimento="reduzido"] .lanterna {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-movimento="completo"])::view-transition-group(*),
+  html:not([data-movimento="completo"])::view-transition-old(*),
+  html:not([data-movimento="completo"])::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  html:not([data-movimento="completo"]) .lanterna {
+    display: none;
+  }
+}
+
+/* A entrada das casas do álbum é presa à rolagem, e não a um relógio: a regra
+   geral de reduzir animações não a alcança. Aqui ela é desligada de vez. */
+[data-movimento="reduzido"] .vagas > .casa {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-movimento="completo"]) .vagas > .casa {
+    animation: none;
+  }
 }
 ````
 
@@ -4935,6 +5337,31 @@ html:not(.com-cenas) #pagina-base {
   }
 }
 
+/* As linhas do campo, atrás dos números. É enfeite: fica bem fraco. */
+.campo-dos-numeros {
+  position: absolute;
+  z-index: 0;
+  right: var(--espaco-4);
+  bottom: var(--espaco-5);
+  width: min(55%, 24rem);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.numeros {
+  position: relative;   /* na frente do campo */
+  z-index: 1;
+}
+
+.com-cenas .campo-dos-numeros {
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  top: 54%;
+  width: min(88vw, 50rem, 110vh);
+  translate: -50% -50%;
+}
+
 /* "--aceso" vai de 0 a 1 conforme chega a vez do número. Parado, vale 1. */
 .numero {
   position: relative;
@@ -5549,6 +5976,117 @@ document.addEventListener('DOMContentLoaded', function () {
       definirAberto(false);
       botao.focus();
     }
+  });
+});
+````
+
+### js/efeitos.js
+
+````js
+// ============================================================================
+// efeitos.js
+// ----------------------------------------------------------------------------
+// Dois efeitos que valem nas 7 páginas e respondem ao ponteiro (o mouse):
+//
+//   1. Retícula que acende: os pontinhos de impressão aparecem no papel em
+//      volta do ponteiro, como uma lanterna passando pela página.
+//   2. Lendária holográfica: a figurinha lendária inclina e o brilho colorido
+//      corre conforme o ponteiro passa por cima dela.
+//
+// Nos dois casos o JavaScript só anota a posição do ponteiro em variáveis do
+// CSS (--x, --y, --px, --py...). Quem desenha é o CSS (base.css e componentes.css).
+//
+// Não depende de nenhum outro arquivo do site.
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  // A pessoa pediu menos movimento? (no painel de acessibilidade ou no aparelho)
+  // "completo" é o pedido contrário: ver as animações mesmo que o aparelho peça menos.
+  function querMenosMovimento() {
+    const pedido = document.documentElement.dataset.movimento;
+    if (pedido === 'reduzido') return true;
+    if (pedido === 'completo') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  // -------------------------------------------------------------------------
+  // 1. Retícula que acende
+  // -------------------------------------------------------------------------
+  // Uma camada do tamanho da tela, atrás de tudo, coberta de pontinhos. Uma
+  // máscara (no CSS) só deixa ver os que estão perto do ponteiro. A posição
+  // fica guardada na própria camada, que não tem nada dentro: assim, mexer o
+  // mouse não obriga o navegador a recalcular o estilo da página inteira.
+
+  const lanterna = document.createElement('div');
+  lanterna.className = 'lanterna';
+  lanterna.setAttribute('aria-hidden', 'true');   // é só enfeite
+  document.body.prepend(lanterna);
+
+  function apagarLanterna() {
+    lanterna.classList.remove('lanterna-acesa');
+  }
+
+  // -------------------------------------------------------------------------
+  // 2. Lendária holográfica
+  // -------------------------------------------------------------------------
+
+  let brilhando = null;   // a figurinha lendária que está sob o ponteiro agora
+
+  function apagarBrilho() {
+    if (!brilhando) return;
+    for (const nome of ['--px', '--py', '--rx', '--ry', '--brilho', '--tempo-do-movimento']) {
+      brilhando.style.removeProperty(nome);
+    }
+    brilhando = null;
+  }
+
+  // -------------------------------------------------------------------------
+  // Um ouvinte só para o site inteiro
+  // -------------------------------------------------------------------------
+
+  document.addEventListener('pointermove', function (evento) {
+    const parado = querMenosMovimento();
+
+    // A lanterna segue só o mouse. No celular não existe ponteiro parado em cima da página.
+    if (evento.pointerType === 'mouse' && !parado) {
+      lanterna.style.setProperty('--x', evento.clientX + 'px');
+      lanterna.style.setProperty('--y', evento.clientY + 'px');
+      lanterna.classList.add('lanterna-acesa');
+    } else {
+      apagarLanterna();
+    }
+
+    // A figurinha lendária que está embaixo do ponteiro (se houver uma, e de frente)
+    let figurinha = evento.target.closest ? evento.target.closest('.figurinha-lendaria') : null;
+    if (figurinha && (figurinha.dataset.face === 'verso' || figurinha.dataset.face === 'costas')) figurinha = null;
+    if (figurinha !== brilhando) apagarBrilho();
+    if (!figurinha) return;
+    brilhando = figurinha;
+
+    const caixa = figurinha.getBoundingClientRect();
+    const x = (evento.clientX - caixa.left) / caixa.width;    // 0 na esquerda, 1 na direita
+    const y = (evento.clientY - caixa.top) / caixa.height;    // 0 em cima, 1 embaixo
+    figurinha.style.setProperty('--px', (x * 100).toFixed(1) + '%');
+    figurinha.style.setProperty('--py', (y * 100).toFixed(1) + '%');
+    figurinha.style.setProperty('--brilho', '0.9');
+    // Com menos movimento, a figurinha não inclina: fica só o brilho
+    if (!parado) {
+      figurinha.style.setProperty('--ry', ((x - 0.5) * 22).toFixed(1) + 'deg');
+      figurinha.style.setProperty('--rx', ((0.5 - y) * 22).toFixed(1) + 'deg');
+      figurinha.style.setProperty('--tempo-do-movimento', '160ms');   // inclina rápido, para acompanhar o ponteiro
+    }
+  });
+
+  // Ao clicar, a figurinha vai virar: ela volta ao prumo antes, para o giro
+  // sair inteiro. O "true" faz este ouvinte rodar antes do clique da figurinha.
+  document.addEventListener('click', apagarBrilho, true);
+
+  // O ponteiro saiu da janela
+  document.documentElement.addEventListener('pointerleave', function () {
+    apagarLanterna();
+    apagarBrilho();
   });
 });
 ````
@@ -6426,6 +6964,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const fig = figurinhaPorNumero(numero);
     const casa = document.getElementById('casa-' + numero);
     casa.textContent = '';   // apaga o desenho anterior
+    // A batida (o anel de tinta e a tremida) vale só para a figurinha que acabou de ser colada
+    casa.classList.toggle('bateu', acabouDeColar === true);
 
     if (estaColada(album, numero)) {
       const figurinha = criarFigurinha(fig, { vira: true, etiqueta: textoDeRepetidas(repetidasDe(album, numero)) });
@@ -6486,11 +7026,48 @@ document.addEventListener('DOMContentLoaded', function () {
     return coladas + ' de ' + total + (coladas === 1 ? ' colada' : ' coladas');
   }
 
+  // O placar gira como um marcador antigo. Cada casa do número é uma janelinha
+  // que mostra uma fita com os algarismos de 0 a 9, um embaixo do outro. Para
+  // mostrar o 7, a fita sobe sete degraus (o CSS faz a subida, devagar).
+  function mostrarNoOdometro(odometro, valor) {
+    const algarismos = String(valor);
+    odometro.dataset.valor = algarismos;
+
+    // Cada fita sobe até o algarismo que lhe cabe
+    function subir() {
+      const atual = odometro.dataset.valor;
+      Array.from(odometro.children).forEach(function (casa, i) {
+        casa.firstChild.style.setProperty('--digito', atual[i]);
+      });
+    }
+
+    // A quantidade de casas é a mesma (de 12 para 13, por exemplo): só gira
+    if (odometro.children.length === algarismos.length) {
+      subir();
+      return;
+    }
+
+    // Mudou a quantidade de casas (de 9 para 10): monta as fitas de novo
+    odometro.textContent = '';
+    for (let i = 0; i < algarismos.length; i++) {
+      const casa = criarElemento('span', 'odo-casa');
+      const fita = criarElemento('span', 'odo-fita');
+      for (let n = 0; n <= 9; n++) fita.append(criarElemento('span', '', String(n)));
+      fita.style.transitionDelay = (i * 120) + 'ms';   // cada casa começa um pouco depois da anterior
+      casa.append(fita);
+      odometro.append(casa);
+    }
+    // As fitas nascem no zero. Dois quadros depois elas sobem: o navegador
+    // precisa desenhar o zero primeiro para haver um caminho a percorrer.
+    requestAnimationFrame(function () { requestAnimationFrame(subir); });
+  }
+
   function atualizarPlacar() {
     const album = lerAlbum();
     const resumo = resumoDoAlbum(album);
 
     document.getElementById('placar-coladas').textContent = resumo.coladas;
+    mostrarNoOdometro(document.getElementById('placar-odometro'), resumo.coladas);
     document.getElementById('placar-total').textContent = resumo.total;
     document.getElementById('placar-barra').style.setProperty('--parte', resumo.coladas / resumo.total);
 
@@ -6522,10 +7099,28 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('conta-repetidas').textContent = resumo.comRepetida;
   }
 
-  function desenharConquistas() {
+  // As conquistas que acabaram de sair e ainda não foram vistas. O carimbo
+  // delas só bate quando o quadro aparece na tela (a lista fica lá no fim da
+  // página, longe de onde a pessoa cola).
+  const carimbosPorBater = [];
+  const vigiaDosCarimbos = 'IntersectionObserver' in window ? new IntersectionObserver(function (entradas) {
+    for (const entrada of entradas) {
+      if (!entrada.isIntersecting) continue;
+      entrada.target.classList.add('conquista-carimbando');   // o CSS faz o carimbo bater
+      vigiaDosCarimbos.unobserve(entrada.target);
+      const posicao = carimbosPorBater.indexOf(entrada.target.dataset.conquista);
+      if (posicao >= 0) carimbosPorBater.splice(posicao, 1);
+    }
+  }, { threshold: 0.6 }) : null;
+
+  // "novas" são os nomes das conquistas que acabaram de sair (ou nada)
+  function desenharConquistas(novas) {
     const album = lerAlbum();
     const lista = document.getElementById('conquistas');
     lista.textContent = '';
+    for (const nome of novas || []) {
+      if (vigiaDosCarimbos && !movimentoReduzido() && !carimbosPorBater.includes(nome)) carimbosPorBater.push(nome);
+    }
 
     for (const conquista of CONQUISTAS) {
       const dia = album.conquistas[conquista.id];
@@ -6534,6 +7129,13 @@ document.addEventListener('DOMContentLoaded', function () {
       item.append(criarElemento('span', 'conquista-como', conquista.como));
       item.append(criarElemento('span', 'conquista-estado', dia ? 'Feita em ' + dataPorExtenso(dia) : 'Ainda não'));
       lista.append(item);
+
+      // Conquista nova: fica sem o carimbo até aparecer na tela
+      if (dia && carimbosPorBater.includes(conquista.nome)) {
+        item.classList.add('conquista-nova');
+        item.dataset.conquista = conquista.nome;
+        vigiaDosCarimbos.observe(item);
+      }
     }
   }
 
@@ -6624,10 +7226,10 @@ document.addEventListener('DOMContentLoaded', function () {
     avisar(texto);   // o mesmo texto, lido pelo leitor de tela
   }
 
-  function atualizarTudo() {
+  function atualizarTudo(conquistasNovas) {
     desenharBandeja();
     atualizarPlacar();
-    desenharConquistas();
+    desenharConquistas(conquistasNovas);
     aplicarFiltros();
   }
 
@@ -6644,7 +7246,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ultimaColada = numero;
     if (anterior !== null) desenharCasa(anterior);   // a colagem anterior perde o "Desfazer"
     desenharCasa(numero, true);
-    atualizarTudo();
+    atualizarTudo(conquistas);
 
     const fig = figurinhaPorNumero(numero);
     const resumo = resumoDoAlbum(lerAlbum());
@@ -6823,6 +7425,20 @@ document.addEventListener('DOMContentLoaded', function () {
   for (const fig of FIGURINHAS) desenharCasa(fig.numero);
   atualizarTudo();
 
+  // O campo desenhado no fim do álbum: o traço só começa quando ele aparece na
+  // tela. Com menos movimento (ou em navegador antigo), ele já vem pronto.
+  const campoDoFinal = document.getElementById('campo-do-final');
+  if (campoDoFinal && 'IntersectionObserver' in window && !movimentoReduzido()) {
+    campoDoFinal.classList.add('por-desenhar');
+    const vigiaDoCampo = new IntersectionObserver(function (entradas) {
+      if (!entradas[0].isIntersecting) return;
+      campoDoFinal.classList.remove('por-desenhar');
+      campoDoFinal.classList.add('desenhando');
+      vigiaDoCampo.disconnect();
+    }, { threshold: 0.4 });
+    vigiaDoCampo.observe(campoDoFinal);
+  }
+
   // Se o endereço veio com uma âncora (album.html#casa-50), rola até ela.
   // O navegador não faz isso sozinho porque as casas só passam a existir agora.
   if (location.hash.length > 1) {
@@ -6985,6 +7601,15 @@ document.addEventListener('DOMContentLoaded', function () {
     resumo.hidden = true;
 
     palco.append(titulo, texto, mesa, botoes, resumo);
+
+    // As figurinhas saem todas do mesmo ponto, onde o pacotinho estava: no alto
+    // e no meio da mesa. Cada casa guarda a distância até esse ponto (--dx e
+    // --dy), e a animação do CSS começa de lá, abre em leque e só depois leva
+    // cada figurinha para a sua casa.
+    for (const casa of mesa.children) {
+      casa.style.setProperty('--dx', Math.round(mesa.offsetLeft + mesa.offsetWidth / 2 - casa.offsetLeft - casa.offsetWidth / 2) + 'px');
+      casa.style.setProperty('--dy', Math.round(mesa.offsetTop - casa.offsetTop) + 'px');
+    }
     titulo.focus();
     avisar('Pacotinho aberto. ' + total + ' figurinhas de costas. Vire uma por uma.');
 
@@ -8310,6 +8935,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return { caixa: caixa, visor: visor, valor: VALORES[i], mostrado: VALORES[i] };
   });
 
+  const campoDosNumeros = document.getElementById('campo-dos-numeros');
+
   function mostrarNumero(numero, valor) {
     if (valor === numero.mostrado) return;
     numero.mostrado = valor;
@@ -8323,6 +8950,9 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarNumero(numero, Math.round(numero.valor * t));
         numero.caixa.style.setProperty('--aceso', t.toFixed(3));
       });
+      // As linhas do campo se desenham enquanto os números contam
+      // ("--falta" é o pedaço do traço que ainda não apareceu)
+      campoDosNumeros.style.setProperty('--falta', (1 - trecho(0.02, 0.62, p)).toFixed(3));
     },
 
     parar: function () {
@@ -8330,6 +8960,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarNumero(numero, numero.valor);
         numero.caixa.style.removeProperty('--aceso');
       }
+      campoDosNumeros.style.removeProperty('--falta');   // parado, o campo aparece pronto
     },
   });
 
@@ -12548,7 +13179,7 @@ const GRUPOS = [
   },
   {
     titulo: 'Comportamento (JavaScript)', pasta: 'js', extensao: '.js', linguagem: 'js',
-    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'pacote3d.js', 'pacotinho-3d.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
+    primeiro: ['tema-acessibilidade.js', 'menu.js', 'efeitos.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'pacote3d.js', 'pacotinho-3d.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',

@@ -126,6 +126,14 @@ Pendências desta pesquisa:
 - MDN Web Docs. Canvas API, usada na retícula da abertura e na sequência de quadros: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 - MDN Web Docs. `drawImage()`, que desenha cada quadro da sequência: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
 - MDN Web Docs. WebGL API, o desenho 3D do navegador, por baixo da Three.js: https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+- MDN Web Docs. View Transition API, usada na virada de página: https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API
+- MDN Web Docs. Regra `@view-transition`: https://developer.mozilla.org/en-US/docs/Web/CSS/@view-transition
+- MDN Web Docs. `animation-timeline`, usada na entrada das casas do álbum: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
+- MDN Web Docs. `clip-path`, usado no rasgo em serra: https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+- MDN Web Docs. `mask-image`, usada na retícula que acende: https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
+- MDN Web Docs. `stroke-dashoffset`, usado no traço que se desenha: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset
+- MDN Web Docs. Intersection Observer API, usada no carimbo e no campo do álbum: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+- MDN Web Docs. Pointer events, usados na lendária holográfica e na retícula: https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
 - Jurn van Wissen. Let's Make One of Those Fancy Scrolling Animations Used on Apple Product Pages. CSS-Tricks, 22/05/2020 (a técnica da sequência de quadros): https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/
 
 ## Ferramentas

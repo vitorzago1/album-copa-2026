@@ -23,6 +23,9 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Ferramenta `scripts/quadros.html`, que gera os quadros.
 - Crédito da Three.js na página Sobre e em `docs/referencias.md`.
 - 34 verificações automáticas novas (369 no total).
+- Nove efeitos escolhidos no primeiro laboratório: lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque no pacotinho, virar a página entre as 7 páginas, casas do álbum que assentam ao rolar, placar girando, retícula que acende em volta do mouse e traço que se desenha (campo atrás dos números e no fim do álbum).
+- Corrigido: a figurinha recém-colada passava alguns pixels da beirada da tela durante a animação.
+- 47 verificações automáticas novas (416 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

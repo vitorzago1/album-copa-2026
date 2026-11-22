@@ -176,6 +176,44 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - **Movimento na página Pacotinhos.** A inclinação só acontece com o ponteiro em cima e para quando ele sai. Com "Reduzir animações", o pacotinho 3D fica parado e a página não espera a animação de rasgar.
 - **Acessibilidade.** As telas de desenho ficam fora da leitura de tela (`aria-hidden`). O botão "Rasgar o pacotinho" continua sendo o controle com nome e foco.
 
+## Efeitos do primeiro laboratório (etapa 12)
+
+- **O que entrou.** Só as nove ideias marcadas pelo aluno no laboratório 1 (números 10, 11, 12, 13, 14, 15, 17, 18 e 19). As nove ideias de fundo, o papel picado, os sons, a vibração, a inclinação do celular, o aplicativo instalável e o compartilhar não foram marcados e não entraram.
+- **Todo movimento responde a uma ação.** Ponteiro (lendária, retícula, balanço do pacotinho), clique (batida, rasgo, leque, virada de página) ou rolagem (casas, carimbo, campo). Nada começa sozinho.
+- **Lendária holográfica em todo lugar.** Vale para qualquer figurinha lendária de frente. De costas ou no verso a camada de brilho some, porque ali só há texto. Sem ponteiro fica um brilho fraco, que também aparece no celular.
+- **O brilho não muda com o tema.** O arco-íris é um valor só (`--holografico`, em `css/tokens.css`), porque a figurinha é um objeto impresso. Ele fica por cima da figurinha como brilho; nenhum texto é escrito sobre ele.
+- **Batida no lugar da animação antiga de colar.** A classe continua a mesma (`figurinha-colando`); mudou o desenho da animação. A casa ganha a classe `bateu` só na figurinha recém-colada.
+- **Carimbo que espera.** O quadro de conquistas fica no fim do álbum, longe de onde se cola. O carimbo de uma conquista nova fica guardado até o quadro aparecer na tela.
+- **Rasgo.** Na página Pacotinhos quem aparece é o pacotinho 3D, que já rasga de verdade. O rasgo em serra, o brilho e o balanço foram para o pacotinho de CSS, que é o plano B. A saída em leque vale para os dois.
+- **Virar a página.** Uma direção só, da direita para a esquerda, para qualquer troca. Cabeçalho e rodapé têm nome próprio na transição e ficam parados.
+- **Entrar ao rolar só no álbum.** É onde há muitas casas iguais. A animação termina quando a casa está 90% dentro da tela: uma casa inteira à vista já está assentada.
+- **Placar.** Só o número grande do topo do álbum gira. Os números da página inicial já contam pela rolagem.
+- **Retícula que acende.** Só com mouse (no toque não há ponteiro parado). Fica desligada na página inicial em movimento, que já tem os pontinhos da abertura.
+- **Traço que se desenha.** Usado três vezes: o sublinhado da frase e o campo atrás dos números (pela rolagem, na página inicial) e o campo do fim do álbum (quando a seção aparece).
+
+### WCAG 2.2 nos efeitos
+
+| Critério | Como foi atendido |
+|---|---|
+| 1.1.1 Conteúdo não textual | Campo, retícula e fitas do placar são enfeite e ficam fora da leitura de tela. |
+| 1.3.1 e 4.1.2 Informação e nome | O número do placar é um texto comum, lido no lugar das fitas. A raridade da lendária continua escrita. |
+| 1.4.1 Uso da cor | O brilho holográfico é um reforço: a palavra "Lendária", a estrela e a trama continuam. |
+| 1.4.3 Contraste | Na faixa do texto, o brilho da lendária tem um terço da força. Contraste medido do nome com o brilho por cima: 6,5:1 no pior caso (tema escuro, ponteiro em cima do nome). Os pares de cor do site não mudaram (236 pares, 0 reprovados). |
+| 1.4.10 Reflow | A batida e o leque não criam rolagem lateral, nem em 320 px. |
+| 2.2.2 Pausar, parar, ocultar | Nenhum efeito dura mais de 5 segundos nem começa sozinho. |
+| 2.3.3 Animação por interação | "Reduzir animações" desliga a inclinação, a batida, o carimbo, a entrada das casas, o desenho do campo, a retícula e a virada de página. |
+| 2.4.7 e 2.4.11 Foco | Uma casa com foco está inteira na tela e, portanto, assentada e opaca. Ao colar, o foco vai para a figurinha, como antes. |
+| 2.5.8 Tamanho do alvo | Os botões "Colar" continuam com 44 px de altura no lugar deles. |
+
+## Verificação feita na etapa 12
+
+- 47 verificações automáticas novas no Microsoft Edge sem janela: placar (texto para o leitor de tela, fita no algarismo certo), entrada das casas pela rolagem, lendária (brilho parado, inclinação com o ponteiro, volta ao prumo, verso sem brilho), batida (animações, foco, sem rolagem lateral em nenhum momento em 320 px), carimbo que espera e bate ao aparecer, campo do álbum, leque (ponto de partida comum e chegada sem sobra), pacotinho de CSS com rasgo em serra, campo dos números pela rolagem, retícula nas 7 páginas (acende com o mouse, apaga com o toque, não atrapalha cliques), virada de página ligada nas 7 páginas, menos movimento e alto contraste.
+- As 369 verificações anteriores continuam passando (uma foi ajustada: a altura do botão "Colar" passou a ser medida no lugar dele, e não durante a entrada da casa).
+- Defeito achado pelos testes e corrigido: a tremida da casa ao colar não valia, porque a regra da entrada ao rolar ganhava dela.
+- Contraste do nome da figurinha lendária, medido nos prints com o brilho por cima: de 6,5:1 a 9,6:1 nos dois temas. Na primeira versão do efeito o pior caso era 4,4:1 (abaixo do mínimo de 4,5:1); por isso o brilho foi enfraquecido sobre o texto.
+- A virada de página foi conferida por um clique de verdade em um link do menu (a página seguinte abriu sem erro). O movimento em si só dá para julgar olhando.
+- Ainda não verificado: Firefox e Safari (onde a virada de página e a entrada ao rolar podem não existir), celular de verdade, leitor de tela (NVDA) e Lighthouse.
+
 ## Verificação feita na etapa 11
 
 - 34 verificações automáticas novas no Microsoft Edge sem janela: pedido dos 90 quadros só do tema em uso, peso, troca do pacotinho de CSS pela tela, o que a tela mostra em quatro pontos da rolagem, figurinhas atrás do pacotinho, tema escuro, nenhum pedido de imagem na versão parada, plano B quando as imagens falham, pacotinho ao vivo (desenhado, inclina, volta e para, troca de tema, rasga, abre outro), menos movimento, 320 px, navegador sem WebGL e o gerador de quadros.

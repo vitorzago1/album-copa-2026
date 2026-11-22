@@ -45,6 +45,7 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
 - Nada de emoji no lugar de ícone, rótulos em caixa-alta, seta no fim de botão ou cards todos iguais.
 - A figurinha é numerada em sequência ("Nº 127"). Não usar código de três letras mais número.
 - Movimento: a página inicial é uma apresentação em cenas presas à rolagem (decisão do Vitor em 21/11/2026, depois dos dois laboratórios). Nas outras páginas, o movimento só responde a uma ação da pessoa. Toda cena tem uma versão parada, usada com menos movimento, com letra maior e sem JavaScript.
+- Efeitos escolhidos pelo Vitor no laboratório 1 e já aplicados (etapa 12): lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque, virar a página, entrar ao rolar, placar girando, retícula que acende e traço que se desenha. As texturas de fundo e as outras ideias do laboratório não foram escolhidas: não aplicar.
 
 ## Conteúdo e direitos
 

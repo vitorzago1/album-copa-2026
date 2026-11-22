@@ -36,6 +36,7 @@ album-copa-2026/
 │             figurinha.js (desenho e virar), album.js, pacotinho.js, trocas.js,
 │             inicio.js, carrossel.js, login.js, contato.js, formulario.js,
 │             sobre.js, demonstracao.js, menu.js, tema-acessibilidade.js,
+│             efeitos.js (retícula que acende e lendária holográfica),
 │             cenas.js (motor das cenas), cenas-inicio.js (as oito cenas),
 │             pacote3d.js (o pacotinho em 3D), pacotinho-3d.js (ele ao vivo)
 │             e vendor/three.min.js (a única biblioteca do site)
@@ -174,6 +175,29 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 7. **Como gerar os quadros de novo.** Abra `scripts/quadros.html` pelo servidor local, no Edge ou no Chrome, clique em "Salvar os quadros em uma pasta" e escolha `assets/img/pacotinho`.
 8. **Verificações automáticas novas:** 34. No total são 369, todas passando.
 
+### Etapa 12: os nove efeitos escolhidos no primeiro laboratório
+
+O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhidas e aplicadas nesta etapa. As texturas de fundo não foram escolhidas e ficaram de fora.
+
+| Efeito | Onde está | Como é feito |
+|---|---|---|
+| Lendária holográfica | Toda figurinha lendária, em qualquer página | O `js/efeitos.js` anota a posição do ponteiro em variáveis do CSS; o CSS inclina a figurinha e move duas camadas de brilho (`mix-blend-mode`) |
+| Colar com batida | Álbum, ao colar | Três animações de CSS: a figurinha desce e bate, a casa treme e um anel de tinta se abre |
+| Carimbo de conquista | Álbum, quadro de conquistas | O carimbo de uma conquista nova espera o quadro aparecer na tela (`IntersectionObserver`) e então bate |
+| Rasgo em serra e saída em leque | Página Pacotinhos | `clip-path` recorta a borda do pacotinho de CSS em dente de serra; as cinco figurinhas partem do mesmo ponto, abrem em leque e vão cada uma para a sua casa |
+| Virar a página | Troca entre as 7 páginas | View Transitions API: uma regra de CSS (`@view-transition`) e duas animações. Cabeçalho e rodapé ficam parados |
+| Entrar ao rolar | Casas do álbum | `animation-timeline: view()`: a animação anda com a rolagem, sem JavaScript |
+| Placar girando | Número grande no topo do álbum | Cada casa do número é uma fita de 0 a 9 que sobe até o algarismo certo |
+| Retícula que acende | Fundo das 7 páginas | Uma camada de pontinhos atrás de tudo, com uma máscara (`mask-image`) que só deixa ver os que estão perto do mouse |
+| Traço que se desenha | Campo atrás dos números (página inicial) e no fim do álbum | `stroke-dashoffset` no SVG: o traço aparece aos poucos, pela rolagem ou quando a seção entra na tela |
+
+1. **Onde o navegador não conhece a técnica, nada quebra.** A virada de página e a entrada ao rolar ainda não existem em todos os navegadores (no Firefox, por exemplo). Ali a troca de página é seca e as casas já estão no lugar. Com o site aberto direto do arquivo (`file://`), a virada de página também não acontece.
+2. **Menos movimento.** Com "Reduzir animações" (ou o aparelho pedindo menos movimento): a lendária ganha o brilho mas não inclina; a figurinha só aparece colada; o carimbo já vem batido; as casas não se mexem ao rolar; o campo já vem desenhado; a retícula que acende some; a troca de página é seca.
+3. **Alto contraste.** O brilho colorido da lendária e a retícula que acende somem.
+4. **Acessibilidade do placar.** As fitas que giram ficam fora da leitura de tela; o número é lido de um texto comum ao lado.
+5. **Correção de quebra.** A figurinha que acaba de ser colada chega maior e torta e passava alguns pixels da beirada da tela. A grade das casas agora corta essa sobra (`overflow-x: clip`) sem criar barra de rolagem.
+6. **Verificações automáticas novas:** 47. No total são 416, todas passando.
+
 ## Onde está cada item pedido pelo professor
 
 | Item | Onde está |
@@ -184,7 +208,7 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 | Carrossel de imagens | `index.html`, seção "As 16 sedes" |
 | Imagens | Fotos dos 16 estádios (`assets/img/sedes/`), 48 bandeiras (`assets/bandeiras/`) e desenhos próprios em SVG e CSS |
 | Cartões explicativos | `index.html`: "Como funciona", "Pacotinho do dia", "Raridades" e "Como trocar" |
-| Animações e 3D | `index.html`: oito cenas presas à rolagem (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada; pacotinho em 3D na cena 3 (sequência de quadros) e em `pacotinhos.html` (ao vivo) |
+| Animações e 3D | `index.html`: oito cenas presas à rolagem (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada; pacotinho em 3D na cena 3 (sequência de quadros) e em `pacotinhos.html` (ao vivo); nove efeitos nas outras páginas (tabela da etapa 12) |
 | Modo escuro e claro | Painel de acessibilidade (botão no cabeçalho de todas as páginas); cores em `css/tokens.css` |
 | Rodapé | Igual nas 7 páginas, com navegação, link do GitHub e créditos |
 | Página de login | `login.html` (simulação, com a senha guardada só como hash) |
@@ -213,6 +237,7 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 - Fotos do Wikimedia Commons (licenças CC BY, CC BY-SA, CC0 e domínio público), com autor e licença de cada uma na página Sobre e em `docs/referencias.md`.
 - `crypto.subtle` (já vem no navegador): calcula o hash da senha. Não é biblioteca externa.
 - As cenas da página inicial usam só recursos do navegador: `position: sticky`, transformações 3D do CSS (`perspective`, `rotateY`, `translateZ`), `<canvas>` e `requestAnimationFrame`.
+- Os efeitos da etapa 12 também usam só recursos do navegador: View Transitions API, animações presas à rolagem (`animation-timeline`), `clip-path`, `mask-image`, `mix-blend-mode`, `IntersectionObserver` e eventos de ponteiro.
 - **Three.js r128 (licença MIT), a única biblioteca do site.** Fica guardada em `js/vendor/three.min.js`, com a licença ao lado.
   - Para que serve: desenhar o pacotinho em 3D (luz, reflexo de papel laminado, textura).
   - Onde roda: na página Pacotinhos (pacotinho ao vivo) e na ferramenta `scripts/quadros.html` (que gera a sequência de quadros). A página inicial e as outras cinco páginas não a carregam.
