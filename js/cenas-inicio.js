@@ -616,6 +616,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return { caixa: caixa, visor: visor, valor: VALORES[i], mostrado: VALORES[i] };
   });
 
+  const campoDosNumeros = document.getElementById('campo-dos-numeros');
+
   function mostrarNumero(numero, valor) {
     if (valor === numero.mostrado) return;
     numero.mostrado = valor;
@@ -629,6 +631,9 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarNumero(numero, Math.round(numero.valor * t));
         numero.caixa.style.setProperty('--aceso', t.toFixed(3));
       });
+      // As linhas do campo se desenham enquanto os números contam
+      // ("--falta" é o pedaço do traço que ainda não apareceu)
+      campoDosNumeros.style.setProperty('--falta', (1 - trecho(0.02, 0.62, p)).toFixed(3));
     },
 
     parar: function () {
@@ -636,6 +641,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarNumero(numero, numero.valor);
         numero.caixa.style.removeProperty('--aceso');
       }
+      campoDosNumeros.style.removeProperty('--falta');   // parado, o campo aparece pronto
     },
   });
 

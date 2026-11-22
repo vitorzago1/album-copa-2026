@@ -175,3 +175,48 @@ html[data-fonte="maior"] { font-size: 125%; }
 [data-contraste="alto"] a {
   text-decoration-thickness: 2px;
 }
+
+/* No alto contraste, somem também o brilho colorido da lendária e a retícula
+   que segue o ponteiro */
+[data-contraste="alto"] .figurinha-lendaria::before,
+[data-contraste="alto"] .figurinha-lendaria::after,
+[data-contraste="alto"] .lanterna {
+  display: none;
+}
+
+/* Reduzir animações vale também para a virada de página: a troca fica seca.
+   (Os retratos da página velha e da nova são peças do próprio navegador,
+   por isso não entram na regra geral lá de cima e precisam desta.) */
+html[data-movimento="reduzido"]::view-transition-group(*),
+html[data-movimento="reduzido"]::view-transition-old(*),
+html[data-movimento="reduzido"]::view-transition-new(*) {
+  animation: none !important;
+}
+
+[data-movimento="reduzido"] .lanterna {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-movimento="completo"])::view-transition-group(*),
+  html:not([data-movimento="completo"])::view-transition-old(*),
+  html:not([data-movimento="completo"])::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  html:not([data-movimento="completo"]) .lanterna {
+    display: none;
+  }
+}
+
+/* A entrada das casas do álbum é presa à rolagem, e não a um relógio: a regra
+   geral de reduzir animações não a alcança. Aqui ela é desligada de vez. */
+[data-movimento="reduzido"] .vagas > .casa {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-movimento="completo"]) .vagas > .casa {
+    animation: none;
+  }
+}

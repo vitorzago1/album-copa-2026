@@ -216,6 +216,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const fig = figurinhaPorNumero(numero);
     const casa = document.getElementById('casa-' + numero);
     casa.textContent = '';   // apaga o desenho anterior
+    // A batida (o anel de tinta e a tremida) vale só para a figurinha que acabou de ser colada
+    casa.classList.toggle('bateu', acabouDeColar === true);
 
     if (estaColada(album, numero)) {
       const figurinha = criarFigurinha(fig, { vira: true, etiqueta: textoDeRepetidas(repetidasDe(album, numero)) });
@@ -276,11 +278,48 @@ document.addEventListener('DOMContentLoaded', function () {
     return coladas + ' de ' + total + (coladas === 1 ? ' colada' : ' coladas');
   }
 
+  // O placar gira como um marcador antigo. Cada casa do número é uma janelinha
+  // que mostra uma fita com os algarismos de 0 a 9, um embaixo do outro. Para
+  // mostrar o 7, a fita sobe sete degraus (o CSS faz a subida, devagar).
+  function mostrarNoOdometro(odometro, valor) {
+    const algarismos = String(valor);
+    odometro.dataset.valor = algarismos;
+
+    // Cada fita sobe até o algarismo que lhe cabe
+    function subir() {
+      const atual = odometro.dataset.valor;
+      Array.from(odometro.children).forEach(function (casa, i) {
+        casa.firstChild.style.setProperty('--digito', atual[i]);
+      });
+    }
+
+    // A quantidade de casas é a mesma (de 12 para 13, por exemplo): só gira
+    if (odometro.children.length === algarismos.length) {
+      subir();
+      return;
+    }
+
+    // Mudou a quantidade de casas (de 9 para 10): monta as fitas de novo
+    odometro.textContent = '';
+    for (let i = 0; i < algarismos.length; i++) {
+      const casa = criarElemento('span', 'odo-casa');
+      const fita = criarElemento('span', 'odo-fita');
+      for (let n = 0; n <= 9; n++) fita.append(criarElemento('span', '', String(n)));
+      fita.style.transitionDelay = (i * 120) + 'ms';   // cada casa começa um pouco depois da anterior
+      casa.append(fita);
+      odometro.append(casa);
+    }
+    // As fitas nascem no zero. Dois quadros depois elas sobem: o navegador
+    // precisa desenhar o zero primeiro para haver um caminho a percorrer.
+    requestAnimationFrame(function () { requestAnimationFrame(subir); });
+  }
+
   function atualizarPlacar() {
     const album = lerAlbum();
     const resumo = resumoDoAlbum(album);
 
     document.getElementById('placar-coladas').textContent = resumo.coladas;
+    mostrarNoOdometro(document.getElementById('placar-odometro'), resumo.coladas);
     document.getElementById('placar-total').textContent = resumo.total;
     document.getElementById('placar-barra').style.setProperty('--parte', resumo.coladas / resumo.total);
 
@@ -312,10 +351,28 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('conta-repetidas').textContent = resumo.comRepetida;
   }
 
-  function desenharConquistas() {
+  // As conquistas que acabaram de sair e ainda não foram vistas. O carimbo
+  // delas só bate quando o quadro aparece na tela (a lista fica lá no fim da
+  // página, longe de onde a pessoa cola).
+  const carimbosPorBater = [];
+  const vigiaDosCarimbos = 'IntersectionObserver' in window ? new IntersectionObserver(function (entradas) {
+    for (const entrada of entradas) {
+      if (!entrada.isIntersecting) continue;
+      entrada.target.classList.add('conquista-carimbando');   // o CSS faz o carimbo bater
+      vigiaDosCarimbos.unobserve(entrada.target);
+      const posicao = carimbosPorBater.indexOf(entrada.target.dataset.conquista);
+      if (posicao >= 0) carimbosPorBater.splice(posicao, 1);
+    }
+  }, { threshold: 0.6 }) : null;
+
+  // "novas" são os nomes das conquistas que acabaram de sair (ou nada)
+  function desenharConquistas(novas) {
     const album = lerAlbum();
     const lista = document.getElementById('conquistas');
     lista.textContent = '';
+    for (const nome of novas || []) {
+      if (vigiaDosCarimbos && !movimentoReduzido() && !carimbosPorBater.includes(nome)) carimbosPorBater.push(nome);
+    }
 
     for (const conquista of CONQUISTAS) {
       const dia = album.conquistas[conquista.id];
@@ -324,6 +381,13 @@ document.addEventListener('DOMContentLoaded', function () {
       item.append(criarElemento('span', 'conquista-como', conquista.como));
       item.append(criarElemento('span', 'conquista-estado', dia ? 'Feita em ' + dataPorExtenso(dia) : 'Ainda não'));
       lista.append(item);
+
+      // Conquista nova: fica sem o carimbo até aparecer na tela
+      if (dia && carimbosPorBater.includes(conquista.nome)) {
+        item.classList.add('conquista-nova');
+        item.dataset.conquista = conquista.nome;
+        vigiaDosCarimbos.observe(item);
+      }
     }
   }
 
@@ -414,10 +478,10 @@ document.addEventListener('DOMContentLoaded', function () {
     avisar(texto);   // o mesmo texto, lido pelo leitor de tela
   }
 
-  function atualizarTudo() {
+  function atualizarTudo(conquistasNovas) {
     desenharBandeja();
     atualizarPlacar();
-    desenharConquistas();
+    desenharConquistas(conquistasNovas);
     aplicarFiltros();
   }
 
@@ -434,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ultimaColada = numero;
     if (anterior !== null) desenharCasa(anterior);   // a colagem anterior perde o "Desfazer"
     desenharCasa(numero, true);
-    atualizarTudo();
+    atualizarTudo(conquistas);
 
     const fig = figurinhaPorNumero(numero);
     const resumo = resumoDoAlbum(lerAlbum());
@@ -612,6 +676,20 @@ document.addEventListener('DOMContentLoaded', function () {
   montarFinal();
   for (const fig of FIGURINHAS) desenharCasa(fig.numero);
   atualizarTudo();
+
+  // O campo desenhado no fim do álbum: o traço só começa quando ele aparece na
+  // tela. Com menos movimento (ou em navegador antigo), ele já vem pronto.
+  const campoDoFinal = document.getElementById('campo-do-final');
+  if (campoDoFinal && 'IntersectionObserver' in window && !movimentoReduzido()) {
+    campoDoFinal.classList.add('por-desenhar');
+    const vigiaDoCampo = new IntersectionObserver(function (entradas) {
+      if (!entradas[0].isIntersecting) return;
+      campoDoFinal.classList.remove('por-desenhar');
+      campoDoFinal.classList.add('desenhando');
+      vigiaDoCampo.disconnect();
+    }, { threshold: 0.4 });
+    vigiaDoCampo.observe(campoDoFinal);
+  }
 
   // Se o endereço veio com uma âncora (album.html#casa-50), rola até ela.
   // O navegador não faz isso sozinho porque as casas só passam a existir agora.

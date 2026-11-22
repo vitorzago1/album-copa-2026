@@ -477,3 +477,68 @@ a:hover {
 .secao + .secao {
   border-top: 2px solid var(--cor-texto);
 }
+
+/* ---------- Retícula que acende ----------
+   Uma camada do tamanho da tela, atrás de tudo, coberta de pontinhos de
+   impressão. A máscara só deixa ver os que estão perto do ponteiro: a posição
+   chega em --x e --y, escrita pelo js/efeitos.js. É só enfeite. */
+
+.lanterna {
+  position: fixed;
+  inset: 0;
+  z-index: -1;            /* atrás de todo o conteúdo, em cima só do papel */
+  pointer-events: none;
+  background: radial-gradient(circle, var(--cor-texto) 1.6px, transparent 2px) 0 0 / 11px 11px;
+  -webkit-mask-image: radial-gradient(circle 9rem at var(--x, 50%) var(--y, 50%), #000, transparent);
+  mask-image: radial-gradient(circle 9rem at var(--x, 50%) var(--y, 50%), #000, transparent);
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
+.lanterna-acesa {
+  opacity: 0.2;
+}
+
+/* Na página inicial em movimento a abertura já tem os seus pontinhos */
+.com-cenas .lanterna {
+  display: none;
+}
+
+/* ---------- Virar a página ----------
+   Ao ir de uma página do site para outra, o navegador tira um retrato da
+   página velha e um da nova e anima entre os dois (View Transitions API).
+   A regra abaixo liga isso para os links do próprio site. A página velha sai
+   como uma folha virando em torno da borda esquerda, e a nova chega.
+   Onde o navegador não conhece a regra (Firefox, por exemplo), ou com o site
+   aberto direto do arquivo, a troca é seca e nada quebra. */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* O cabeçalho e o rodapé são iguais em todas as páginas: ficam parados */
+.cabecalho {
+  view-transition-name: cabecalho;
+}
+
+.rodape {
+  view-transition-name: rodape;
+}
+
+::view-transition-old(root) {
+  transform-origin: left center;
+  animation: folha-sai 280ms ease-in both;
+}
+
+::view-transition-new(root) {
+  transform-origin: left center;
+  animation: folha-entra 360ms ease-out both;
+}
+
+@keyframes folha-sai {
+  to { transform: perspective(60rem) rotateY(-80deg); opacity: 0; }
+}
+
+@keyframes folha-entra {
+  from { transform: perspective(60rem) rotateY(60deg); opacity: 0; }
+}

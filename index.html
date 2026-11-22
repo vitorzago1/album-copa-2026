@@ -11,6 +11,7 @@
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
   <script src="js/dados.js" defer></script>
@@ -308,6 +309,18 @@
     <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
       <div class="cena-palco">
         <h2 class="cena-titulo" id="titulo-numeros">A Copa de 2026 em números</h2>
+        <!-- Enfeite: as linhas de um campo, atrás dos números. A rolagem desenha o traço. -->
+        <svg class="campo-tracado campo-dos-numeros" id="campo-dos-numeros" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+          <rect pathLength="1" x="20" y="20" width="560" height="360"/>
+          <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
+          <circle pathLength="1" cx="300" cy="200" r="62"/>
+          <rect pathLength="1" x="20" y="105" width="92" height="190"/>
+          <rect pathLength="1" x="20" y="155" width="36" height="90"/>
+          <path pathLength="1" d="M112 160a50 50 0 0 1 0 80"/>
+          <rect pathLength="1" x="488" y="105" width="92" height="190"/>
+          <rect pathLength="1" x="544" y="155" width="36" height="90"/>
+          <path pathLength="1" d="M488 160a50 50 0 0 0 0 80"/>
+        </svg>
         <dl class="numeros" id="numeros">
           <div class="numero"><dt>seleções</dt><dd>48</dd></div>
           <div class="numero"><dt>figurinhas no álbum</dt><dd>288</dd></div>

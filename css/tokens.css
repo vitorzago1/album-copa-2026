@@ -48,6 +48,9 @@
   --cor-prata: #C5CAD6;              /* brilhante: laminado */
   --cor-prata-clara: #ECEEF3;
   --cor-ouro: #F2C230;               /* lendária: holográfico */
+  /* O arco-íris do papel holográfico. Fica por cima da lendária, bem fraco;
+     é brilho, não é texto nem fundo de texto. Não muda com o tema. */
+  --holografico: linear-gradient(115deg, #FF5D8F, #FFD166 22%, #5EEAD4 45%, #60A5FA 68%, #C084FC 90%);
 
   /* Foto impressa em uma tinta só: a parte escura da foto sai na cor da tinta
      e a parte clara fica na cor do papel */

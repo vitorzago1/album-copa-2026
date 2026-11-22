@@ -148,6 +148,15 @@ document.addEventListener('DOMContentLoaded', function () {
     resumo.hidden = true;
 
     palco.append(titulo, texto, mesa, botoes, resumo);
+
+    // As figurinhas saem todas do mesmo ponto, onde o pacotinho estava: no alto
+    // e no meio da mesa. Cada casa guarda a distância até esse ponto (--dx e
+    // --dy), e a animação do CSS começa de lá, abre em leque e só depois leva
+    // cada figurinha para a sua casa.
+    for (const casa of mesa.children) {
+      casa.style.setProperty('--dx', Math.round(mesa.offsetLeft + mesa.offsetWidth / 2 - casa.offsetLeft - casa.offsetWidth / 2) + 'px');
+      casa.style.setProperty('--dy', Math.round(mesa.offsetTop - casa.offsetTop) + 'px');
+    }
     titulo.focus();
     avisar('Pacotinho aberto. ' + total + ' figurinhas de costas. Vire uma por uma.');
 

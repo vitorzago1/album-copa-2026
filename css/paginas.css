@@ -283,6 +283,13 @@ html {
 .vagas {
   list-style: none;
   padding: 0;
+  /* A figurinha que acabou de ser colada chega maior e torta, e passaria da
+     beirada da tela. "overflow-x: clip" corta essa sobra sem criar barra de
+     rolagem. A margem negativa com o mesmo tanto de respiro leva o corte um
+     pouco para fora da grade, até a beira da página. */
+  overflow-x: clip;
+  margin-inline: calc(var(--espaco-4) * -1);
+  padding-inline: var(--espaco-4);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 12rem));
   gap: var(--espaco-5) var(--espaco-4);
@@ -303,9 +310,26 @@ html {
 
 /* A casa empilha a figurinha (ou a vaga) e, se houver, o botão "Desfazer" */
 .casa {
+  position: relative;   /* o anel da batida se mede por ela */
   display: grid;
   gap: var(--espaco-2);
   align-content: start;
+}
+
+/* Entrar ao rolar: cada casa do álbum assenta no lugar enquanto entra na tela.
+   "animation-timeline: view()" troca o relógio da animação pela rolagem: ela
+   anda conforme a casa aparece e termina com a casa inteira à vista.
+   Onde o navegador não conhece isso, as casas simplesmente já estão no lugar. */
+@supports (animation-timeline: view()) {
+  .vagas > .casa {
+    animation: assentar linear both;
+    animation-timeline: view(block);
+    animation-range: entry 0% entry 90%;
+  }
+}
+
+@keyframes assentar {
+  from { opacity: 0; translate: 0 2rem; rotate: -4deg; scale: 0.86; }
 }
 
 /* A largura de cada casa é a da coluna, e pronto: "minmax(0, 1fr)" proíbe o

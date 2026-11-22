@@ -716,6 +716,31 @@ html:not(.com-cenas) #pagina-base {
   }
 }
 
+/* As linhas do campo, atrás dos números. É enfeite: fica bem fraco. */
+.campo-dos-numeros {
+  position: absolute;
+  z-index: 0;
+  right: var(--espaco-4);
+  bottom: var(--espaco-5);
+  width: min(55%, 24rem);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.numeros {
+  position: relative;   /* na frente do campo */
+  z-index: 1;
+}
+
+.com-cenas .campo-dos-numeros {
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  top: 54%;
+  width: min(88vw, 50rem, 110vh);
+  translate: -50% -50%;
+}
+
 /* "--aceso" vai de 0 a 1 conforme chega a vez do número. Parado, vale 1. */
 .numero {
   position: relative;

@@ -324,6 +324,70 @@
   background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
 }
 
+/* ---------- Lendária holográfica ----------
+   O js/efeitos.js escreve na figurinha a posição do ponteiro (--px e --py, de
+   0% a 100%) e a inclinação (--rx e --ry). Com isso a figurinha inclina e o
+   brilho corre. Sem ponteiro em cima, fica só um brilho fraco e parado. */
+.figurinha-lendaria {
+  --px: 50%;
+  --py: 50%;
+  --brilho: 0.3;
+}
+
+/* A que não vira (na mão, nas amostras) */
+.figurinha-lendaria:not(.figurinha-vira) {
+  transform: perspective(42rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 160ms ease-out;
+}
+
+/* A que vira (colada no álbum, saída do pacotinho): só inclina de frente */
+.figurinha-vira.figurinha-lendaria[data-face="frente"] {
+  transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+
+/* Duas camadas por cima da figurinha: o arco-íris (::after) e o reflexo
+   branco que acompanha o ponteiro (::before). Os modos de mistura "overlay" e
+   "soft-light" tingem as cores de baixo sem apagar o texto. */
+.figurinha-lendaria::before,
+.figurinha-lendaria::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 250ms ease-out;
+  /* Na faixa de baixo fica o texto: ali o brilho cai para um terço da força,
+     para o nome e a raridade continuarem fáceis de ler (contraste medido) */
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
+  mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
+}
+
+.figurinha-lendaria::after {
+  background: var(--holografico) var(--px) var(--py) / 260% 260%;
+  mix-blend-mode: overlay;
+  opacity: calc(var(--brilho) * 0.8);
+}
+
+.figurinha-lendaria::before {
+  background: radial-gradient(circle at var(--px) var(--py), rgba(255, 255, 255, 0.95), transparent 45%);
+  mix-blend-mode: soft-light;
+  opacity: var(--brilho);
+}
+
+/* De costas ou mostrando o verso, o brilho some: ali só há texto para ler.
+   Nas cenas da página inicial em que as figurinhas são enfeite, também. */
+.figurinha-lendaria[data-face="verso"]::before,
+.figurinha-lendaria[data-face="verso"]::after,
+.figurinha-lendaria[data-face="costas"]::before,
+.figurinha-lendaria[data-face="costas"]::after,
+.voo .figurinha-lendaria::before,
+.voo .figurinha-lendaria::after,
+.miolo .figurinha-lendaria::before,
+.miolo .figurinha-lendaria::after {
+  display: none;
+}
+
 /* Etiqueta presa na figurinha: usa a tinta e o papel da própria figurinha,
    porque a figurinha não muda de cor quando o tema muda. */
 .figurinha .etiqueta {
@@ -362,7 +426,8 @@
   text-align: left;
   cursor: pointer;
   transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateY(0deg);
-  transition: transform var(--tempo-de-virar) ease-in-out;
+  /* "--tempo-do-movimento" só existe enquanto a lendária acompanha o ponteiro (mais abaixo) */
+  transition: transform var(--tempo-do-movimento, var(--tempo-de-virar)) ease-in-out;
 }
 
 .figurinha-vira[data-face="verso"],
@@ -441,15 +506,48 @@
    ("scale" e "rotate" são propriedades separadas do "transform",
    por isso não atrapalham o giro de virar.) */
 .figurinha-colando {
-  animation: colar 280ms cubic-bezier(0.3, 1.4, 0.5, 1);
+  animation: bater 520ms cubic-bezier(0.3, 0.9, 0.4, 1) backwards;
 }
 
-@keyframes colar {
-  from {
-    scale: 1.14;
-    rotate: 5deg;
-    box-shadow: none;
-  }
+/* A batida: a figurinha desce torta e maior, bate no lugar (55%), amassa de
+   leve (70%) e volta ao tamanho. */
+@keyframes bater {
+  0% { translate: 0 -60%; rotate: -12deg; scale: 1.35; opacity: 0; box-shadow: none; }
+  55% { translate: 0 0; rotate: 0deg; scale: 1; opacity: 1; }
+  70% { scale: 1.07 0.92; }
+  100% { scale: 1; }
+}
+
+/* A casa em que a figurinha acabou de bater: abre um anel de tinta em volta
+   da figurinha e dá uma tremida. (A classe "bateu" é posta pelo js/album.js.) */
+/* (".vagas > .casa.bateu" precisa ganhar da regra de entrar ao rolar, em paginas.css) */
+.vagas > .casa.bateu {
+  animation: tremer 260ms linear 280ms;
+}
+
+.casa.bateu::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  aspect-ratio: 3 / 4;   /* o mesmo formato da figurinha, que fica no topo da casa */
+  border: 3px solid var(--cor-texto);
+  border-radius: var(--raio-adesivo);
+  pointer-events: none;
+  opacity: 0;
+  animation: anel 560ms ease-out 280ms;
+}
+
+@keyframes anel {
+  from { scale: 0.9; opacity: 0.8; }
+  to { scale: 1.18; opacity: 0; }
+}
+
+@keyframes tremer {
+  20% { translate: -2px 1px; }
+  45% { translate: 2px -1px; }
+  70% { translate: -1px 0; }
 }
 
 /* Revelar: o reflexo passa uma vez pela brilhante e pela lendária,
@@ -824,6 +922,28 @@ textarea.campo-entrada {
   rotate: -3deg;
 }
 
+/* Conquista que acabou de sair: o carimbo só aparece quando o quadro entra na
+   tela, e aí bate com força (as classes são postas pelo js/album.js) */
+.conquista-nova:not(.conquista-carimbando) .conquista-estado {
+  opacity: 0;
+}
+
+.conquista-carimbando {
+  animation: tremer 240ms linear 230ms;
+}
+
+.conquista-carimbando .conquista-estado {
+  animation: carimbar 420ms cubic-bezier(0.3, 0.8, 0.4, 1) backwards;
+}
+
+/* O carimbo chega grande, torto e transparente e encolhe até o tamanho certo */
+@keyframes carimbar {
+  0% { scale: 2.8; opacity: 0; rotate: -20deg; }
+  60% { scale: 0.92; opacity: 1; rotate: -7deg; }
+  80% { scale: 1.06; }
+  100% { scale: 1; }
+}
+
 @media (min-width: 40rem) {
   .conquistas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -975,11 +1095,49 @@ textarea.campo-entrada {
 
 /* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
    Este é o único momento "ensaiado" do site. */
+/* Antes de rasgar, o pacotinho balança quando o ponteiro passa por cima */
+.palco .pacotinho:hover:not(.pacotinho-rasgando) {
+  animation: balancar 700ms ease-in-out;
+}
+
+@keyframes balancar {
+  0%, 100% { rotate: -3deg; }
+  30% { rotate: -7deg; }
+  70% { rotate: 1deg; }
+}
+
+/* O brilho de papel laminado que atravessa o pacotinho de CSS */
+.pacotinho-corpo {
+  overflow: hidden;
+}
+
+.pacotinho-corpo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  translate: -120% 0;
+}
+
+.palco .pacotinho:hover .pacotinho-corpo::after,
+.pacotinho-rasgando .pacotinho-corpo::after {
+  animation: laminado 900ms ease-out;
+}
+
+@keyframes laminado {
+  to { translate: 120% 0; }
+}
+
+/* Rasgado: a borda do picote vira dente de serra. "clip-path" recorta a forma
+   por uma lista de pontos: sobe, desce, sobe, desce. */
 .pacotinho-rasgando .pacotinho-aba {
+  border-bottom-color: transparent;
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 84% 78%, 76% 100%, 68% 78%, 60% 100%, 52% 78%, 44% 100%, 36% 78%, 28% 100%, 20% 78%, 12% 100%, 4% 78%, 0 100%);
   animation: rasgar 520ms ease-in forwards;
 }
 
 .pacotinho-rasgando .pacotinho-corpo {
+  clip-path: polygon(0 7px, 4% 0, 12% 7px, 20% 0, 28% 7px, 36% 0, 44% 7px, 52% 0, 60% 7px, 68% 0, 76% 7px, 84% 0, 92% 7px, 100% 0, 100% 100%, 0 100%);
   animation: esvaziar 360ms ease-in 440ms forwards;
 }
 
@@ -992,17 +1150,27 @@ textarea.campo-entrada {
   to { transform: translateY(16%); opacity: 0; }
 }
 
-/* As figurinhas saem do pacotinho uma depois da outra.
-   --ordem (0 a 4) vem do HTML e atrasa cada uma um pouco mais que a anterior. */
+/* As figurinhas saem do pacotinho em leque. Todas partem do mesmo ponto (a
+   distância até ele vem em --dx e --dy, postas pelo js/pacotinho.js), abrem
+   como um leque de cartas (40%) e depois cada uma vai para a sua casa.
+   --ordem (0 a 4) dá o ângulo de cada uma no leque e o pequeno atraso. */
 .mesa > li {
-  animation: sair-do-pacotinho 440ms cubic-bezier(0.2, 0.8, 0.3, 1.15) backwards;
-  animation-delay: calc(var(--ordem, 0) * 120ms);
+  animation: sair-em-leque 720ms cubic-bezier(0.2, 0.8, 0.3, 1.1) backwards;
+  animation-delay: calc(var(--ordem, 0) * 90ms);
 }
 
-@keyframes sair-do-pacotinho {
-  from {
+@keyframes sair-em-leque {
+  0% {
     opacity: 0;
-    transform: translateY(-3rem) rotate(-10deg) scale(0.7);
+    translate: var(--dx, 0px) var(--dy, 0px);
+    rotate: 0deg;
+    scale: 0.5;
+  }
+  40% {
+    opacity: 1;
+    translate: calc(var(--dx, 0px) + (var(--ordem, 0) - 2) * 1.5rem) calc(var(--dy, 0px) - 0.5rem);
+    rotate: calc((var(--ordem, 0) - 2) * 12deg);
+    scale: 0.62;
   }
 }
 
@@ -1127,4 +1295,67 @@ textarea.campo-entrada {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
+}
+
+/* ---------- Placar girando ----------
+   Cada casa do número é uma janelinha com a altura de uma linha, que mostra
+   uma fita com os algarismos de 0 a 9, um embaixo do outro. "--digito" (posto
+   pelo js/album.js) diz quantos degraus a fita sobe. */
+
+.odometro {
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.odo-casa {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+.odo-fita {
+  display: grid;
+  transform: translateY(calc(var(--digito, 0) * -1em));
+  transition: transform 1100ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.odo-fita span {
+  height: 1em;
+}
+
+/* ---------- Traço que se desenha ----------
+   As linhas de um campo de futebol. Cada linha "mede 1" (pathLength="1" no
+   HTML) e é tracejada com um traço de tamanho 1: escondendo o traço inteiro
+   (stroke-dashoffset: 1) a linha some; trazendo de volta aos poucos, ela se
+   desenha como uma caneta percorrendo o papel. */
+
+.campo-tracado {
+  display: block;
+  width: min(100%, 20rem);
+  fill: none;
+  stroke: var(--cor-texto);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.campo-tracado * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--falta, 0);   /* a página inicial manda "--falta" pela rolagem */
+}
+
+/* Antes de aparecer na tela (página do álbum), as linhas ficam escondidas */
+.campo-tracado.por-desenhar * {
+  stroke-dashoffset: 1;
+}
+
+.campo-tracado.desenhando * {
+  animation: desenhar-campo 1500ms ease-in-out backwards;
+}
+
+.campo-tracado.desenhando :nth-child(n + 4) { animation-delay: 500ms; }
+.campo-tracado.desenhando :nth-child(n + 7) { animation-delay: 900ms; }
+
+@keyframes desenhar-campo {
+  from { stroke-dashoffset: 1; }
 }

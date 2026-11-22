@@ -11,6 +11,7 @@
        salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
+  <script src="js/efeitos.js" defer></script>
 
   <!-- Os scripts do álbum, nesta ordem: os dados, o caderninho do progresso,
        o desenho da figurinha e, por último, a página. O "defer" espera o HTML
@@ -68,7 +69,9 @@
       <div class="fluxo">
         <h1>Álbum</h1>
         <p class="placar">
-          <span class="placar-numero" id="placar-coladas">0</span>
+          <!-- O número grande gira como um marcador antigo (js/album.js). Quem lê o
+               número para o leitor de tela é o texto escondido ao lado. -->
+          <span class="placar-numero"><span class="odometro" id="placar-odometro" aria-hidden="true"></span><span class="escondido" id="placar-coladas">0</span></span>
           <span>de <span id="placar-total">24</span> figurinhas coladas</span>
         </p>
         <!-- A barra é só desenho: o número já está escrito acima. -->
@@ -156,6 +159,18 @@
           <p id="final-placar"></p>
           <p id="final-onde"></p>
           <p id="final-numeros"></p>
+          <!-- Enfeite: as linhas de um campo, que se desenham quando esta parte aparece na tela. -->
+          <svg class="campo-tracado" id="campo-do-final" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+            <rect pathLength="1" x="20" y="20" width="560" height="360"/>
+            <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
+            <circle pathLength="1" cx="300" cy="200" r="62"/>
+            <rect pathLength="1" x="20" y="105" width="92" height="190"/>
+            <rect pathLength="1" x="20" y="155" width="36" height="90"/>
+            <path pathLength="1" d="M112 160a50 50 0 0 1 0 80"/>
+            <rect pathLength="1" x="488" y="105" width="92" height="190"/>
+            <rect pathLength="1" x="544" y="155" width="36" height="90"/>
+            <path pathLength="1" d="M488 160a50 50 0 0 0 0 80"/>
+          </svg>
         </div>
 
         <div class="fluxo">
