@@ -951,6 +951,28 @@ textarea.campo-entrada {
   font-weight: 700;
 }
 
+/* Pacotinho 3D ao vivo (página Pacotinhos, js/pacotinho-3d.js). A tela de desenho
+   entra dentro do pacotinho de CSS, que fica só como molde: guarda o tamanho,
+   o lugar e o clique. A tela é maior que o molde, para o pacotinho poder
+   inclinar e a aba ter para onde voar. */
+.pacotinho-com-3d {
+  position: relative;
+}
+
+.pacotinho-com-3d > .pacotinho-aba,
+.pacotinho-com-3d > .pacotinho-corpo {
+  visibility: hidden;
+}
+
+.pacotinho-vivo {
+  position: absolute;
+  left: -30%;
+  top: -25%;
+  width: 160%;
+  height: 150%;
+  pointer-events: none;   /* o clique e o ponteiro passam direto para o molde */
+}
+
 /* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
    Este é o único momento "ensaiado" do site. */
 .pacotinho-rasgando .pacotinho-aba {

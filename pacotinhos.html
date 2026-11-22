@@ -19,6 +19,13 @@
   <script src="js/figurinha.js" defer></script>
   <script src="js/pacotinho.js" defer></script>
 
+  <!-- O pacotinho fechado em 3D. É a única parte do site que usa uma biblioteca
+       externa (Three.js, guardada em js/vendor). Sem ela, ou sem WebGL no
+       navegador, a página funciona igual, com o pacotinho desenhado em CSS. -->
+  <script src="js/vendor/three.min.js" defer></script>
+  <script src="js/pacote3d.js" defer></script>
+  <script src="js/pacotinho-3d.js" defer></script>
+
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
