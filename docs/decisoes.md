@@ -211,7 +211,8 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - As 369 verificações anteriores continuam passando (uma foi ajustada: a altura do botão "Colar" passou a ser medida no lugar dele, e não durante a entrada da casa).
 - Defeito achado pelos testes e corrigido: a tremida da casa ao colar não valia, porque a regra da entrada ao rolar ganhava dela.
 - Contraste do nome da figurinha lendária, medido nos prints com o brilho por cima: de 6,5:1 a 9,6:1 nos dois temas. Na primeira versão do efeito o pior caso era 4,4:1 (abaixo do mínimo de 4,5:1); por isso o brilho foi enfraquecido sobre o texto.
-- A virada de página foi conferida por um clique de verdade em um link do menu (a página seguinte abriu sem erro). O movimento em si só dá para julgar olhando.
+- A virada de página foi conferida com cliques de mouse de verdade em três links do menu, no Edge sem janela: em cada troca o navegador registrou a saída, a chegada, o começo e o fim da animação, sem erro.
+- No navegador embutido do aplicativo de programação usado no projeto, a animação da virada é abandonada pelo próprio navegador (mensagem "Page already revealed" no console) e a troca fica seca. As páginas abrem normalmente. Falta conferir em uma janela comum do Edge ou do Chrome.
 - Ainda não verificado: Firefox e Safari (onde a virada de página e a entrada ao rolar podem não existir), celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 11
