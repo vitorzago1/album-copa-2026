@@ -4,24 +4,24 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
-- Arquivos: 32.
-- Linhas de código (com comentários): 11627.
+- Arquivos: 35.
+- Linhas de código (com comentários): 12527.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 434 |
+| `index.html` | 440 |
 | `album.html` | 219 |
-| `pacotinhos.html` | 129 |
+| `pacotinhos.html` | 136 |
 | `trocas.html` | 165 |
 | `login.html` | 182 |
 | `contato.html` | 159 |
-| `sobre.html` | 297 |
+| `sobre.html` | 301 |
 | `css/tokens.css` | 204 |
 | `css/base.css` | 479 |
-| `css/componentes.css` | 1108 |
+| `css/componentes.css` | 1130 |
 | `css/paginas.css` | 513 |
 | `css/acessibilidade.css` | 177 |
-| `css/cenas.css` | 1021 |
+| `css/cenas.css` | 1044 |
 | `js/tema-acessibilidade.js` | 226 |
 | `js/menu.js` | 52 |
 | `js/estado.js` | 417 |
@@ -32,7 +32,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/inicio.js` | 53 |
 | `js/carrossel.js` | 92 |
 | `js/cenas.js` | 254 |
-| `js/cenas-inicio.js` | 752 |
+| `js/cenas-inicio.js` | 821 |
+| `js/pacote3d.js` | 466 |
+| `js/pacotinho-3d.js` | 170 |
 | `js/formulario.js` | 53 |
 | `js/login.js` | 312 |
 | `js/contato.js` | 112 |
@@ -40,7 +42,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/demonstracao.js` | 39 |
 | `js/dados.js` | 2474 |
 | `scripts/contraste.js` | 281 |
-| `scripts/gerar-anexo.js` | 99 |
+| `scripts/gerar-anexo.js` | 103 |
+| `scripts/quadros.html` | 129 |
 
 ## Páginas (HTML)
 
@@ -195,8 +198,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </ol>
     </section>
 
-    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho tem frente e costas no espaço 3D
-         do CSS. As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
+    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho aparece de dois jeitos:
+         1. uma sequência de 90 imagens de um pacotinho 3D (a técnica das páginas de
+            produto), mostradas uma a uma no <canvas> conforme a rolagem;
+         2. um pacotinho desenhado em CSS, usado na versão parada e enquanto as
+            imagens ainda estão chegando.
+         As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
     <section class="cena cena-pacote" style="--altura: 360vh" aria-labelledby="titulo-cena-pacote">
       <div class="cena-palco palco-3d">
         <h2 class="cena-titulo" id="titulo-cena-pacote">Todo dia, um pacotinho.</h2>
@@ -216,6 +223,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
               <span class="pacotinho-texto">Abra pelo picote</span>
             </div>
           </div>
+          <!-- Cada imagem da sequência tem 720 por 924 pixels. -->
+          <canvas class="pacote-quadros so-com-js" id="pacote-quadros" width="720" height="924" aria-hidden="true"></canvas>
         </div>
       </div>
     </section>
@@ -730,6 +739,13 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
   <script src="js/pacotinho.js" defer></script>
+
+  <!-- O pacotinho fechado em 3D. É a única parte do site que usa uma biblioteca
+       externa (Three.js, guardada em js/vendor). Sem ela, ou sem WebGL no
+       navegador, a página funciona igual, com o pacotinho desenhado em CSS. -->
+  <script src="js/vendor/three.min.js" defer></script>
+  <script src="js/pacote3d.js" defer></script>
+  <script src="js/pacotinho-3d.js" defer></script>
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -1478,6 +1494,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <h2 id="titulo-feito">Como foi feito</h2>
       <ul class="lista-simples">
         <li>HTML, CSS e JavaScript puros, sem framework e sem etapa de build. O site abre direto do arquivo <code>index.html</code>.</li>
+        <li>Uma única biblioteca, a Three.js, usada só para desenhar o pacotinho em 3D.</li>
         <li>Sete páginas com o mesmo cabeçalho e o mesmo rodapé.</li>
         <li>Meta de acessibilidade: WCAG 2.2, nível AA, nos temas claro e escuro. O contraste de cada par de cores é calculado por um script.</li>
         <li>Tudo funciona pelo teclado. O que se faz arrastando também se faz por botão.</li>
@@ -1498,6 +1515,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
       <h3>Bandeiras</h3>
       <p>Biblioteca <a href="https://github.com/lipis/flag-icons">flag-icons</a>, de Panayiotis Lipiridis. Licença MIT.</p>
+
+      <h3>Biblioteca de 3D</h3>
+      <p>Biblioteca <a href="https://threejs.org/">Three.js</a>, revisão 128, dos autores do three.js. Licença MIT. Desenha o pacotinho em 3D na página Pacotinhos e gerou as imagens do pacotinho da página inicial.</p>
 
       <h3>Fotos dos estádios</h3>
       <p>Todas vêm do Wikimedia Commons. Foram reduzidas para 960 pixels de largura e, no site, aparecem na cor da tinta da página por um efeito feito no CSS. O link de cada linha leva à foto original.</p>
@@ -3315,6 +3335,28 @@ textarea.campo-entrada {
   font-weight: 700;
 }
 
+/* Pacotinho 3D ao vivo (página Pacotinhos, js/pacotinho-3d.js). A tela de desenho
+   entra dentro do pacotinho de CSS, que fica só como molde: guarda o tamanho,
+   o lugar e o clique. A tela é maior que o molde, para o pacotinho poder
+   inclinar e a aba ter para onde voar. */
+.pacotinho-com-3d {
+  position: relative;
+}
+
+.pacotinho-com-3d > .pacotinho-aba,
+.pacotinho-com-3d > .pacotinho-corpo {
+  visibility: hidden;
+}
+
+.pacotinho-vivo {
+  position: absolute;
+  left: -30%;
+  top: -25%;
+  width: 160%;
+  height: 150%;
+  pointer-events: none;   /* o clique e o ponteiro passam direto para o molde */
+}
+
 /* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
    Este é o único momento "ensaiado" do site. */
 .pacotinho-rasgando .pacotinho-aba {
@@ -4572,6 +4614,29 @@ main:has(> .cena-abertura) {
   inset: 0;
   display: block;
   transform-style: preserve-3d;
+}
+
+/* A sequência de quadros: uma tela de desenho maior que o pacotinho, com folga
+   para ele entrar, girar e cair. Fica escondida até todas as imagens chegarem;
+   aí a classe "com-quadros" troca o pacotinho de CSS por ela. */
+.pacote-quadros {
+  display: none;
+}
+
+.com-cenas .com-quadros .pacote-quadros {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--pacote-l) * 2.4);
+  height: calc(var(--pacote-l) * 3.08);
+  margin-left: calc(var(--pacote-l) * -1.2);
+  margin-top: calc(var(--pacote-l) * -1.54);
+  pointer-events: none;
+}
+
+.com-cenas .com-quadros .pacote3d {
+  display: none;
 }
 
 /* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
@@ -7941,6 +8006,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // -------------------------------------------------------------------------
   // 3. O pacotinho gira e abre
   // -------------------------------------------------------------------------
+  // O pacotinho aparece de dois jeitos, com a mesma coreografia:
+  //   - a sequência de quadros: 90 imagens de um pacotinho 3D, já prontas em
+  //     assets/img/pacotinho/. A rolagem escolhe qual imagem mostrar. É a
+  //     técnica das páginas de produto: o 3D pesado é feito antes, uma vez só,
+  //     e o site só mostra fotos. (As imagens saem de scripts/quadros.html.)
+  //   - o pacotinho de CSS: fica no lugar enquanto as imagens não chegam.
+  // As figurinhas são elementos comuns da página, atrás do pacotinho.
 
   const pacote = document.getElementById('pacote3d');
   const abaDoPacote = document.getElementById('pacote3d-aba');
@@ -7957,56 +8029,118 @@ document.addEventListener('DOMContentLoaded', function () {
   let alturaDoPacote = 300;
   let passoDoLeque = 120;
 
-  registrarCena(document.querySelector('.cena-pacote'), {
+  // ----- A sequência de quadros
+  const telaDeQuadros = document.getElementById('pacote-quadros');
+  const pincelDeQuadros = telaDeQuadros.getContext('2d');
+  const QUADROS = 90;
+  const FIM_DO_PACOTE = 0.72;     // o pacotinho sai de cena com 72% da rolagem; o resto é das figurinhas
+  let quadros = [];               // as imagens do tema em uso
+  let temaDosQuadros = '';
+  let quadroMostrado = -1;
+  let paginaCarregada = document.readyState === 'complete';
+
+  // Busca as 90 imagens do tema atual. Só quando a última chega é que elas
+  // entram em cena: até lá, quem aparece é o pacotinho de CSS.
+  function carregarQuadros() {
+    const tema = document.documentElement.dataset.tema === 'escuro' ? 'escuro' : 'claro';
+    if (tema === temaDosQuadros) return;
+    temaDosQuadros = tema;
+
+    const novos = [];
+    let chegaram = 0;
+    for (let i = 1; i <= QUADROS; i++) {
+      const imagem = new Image();
+      imagem.onload = function () {
+        chegaram += 1;
+        if (chegaram < QUADROS || tema !== temaDosQuadros) return;
+        quadros = novos;
+        quadroMostrado = -1;
+        cenaDoPacote.classList.add('com-quadros');
+        cenaDoPacoteNoMotor.suja = true;
+        pedirQuadro();
+      };
+      // Os arquivos se chamam 001.webp, 002.webp ... 090.webp
+      imagem.src = 'assets/img/pacotinho/' + tema + '/' + String(i).padStart(3, '0') + '.webp';
+      novos.push(imagem);
+    }
+  }
+
+  // Mostra a imagem que corresponde ao progresso p da cena
+  function mostrarQuadro(p) {
+    const numero = Math.round(limitar(p / FIM_DO_PACOTE) * (QUADROS - 1));
+    if (numero === quadroMostrado) return;
+    quadroMostrado = numero;
+    pincelDeQuadros.clearRect(0, 0, telaDeQuadros.width, telaDeQuadros.height);
+    pincelDeQuadros.drawImage(quadros[numero], 0, 0);
+  }
+
+  const cenaDoPacoteNoMotor = registrarCena(document.querySelector('.cena-pacote'), {
     medir: function () {
       alturaDoPacote = cenaDoPacote.offsetHeight;
       const larguraDaCarta = cartas[0].offsetWidth;
       // No celular as cinco não cabem lado a lado: o leque fica mais fechado
       passoDoLeque = Math.min(larguraDaCarta * 1.08, (cenaDoPacote.parentElement.clientWidth - larguraDaCarta * 1.3 - 24) / 4);
+      // As imagens só são buscadas se as cenas estão em movimento e depois que o
+      // resto da página carregou. Trocar o tema busca as do outro tema.
+      if (cenasEmMovimento && paginaCarregada) carregarQuadros();
     },
 
     desenhar: function (p) {
-      const chegada = trecho(0, 0.3, p);        // o pacotinho entra girando
-      const rasgo = trecho(0.3, 0.44, p);       // a aba sai pelo picote
-      const descida = trecho(0.55, 0.85, p);    // o pacotinho vazio desce e deita
+      // A coreografia do pacotinho (a mesma de posar(), no js/pacote3d.js):
+      const chegada = trecho(0, 0.28, p);       // entra girando, de costas para a frente
+      const rasgo = trecho(0.28, 0.4, p);       // a aba sai pelo picote
+      const queda = trecho(0.55, 0.72, p);      // vazio, cai para fora da cena
+      const some = String(trecho(0, 0.06, p) * (1 - trecho(0.64, 0.72, p)));
 
-      const giro = misturar(-205, 0, chegada);
-      const tombo = misturar(22, 0, chegada) + descida * 55;
-      const sobe = misturar(alturaDoPacote * 0.5, 0, chegada) + descida * alturaDoPacote * 0.55;
-      const tamanho = misturar(0.7, 1, chegada);
-      pacote.style.transform = 'translateY(' + sobe + 'px) rotateX(' + tombo + 'deg) rotateY(' + giro + 'deg) scale(' + tamanho + ')';
-      pacote.style.opacity = trecho(0, 0.06, p) * (1 - trecho(0.66, 0.84, p));
+      if (quadros.length === QUADROS) {
+        mostrarQuadro(p);
+        telaDeQuadros.style.opacity = some;
+      } else {
+        // O pacotinho de CSS, com os mesmos movimentos
+        const giro = misturar(-205, 9, chegada) - trecho(0.28, 0.55, p) * 18;
+        const tombo = misturar(22, 0, chegada) + queda * 62;
+        const desce = misturar(alturaDoPacote * 0.46, 0, chegada) + queda * queda * alturaDoPacote * 1.86;
+        pacote.style.transform = 'translateY(' + desce + 'px) rotateX(' + (-tombo) + 'deg) rotateY(' + giro + 'deg) rotate(' + (queda * 12) + 'deg) scale(' + misturar(0.72, 1, chegada) + ')';
+        pacote.style.opacity = some;
+        abaDoPacote.style.transform = 'translate(' + (rasgo * 70) + '%, ' + (rasgo * -190) + '%) rotate(' + (rasgo * 38) + 'deg)';
+        abaDoPacote.style.opacity = 1 - trecho(0.34, 0.4, p);
+      }
 
-      abaDoPacote.style.transform = 'translate(' + (rasgo * 70) + '%, ' + (rasgo * -190) + '%) rotate(' + (rasgo * 38) + 'deg)';
-      abaDoPacote.style.opacity = 1 - trecho(0.36, 0.46, p);
-
-      // As cinco figurinhas: sobem por dentro do pacotinho, passam para a frente
-      // e abrem em leque. Cada uma começa um pouco depois da anterior.
+      // As cinco figurinhas: sobem por dentro do pacotinho, passam por cima dele
+      // e, quando ele já caiu, descem e abrem em leque. Cada uma começa um
+      // pouco depois da anterior. Elas ficam sempre atrás do pacotinho.
       cartas.forEach(function (carta, i) {
-        const t = trecho(0.42 + i * 0.03, 0.76 + i * 0.03, p);
+        const t = trecho(0.38 + i * 0.03, 0.74 + i * 0.03, p);
         const lado = i - 2;   // -2, -1, 0, 1, 2: a do meio fica no meio
         const x = lado * passoDoLeque * t * t;
-        const y = misturar(0, alturaDoPacote * 0.04, t) - Math.sin(t * Math.PI) * alturaDoPacote * 0.6;
-        // Profundidade: começa atrás da frente do pacotinho e termina na frente de tudo
-        const z = misturar(-(34 + i * 2), 40 + (2 - Math.abs(lado)) * 16, trecho(0.5, 0.8, t));
+        const y = misturar(0, alturaDoPacote * 0.03, t) - Math.sin(t * Math.PI) * alturaDoPacote * 0.75;
+        // Profundidade: sempre negativa (atrás da frente do pacotinho). No leque,
+        // a figurinha do meio fica um pouco à frente das dos lados.
+        const z = misturar(-(34 + i * 2), -4 - Math.abs(lado) * 10, trecho(0.5, 0.8, t));
         const giroDaCarta = lado * 5 * t;
         const viradaDaCarta = Math.sin(t * Math.PI) * -20;   // vira de lado só no meio do caminho
         carta.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px) rotateY(' + viradaDaCarta + 'deg) rotate(' + giroDaCarta + 'deg)';
         // Só aparece quando o pacotinho já está de frente (antes disso ficaria de fora, no giro)
-        carta.style.opacity = trecho(0.3, 0.34, p);
+        carta.style.opacity = trecho(0.25, 0.29, p);
       });
 
       const entra1 = trecho(0.02, 0.1, p);
       tituloDoPacote1.style.opacity = entra1 * (1 - trecho(0.26, 0.34, p));
       tituloDoPacote1.style.transform = 'translateY(' + ((1 - entra1) * 18) + 'px)';
-      const entra2 = trecho(0.76, 0.88, p);
+      const entra2 = trecho(0.78, 0.9, p);
       tituloDoPacote2.style.opacity = entra2;
       tituloDoPacote2.style.transform = 'translateY(' + ((1 - entra2) * 18) + 'px)';
     },
 
     parar: function () {
-      limparEstilos([pacote, abaDoPacote, tituloDoPacote1, tituloDoPacote2].concat(cartas));
+      limparEstilos([pacote, abaDoPacote, telaDeQuadros, tituloDoPacote1, tituloDoPacote2].concat(cartas));
+      quadroMostrado = -1;
     },
+  });
+
+  window.addEventListener('load', function () {
+    paginaCarregada = true;
+    if (cenasEmMovimento) carregarQuadros();
   });
 
   // -------------------------------------------------------------------------
@@ -8376,6 +8510,652 @@ document.addEventListener('DOMContentLoaded', function () {
       montarReticula();
       cenaDaAbertura.suja = true;
       if (!cenasEmMovimento) cenaDaAbertura.parar();
+    });
+  }
+});
+````
+
+### js/pacote3d.js
+
+````js
+// ============================================================================
+// pacote3d.js
+// ----------------------------------------------------------------------------
+// O pacotinho de figurinhas como um objeto 3D de verdade, desenhado pela placa
+// de vídeo (WebGL) com a biblioteca Three.js.
+//
+// É a ÚNICA parte do site que usa uma biblioteca externa. Ela serve para duas
+// coisas:
+//   1. gerar a sequência de quadros da página inicial (scripts/quadros.html);
+//   2. mostrar o pacotinho ao vivo na página Pacotinhos.
+//
+// Como o pacotinho é montado:
+//   - duas folhas (frente e costas), cada uma um plano cheio de pontos;
+//   - cada ponto é empurrado para fora no meio, formando a "barriga" do
+//     pacotinho cheio, e fica chato nas bordas, onde ele é selado;
+//   - a estampa (marca, picote, retícula) é desenhada em um <canvas> comum e
+//     colada nas folhas como uma textura;
+//   - a parte de cima (a aba) é uma peça separada, para poder ser rasgada.
+//
+// Depende de: js/vendor/three.min.js (Three.js r128, licença MIT).
+// ============================================================================
+
+function criarPacote3d(tela, opcoes) {
+  'use strict';
+  opcoes = opcoes || {};
+
+  // Medidas do pacotinho, em "unidades" do mundo 3D. A proporção é 5 por 7,
+  // a mesma do pacotinho desenhado em CSS.
+  const LARGURA = 5;
+  const ALTURA = 7;
+  const CORTE = 0.86;      // o picote fica a 86% da altura; acima dele é a aba
+  const BARRIGA = 0.5;     // o quanto o meio do pacotinho estufa
+  const DISTANCIA = 30;    // da câmera até o pacotinho
+
+  // "Quanto deste trecho já passou?" (0 antes, 1 depois, suave no meio)
+  function suave(inicio, fim, t) {
+    const x = Math.min(1, Math.max(0, (t - inicio) / (fim - inicio)));
+    return x * x * (3 - 2 * x);
+  }
+
+  function misturar(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+  const GRAU = Math.PI / 180;   // a Three.js mede ângulos em radianos
+
+  // -------------------------------------------------------------------------
+  // 1. Desenhista, cena, câmera e luz
+  // -------------------------------------------------------------------------
+
+  // alpha: true deixa o fundo transparente: só o pacotinho é desenhado.
+  // preserveDrawingBuffer: true permite copiar o desenho para uma imagem.
+  const desenhista = new THREE.WebGLRenderer({ canvas: tela, alpha: true, antialias: true, preserveDrawingBuffer: true });
+  desenhista.setClearColor(0x000000, 0);
+  desenhista.outputEncoding = THREE.sRGBEncoding;   // cores na tela iguais às do CSS
+
+  const cena = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(30, 1, 1, 100);
+  camera.position.z = DISTANCIA;
+
+  cena.add(new THREE.HemisphereLight(0xffffff, 0xd0c8cc, 0.5));   // luz geral, de cima e de baixo
+  const lampada = new THREE.DirectionalLight(0xffffff, 0.8);       // uma lâmpada, em cima à esquerda
+  lampada.position.set(-9, 10, 9);
+  cena.add(lampada);
+
+  // Papel laminado só parece laminado se tiver o que refletir. Aqui é montado
+  // um "estúdio" de mentira: uma sala escura com painéis de luz. A Three.js
+  // fotografa essa sala em todas as direções e usa a foto como reflexo.
+  function criarReflexos() {
+    const estudio = new THREE.Scene();
+    estudio.background = new THREE.Color(0x303034);
+    function painel(cor, largura, altura, x, y, z) {
+      const luz = new THREE.Mesh(new THREE.PlaneGeometry(largura, altura), new THREE.MeshBasicMaterial({ color: cor, side: THREE.DoubleSide }));
+      luz.position.set(x, y, z);
+      luz.lookAt(0, 0, 0);
+      estudio.add(luz);
+    }
+    painel(0xffffff, 14, 8, -10, 12, 10);    // janela grande, em cima à esquerda
+    painel(0xffffff, 3, 16, 14, 2, 6);       // faixa de luz à direita
+    painel(0xd8d2d6, 20, 6, 0, -12, 8);      // rebatedor embaixo
+    painel(0xffffff, 10, 10, 0, 6, -14);     // luz de trás
+    const fotografo = new THREE.PMREMGenerator(desenhista);
+    const reflexos = fotografo.fromScene(estudio, 0.03).texture;
+    fotografo.dispose();
+    return reflexos;
+  }
+  const reflexos = criarReflexos();
+
+  // -------------------------------------------------------------------------
+  // 2. A estampa: desenhada em <canvas> comum e usada como textura
+  // -------------------------------------------------------------------------
+
+  const ESTAMPA_L = 1000;
+  const ESTAMPA_A = 1400;
+  const FONTE_DESTAQUE = '"Londrina Solid", "Arial Black", sans-serif';
+  const FONTE_LEITURA = '"Atkinson Hyperlegible Next", "Segoe UI", Arial, sans-serif';
+
+  function novaTela() {
+    const nova = document.createElement('canvas');
+    nova.width = ESTAMPA_L;
+    nova.height = ESTAMPA_A;
+    return nova;
+  }
+
+  const telaDaFrente = novaTela();
+  const telaDasCostas = novaTela();
+  const telaDoRecorte = novaTela();
+  const telaDoRelevo = novaTela();
+
+  // As cores vêm do CSS (tokens.css): as mesmas do pacotinho desenhado em CSS.
+  // Assim o pacotinho 3D troca de cor junto com o tema.
+  function lerCores() {
+    const estilo = getComputedStyle(document.documentElement);
+    return {
+      papel: estilo.getPropertyValue('--cor-etiqueta-fundo').trim() || '#14204F',
+      tinta: estilo.getPropertyValue('--cor-etiqueta-texto').trim() || '#F6CDD7',
+      prata: estilo.getPropertyValue('--cor-prata').trim() || '#C5CAD6',
+    };
+  }
+
+  // O que frente e costas têm em comum: o papel, a retícula, o picote e as
+  // faixas seladas em cima e embaixo
+  function estamparBase(pincel, cores) {
+    pincel.globalCompositeOperation = 'source-over';
+    pincel.globalAlpha = 1;
+    pincel.fillStyle = cores.papel;
+    pincel.fillRect(0, 0, ESTAMPA_L, ESTAMPA_A);
+
+    // Retícula: pontinhos na cor da tinta, bem fracos
+    pincel.fillStyle = cores.tinta;
+    pincel.globalAlpha = 0.3;
+    pincel.beginPath();
+    for (let y = 13; y < ESTAMPA_A; y += 26) {
+      for (let x = 13; x < ESTAMPA_L; x += 26) {
+        pincel.moveTo(x + 3, y);
+        pincel.arc(x, y, 3, 0, 6.283);
+      }
+    }
+    pincel.fill();
+
+    // As faixas seladas: risquinhos deitados, como o papel prensado
+    pincel.globalAlpha = 0.28;
+    for (let y = 6; y < 74; y += 10) {
+      pincel.fillRect(0, y, ESTAMPA_L, 3);
+      pincel.fillRect(0, ESTAMPA_A - y - 3, ESTAMPA_L, 3);
+    }
+
+    // O picote: linha tracejada na altura do corte
+    pincel.globalAlpha = 1;
+    pincel.strokeStyle = cores.tinta;
+    pincel.lineWidth = 6;
+    pincel.setLineDash([24, 16]);
+    pincel.beginPath();
+    pincel.moveTo(0, ESTAMPA_A * (1 - CORTE));
+    pincel.lineTo(ESTAMPA_L, ESTAMPA_A * (1 - CORTE));
+    pincel.stroke();
+    pincel.setLineDash([]);
+  }
+
+  // Um texto em cima de uma faixa lisa, para os pontinhos não atrapalharem a leitura
+  function estamparTexto(pincel, cores, texto, fonte, x, y, giro) {
+    pincel.save();
+    pincel.translate(x, y);
+    pincel.rotate((giro || 0) * GRAU);
+    pincel.font = fonte;
+    pincel.textAlign = 'center';
+    pincel.textBaseline = 'middle';
+    const medida = pincel.measureText(texto);
+    const altura = (medida.actualBoundingBoxAscent + medida.actualBoundingBoxDescent) || 60;
+    pincel.fillStyle = cores.papel;
+    pincel.fillRect(-medida.width / 2 - 22, -altura / 2 - 14, medida.width + 44, altura + 28);
+    pincel.fillStyle = cores.tinta;
+    pincel.fillText(texto, 0, 0);
+    pincel.restore();
+  }
+
+  // As bordas de cima e de baixo são cortadas em serrilha, como em um pacotinho
+  // de verdade. O recorte é feito apagando triângulos do desenho.
+  function serrilhar(pincel) {
+    pincel.globalCompositeOperation = 'destination-out';
+    pincel.beginPath();
+    for (let x = 0; x < ESTAMPA_L; x += 40) {
+      pincel.moveTo(x, 0);
+      pincel.lineTo(x + 20, 22);
+      pincel.lineTo(x + 40, 0);
+      pincel.moveTo(x, ESTAMPA_A);
+      pincel.lineTo(x + 20, ESTAMPA_A - 22);
+      pincel.lineTo(x + 40, ESTAMPA_A);
+    }
+    pincel.fill();
+    pincel.globalCompositeOperation = 'source-over';
+  }
+
+  function estampar() {
+    const cores = lerCores();
+
+    // Frente
+    let pincel = telaDaFrente.getContext('2d');
+    pincel.clearRect(0, 0, ESTAMPA_L, ESTAMPA_A);
+    estamparBase(pincel, cores);
+    estamparTexto(pincel, cores, 'Rasgue aqui', '700 58px ' + FONTE_LEITURA, 500, 112);
+    estamparTexto(pincel, cores, 'Colei!', '900 290px ' + FONTE_DESTAQUE, 500, 760, -6);
+    estamparTexto(pincel, cores, '5 figurinhas', '700 74px ' + FONTE_LEITURA, 500, 1010);
+    serrilhar(pincel);
+
+    // Costas: a emenda do papel no meio e dois textos
+    pincel = telaDasCostas.getContext('2d');
+    pincel.clearRect(0, 0, ESTAMPA_L, ESTAMPA_A);
+    estamparBase(pincel, cores);
+    pincel.fillStyle = cores.tinta;
+    pincel.globalAlpha = 0.16;
+    pincel.fillRect(468, 0, 64, ESTAMPA_A);
+    pincel.globalAlpha = 0.5;
+    pincel.fillRect(468, 0, 4, ESTAMPA_A);
+    pincel.fillRect(528, 0, 4, ESTAMPA_A);
+    pincel.globalAlpha = 1;
+    estamparTexto(pincel, cores, 'Álbum da Copa 2026', '700 66px ' + FONTE_LEITURA, 500, 620);
+    estamparTexto(pincel, cores, 'Abra pelo picote', '700 66px ' + FONTE_LEITURA, 500, 760);
+    serrilhar(pincel);
+
+    // O recorte sozinho, em preto e branco, para o lado de dentro do pacotinho
+    pincel = telaDoRecorte.getContext('2d');
+    pincel.fillStyle = '#FFFFFF';
+    pincel.fillRect(0, 0, ESTAMPA_L, ESTAMPA_A);
+    pincel.fillStyle = '#000000';
+    pincel.beginPath();
+    for (let x = 0; x < ESTAMPA_L; x += 40) {
+      pincel.moveTo(x, 0);
+      pincel.lineTo(x + 20, 22);
+      pincel.lineTo(x + 40, 0);
+      pincel.moveTo(x, ESTAMPA_A);
+      pincel.lineTo(x + 20, ESTAMPA_A - 22);
+      pincel.lineTo(x + 40, ESTAMPA_A);
+    }
+    pincel.fill();
+
+    texturaDaFrente.needsUpdate = true;
+    texturaDasCostas.needsUpdate = true;
+    texturaDoRecorte.needsUpdate = true;
+    materialDeDentro.color.set(cores.prata);
+  }
+
+  // O relevo: um desenho em tons de cinza que diz onde o papel é amassado.
+  // Claro = alto, escuro = fundo. A luz usa isso para fazer brilhos e sombras.
+  function desenharRelevo() {
+    const pincel = telaDoRelevo.getContext('2d');
+    pincel.fillStyle = '#808080';
+    pincel.fillRect(0, 0, ESTAMPA_L, ESTAMPA_A);
+
+    // Um sorteio que se repete, para o amassado ser sempre o mesmo
+    let semente = 2026;
+    function acaso() {
+      semente = (semente * 1664525 + 1013904223) % 4294967296;
+      return semente / 4294967296;
+    }
+
+    // Vincos: riscos largos e esfumados, uns claros e outros escuros
+    pincel.lineCap = 'round';
+    for (let i = 0; i < 70; i++) {
+      const x = acaso() * ESTAMPA_L;
+      const y = acaso() * ESTAMPA_A;
+      const angulo = acaso() * 6.283;
+      const comprimento = 120 + acaso() * 380;
+      const tom = acaso() < 0.5 ? 255 : 0;
+      pincel.strokeStyle = 'rgba(' + tom + ',' + tom + ',' + tom + ',0.1)';
+      for (const largura of [60, 34, 14]) {
+        pincel.lineWidth = largura;
+        pincel.beginPath();
+        pincel.moveTo(x, y);
+        pincel.lineTo(x + Math.cos(angulo) * comprimento, y + Math.sin(angulo) * comprimento);
+        pincel.stroke();
+      }
+    }
+
+    // Faixas seladas: degraus bem marcados
+    for (let y = 0; y < 76; y += 10) {
+      pincel.fillStyle = '#C8C8C8';
+      pincel.fillRect(0, y, ESTAMPA_L, 5);
+      pincel.fillRect(0, ESTAMPA_A - y - 5, ESTAMPA_L, 5);
+      pincel.fillStyle = '#404040';
+      pincel.fillRect(0, y + 5, ESTAMPA_L, 5);
+      pincel.fillRect(0, ESTAMPA_A - y - 10, ESTAMPA_L, 5);
+    }
+  }
+
+  function criarTextura(telaDeOrigem, colorida) {
+    const textura = new THREE.CanvasTexture(telaDeOrigem);
+    if (colorida) textura.encoding = THREE.sRGBEncoding;
+    textura.anisotropy = desenhista.capabilities.getMaxAnisotropy();   // nitidez quando o pacotinho está de lado
+    return textura;
+  }
+
+  const texturaDaFrente = criarTextura(telaDaFrente, true);
+  const texturaDasCostas = criarTextura(telaDasCostas, true);
+  const texturaDoRecorte = criarTextura(telaDoRecorte, false);
+  const texturaDoRelevo = criarTextura(telaDoRelevo, false);
+
+  // -------------------------------------------------------------------------
+  // 3. Os materiais
+  // -------------------------------------------------------------------------
+  // metalness = o quanto parece metal; roughness = o quanto é áspero (fosco).
+  // Papel laminado: bastante metal e pouco áspero.
+
+  function criarMaterialDeFora(textura, some) {
+    return new THREE.MeshStandardMaterial({
+      map: textura,
+      bumpMap: texturaDoRelevo,
+      bumpScale: 0.06,
+      metalness: 0.55,
+      roughness: 0.36,
+      envMap: reflexos,
+      envMapIntensity: 1,      // a força dos reflexos
+      alphaTest: 0.5,          // o que é transparente na estampa (a serrilha) não é desenhado
+      transparent: some,       // só a aba precisa sumir aos poucos
+    });
+  }
+
+  // O lado de dentro é prateado, como em todo pacotinho laminado
+  const materialDeDentro = new THREE.MeshStandardMaterial({
+    color: 0xC5CAD6,
+    metalness: 0.85,
+    roughness: 0.3,
+    envMap: reflexos,
+    alphaMap: texturaDoRecorte,
+    alphaTest: 0.5,
+    side: THREE.BackSide,      // só é desenhado quando visto por dentro
+  });
+
+  // -------------------------------------------------------------------------
+  // 4. A forma
+  // -------------------------------------------------------------------------
+
+  // O quanto o ponto (u, v) estufa para fora. u vai de 0 (esquerda) a 1
+  // (direita); v vai de 0 (embaixo) a 1 (em cima).
+  function barriga(u, v) {
+    const dosLados = Math.pow(Math.sin(Math.PI * u), 0.55);           // chato nas laterais
+    const dasPontas = suave(0.05, 0.24, v) * (1 - suave(0.78, 0.95, v));   // chato nas faixas seladas
+    const rugas = 0.03 * Math.sin(u * 19 + v * 9) * Math.sin(v * 27 - u * 6);
+    return (BARRIGA * dosLados + rugas) * dasPontas;
+  }
+
+  // Uma folha: um plano que vai de vInicio a vFim da altura do pacotinho.
+  // Ela tem dois lados: o de fora, com a estampa, e o de dentro, prateado.
+  function criarFolha(vInicio, vFim, materialDeFora) {
+    const fatia = vFim - vInicio;
+    const forma = new THREE.PlaneGeometry(LARGURA, ALTURA * fatia, 28, Math.max(6, Math.round(64 * fatia)));
+    const lugares = forma.attributes.position;
+    const uvs = forma.attributes.uv;
+    for (let i = 0; i < lugares.count; i++) {
+      const u = uvs.getX(i);
+      const v = vInicio + uvs.getY(i) * fatia;
+      uvs.setY(i, v);                         // a textura usa só a fatia que cabe a esta folha
+      lugares.setZ(i, barriga(u, v));         // empurra o ponto para fora
+    }
+    forma.computeVertexNormals();             // recalcula para onde cada pedacinho "olha", para a luz
+
+    const folha = new THREE.Group();
+    folha.add(new THREE.Mesh(forma, materialDeFora), new THREE.Mesh(forma, materialDeDentro));
+    return folha;
+  }
+
+  // Uma peça: frente e costas da mesma fatia. As costas são a mesma folha,
+  // virada meia volta.
+  function criarPeca(vInicio, vFim, some) {
+    const materiais = [criarMaterialDeFora(texturaDaFrente, some), criarMaterialDeFora(texturaDasCostas, some)];
+    const peca = new THREE.Group();
+    const frente = criarFolha(vInicio, vFim, materiais[0]);
+    const costas = criarFolha(vInicio, vFim, materiais[1]);
+    costas.rotation.y = Math.PI;
+    peca.add(frente, costas);
+    peca.userData.materiais = materiais;
+    return peca;
+  }
+
+  const pacote = new THREE.Group();   // o pacotinho inteiro: é ele que gira e cai
+  cena.add(pacote);
+
+  // O corpo: do pé até o picote
+  const corpo = criarPeca(0, CORTE, false);
+  corpo.position.y = ALTURA * (CORTE / 2 - 0.5);
+  pacote.add(corpo);
+
+  // A aba: do picote até o topo. Ela fica presa a um "eixo" no canto de baixo,
+  // à esquerda: é em torno desse canto que ela gira quando é rasgada.
+  const alturaDaAba = ALTURA * (1 - CORTE);
+  const eixoDaAba = new THREE.Group();
+  eixoDaAba.position.set(-LARGURA / 2, ALTURA * (CORTE - 0.5), 0);
+  const aba = criarPeca(CORTE, 1, true);
+  aba.position.set(LARGURA / 2, alturaDaAba / 2, 0);
+  eixoDaAba.add(aba);
+  pacote.add(eixoDaAba);
+
+  // -------------------------------------------------------------------------
+  // 5. As poses
+  // -------------------------------------------------------------------------
+
+  // Põe o pacotinho em uma pose. Tudo em graus e em unidades do mundo 3D.
+  //   rasgo: 0 = aba no lugar; 1 = aba arrancada e sumida
+  function aplicar(pose) {
+    pacote.rotation.set((pose.giroX || 0) * GRAU, (pose.giroY || 0) * GRAU, (pose.giroZ || 0) * GRAU);
+    pacote.position.set(pose.x || 0, pose.y || 0, 0);
+    pacote.scale.setScalar(pose.tamanho === undefined ? 1 : pose.tamanho);
+
+    const rasgo = pose.rasgo || 0;
+    eixoDaAba.visible = rasgo < 1;
+    eixoDaAba.rotation.set(rasgo * -70 * GRAU, rasgo * 40 * GRAU, rasgo * 52 * GRAU);
+    eixoDaAba.position.set(-LARGURA / 2 + rasgo * 2.4, ALTURA * (CORTE - 0.5) + rasgo * 3.4, rasgo * 1.5);
+    const opacidade = 1 - suave(0.55, 1, rasgo);
+    for (const material of aba.userData.materiais) material.opacity = opacidade;
+  }
+
+  // A coreografia da cena da página inicial. t vai de 0 a 1:
+  //   0,00 a 0,39  o pacotinho entra girando, de costas para a frente
+  //   0,39 a 0,56  a aba é rasgada pelo picote
+  //   0,56 a 0,76  ele espera, aberto, virando devagar (é quando as figurinhas sobem)
+  //   0,76 a 1,00  vazio, ele cai para fora do quadro
+  function posar(t) {
+    const chegada = suave(0, 0.39, t);
+    const rasgo = suave(0.39, 0.56, t);
+    const queda = suave(0.76, 1, t);
+    aplicar({
+      giroY: misturar(-205, 9, chegada) - suave(0.39, 0.76, t) * 18,   // depois de chegar, vira devagar de um lado para o outro
+      giroX: misturar(22, 0, chegada) + queda * 62,
+      giroZ: Math.sin(rasgo * Math.PI) * -3 + queda * -12,   // dá um tranco quando a aba sai
+      y: misturar(-3.2, 0, chegada) - queda * queda * 13,     // a queda acelera, como tudo que cai
+      tamanho: misturar(0.72, 1, chegada),
+      rasgo: rasgo,
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 6. Tamanho e desenho
+  // -------------------------------------------------------------------------
+
+  // Ajusta o desenho ao tamanho da tela. "alturaVisivel" diz quantas unidades
+  // do mundo 3D cabem de cima a baixo: quanto maior, menor o pacotinho aparece.
+  // O tamanho vem da página (o espaço que a tela ocupa). O gerador de quadros
+  // passa um tamanho fixo em 'opcoes', para toda imagem sair igual.
+  function medir() {
+    const largura = opcoes.largura || tela.clientWidth || tela.width;
+    const altura = opcoes.altura || tela.clientHeight || tela.height;
+    desenhista.setPixelRatio(opcoes.nitidez || Math.min(window.devicePixelRatio || 1, 2));
+    desenhista.setSize(largura, altura, false);
+    camera.aspect = largura / altura;
+    camera.fov = 2 * Math.atan(((opcoes.alturaVisivel || 9) / 2) / DISTANCIA) / GRAU;
+    camera.updateProjectionMatrix();
+  }
+
+  function desenhar() {
+    desenhista.render(cena, camera);
+  }
+
+  desenharRelevo();
+  texturaDoRelevo.needsUpdate = true;
+  estampar();
+  medir();
+  aplicar({});
+
+  return {
+    posar: posar,         // coreografia da página inicial (t de 0 a 1)
+    aplicar: aplicar,     // pose livre (página Pacotinhos)
+    estampar: estampar,   // refaz a estampa (quando o tema muda ou a fonte chega)
+    medir: medir,
+    desenhar: desenhar,
+  };
+}
+````
+
+### js/pacotinho-3d.js
+
+````js
+// ============================================================================
+// pacotinho-3d.js
+// ----------------------------------------------------------------------------
+// Na página Pacotinhos, troca o desenho do pacotinho fechado (feito em CSS)
+// pelo pacotinho 3D ao vivo (js/pacote3d.js, com a biblioteca Three.js).
+//
+// O que ele faz a mais que o de CSS:
+//   - inclina conforme o mouse (ou o dedo) passa por cima, e o brilho do papel
+//     laminado anda junto;
+//   - na hora de rasgar, a aba sai de verdade e mostra o lado prateado.
+//
+// Este arquivo NÃO mexe nas regras da página: quem sorteia, guarda e mostra as
+// figurinhas continua sendo o js/pacotinho.js. Aqui só se troca o desenho.
+// Se o navegador não tiver WebGL (o desenho 3D), nada acontece e o pacotinho
+// de CSS continua no lugar.
+//
+// Depende de: js/vendor/three.min.js, js/pacote3d.js, js/figurinha.js
+// (movimentoReduzido) e js/pacotinho.js.
+// ============================================================================
+
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+
+  const palco = document.getElementById('palco');
+  if (!palco || typeof THREE === 'undefined' || typeof criarPacote3d !== 'function') return;
+
+  // Uma única tela de desenho para a página inteira. Ela é guardada e posta de
+  // novo dentro de cada pacotinho que aparece ("Abrir outro pacotinho").
+  const tela = document.createElement('canvas');
+  tela.className = 'pacotinho-vivo';
+
+  // O navegador sabe desenhar em 3D (WebGL)? A pergunta é feita antes, com uma
+  // tela de teste, para a Three.js não escrever um erro no console à toa.
+  function temWebGL() {
+    try {
+      const teste = document.createElement('canvas');
+      return Boolean(teste.getContext('webgl') || teste.getContext('experimental-webgl'));
+    } catch (erro) {
+      return false;
+    }
+  }
+  if (!temWebGL()) return;   // sem WebGL: fica o pacotinho de CSS
+
+  let pacote;
+  try {
+    // alturaVisivel: 10.5 = a altura do pacotinho (7) mais metade de folga,
+    // para a aba ter para onde voar
+    pacote = criarPacote3d(tela, { alturaVisivel: 10.5 });
+  } catch (erro) {
+    return;   // algo deu errado ao montar o 3D: fica o pacotinho de CSS
+  }
+
+  const TEMPO_DE_RASGAR = 800;   // o mesmo do js/pacotinho.js, em milésimos de segundo
+  let dono = null;               // o pacotinho de CSS que está "vestido" com a tela
+  let rasgando = false;
+  let quadroPedido = false;
+
+  // A pose de agora e a pose para onde o pacotinho quer ir
+  const pose = { giroX: 0, giroY: 0, rasgo: 0, y: 0 };
+  const alvo = { giroX: 0, giroY: 0 };
+
+  function desenhar() {
+    pacote.aplicar(pose);
+    pacote.desenhar();
+  }
+
+  // Põe a tela dentro de um pacotinho de CSS que acabou de aparecer no palco
+  function vestir(pacotinho) {
+    dono = pacotinho;
+    rasgando = false;
+    pose.giroX = pose.giroY = pose.rasgo = pose.y = 0;
+    alvo.giroX = alvo.giroY = 0;
+    tela.style.opacity = '';
+
+    pacotinho.classList.add('pacotinho-com-3d');   // o CSS esconde o desenho antigo
+    pacotinho.append(tela);
+    pacote.medir();
+    desenhar();
+
+    // O pacotinho inclina para o lado em que o ponteiro está
+    pacotinho.addEventListener('pointermove', function (evento) {
+      if (rasgando || movimentoReduzido()) return;
+      const caixa = pacotinho.getBoundingClientRect();
+      const x = (evento.clientX - caixa.left) / caixa.width - 0.5;    // de -0,5 (esquerda) a 0,5 (direita)
+      const y = (evento.clientY - caixa.top) / caixa.height - 0.5;    // de -0,5 (em cima) a 0,5 (embaixo)
+      alvo.giroY = x * 34;
+      alvo.giroX = y * 22;
+      pedirQuadroDoPacote();
+    });
+    pacotinho.addEventListener('pointerleave', function () {
+      alvo.giroX = alvo.giroY = 0;
+      pedirQuadroDoPacote();
+    });
+  }
+
+  // Um quadro da inclinação: anda 15% do caminho até o alvo e desenha.
+  // O laço para sozinho quando o pacotinho chega: nada fica rodando à toa.
+  function quadroDoPacote() {
+    quadroPedido = false;
+    if (rasgando || !tela.isConnected) return;
+    pose.giroX += (alvo.giroX - pose.giroX) * 0.15;
+    pose.giroY += (alvo.giroY - pose.giroY) * 0.15;
+    desenhar();
+    if (Math.abs(alvo.giroX - pose.giroX) + Math.abs(alvo.giroY - pose.giroY) > 0.05) pedirQuadroDoPacote();
+  }
+
+  function pedirQuadroDoPacote() {
+    if (quadroPedido) return;
+    quadroPedido = true;
+    requestAnimationFrame(quadroDoPacote);
+  }
+
+  // A animação de rasgar, no mesmo tempo da animação de CSS que ela substitui:
+  // primeiro a aba sai; no fim, o pacotinho vazio escorrega e some.
+  function rasgar() {
+    if (rasgando || movimentoReduzido()) return;   // com menos movimento, a página nem espera a animação
+    rasgando = true;
+    const inicio = performance.now();
+    const giroX = pose.giroX;
+    const giroY = pose.giroY;
+
+    function quadroDoRasgo(agora) {
+      if (!tela.isConnected) return;   // o palco já foi trocado pelas figurinhas
+      const t = Math.min(1, (agora - inicio) / TEMPO_DE_RASGAR);
+      const fim = Math.max(0, (t - 0.55) / 0.45);   // 0 até 55% do tempo; depois sobe até 1
+      pose.rasgo = Math.min(1, t / 0.65);
+      pose.giroX = giroX * (1 - t);
+      pose.giroY = giroY * (1 - t);
+      pose.y = -fim * 1.2;
+      tela.style.opacity = String(1 - fim);
+      desenhar();
+      if (t < 1) requestAnimationFrame(quadroDoRasgo);
+    }
+    requestAnimationFrame(quadroDoRasgo);
+  }
+
+  // Um vigia olha o palco. Ele avisa em dois casos:
+  //   - apareceu um pacotinho novo (a página desenhou o palco de novo);
+  //   - o pacotinho ganhou a classe "pacotinho-rasgando" (a pessoa rasgou).
+  function olharOPalco() {
+    const pacotinho = palco.querySelector('.pacotinho');
+    if (pacotinho && pacotinho !== dono) vestir(pacotinho);
+    if (pacotinho && pacotinho.classList.contains('pacotinho-rasgando')) rasgar();
+  }
+  new MutationObserver(olharOPalco).observe(palco, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+  olharOPalco();
+
+  // Tema novo, cores novas: a estampa é refeita
+  new MutationObserver(function () {
+    pacote.estampar();
+    if (tela.isConnected) desenhar();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-tema', 'data-contraste'] });
+
+  window.addEventListener('resize', function () {
+    if (!tela.isConnected) return;
+    pacote.medir();
+    desenhar();
+  });
+
+  // A estampa usa as letras do site: quando elas chegam, é desenhada de novo
+  if (document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load('900 100px "Londrina Solid"'),
+      document.fonts.load('700 60px "Atkinson Hyperlegible Next"'),
+    ]).then(function () {
+      pacote.estampar();
+      if (tela.isConnected) desenhar();
     });
   }
 });
@@ -11768,11 +12548,15 @@ const GRUPOS = [
   },
   {
     titulo: 'Comportamento (JavaScript)', pasta: 'js', extensao: '.js', linguagem: 'js',
-    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
+    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'pacote3d.js', 'pacotinho-3d.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',
     primeiro: ['contraste.js', 'gerar-anexo.js'],
+  },
+  {
+    titulo: 'Ferramentas de apoio (HTML)', pasta: 'scripts', extensao: '.html', linguagem: 'html',
+    primeiro: ['quadros.html'],
   },
 ];
 
@@ -11835,4 +12619,140 @@ const cabecalho = [
 
 fs.writeFileSync(ARQUIVO_SAIDA, cabecalho.concat(linhas).join('\n'), 'utf8');
 console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo escrito em docs/anexo-codigo.md');
+````
+
+## Ferramentas de apoio (HTML)
+
+### scripts/quadros.html
+
+````html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerador de quadros do pacotinho | Colei!</title>
+  <meta name="robots" content="noindex">
+
+  <!-- FERRAMENTA DE APOIO. Não faz parte do site entregue.
+       Esta página desenha o pacotinho 3D (js/pacote3d.js) em 90 poses seguidas
+       e salva cada pose como uma imagem. É a "sequência de quadros" que a cena
+       do pacotinho, na página inicial, mostra conforme a rolagem.
+
+       Para gerar de novo (depois de mudar o js/pacote3d.js, por exemplo):
+       abra esta página pelo servidor local, no Edge ou no Chrome, clique em
+       "Salvar os quadros em uma pasta" e escolha a pasta assets/img/pacotinho. -->
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/componentes.css">
+  <script src="../js/vendor/three.min.js"></script>
+  <script src="../js/pacote3d.js"></script>
+  <style>
+    main { display: grid; gap: var(--espaco-4); }
+    .quadros-tela { width: min(100%, 22.5rem); height: auto; border: 2px dashed var(--cor-borda); }
+    .quadros-controle { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-3); }
+    .quadros-controle input { flex: 1 1 12rem; }
+  </style>
+</head>
+<body>
+  <main class="largura">
+    <h1>Gerador de quadros</h1>
+    <p>Ferramenta de apoio do projeto Colei!. Ela desenha o pacotinho em 3D em 90 poses e salva cada uma como imagem, para a cena do pacotinho da página inicial.</p>
+
+    <div class="quadros-controle">
+      <label for="quadro">Quadro</label>
+      <input type="range" id="quadro" min="1" max="90" value="1">
+      <output id="quadro-numero" for="quadro">1 de 90</output>
+    </div>
+    <div class="quadros-controle">
+      <button class="botao botao-contorno" type="button" id="trocar-tema">Trocar o tema</button>
+      <button class="botao" type="button" id="salvar">Salvar os quadros em uma pasta</button>
+    </div>
+    <p class="painel-aviso" id="aviso" role="status"></p>
+
+    <!-- O tamanho da tela é o tamanho de cada imagem salva: 720 por 924 pixels. -->
+    <canvas class="quadros-tela" id="tela" width="720" height="924" aria-label="Pré-visualização do quadro escolhido"></canvas>
+  </main>
+
+  <script>
+    'use strict';
+
+    const QUADROS = 90;          // quantas poses
+    const QUALIDADE = 0.82;      // do arquivo WebP: de 0 (leve e feio) a 1 (pesado e fiel)
+    const TEMAS = ['claro', 'escuro'];
+
+    const tela = document.getElementById('tela');
+    const aviso = document.getElementById('aviso');
+    const controle = document.getElementById('quadro');
+    document.documentElement.dataset.tema = 'claro';
+
+    // alturaVisivel: 15.4 deixa uma folga em volta do pacotinho, porque ele
+    // entra por baixo, gira e a aba voa para cima
+    const pacote = criarPacote3d(tela, { alturaVisivel: 15.4, nitidez: 1, largura: 720, altura: 924 });
+
+    // Desenha a pose de número "i" (de 1 a 90)
+    function desenharQuadro(i) {
+      pacote.posar((i - 1) / (QUADROS - 1));
+      pacote.desenhar();
+    }
+
+    function mostrar() {
+      desenharQuadro(Number(controle.value));
+      document.getElementById('quadro-numero').textContent = controle.value + ' de ' + QUADROS;
+    }
+
+    function usarTema(tema) {
+      document.documentElement.dataset.tema = tema;
+      pacote.estampar();   // refaz a estampa com as cores do tema
+      mostrar();
+    }
+
+    controle.addEventListener('input', mostrar);
+    document.getElementById('trocar-tema').addEventListener('click', function () {
+      usarTema(document.documentElement.dataset.tema === 'claro' ? 'escuro' : 'claro');
+    });
+
+    // Usado também pelo teste automático: devolve um quadro já em forma de arquivo
+    // (um texto comprido que começa com "data:image/webp;base64,")
+    function quadroComoArquivo(tema, i, tipo) {
+      if (document.documentElement.dataset.tema !== tema) usarTema(tema);
+      desenharQuadro(i);
+      return tela.toDataURL(tipo || 'image/webp', QUALIDADE);
+    }
+
+    // Salva tudo em uma pasta escolhida pela pessoa: claro/001.webp ... escuro/090.webp
+    document.getElementById('salvar').addEventListener('click', async function () {
+      if (!window.showDirectoryPicker) {
+        aviso.textContent = 'Este navegador não deixa uma página salvar em uma pasta. Use o Edge ou o Chrome.';
+        return;
+      }
+      const pasta = await window.showDirectoryPicker({ mode: 'readwrite' });
+      for (const tema of TEMAS) {
+        usarTema(tema);
+        const pastaDoTema = await pasta.getDirectoryHandle(tema, { create: true });
+        for (let i = 1; i <= QUADROS; i++) {
+          desenharQuadro(i);
+          const imagem = await new Promise(function (pronto) { tela.toBlob(pronto, 'image/webp', QUALIDADE); });
+          const arquivo = await pastaDoTema.getFileHandle(String(i).padStart(3, '0') + '.webp', { create: true });
+          const escrita = await arquivo.createWritable();
+          await escrita.write(imagem);
+          await escrita.close();
+          aviso.textContent = 'Tema ' + tema + ': quadro ' + i + ' de ' + QUADROS + '.';
+        }
+      }
+      aviso.textContent = 'Pronto: ' + (QUADROS * TEMAS.length) + ' quadros salvos.';
+    });
+
+    // A estampa usa as letras do site: só pode ser desenhada depois que elas chegarem
+    const pronto = Promise.all([
+      document.fonts.load('900 100px "Londrina Solid"'),
+      document.fonts.load('700 60px "Atkinson Hyperlegible Next"'),
+    ]).then(function () {
+      pacote.estampar();
+      mostrar();
+      return true;
+    });
+  </script>
+</body>
+</html>
 ````

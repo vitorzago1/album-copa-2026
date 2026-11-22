@@ -17,6 +17,12 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Aviso na página inicial, com botão, para quem vê a versão parada por causa do aparelho.
 - Saiu da abertura a página de amostra com três vagas: o álbum em 3D faz esse papel.
 - 81 verificações automáticas novas (335 no total).
+- Pacotinho em 3D, com a biblioteca Three.js r128 (a única do site, guardada em `js/vendor/`).
+- Cena do pacotinho da página inicial com sequência de quadros: 90 imagens por tema, escolhidas pela rolagem. O pacotinho de CSS fica como plano B.
+- Página Pacotinhos: o pacotinho fechado é o modelo 3D ao vivo, que inclina com o ponteiro e rasga mostrando o lado prateado. Sem WebGL, fica o de CSS.
+- Ferramenta `scripts/quadros.html`, que gera os quadros.
+- Crédito da Three.js na página Sobre e em `docs/referencias.md`.
+- 34 verificações automáticas novas (369 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

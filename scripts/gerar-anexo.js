@@ -30,11 +30,15 @@ const GRUPOS = [
   },
   {
     titulo: 'Comportamento (JavaScript)', pasta: 'js', extensao: '.js', linguagem: 'js',
-    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
+    primeiro: ['tema-acessibilidade.js', 'menu.js', 'estado.js', 'figurinha.js', 'album.js', 'pacotinho.js', 'trocas.js', 'inicio.js', 'carrossel.js', 'cenas.js', 'cenas-inicio.js', 'pacote3d.js', 'pacotinho-3d.js', 'formulario.js', 'login.js', 'contato.js', 'sobre.js', 'demonstracao.js', 'dados.js'],
   },
   {
     titulo: 'Scripts de apoio (Node.js)', pasta: 'scripts', extensao: '.js', linguagem: 'js',
     primeiro: ['contraste.js', 'gerar-anexo.js'],
+  },
+  {
+    titulo: 'Ferramentas de apoio (HTML)', pasta: 'scripts', extensao: '.html', linguagem: 'html',
+    primeiro: ['quadros.html'],
   },
 ];
 

@@ -36,10 +36,12 @@ album-copa-2026/
 │             figurinha.js (desenho e virar), album.js, pacotinho.js, trocas.js,
 │             inicio.js, carrossel.js, login.js, contato.js, formulario.js,
 │             sobre.js, demonstracao.js, menu.js, tema-acessibilidade.js,
-│             cenas.js (motor das cenas) e cenas-inicio.js (as oito cenas)
-├── assets/   bandeiras, fotos dos estádios, SVG e fontes
+│             cenas.js (motor das cenas), cenas-inicio.js (as oito cenas),
+│             pacote3d.js (o pacotinho em 3D), pacotinho-3d.js (ele ao vivo)
+│             e vendor/three.min.js (a única biblioteca do site)
+├── assets/   bandeiras, fotos dos estádios, quadros do pacotinho, SVG e fontes
 ├── docs/     cores, decisões, referências, prints e anexo de código
-├── scripts/  ferramentas de apoio (contraste, anexo de código)
+├── scripts/  ferramentas de apoio (contraste, anexo de código, gerador de quadros)
 ├── README.md
 ├── CHANGELOG.md
 └── CLAUDE.md regras do projeto para a IA que ajudou na construção
@@ -161,6 +163,17 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 7. **Nada se mexe sozinho por mais de 5 segundos.** O balanço dos pontinhos da abertura para 5 segundos depois do último gesto.
 8. **Verificações automáticas novas:** 81. Com as 254 anteriores, são 335, todas passando.
 
+### Etapa 11: o pacotinho em 3D e a sequência de quadros
+
+1. **Uma biblioteca, com autorização.** O pacotinho virou um objeto 3D de verdade, desenhado com a Three.js (ver "Tecnologias"). É a única biblioteca do site.
+2. **O modelo** (`js/pacote3d.js`). Duas folhas, frente e costas, feitas de um plano cheio de pontos. Cada ponto é empurrado para fora no meio, formando a barriga do pacotinho cheio. A estampa (marca, picote, retícula, serrilha) é desenhada em um `<canvas>` comum, com as cores do `css/tokens.css`, e colada nas folhas. A aba é uma peça separada, para poder ser rasgada. Por dentro o papel é prateado.
+3. **A sequência de quadros** (a técnica das páginas de produto, como a dos AirPods). O 3D é desenhado antes, uma vez só: a ferramenta `scripts/quadros.html` põe o pacotinho em 90 poses seguidas e salva cada uma como imagem (`assets/img/pacotinho/claro` e `escuro`, 720 por 924 pixels, formato WebP). Na cena do pacotinho da página inicial, a rolagem escolhe qual das 90 imagens mostrar. A página inicial não carrega a biblioteca.
+4. **Peso.** Cada tema tem cerca de 1,35 MB de quadros. Só os do tema em uso são baixados, depois que o resto da página carregou e só se as cenas estão em movimento.
+5. **Plano B.** Enquanto as imagens não chegam (ou se alguma falhar), a cena usa o pacotinho desenhado em CSS, com a mesma coreografia.
+6. **Ao vivo na página Pacotinhos** (`js/pacotinho-3d.js`). O pacotinho fechado é o modelo 3D rodando na hora: inclina conforme o ponteiro passa por cima e, ao rasgar, a aba sai e mostra o lado prateado. As regras da página não mudaram: o pacotinho de CSS continua lá como molde (tamanho, lugar e clique), e sem WebGL é ele que aparece.
+7. **Como gerar os quadros de novo.** Abra `scripts/quadros.html` pelo servidor local, no Edge ou no Chrome, clique em "Salvar os quadros em uma pasta" e escolha `assets/img/pacotinho`.
+8. **Verificações automáticas novas:** 34. No total são 369, todas passando.
+
 ## Onde está cada item pedido pelo professor
 
 | Item | Onde está |
@@ -171,7 +184,7 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 | Carrossel de imagens | `index.html`, seção "As 16 sedes" |
 | Imagens | Fotos dos 16 estádios (`assets/img/sedes/`), 48 bandeiras (`assets/bandeiras/`) e desenhos próprios em SVG e CSS |
 | Cartões explicativos | `index.html`: "Como funciona", "Pacotinho do dia", "Raridades" e "Como trocar" |
-| Animações e 3D | `index.html`: oito cenas presas à rolagem (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada |
+| Animações e 3D | `index.html`: oito cenas presas à rolagem (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada; pacotinho em 3D na cena 3 (sequência de quadros) e em `pacotinhos.html` (ao vivo) |
 | Modo escuro e claro | Painel de acessibilidade (botão no cabeçalho de todas as páginas); cores em `css/tokens.css` |
 | Rodapé | Igual nas 7 páginas, com navegação, link do GitHub e créditos |
 | Página de login | `login.html` (simulação, com a senha guardada só como hash) |
@@ -199,7 +212,14 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 - `flag-icons` (licença MIT): só as imagens das bandeiras, copiadas para dentro do projeto. Motivo: desenhar à mão cada bandeira com fidelidade daria muito trabalho e mais chance de erro, e o enunciado do projeto permite bandeiras de fonte com licença livre.
 - Fotos do Wikimedia Commons (licenças CC BY, CC BY-SA, CC0 e domínio público), com autor e licença de cada uma na página Sobre e em `docs/referencias.md`.
 - `crypto.subtle` (já vem no navegador): calcula o hash da senha. Não é biblioteca externa.
-- As cenas da página inicial usam só recursos do navegador: `position: sticky`, transformações 3D do CSS (`perspective`, `rotateY`, `translateZ`), `<canvas>` e `requestAnimationFrame`. Nenhuma biblioteca.
+- As cenas da página inicial usam só recursos do navegador: `position: sticky`, transformações 3D do CSS (`perspective`, `rotateY`, `translateZ`), `<canvas>` e `requestAnimationFrame`.
+- **Three.js r128 (licença MIT), a única biblioteca do site.** Fica guardada em `js/vendor/three.min.js`, com a licença ao lado.
+  - Para que serve: desenhar o pacotinho em 3D (luz, reflexo de papel laminado, textura).
+  - Onde roda: na página Pacotinhos (pacotinho ao vivo) e na ferramenta `scripts/quadros.html` (que gera a sequência de quadros). A página inicial e as outras cinco páginas não a carregam.
+  - Por que uma biblioteca: o navegador desenha 3D com WebGL, que é uma interface de nível muito baixo. Luz, reflexo e textura em WebGL puro pediriam centenas de linhas de código de placa de vídeo. Com a biblioteca, o arquivo `js/pacote3d.js` descreve o pacotinho em termos de folha, material e lâmpada.
+  - Por que esta versão: ela tem um arquivo único que funciona com `<script src>` comum, sem `type="module"`, como o projeto exige para abrir direto do arquivo. As versões atuais da biblioteca são distribuídas como módulo.
+  - De onde veio: cdnjs (`cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js`), baixada em 21/11/2026. A assinatura do arquivo (SHA-512) foi conferida com a publicada pelo cdnjs.
+  - Sem ela: se o arquivo não carregar ou o navegador não tiver WebGL, a página Pacotinhos mostra o pacotinho desenhado em CSS e funciona igual.
 
 ## Documentação
 

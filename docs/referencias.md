@@ -93,6 +93,11 @@ Pendências desta pesquisa:
 - Três curiosidades foram deduzidas da lista de elencos, e não de uma reportagem: El Kaabi (mais gols no elenco), Ricardo Adé (defensor mais velho do elenco) e Brahim Díaz (camisa 10).
 - Os dados das 16 sedes vêm de uma fonte só (a tabela da Wikipedia). As notas "o estádio que mais recebeu jogos" e "o menor dos 16 estádios" foram tiradas da comparação dos números dessa tabela.
 
+## Biblioteca
+
+- Three.js, revisão 128, dos autores do three.js, licença MIT. Origem: https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js, baixada em 21/11/2026 e guardada sem alteração em `js/vendor/three.min.js`. A licença está em `js/vendor/LICENCA-three.txt` (cópia de https://github.com/mrdoob/three.js/blob/r128/LICENSE). Usada só para o pacotinho em 3D.
+- Documentação consultada: https://threejs.org/docs/
+
 ## Normas e documentação das técnicas usadas
 
 - W3C. Web Content Accessibility Guidelines (WCAG) 2.2: https://www.w3.org/TR/WCAG22/
@@ -115,12 +120,19 @@ Pendências desta pesquisa:
 - MDN Web Docs. Elemento `<dialog>`: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog
 - MDN Web Docs. `prefers-color-scheme` e `prefers-reduced-motion`: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
 - Nielsen Norman Group. 10 Usability Heuristics for User Interface Design: https://www.nngroup.com/articles/ten-usability-heuristics/
+- MDN Web Docs. `position: sticky`, usado no palco das cenas da página inicial: https://developer.mozilla.org/en-US/docs/Web/CSS/position
+- MDN Web Docs. `requestAnimationFrame()`, o laço das cenas: https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+- MDN Web Docs. `perspective`, usada no pacotinho, no álbum e no voo: https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
+- MDN Web Docs. Canvas API, usada na retícula da abertura e na sequência de quadros: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+- MDN Web Docs. `drawImage()`, que desenha cada quadro da sequência: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+- MDN Web Docs. WebGL API, o desenho 3D do navegador, por baixo da Three.js: https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+- Jurn van Wissen. Let's Make One of Those Fancy Scrolling Animations Used on Apple Product Pages. CSS-Tricks, 22/05/2020 (a técnica da sequência de quadros): https://css-tricks.com/lets-make-one-of-those-fancy-scrolling-animations-used-on-apple-product-pages/
 
 ## Ferramentas
 
 - Git: histórico de versões.
 - Node.js: roda o `scripts/contraste.js`.
-- Microsoft Edge em modo sem janela: testes automáticos e prints.
+- Microsoft Edge em modo sem janela: testes automáticos, prints e geração dos quadros do pacotinho (com `scripts/quadros.html`).
 
 ## Inteligência artificial
 

@@ -162,6 +162,28 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 2.4.11 Foco não encoberto | Nenhum botão focado fica atrás de outra peça (conferido no passeio com o Tab). |
 | 4.1.2 Nome, função, valor | As peças só de enfeite (canvas, álbum em 3D, figurinhas do voo) ficam fora da leitura (`aria-hidden`), com texto equivalente ao lado quando informam algo. |
 
+## Pacotinho em 3D (etapa 11)
+
+- **Biblioteca.** Three.js r128, autorizada pelo aluno em 21/11/2026. É a única do site. O motivo e a origem estão no README, em "Tecnologias".
+- **Um modelo, dois usos.** O mesmo `js/pacote3d.js` gera a sequência de quadros da página inicial e roda ao vivo na página Pacotinhos.
+- **Por que quadros na página inicial.** A página inicial fica sem a biblioteca (600 KB a menos) e sem depender de WebGL. O custo são cerca de 1,35 MB de imagens por tema, baixadas só com as cenas em movimento.
+- **Por que ao vivo na página Pacotinhos.** Ali o pacotinho responde ao ponteiro, o que imagens prontas não fazem.
+- **Cores.** A estampa lê `--cor-etiqueta-fundo`, `--cor-etiqueta-texto` e `--cor-prata` do CSS. O pacotinho é azul com letra rosa no tema claro e rosa com letra azul no escuro, como o de CSS. A luz foi ajustada medindo a cor do desenho contra a cor do CSS.
+- **Dois conjuntos de quadros.** As imagens já vêm pintadas, então há um conjunto por tema. O alto contraste usa o conjunto do tema em que está.
+- **As figurinhas não são 3D da biblioteca.** Continuam sendo elementos comuns da página, atrás da tela de desenho. O texto delas continua legível para o leitor de tela.
+- **Coreografia nova da cena.** O pacotinho entra girando, a aba é rasgada, ele vira devagar enquanto as figurinhas sobem e depois cai para fora da cena. Antes ele sumia aos poucos.
+- **Plano B em três níveis.** Sem movimento: pacotinho de CSS parado. Imagens que não chegam: pacotinho de CSS animado. Sem WebGL na página Pacotinhos: pacotinho de CSS.
+- **Movimento na página Pacotinhos.** A inclinação só acontece com o ponteiro em cima e para quando ele sai. Com "Reduzir animações", o pacotinho 3D fica parado e a página não espera a animação de rasgar.
+- **Acessibilidade.** As telas de desenho ficam fora da leitura de tela (`aria-hidden`). O botão "Rasgar o pacotinho" continua sendo o controle com nome e foco.
+
+## Verificação feita na etapa 11
+
+- 34 verificações automáticas novas no Microsoft Edge sem janela: pedido dos 90 quadros só do tema em uso, peso, troca do pacotinho de CSS pela tela, o que a tela mostra em quatro pontos da rolagem, figurinhas atrás do pacotinho, tema escuro, nenhum pedido de imagem na versão parada, plano B quando as imagens falham, pacotinho ao vivo (desenhado, inclina, volta e para, troca de tema, rasga, abre outro), menos movimento, 320 px, navegador sem WebGL e o gerador de quadros.
+- As 335 verificações anteriores continuam passando (duas delas foram atualizadas para a coreografia nova do pacotinho).
+- A cor do corpo do pacotinho foi medida nos quadros: perto de `#232A51` no tema claro (alvo `#14204F`) e de `#E2CED9` no escuro (alvo `#FBE3E9`). A diferença é a luz e o reflexo do papel laminado.
+- O teste e a geração dos quadros rodaram com desenho 3D por programa (SwiftShader), sem placa de vídeo. A fluidez do pacotinho ao vivo em placa de vídeo e em celular de verdade ainda não foi medida.
+- Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
+
 ## Verificação feita na etapa 10
 
 - 81 verificações automáticas novas no Microsoft Edge sem janela: palco grudado em cada cena, estado de cada cena no começo e no fim, nenhum pontinho atrás do texto da abertura, balanço que para em 5 segundos, foco pelo teclado nos botões das cenas e nos links dos grupos, troca entre movimento e parado pelo painel, botão do aviso, escolha guardada, página sem JavaScript, 320 px, 390 px, celular deitado, letra maior e console sem erros.
