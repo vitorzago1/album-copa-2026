@@ -4,10 +4,11 @@
    "Token" é um valor com nome. Em vez de escrever #14204F em vinte lugares,
    o site inteiro usa var(--cor-texto). Para mudar a cor, muda-se uma linha só.
 
-   Direção visual: "Uma tinta só".
-   - Tema claro:  tinta azul sobre papel rosa.
-   - Tema escuro: tinta rosa sobre papel azul (papel e tinta trocam de lugar).
-   A cor de verdade só chega pelas figurinhas.
+   Direção visual: "Uma tinta só, vários papéis".
+   - Tema claro:  tinta azul sobre papel claro (rosa, pêssego, menta e lilás).
+   - Tema escuro: tinta rosa sobre papel fundo (azul, roxo, petróleo e vinho).
+   A tinta é uma só; o papel do fundo é que muda ao longo da página.
+   A cor viva só chega pelas figurinhas.
 
    IMPORTANTE: toda cor nova entra aqui, com nome começando em --cor-, e depois
    é conferida com:  node scripts/contraste.js
@@ -19,6 +20,14 @@
   --cor-fundo: #F6CDD7;              /* papel rosa: o fundo da página */
   --cor-superficie: #FDF1F4;         /* papel de cupom: cartões e campos */
   --cor-vaga: #EDB5C3;               /* rosa-sombra: espaço vazio e trilho da barra */
+
+  /* Os outros papéis. O fundo muda de cor ao longo da página, como as páginas
+     coloridas de um álbum. Todos são claros o bastante para a tinta azul. */
+  --cor-papel-2: #FBD9BF;            /* pêssego */
+  --cor-papel-3: #CDEBD8;            /* menta: lembra o gramado */
+  --cor-papel-4: #E1D5F5;            /* lilás */
+  /* As linhas de campo desenhadas no fundo: a própria tinta, bem fraca */
+  --cor-traco-do-fundo: rgba(20, 32, 79, 0.09);
 
   /* Tinta */
   --cor-texto: #14204F;              /* azul-tinteiro: a única tinta da página */
@@ -67,6 +76,12 @@
   --cor-superficie: #25359A;         /* papel azul claro: no escuro, o que está na frente fica mais claro */
   --cor-vaga: #131D4A;               /* rebaixo: mais escuro que a página */
 
+  /* Os outros papéis, no escuro: todos fundos o bastante para a tinta rosa */
+  --cor-papel-2: #3A1F87;            /* roxo */
+  --cor-papel-3: #0D3A63;            /* petróleo */
+  --cor-papel-4: #55195A;            /* vinho */
+  --cor-traco-do-fundo: rgba(251, 227, 233, 0.07);
+
   --cor-texto: #FBE3E9;              /* tinta rosa */
   --cor-texto-secundario: #C9B4CC;
   --cor-borda: #9AA3E6;
@@ -104,6 +119,10 @@
   --cor-fundo: #FFFFFF;
   --cor-superficie: #FFFFFF;
   --cor-vaga: #FFFFFF;
+  --cor-papel-2: #FFFFFF;            /* no alto contraste o fundo é liso */
+  --cor-papel-3: #FFFFFF;
+  --cor-papel-4: #FFFFFF;
+  --cor-traco-do-fundo: transparent;
 
   --cor-texto: #000000;
   --cor-texto-secundario: #1F1F1F;
@@ -140,6 +159,9 @@
   --cor-fundo: #000000;
   --cor-superficie: #000000;
   --cor-vaga: #000000;
+  --cor-papel-2: #000000;
+  --cor-papel-3: #000000;
+  --cor-papel-4: #000000;
 
   --cor-texto: #FFFFFF;
   --cor-texto-secundario: #E6E6E6;
@@ -205,3 +227,21 @@
   /* Movimento */
   --duracao: 200ms;
 }
+
+/* ---------- Fundo da página ----------
+   Gerado por:  node scripts/gerar-fundo.js   (não edite à mão o que está
+   entre as duas marcas: mude as cores de papel lá em cima e rode o script) */
+/* FUNDO-INICIO */
+:root {
+  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%23FBD9BF'/%3E%3Crect y='744' width='16' height='1080' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%23CDEBD8'/%3E%3Crect y='1824' width='16' height='1080' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%23E1D5F5'/%3E%3Crect y='2904' width='16' height='1080' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%23F6CDD7'/%3E%3Crect y='3984' width='16' height='416' fill='%23F6CDD7'/%3E%3C/svg%3E");
+}
+
+[data-tema="escuro"] {
+  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%233A1F87'/%3E%3Crect y='744' width='16' height='1080' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%230D3A63'/%3E%3Crect y='1824' width='16' height='1080' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%2355195A'/%3E%3Crect y='2904' width='16' height='1080' fill='%2355195A'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%231B2A80'/%3E%3Crect y='3984' width='16' height='416' fill='%231B2A80'/%3E%3C/svg%3E");
+}
+
+/* No alto contraste o fundo é liso: branco ou preto, sem desenho */
+[data-contraste="alto"] {
+  --fundo-papeis: none;
+}
+/* FUNDO-FIM */

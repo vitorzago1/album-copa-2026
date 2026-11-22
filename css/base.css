@@ -109,6 +109,7 @@ body {
   font-family: var(--fonte-leitura);
   font-size: var(--texto-base);
   line-height: var(--entrelinha);
+  position: relative;   /* o desenho do fundo (body::before, mais abaixo) se mede pela página inteira */
   background: var(--cor-fundo);
   color: var(--cor-texto);
   overflow-wrap: break-word;   /* palavra comprida demais quebra em vez de empurrar a página */
@@ -541,4 +542,65 @@ a:hover {
 
 @keyframes folha-entra {
   from { transform: perspective(60rem) rotateY(60deg); opacity: 0; }
+}
+
+/* ---------- O fundo da página ----------
+   Uma camada do tamanho da página inteira, atrás de todo o conteúdo. Ela tem
+   duas partes, uma por cima da outra:
+
+   1. OS PAPÉIS (a última linha do "background"). O fundo muda de cor conforme
+      a página desce: rosa, pêssego, menta, lilás e de novo rosa. Entre um
+      papel e outro, bolinhas da cor seguinte vão crescendo até se juntarem,
+      como o degradê da impressão em papel. É uma tira estreita, repetida para
+      os lados e para baixo, desenhada pelo scripts/gerar-fundo.js.
+
+   2. AS LINHAS DE CAMPO (as outras linhas). Um campo de futebol visto de cima,
+      espalhado pela página: o círculo central, a grande área e os cantos, mais
+      duas cruzes de registro de gráfica. Cada linha é um degradê com uma faixa
+      fininha de cor e o resto transparente. Todas se repetem a cada 4400 px,
+      a mesma altura da tira dos papéis.
+
+   A tinta continua uma só: as linhas são a tinta da página, bem fraca. */
+
+body::before {
+  --traco: var(--cor-traco-do-fundo);
+  --raio-do-centro: min(16rem, 38vw);
+  --raio-da-meia-lua: min(9rem, 20vw);
+
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    /* Cruz de registro, em cima à esquerda (um risco deitado e um em pé) */
+    linear-gradient(to bottom, transparent 379px, var(--traco) 379px 381px, transparent 381px) left 24px top 0 / 22px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 369px, var(--traco) 369px 391px, transparent 391px) left 34px top 0 / 2px 4400px repeat-y,
+    /* Cruz de registro, mais abaixo à direita */
+    linear-gradient(to bottom, transparent 3049px, var(--traco) 3049px 3051px, transparent 3051px) right 24px top 0 / 22px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 3039px, var(--traco) 3039px 3061px, transparent 3061px) right 34px top 0 / 2px 4400px repeat-y,
+
+    /* O círculo central: um anel, a linha do meio do campo e o ponto do pontapé inicial */
+    radial-gradient(circle at 50% 1180px, transparent calc(var(--raio-do-centro) - 4px), var(--traco) calc(var(--raio-do-centro) - 3px), var(--traco) var(--raio-do-centro), transparent calc(var(--raio-do-centro) + 1px)) 0 0 / 100% 4400px repeat-y,
+    linear-gradient(to bottom, transparent 1178px, var(--traco) 1178px 1181px, transparent 1181px) 0 0 / 100% 4400px repeat-y,
+    radial-gradient(circle at 50% 1180px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
+
+    /* A grande área: a linha de fundo, os dois lados, a linha da frente, a marca do pênalti... */
+    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2002px, transparent 2002px) 0 0 / 100% 4400px repeat-y,
+    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 27% 0 / 3px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 73% 0 / 3px 4400px repeat-y,
+    linear-gradient(to bottom, transparent 2329px, var(--traco) 2329px 2332px, transparent 2332px) center top / 46% 4400px repeat-y,
+    radial-gradient(circle at 50% 2220px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
+    /* ...e a meia-lua. O anel tem o centro na marca do pênalti, mas esta camada
+       só começa na linha da frente da área: o que ficaria dentro da área não aparece. */
+    radial-gradient(circle at 50% -112px, transparent calc(var(--raio-da-meia-lua) - 4px), var(--traco) calc(var(--raio-da-meia-lua) - 3px), var(--traco) var(--raio-da-meia-lua), transparent calc(var(--raio-da-meia-lua) + 1px)) 0 2332px / 100% 4400px repeat-y,
+
+    /* Os cantos: outra linha de fundo e os dois quartos de círculo do escanteio.
+       Esta camada termina na linha: só aparece a metade de cima de cada anel. */
+    linear-gradient(to bottom, transparent 3399px, var(--traco) 3399px 3402px, transparent 3402px) 0 0 / 100% 4400px repeat-y,
+    radial-gradient(circle at 0 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
+    radial-gradient(circle at 100% 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
+
+    /* Os papéis e as passagens em retícula */
+    var(--fundo-papeis) 0 0 / 16px 4400px repeat;
 }

@@ -130,12 +130,35 @@ const PARES = [
   { frente: ['foco', 'foco-vao'], fundo: 'etiqueta-fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre área na cor da tinta' },
 ];
 
+// Os outros papéis do fundo. A página muda de papel conforme a pessoa rola,
+// então tudo o que fica direto sobre a página precisa passar em cada um deles.
+const PAPEIS = [
+  { token: 'papel-2', nome: 'papel 2' },
+  { token: 'papel-3', nome: 'papel 3' },
+  { token: 'papel-4', nome: 'papel 4' },
+];
+for (const papel of PAPEIS) {
+  PARES.push(
+    { frente: 'texto', fundo: papel.token, tipo: 'texto', uso: 'Texto principal sobre o ' + papel.nome },
+    { frente: 'texto-secundario', fundo: papel.token, tipo: 'texto', uso: 'Texto de apoio sobre o ' + papel.nome },
+    { frente: 'acao', fundo: papel.token, tipo: 'texto', uso: 'Link e botão principal sobre o ' + papel.nome },
+    { frente: 'sucesso', fundo: papel.token, tipo: 'texto', uso: 'Mensagem de sucesso sobre o ' + papel.nome },
+    { frente: 'erro', fundo: papel.token, tipo: 'texto', uso: 'Mensagem de erro sobre o ' + papel.nome },
+    { frente: 'borda', fundo: papel.token, tipo: 'componente', uso: 'Borda de campo e de vaga sobre o ' + papel.nome },
+    { frente: ['figurinha-tinta', 'figurinha-papel'], fundo: papel.token, tipo: 'componente', uso: 'Etiqueta da figurinha (fundo ou contorno) sobre o ' + papel.nome },
+    { frente: ['foco', 'foco-vao'], fundo: papel.token, tipo: 'componente', uso: 'Foco (anel ou vão) sobre o ' + papel.nome }
+  );
+}
+
 // ---------------------------------------------------------------------------
 // 4. O que cada cor é e por que foi escolhida (frases curtas, para o relatório)
 // ---------------------------------------------------------------------------
 
 const DESCRICAO = [
-  { token: 'fundo', nome: 'Papel rosa / papel azul', onde: 'Fundo de todas as páginas', motivo: 'Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto.' },
+  { token: 'fundo', nome: 'Papel rosa / papel azul', onde: 'Primeira faixa do fundo de todas as páginas (e a cor do cabeçalho)', motivo: 'Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto.' },
+  { token: 'papel-2', nome: 'Papel pêssego / papel roxo', onde: 'Segunda faixa do fundo', motivo: 'Vizinho do rosa no círculo das cores: o papel muda sem brigar com o anterior. No escuro, o roxo é o vizinho do azul.' },
+  { token: 'papel-3', nome: 'Papel menta / papel petróleo', onde: 'Terceira faixa do fundo', motivo: 'Verde claro lembra o gramado: é a faixa onde fica o desenho da grande área. No escuro, um azul-petróleo.' },
+  { token: 'papel-4', nome: 'Papel lilás / papel vinho', onde: 'Quarta faixa do fundo', motivo: 'Fica entre o verde e o rosa do começo, para o fundo emendar quando se repete em páginas compridas.' },
   { token: 'superficie', nome: 'Papel de cupom', onde: 'Cartões, campos de formulário e painel', motivo: 'Quase branco: passa limpeza e marca o que é papel solto em cima da página. No escuro, o que está na frente fica mais claro.' },
   { token: 'vaga', nome: 'Rosa-sombra / rebaixo', onde: 'Espaço vazio da figurinha e trilho da barra de progresso', motivo: 'O próprio papel um tom abaixo: comunica ausência e lugar reservado sem usar cinza.' },
   { token: 'texto', nome: 'Azul-tinteiro / tinta rosa', onde: 'Textos, títulos e fios', motivo: 'Azul-escuro transmite confiança e seriedade de coisa impressa. No escuro, um rosa quase branco é mais macio que o branco puro.' },
@@ -187,7 +210,7 @@ linhas.push('## Como ler');
 linhas.push('');
 linhas.push('- Contraste é a diferença de claridade entre duas cores, de 1:1 (iguais) a 21:1 (preto no branco).');
 linhas.push('- Mínimos do WCAG 2.2: texto normal 4,5:1 (nível AA) e 7:1 (nível AAA); texto grande, bordas, ícones, anel de foco e barras 3:1.');
-linhas.push('- Direção visual: "Uma tinta só". Tema claro é tinta azul sobre papel rosa; tema escuro é tinta rosa sobre papel azul.');
+linhas.push('- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página: são quatro papéis por tema.');
 linhas.push('');
 linhas.push('## Paleta e motivo de cada cor');
 linhas.push('');
@@ -226,7 +249,61 @@ for (const tema of TEMAS) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. As cores das seleções (o desenho dentro da figurinha)
+// 6. As linhas de campo desenhadas no fundo
+// ---------------------------------------------------------------------------
+// A linha é a própria tinta, bem fraca, por cima do papel (--cor-traco-do-fundo).
+// Um texto pode ficar em cima de uma linha. Por isso a conta é refeita com o
+// papel "riscado": a cor que o olho vê quando a linha se mistura com o papel.
+// No alto contraste não há linha (ela é transparente), então não há o que conferir.
+
+// Acha os dois valores no tokens.css, na ordem em que aparecem: claro e escuro.
+// Cada um tem o formato rgba(vermelho, verde, azul, força), com força de 0 a 1.
+const TRACOS = [...fs.readFileSync(ARQUIVO_TOKENS, 'utf8').matchAll(/--cor-traco-do-fundo:\s*rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/g)];
+
+// Mistura a linha com o papel e devolve a cor resultante em #HEX
+function papelRiscado(papelHex, traco) {
+  const forca = Number(traco[4]);
+  let hex = '#';
+  for (let canal = 0; canal < 3; canal++) {
+    const doPapel = parseInt(papelHex.slice(1 + canal * 2, 3 + canal * 2), 16);
+    const daLinha = Number(traco[1 + canal]);
+    const visto = Math.round(doPapel * (1 - forca) + daLinha * forca);
+    hex += visto.toString(16).padStart(2, '0');
+  }
+  return hex.toUpperCase();
+}
+
+const TEXTOS_SOBRE_A_PAGINA = ['texto', 'texto-secundario', 'acao', 'sucesso', 'erro'];
+let paresDasLinhas = 0;
+
+linhas.push('## Contraste: linhas de campo do fundo');
+linhas.push('');
+linhas.push('As linhas de campo são a tinta da página bem fraca, por cima do papel. A tabela mostra cada papel já com a linha por cima e o texto que menos contrasta com ele. Mínimo de 4,5:1. No alto contraste não há linhas.');
+linhas.push('');
+linhas.push('| Tema | Papel | Papel com a linha | Texto que menos contrasta | Contraste | Resultado |');
+linhas.push('|---|---|---|---|---|---|');
+[claro, escuro].forEach(function (cores, i) {
+  for (const papel of ['fundo', 'papel-2', 'papel-3', 'papel-4']) {
+    const riscado = papelRiscado(cores[papel], TRACOS[i]);
+    let pior = TEXTOS_SOBRE_A_PAGINA[0];
+    for (const nome of TEXTOS_SOBRE_A_PAGINA) {
+      if (contraste(cores[nome], riscado) < contraste(cores[pior], riscado)) pior = nome;
+    }
+    const razao = contraste(cores[pior], riscado);
+    const veredito = resultado(razao, 'texto');
+    total += TEXTOS_SOBRE_A_PAGINA.length;
+    paresDasLinhas += TEXTOS_SOBRE_A_PAGINA.length;
+    if (veredito === 'REPROVA') {
+      reprovados += 1;
+      console.log(`REPROVA  Linha do fundo, tema ${i === 0 ? 'claro' : 'escuro'}: --cor-${pior} sobre ${riscado} = ${formatar(razao)}`);
+    }
+    linhas.push(`| ${i === 0 ? 'Claro' : 'Escuro'} | \`${cores[papel]}\` | \`${riscado}\` | \`--cor-${pior}\` | ${formatar(razao)} | ${veredito} |`);
+  }
+});
+linhas.push('');
+
+// ---------------------------------------------------------------------------
+// 7. As cores das seleções (o desenho dentro da figurinha)
 // ---------------------------------------------------------------------------
 // Cada seleção tem três cores em js/dados.js: campo, camisa e número.
 // O desenho precisa de dois contrastes de pelo menos 3:1:
@@ -267,7 +344,7 @@ linhas.push('');
 
 linhas.push('## Resumo');
 linhas.push('');
-linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
+linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais ${paresDasLinhas} pares de texto sobre as linhas do fundo, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
 linhas.push(`- Reprovados: ${reprovados}.`);
 linhas.push('- A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.');
 linhas.push('- A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.');

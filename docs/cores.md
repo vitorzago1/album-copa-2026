@@ -6,13 +6,16 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 
 - Contraste é a diferença de claridade entre duas cores, de 1:1 (iguais) a 21:1 (preto no branco).
 - Mínimos do WCAG 2.2: texto normal 4,5:1 (nível AA) e 7:1 (nível AAA); texto grande, bordas, ícones, anel de foco e barras 3:1.
-- Direção visual: "Uma tinta só". Tema claro é tinta azul sobre papel rosa; tema escuro é tinta rosa sobre papel azul.
+- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página: são quatro papéis por tema.
 
 ## Paleta e motivo de cada cor
 
 | Cor | Token | Claro | Escuro | Onde é usada | Motivo |
 |---|---|---|---|---|---|
-| Papel rosa / papel azul | `--cor-fundo` | `#F6CDD7` | `#1B2A80` | Fundo de todas as páginas | Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto. |
+| Papel rosa / papel azul | `--cor-fundo` | `#F6CDD7` | `#1B2A80` | Primeira faixa do fundo de todas as páginas (e a cor do cabeçalho) | Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto. |
+| Papel pêssego / papel roxo | `--cor-papel-2` | `#FBD9BF` | `#3A1F87` | Segunda faixa do fundo | Vizinho do rosa no círculo das cores: o papel muda sem brigar com o anterior. No escuro, o roxo é o vizinho do azul. |
+| Papel menta / papel petróleo | `--cor-papel-3` | `#CDEBD8` | `#0D3A63` | Terceira faixa do fundo | Verde claro lembra o gramado: é a faixa onde fica o desenho da grande área. No escuro, um azul-petróleo. |
+| Papel lilás / papel vinho | `--cor-papel-4` | `#E1D5F5` | `#55195A` | Quarta faixa do fundo | Fica entre o verde e o rosa do começo, para o fundo emendar quando se repete em páginas compridas. |
 | Papel de cupom | `--cor-superficie` | `#FDF1F4` | `#25359A` | Cartões, campos de formulário e painel | Quase branco: passa limpeza e marca o que é papel solto em cima da página. No escuro, o que está na frente fica mais claro. |
 | Rosa-sombra / rebaixo | `--cor-vaga` | `#EDB5C3` | `#131D4A` | Espaço vazio da figurinha e trilho da barra de progresso | O próprio papel um tom abaixo: comunica ausência e lugar reservado sem usar cinza. |
 | Azul-tinteiro / tinta rosa | `--cor-texto` | `#14204F` | `#FBE3E9` | Textos, títulos e fios | Azul-escuro transmite confiança e seriedade de coisa impressa. No escuro, um rosa quase branco é mais macio que o branco puro. |
@@ -74,6 +77,30 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Foco (anel ou vão) sobre a figurinha | `#14204F` | `#FFFFFF` | 15,56:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) em volta do botão principal | `#FDF1F4` | `#2340C4` | 7,33:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre área na cor da tinta | `#FDF1F4` | `#14204F` | 14,13:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 2 | `#14204F` | `#FBD9BF` | 11,69:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 2 | `#474C7A` | `#FBD9BF` | 6,11:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o papel 2 | `#2340C4` | `#FBD9BF` | 6,06:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o papel 2 | `#0A5C33` | `#FBD9BF` | 6,09:1 | 4,5:1 | Passa AA |
+| Mensagem de erro sobre o papel 2 | `#9E001A` | `#FBD9BF` | 6,39:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o papel 2 | `#4F5487` | `#FBD9BF` | 5,35:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 2 | `#14204F` | `#FBD9BF` | 11,69:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 2 | `#14204F` | `#FBD9BF` | 11,69:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 3 | `#14204F` | `#CDEBD8` | 12,21:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 3 | `#474C7A` | `#CDEBD8` | 6,38:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o papel 3 | `#2340C4` | `#CDEBD8` | 6,33:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o papel 3 | `#0A5C33` | `#CDEBD8` | 6,36:1 | 4,5:1 | Passa AA |
+| Mensagem de erro sobre o papel 3 | `#9E001A` | `#CDEBD8` | 6,67:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o papel 3 | `#4F5487` | `#CDEBD8` | 5,58:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 3 | `#14204F` | `#CDEBD8` | 12,21:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 3 | `#14204F` | `#CDEBD8` | 12,21:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 4 | `#14204F` | `#E1D5F5` | 11,15:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 4 | `#474C7A` | `#E1D5F5` | 5,82:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o papel 4 | `#2340C4` | `#E1D5F5` | 5,78:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o papel 4 | `#0A5C33` | `#E1D5F5` | 5,80:1 | 4,5:1 | Passa AA |
+| Mensagem de erro sobre o papel 4 | `#9E001A` | `#E1D5F5` | 6,09:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o papel 4 | `#4F5487` | `#E1D5F5` | 5,10:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#14204F` | `#E1D5F5` | 11,15:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 4 | `#14204F` | `#E1D5F5` | 11,15:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: tema escuro
 
@@ -114,6 +141,30 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Foco (anel ou vão) sobre a figurinha | `#131D4A` | `#EFE6EC` | 13,21:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) em volta do botão principal | `#131D4A` | `#A9BEFF` | 8,83:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre área na cor da tinta | `#131D4A` | `#FBE3E9` | 13,26:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 2 | `#FBE3E9` | `#3A1F87` | 10,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 2 | `#C9B4CC` | `#3A1F87` | 6,31:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o papel 2 | `#A9BEFF` | `#3A1F87` | 6,66:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o papel 2 | `#6EDB9B` | `#3A1F87` | 7,11:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 2 | `#FF9A9A` | `#3A1F87` | 5,99:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o papel 2 | `#9AA3E6` | `#3A1F87` | 5,07:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 2 | `#EFE6EC` | `#3A1F87` | 9,97:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 2 | `#FBE3E9` | `#3A1F87` | 10,00:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 3 | `#FBE3E9` | `#0D3A63` | 9,58:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 3 | `#C9B4CC` | `#0D3A63` | 6,04:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o papel 3 | `#A9BEFF` | `#0D3A63` | 6,38:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o papel 3 | `#6EDB9B` | `#0D3A63` | 6,81:1 | 4,5:1 | Passa AA |
+| Mensagem de erro sobre o papel 3 | `#FF9A9A` | `#0D3A63` | 5,74:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o papel 3 | `#9AA3E6` | `#0D3A63` | 4,86:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 3 | `#EFE6EC` | `#0D3A63` | 9,54:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 3 | `#FBE3E9` | `#0D3A63` | 9,58:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 4 | `#FBE3E9` | `#55195A` | 10,32:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 4 | `#C9B4CC` | `#55195A` | 6,51:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o papel 4 | `#A9BEFF` | `#55195A` | 6,87:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o papel 4 | `#6EDB9B` | `#55195A` | 7,33:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 4 | `#FF9A9A` | `#55195A` | 6,18:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o papel 4 | `#9AA3E6` | `#55195A` | 5,23:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#EFE6EC` | `#55195A` | 10,28:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 4 | `#FBE3E9` | `#55195A` | 10,32:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: alto contraste, claro
 
@@ -154,6 +205,30 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Foco (anel ou vão) sobre a figurinha | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) em volta do botão principal | `#FFFFFF` | `#0A1FA8` | 11,84:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre área na cor da tinta | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 2 | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 2 | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o papel 2 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o papel 2 | `#00471D` | `#FFFFFF` | 10,94:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 2 | `#8A0014` | `#FFFFFF` | 10,04:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o papel 2 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 2 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 2 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 3 | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 3 | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o papel 3 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o papel 3 | `#00471D` | `#FFFFFF` | 10,94:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 3 | `#8A0014` | `#FFFFFF` | 10,04:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o papel 3 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 3 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 3 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 4 | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 4 | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o papel 4 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o papel 4 | `#00471D` | `#FFFFFF` | 10,94:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 4 | `#8A0014` | `#FFFFFF` | 10,04:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o papel 4 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 4 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: alto contraste, escuro
 
@@ -194,6 +269,45 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Foco (anel ou vão) sobre a figurinha | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) em volta do botão principal | `#000000` | `#9CB4FF` | 10,39:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre área na cor da tinta | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 2 | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 2 | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o papel 2 | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o papel 2 | `#7CF0AD` | `#000000` | 14,92:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 2 | `#FFB3B3` | `#000000` | 12,35:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o papel 2 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 2 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 2 | `#FFD60A` | `#000000` | 14,88:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 3 | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 3 | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o papel 3 | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o papel 3 | `#7CF0AD` | `#000000` | 14,92:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 3 | `#FFB3B3` | `#000000` | 12,35:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o papel 3 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 3 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 3 | `#FFD60A` | `#000000` | 14,88:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o papel 4 | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o papel 4 | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o papel 4 | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o papel 4 | `#7CF0AD` | `#000000` | 14,92:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o papel 4 | `#FFB3B3` | `#000000` | 12,35:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o papel 4 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o papel 4 | `#FFD60A` | `#000000` | 14,88:1 | 3:1 | Passa (3:1) |
+
+## Contraste: linhas de campo do fundo
+
+As linhas de campo são a tinta da página bem fraca, por cima do papel. A tabela mostra cada papel já com a linha por cima e o texto que menos contrasta com ele. Mínimo de 4,5:1. No alto contraste não há linhas.
+
+| Tema | Papel | Papel com a linha | Texto que menos contrasta | Contraste | Resultado |
+|---|---|---|---|---|---|
+| Claro | `#F6CDD7` | `#E2BDCB` | `--cor-acao` | 4,76:1 | Passa AA |
+| Claro | `#FBD9BF` | `#E6C8B5` | `--cor-acao` | 5,11:1 | Passa AA |
+| Claro | `#CDEBD8` | `#BCD9CC` | `--cor-acao` | 5,36:1 | Passa AA |
+| Claro | `#E1D5F5` | `#CFC5E6` | `--cor-acao` | 4,91:1 | Passa AA |
+| Escuro | `#1B2A80` | `#2B3787` | `--cor-erro` | 5,17:1 | Passa AA |
+| Escuro | `#3A1F87` | `#482D8E` | `--cor-erro` | 5,07:1 | Passa AA |
+| Escuro | `#0D3A63` | `#1E466C` | `--cor-erro` | 4,81:1 | Passa AA |
+| Escuro | `#55195A` | `#612764` | `--cor-erro` | 5,22:1 | Passa AA |
 
 ## Contraste: cores das seleções
 
@@ -252,7 +366,7 @@ O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica so
 
 ## Resumo
 
-- Pares conferidos: 236 (35 pares da página em 4 temas, mais 2 pares do desenho de cada uma das 48 seleções).
+- Pares conferidos: 372 (59 pares da página em 4 temas, mais 40 pares de texto sobre as linhas do fundo, mais 2 pares do desenho de cada uma das 48 seleções).
 - Reprovados: 0.
 - A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.
 - A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.
