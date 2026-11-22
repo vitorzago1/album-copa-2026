@@ -397,6 +397,29 @@ main:has(> .cena-abertura) {
   transform-style: preserve-3d;
 }
 
+/* A sequência de quadros: uma tela de desenho maior que o pacotinho, com folga
+   para ele entrar, girar e cair. Fica escondida até todas as imagens chegarem;
+   aí a classe "com-quadros" troca o pacotinho de CSS por ela. */
+.pacote-quadros {
+  display: none;
+}
+
+.com-cenas .com-quadros .pacote-quadros {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--pacote-l) * 2.4);
+  height: calc(var(--pacote-l) * 3.08);
+  margin-left: calc(var(--pacote-l) * -1.2);
+  margin-top: calc(var(--pacote-l) * -1.54);
+  pointer-events: none;
+}
+
+.com-cenas .com-quadros .pacote3d {
+  display: none;
+}
+
 /* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
 .com-cenas .pacote-carta {
   position: absolute;

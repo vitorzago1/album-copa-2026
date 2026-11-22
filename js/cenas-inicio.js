@@ -312,6 +312,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // -------------------------------------------------------------------------
   // 3. O pacotinho gira e abre
   // -------------------------------------------------------------------------
+  // O pacotinho aparece de dois jeitos, com a mesma coreografia:
+  //   - a sequência de quadros: 90 imagens de um pacotinho 3D, já prontas em
+  //     assets/img/pacotinho/. A rolagem escolhe qual imagem mostrar. É a
+  //     técnica das páginas de produto: o 3D pesado é feito antes, uma vez só,
+  //     e o site só mostra fotos. (As imagens saem de scripts/quadros.html.)
+  //   - o pacotinho de CSS: fica no lugar enquanto as imagens não chegam.
+  // As figurinhas são elementos comuns da página, atrás do pacotinho.
 
   const pacote = document.getElementById('pacote3d');
   const abaDoPacote = document.getElementById('pacote3d-aba');
@@ -328,56 +335,118 @@ document.addEventListener('DOMContentLoaded', function () {
   let alturaDoPacote = 300;
   let passoDoLeque = 120;
 
-  registrarCena(document.querySelector('.cena-pacote'), {
+  // ----- A sequência de quadros
+  const telaDeQuadros = document.getElementById('pacote-quadros');
+  const pincelDeQuadros = telaDeQuadros.getContext('2d');
+  const QUADROS = 90;
+  const FIM_DO_PACOTE = 0.72;     // o pacotinho sai de cena com 72% da rolagem; o resto é das figurinhas
+  let quadros = [];               // as imagens do tema em uso
+  let temaDosQuadros = '';
+  let quadroMostrado = -1;
+  let paginaCarregada = document.readyState === 'complete';
+
+  // Busca as 90 imagens do tema atual. Só quando a última chega é que elas
+  // entram em cena: até lá, quem aparece é o pacotinho de CSS.
+  function carregarQuadros() {
+    const tema = document.documentElement.dataset.tema === 'escuro' ? 'escuro' : 'claro';
+    if (tema === temaDosQuadros) return;
+    temaDosQuadros = tema;
+
+    const novos = [];
+    let chegaram = 0;
+    for (let i = 1; i <= QUADROS; i++) {
+      const imagem = new Image();
+      imagem.onload = function () {
+        chegaram += 1;
+        if (chegaram < QUADROS || tema !== temaDosQuadros) return;
+        quadros = novos;
+        quadroMostrado = -1;
+        cenaDoPacote.classList.add('com-quadros');
+        cenaDoPacoteNoMotor.suja = true;
+        pedirQuadro();
+      };
+      // Os arquivos se chamam 001.webp, 002.webp ... 090.webp
+      imagem.src = 'assets/img/pacotinho/' + tema + '/' + String(i).padStart(3, '0') + '.webp';
+      novos.push(imagem);
+    }
+  }
+
+  // Mostra a imagem que corresponde ao progresso p da cena
+  function mostrarQuadro(p) {
+    const numero = Math.round(limitar(p / FIM_DO_PACOTE) * (QUADROS - 1));
+    if (numero === quadroMostrado) return;
+    quadroMostrado = numero;
+    pincelDeQuadros.clearRect(0, 0, telaDeQuadros.width, telaDeQuadros.height);
+    pincelDeQuadros.drawImage(quadros[numero], 0, 0);
+  }
+
+  const cenaDoPacoteNoMotor = registrarCena(document.querySelector('.cena-pacote'), {
     medir: function () {
       alturaDoPacote = cenaDoPacote.offsetHeight;
       const larguraDaCarta = cartas[0].offsetWidth;
       // No celular as cinco não cabem lado a lado: o leque fica mais fechado
       passoDoLeque = Math.min(larguraDaCarta * 1.08, (cenaDoPacote.parentElement.clientWidth - larguraDaCarta * 1.3 - 24) / 4);
+      // As imagens só são buscadas se as cenas estão em movimento e depois que o
+      // resto da página carregou. Trocar o tema busca as do outro tema.
+      if (cenasEmMovimento && paginaCarregada) carregarQuadros();
     },
 
     desenhar: function (p) {
-      const chegada = trecho(0, 0.3, p);        // o pacotinho entra girando
-      const rasgo = trecho(0.3, 0.44, p);       // a aba sai pelo picote
-      const descida = trecho(0.55, 0.85, p);    // o pacotinho vazio desce e deita
+      // A coreografia do pacotinho (a mesma de posar(), no js/pacote3d.js):
+      const chegada = trecho(0, 0.28, p);       // entra girando, de costas para a frente
+      const rasgo = trecho(0.28, 0.4, p);       // a aba sai pelo picote
+      const queda = trecho(0.55, 0.72, p);      // vazio, cai para fora da cena
+      const some = String(trecho(0, 0.06, p) * (1 - trecho(0.64, 0.72, p)));
 
-      const giro = misturar(-205, 0, chegada);
-      const tombo = misturar(22, 0, chegada) + descida * 55;
-      const sobe = misturar(alturaDoPacote * 0.5, 0, chegada) + descida * alturaDoPacote * 0.55;
-      const tamanho = misturar(0.7, 1, chegada);
-      pacote.style.transform = 'translateY(' + sobe + 'px) rotateX(' + tombo + 'deg) rotateY(' + giro + 'deg) scale(' + tamanho + ')';
-      pacote.style.opacity = trecho(0, 0.06, p) * (1 - trecho(0.66, 0.84, p));
+      if (quadros.length === QUADROS) {
+        mostrarQuadro(p);
+        telaDeQuadros.style.opacity = some;
+      } else {
+        // O pacotinho de CSS, com os mesmos movimentos
+        const giro = misturar(-205, 9, chegada) - trecho(0.28, 0.55, p) * 18;
+        const tombo = misturar(22, 0, chegada) + queda * 62;
+        const desce = misturar(alturaDoPacote * 0.46, 0, chegada) + queda * queda * alturaDoPacote * 1.86;
+        pacote.style.transform = 'translateY(' + desce + 'px) rotateX(' + (-tombo) + 'deg) rotateY(' + giro + 'deg) rotate(' + (queda * 12) + 'deg) scale(' + misturar(0.72, 1, chegada) + ')';
+        pacote.style.opacity = some;
+        abaDoPacote.style.transform = 'translate(' + (rasgo * 70) + '%, ' + (rasgo * -190) + '%) rotate(' + (rasgo * 38) + 'deg)';
+        abaDoPacote.style.opacity = 1 - trecho(0.34, 0.4, p);
+      }
 
-      abaDoPacote.style.transform = 'translate(' + (rasgo * 70) + '%, ' + (rasgo * -190) + '%) rotate(' + (rasgo * 38) + 'deg)';
-      abaDoPacote.style.opacity = 1 - trecho(0.36, 0.46, p);
-
-      // As cinco figurinhas: sobem por dentro do pacotinho, passam para a frente
-      // e abrem em leque. Cada uma começa um pouco depois da anterior.
+      // As cinco figurinhas: sobem por dentro do pacotinho, passam por cima dele
+      // e, quando ele já caiu, descem e abrem em leque. Cada uma começa um
+      // pouco depois da anterior. Elas ficam sempre atrás do pacotinho.
       cartas.forEach(function (carta, i) {
-        const t = trecho(0.42 + i * 0.03, 0.76 + i * 0.03, p);
+        const t = trecho(0.38 + i * 0.03, 0.74 + i * 0.03, p);
         const lado = i - 2;   // -2, -1, 0, 1, 2: a do meio fica no meio
         const x = lado * passoDoLeque * t * t;
-        const y = misturar(0, alturaDoPacote * 0.04, t) - Math.sin(t * Math.PI) * alturaDoPacote * 0.6;
-        // Profundidade: começa atrás da frente do pacotinho e termina na frente de tudo
-        const z = misturar(-(34 + i * 2), 40 + (2 - Math.abs(lado)) * 16, trecho(0.5, 0.8, t));
+        const y = misturar(0, alturaDoPacote * 0.03, t) - Math.sin(t * Math.PI) * alturaDoPacote * 0.75;
+        // Profundidade: sempre negativa (atrás da frente do pacotinho). No leque,
+        // a figurinha do meio fica um pouco à frente das dos lados.
+        const z = misturar(-(34 + i * 2), -4 - Math.abs(lado) * 10, trecho(0.5, 0.8, t));
         const giroDaCarta = lado * 5 * t;
         const viradaDaCarta = Math.sin(t * Math.PI) * -20;   // vira de lado só no meio do caminho
         carta.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px) rotateY(' + viradaDaCarta + 'deg) rotate(' + giroDaCarta + 'deg)';
         // Só aparece quando o pacotinho já está de frente (antes disso ficaria de fora, no giro)
-        carta.style.opacity = trecho(0.3, 0.34, p);
+        carta.style.opacity = trecho(0.25, 0.29, p);
       });
 
       const entra1 = trecho(0.02, 0.1, p);
       tituloDoPacote1.style.opacity = entra1 * (1 - trecho(0.26, 0.34, p));
       tituloDoPacote1.style.transform = 'translateY(' + ((1 - entra1) * 18) + 'px)';
-      const entra2 = trecho(0.76, 0.88, p);
+      const entra2 = trecho(0.78, 0.9, p);
       tituloDoPacote2.style.opacity = entra2;
       tituloDoPacote2.style.transform = 'translateY(' + ((1 - entra2) * 18) + 'px)';
     },
 
     parar: function () {
-      limparEstilos([pacote, abaDoPacote, tituloDoPacote1, tituloDoPacote2].concat(cartas));
+      limparEstilos([pacote, abaDoPacote, telaDeQuadros, tituloDoPacote1, tituloDoPacote2].concat(cartas));
+      quadroMostrado = -1;
     },
+  });
+
+  window.addEventListener('load', function () {
+    paginaCarregada = true;
+    if (cenasEmMovimento) carregarQuadros();
   });
 
   // -------------------------------------------------------------------------

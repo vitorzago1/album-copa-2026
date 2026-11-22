@@ -146,8 +146,12 @@
       </ol>
     </section>
 
-    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho tem frente e costas no espaço 3D
-         do CSS. As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
+    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho aparece de dois jeitos:
+         1. uma sequência de 90 imagens de um pacotinho 3D (a técnica das páginas de
+            produto), mostradas uma a uma no <canvas> conforme a rolagem;
+         2. um pacotinho desenhado em CSS, usado na versão parada e enquanto as
+            imagens ainda estão chegando.
+         As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
     <section class="cena cena-pacote" style="--altura: 360vh" aria-labelledby="titulo-cena-pacote">
       <div class="cena-palco palco-3d">
         <h2 class="cena-titulo" id="titulo-cena-pacote">Todo dia, um pacotinho.</h2>
@@ -167,6 +171,8 @@
               <span class="pacotinho-texto">Abra pelo picote</span>
             </div>
           </div>
+          <!-- Cada imagem da sequência tem 720 por 924 pixels. -->
+          <canvas class="pacote-quadros so-com-js" id="pacote-quadros" width="720" height="924" aria-hidden="true"></canvas>
         </div>
       </div>
     </section>
