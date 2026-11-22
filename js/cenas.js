@@ -77,6 +77,18 @@ function registrarCena(elemento, cena) {
   cena.naTela = false;
   cena.suja = true;       // "precisa ser redesenhada"
   cena.comecou = false;
+
+  // O aviso "Desça para continuar", no pé do palco. Ele avisa que a cena só
+  // anda com a rolagem. Por padrão aparece desde o começo da cena; o atributo
+  // data-aviso-de="0.2" no HTML faz aparecer só a partir de 20%.
+  // É uma ajuda para os olhos: fica fora da leitura de tela.
+  cena.aviso = document.createElement('p');
+  cena.aviso.className = 'cena-desca';
+  cena.aviso.setAttribute('aria-hidden', 'true');
+  cena.aviso.append(document.createElement('i'), 'Desça para continuar');
+  elemento.querySelector('.cena-palco').append(cena.aviso);
+  cena.avisoDe = Number(elemento.dataset.avisoDe || -1);
+
   CENAS.push(cena);
   return cena;
 }
@@ -120,7 +132,10 @@ function medirRolagem() {
   for (const cena of CENAS) {
     const caixa = cena.elemento.getBoundingClientRect();
     cena.alvo = limitar(-caixa.top / (caixa.height - alturaDaTela));
-    cena.naTela = caixa.bottom > 0 && caixa.top < alturaDaTela;
+    const naTela = caixa.bottom > 0 && caixa.top < alturaDaTela;
+    // A classe "cena-na-tela" faz o fio do aviso descer de novo quando a cena chega
+    if (naTela !== cena.naTela) cena.elemento.classList.toggle('cena-na-tela', naTela);
+    cena.naTela = naTela;
   }
 }
 
@@ -146,6 +161,8 @@ function quadro(agora) {
     if (cena.p !== antes || cena.suja || (cena.viva && cena.viva(agora))) {
       cena.desenhar(cena.p, agora);
       cena.suja = false;
+      // O aviso de descer some perto do fim da cena, quando não há mais o que esperar
+      cena.aviso.style.opacity = String(trecho(cena.avisoDe, cena.avisoDe + 0.06, cena.p) * (1 - trecho(0.8, 0.88, cena.p)));
     }
   }
   pedirQuadro();
@@ -188,6 +205,7 @@ function aplicarModoDasCenas() {
   // Primeiro tudo volta ao que o CSS manda; depois cada cena mede a tela nova
   for (const cena of CENAS) {
     cena.parar();
+    cena.aviso.removeAttribute('style');
     cena.comecou = false;
   }
   medirCenas();

@@ -110,7 +110,7 @@ html:not(.com-js) .so-com-js {
   display: none;
 }
 
-/* "Role para ver": um fio que desce. Só existe com as cenas em movimento. */
+/* "Desça para continuar" da abertura: um fio que desce. Só existe com as cenas em movimento. */
 .rolar-dica {
   display: none;
 }
@@ -122,13 +122,50 @@ html:not(.com-js) .so-com-js {
   font-weight: 700;
 }
 
-.rolar-dica i {
+.rolar-dica i,
+.cena-desca i {
   display: block;
   width: 2px;
   height: 2.25rem;
   background: var(--cor-texto);
   transform-origin: top;
+}
+
+.rolar-dica i {
   animation: fio-descendo 1.6s ease-in-out 3;   /* três vezes e para */
+}
+
+/* O aviso "Desça para continuar", no pé de cada palco (posto pelo js/cenas.js).
+   Fica em uma etiqueta de papel claro, para ser lido por cima de qualquer cena. */
+.cena-desca {
+  display: none;
+}
+
+.com-cenas .cena-desca {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: var(--espaco-4);
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  max-width: none;
+  padding: var(--espaco-1) var(--espaco-3);
+  background: var(--cor-superficie);
+  font-size: var(--texto-pequeno);
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.cena-desca i {
+  height: 1.5rem;
+}
+
+/* O fio desce três vezes cada vez que a cena chega à tela, e para */
+.cena-na-tela .cena-desca i {
+  animation: fio-descendo 1.6s ease-in-out 3;
 }
 
 @keyframes fio-descendo {
@@ -907,7 +944,7 @@ html:not(.com-cenas) #pagina-base {
 .com-cenas .trilha {
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: 3.25rem;   /* sobra o pé do palco para o aviso "Desça para continuar" */
   left: 0;
   display: flex;
   align-items: center;
@@ -974,6 +1011,20 @@ html:not(.com-cenas) #pagina-base {
 .com-cenas .voo-fim .cena-titulo {
   position: static;
   pointer-events: auto;
+}
+
+/* ---------- Janela não muito alta (notebook, celular pequeno) ----------
+   Com menos de 640 px de altura, cada grupo fica mais estreito. As bandeiras
+   encolhem junto, e o link "Ver o Grupo no álbum" não fica debaixo do aviso
+   "Desça para continuar". */
+@media (max-height: 40rem) {
+  .com-cenas .grupo {
+    width: min(78vw, 16rem);
+  }
+
+  .com-cenas .grupo-letra {
+    font-size: 4.5rem;
+  }
 }
 
 /* ---------- Tela baixa (celular deitado, janela pequena) ----------
