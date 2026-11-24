@@ -334,6 +334,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - 22 verificações automáticas novas no Microsoft Edge sem janela: peças do retrato, ausência de foto, bandeirinha sem texto alternativo, texto da figurinha igual, os quatro cortes de cabelo e o corte fixo por figurinha, cor da pele, contorno e cabelo na tinta, cores da seleção, ordem das camadas, figurinha de bandeira sem mudança, retrato dentro da moldura, 320 px, tema escuro, alto contraste, as quatro páginas com figurinhas, página sem JavaScript e contraste.
 - As 510 verificações anteriores continuam passando.
 - Instabilidade investigada: a suíte da etapa 10 falhava quando rodava logo depois de outra. Foi medido que o fundo novo não atrasa as cenas (mesmo tempo com e sem ele) e que não sobravam navegadores de teste abertos. A causa era o teste, que esperava um tempo fixo de 1 segundo com a máquina ainda ocupada fechando o navegador da suíte anterior. O teste passou a esperar a cena chegar ao lugar. Rodada de novo em sequência, a suíte passou.
+- No endereço publicado (https://vitorzago1.github.io/album-copa-2026/), depois do envio das etapas 13 a 16 em 23/11/2026: as suítes das etapas 10 a 16 passaram, com 274 verificações (73, 34, 47, 31, 39, 29 e 21). Quatro verificações dessas suítes só existem no computador, porque rodam os scripts do projeto, e ficaram de fora. O site publicado atualizou 32 segundos depois do envio.
 - Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 15
