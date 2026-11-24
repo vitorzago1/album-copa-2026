@@ -270,6 +270,47 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 2.2.2 Pausar, parar, ocultar | O fundo não se mexe. |
 | 2.4.7 e 2.4.11 Foco | O foco em um botão do convite traz a cena de volta ao começo, com o convite inteiro à vista. |
 
+## Frase animada, carrossel dos grupos e cores mais vivas (etapa 15)
+
+- **Pedido do aluno em 23/11/2026.** Cores um pouco mais vivas; a frase "São 48 seleções..." como animação, sem descer a página por dentro dela; os 12 grupos em carrossel, também sem descer a página.
+- **A frase não é mais cena.** Antes ela ocupava 220% da altura da tela e as palavras acendiam conforme a rolagem. Agora é uma seção comum.
+- **Quando a animação toca.** Quando 40% da frase está dentro da tela (`IntersectionObserver`). Toca uma vez só: voltar à frase não a apaga de novo.
+- **Quem anima é o CSS.** O JavaScript só tira a classe `frase-apagada`. Cada palavra tem a sua posição em `--ordem`, e o CSS faz cada uma esperar 110 milésimos de segundo a mais.
+- **O padrão é aceso.** Sem JavaScript, a classe `frase-apagada` nunca é posta, e a frase aparece inteira.
+- **Os grupos não são mais cena.** Antes a rolagem para baixo empurrava a faixa para o lado, por 420% da altura da tela. Agora a faixa rola para os lados dentro de uma janela.
+- **Rolagem do navegador, e não transformação.** A janela usa `overflow-x: auto` e `scroll-snap`. Assim o carrossel funciona com dedo, mouse, setas do teclado e foco, sem código para cada um. Os botões só pedem à janela para rolar até um painel.
+- **Arrastar tem alternativa por botão.** "Anterior", "Próximo" e os doze indicadores fazem o mesmo que arrastar.
+- **Dá a volta.** "Anterior" no Grupo A vai para o L, e "Próximo" no L volta para o A, como no carrossel das sedes.
+- **Não passa sozinho.** Só muda quando a pessoa pede.
+- **Todos os painéis ficam na página.** Os doze grupos continuam no HTML ao mesmo tempo: o leitor de tela lê todos, e o foco do teclado alcança todos os links.
+- **Barra de rolagem escondida.** A janela não mostra a barra; os botões fazem esse papel. A janela recebe foco (`tabindex="0"`) para poder ser rolada com as setas.
+- **O efeito da tinta ficou.** `--f` continua indo de 0 a 1 conforme o painel chega ao meio; só mudou quem calcula (a rolagem da janela, no `js/carrossel.js`).
+- **Um arquivo para os dois carrosséis.** O `js/carrossel.js` tem duas funções, uma para as sedes e uma para os grupos, e uma função comum que marca o indicador atual.
+- **Cores mais vivas só nos papéis.** Mudaram os quatro papéis de cada tema, a cor da vaga do tema claro e o amarelo dos recortes. A tinta do texto, os botões, as figurinhas e as cores das seleções não mudaram. As imagens do pacotinho em 3D da página inicial não foram geradas de novo.
+- **Limite das cores.** Cada papel ficou tão vivo quanto dava mantendo todos os textos acima de 4,5:1. O par mais apertado é o número dentro da vaga, com 4,62:1.
+
+### WCAG 2.2 na frase e no carrossel dos grupos
+
+| Critério | Como foi atendido |
+|---|---|
+| 1.3.1 e 4.1.2 Informação e nome | A seção tem `aria-roledescription="carrossel"`; cada painel é um grupo com o nome "Grupo C, 3 de 12"; os indicadores têm o nome "Grupo A", "Grupo B"... |
+| 1.4.3 Contraste | 396 pares, 0 reprovados, com os papéis novos. As palavras apagadas da frase são um estado de passagem, que dura menos de 4 segundos. |
+| 1.4.10 Reflow | Em 320 px o grupo do meio cabe inteiro e a página não ganha rolagem lateral. |
+| 2.1.1 Teclado | Botões, indicadores e links recebem foco. O foco em um link de outro grupo traz o grupo para a tela. A janela pode ser rolada com as setas. |
+| 2.2.2 Pausar, parar, ocultar | A frase leva menos de 5 segundos e toca uma vez. O carrossel não passa sozinho. |
+| 2.3.3 Animação por interação | Com "Reduzir animações" a frase já vem acesa e o carrossel troca de uma vez. |
+| 2.5.1 e 2.5.7 Gestos e arrastar | Arrastar a faixa tem alternativa por botão. |
+| 2.5.8 Tamanho do alvo | Botões e indicadores com 44 px. |
+| 4.1.3 Mensagens de status | A posição ("3 de 12: Grupo C") fica em um texto com `role="status"`. |
+
+## Verificação feita na etapa 15
+
+- 30 verificações automáticas novas no Microsoft Edge sem janela. Frase: espera apagada, acende sozinha sem a página rolar, termina em menos de 5 segundos, toca uma vez, já vem acesa com menos movimento e sem JavaScript. Carrossel: doze painéis com nome, botões, indicadores, volta do A para o L e do L para o A, rolagem com o dedo, foco do teclado, menos movimento, 320 px e tema escuro. Cores: os oito papéis mais vivos que antes e o contraste passando.
+- Defeito achado pelos testes e corrigido: com "Reduzir animações", a última palavra da frase ainda esperava mais de 2 segundos para acender.
+- Suítes anteriores: seis verificações da etapa 10 e duas da etapa 13 saíram (conferiam a frase e os grupos como cenas presas à rolagem), e mais duas da etapa 10 saíram com as cenas 7 e 8. As que procuravam "o carrossel" passaram a dizer qual dos dois. Total: 510, todas passando.
+- Em uma das rodadas a suíte da etapa 10 teve 11 falhas de uma vez e, rodada de novo sozinha, passou inteira. Foi tratada como instabilidade da máquina de teste; se voltar a acontecer, precisa ser investigada.
+- Ainda não verificado: Firefox, Safari, celular de verdade (em especial arrastar o carrossel com o dedo), leitor de tela (NVDA) e Lighthouse.
+
 ## Verificação feita na etapa 14
 
 - 39 verificações automáticas novas no Microsoft Edge sem janela. Colagem: arquivo de cada tema servido e usado nas 7 páginas; só as seis cores de papel; sem texto, foto, link ou script; menos de 80 KB; linha de giz, círculo central e sol lidos nos pixels de um print; mesmo desenho nos dois temas; metade do tamanho no celular; nada no alto contraste. Grão: muda o papel de verdade e nunca na direção que tira contraste. Abertura: convite no meio em 7 tamanhos de tela; título, botões e aviso centralizados; nenhum pontinho atrás do texto; pontinhos dos lados e em cima do título; pontinhos menores perto do texto; saída ao rolar; foco; versão parada igual à de antes.

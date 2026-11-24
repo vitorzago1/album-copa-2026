@@ -41,6 +41,11 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Abertura da página inicial: convite centralizado, com os pontinhos contornando o texto.
 - Corrigido: os botões da abertura ficavam 26 px fora do centro.
 - 39 verificações automáticas novas (490 no total).
+- A frase "São 48 seleções..." deixou de ser cena presa à rolagem: acende sozinha quando aparece na tela.
+- Os 12 grupos viraram um carrossel, com botões, indicadores de A a L e rolagem para os lados. A página inicial ficou com seis cenas.
+- Papéis do fundo e amarelo dos recortes com cores mais vivas. Contraste: 396 pares, 0 reprovados.
+- "Reduzir animações" passou a tirar também o tempo de espera das transições.
+- 30 verificações automáticas novas (510 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

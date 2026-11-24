@@ -37,7 +37,7 @@ album-copa-2026/
 │             inicio.js, carrossel.js, login.js, contato.js, formulario.js,
 │             sobre.js, demonstracao.js, menu.js, tema-acessibilidade.js,
 │             efeitos.js (retícula que acende e lendária holográfica),
-│             cenas.js (motor das cenas), cenas-inicio.js (as oito cenas),
+│             cenas.js (motor das cenas), cenas-inicio.js (as seis cenas e a frase que acende),
 │             pacote3d.js (o pacotinho em 3D), pacotinho-3d.js (ele ao vivo)
 │             e vendor/three.min.js (a única biblioteca do site)
 ├── assets/   bandeiras, fotos dos estádios, quadros do pacotinho, colagem do fundo, SVG e fontes
@@ -148,7 +148,7 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 Depois da publicação, o site foi avaliado como "genérico". Duas páginas de teste (`laboratorio.html` e `laboratorio-2.html`, que não fazem parte do site) serviram para escolher efeitos com tudo funcionando. Esta etapa aplica as oito cenas escolhidas no segundo laboratório.
 
 1. **Como uma cena funciona.** A cena é uma seção bem alta (por exemplo, 240vh, quase duas telas e meia). Dentro dela, o palco fica grudado na tela (`position: sticky`). Enquanto a pessoa rola por dentro da cena, o `js/cenas.js` transforma a rolagem em um número de 0 a 1, o progresso, e chama a função de desenho da cena. Rolar para cima desfaz tudo.
-2. **As oito cenas** (`js/cenas-inicio.js` e `css/cenas.css`):
+2. **As oito cenas** (`js/cenas-inicio.js` e `css/cenas.css`; na etapa 15 a frase e os grupos deixaram de ser cenas, e ficaram seis):
    - abertura: os pontinhos de impressão se juntam e formam "Colei!", desenhados em um `<canvas>`;
    - a frase que acende, palavra por palavra;
    - o pacotinho que gira, rasga e solta cinco figurinhas (3D em CSS);
@@ -228,6 +228,20 @@ Dois pedidos do aluno em 22/11/2026, depois de ver a etapa 13: o fundo ainda est
 10. **Tentativa descartada.** Foi testada a foto de um estádio impressa em retícula. Com as cores claras que o contraste permite, a foto virava uma mancha sem forma. A ideia foi trocada pelo estádio desenhado.
 11. **Verificações automáticas novas:** 39. Duas da etapa 13 saíram junto com as linhas cinza. No total são 490, todas passando.
 
+### Etapa 15: frase que acende sozinha, carrossel dos grupos e cores mais vivas
+
+Três pedidos do aluno em 23/11/2026: as cores um pouco mais vivas; a frase "São 48 seleções..." virar só uma animação, sem ser preciso descer a página por dentro dela; e os 12 grupos virarem um carrossel, também sem descer a página.
+
+1. **Frase que acende sozinha.** Ela deixou de ser uma cena presa à rolagem. Quando aparece na tela, as palavras acendem uma depois da outra e o sublinhado se desenha, em menos de 4 segundos, uma vez só. Quem avisa que ela apareceu é um `IntersectionObserver`; quem acende é o CSS (cada palavra espera 110 milésimos de segundo a mais que a anterior).
+2. **Sem movimento, sem espera.** Com "Reduzir animações", com o aparelho pedindo menos movimento ou sem JavaScript, a frase já vem toda acesa.
+3. **Carrossel dos grupos.** Os doze grupos ficam lado a lado em uma faixa que rola para os lados (a rolagem é a do próprio navegador, com `scroll-snap`). Botões "Anterior" e "Próximo", um indicador para cada grupo (de A a L) e a posição escrita ("3 de 12: Grupo C"), lida pelo leitor de tela a cada troca. Também dá para arrastar com o dedo ou rolar com o mouse.
+4. **O grupo do meio ganha cor.** O efeito da cena antiga ficou: a bandeira é impressa em uma tinta só e, no grupo que está no meio da janela, vira figurinha colorida.
+5. **Onde está o código.** O carrossel dos grupos fica no `js/carrossel.js`, junto com o das sedes. O CSS dos dois trechos continua no `css/cenas.css`.
+6. **Seis cenas.** A página inicial passou de oito para seis cenas presas à rolagem (abertura, pacotinho, álbum, mergulho, números e voo) e ficou mais curta.
+7. **Cores mais vivas.** Os quatro papéis dos dois temas e o amarelo dos recortes ganharam mais cor, sem mexer na tinta do texto. O fundo foi redesenhado com `node scripts/gerar-fundo.js` e o contraste conferido de novo: 396 pares, 0 reprovados (o menor valor é 4,62:1).
+8. **Menos movimento ainda mais direto.** A regra geral de "Reduzir animações" passou a zerar também o tempo de espera das transições (`transition-delay`).
+9. **Verificações automáticas novas:** 30. Dez das etapas 10 e 13 saíram, porque conferiam a frase e os grupos como cenas. No total são 510, todas passando.
+
 ## Onde está cada item pedido pelo professor
 
 | Item | Onde está |
@@ -235,10 +249,10 @@ Dois pedidos do aluno em 22/11/2026, depois de ver a etapa 13: o fundo ainda est
 | Cartões | Figurinhas (`album.html`, `pacotinhos.html`), cartões "É uma simulação" (`login.html`, `contato.html`), cupom do pacotinho e bilhete de troca (`index.html`) |
 | Abas de pesquisa | `album.html`: busca, abas Todas, Tenho, Faltam e Repetidas, e filtros de grupo, seleção, posição e raridade |
 | Contato com formulário | `contato.html` |
-| Carrossel de imagens | `index.html`, seção "As 16 sedes" |
+| Carrossel de imagens | `index.html`: seção "As 16 sedes" (fotos dos estádios) e seção "12 grupos, de A a L." (bandeiras). Código em `js/carrossel.js` |
 | Imagens | Fotos dos 16 estádios (`assets/img/sedes/`), 48 bandeiras (`assets/bandeiras/`) e desenhos próprios em SVG e CSS |
 | Cartões explicativos | `index.html`: "Como funciona", "Pacotinho do dia", "Raridades" e "Como trocar" |
-| Animações e 3D | `index.html`: oito cenas presas à rolagem (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada; pacotinho em 3D na cena 3 (sequência de quadros) e em `pacotinhos.html` (ao vivo); nove efeitos nas outras páginas (tabela da etapa 12) |
+| Animações e 3D | `index.html`: seis cenas presas à rolagem e a frase que acende sozinha (`css/cenas.css`, `js/cenas.js` e `js/cenas-inicio.js`), todas com versão parada; pacotinho em 3D na cena 2 (sequência de quadros) e em `pacotinhos.html` (ao vivo); nove efeitos nas outras páginas (tabela da etapa 12) |
 | Modo escuro e claro | Painel de acessibilidade (botão no cabeçalho de todas as páginas); cores em `css/tokens.css` |
 | Rodapé | Igual nas 7 páginas, com navegação, link do GitHub e créditos |
 | Página de login | `login.html` (simulação, com a senha guardada só como hash) |

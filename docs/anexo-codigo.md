@@ -5,11 +5,11 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 37.
-- Linhas de código (com comentários): 13981.
+- Linhas de código (com comentários): 14039.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 453 |
+| `index.html` | 467 |
 | `album.html` | 234 |
 | `pacotinhos.html` | 137 |
 | `trocas.html` | 166 |
@@ -20,8 +20,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `css/base.css` | 619 |
 | `css/componentes.css` | 1361 |
 | `css/paginas.css` | 537 |
-| `css/acessibilidade.css` | 222 |
-| `css/cenas.css` | 1134 |
+| `css/acessibilidade.css` | 224 |
+| `css/cenas.css` | 1119 |
 | `js/tema-acessibilidade.js` | 226 |
 | `js/menu.js` | 52 |
 | `js/efeitos.js` | 106 |
@@ -31,9 +31,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/pacotinho.js` | 242 |
 | `js/trocas.js` | 200 |
 | `js/inicio.js` | 53 |
-| `js/carrossel.js` | 92 |
+| `js/carrossel.js` | 235 |
 | `js/cenas.js` | 272 |
-| `js/cenas-inicio.js` | 867 |
+| `js/cenas-inicio.js` | 781 |
 | `js/pacote3d.js` | 466 |
 | `js/pacotinho-3d.js` | 170 |
 | `js/formulario.js` | 53 |
@@ -74,7 +74,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <script src="js/inicio.js" defer></script>
   <script src="js/carrossel.js" defer></script>
 
-  <!-- As cenas presas à rolagem: o motor e, depois, as oito cenas desta página. -->
+  <!-- As cenas presas à rolagem: o motor e, depois, as seis cenas desta página. -->
   <script src="js/cenas.js" defer></script>
   <script src="js/cenas-inicio.js" defer></script>
 
@@ -149,16 +149,15 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- A FRASE ACENDE (cena 2). Cada palavra acende quando a rolagem chega nela. -->
-    <div class="cena cena-frase" style="--altura: 220vh">
-      <div class="cena-palco">
-        <div class="frase-caixa">
-          <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
-          <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path id="frase-traco" pathLength="1" d="M6 10c60-7 150-8 288-3M14 19c80-6 170-7 262-2"/>
-          </svg>
-        </div>
-      </div>
+    <!-- A FRASE ACENDE. Não é uma cena presa à rolagem: quando a frase aparece na
+         tela, as palavras acendem sozinhas, uma depois da outra, e o sublinhado se
+         desenha (js/cenas-inicio.js). Sem JavaScript, ou com menos movimento, ela já
+         vem toda acesa. -->
+    <div class="largura secao frase-secao" id="frase-secao">
+      <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
+      <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path id="frase-traco" pathLength="1" d="M6 10c60-7 150-8 288-3M14 19c80-6 170-7 262-2"/>
+      </svg>
     </div>
 
     <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
@@ -201,7 +200,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </ol>
     </section>
 
-    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho aparece de dois jeitos:
+    <!-- O PACOTINHO GIRA E ABRE (cena 2). O pacotinho aparece de dois jeitos:
          1. uma sequência de 90 imagens de um pacotinho 3D (a técnica das páginas de
             produto), mostradas uma a uma no <canvas> conforme a rolagem;
          2. um pacotinho desenhado em CSS, usado na versão parada e enquanto as
@@ -322,7 +321,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- O ÁLBUM ABRE (cena 4). Três folhas empilhadas; cada uma tem frente e verso.
+    <!-- O ÁLBUM ABRE (cena 3). Três folhas empilhadas; cada uma tem frente e verso.
          As páginas (Grupo C, como amostra) são montadas pelo js/cenas-inicio.js. -->
     <section class="cena cena-album" style="--altura: 360vh" aria-labelledby="titulo-cena-album">
       <div class="cena-palco palco-3d">
@@ -348,7 +347,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- MERGULHO NA FIGURINHA (cena 5). A figurinha cresce até a tela ficar da cor dela. -->
+    <!-- MERGULHO NA FIGURINHA (cena 4). A figurinha cresce até a tela ficar da cor dela. -->
     <div class="cena cena-mergulho" style="--altura: 240vh">
       <div class="cena-palco">
         <div class="mergulho so-com-js" id="mergulho" aria-hidden="true"></div>
@@ -358,7 +357,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </div>
 
-    <!-- OS NÚMEROS CONTAM (cena 6). Os valores escritos aqui são os finais; o
+    <!-- OS NÚMEROS CONTAM (cena 5). Os valores escritos aqui são os finais; o
          js/cenas-inicio.js confere com os dados e faz a contagem. -->
     <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
       <div class="cena-palco">
@@ -384,16 +383,31 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- OS GRUPOS ANDAM PARA O LADO (cena 7). A rolagem para baixo move a faixa para
-         o lado. Os doze painéis são postos pelo js/cenas-inicio.js. -->
-    <section class="cena cena-grupos" style="--altura: 420vh" aria-labelledby="titulo-grupos">
-      <div class="cena-palco">
-        <div class="trilha" id="trilha">
-          <div class="trilha-abre">
-            <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
-            <p>A bandeira chega impressa em uma tinta só. No meio da tela, ela vira figurinha e ganha a cor de verdade.</p>
-            <noscript><p>A lista dos grupos aparece com o JavaScript ligado. No <a href="album.html">álbum</a> eles estão todos.</p></noscript>
+    <!-- CARROSSEL DOS GRUPOS. Os doze grupos ficam lado a lado em uma faixa que anda
+         para os lados. O grupo que está no meio vira figurinha e ganha cor. Os
+         painéis são montados pelo js/carrossel.js, a partir de js/dados.js.
+         Não passa sozinho: só anda quando a pessoa aperta um botão ou arrasta. -->
+    <section class="secao fluxo secao-grupos" aria-labelledby="titulo-grupos" aria-roledescription="carrossel">
+      <div class="largura fluxo">
+        <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
+        <p>Passe os grupos para ver as seleções de cada um. A bandeira fica impressa em uma tinta só; no grupo do meio, ela vira figurinha e ganha a cor de verdade.</p>
+        <noscript><p>A lista dos grupos aparece com o JavaScript ligado. No <a href="album.html">álbum</a> eles estão todos.</p></noscript>
+      </div>
+
+      <div class="fluxo" id="carrossel-grupos" hidden>
+        <!-- A janela: mostra um pedaço da faixa. tabindex="0" deixa rolar com as setas do teclado. -->
+        <div class="grupos-janela" id="grupos-janela" tabindex="0" role="group" aria-label="Os 12 grupos, lado a lado">
+          <div class="trilha" id="trilha"></div>
+        </div>
+
+        <div class="largura fluxo">
+          <div class="carrossel-controles">
+            <button class="botao botao-contorno" type="button" id="grupo-anterior">Anterior</button>
+            <!-- role="status": o leitor de tela lê "3 de 12: Grupo C" a cada troca. -->
+            <p class="carrossel-posicao" id="grupo-posicao" role="status"></p>
+            <button class="botao botao-contorno" type="button" id="grupo-proximo">Próximo</button>
           </div>
+          <ol class="carrossel-indicadores" id="grupo-indicadores" aria-label="Ir direto para um grupo"></ol>
         </div>
       </div>
     </section>
@@ -460,7 +474,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- VOO PELAS FIGURINHAS (cena 8). As figurinhas ficam espalhadas em profundidade
+    <!-- VOO PELAS FIGURINHAS (cena 6). As figurinhas ficam espalhadas em profundidade
          e a rolagem leva a câmera por entre elas. -->
     <section class="cena cena-voo" style="--altura: 300vh" aria-labelledby="voo-titulo">
       <div class="cena-palco palco-voo">
@@ -1746,21 +1760,21 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 /* ---------- Tema claro (o padrão) ---------- */
 :root {
   /* Papel */
-  --cor-fundo: #F6CDD7;              /* papel rosa: o fundo da página */
+  --cor-fundo: #FAC3D3;              /* papel rosa: o fundo da página */
   --cor-superficie: #FDF1F4;         /* papel de cupom: cartões e campos */
-  --cor-vaga: #EDB5C3;               /* rosa-sombra: espaço vazio e trilho da barra */
+  --cor-vaga: #F4B1C5;               /* rosa-sombra: espaço vazio e trilho da barra */
 
   /* Os outros papéis. O fundo muda de cor ao longo da página, como as páginas
      coloridas de um álbum. Todos são claros o bastante para a tinta azul. */
-  --cor-papel-2: #FBD9BF;            /* pêssego */
-  --cor-papel-3: #CDEBD8;            /* menta: lembra o gramado */
-  --cor-papel-4: #E1D5F5;            /* lilás */
+  --cor-papel-2: #FFD0A6;            /* pêssego */
+  --cor-papel-3: #B5EBCB;            /* menta: lembra o gramado */
+  --cor-papel-4: #D8C7FB;            /* lilás */
   /* Os papéis dos desenhos recortados e colados no fundo (bola, estádio,
      bandeirinhas...). O realce é o mais claro de todos no tema claro e o mais
      fundo no escuro; o destaque é a cor que não aparece nos outros papéis.
      Um texto pode passar por cima deles: por isso entram na conta do contraste. */
   --cor-papel-realce: #FDF1F4;       /* branco de papel */
-  --cor-papel-destaque: #FFDD66;     /* amarelo */
+  --cor-papel-destaque: #FFD43B;     /* amarelo */
 
   /* Tinta */
   --cor-texto: #14204F;              /* azul-tinteiro: a única tinta da página */
@@ -1805,14 +1819,14 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
 /* ---------- Tema escuro ---------- */
 [data-tema="escuro"] {
-  --cor-fundo: #1B2A80;              /* papel azul */
+  --cor-fundo: #1B2B8C;              /* papel azul */
   --cor-superficie: #25359A;         /* papel azul claro: no escuro, o que está na frente fica mais claro */
   --cor-vaga: #131D4A;               /* rebaixo: mais escuro que a página */
 
   /* Os outros papéis, no escuro: todos fundos o bastante para a tinta rosa */
-  --cor-papel-2: #3A1F87;            /* roxo */
-  --cor-papel-3: #0D3A63;            /* petróleo */
-  --cor-papel-4: #55195A;            /* vinho */
+  --cor-papel-2: #4A1FA6;            /* roxo */
+  --cor-papel-3: #06437A;            /* petróleo */
+  --cor-papel-4: #6E1672;            /* vinho */
   --cor-papel-realce: #131D4A;       /* o mais fundo: o mesmo azul do rebaixo */
   --cor-papel-destaque: #0F4A30;     /* verde fundo, de gramado à noite */
 
@@ -1970,11 +1984,11 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
    entre as duas marcas: mude as cores de papel lá em cima e rode o script) */
 /* FUNDO-INICIO */
 :root {
-  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%23FBD9BF'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%23FBD9BF'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%23FBD9BF'/%3E%3Crect y='744' width='16' height='1080' fill='%23FBD9BF'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%23CDEBD8'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%23CDEBD8'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%23CDEBD8'/%3E%3Crect y='1824' width='16' height='1080' fill='%23CDEBD8'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%23E1D5F5'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%23E1D5F5'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%23E1D5F5'/%3E%3Crect y='2904' width='16' height='1080' fill='%23E1D5F5'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%23F6CDD7'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%23F6CDD7'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%23F6CDD7'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%23F6CDD7'/%3E%3Crect y='3984' width='16' height='416' fill='%23F6CDD7'/%3E%3C/svg%3E");
+  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%23FFD0A6'/%3E%3Crect y='744' width='16' height='1080' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%23B5EBCB'/%3E%3Crect y='1824' width='16' height='1080' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%23D8C7FB'/%3E%3Crect y='2904' width='16' height='1080' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%23FAC3D3'/%3E%3Crect y='3984' width='16' height='416' fill='%23FAC3D3'/%3E%3C/svg%3E");
 }
 
 [data-tema="escuro"] {
-  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%233A1F87'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%233A1F87'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%233A1F87'/%3E%3Crect y='744' width='16' height='1080' fill='%233A1F87'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%230D3A63'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%230D3A63'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%230D3A63'/%3E%3Crect y='1824' width='16' height='1080' fill='%230D3A63'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%2355195A'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%2355195A'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%2355195A'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%2355195A'/%3E%3Crect y='2904' width='16' height='1080' fill='%2355195A'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%231B2A80'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%231B2A80'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%231B2A80'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%231B2A80'/%3E%3Crect y='3984' width='16' height='416' fill='%231B2A80'/%3E%3C/svg%3E");
+  --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%234A1FA6'/%3E%3Crect y='744' width='16' height='1080' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%2306437A'/%3E%3Crect y='1824' width='16' height='1080' fill='%2306437A'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%236E1672'/%3E%3Crect y='2904' width='16' height='1080' fill='%236E1672'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%231B2B8C'/%3E%3Crect y='3984' width='16' height='416' fill='%231B2B8C'/%3E%3C/svg%3E");
 }
 
 /* No alto contraste o fundo é liso: branco ou preto, sem desenho */
@@ -4638,6 +4652,7 @@ html[data-fonte="maior"] { font-size: 125%; }
   animation-delay: 0s !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;   /* sem fila de espera: tudo muda na hora */
   scroll-behavior: auto !important;
 }
 
@@ -4658,6 +4673,7 @@ html[data-fonte="maior"] { font-size: 125%; }
     animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 
@@ -4763,15 +4779,18 @@ html[data-movimento="reduzido"]::view-transition-new(*) {
       O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
       js/cenas-inicio.js, escrevendo "transform" e "opacity" no elemento.
 
+   Este arquivo também guarda duas partes da página inicial que NÃO são cenas
+   presas à rolagem: a frase que acende sozinha e o carrossel dos grupos.
+
    Partes:
    1. A cena e o palco
    2. Abertura: a retícula forma a marca
-   3. A frase acende
+   3. A frase acende (animação, não é cena)
    4. O pacotinho gira e abre
    5. O álbum abre
    6. Mergulho na figurinha
    7. Os números contam
-   8. Os grupos andam para o lado
+   8. O carrossel dos grupos (não é cena)
    9. Voo pelas figurinhas
    ========================================================================== */
 
@@ -5077,20 +5096,38 @@ main:has(> .cena-abertura) {
   stroke-dashoffset: var(--falta, 0);
 }
 
-.com-cenas .frase-caixa {
-  width: 100%;
-  max-width: var(--largura-maxima);
-  padding-inline: var(--espaco-4);
+/* A frase ganha espaço em cima e embaixo: é um respiro entre a abertura e o
+   resto da página */
+.frase-secao {
+  padding-block: clamp(4rem, 14vh, 9rem);
 }
 
-/* Em movimento, a palavra que ainda não acendeu fica com a tinta bem diluída */
-.com-cenas .frase span {
-  transition: color 260ms ease-out;
+/* As palavras acendem uma depois da outra. "--ordem" é a posição da palavra na
+   frase (vem do JavaScript): cada uma espera 110 milésimos de segundo a mais
+   que a anterior. A frase inteira leva menos de 3 segundos. */
+.frase span {
+  transition: color 320ms ease-out;
+  transition-delay: calc(var(--ordem, 0) * 110ms);
 }
 
-.com-cenas .frase span:not(.acesa) {
+/* O sublinhado se desenha depois da última palavra ("--palavras" é quantas são) */
+.frase-traco path {
+  transition: stroke-dashoffset 700ms ease-out;
+  transition-delay: calc(var(--palavras, 0) * 110ms);
+}
+
+/* Antes de aparecer na tela, a frase espera apagada: a tinta bem diluída e o
+   sublinhado por desenhar. Quem põe e tira esta classe é o js/cenas-inicio.js.
+   Sem JavaScript, ou com menos movimento, ela nunca é posta. */
+.frase-apagada .frase span {
   color: var(--cor-vaga);
   color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
+  transition: none;
+}
+
+.frase-apagada .frase-traco path {
+  stroke-dashoffset: 1;
+  transition: none;
 }
 
 /* ---------- 4. O pacotinho gira e abre ---------- */
@@ -5584,22 +5621,47 @@ html:not(.com-cenas) #pagina-base {
   padding-inline: var(--espaco-4);
 }
 
-/* ---------- 8. Os grupos andam para o lado ---------- */
+/* ---------- 8. O carrossel dos grupos ---------- */
 
-/* Parada: os doze grupos em uma grade */
+/* A seção vai de um lado ao outro da tela, para a faixa poder passar das
+   margens. O título e os botões ficam no miolo (classe "largura"). */
+.secao-grupos {
+  border-top: 2px solid var(--cor-texto);
+  padding-block: var(--espaco-6);
+}
+
+/* A janela: mostra um pedaço da faixa e rola para os lados. Cada painel "gruda"
+   no meio dela quando a rolagem para (scroll-snap). A barra de rolagem fica
+   escondida: os botões "Anterior" e "Próximo" fazem esse papel. */
+.grupos-janela {
+  position: relative;   /* os painéis medem a posição deles a partir daqui */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-block: var(--espaco-4);
+}
+
+.grupos-janela::-webkit-scrollbar {
+  display: none;
+}
+
+/* A faixa: os doze grupos em fila. A folga dos lados (metade da janela menos
+   metade de um painel) deixa o primeiro e o último chegarem ao meio. */
 .trilha {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  gap: var(--espaco-6) var(--espaco-5);
+  --grupo-l: min(78vw, 21rem);
+  display: flex;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  width: max-content;
+  padding-inline: calc(50% - var(--grupo-l) / 2);
 }
 
-.trilha-abre {
-  grid-column: 1 / -1;
-}
-
-.trilha-abre p {
-  margin-top: var(--espaco-4);
-  font-size: var(--texto-medio);
+.trilha > .grupo {
+  flex: none;
+  width: var(--grupo-l);
+  scroll-snap-align: center;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .grupo {
@@ -5705,31 +5767,6 @@ html:not(.com-cenas) #pagina-base {
   font-weight: 700;
 }
 
-/* Em movimento: a faixa vira uma fila única, bem mais larga que a tela.
-   A rolagem para baixo empurra a fila para a esquerda. */
-.com-cenas .trilha {
-  position: absolute;
-  top: 0;
-  bottom: 3.25rem;   /* sobra o pé do palco para o aviso "Desça para continuar" */
-  left: 0;
-  display: flex;
-  align-items: center;
-  gap: clamp(2rem, 7vw, 6rem);
-  padding-inline: max(var(--espaco-4), 9vw);
-}
-
-.com-cenas .trilha-abre {
-  flex: none;
-  width: min(78vw, 26rem);
-}
-
-.com-cenas .grupo {
-  flex: none;
-  width: min(78vw, 24rem);
-  padding-top: 0;
-  border-top: 0;
-}
-
 /* ---------- 9. Voo pelas figurinhas ---------- */
 
 /* Parada: só o título e o botão */
@@ -5779,20 +5816,6 @@ html:not(.com-cenas) #pagina-base {
   pointer-events: auto;
 }
 
-/* ---------- Janela não muito alta (notebook, celular pequeno) ----------
-   Com menos de 640 px de altura, cada grupo fica mais estreito. As bandeiras
-   encolhem junto, e o link "Ver o Grupo no álbum" não fica debaixo do aviso
-   "Desça para continuar". */
-@media (max-height: 40rem) {
-  .com-cenas .grupo {
-    width: min(78vw, 16rem);
-  }
-
-  .com-cenas .grupo-letra {
-    font-size: 4.5rem;
-  }
-}
-
 /* ---------- Tela baixa (celular deitado, janela pequena) ----------
    Com menos de 480 px de altura, as peças encolhem para caber no palco. */
 @media (max-height: 30rem) {
@@ -5820,11 +5843,6 @@ html:not(.com-cenas) #pagina-base {
   .com-cenas .pacote-cena {
     --pacote-l: 30vh;
     margin-top: 2.5rem;
-  }
-
-  .com-cenas .frase {
-    max-width: none;
-    font-size: 1.5rem;
   }
 
   .com-cenas .livro {
@@ -5857,23 +5875,6 @@ html:not(.com-cenas) #pagina-base {
   .com-cenas .numero dt {
     font-size: var(--texto-pequeno);
     line-height: 1.25;
-  }
-
-  .com-cenas .grupo {
-    grid-template-columns: auto 1fr;
-    column-gap: var(--espaco-5);
-    width: min(88vw, 34rem);
-  }
-
-  .com-cenas .grupo-letra {
-    font-size: 3.5rem;
-  }
-
-  .com-cenas .grupo-selecoes {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    font-size: var(--texto-pequeno);
   }
 
   .com-cenas .voo {
@@ -8156,94 +8157,237 @@ document.addEventListener('DOMContentLoaded', function () {
 // ============================================================================
 // carrossel.js
 // ----------------------------------------------------------------------------
-// O carrossel das 16 sedes, na página inicial. Mostra uma sede por vez, com a
-// foto do estádio e os dados dela.
+// Os dois carrosséis da página inicial:
+//   1. o das 16 sedes: mostra uma sede por vez, com a foto do estádio;
+//   2. o dos 12 grupos: uma faixa de grupos lado a lado, que anda para os lados.
 //
-// Como é feito para funcionar com teclado e leitor de tela:
+// Como são feitos para funcionar com teclado e leitor de tela:
 //   - botões "Anterior" e "Próxima" de verdade (<button>);
-//   - um botão numerado para cada sede (os indicadores), que leva direto a ela;
+//   - um botão para cada item (os indicadores), que leva direto a ele;
 //   - a posição ("3 de 16: Dallas") fica em um texto com role="status", que o
 //     leitor de tela lê sozinho a cada troca;
-//   - não passa sozinho: só muda quando a pessoa pede.
+//   - não passam sozinhos: só mudam quando a pessoa pede.
 //
-// Depende de: js/dados.js (a lista SEDES).
+// Depende de: js/dados.js (as listas SEDES e SELECOES), js/estado.js
+// (gruposDoAlbum e figurinhasDoGrupo) e js/figurinha.js (criarElemento e
+// movimentoReduzido).
 // ============================================================================
 
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  const carrossel = document.getElementById('carrossel');
-  if (!carrossel) return;
-
-  const indicadores = document.getElementById('sede-indicadores');
-  let atual = 0;   // posição da sede que está na tela (0 é a primeira)
-
-  // Escreve os números com ponto de milhar, do jeito brasileiro: 80824 vira "80.824"
-  function comPonto(numero) {
-    return numero.toLocaleString('pt-BR');
-  }
-
-  // Cria um botão numerado para cada sede
-  SEDES.forEach(function (sede, posicao) {
-    const botao = document.createElement('button');
-    botao.type = 'button';
-    botao.className = 'carrossel-numero';
-    botao.textContent = posicao + 1;
-    botao.setAttribute('aria-label', 'Sede ' + (posicao + 1) + ': ' + sede.cidade);
-    botao.addEventListener('click', function () { mostrar(posicao); });
-
-    const item = document.createElement('li');
-    item.append(botao);
-    indicadores.append(item);
-  });
-
-  // Troca a sede que está na tela
-  function mostrar(posicao) {
-    atual = posicao;
-    const sede = SEDES[atual];
-
-    // Textos
-    document.getElementById('sede-cidade').textContent = sede.cidade;
-    document.getElementById('sede-estadio').textContent = sede.estadio;
-    document.getElementById('sede-pais').textContent = sede.municipio ? sede.municipio + ', ' + sede.pais : sede.pais;
-    document.getElementById('sede-bandeira').src = 'assets/bandeiras/' + sede.bandeira + '.svg';
-    document.getElementById('sede-numeros').textContent = sede.jogos + ' jogos e ' + comPonto(sede.capacidade) + ' lugares';
-    document.getElementById('sede-nome-na-copa').textContent = sede.nomeNaCopa;
-
-    const nota = document.getElementById('sede-nota');
-    nota.textContent = sede.nota;
-    nota.hidden = sede.nota === '';
-
-    // Foto e crédito
-    const foto = document.getElementById('sede-foto');
-    foto.src = 'assets/img/sedes/' + sede.id + '.jpg';
-    foto.alt = sede.foto.alt;
-    const credito = document.getElementById('sede-credito');
-    credito.textContent = 'Foto: ' + sede.foto.autor + ', ' + sede.foto.licenca + ', Wikimedia Commons';
-    credito.href = sede.foto.origem;
-
-    // Posição: lida pelo leitor de tela a cada troca
-    document.getElementById('sede-posicao').textContent = (atual + 1) + ' de ' + SEDES.length + ': ' + sede.cidade;
-
-    // Marca o indicador da sede atual (aria-current diz ao leitor de tela qual é)
-    const botoes = indicadores.querySelectorAll('button');
+  // Marca o indicador do item atual (aria-current diz ao leitor de tela qual é)
+  function marcarIndicador(lista, atual) {
+    const botoes = lista.querySelectorAll('button');
     for (let i = 0; i < botoes.length; i++) {
       if (i === atual) botoes[i].setAttribute('aria-current', 'true');
       else botoes[i].removeAttribute('aria-current');
     }
   }
 
-  // "Anterior" na primeira vai para a última, e "Próxima" na última volta para a primeira
-  document.getElementById('sede-anterior').addEventListener('click', function () {
-    mostrar((atual - 1 + SEDES.length) % SEDES.length);
-  });
+  // -------------------------------------------------------------------------
+  // 1. O carrossel das sedes
+  // -------------------------------------------------------------------------
 
-  document.getElementById('sede-proxima').addEventListener('click', function () {
-    mostrar((atual + 1) % SEDES.length);
-  });
+  function montarCarrosselDasSedes() {
+    const carrossel = document.getElementById('carrossel');
+    if (!carrossel) return;
 
-  carrossel.hidden = false;   // o carrossel só aparece se o JavaScript estiver ligado
-  mostrar(0);
+    const indicadores = document.getElementById('sede-indicadores');
+    let atual = 0;   // posição da sede que está na tela (0 é a primeira)
+
+    // Escreve os números com ponto de milhar, do jeito brasileiro: 80824 vira "80.824"
+    function comPonto(numero) {
+      return numero.toLocaleString('pt-BR');
+    }
+
+    // Cria um botão numerado para cada sede
+    SEDES.forEach(function (sede, posicao) {
+      const botao = document.createElement('button');
+      botao.type = 'button';
+      botao.className = 'carrossel-numero';
+      botao.textContent = posicao + 1;
+      botao.setAttribute('aria-label', 'Sede ' + (posicao + 1) + ': ' + sede.cidade);
+      botao.addEventListener('click', function () { mostrar(posicao); });
+
+      const item = document.createElement('li');
+      item.append(botao);
+      indicadores.append(item);
+    });
+
+    // Troca a sede que está na tela
+    function mostrar(posicao) {
+      atual = posicao;
+      const sede = SEDES[atual];
+
+      // Textos
+      document.getElementById('sede-cidade').textContent = sede.cidade;
+      document.getElementById('sede-estadio').textContent = sede.estadio;
+      document.getElementById('sede-pais').textContent = sede.municipio ? sede.municipio + ', ' + sede.pais : sede.pais;
+      document.getElementById('sede-bandeira').src = 'assets/bandeiras/' + sede.bandeira + '.svg';
+      document.getElementById('sede-numeros').textContent = sede.jogos + ' jogos e ' + comPonto(sede.capacidade) + ' lugares';
+      document.getElementById('sede-nome-na-copa').textContent = sede.nomeNaCopa;
+
+      const nota = document.getElementById('sede-nota');
+      nota.textContent = sede.nota;
+      nota.hidden = sede.nota === '';
+
+      // Foto e crédito
+      const foto = document.getElementById('sede-foto');
+      foto.src = 'assets/img/sedes/' + sede.id + '.jpg';
+      foto.alt = sede.foto.alt;
+      const credito = document.getElementById('sede-credito');
+      credito.textContent = 'Foto: ' + sede.foto.autor + ', ' + sede.foto.licenca + ', Wikimedia Commons';
+      credito.href = sede.foto.origem;
+
+      // Posição: lida pelo leitor de tela a cada troca
+      document.getElementById('sede-posicao').textContent = (atual + 1) + ' de ' + SEDES.length + ': ' + sede.cidade;
+      marcarIndicador(indicadores, atual);
+    }
+
+    // "Anterior" na primeira vai para a última, e "Próxima" na última volta para a primeira
+    document.getElementById('sede-anterior').addEventListener('click', function () {
+      mostrar((atual - 1 + SEDES.length) % SEDES.length);
+    });
+
+    document.getElementById('sede-proxima').addEventListener('click', function () {
+      mostrar((atual + 1) % SEDES.length);
+    });
+
+    carrossel.hidden = false;   // o carrossel só aparece se o JavaScript estiver ligado
+    mostrar(0);
+  }
+
+  // -------------------------------------------------------------------------
+  // 2. O carrossel dos grupos
+  // -------------------------------------------------------------------------
+  // Os doze painéis ficam lado a lado dentro de uma "janela" que rola para os
+  // lados (a rolagem é a do próprio navegador: funciona com o dedo, com o
+  // mouse e com as setas do teclado). Os botões só pedem à janela para rolar
+  // até um painel. O grupo que está no meio da janela é o "atual": as bandeiras
+  // dele deixam de ser impressas em uma tinta só e viram figurinhas coloridas.
+
+  function montarCarrosselDosGrupos() {
+    const carrossel = document.getElementById('carrossel-grupos');
+    if (!carrossel) return;
+
+    const janela = document.getElementById('grupos-janela');
+    const trilha = document.getElementById('trilha');
+    const indicadores = document.getElementById('grupo-indicadores');
+    const posicao = document.getElementById('grupo-posicao');
+    const letras = gruposDoAlbum().sort();
+    let atual = -1;            // o grupo que está no meio da janela
+    let quadroPedido = false;  // já existe uma medição agendada?
+
+    // Um painel por grupo: a letra, as quatro seleções e o link para o álbum
+    const paineis = letras.map(function (letra, i) {
+      const painel = criarElemento('div', 'grupo');
+      painel.setAttribute('role', 'group');
+      painel.setAttribute('aria-roledescription', 'slide');
+      painel.setAttribute('aria-label', 'Grupo ' + letra + ', ' + (i + 1) + ' de ' + letras.length);
+
+      const titulo = document.createElement('h3');
+      titulo.append('Grupo ', criarElemento('span', 'grupo-letra', letra));
+
+      const lista = criarElemento('ul', 'grupo-selecoes');
+      for (const selecao of SELECOES.filter(function (s) { return s.grupo === letra; })) {
+        const item = document.createElement('li');
+        const selo = criarElemento('span', 'selo');
+        const bandeira = document.createElement('img');
+        bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
+        bandeira.alt = '';              // o nome da seleção vem escrito logo abaixo
+        bandeira.loading = 'lazy';      // a imagem só é baixada quando está chegando perto da tela
+        selo.append(bandeira);
+        item.append(selo, selecao.nome);
+        lista.append(item);
+      }
+
+      const figurinhas = figurinhasDoGrupo(letra);
+      const numeros = criarElemento('p', 'grupo-numeros', figurinhas.length + ' figurinhas, da Nº ' + figurinhas[0].numero + ' à Nº ' + figurinhas[figurinhas.length - 1].numero);
+
+      const link = criarElemento('a', '', 'Ver o Grupo ' + letra + ' no álbum');
+      link.href = 'album.html#titulo-grupo-' + letra;
+
+      painel.append(titulo, lista, numeros, link);
+      trilha.append(painel);
+
+      // O indicador deste grupo: um botão com a letra
+      const botao = criarElemento('button', 'carrossel-numero', letra);
+      botao.type = 'button';
+      botao.setAttribute('aria-label', 'Grupo ' + letra);
+      botao.addEventListener('click', function () { irPara(i); });
+      const item = document.createElement('li');
+      item.append(botao);
+      indicadores.append(item);
+
+      return painel;
+    });
+
+    // Onde a janela precisa estar para o painel i ficar bem no meio dela
+    function lugarDoPainel(i) {
+      return paineis[i].offsetLeft + paineis[i].offsetWidth / 2 - janela.clientWidth / 2;
+    }
+
+    // Rola a janela até o painel i. Com menos movimento, vai de uma vez.
+    function irPara(i) {
+      janela.scrollTo({ left: lugarDoPainel(i), behavior: movimentoReduzido() ? 'auto' : 'smooth' });
+    }
+
+    // Olha onde a rolagem está e arruma cada painel. "--f" vai de 0 (longe do
+    // meio da janela) a 1 (bem no meio): é ele que o CSS usa para dar cor à
+    // bandeira (ver ".selo", em css/cenas.css).
+    function medir() {
+      quadroPedido = false;
+      const meio = janela.scrollLeft + janela.clientWidth / 2;
+      const alcance = paineis[0].offsetWidth * 0.9;
+      let maisPerto = 0;
+      let menorDistancia = Infinity;
+
+      paineis.forEach(function (painel, i) {
+        const distancia = Math.abs(painel.offsetLeft + painel.offsetWidth / 2 - meio);
+        const perto = Math.min(1, Math.max(0, 1 - distancia / alcance));
+        const foco = perto * perto * (3 - 2 * perto);   // arranca e freia com suavidade
+        painel.style.setProperty('--f', foco.toFixed(3));
+        painel.classList.toggle('grupo-colado', foco > 0.55);
+        if (distancia < menorDistancia) {
+          menorDistancia = distancia;
+          maisPerto = i;
+        }
+      });
+
+      // Mudou o grupo do meio: atualiza o texto da posição e o indicador
+      if (maisPerto !== atual) {
+        atual = maisPerto;
+        posicao.textContent = (atual + 1) + ' de ' + letras.length + ': Grupo ' + letras[atual];
+        marcarIndicador(indicadores, atual);
+      }
+    }
+
+    // A rolagem dispara muitos avisos por segundo: mede no máximo uma vez por quadro
+    function pedirMedida() {
+      if (quadroPedido) return;
+      quadroPedido = true;
+      requestAnimationFrame(medir);
+    }
+    janela.addEventListener('scroll', pedirMedida, { passive: true });
+    window.addEventListener('resize', pedirMedida);
+
+    // "Anterior" no primeiro vai para o último, e "Próximo" no último volta para o primeiro
+    document.getElementById('grupo-anterior').addEventListener('click', function () {
+      irPara((atual - 1 + letras.length) % letras.length);
+    });
+
+    document.getElementById('grupo-proximo').addEventListener('click', function () {
+      irPara((atual + 1) % letras.length);
+    });
+
+    carrossel.hidden = false;   // o carrossel só aparece se o JavaScript estiver ligado
+    janela.scrollLeft = lugarDoPainel(0);
+    medir();
+  }
+
+  montarCarrosselDasSedes();
+  montarCarrosselDosGrupos();
 });
 ````
 
@@ -8530,7 +8674,7 @@ function comecarCenas() {
 // ============================================================================
 // cenas-inicio.js
 // ----------------------------------------------------------------------------
-// As oito cenas da página inicial. Cada uma é registrada no motor
+// As seis cenas da página inicial. Cada uma é registrada no motor
 // (js/cenas.js) com três funções:
 //   medir()             mede o que depende do tamanho da tela;
 //   desenhar(p, agora)  põe as peças no lugar para o progresso p, de 0 a 1;
@@ -8538,13 +8682,15 @@ function comecarCenas() {
 //
 // As cenas, na ordem em que aparecem na página:
 //   1. Abertura: a retícula forma a marca (partículas em canvas)
-//   2. A frase acende (texto preso à rolagem)
-//   3. O pacotinho gira e abre (3D em CSS)
-//   4. O álbum abre (livro 3D em CSS)
-//   5. Mergulho na figurinha (zoom que atravessa)
-//   6. Os números contam (contador preso à rolagem)
-//   7. Os grupos andam para o lado (rolagem horizontal)
-//   8. Voo pelas figurinhas (câmera em profundidade)
+//   2. O pacotinho gira e abre (3D em CSS)
+//   3. O álbum abre (livro 3D em CSS)
+//   4. Mergulho na figurinha (zoom que atravessa)
+//   5. Os números contam (contador preso à rolagem)
+//   6. Voo pelas figurinhas (câmera em profundidade)
+//
+// Este arquivo também cuida da frase que acende sozinha, logo depois da
+// abertura. Ela não é uma cena: é uma animação que toca quando aparece na tela.
+// Os 12 grupos ficam em um carrossel (js/carrossel.js).
 //
 // Depende de: js/dados.js, js/estado.js, js/figurinha.js e js/cenas.js.
 // ============================================================================
@@ -8849,37 +8995,44 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 2. A frase acende
+  // A frase acende sozinha (não é uma cena presa à rolagem)
   // -------------------------------------------------------------------------
+  // Quando a frase aparece na tela, a classe "frase-apagada" sai e o CSS acende
+  // as palavras uma depois da outra (cada uma espera um pouco mais que a
+  // anterior). Acontece uma vez só. Com menos movimento, a frase nunca fica
+  // apagada.
 
+  const secaoDaFrase = document.getElementById('frase-secao');
   const frase = document.getElementById('frase');
-  const tracoDaFrase = document.getElementById('frase-traco');
-  // A frase é desmontada em palavras: cada uma vira um <span> para poder acender sozinha
-  const palavras = frase.textContent.trim().split(/\s+/).map(function (texto) {
-    return criarElemento('span', '', texto);
-  });
+  // A frase é desmontada em palavras: cada uma vira um <span> para poder acender
+  // sozinha. "--ordem" diz ao CSS a posição dela na fila.
+  const palavras = frase.textContent.trim().split(/\s+/);
   frase.textContent = '';
-  palavras.forEach(function (palavra, i) {
+  palavras.forEach(function (texto, i) {
+    const palavra = criarElemento('span', '', texto);
+    palavra.style.setProperty('--ordem', i);
     frase.append(palavra);
     if (i < palavras.length - 1) frase.append(' ');
   });
+  secaoDaFrase.style.setProperty('--palavras', palavras.length);
 
-  registrarCena(document.querySelector('.cena-frase'), {
-    desenhar: function (p) {
-      palavras.forEach(function (palavra, i) {
-        // A primeira palavra acende com 6% da cena; a última, com 76%
-        palavra.classList.toggle('acesa', p > 0.06 + (i / palavras.length) * 0.7);
-      });
-      tracoDaFrase.style.setProperty('--falta', (1 - trecho(0.8, 0.96, p)).toFixed(3));
-    },
-
-    parar: function () {
-      tracoDaFrase.style.removeProperty('--falta');   // o sublinhado aparece pronto
-    },
-  });
+  if (!movimentoReduzido() && 'IntersectionObserver' in window) {
+    secaoDaFrase.classList.add('frase-apagada');
+    // O vigia avisa quando pelo menos 40% da frase está dentro da tela
+    const vigiaDaFrase = new IntersectionObserver(function (entradas) {
+      if (!entradas[0].isIntersecting) return;
+      secaoDaFrase.classList.remove('frase-apagada');
+      vigiaDaFrase.disconnect();   // acende uma vez só
+    }, { threshold: 0.4 });
+    vigiaDaFrase.observe(frase);
+    // Se a pessoa ligar "Reduzir animações" antes de chegar aqui, a frase acende de vez
+    new MutationObserver(function () {
+      if (movimentoReduzido()) secaoDaFrase.classList.remove('frase-apagada');
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-movimento'] });
+  }
 
   // -------------------------------------------------------------------------
-  // 3. O pacotinho gira e abre
+  // 2. O pacotinho gira e abre
   // -------------------------------------------------------------------------
   // O pacotinho aparece de dois jeitos, com a mesma coreografia:
   //   - a sequência de quadros: 90 imagens de um pacotinho 3D, já prontas em
@@ -9019,7 +9172,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 4. O álbum abre
+  // 3. O álbum abre
   // -------------------------------------------------------------------------
 
   const livro = document.getElementById('livro');
@@ -9107,7 +9260,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 5. Mergulho na figurinha
+  // 4. Mergulho na figurinha
   // -------------------------------------------------------------------------
 
   const mergulho = document.getElementById('mergulho');
@@ -9169,7 +9322,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 6. Os números contam
+  // 5. Os números contam
   // -------------------------------------------------------------------------
 
   // Os valores vêm dos dados do site, na mesma ordem das casas do HTML:
@@ -9215,102 +9368,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 7. Os grupos andam para o lado
-  // -------------------------------------------------------------------------
-
-  const trilha = document.getElementById('trilha');
-  const palcoDaTrilha = trilha.parentElement;
-
-  // Um painel por grupo: a letra, as quatro seleções e o link para o álbum
-  const paineis = gruposDoAlbum().sort().map(function (letra) {
-    const painel = criarElemento('div', 'grupo');
-
-    const titulo = document.createElement('h3');
-    titulo.append('Grupo ', criarElemento('span', 'grupo-letra', letra));
-
-    const lista = criarElemento('ul', 'grupo-selecoes');
-    for (const selecao of SELECOES.filter(function (s) { return s.grupo === letra; })) {
-      const item = document.createElement('li');
-      const selo = criarElemento('span', 'selo');
-      const bandeira = document.createElement('img');
-      bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
-      bandeira.alt = '';              // o nome da seleção vem escrito logo abaixo
-      bandeira.loading = 'lazy';      // a imagem só é baixada quando está chegando perto da tela
-      selo.append(bandeira);
-      item.append(selo, selecao.nome);
-      lista.append(item);
-    }
-
-    const figurinhas = figurinhasDoGrupo(letra);
-    const numeros = criarElemento('p', 'grupo-numeros', figurinhas.length + ' figurinhas, da Nº ' + figurinhas[0].numero + ' à Nº ' + figurinhas[figurinhas.length - 1].numero);
-
-    const link = criarElemento('a', '', 'Ver o Grupo ' + letra + ' no álbum');
-    link.href = 'album.html#titulo-grupo-' + letra;
-
-    painel.append(titulo, lista, numeros, link);
-    trilha.append(painel);
-    return { elemento: painel, centro: 0, foco: -1 };
-  });
-  let sobraDaTrilha = 0;
-  let larguraDoPalcoDaTrilha = 0;
-
-  const cenaDosGrupos = registrarCena(document.querySelector('.cena-grupos'), {
-    medir: function () {
-      larguraDoPalcoDaTrilha = palcoDaTrilha.clientWidth;
-      sobraDaTrilha = Math.max(0, trilha.scrollWidth - larguraDoPalcoDaTrilha);   // o quanto a faixa passa da tela
-      for (const painel of paineis) {
-        painel.centro = painel.elemento.offsetLeft + painel.elemento.offsetWidth / 2;
-        painel.foco = -1;
-      }
-    },
-
-    desenhar: function (p) {
-      // A rolagem para baixo vira deslocamento para a esquerda
-      const deslocamento = limitar((p - 0.04) / 0.92) * sobraDaTrilha;
-      trilha.style.transform = 'translate3d(' + (-deslocamento).toFixed(1) + 'px, 0, 0)';
-
-      const meio = larguraDoPalcoDaTrilha / 2;
-      for (const painel of paineis) {
-        // A que distância este grupo está do meio da tela? 1 = bem no meio
-        const perto = limitar(1 - Math.abs(painel.centro - deslocamento - meio) / (larguraDoPalcoDaTrilha * 0.42));
-        const foco = Number((perto * perto * (3 - 2 * perto)).toFixed(3));
-        if (foco === painel.foco) continue;
-        painel.foco = foco;
-        painel.elemento.style.setProperty('--f', foco);
-        painel.elemento.classList.toggle('grupo-colado', foco > 0.55);
-      }
-    },
-
-    parar: function () {
-      trilha.removeAttribute('style');
-      for (const painel of paineis) {
-        painel.elemento.removeAttribute('style');
-        painel.elemento.classList.add('grupo-colado');   // parados, todos já são figurinha
-        painel.foco = -1;
-      }
-    },
-  });
-
-  // Teclado: quando um link de um grupo recebe o foco, a rolagem leva a faixa
-  // até esse grupo. Sem isto, o foco poderia cair em um link fora da tela.
-  trilha.addEventListener('focusin', function (evento) {
-    if (!cenasEmMovimento) return;
-    const painel = paineis.find(function (item) { return item.elemento.contains(evento.target); });
-    if (!painel || sobraDaTrilha === 0) return;
-    const deslocamento = limitar((painel.centro - larguraDoPalcoDaTrilha / 2) / sobraDaTrilha) * sobraDaTrilha;
-    const p = 0.04 + 0.92 * deslocamento / sobraDaTrilha;
-    focarNaCena(cenaDosGrupos, p);
-  });
-
-  // Ao dar o foco, o navegador pode tentar rolar o palco para o lado por conta
-  // própria. Quem move a faixa é só a cena: o palco volta para o lugar.
-  palcoDaTrilha.addEventListener('scroll', function () {
-    palcoDaTrilha.scrollLeft = 0;
-    palcoDaTrilha.scrollTop = 0;
-  });
-
-  // -------------------------------------------------------------------------
-  // 8. Voo pelas figurinhas
+  // 6. Voo pelas figurinhas
   // -------------------------------------------------------------------------
 
   const voo = document.getElementById('voo');

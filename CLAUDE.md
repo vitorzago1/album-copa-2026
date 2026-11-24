@@ -38,7 +38,7 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
 ## Design: direção "Uma tinta só, vários papéis"
 
 - A página é impressa em uma tinta só: tinta azul no tema claro, tinta rosa no escuro. A cor viva só chega pelas figurinhas.
-- O papel do fundo muda ao longo da página (pedido do Vitor em 22/11/2026): quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula. Fica tudo no `body::before` (`css/base.css`). No alto contraste o fundo é liso.
+- O papel do fundo muda ao longo da página (pedido do Vitor em 22/11/2026; cores deixadas mais vivas a pedido dele em 23/11/2026): quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula. Fica tudo no `body::before` (`css/base.css`). No alto contraste o fundo é liso.
 - Por cima dos papéis há uma colagem de papel recortado (estádio, bola, bandeirinhas, figurinhas...), grão e manchas de papel. O Vitor pediu isso em 22/11/2026 porque só cores ficava "seco e artificial": ele quer detalhes e imagens no fundo. Os desenhos são próprios, feitos por código no `scripts/gerar-fundo.js`, e só usam as cores de papel do `css/tokens.css` (os quatro papéis, o realce e o destaque), todas conferidas no contraste. Foto no fundo foi testada e não funcionou.
 - Ao mudar uma cor de papel em `css/tokens.css` ou um desenho da colagem: rodar `node scripts/gerar-fundo.js` (redesenha o fundo) e depois `node scripts/contraste.js`.
 - Na abertura da página inicial, em movimento, o convite fica centralizado e os pontinhos contornam o texto (pedido do Vitor em 22/11/2026).
@@ -48,7 +48,7 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
 - Linha tracejada significa picote ("dá para destacar").
 - Nada de emoji no lugar de ícone, rótulos em caixa-alta, seta no fim de botão ou cards todos iguais.
 - A figurinha é numerada em sequência ("Nº 127"). Não usar código de três letras mais número.
-- Movimento: a página inicial é uma apresentação em cenas presas à rolagem (decisão do Vitor em 21/11/2026, depois dos dois laboratórios). Nas outras páginas, o movimento só responde a uma ação da pessoa. Toda cena tem uma versão parada, usada com menos movimento, com letra maior e sem JavaScript. Toda cena em movimento mostra o aviso "Desça para continuar", criado pelo `js/cenas.js` (pedido do Vitor em 22/11/2026).
+- Movimento: a página inicial é uma apresentação em seis cenas presas à rolagem (decisão do Vitor em 21/11/2026, depois dos dois laboratórios). Em 23/11/2026 ele pediu para tirar duas cenas: a frase "São 48 seleções..." virou uma animação que toca sozinha ao aparecer, e os 12 grupos viraram um carrossel. Ele não quer ter que descer a página para ver um texto ou uma lista. Nas outras páginas, o movimento só responde a uma ação da pessoa. Toda cena tem uma versão parada, usada com menos movimento, com letra maior e sem JavaScript. Toda cena em movimento mostra o aviso "Desça para continuar", criado pelo `js/cenas.js` (pedido do Vitor em 22/11/2026).
 - Efeitos escolhidos pelo Vitor no laboratório 1 e já aplicados (etapa 12): lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque, virar a página, entrar ao rolar, placar girando, retícula que acende e traço que se desenha. As outras ideias do laboratório (incluindo as texturas de fundo de lá) não foram escolhidas: não aplicar. O fundo com vários papéis não veio do laboratório; foi um pedido à parte.
 
 ## Conteúdo e direitos
