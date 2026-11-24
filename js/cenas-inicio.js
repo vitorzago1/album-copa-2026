@@ -47,6 +47,43 @@ document.addEventListener('DOMContentLoaded', function () {
   let ultimoGesto = performance.now();   // a última vez em que a pessoa rolou ou mexeu o mouse
   let medidasDaReticula = '';            // as medidas usadas na última montagem
 
+  // Os pontinhos chegam perto do convite, mas não passam por trás do texto.
+  const FOLGA_DO_TEXTO = 14;      // a menos de 14 px do texto não há pontinho
+  const CHEGADA_AO_TEXTO = 110;   // de 14 a 110 px, o pontinho vai crescendo até o tamanho normal
+
+  // Onde está cada peça do convite, medida a partir do canto da tela de desenho:
+  // uma caixa para cada linha do título (a de baixo é mais curta que a de cima),
+  // uma para cada botão e uma para o aviso de descer.
+  function caixasDoConvite() {
+    if (!cenasEmMovimento) return [];
+    const origem = convite.getBoundingClientRect();
+    const linhasDoTitulo = document.createRange();
+    linhasDoTitulo.selectNodeContents(convite.querySelector('h1'));
+    const pecas = Array.from(linhasDoTitulo.getClientRects());
+    for (const peca of convite.querySelectorAll('.botao, .rolar-dica')) pecas.push(peca.getBoundingClientRect());
+
+    const caixas = [];
+    for (const peca of pecas) {
+      if (peca.width === 0 || peca.height === 0) continue;   // peça escondida
+      // A posição dentro do convite, somada ao lugar do convite no palco
+      const esquerda = Math.round(peca.left - origem.left + convite.offsetLeft);
+      const topo = Math.round(peca.top - origem.top + convite.offsetTop);
+      caixas.push({ esquerda: esquerda, topo: topo, direita: esquerda + Math.round(peca.width), base: topo + Math.round(peca.height) });
+    }
+    return caixas;
+  }
+
+  // A distância de um ponto até a caixa mais próxima (0 se ele está dentro de uma)
+  function distanciaAteAsCaixas(x, y, caixas) {
+    let menor = Infinity;
+    for (const caixa of caixas) {
+      const dx = Math.max(caixa.esquerda - x, 0, x - caixa.direita);
+      const dy = Math.max(caixa.topo - y, 0, y - caixa.base);
+      menor = Math.min(menor, Math.hypot(dx, dy));
+    }
+    return menor;
+  }
+
   function montarReticula() {
     // Ao abrir a página, o cabeçalho ainda está em cima do palco. O CSS usa a
     // altura dele (a distância do topo da página até a cena) para subir o
@@ -63,7 +100,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // da tela, a cor, o modo, a fonte, o tamanho do convite), fica a que já existe.
     // No celular isso acontece toda hora: a barra de endereço some e volta.
     const fonteChegou = !document.fonts || document.fonts.check('900 100px "Londrina Solid"');
-    const medidas = [largura, altura, tinta, cenasEmMovimento, fonteChegou, convite.offsetWidth, convite.offsetHeight].join('|');
+    const caixas = caixasDoConvite();
+    const medidas = [largura, altura, tinta, cenasEmMovimento, fonteChegou, JSON.stringify(caixas)].join('|');
     if (medidas === medidasDaReticula) return;
     medidasDaReticula = medidas;
 
@@ -121,23 +159,24 @@ document.addEventListener('DOMContentLoaded', function () {
     if (quantos === 0) return;
 
     // c) Os lugares soltos: uma retícula comum, cobrindo o palco inteiro, com
-    //    (quase) a mesma quantidade de pontos. Ela deixa uma janela em volta
-    //    do convite, para nenhum pontinho passar por trás do texto.
-    const janela = {
-      esquerda: convite.offsetLeft - 16,
-      direita: convite.offsetLeft + convite.offsetWidth + 16,
-      topo: convite.offsetTop - 16,
-      base: convite.offsetTop + convite.offsetHeight + 16,
-    };
-    const areaDaJanela = cenasEmMovimento ? (janela.direita - janela.esquerda) * (janela.base - janela.topo) : 0;
-    const areaLivre = Math.max(largura * altura * 0.3, largura * altura - areaDaJanela);
+    //    (quase) a mesma quantidade de pontos. Ela contorna cada linha do
+    //    convite: nenhum pontinho passa por trás do texto, e os que ficam
+    //    perto dele são menores, como um degradê de impressão.
+    let areaDoTexto = 0;
+    for (const caixa of caixas) {
+      areaDoTexto += (caixa.direita - caixa.esquerda + FOLGA_DO_TEXTO * 2) * (caixa.base - caixa.topo + FOLGA_DO_TEXTO * 2);
+    }
+    const areaLivre = Math.max(largura * altura * 0.3, largura * altura - areaDoTexto);
     vaoSolto = Math.sqrt(areaLivre / (quantos * 0.866)) * 0.98;
     let soltos = [];
     linha = 0;
     for (let y = vaoSolto / 2; y < altura; y += vaoSolto * 0.866) {
       for (let x = (linha % 2) * vaoSolto / 2; x < largura; x += vaoSolto) {
-        const naJanela = cenasEmMovimento && x > janela.esquerda && x < janela.direita && y > janela.topo && y < janela.base;
-        if (!naJanela) soltos.push({ x: x, y: y });
+        const distancia = distanciaAteAsCaixas(x, y, caixas);
+        if (distancia < FOLGA_DO_TEXTO) continue;
+        // "tamanho" vai de 0.35 (colado no texto) a 1 (longe dele)
+        const tamanho = misturar(0.35, 1, limitar((distancia - FOLGA_DO_TEXTO) / (CHEGADA_AO_TEXTO - FOLGA_DO_TEXTO)));
+        soltos.push({ x: x, y: y, tamanho: tamanho });
       }
       linha += 1;
     }
@@ -174,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const descida = (fim.y - topo) / Math.max(1, base - topo);
       return {
         xSolto: solto.x, ySolto: solto.y,
+        tamanhoSolto: solto.tamanho,
         xFim: fim.x, yFim: fim.y,
         raioFim: passo * misturar(0.3, 0.57, descida),
         // Quem está mais perto do meio chega primeiro
@@ -202,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const curva = Math.sin(e * Math.PI) * 0.2;
       let x = ponto.xSolto + dx * e - dy * curva;
       let y = ponto.ySolto + dy * e + dx * curva;
-      let raio = misturar(raioSolto, ponto.raioFim, e);
+      let raio = misturar(raioSolto * ponto.tamanhoSolto, ponto.raioFim, e);
 
       if (falta > 0.01) {
         // Enquanto está solto, o pontinho balança de leve...

@@ -245,8 +245,8 @@ main:has(> .cena-abertura) {
   }
 }
 
-/* Em movimento: o desenho cobre o palco inteiro e o convite fica embaixo,
-   à esquerda, como em um cartaz */
+/* Em movimento: o desenho cobre o palco inteiro e o convite fica no meio,
+   com os pontinhos em volta, como em um cartaz */
 .com-cenas .cena-abertura .cena-palco {
   display: block;
 }
@@ -258,19 +258,37 @@ main:has(> .cena-abertura) {
   aspect-ratio: auto;
 }
 
+/* O convite fica no meio do palco, nos dois sentidos. A receita: prender os
+   quatro lados, dar à caixa o tamanho do conteúdo (fit-content) e deixar as
+   margens em "auto": o navegador divide a sobra por igual. */
 .com-cenas .abertura-convite {
   position: absolute;
   z-index: 2;
-  left: max(var(--espaco-4), 6vw);
-  right: max(var(--espaco-4), 6vw);
+  left: 0;
+  right: 0;
+  top: 0;
   /* A folga de baixo é a altura do cabeçalho ("--cabecalho" vem do JavaScript):
-     assim o convite aparece inteiro na primeira tela, com o cabeçalho ainda em cima */
-  bottom: max(calc(var(--cabecalho, 5rem) + 1.5rem), 12vh);
-  max-width: 46rem;
+     assim o meio do convite é o meio do que se vê na primeira tela, com o
+     cabeçalho ainda em cima */
+  bottom: var(--cabecalho, 5rem);
+  width: fit-content;
+  height: fit-content;
+  max-width: min(46rem, 100% - 2 * var(--espaco-4));
+  margin: auto;
+  text-align: center;
 }
 
 .com-cenas .abertura-convite h1 {
   font-size: clamp(3rem, 1.25rem + 7.5vw, 7rem);
+}
+
+/* Os botões e o aviso de descer são parágrafos, e parágrafo tem largura máxima
+   de leitura (ver base.css). Aqui eles ocupam a largura toda do convite, para
+   o meio deles ser o meio da tela. */
+.com-cenas .abertura-botoes,
+.com-cenas .rolar-dica {
+  max-width: none;
+  justify-content: center;
 }
 
 .com-cenas .abertura-assinatura {
@@ -1037,10 +1055,6 @@ html:not(.com-cenas) #pagina-base {
 
   .com-cenas .cena-titulo {
     top: 0.75rem;
-  }
-
-  .com-cenas .abertura-convite {
-    bottom: calc(var(--cabecalho, 4rem) + 0.5rem);
   }
 
   .com-cenas .abertura-convite h1 {
