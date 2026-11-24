@@ -15,15 +15,18 @@
       O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
       js/cenas-inicio.js, escrevendo "transform" e "opacity" no elemento.
 
+   Este arquivo também guarda duas partes da página inicial que NÃO são cenas
+   presas à rolagem: a frase que acende sozinha e o carrossel dos grupos.
+
    Partes:
    1. A cena e o palco
    2. Abertura: a retícula forma a marca
-   3. A frase acende
+   3. A frase acende (animação, não é cena)
    4. O pacotinho gira e abre
    5. O álbum abre
    6. Mergulho na figurinha
    7. Os números contam
-   8. Os grupos andam para o lado
+   8. O carrossel dos grupos (não é cena)
    9. Voo pelas figurinhas
    ========================================================================== */
 
@@ -329,20 +332,38 @@ main:has(> .cena-abertura) {
   stroke-dashoffset: var(--falta, 0);
 }
 
-.com-cenas .frase-caixa {
-  width: 100%;
-  max-width: var(--largura-maxima);
-  padding-inline: var(--espaco-4);
+/* A frase ganha espaço em cima e embaixo: é um respiro entre a abertura e o
+   resto da página */
+.frase-secao {
+  padding-block: clamp(4rem, 14vh, 9rem);
 }
 
-/* Em movimento, a palavra que ainda não acendeu fica com a tinta bem diluída */
-.com-cenas .frase span {
-  transition: color 260ms ease-out;
+/* As palavras acendem uma depois da outra. "--ordem" é a posição da palavra na
+   frase (vem do JavaScript): cada uma espera 110 milésimos de segundo a mais
+   que a anterior. A frase inteira leva menos de 3 segundos. */
+.frase span {
+  transition: color 320ms ease-out;
+  transition-delay: calc(var(--ordem, 0) * 110ms);
 }
 
-.com-cenas .frase span:not(.acesa) {
+/* O sublinhado se desenha depois da última palavra ("--palavras" é quantas são) */
+.frase-traco path {
+  transition: stroke-dashoffset 700ms ease-out;
+  transition-delay: calc(var(--palavras, 0) * 110ms);
+}
+
+/* Antes de aparecer na tela, a frase espera apagada: a tinta bem diluída e o
+   sublinhado por desenhar. Quem põe e tira esta classe é o js/cenas-inicio.js.
+   Sem JavaScript, ou com menos movimento, ela nunca é posta. */
+.frase-apagada .frase span {
   color: var(--cor-vaga);
   color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
+  transition: none;
+}
+
+.frase-apagada .frase-traco path {
+  stroke-dashoffset: 1;
+  transition: none;
 }
 
 /* ---------- 4. O pacotinho gira e abre ---------- */
@@ -836,22 +857,47 @@ html:not(.com-cenas) #pagina-base {
   padding-inline: var(--espaco-4);
 }
 
-/* ---------- 8. Os grupos andam para o lado ---------- */
+/* ---------- 8. O carrossel dos grupos ---------- */
 
-/* Parada: os doze grupos em uma grade */
+/* A seção vai de um lado ao outro da tela, para a faixa poder passar das
+   margens. O título e os botões ficam no miolo (classe "largura"). */
+.secao-grupos {
+  border-top: 2px solid var(--cor-texto);
+  padding-block: var(--espaco-6);
+}
+
+/* A janela: mostra um pedaço da faixa e rola para os lados. Cada painel "gruda"
+   no meio dela quando a rolagem para (scroll-snap). A barra de rolagem fica
+   escondida: os botões "Anterior" e "Próximo" fazem esse papel. */
+.grupos-janela {
+  position: relative;   /* os painéis medem a posição deles a partir daqui */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-block: var(--espaco-4);
+}
+
+.grupos-janela::-webkit-scrollbar {
+  display: none;
+}
+
+/* A faixa: os doze grupos em fila. A folga dos lados (metade da janela menos
+   metade de um painel) deixa o primeiro e o último chegarem ao meio. */
 .trilha {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  gap: var(--espaco-6) var(--espaco-5);
+  --grupo-l: min(78vw, 21rem);
+  display: flex;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  width: max-content;
+  padding-inline: calc(50% - var(--grupo-l) / 2);
 }
 
-.trilha-abre {
-  grid-column: 1 / -1;
-}
-
-.trilha-abre p {
-  margin-top: var(--espaco-4);
-  font-size: var(--texto-medio);
+.trilha > .grupo {
+  flex: none;
+  width: var(--grupo-l);
+  scroll-snap-align: center;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .grupo {
@@ -957,31 +1003,6 @@ html:not(.com-cenas) #pagina-base {
   font-weight: 700;
 }
 
-/* Em movimento: a faixa vira uma fila única, bem mais larga que a tela.
-   A rolagem para baixo empurra a fila para a esquerda. */
-.com-cenas .trilha {
-  position: absolute;
-  top: 0;
-  bottom: 3.25rem;   /* sobra o pé do palco para o aviso "Desça para continuar" */
-  left: 0;
-  display: flex;
-  align-items: center;
-  gap: clamp(2rem, 7vw, 6rem);
-  padding-inline: max(var(--espaco-4), 9vw);
-}
-
-.com-cenas .trilha-abre {
-  flex: none;
-  width: min(78vw, 26rem);
-}
-
-.com-cenas .grupo {
-  flex: none;
-  width: min(78vw, 24rem);
-  padding-top: 0;
-  border-top: 0;
-}
-
 /* ---------- 9. Voo pelas figurinhas ---------- */
 
 /* Parada: só o título e o botão */
@@ -1031,20 +1052,6 @@ html:not(.com-cenas) #pagina-base {
   pointer-events: auto;
 }
 
-/* ---------- Janela não muito alta (notebook, celular pequeno) ----------
-   Com menos de 640 px de altura, cada grupo fica mais estreito. As bandeiras
-   encolhem junto, e o link "Ver o Grupo no álbum" não fica debaixo do aviso
-   "Desça para continuar". */
-@media (max-height: 40rem) {
-  .com-cenas .grupo {
-    width: min(78vw, 16rem);
-  }
-
-  .com-cenas .grupo-letra {
-    font-size: 4.5rem;
-  }
-}
-
 /* ---------- Tela baixa (celular deitado, janela pequena) ----------
    Com menos de 480 px de altura, as peças encolhem para caber no palco. */
 @media (max-height: 30rem) {
@@ -1072,11 +1079,6 @@ html:not(.com-cenas) #pagina-base {
   .com-cenas .pacote-cena {
     --pacote-l: 30vh;
     margin-top: 2.5rem;
-  }
-
-  .com-cenas .frase {
-    max-width: none;
-    font-size: 1.5rem;
   }
 
   .com-cenas .livro {
@@ -1109,23 +1111,6 @@ html:not(.com-cenas) #pagina-base {
   .com-cenas .numero dt {
     font-size: var(--texto-pequeno);
     line-height: 1.25;
-  }
-
-  .com-cenas .grupo {
-    grid-template-columns: auto 1fr;
-    column-gap: var(--espaco-5);
-    width: min(88vw, 34rem);
-  }
-
-  .com-cenas .grupo-letra {
-    font-size: 3.5rem;
-  }
-
-  .com-cenas .grupo-selecoes {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    font-size: var(--texto-pequeno);
   }
 
   .com-cenas .voo {

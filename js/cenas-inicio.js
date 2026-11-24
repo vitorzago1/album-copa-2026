@@ -1,7 +1,7 @@
 // ============================================================================
 // cenas-inicio.js
 // ----------------------------------------------------------------------------
-// As oito cenas da página inicial. Cada uma é registrada no motor
+// As seis cenas da página inicial. Cada uma é registrada no motor
 // (js/cenas.js) com três funções:
 //   medir()             mede o que depende do tamanho da tela;
 //   desenhar(p, agora)  põe as peças no lugar para o progresso p, de 0 a 1;
@@ -9,13 +9,15 @@
 //
 // As cenas, na ordem em que aparecem na página:
 //   1. Abertura: a retícula forma a marca (partículas em canvas)
-//   2. A frase acende (texto preso à rolagem)
-//   3. O pacotinho gira e abre (3D em CSS)
-//   4. O álbum abre (livro 3D em CSS)
-//   5. Mergulho na figurinha (zoom que atravessa)
-//   6. Os números contam (contador preso à rolagem)
-//   7. Os grupos andam para o lado (rolagem horizontal)
-//   8. Voo pelas figurinhas (câmera em profundidade)
+//   2. O pacotinho gira e abre (3D em CSS)
+//   3. O álbum abre (livro 3D em CSS)
+//   4. Mergulho na figurinha (zoom que atravessa)
+//   5. Os números contam (contador preso à rolagem)
+//   6. Voo pelas figurinhas (câmera em profundidade)
+//
+// Este arquivo também cuida da frase que acende sozinha, logo depois da
+// abertura. Ela não é uma cena: é uma animação que toca quando aparece na tela.
+// Os 12 grupos ficam em um carrossel (js/carrossel.js).
 //
 // Depende de: js/dados.js, js/estado.js, js/figurinha.js e js/cenas.js.
 // ============================================================================
@@ -320,37 +322,44 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 2. A frase acende
+  // A frase acende sozinha (não é uma cena presa à rolagem)
   // -------------------------------------------------------------------------
+  // Quando a frase aparece na tela, a classe "frase-apagada" sai e o CSS acende
+  // as palavras uma depois da outra (cada uma espera um pouco mais que a
+  // anterior). Acontece uma vez só. Com menos movimento, a frase nunca fica
+  // apagada.
 
+  const secaoDaFrase = document.getElementById('frase-secao');
   const frase = document.getElementById('frase');
-  const tracoDaFrase = document.getElementById('frase-traco');
-  // A frase é desmontada em palavras: cada uma vira um <span> para poder acender sozinha
-  const palavras = frase.textContent.trim().split(/\s+/).map(function (texto) {
-    return criarElemento('span', '', texto);
-  });
+  // A frase é desmontada em palavras: cada uma vira um <span> para poder acender
+  // sozinha. "--ordem" diz ao CSS a posição dela na fila.
+  const palavras = frase.textContent.trim().split(/\s+/);
   frase.textContent = '';
-  palavras.forEach(function (palavra, i) {
+  palavras.forEach(function (texto, i) {
+    const palavra = criarElemento('span', '', texto);
+    palavra.style.setProperty('--ordem', i);
     frase.append(palavra);
     if (i < palavras.length - 1) frase.append(' ');
   });
+  secaoDaFrase.style.setProperty('--palavras', palavras.length);
 
-  registrarCena(document.querySelector('.cena-frase'), {
-    desenhar: function (p) {
-      palavras.forEach(function (palavra, i) {
-        // A primeira palavra acende com 6% da cena; a última, com 76%
-        palavra.classList.toggle('acesa', p > 0.06 + (i / palavras.length) * 0.7);
-      });
-      tracoDaFrase.style.setProperty('--falta', (1 - trecho(0.8, 0.96, p)).toFixed(3));
-    },
-
-    parar: function () {
-      tracoDaFrase.style.removeProperty('--falta');   // o sublinhado aparece pronto
-    },
-  });
+  if (!movimentoReduzido() && 'IntersectionObserver' in window) {
+    secaoDaFrase.classList.add('frase-apagada');
+    // O vigia avisa quando pelo menos 40% da frase está dentro da tela
+    const vigiaDaFrase = new IntersectionObserver(function (entradas) {
+      if (!entradas[0].isIntersecting) return;
+      secaoDaFrase.classList.remove('frase-apagada');
+      vigiaDaFrase.disconnect();   // acende uma vez só
+    }, { threshold: 0.4 });
+    vigiaDaFrase.observe(frase);
+    // Se a pessoa ligar "Reduzir animações" antes de chegar aqui, a frase acende de vez
+    new MutationObserver(function () {
+      if (movimentoReduzido()) secaoDaFrase.classList.remove('frase-apagada');
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-movimento'] });
+  }
 
   // -------------------------------------------------------------------------
-  // 3. O pacotinho gira e abre
+  // 2. O pacotinho gira e abre
   // -------------------------------------------------------------------------
   // O pacotinho aparece de dois jeitos, com a mesma coreografia:
   //   - a sequência de quadros: 90 imagens de um pacotinho 3D, já prontas em
@@ -490,7 +499,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 4. O álbum abre
+  // 3. O álbum abre
   // -------------------------------------------------------------------------
 
   const livro = document.getElementById('livro');
@@ -578,7 +587,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 5. Mergulho na figurinha
+  // 4. Mergulho na figurinha
   // -------------------------------------------------------------------------
 
   const mergulho = document.getElementById('mergulho');
@@ -640,7 +649,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 6. Os números contam
+  // 5. Os números contam
   // -------------------------------------------------------------------------
 
   // Os valores vêm dos dados do site, na mesma ordem das casas do HTML:
@@ -686,102 +695,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // -------------------------------------------------------------------------
-  // 7. Os grupos andam para o lado
-  // -------------------------------------------------------------------------
-
-  const trilha = document.getElementById('trilha');
-  const palcoDaTrilha = trilha.parentElement;
-
-  // Um painel por grupo: a letra, as quatro seleções e o link para o álbum
-  const paineis = gruposDoAlbum().sort().map(function (letra) {
-    const painel = criarElemento('div', 'grupo');
-
-    const titulo = document.createElement('h3');
-    titulo.append('Grupo ', criarElemento('span', 'grupo-letra', letra));
-
-    const lista = criarElemento('ul', 'grupo-selecoes');
-    for (const selecao of SELECOES.filter(function (s) { return s.grupo === letra; })) {
-      const item = document.createElement('li');
-      const selo = criarElemento('span', 'selo');
-      const bandeira = document.createElement('img');
-      bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
-      bandeira.alt = '';              // o nome da seleção vem escrito logo abaixo
-      bandeira.loading = 'lazy';      // a imagem só é baixada quando está chegando perto da tela
-      selo.append(bandeira);
-      item.append(selo, selecao.nome);
-      lista.append(item);
-    }
-
-    const figurinhas = figurinhasDoGrupo(letra);
-    const numeros = criarElemento('p', 'grupo-numeros', figurinhas.length + ' figurinhas, da Nº ' + figurinhas[0].numero + ' à Nº ' + figurinhas[figurinhas.length - 1].numero);
-
-    const link = criarElemento('a', '', 'Ver o Grupo ' + letra + ' no álbum');
-    link.href = 'album.html#titulo-grupo-' + letra;
-
-    painel.append(titulo, lista, numeros, link);
-    trilha.append(painel);
-    return { elemento: painel, centro: 0, foco: -1 };
-  });
-  let sobraDaTrilha = 0;
-  let larguraDoPalcoDaTrilha = 0;
-
-  const cenaDosGrupos = registrarCena(document.querySelector('.cena-grupos'), {
-    medir: function () {
-      larguraDoPalcoDaTrilha = palcoDaTrilha.clientWidth;
-      sobraDaTrilha = Math.max(0, trilha.scrollWidth - larguraDoPalcoDaTrilha);   // o quanto a faixa passa da tela
-      for (const painel of paineis) {
-        painel.centro = painel.elemento.offsetLeft + painel.elemento.offsetWidth / 2;
-        painel.foco = -1;
-      }
-    },
-
-    desenhar: function (p) {
-      // A rolagem para baixo vira deslocamento para a esquerda
-      const deslocamento = limitar((p - 0.04) / 0.92) * sobraDaTrilha;
-      trilha.style.transform = 'translate3d(' + (-deslocamento).toFixed(1) + 'px, 0, 0)';
-
-      const meio = larguraDoPalcoDaTrilha / 2;
-      for (const painel of paineis) {
-        // A que distância este grupo está do meio da tela? 1 = bem no meio
-        const perto = limitar(1 - Math.abs(painel.centro - deslocamento - meio) / (larguraDoPalcoDaTrilha * 0.42));
-        const foco = Number((perto * perto * (3 - 2 * perto)).toFixed(3));
-        if (foco === painel.foco) continue;
-        painel.foco = foco;
-        painel.elemento.style.setProperty('--f', foco);
-        painel.elemento.classList.toggle('grupo-colado', foco > 0.55);
-      }
-    },
-
-    parar: function () {
-      trilha.removeAttribute('style');
-      for (const painel of paineis) {
-        painel.elemento.removeAttribute('style');
-        painel.elemento.classList.add('grupo-colado');   // parados, todos já são figurinha
-        painel.foco = -1;
-      }
-    },
-  });
-
-  // Teclado: quando um link de um grupo recebe o foco, a rolagem leva a faixa
-  // até esse grupo. Sem isto, o foco poderia cair em um link fora da tela.
-  trilha.addEventListener('focusin', function (evento) {
-    if (!cenasEmMovimento) return;
-    const painel = paineis.find(function (item) { return item.elemento.contains(evento.target); });
-    if (!painel || sobraDaTrilha === 0) return;
-    const deslocamento = limitar((painel.centro - larguraDoPalcoDaTrilha / 2) / sobraDaTrilha) * sobraDaTrilha;
-    const p = 0.04 + 0.92 * deslocamento / sobraDaTrilha;
-    focarNaCena(cenaDosGrupos, p);
-  });
-
-  // Ao dar o foco, o navegador pode tentar rolar o palco para o lado por conta
-  // própria. Quem move a faixa é só a cena: o palco volta para o lugar.
-  palcoDaTrilha.addEventListener('scroll', function () {
-    palcoDaTrilha.scrollLeft = 0;
-    palcoDaTrilha.scrollTop = 0;
-  });
-
-  // -------------------------------------------------------------------------
-  // 8. Voo pelas figurinhas
+  // 6. Voo pelas figurinhas
   // -------------------------------------------------------------------------
 
   const voo = document.getElementById('voo');

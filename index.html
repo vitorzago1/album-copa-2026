@@ -20,7 +20,7 @@
   <script src="js/inicio.js" defer></script>
   <script src="js/carrossel.js" defer></script>
 
-  <!-- As cenas presas à rolagem: o motor e, depois, as oito cenas desta página. -->
+  <!-- As cenas presas à rolagem: o motor e, depois, as seis cenas desta página. -->
   <script src="js/cenas.js" defer></script>
   <script src="js/cenas-inicio.js" defer></script>
 
@@ -95,16 +95,15 @@
       </div>
     </section>
 
-    <!-- A FRASE ACENDE (cena 2). Cada palavra acende quando a rolagem chega nela. -->
-    <div class="cena cena-frase" style="--altura: 220vh">
-      <div class="cena-palco">
-        <div class="frase-caixa">
-          <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
-          <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path id="frase-traco" pathLength="1" d="M6 10c60-7 150-8 288-3M14 19c80-6 170-7 262-2"/>
-          </svg>
-        </div>
-      </div>
+    <!-- A FRASE ACENDE. Não é uma cena presa à rolagem: quando a frase aparece na
+         tela, as palavras acendem sozinhas, uma depois da outra, e o sublinhado se
+         desenha (js/cenas-inicio.js). Sem JavaScript, ou com menos movimento, ela já
+         vem toda acesa. -->
+    <div class="largura secao frase-secao" id="frase-secao">
+      <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
+      <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path id="frase-traco" pathLength="1" d="M6 10c60-7 150-8 288-3M14 19c80-6 170-7 262-2"/>
+      </svg>
     </div>
 
     <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
@@ -147,7 +146,7 @@
       </ol>
     </section>
 
-    <!-- O PACOTINHO GIRA E ABRE (cena 3). O pacotinho aparece de dois jeitos:
+    <!-- O PACOTINHO GIRA E ABRE (cena 2). O pacotinho aparece de dois jeitos:
          1. uma sequência de 90 imagens de um pacotinho 3D (a técnica das páginas de
             produto), mostradas uma a uma no <canvas> conforme a rolagem;
          2. um pacotinho desenhado em CSS, usado na versão parada e enquanto as
@@ -268,7 +267,7 @@
       </div>
     </section>
 
-    <!-- O ÁLBUM ABRE (cena 4). Três folhas empilhadas; cada uma tem frente e verso.
+    <!-- O ÁLBUM ABRE (cena 3). Três folhas empilhadas; cada uma tem frente e verso.
          As páginas (Grupo C, como amostra) são montadas pelo js/cenas-inicio.js. -->
     <section class="cena cena-album" style="--altura: 360vh" aria-labelledby="titulo-cena-album">
       <div class="cena-palco palco-3d">
@@ -294,7 +293,7 @@
       </div>
     </section>
 
-    <!-- MERGULHO NA FIGURINHA (cena 5). A figurinha cresce até a tela ficar da cor dela. -->
+    <!-- MERGULHO NA FIGURINHA (cena 4). A figurinha cresce até a tela ficar da cor dela. -->
     <div class="cena cena-mergulho" style="--altura: 240vh">
       <div class="cena-palco">
         <div class="mergulho so-com-js" id="mergulho" aria-hidden="true"></div>
@@ -304,7 +303,7 @@
       </div>
     </div>
 
-    <!-- OS NÚMEROS CONTAM (cena 6). Os valores escritos aqui são os finais; o
+    <!-- OS NÚMEROS CONTAM (cena 5). Os valores escritos aqui são os finais; o
          js/cenas-inicio.js confere com os dados e faz a contagem. -->
     <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
       <div class="cena-palco">
@@ -330,16 +329,31 @@
       </div>
     </section>
 
-    <!-- OS GRUPOS ANDAM PARA O LADO (cena 7). A rolagem para baixo move a faixa para
-         o lado. Os doze painéis são postos pelo js/cenas-inicio.js. -->
-    <section class="cena cena-grupos" style="--altura: 420vh" aria-labelledby="titulo-grupos">
-      <div class="cena-palco">
-        <div class="trilha" id="trilha">
-          <div class="trilha-abre">
-            <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
-            <p>A bandeira chega impressa em uma tinta só. No meio da tela, ela vira figurinha e ganha a cor de verdade.</p>
-            <noscript><p>A lista dos grupos aparece com o JavaScript ligado. No <a href="album.html">álbum</a> eles estão todos.</p></noscript>
+    <!-- CARROSSEL DOS GRUPOS. Os doze grupos ficam lado a lado em uma faixa que anda
+         para os lados. O grupo que está no meio vira figurinha e ganha cor. Os
+         painéis são montados pelo js/carrossel.js, a partir de js/dados.js.
+         Não passa sozinho: só anda quando a pessoa aperta um botão ou arrasta. -->
+    <section class="secao fluxo secao-grupos" aria-labelledby="titulo-grupos" aria-roledescription="carrossel">
+      <div class="largura fluxo">
+        <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
+        <p>Passe os grupos para ver as seleções de cada um. A bandeira fica impressa em uma tinta só; no grupo do meio, ela vira figurinha e ganha a cor de verdade.</p>
+        <noscript><p>A lista dos grupos aparece com o JavaScript ligado. No <a href="album.html">álbum</a> eles estão todos.</p></noscript>
+      </div>
+
+      <div class="fluxo" id="carrossel-grupos" hidden>
+        <!-- A janela: mostra um pedaço da faixa. tabindex="0" deixa rolar com as setas do teclado. -->
+        <div class="grupos-janela" id="grupos-janela" tabindex="0" role="group" aria-label="Os 12 grupos, lado a lado">
+          <div class="trilha" id="trilha"></div>
+        </div>
+
+        <div class="largura fluxo">
+          <div class="carrossel-controles">
+            <button class="botao botao-contorno" type="button" id="grupo-anterior">Anterior</button>
+            <!-- role="status": o leitor de tela lê "3 de 12: Grupo C" a cada troca. -->
+            <p class="carrossel-posicao" id="grupo-posicao" role="status"></p>
+            <button class="botao botao-contorno" type="button" id="grupo-proximo">Próximo</button>
           </div>
+          <ol class="carrossel-indicadores" id="grupo-indicadores" aria-label="Ir direto para um grupo"></ol>
         </div>
       </div>
     </section>
@@ -406,7 +420,7 @@
       </div>
     </section>
 
-    <!-- VOO PELAS FIGURINHAS (cena 8). As figurinhas ficam espalhadas em profundidade
+    <!-- VOO PELAS FIGURINHAS (cena 6). As figurinhas ficam espalhadas em profundidade
          e a rolagem leva a câmera por entre elas. -->
     <section class="cena cena-voo" style="--altura: 300vh" aria-labelledby="voo-titulo">
       <div class="cena-palco palco-voo">
