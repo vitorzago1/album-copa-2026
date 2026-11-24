@@ -242,6 +242,20 @@ Três pedidos do aluno em 23/11/2026: as cores um pouco mais vivas; a frase "Sã
 8. **Menos movimento ainda mais direto.** A regra geral de "Reduzir animações" passou a zerar também o tempo de espera das transições (`transition-delay`).
 9. **Verificações automáticas novas:** 30. Dez das etapas 10 e 13 saíram, porque conferiam a frase e os grupos como cenas. No total são 510, todas passando.
 
+### Etapa 16: retrato novo nas figurinhas
+
+Pedido do aluno em 23/11/2026: as figurinhas estavam "bem feias" e os jogadores pareciam bonecos. Ele pediu foto. Como o projeto proíbe foto de jogador, a escolha dele foi um desenho mais humano.
+
+1. **O retrato.** Uma pessoa de frente, da cabeça aos ombros: rosto, orelhas, pescoço, sobrancelhas, olhos, nariz e boca, cabelo, camisa com gola e mangas, e o número no peito. Antes era um círculo e meio círculo. O desenho é um SVG montado pela função `desenharRetrato`, no `js/figurinha.js`.
+2. **Quatro cortes de cabelo.** Curto, penteado para o lado, cacheado e raspado. O corte sai do número da figurinha: a mesma figurinha tem sempre o mesmo, e o álbum não vira uma fila de retratos iguais.
+3. **Genérico de propósito.** O retrato não tenta parecer com o jogador de verdade e não é foto. A pele não tem cor de pele: é o papel da figurinha com um pouco da tinta, como em um impresso de uma tinta só. Assim o desenho não "chuta" a aparência de ninguém.
+4. **Cores da seleção.** A camisa, a gola e o número usam as três cores de cada seleção que já estavam no `js/dados.js`.
+5. **Bandeirinha.** Cada figurinha de jogador ganhou a bandeira da seleção no canto de cima. Ela não tem texto alternativo, porque o nome da seleção já vem escrito na tarja.
+6. **Fundo do retrato.** Um clarão atrás da cabeça, e os pontinhos de retícula ficaram só no fundo (antes passavam por cima do desenho).
+7. **O que não mudou.** O texto da figurinha (nome, seleção, raridade e número), as três raridades, o verso, as costas e a figurinha de bandeira.
+8. **Contraste.** O contorno do retrato é a tinta da figurinha sobre a cor de fundo de cada seleção, e o número fica sobre a camisa: os dois continuam acima de 3:1 nas 48 seleções (`node scripts/contraste.js`).
+9. **Verificações automáticas novas:** 22. No total são 532, todas passando.
+
 ## Onde está cada item pedido pelo professor
 
 | Item | Onde está |

@@ -363,9 +363,9 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 
 ## Contraste: cores das seleções
 
-O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.
+O número é escrito sobre a camisa, e o contorno do retrato (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.
 
-| Seleção | Campo | Camisa | Número | Número sobre a camisa | Silhueta sobre o campo | Resultado |
+| Seleção | Campo | Camisa | Número | Número sobre a camisa | Contorno sobre o campo | Resultado |
 |---|---|---|---|---|---|---|
 | México | `#D9534F` | `#0B6B3A` | `#FFFFFF` | 6,61:1 | 3,93:1 | Passa (3:1) |
 | África do Sul | `#2E9E6B` | `#F7C531` | `#0B5A3C` | 5,11:1 | 4,61:1 | Passa (3:1) |

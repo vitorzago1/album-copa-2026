@@ -5,20 +5,20 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 37.
-- Linhas de código (com comentários): 14039.
+- Linhas de código (com comentários): 14221.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 467 |
+| `index.html` | 506 |
 | `album.html` | 234 |
 | `pacotinhos.html` | 137 |
 | `trocas.html` | 166 |
 | `login.html` | 183 |
 | `contato.html` | 160 |
-| `sobre.html` | 305 |
+| `sobre.html` | 344 |
 | `css/tokens.css` | 255 |
 | `css/base.css` | 619 |
-| `css/componentes.css` | 1361 |
+| `css/componentes.css` | 1420 |
 | `css/paginas.css` | 537 |
 | `css/acessibilidade.css` | 224 |
 | `css/cenas.css` | 1119 |
@@ -26,7 +26,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/menu.js` | 52 |
 | `js/efeitos.js` | 106 |
 | `js/estado.js` | 417 |
-| `js/figurinha.js` | 225 |
+| `js/figurinha.js` | 270 |
 | `js/album.js` | 700 |
 | `js/pacotinho.js` | 242 |
 | `js/trocas.js` | 200 |
@@ -264,9 +264,20 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <div class="figurinha figurinha-comum" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F; --giro: -1.2deg" aria-hidden="true">
               <div class="figurinha-arte">
                 <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" focusable="false">
-                  <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-                  <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-                  <text class="busto-numero" x="30" y="57" text-anchor="middle">5</text>
+                  <path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>
+                  <path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>
+                  <path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>
+                  <path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>
+                  <path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>
+                  <ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/>
+                  <ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>
+                  <path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>
+                  <path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>
+                  <path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>
+                  <path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>
+                  <circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/>
+                  <circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>
+                  <text class="busto-numero" x="30" y="58" text-anchor="middle">5</text>
                 </svg>
               </div>
               <div class="figurinha-tarja">
@@ -283,9 +294,20 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <div class="figurinha figurinha-brilhante" style="--campo: #1D4E9E; --camisa: #FFFFFF; --numero: #1D4E9E; --giro: 0.8deg" aria-hidden="true">
               <div class="figurinha-arte">
                 <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" focusable="false">
-                  <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-                  <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-                  <text class="busto-numero" x="30" y="57" text-anchor="middle">8</text>
+                  <path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>
+                  <path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>
+                  <path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>
+                  <path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>
+                  <path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>
+                  <ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/>
+                  <ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>
+                  <path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>
+                  <path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>
+                  <path class="busto-cabelo" d="M19.6 21C18.2 10.4 24.4 4.2 31.6 4.8C38.2 5.4 42 11 40.4 21C39.6 17.4 38.2 15.2 35.6 14C31 16.4 25 16.6 21.8 15.4C20.6 17 20 19 19.6 21Z"/>
+                  <path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>
+                  <circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/>
+                  <circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>
+                  <text class="busto-numero" x="30" y="58" text-anchor="middle">8</text>
                 </svg>
               </div>
               <div class="figurinha-tarja">
@@ -302,9 +324,26 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <div class="figurinha figurinha-lendaria" style="--campo: #B3202A; --camisa: #F6F2F2; --numero: #B3202A; --giro: -0.6deg" aria-hidden="true">
               <div class="figurinha-arte">
                 <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" focusable="false">
-                  <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-                  <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-                  <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
+                  <path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>
+                  <path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>
+                  <path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>
+                  <path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>
+                  <path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>
+                  <ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/>
+                  <ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>
+                  <path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>
+                  <path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>
+                  <path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>
+                  <circle class="busto-cabelo" cx="21.4" cy="13.8" r="3.6"/>
+                  <circle class="busto-cabelo" cx="25" cy="9.2" r="3.9"/>
+                  <circle class="busto-cabelo" cx="30" cy="7.2" r="4.1"/>
+                  <circle class="busto-cabelo" cx="35" cy="9.2" r="3.9"/>
+                  <circle class="busto-cabelo" cx="38.6" cy="13.8" r="3.6"/>
+                  <circle class="busto-cabelo" cx="30" cy="11.6" r="4"/>
+                  <path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>
+                  <circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/>
+                  <circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>
+                  <text class="busto-numero" x="30" y="58" text-anchor="middle">10</text>
                 </svg>
               </div>
               <div class="figurinha-tarja">
@@ -1660,9 +1699,20 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <div class="figurinha figurinha-comum" style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F">
           <div class="figurinha-arte">
             <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
-              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-              <text class="busto-numero" x="30" y="57" text-anchor="middle">5</text>
+              <path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>
+              <path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>
+              <path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>
+              <path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>
+              <path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>
+              <ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/>
+              <ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>
+              <path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>
+              <path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>
+              <path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>
+              <path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>
+              <circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/>
+              <circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>
+              <text class="busto-numero" x="30" y="58" text-anchor="middle">5</text>
             </svg>
           </div>
           <div class="figurinha-tarja">
@@ -1675,9 +1725,20 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <span class="etiqueta">Nova</span>
           <div class="figurinha-arte">
             <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
-              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-              <text class="busto-numero" x="30" y="57" text-anchor="middle">8</text>
+              <path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>
+              <path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>
+              <path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>
+              <path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>
+              <path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>
+              <ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/>
+              <ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>
+              <path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>
+              <path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>
+              <path class="busto-cabelo" d="M19.6 21C18.2 10.4 24.4 4.2 31.6 4.8C38.2 5.4 42 11 40.4 21C39.6 17.4 38.2 15.2 35.6 14C31 16.4 25 16.6 21.8 15.4C20.6 17 20 19 19.6 21Z"/>
+              <path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>
+              <circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/>
+              <circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>
+              <text class="busto-numero" x="30" y="58" text-anchor="middle">8</text>
             </svg>
           </div>
           <div class="figurinha-tarja">
@@ -1689,9 +1750,26 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <div class="figurinha figurinha-lendaria" style="--campo: #B3202A; --camisa: #F6F2F2; --numero: #B3202A">
           <div class="figurinha-arte">
             <svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
-              <circle class="busto-cabeca" cx="30" cy="17" r="10"/>
-              <path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>
-              <text class="busto-numero" x="30" y="57" text-anchor="middle">10</text>
+              <path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>
+              <path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>
+              <path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>
+              <path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>
+              <path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>
+              <ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/>
+              <ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>
+              <path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>
+              <path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>
+              <path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>
+              <circle class="busto-cabelo" cx="21.4" cy="13.8" r="3.6"/>
+              <circle class="busto-cabelo" cx="25" cy="9.2" r="3.9"/>
+              <circle class="busto-cabelo" cx="30" cy="7.2" r="4.1"/>
+              <circle class="busto-cabelo" cx="35" cy="9.2" r="3.9"/>
+              <circle class="busto-cabelo" cx="38.6" cy="13.8" r="3.6"/>
+              <circle class="busto-cabelo" cx="30" cy="11.6" r="4"/>
+              <path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>
+              <circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/>
+              <circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>
+              <text class="busto-numero" x="30" y="58" text-anchor="middle">10</text>
             </svg>
           </div>
           <div class="figurinha-tarja">
@@ -2824,11 +2902,14 @@ body::before {
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  background: var(--campo, #8A8FB0);
+  /* A cor da seleção, com um clarão atrás da cabeça, como luz de estúdio */
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.4), transparent 62%),
+    var(--campo, #8A8FB0);
   border-radius: 6px 6px 0 0;
 }
 
-/* Retícula: os pontinhos de impressão que fazem a sombra do retrato.
+/* Retícula: os pontinhos de impressão no fundo do retrato, atrás da pessoa.
    São bolinhas desenhadas com gradiente, mais fortes embaixo. */
 .figurinha-arte::after {
   content: "";
@@ -2839,31 +2920,87 @@ body::before {
   mask-image: linear-gradient(to top, #000, transparent 65%);
 }
 
-/* O retrato é genérico: uma cabeça lisa e uma camisa com o número.
-   Não é foto nem desenho de nenhuma pessoa. */
+/* O retrato: uma pessoa de frente, da cabeça aos ombros (o desenho está no
+   js/figurinha.js, na função desenharRetrato). É genérico: não é foto nem
+   desenho de nenhuma pessoa de verdade.
+   A pele não tem cor de pele: é o papel da figurinha com um pouco da tinta,
+   como em um retrato impresso em uma tinta só. Assim o desenho não "chuta" a
+   aparência de ninguém. */
 .figurinha-busto {
+  --pele: #DDE0E8;   /* para navegador antigo, que não conhece color-mix */
+  --pele: color-mix(in srgb, var(--cor-figurinha-tinta) 13%, var(--cor-figurinha-papel));
   position: absolute;
+  z-index: 1;   /* por cima dos pontinhos de retícula, que ficam só no fundo */
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 88%;
+  height: 94%;
 }
 
-.busto-cabeca {
+/* Rosto, orelhas e pescoço. O contorno na tinta da figurinha é o que separa
+   a pessoa do fundo colorido (contraste conferido no scripts/contraste.js). */
+.busto-pele {
+  fill: var(--pele);
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+/* A sombra de um lado do rosto e a do queixo no pescoço */
+.busto-sombra {
   fill: var(--cor-figurinha-tinta);
+  opacity: 0.16;
+}
+
+.busto-cabelo,
+.busto-olho {
+  fill: var(--cor-figurinha-tinta);
+}
+
+.busto-cabelo-raspado {
+  opacity: 0.55;
+}
+
+/* Sobrancelhas, nariz, boca e a costura das mangas: traços finos */
+.busto-traco {
+  fill: none;
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .busto-camisa {
   fill: var(--camisa, #FFFFFF);
   stroke: var(--cor-figurinha-tinta);
   stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+/* A gola tem a cor do número, que sempre contrasta com a da camisa */
+.busto-gola {
+  fill: var(--numero, var(--cor-figurinha-tinta));
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 0.9;
+  stroke-linejoin: round;
 }
 
 .busto-numero {
   fill: var(--numero, var(--cor-figurinha-tinta));
   font-family: var(--fonte-destaque);
   font-weight: 900;
-  font-size: 15px;
+  font-size: 13px;
+}
+
+/* A bandeirinha da seleção, no canto de cima do retrato */
+.figurinha-pais {
+  position: absolute;
+  z-index: 1;
+  top: 6%;
+  left: 6%;
+  width: 24%;
+  border: 1.5px solid var(--cor-figurinha-papel);
+  outline: 1px solid var(--cor-figurinha-tinta);
 }
 
 /* Tarja: a faixa de baixo, onde fica o texto */
@@ -2947,7 +3084,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;   /* o reflexo passa por cima do retrato */
   background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
 }
 
@@ -6795,6 +6932,47 @@ function avisar(texto) {
 // Desenho
 // ---------------------------------------------------------------------------
 
+// Os quatro cortes de cabelo do retrato. Cada um é um desenho em SVG, posto
+// por cima da cabeça. O último é o cabelo raspado, que sai mais claro.
+const PENTEADOS = [
+  // curto
+  '<path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>',
+  // penteado para o lado
+  '<path class="busto-cabelo" d="M19.6 21C18.2 10.4 24.4 4.2 31.6 4.8C38.2 5.4 42 11 40.4 21C39.6 17.4 38.2 15.2 35.6 14C31 16.4 25 16.6 21.8 15.4C20.6 17 20 19 19.6 21Z"/>',
+  // cacheado: o cabelo curto com seis cachos em volta
+  '<path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>' +
+  '<circle class="busto-cabelo" cx="21.4" cy="13.8" r="3.6"/><circle class="busto-cabelo" cx="25" cy="9.2" r="3.9"/><circle class="busto-cabelo" cx="30" cy="7.2" r="4.1"/>' +
+  '<circle class="busto-cabelo" cx="35" cy="9.2" r="3.9"/><circle class="busto-cabelo" cx="38.6" cy="13.8" r="3.6"/><circle class="busto-cabelo" cx="30" cy="11.6" r="4"/>',
+  // raspado
+  '<path class="busto-cabelo busto-cabelo-raspado" d="M20.2 18.6C20.4 11.4 24.4 7.2 30 7.2C35.6 7.2 39.6 11.4 39.8 18.6C38.2 14.4 35.4 12.6 30 12.6C24.6 12.6 21.8 14.4 20.2 18.6Z"/>',
+];
+
+// O retrato: uma pessoa de frente, da cabeça aos ombros, com a camisa da
+// seleção e o número. É um desenho genérico, igual para todos; só o corte de
+// cabelo muda, conforme o número da figurinha (para o álbum não parecer uma
+// fila de bonecos iguais). Não é foto nem tenta parecer com o jogador de verdade.
+// As cores vêm do CSS (ver ".busto-...", em css/componentes.css).
+function desenharRetrato(numeroDaCamisa, penteado) {
+  return '<svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">' +
+    // a camisa, com a costura das duas mangas
+    '<path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>' +
+    '<path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>' +
+    // o pescoço, a sombra do queixo e a gola
+    '<path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>' +
+    '<path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>' +
+    '<path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>' +
+    // as orelhas e o rosto, com a sombra de um dos lados
+    '<ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/><ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>' +
+    '<path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>' +
+    '<path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>' +
+    PENTEADOS[penteado % PENTEADOS.length] +
+    // as sobrancelhas, os olhos, o nariz e a boca
+    '<path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>' +
+    '<circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/><circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>' +
+    '<text class="busto-numero" x="30" y="58" text-anchor="middle">' + Number(numeroDaCamisa) + '</text>' +
+    '</svg>';
+}
+
 // A frente: o retrato (ou a bandeira) em cima e a tarja com o texto embaixo
 function preencherFrente(onde, fig, etiqueta) {
   const selecao = selecaoPorId(fig.selecao);
@@ -6810,13 +6988,17 @@ function preencherFrente(onde, fig, etiqueta) {
     bandeira.draggable = false;   // quem é arrastada é a figurinha inteira, não só a imagem
     arte.append(bandeira);
   } else {
-    // Retrato genérico: uma cabeça lisa e uma camisa com o número. Não é foto de ninguém.
-    arte.innerHTML =
-      '<svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">' +
-      '<circle class="busto-cabeca" cx="30" cy="17" r="10"/>' +
-      '<path class="busto-camisa" d="M7 61c0-15 9-24 23-24s23 9 23 24z"/>' +
-      '<text class="busto-numero" x="30" y="57" text-anchor="middle">' + Number(fig.camisa) + '</text>' +
-      '</svg>';
+    // Retrato genérico, desenhado: não é foto de ninguém
+    arte.innerHTML = desenharRetrato(fig.camisa, fig.numero);
+
+    // A bandeirinha da seleção, no canto de cima
+    const pais = document.createElement('img');
+    pais.className = 'figurinha-pais';
+    pais.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
+    pais.alt = '';                // o nome da seleção vem escrito na tarja, logo abaixo
+    pais.loading = 'lazy';
+    pais.draggable = false;
+    arte.append(pais);
   }
 
   const tarja = criarElemento('span', 'figurinha-tarja');
@@ -13432,7 +13614,7 @@ for (const tema of TEMAS) {
 // Cada seleção tem três cores em js/dados.js: campo, camisa e número.
 // O desenho precisa de dois contrastes de pelo menos 3:1:
 //   - o número sobre a camisa (é um número grande, em negrito);
-//   - a silhueta, na tinta da figurinha, sobre o campo.
+//   - o contorno do retrato, na tinta da figurinha, sobre o campo.
 // A figurinha não muda de cor com o tema; só a tinta muda no alto contraste.
 
 // Lê a lista SELECOES de js/dados.js. O arquivo é um script de navegador,
@@ -13447,22 +13629,22 @@ const TINTAS = [
 
 linhas.push('## Contraste: cores das seleções');
 linhas.push('');
-linhas.push('O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.');
+linhas.push('O número é escrito sobre a camisa, e o contorno do retrato (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.');
 linhas.push('');
-linhas.push('| Seleção | Campo | Camisa | Número | Número sobre a camisa | Silhueta sobre o campo | Resultado |');
+linhas.push('| Seleção | Campo | Camisa | Número | Número sobre a camisa | Contorno sobre o campo | Resultado |');
 linhas.push('|---|---|---|---|---|---|---|');
 for (const selecao of SELECOES) {
   const cores = selecao.cores;
   const numeroNaCamisa = contraste(cores.numero, cores.camisa);
-  let silhuetaNoCampo = 21;
-  for (const tinta of TINTAS) silhuetaNoCampo = Math.min(silhuetaNoCampo, contraste(tinta.cor, cores.campo));
-  const passou = numeroNaCamisa >= 3 && silhuetaNoCampo >= 3;
+  let contornoNoCampo = 21;
+  for (const tinta of TINTAS) contornoNoCampo = Math.min(contornoNoCampo, contraste(tinta.cor, cores.campo));
+  const passou = numeroNaCamisa >= 3 && contornoNoCampo >= 3;
   total += 2;
   if (!passou) {
     reprovados += 1;
-    console.log(`REPROVA  Seleção ${selecao.nome}: número/camisa ${formatar(numeroNaCamisa)}, silhueta/campo ${formatar(silhuetaNoCampo)}`);
+    console.log(`REPROVA  Seleção ${selecao.nome}: número/camisa ${formatar(numeroNaCamisa)}, contorno/campo ${formatar(contornoNoCampo)}`);
   }
-  linhas.push(`| ${selecao.nome} | \`${cores.campo}\` | \`${cores.camisa}\` | \`${cores.numero}\` | ${formatar(numeroNaCamisa)} | ${formatar(silhuetaNoCampo)} | ${passou ? 'Passa (3:1)' : 'REPROVA'} |`);
+  linhas.push(`| ${selecao.nome} | \`${cores.campo}\` | \`${cores.camisa}\` | \`${cores.numero}\` | ${formatar(numeroNaCamisa)} | ${formatar(contornoNoCampo)} | ${passou ? 'Passa (3:1)' : 'REPROVA'} |`);
 }
 linhas.push('');
 

@@ -46,6 +46,9 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Papéis do fundo e amarelo dos recortes com cores mais vivas. Contraste: 396 pares, 0 reprovados.
 - "Reduzir animações" passou a tirar também o tempo de espera das transições.
 - 30 verificações automáticas novas (510 no total).
+- Retrato novo nas figurinhas de jogador: uma pessoa desenhada (rosto, cabelo em quatro cortes, pescoço, camisa com gola e número), no lugar do boneco de círculo e meio círculo. Continua genérico e sem foto.
+- Bandeirinha da seleção no canto de cada figurinha de jogador.
+- 22 verificações automáticas novas (532 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

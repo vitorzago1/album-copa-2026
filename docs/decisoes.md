@@ -27,7 +27,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - A figurinha que vira é um `<button>`: clique, Enter e Espaço funcionam sem código extra de teclado.
 - A figurinha tem três faces: frente (retrato), verso (posição, clube e curiosidade) e costas (fechada, quando sai do pacotinho). De costas, a moldura não mostra a raridade.
 - A seleção vem escrita na frente da figurinha: as cores da camisa sozinhas não dizem de quem ela é.
-- O retrato é um busto genérico (cabeça lisa e camisa com o número). Não representa nenhuma pessoa.
+- O retrato é um busto genérico. Não representa nenhuma pessoa. Até a etapa 15 era uma cabeça lisa e uma camisa com o número; na etapa 16 virou o desenho de uma pessoa (ver "Retrato novo nas figurinhas", mais abaixo).
 - Colar tem dois caminhos com o mesmo resultado: arrastar da bandeja até a vaga (API de arrastar e soltar do HTML) ou o botão "Colar", que aparece na bandeja e na própria vaga.
 - Só a vaga com o número da figurinha aceita o arrasto. As outras recusam.
 - "Desfazer" não tem prazo. O enunciado do projeto sugeria "por alguns segundos"; ficou sem limite de tempo para não criar uma ação com tempo contado (critério 2.2.1). O recado fica até a próxima ação ou até ser fechado, e só a última colagem pode ser desfeita.
@@ -302,6 +302,39 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 2.5.1 e 2.5.7 Gestos e arrastar | Arrastar a faixa tem alternativa por botão. |
 | 2.5.8 Tamanho do alvo | Botões e indicadores com 44 px. |
 | 4.1.3 Mensagens de status | A posição ("3 de 12: Grupo C") fica em um texto com `role="status"`. |
+
+## Retrato novo nas figurinhas (etapa 16)
+
+- **Pedido do aluno em 23/11/2026.** "Colocar foto nas figurinhas dos jogadores como se eles fossem pessoas e não bonecos. As figurinhas estão bem feias."
+- **Por que não foto.** A regra do projeto proíbe foto de jogador. Além disso, muitos dos 240 jogadores não têm foto com licença livre, haveria risco de pôr a foto da pessoa errada, e usar o rosto de atleta em figurinha é o que os álbuns de verdade pagam para poder fazer. As duas saídas foram postas para o aluno, que escolheu o desenho mais humano.
+- **Desenho próprio, por código.** O retrato é um SVG montado no `js/figurinha.js`. Nenhuma imagem de fora.
+- **Genérico.** O mesmo rosto para todos. Não há tentativa de parecer com o jogador.
+- **Pele sem cor de pele.** A pele é o papel da figurinha misturado com 13% da tinta (`color-mix`): um cinza-azulado claro, de impresso em uma tinta só. Sortear tons de pele para jogadores reais seria inventar a aparência deles.
+- **Cabelo.** Quatro cortes, escolhidos pelo número da figurinha (o resto da divisão por quatro). É o que dá variedade sem inventar muito. Limite conhecido: o corte sorteado pode não combinar com o jogador de verdade.
+- **Rosto com poucos traços.** Sobrancelhas, olhos, nariz e boca são traços simples: o bastante para ler como pessoa no tamanho da figurinha.
+- **Contorno na tinta.** Cabeça, pescoço e camisa têm contorno na tinta da figurinha. É ele que separa a pessoa do fundo colorido, e é o par conferido no script de contraste.
+- **Gola na cor do número.** O número de cada seleção já foi escolhido para contrastar com a camisa; a gola reaproveita essa cor.
+- **Bandeirinha.** A bandeira da seleção no canto. É enfeite (`alt=""`): a seleção continua escrita na tarja.
+- **Camadas.** De baixo para cima: cor de fundo com o clarão, pontinhos de retícula, retrato e bandeirinha, reflexo da brilhante e da lendária.
+- **Figurinhas de amostra.** As seis escritas direto no HTML (três na página inicial, três no guia de estilo da página Sobre) usam o mesmo desenho, cada uma com um corte.
+- **Desenho da figurinha no fundo.** As figurinhas recortadas da colagem do fundo não mudaram: lá são silhuetas de papel.
+- **Prints antigos.** Os prints de `docs/prints` das etapas anteriores (álbum, pacotinhos) mostram o retrato antigo; os novos estão em `v1.0-figurinhas-*.png`.
+
+### WCAG 2.2 no retrato
+
+| Critério | Como foi atendido |
+|---|---|
+| 1.1.1 Conteúdo não textual | O retrato e a bandeirinha são enfeite: o SVG tem `aria-hidden` e a bandeira tem `alt=""`. O nome, a seleção, a raridade e o número vêm escritos. |
+| 1.4.1 Uso da cor | A seleção não depende das cores da camisa: está escrita na tarja. |
+| 1.4.11 Contraste não textual | Contorno do retrato sobre a cor de fundo e número sobre a camisa: no mínimo 3:1 nas 48 seleções. |
+| 1.4.10 Reflow | O álbum com figurinhas coladas não ganha rolagem lateral em 320 px. |
+
+## Verificação feita na etapa 16
+
+- 22 verificações automáticas novas no Microsoft Edge sem janela: peças do retrato, ausência de foto, bandeirinha sem texto alternativo, texto da figurinha igual, os quatro cortes de cabelo e o corte fixo por figurinha, cor da pele, contorno e cabelo na tinta, cores da seleção, ordem das camadas, figurinha de bandeira sem mudança, retrato dentro da moldura, 320 px, tema escuro, alto contraste, as quatro páginas com figurinhas, página sem JavaScript e contraste.
+- As 510 verificações anteriores continuam passando.
+- Instabilidade investigada: a suíte da etapa 10 falhava quando rodava logo depois de outra. Foi medido que o fundo novo não atrasa as cenas (mesmo tempo com e sem ele) e que não sobravam navegadores de teste abertos. A causa era o teste, que esperava um tempo fixo de 1 segundo com a máquina ainda ocupada fechando o navegador da suíte anterior. O teste passou a esperar a cena chegar ao lugar. Rodada de novo em sequência, a suíte passou.
+- Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 15
 

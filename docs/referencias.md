@@ -13,7 +13,7 @@ As duas licenças estão copiadas em `assets/fontes/LICENCA-*.txt`, do repositó
 
 ## Imagens
 
-- Retrato das figurinhas: desenho próprio em SVG (busto genérico, sem representar nenhuma pessoa).
+- Retrato das figurinhas: desenho próprio em SVG, feito por código no `js/figurinha.js` (uma pessoa genérica, da cabeça aos ombros, sem representar ninguém). Não é foto.
 - Ícone do site (`assets/svg/favicon.svg`): desenho próprio.
 - Pacotinho, costas da figurinha, cartela e carimbos: desenhados em CSS, sem imagem.
 - Desenhos do fundo (`assets/img/fundo/`: estádio, bola, bandeirinhas, figurinhas, apito e os outros recortes): desenhos próprios, feitos por código no `scripts/gerar-fundo.js`. Sem foto e sem imagem de fora.

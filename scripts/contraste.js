@@ -261,7 +261,7 @@ for (const tema of TEMAS) {
 // Cada seleção tem três cores em js/dados.js: campo, camisa e número.
 // O desenho precisa de dois contrastes de pelo menos 3:1:
 //   - o número sobre a camisa (é um número grande, em negrito);
-//   - a silhueta, na tinta da figurinha, sobre o campo.
+//   - o contorno do retrato, na tinta da figurinha, sobre o campo.
 // A figurinha não muda de cor com o tema; só a tinta muda no alto contraste.
 
 // Lê a lista SELECOES de js/dados.js. O arquivo é um script de navegador,
@@ -276,22 +276,22 @@ const TINTAS = [
 
 linhas.push('## Contraste: cores das seleções');
 linhas.push('');
-linhas.push('O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.');
+linhas.push('O número é escrito sobre a camisa, e o contorno do retrato (na tinta da figurinha) fica sobre o campo. Mínimo de 3:1 nos dois casos. A última coluna é o pior resultado entre a tinta normal e a do alto contraste.');
 linhas.push('');
-linhas.push('| Seleção | Campo | Camisa | Número | Número sobre a camisa | Silhueta sobre o campo | Resultado |');
+linhas.push('| Seleção | Campo | Camisa | Número | Número sobre a camisa | Contorno sobre o campo | Resultado |');
 linhas.push('|---|---|---|---|---|---|---|');
 for (const selecao of SELECOES) {
   const cores = selecao.cores;
   const numeroNaCamisa = contraste(cores.numero, cores.camisa);
-  let silhuetaNoCampo = 21;
-  for (const tinta of TINTAS) silhuetaNoCampo = Math.min(silhuetaNoCampo, contraste(tinta.cor, cores.campo));
-  const passou = numeroNaCamisa >= 3 && silhuetaNoCampo >= 3;
+  let contornoNoCampo = 21;
+  for (const tinta of TINTAS) contornoNoCampo = Math.min(contornoNoCampo, contraste(tinta.cor, cores.campo));
+  const passou = numeroNaCamisa >= 3 && contornoNoCampo >= 3;
   total += 2;
   if (!passou) {
     reprovados += 1;
-    console.log(`REPROVA  Seleção ${selecao.nome}: número/camisa ${formatar(numeroNaCamisa)}, silhueta/campo ${formatar(silhuetaNoCampo)}`);
+    console.log(`REPROVA  Seleção ${selecao.nome}: número/camisa ${formatar(numeroNaCamisa)}, contorno/campo ${formatar(contornoNoCampo)}`);
   }
-  linhas.push(`| ${selecao.nome} | \`${cores.campo}\` | \`${cores.camisa}\` | \`${cores.numero}\` | ${formatar(numeroNaCamisa)} | ${formatar(silhuetaNoCampo)} | ${passou ? 'Passa (3:1)' : 'REPROVA'} |`);
+  linhas.push(`| ${selecao.nome} | \`${cores.campo}\` | \`${cores.camisa}\` | \`${cores.numero}\` | ${formatar(numeroNaCamisa)} | ${formatar(contornoNoCampo)} | ${passou ? 'Passa (3:1)' : 'REPROVA'} |`);
 }
 linhas.push('');
 
