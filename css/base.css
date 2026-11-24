@@ -546,26 +546,40 @@ a:hover {
 
 /* ---------- O fundo da página ----------
    Uma camada do tamanho da página inteira, atrás de todo o conteúdo. Ela tem
-   duas partes, uma por cima da outra:
+   quatro partes, uma por cima da outra (no "background", a de cima vem primeiro):
 
-   1. OS PAPÉIS (a última linha do "background"). O fundo muda de cor conforme
-      a página desce: rosa, pêssego, menta, lilás e de novo rosa. Entre um
-      papel e outro, bolinhas da cor seguinte vão crescendo até se juntarem,
-      como o degradê da impressão em papel. É uma tira estreita, repetida para
-      os lados e para baixo, desenhada pelo scripts/gerar-fundo.js.
+   1. O GRÃO DO PAPEL. Um chuvisco bem fino por cima de tudo, para o papel não
+      parecer uma cor chapada de computador.
 
-   2. AS LINHAS DE CAMPO (as outras linhas). Um campo de futebol visto de cima,
-      espalhado pela página: o círculo central, a grande área e os cantos, mais
-      duas cruzes de registro de gráfica. Cada linha é um degradê com uma faixa
-      fininha de cor e o resto transparente. Todas se repetem a cada 4400 px,
-      a mesma altura da tira dos papéis.
+   2. A COLAGEM. Desenhos de papel recortado colados na página: o varal de
+      bandeirinhas, o estádio, a bola, figurinhas, apito, trave, as linhas de
+      giz do gramado... Um arquivo por tema, desenhado pelo
+      scripts/gerar-fundo.js, com 1600 px de largura, centrado e repetido.
+      Só usa as cores de papel do tokens.css.
 
-   A tinta continua uma só: as linhas são a tinta da página, bem fraca. */
+   3. AS MANCHAS. Nuvens largas e bem fracas, como as de um papel pintado à mão.
+
+   4. OS PAPÉIS. O fundo muda de cor conforme a página desce: rosa, pêssego,
+      menta, lilás e de novo rosa. Entre um papel e outro, bolinhas da cor
+      seguinte vão crescendo até se juntarem, como o degradê da impressão em
+      papel. É uma tira estreita, repetida para os lados e para baixo, também
+      desenhada pelo scripts/gerar-fundo.js (fica no fim do tokens.css).
+
+   A colagem e os papéis se repetem juntos a cada 4400 px: cada desenho fica
+   sempre em cima do mesmo papel.
+
+   O grão e as manchas são imagens SVG com um filtro de ruído (feTurbulence).
+   A lista de números (feColorMatrix) pinta o ruído de uma cor só e usa o
+   desenho dele apenas para decidir a transparência. No tema claro a cor é o
+   branco, que só clareia o papel; no escuro é o preto, que só escurece.
+   Assim eles nunca tiram contraste do texto. */
 
 body::before {
-  --traco: var(--cor-traco-do-fundo);
-  --raio-do-centro: min(16rem, 38vw);
-  --raio-da-meia-lua: min(9rem, 20vw);
+  --escala: 1;      /* o tamanho do desenho: 1 = tamanho natural */
+  --desce: 0px;     /* quanto o desenho inteiro desce em relação ao topo da página */
+  --colagem: url("../assets/img/fundo/colagem-claro.svg");
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -0.6'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23r)'/%3E%3C/svg%3E");
+  --manchas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1120' height='880'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 -0.34'/%3E%3C/filter%3E%3Crect width='1120' height='880' filter='url(%23r)'/%3E%3C/svg%3E");
 
   content: "";
   position: absolute;
@@ -573,34 +587,33 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    /* Cruz de registro, em cima à esquerda (um risco deitado e um em pé) */
-    linear-gradient(to bottom, transparent 379px, var(--traco) 379px 381px, transparent 381px) left 24px top 0 / 22px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 369px, var(--traco) 369px 391px, transparent 391px) left 34px top 0 / 2px 4400px repeat-y,
-    /* Cruz de registro, mais abaixo à direita */
-    linear-gradient(to bottom, transparent 3049px, var(--traco) 3049px 3051px, transparent 3051px) right 24px top 0 / 22px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 3039px, var(--traco) 3039px 3061px, transparent 3061px) right 34px top 0 / 2px 4400px repeat-y,
+    var(--grao) 0 0 / 240px 240px repeat,
+    var(--colagem) center var(--desce) / calc(1600px * var(--escala)) calc(4400px * var(--escala)) repeat,
+    var(--manchas) 0 0 / 1120px 880px repeat,
+    var(--fundo-papeis) 0 var(--desce) / calc(16px * var(--escala)) calc(4400px * var(--escala)) repeat;
+}
 
-    /* O círculo central: um anel, a linha do meio do campo e o ponto do pontapé inicial */
-    radial-gradient(circle at 50% 1180px, transparent calc(var(--raio-do-centro) - 4px), var(--traco) calc(var(--raio-do-centro) - 3px), var(--traco) var(--raio-do-centro), transparent calc(var(--raio-do-centro) + 1px)) 0 0 / 100% 4400px repeat-y,
-    linear-gradient(to bottom, transparent 1178px, var(--traco) 1178px 1181px, transparent 1181px) 0 0 / 100% 4400px repeat-y,
-    radial-gradient(circle at 50% 1180px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
+/* No celular o desenho inteiro fica com metade do tamanho: assim cabem na tela
+   o estádio, a bola e os outros recortes. Ele também desce um pouco, para o
+   varal de bandeirinhas aparecer logo abaixo do cabeçalho. */
+@media (max-width: 47.99rem) {
+  body::before {
+    --escala: 0.5;
+    --desce: 44px;
+  }
+}
 
-    /* A grande área: a linha de fundo, os dois lados, a linha da frente, a marca do pênalti... */
-    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2002px, transparent 2002px) 0 0 / 100% 4400px repeat-y,
-    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 27% 0 / 3px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 73% 0 / 3px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 2329px, var(--traco) 2329px 2332px, transparent 2332px) center top / 46% 4400px repeat-y,
-    radial-gradient(circle at 50% 2220px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
-    /* ...e a meia-lua. O anel tem o centro na marca do pênalti, mas esta camada
-       só começa na linha da frente da área: o que ficaria dentro da área não aparece. */
-    radial-gradient(circle at 50% -112px, transparent calc(var(--raio-da-meia-lua) - 4px), var(--traco) calc(var(--raio-da-meia-lua) - 3px), var(--traco) var(--raio-da-meia-lua), transparent calc(var(--raio-da-meia-lua) + 1px)) 0 2332px / 100% 4400px repeat-y,
+/* No tema escuro: a colagem com as cores do escuro; o grão e as manchas
+   pintados de preto e um pouco mais fracos (o preto pesa mais que o branco) */
+[data-tema="escuro"] body::before {
+  --colagem: url("../assets/img/fundo/colagem-escuro.svg");
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.2 -0.54'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23r)'/%3E%3C/svg%3E");
+  --manchas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1120' height='880'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 -0.29'/%3E%3C/filter%3E%3Crect width='1120' height='880' filter='url(%23r)'/%3E%3C/svg%3E");
+}
 
-    /* Os cantos: outra linha de fundo e os dois quartos de círculo do escanteio.
-       Esta camada termina na linha: só aparece a metade de cima de cada anel. */
-    linear-gradient(to bottom, transparent 3399px, var(--traco) 3399px 3402px, transparent 3402px) 0 0 / 100% 4400px repeat-y,
-    radial-gradient(circle at 0 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
-    radial-gradient(circle at 100% 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
-
-    /* Os papéis e as passagens em retícula */
-    var(--fundo-papeis) 0 0 / 16px 4400px repeat;
+/* No alto contraste o fundo é liso: sem colagem, sem grão e sem manchas */
+[data-contraste="alto"] body::before {
+  --colagem: none;
+  --grao: none;
+  --manchas: none;
 }

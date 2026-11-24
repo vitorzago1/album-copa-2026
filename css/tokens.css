@@ -26,8 +26,12 @@
   --cor-papel-2: #FBD9BF;            /* pêssego */
   --cor-papel-3: #CDEBD8;            /* menta: lembra o gramado */
   --cor-papel-4: #E1D5F5;            /* lilás */
-  /* As linhas de campo desenhadas no fundo: a própria tinta, bem fraca */
-  --cor-traco-do-fundo: rgba(20, 32, 79, 0.09);
+  /* Os papéis dos desenhos recortados e colados no fundo (bola, estádio,
+     bandeirinhas...). O realce é o mais claro de todos no tema claro e o mais
+     fundo no escuro; o destaque é a cor que não aparece nos outros papéis.
+     Um texto pode passar por cima deles: por isso entram na conta do contraste. */
+  --cor-papel-realce: #FDF1F4;       /* branco de papel */
+  --cor-papel-destaque: #FFDD66;     /* amarelo */
 
   /* Tinta */
   --cor-texto: #14204F;              /* azul-tinteiro: a única tinta da página */
@@ -80,7 +84,8 @@
   --cor-papel-2: #3A1F87;            /* roxo */
   --cor-papel-3: #0D3A63;            /* petróleo */
   --cor-papel-4: #55195A;            /* vinho */
-  --cor-traco-do-fundo: rgba(251, 227, 233, 0.07);
+  --cor-papel-realce: #131D4A;       /* o mais fundo: o mesmo azul do rebaixo */
+  --cor-papel-destaque: #0F4A30;     /* verde fundo, de gramado à noite */
 
   --cor-texto: #FBE3E9;              /* tinta rosa */
   --cor-texto-secundario: #C9B4CC;
@@ -122,7 +127,8 @@
   --cor-papel-2: #FFFFFF;            /* no alto contraste o fundo é liso */
   --cor-papel-3: #FFFFFF;
   --cor-papel-4: #FFFFFF;
-  --cor-traco-do-fundo: transparent;
+  --cor-papel-realce: #FFFFFF;
+  --cor-papel-destaque: #FFFFFF;
 
   --cor-texto: #000000;
   --cor-texto-secundario: #1F1F1F;
@@ -162,6 +168,8 @@
   --cor-papel-2: #000000;
   --cor-papel-3: #000000;
   --cor-papel-4: #000000;
+  --cor-papel-realce: #000000;
+  --cor-papel-destaque: #000000;
 
   --cor-texto: #FFFFFF;
   --cor-texto-secundario: #E6E6E6;

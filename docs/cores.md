@@ -6,7 +6,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 
 - Contraste é a diferença de claridade entre duas cores, de 1:1 (iguais) a 21:1 (preto no branco).
 - Mínimos do WCAG 2.2: texto normal 4,5:1 (nível AA) e 7:1 (nível AAA); texto grande, bordas, ícones, anel de foco e barras 3:1.
-- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página: são quatro papéis por tema.
+- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página (quatro papéis por tema) e leva desenhos recortados em mais duas cores de papel.
+- O grão e as manchas do fundo não entram na tabela porque não tiram contraste: no tema claro só clareiam o papel e no escuro só escurecem.
 
 ## Paleta e motivo de cada cor
 
@@ -16,6 +17,8 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Papel pêssego / papel roxo | `--cor-papel-2` | `#FBD9BF` | `#3A1F87` | Segunda faixa do fundo | Vizinho do rosa no círculo das cores: o papel muda sem brigar com o anterior. No escuro, o roxo é o vizinho do azul. |
 | Papel menta / papel petróleo | `--cor-papel-3` | `#CDEBD8` | `#0D3A63` | Terceira faixa do fundo | Verde claro lembra o gramado: é a faixa onde fica o desenho da grande área. No escuro, um azul-petróleo. |
 | Papel lilás / papel vinho | `--cor-papel-4` | `#E1D5F5` | `#55195A` | Quarta faixa do fundo | Fica entre o verde e o rosa do começo, para o fundo emendar quando se repete em páginas compridas. |
+| Recorte branco / recorte fundo | `--cor-papel-realce` | `#FDF1F4` | `#131D4A` | Desenhos recortados do fundo: estádio, bola, figurinhas, linhas de giz | O tom mais claro do tema claro e o mais fundo do escuro: o desenho aparece e o texto que passa por cima dele ganha contraste, em vez de perder. |
+| Recorte amarelo / recorte verde | `--cor-papel-destaque` | `#FFDD66` | `#0F4A30` | Detalhes dos desenhos do fundo: sol, estrelas, bandeiras, um dos cartões | A única cor que não está nos papéis: amarelo lembra o sol e o cartão do juiz; no escuro, um verde de gramado à noite. |
 | Papel de cupom | `--cor-superficie` | `#FDF1F4` | `#25359A` | Cartões, campos de formulário e painel | Quase branco: passa limpeza e marca o que é papel solto em cima da página. No escuro, o que está na frente fica mais claro. |
 | Rosa-sombra / rebaixo | `--cor-vaga` | `#EDB5C3` | `#131D4A` | Espaço vazio da figurinha e trilho da barra de progresso | O próprio papel um tom abaixo: comunica ausência e lugar reservado sem usar cinza. |
 | Azul-tinteiro / tinta rosa | `--cor-texto` | `#14204F` | `#FBE3E9` | Textos, títulos e fios | Azul-escuro transmite confiança e seriedade de coisa impressa. No escuro, um rosa quase branco é mais macio que o branco puro. |
@@ -101,6 +104,22 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo e de vaga sobre o papel 4 | `#4F5487` | `#E1D5F5` | 5,10:1 | 3:1 | Passa (3:1) |
 | Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#14204F` | `#E1D5F5` | 11,15:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre o papel 4 | `#14204F` | `#E1D5F5` | 11,15:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de realce | `#14204F` | `#FDF1F4` | 14,13:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de realce | `#474C7A` | `#FDF1F4` | 7,38:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o recorte de realce | `#2340C4` | `#FDF1F4` | 7,33:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o recorte de realce | `#0A5C33` | `#FDF1F4` | 7,36:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o recorte de realce | `#9E001A` | `#FDF1F4` | 7,72:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o recorte de realce | `#4F5487` | `#FDF1F4` | 6,46:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de realce | `#14204F` | `#FDF1F4` | 14,13:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de realce | `#14204F` | `#FDF1F4` | 14,13:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de destaque | `#14204F` | `#FFDD66` | 11,70:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de destaque | `#474C7A` | `#FFDD66` | 6,11:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o recorte de destaque | `#2340C4` | `#FFDD66` | 6,07:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o recorte de destaque | `#0A5C33` | `#FFDD66` | 6,09:1 | 4,5:1 | Passa AA |
+| Mensagem de erro sobre o recorte de destaque | `#9E001A` | `#FFDD66` | 6,39:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o recorte de destaque | `#4F5487` | `#FFDD66` | 5,35:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de destaque | `#14204F` | `#FFDD66` | 11,70:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de destaque | `#14204F` | `#FFDD66` | 11,70:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: tema escuro
 
@@ -165,6 +184,22 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo e de vaga sobre o papel 4 | `#9AA3E6` | `#55195A` | 5,23:1 | 3:1 | Passa (3:1) |
 | Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#EFE6EC` | `#55195A` | 10,28:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre o papel 4 | `#FBE3E9` | `#55195A` | 10,32:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de realce | `#FBE3E9` | `#131D4A` | 13,26:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de realce | `#C9B4CC` | `#131D4A` | 8,36:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o recorte de realce | `#A9BEFF` | `#131D4A` | 8,83:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o recorte de realce | `#6EDB9B` | `#131D4A` | 9,42:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o recorte de realce | `#FF9A9A` | `#131D4A` | 7,94:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o recorte de realce | `#9AA3E6` | `#131D4A` | 6,72:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de realce | `#EFE6EC` | `#131D4A` | 13,21:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de realce | `#FBE3E9` | `#131D4A` | 13,26:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de destaque | `#FBE3E9` | `#0F4A30` | 8,45:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de destaque | `#C9B4CC` | `#0F4A30` | 5,33:1 | 4,5:1 | Passa AA |
+| Link e botão principal sobre o recorte de destaque | `#A9BEFF` | `#0F4A30` | 5,63:1 | 4,5:1 | Passa AA |
+| Mensagem de sucesso sobre o recorte de destaque | `#6EDB9B` | `#0F4A30` | 6,01:1 | 4,5:1 | Passa AA |
+| Mensagem de erro sobre o recorte de destaque | `#FF9A9A` | `#0F4A30` | 5,06:1 | 4,5:1 | Passa AA |
+| Borda de campo e de vaga sobre o recorte de destaque | `#9AA3E6` | `#0F4A30` | 4,29:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de destaque | `#EFE6EC` | `#0F4A30` | 8,42:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de destaque | `#FBE3E9` | `#0F4A30` | 8,45:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: alto contraste, claro
 
@@ -229,6 +264,22 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo e de vaga sobre o papel 4 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 | Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre o papel 4 | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de realce | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de realce | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o recorte de realce | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o recorte de realce | `#00471D` | `#FFFFFF` | 10,94:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o recorte de realce | `#8A0014` | `#FFFFFF` | 10,04:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o recorte de realce | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de realce | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de realce | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de destaque | `#000000` | `#FFFFFF` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de destaque | `#1F1F1F` | `#FFFFFF` | 16,48:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o recorte de destaque | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o recorte de destaque | `#00471D` | `#FFFFFF` | 10,94:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o recorte de destaque | `#8A0014` | `#FFFFFF` | 10,04:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o recorte de destaque | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de destaque | `#000000` | `#FFFFFF` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de destaque | `#0A1FA8` | `#FFFFFF` | 11,84:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: alto contraste, escuro
 
@@ -293,21 +344,22 @@ Arquivo gerado por `node scripts/contraste.js`. Não edite à mão: mude as core
 | Borda de campo e de vaga sobre o papel 4 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
 | Etiqueta da figurinha (fundo ou contorno) sobre o papel 4 | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
 | Foco (anel ou vão) sobre o papel 4 | `#FFD60A` | `#000000` | 14,88:1 | 3:1 | Passa (3:1) |
-
-## Contraste: linhas de campo do fundo
-
-As linhas de campo são a tinta da página bem fraca, por cima do papel. A tabela mostra cada papel já com a linha por cima e o texto que menos contrasta com ele. Mínimo de 4,5:1. No alto contraste não há linhas.
-
-| Tema | Papel | Papel com a linha | Texto que menos contrasta | Contraste | Resultado |
-|---|---|---|---|---|---|
-| Claro | `#F6CDD7` | `#E2BDCB` | `--cor-acao` | 4,76:1 | Passa AA |
-| Claro | `#FBD9BF` | `#E6C8B5` | `--cor-acao` | 5,11:1 | Passa AA |
-| Claro | `#CDEBD8` | `#BCD9CC` | `--cor-acao` | 5,36:1 | Passa AA |
-| Claro | `#E1D5F5` | `#CFC5E6` | `--cor-acao` | 4,91:1 | Passa AA |
-| Escuro | `#1B2A80` | `#2B3787` | `--cor-erro` | 5,17:1 | Passa AA |
-| Escuro | `#3A1F87` | `#482D8E` | `--cor-erro` | 5,07:1 | Passa AA |
-| Escuro | `#0D3A63` | `#1E466C` | `--cor-erro` | 4,81:1 | Passa AA |
-| Escuro | `#55195A` | `#612764` | `--cor-erro` | 5,22:1 | Passa AA |
+| Texto principal sobre o recorte de realce | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de realce | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o recorte de realce | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o recorte de realce | `#7CF0AD` | `#000000` | 14,92:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o recorte de realce | `#FFB3B3` | `#000000` | 12,35:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o recorte de realce | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de realce | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de realce | `#FFD60A` | `#000000` | 14,88:1 | 3:1 | Passa (3:1) |
+| Texto principal sobre o recorte de destaque | `#FFFFFF` | `#000000` | 21,00:1 | 4,5:1 | Passa AAA |
+| Texto de apoio sobre o recorte de destaque | `#E6E6E6` | `#000000` | 16,83:1 | 4,5:1 | Passa AAA |
+| Link e botão principal sobre o recorte de destaque | `#9CB4FF` | `#000000` | 10,39:1 | 4,5:1 | Passa AAA |
+| Mensagem de sucesso sobre o recorte de destaque | `#7CF0AD` | `#000000` | 14,92:1 | 4,5:1 | Passa AAA |
+| Mensagem de erro sobre o recorte de destaque | `#FFB3B3` | `#000000` | 12,35:1 | 4,5:1 | Passa AAA |
+| Borda de campo e de vaga sobre o recorte de destaque | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Etiqueta da figurinha (fundo ou contorno) sobre o recorte de destaque | `#FFFFFF` | `#000000` | 21,00:1 | 3:1 | Passa (3:1) |
+| Foco (anel ou vão) sobre o recorte de destaque | `#FFD60A` | `#000000` | 14,88:1 | 3:1 | Passa (3:1) |
 
 ## Contraste: cores das seleções
 
@@ -366,7 +418,7 @@ O número é escrito sobre a camisa e a silhueta (na tinta da figurinha) fica so
 
 ## Resumo
 
-- Pares conferidos: 372 (59 pares da página em 4 temas, mais 40 pares de texto sobre as linhas do fundo, mais 2 pares do desenho de cada uma das 48 seleções).
+- Pares conferidos: 396 (75 pares da página em 4 temas, mais 2 pares do desenho de cada uma das 48 seleções).
 - Reprovados: 0.
 - A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.
 - A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.
