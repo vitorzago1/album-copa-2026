@@ -33,6 +33,14 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Corrigido: em janela com menos de 640 px de altura, o link "Ver o Grupo no álbum" ficava muito perto do pé do palco.
 - Script de contraste confere também os papéis novos e o texto sobre as linhas do fundo: 372 pares, 0 reprovados.
 - 37 verificações automáticas novas (453 no total).
+- Fundo ilustrado: colagem de papel recortado por cima dos papéis (varal de bandeirinhas, estádio, figurinhas, apito, tática, bola, trave, camisa, escanteio, pacotinho, cronômetro, cartões, estrelas e confete), desenhada pelo `scripts/gerar-fundo.js` em `assets/img/fundo/`.
+- Duas cores novas para os recortes: realce e destaque. Contraste: 396 pares, 0 reprovados.
+- Grão e manchas de papel no fundo, feitos com filtro de ruído do SVG.
+- As linhas de campo cinza saíram; a faixa verde ganhou linhas de giz.
+- No celular, o desenho do fundo fica com metade do tamanho.
+- Abertura da página inicial: convite centralizado, com os pontinhos contornando o texto.
+- Corrigido: os botões da abertura ficavam 26 px fora do centro.
+- 39 verificações automáticas novas (490 no total).
 
 ## v0.4-acessibilidade (20/11/2026)
 

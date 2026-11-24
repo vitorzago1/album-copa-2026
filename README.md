@@ -40,7 +40,7 @@ album-copa-2026/
 │             cenas.js (motor das cenas), cenas-inicio.js (as oito cenas),
 │             pacote3d.js (o pacotinho em 3D), pacotinho-3d.js (ele ao vivo)
 │             e vendor/three.min.js (a única biblioteca do site)
-├── assets/   bandeiras, fotos dos estádios, quadros do pacotinho, SVG e fontes
+├── assets/   bandeiras, fotos dos estádios, quadros do pacotinho, colagem do fundo, SVG e fontes
 ├── docs/     cores, decisões, referências, prints e anexo de código
 ├── scripts/  ferramentas de apoio (contraste, fundo da página, anexo de código, gerador de quadros)
 ├── README.md
@@ -204,13 +204,29 @@ Dois pedidos do aluno em 22/11/2026: um aviso "Desça para continuar" nas partes
 
 1. **Direção: "Uma tinta só, vários papéis".** A tinta continua uma só (azul no tema claro, rosa no escuro). O que muda é o papel: o fundo passa por quatro papéis conforme a página desce (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho) e volta ao primeiro.
 2. **Passagem em retícula.** Entre um papel e o seguinte, bolinhas da cor seguinte crescem linha a linha até se juntarem, como o degradê da impressão em papel. É uma imagem SVG estreita (16 por 4400 px), repetida para os lados e para baixo. Ela fica escrita dentro do `css/tokens.css`, e quem a desenha é o `scripts/gerar-fundo.js`.
-3. **Linhas de campo.** Por cima dos papéis há um campo de futebol visto de cima, espalhado pela página: círculo central, grande área com a meia-lua, cantos e duas cruzes de registro de gráfica. São 16 degradês de CSS (`linear-gradient` e `radial-gradient`) na tinta da página, bem fraca (9% no tema claro, 7% no escuro).
+3. **Linhas de campo (trocadas na etapa 14 por linhas de giz).** Por cima dos papéis havia um campo de futebol visto de cima, espalhado pela página: círculo central, grande área com a meia-lua, cantos e duas cruzes de registro de gráfica. São 16 degradês de CSS (`linear-gradient` e `radial-gradient`) na tinta da página, bem fraca (9% no tema claro, 7% no escuro).
 4. **Onde fica.** Em uma camada só (`body::before`, no `css/base.css`), atrás de todo o conteúdo, nas 7 páginas. Não usa JavaScript, não se mexe e não recebe cliques.
 5. **Contraste.** Tudo o que fica direto sobre a página (texto, link, mensagens, borda e foco) foi conferido em cada papel, e o texto também com uma linha de campo por cima. O `node scripts/contraste.js` passou de 236 para 372 pares, com 0 reprovados. No alto contraste o fundo fica liso (branco ou preto), sem papéis e sem linhas.
 6. **Aviso "Desça para continuar".** Cada uma das oito cenas da página inicial mostra o aviso no pé do palco, com um fio que desce três vezes quando a cena chega à tela. O aviso some perto do fim da cena. Na abertura, o convite da primeira tela já traz a frase, e o aviso do palco entra quando o convite sai. Quem cria o aviso é o `js/cenas.js`, para toda cena registrada.
 7. **O aviso é só para os olhos.** Fica fora da leitura de tela (`aria-hidden`) e não recebe cliques. Na versão parada (menos movimento, letra maior ou sem JavaScript) ele não aparece, porque ali a página é comum.
 8. **Janela baixa.** Com menos de 640 px de altura, cada grupo da faixa dos 12 grupos fica mais estreito. Assim o link "Ver o Grupo no álbum" não fica debaixo do aviso.
 9. **Verificações automáticas novas:** 37. No total são 453, todas passando.
+
+### Etapa 14: fundo ilustrado e abertura centralizada
+
+Dois pedidos do aluno em 22/11/2026, depois de ver a etapa 13: o fundo ainda estava "seco e artificial", só com cores, e devia ter detalhes e imagens; e a frase da abertura devia ficar centralizada, com os pontinhos em volta.
+
+1. **Colagem de papel recortado.** Por cima dos papéis da etapa 13 há desenhos que parecem recortados à tesoura e colados na página: um varal de bandeirinhas no topo, um estádio com o sol nascendo atrás, figurinhas, apito, prancheta de tática, bola, trave, camisa, bandeira de escanteio, pacotinho, cronômetro, cartões, estrelas e confete.
+2. **Desenhos próprios.** Todos são feitos pelo `scripts/gerar-fundo.js` com formas simples (círculos, polígonos e traços). Não há foto, logo nem emblema. As beiradas saem um pouco tortas de propósito: cada ponto é tirado um tiquinho do lugar por um sorteio que se repete.
+3. **Um arquivo por tema.** `assets/img/fundo/colagem-claro.svg` e `colagem-escuro.svg`, com cerca de 55 KB cada. O desenho é o mesmo; mudam as cores. A página só baixa o do tema em uso.
+4. **Só cores de papel.** A colagem usa seis cores do `css/tokens.css`: os quatro papéis e duas novas, o realce (branco de papel; no escuro, o azul mais fundo) e o destaque (amarelo; no escuro, verde). Um texto pode passar por cima de um desenho, então todas entram na conta do contraste: `node scripts/contraste.js` confere 396 pares, com 0 reprovados.
+5. **Gramado de giz.** As linhas de campo cinza da etapa 13 saíram. No lugar, a faixa verde ganhou a linha do meio do campo e o círculo central riscados na cor do realce, como giz.
+6. **Grão e manchas.** Duas imagens SVG com filtro de ruído (`feTurbulence`): um chuvisco fino por cima de tudo e nuvens largas e fracas por baixo da colagem. No tema claro só clareiam o papel; no escuro só escurecem. Por isso não tiram contraste do texto.
+7. **Celular.** O desenho inteiro (papéis e colagem) fica com metade do tamanho, para o estádio e a bola caberem na tela.
+8. **Alto contraste.** O fundo continua liso: sem colagem, grão ou manchas.
+9. **Abertura centralizada.** Em movimento, o convite ("A Copa acabou. Seu álbum, não.", os dois botões e o aviso de descer) fica no meio da primeira tela. Os pontinhos contornam cada linha do texto: não passam por trás dele e ficam menores perto dele. Na versão parada a abertura continua como era, com o convite à esquerda e a marca ao lado.
+10. **Tentativa descartada.** Foi testada a foto de um estádio impressa em retícula. Com as cores claras que o contraste permite, a foto virava uma mancha sem forma. A ideia foi trocada pelo estádio desenhado.
+11. **Verificações automáticas novas:** 39. Duas da etapa 13 saíram junto com as linhas cinza. No total são 490, todas passando.
 
 ## Onde está cada item pedido pelo professor
 
@@ -247,7 +263,7 @@ Dois pedidos do aluno em 22/11/2026: um aviso "Desça para continuar" nas partes
 - HTML, CSS e JavaScript puros, sem framework e sem etapa de build.
 - Git e GitHub para o histórico de versões.
 - Node.js só para rodar os scripts de apoio: contraste, fundo da página e anexo de código (o site em si não precisa dele).
-- O fundo da página usa só CSS: uma imagem SVG escrita dentro do próprio CSS (`data:`), `linear-gradient` e `radial-gradient`.
+- O fundo da página usa só CSS e SVG: dois arquivos SVG (a colagem, um por tema), imagens SVG escritas dentro do próprio CSS (`data:`) e o filtro de ruído `feTurbulence`.
 - `flag-icons` (licença MIT): só as imagens das bandeiras, copiadas para dentro do projeto. Motivo: desenhar à mão cada bandeira com fidelidade daria muito trabalho e mais chance de erro, e o enunciado do projeto permite bandeiras de fonte com licença livre.
 - Fotos do Wikimedia Commons (licenças CC BY, CC BY-SA, CC0 e domínio público), com autor e licença de cada uma na página Sobre e em `docs/referencias.md`.
 - `crypto.subtle` (já vem no navegador): calcula o hash da senha. Não é biblioteca externa.

@@ -16,6 +16,7 @@ As duas licenças estão copiadas em `assets/fontes/LICENCA-*.txt`, do repositó
 - Retrato das figurinhas: desenho próprio em SVG (busto genérico, sem representar nenhuma pessoa).
 - Ícone do site (`assets/svg/favicon.svg`): desenho próprio.
 - Pacotinho, costas da figurinha, cartela e carimbos: desenhados em CSS, sem imagem.
+- Desenhos do fundo (`assets/img/fundo/`: estádio, bola, bandeirinhas, figurinhas, apito e os outros recortes): desenhos próprios, feitos por código no `scripts/gerar-fundo.js`. Sem foto e sem imagem de fora.
 - Bandeiras (`assets/bandeiras/`, as 48 seleções): biblioteca `flag-icons`, de Panayiotis Lipiridis, licença MIT. Origem: https://github.com/lipis/flag-icons (pasta `flags/4x3`). Copiadas em 19 e 20/11/2026, sem alteração. A licença está em `assets/bandeiras/LICENCA-flag-icons.txt`. Só as imagens foram usadas: nenhum código da biblioteca roda no site.
 
 ### Fotos dos estádios (carrossel da página inicial)
@@ -131,6 +132,7 @@ Pendências desta pesquisa:
 - MDN Web Docs. `animation-timeline`, usada na entrada das casas do álbum: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
 - MDN Web Docs. `clip-path`, usado no rasgo em serra: https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
 - MDN Web Docs. `mask-image`, usada na retícula que acende: https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
+- MDN Web Docs. `<feTurbulence>`, o filtro de ruído usado no grão e nas manchas do fundo: https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/feTurbulence (consulta em 22/11/2026)
 - MDN Web Docs. `stroke-dashoffset`, usado no traço que se desenha: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset
 - MDN Web Docs. Intersection Observer API, usada no carimbo e no campo do álbum: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 - MDN Web Docs. Pointer events, usados na lendária holográfica e na retícula: https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events

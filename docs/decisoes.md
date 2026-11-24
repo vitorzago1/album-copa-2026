@@ -238,6 +238,46 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 | 2.3.3 Animação por interação | Com "Reduzir animações" não há cena presa nem aviso. |
 | 2.4.11 Foco não encoberto | O aviso não cobre nenhum link ou botão (conferido em 6 tamanhos de tela e com um link de grupo focado pelo teclado). |
 
+## Fundo ilustrado e abertura centralizada (etapa 14)
+
+- **Pedido do aluno em 22/11/2026, depois da etapa 13.** O fundo estava "seco e artificial", só com cores; devia ter detalhes e imagens. A frase da abertura devia ficar centralizada, e parecia estranha sozinha, sem os pontinhos em volta.
+- **Colagem de papel recortado.** A página continua sendo um impresso; agora tem recortes colados nela, como em um álbum montado à mão. Os temas dos desenhos são de futebol e do próprio álbum: estádio, bola, trave, apito, cartões, tática, bandeirinhas, figurinha e pacotinho.
+- **Por que desenho, e não foto.** Foi testada a foto de um estádio em retícula (licença CC0). Para não tirar contraste do texto, ela só podia usar tons muito próximos do papel, e virava uma mancha sem forma. O desenho recortado fica nítido com as mesmas cores. A ferramenta de teste e o arquivo de medidas da foto foram apagados.
+- **Desenhos próprios, feitos por código.** Nenhuma imagem de fora: cada desenho é uma função do `scripts/gerar-fundo.js`, feita de círculos, polígonos e traços. Nada de logo, emblema, mascote ou layout de álbum existente.
+- **Beirada torta de propósito.** A função `recorte` tira cada ponto um pouco do lugar, com um sorteio que se repete (a mesma conta do `js/cenas.js`). É o que tira a cara de forma feita com régua.
+- **A regra das cores.** A colagem só usa seis cores, todas do `css/tokens.css` e todas conferidas pelo script de contraste: os quatro papéis, o realce e o destaque. Qualquer ponto de um desenho é uma cor em que todo texto do site passa.
+- **Realce.** Branco de papel no tema claro e o azul mais fundo no escuro. Um texto em cima do realce ganha contraste em vez de perder.
+- **Destaque.** Amarelo no tema claro e verde fundo no escuro: a única cor que não está nos papéis. Fica em detalhes pequenos (sol, estrelas, bandeiras, um cartão).
+- **A cor viva continua nas figurinhas.** Os papéis e os recortes são tons claros (ou fundos); as cores fortes das seleções só aparecem nas figurinhas de verdade.
+- **Linhas de giz.** As linhas de campo cinza da etapa 13 cruzavam os desenhos e ficavam confusas. Saíram, junto com a cor `--cor-traco-do-fundo`. A faixa verde ganhou a linha do meio e o círculo central na cor do realce.
+- **Raios só para cima.** Atrás do estádio os raios abrem em leque de 180 graus, como sol nascendo. Uma volta inteira ficava forte demais atrás do texto.
+- **Grão por cima, manchas por baixo.** O chuvisco fino cobre também os recortes, que são papel. As manchas ficam só no papel de trás. A imagem das manchas é grande (1120 por 880 px) porque, repetida a cada 320 px, a repetição aparecia.
+- **Grão que só ajuda o contraste.** No tema claro o ruído é pintado de branco e só clareia; no escuro é pintado de preto e só escurece.
+- **Celular com metade do tamanho.** Em tela estreita só o meio da colagem aparecia, e os desenhos grandes viravam pedaços sem sentido. Com metade do tamanho cabem inteiros. Os papéis encolhem junto, para cada desenho continuar sobre o papel dele.
+- **Abertura no meio.** O convite ganhou o tamanho do conteúdo e margens automáticas, sem `transform`, para a posição dele poder ser medida pelo JavaScript.
+- **Pontinhos que contornam o texto.** Antes havia uma janela retangular vazia em volta do convite. Agora cada linha do título, cada botão e o aviso têm a sua caixa: a menos de 14 px não há pontinho; de 14 a 110 px o pontinho cresce de 35% até o tamanho normal.
+- **Versão parada da abertura.** Não mudou: convite à esquerda e a marca já formada ao lado.
+
+### WCAG 2.2 no fundo ilustrado e na abertura
+
+| Critério | Como foi atendido |
+|---|---|
+| 1.1.1 Conteúdo não textual | A colagem, o grão e as manchas são enfeite em CSS e não entram na leitura de tela. |
+| 1.4.1 Uso da cor | Nenhum desenho do fundo informa algo: são enfeite. |
+| 1.4.3 Contraste | Todo texto foi conferido sobre as seis cores da colagem, nos dois temas. Menor valor: 5,06:1 (mensagem de erro sobre o recorte verde, tema escuro). No tema claro: 5,62:1 (link sobre o papel rosa). 396 pares, 0 reprovados. Com grão e manchas ligados, nenhum ponto do papel ficou mais escuro que o papel liso no tema claro, nem mais claro no escuro (medido nos pixels de um print). |
+| 1.4.11 Contraste não textual | Borda de campo e de vaga: no mínimo 4,29:1 (sobre o recorte verde, tema escuro). |
+| 1.4.10 Reflow | Sem rolagem lateral em 320 px nas 7 páginas. O convite cabe na primeira tela em 7 tamanhos, de 320 por 568 a 1920 por 1080. |
+| 2.2.2 Pausar, parar, ocultar | O fundo não se mexe. |
+| 2.4.7 e 2.4.11 Foco | O foco em um botão do convite traz a cena de volta ao começo, com o convite inteiro à vista. |
+
+## Verificação feita na etapa 14
+
+- 39 verificações automáticas novas no Microsoft Edge sem janela. Colagem: arquivo de cada tema servido e usado nas 7 páginas; só as seis cores de papel; sem texto, foto, link ou script; menos de 80 KB; linha de giz, círculo central e sol lidos nos pixels de um print; mesmo desenho nos dois temas; metade do tamanho no celular; nada no alto contraste. Grão: muda o papel de verdade e nunca na direção que tira contraste. Abertura: convite no meio em 7 tamanhos de tela; título, botões e aviso centralizados; nenhum pontinho atrás do texto; pontinhos dos lados e em cima do título; pontinhos menores perto do texto; saída ao rolar; foco; versão parada igual à de antes.
+- Defeito achado pelos testes e corrigido: os botões da abertura ficavam 26 px fora do centro, porque o parágrafo deles tinha largura máxima de leitura.
+- Suítes anteriores: uma verificação da etapa 10 foi atualizada (os pontinhos agora são conferidos atrás de cada peça do convite, e não em um retângulo só) e duas da etapa 13 saíram com as linhas cinza. Total: 490, todas passando.
+- Rolagem medida no Edge sem janela, com e sem o fundo, no álbum e na página inicial: 60 quadros por segundo nos dois casos. Esse teste não usa placa de vídeo; a fluidez em celular de verdade ainda não foi medida.
+- Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
+
 ## Verificação feita na etapa 13
 
 - 37 verificações automáticas novas no Microsoft Edge sem janela. Fundo: presente nas 7 páginas e nos dois temas; cor de cada papel lida nos pixels de um print (papéis 1, 2, 3, 4 e de novo 1); bolinhas da retícula que crescem; força da linha de campo; alto contraste liso; sem rolagem lateral em 320 px; links por cima do fundo continuam clicáveis; fundo igual sem JavaScript; a tira guardada no `tokens.css` é a que o script desenha com as cores atuais. Aviso: presente nas 8 cenas, fora da leitura de tela, aceso no meio e apagado no fim de cada cena, fio que desce 3 vezes, ausente na versão parada e sem JavaScript.
@@ -245,7 +285,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - Defeito achado por essa conferência e corrigido: em 1024×600 o aviso ficava por cima do link "Ver o Grupo no álbum".
 - As 416 verificações anteriores continuam passando.
 - Contraste: `node scripts/contraste.js` com 372 pares, 0 reprovados.
-- Limite conhecido: nos pontos em que duas linhas de campo se cruzam (pontos de poucos pixels, menores que uma letra) a força da linha dobra. Um texto exatamente em cima de um desses pontos teria ali 4,06:1 no pior caso. A conta de contraste considera uma linha por vez.
+- Limite conhecido (deixou de existir na etapa 14, quando as linhas cinza saíram): nos pontos em que duas linhas de campo se cruzam (pontos de poucos pixels, menores que uma letra) a força da linha dobra. Um texto exatamente em cima de um desses pontos teria ali 4,06:1 no pior caso. A conta de contraste considera uma linha por vez.
 - No navegador embutido do aplicativo de programação, a página inicial carregou os arquivos novos sem erro no console (tema escuro, 8 avisos, fundo com as 16 camadas).
 - Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 

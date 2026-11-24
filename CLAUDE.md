@@ -38,8 +38,10 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
 ## Design: direção "Uma tinta só, vários papéis"
 
 - A página é impressa em uma tinta só: tinta azul no tema claro, tinta rosa no escuro. A cor viva só chega pelas figurinhas.
-- O papel do fundo muda ao longo da página (pedido do Vitor em 22/11/2026): quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula e linhas de campo bem fracas. Fica tudo no `body::before` (`css/base.css`). No alto contraste o fundo é liso.
-- Ao mudar uma cor de papel em `css/tokens.css`: rodar `node scripts/gerar-fundo.js` (redesenha o fundo) e depois `node scripts/contraste.js`.
+- O papel do fundo muda ao longo da página (pedido do Vitor em 22/11/2026): quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula. Fica tudo no `body::before` (`css/base.css`). No alto contraste o fundo é liso.
+- Por cima dos papéis há uma colagem de papel recortado (estádio, bola, bandeirinhas, figurinhas...), grão e manchas de papel. O Vitor pediu isso em 22/11/2026 porque só cores ficava "seco e artificial": ele quer detalhes e imagens no fundo. Os desenhos são próprios, feitos por código no `scripts/gerar-fundo.js`, e só usam as cores de papel do `css/tokens.css` (os quatro papéis, o realce e o destaque), todas conferidas no contraste. Foto no fundo foi testada e não funcionou.
+- Ao mudar uma cor de papel em `css/tokens.css` ou um desenho da colagem: rodar `node scripts/gerar-fundo.js` (redesenha o fundo) e depois `node scripts/contraste.js`.
+- Na abertura da página inicial, em movimento, o convite fica centralizado e os pontinhos contornam o texto (pedido do Vitor em 22/11/2026).
 - Fontes: Londrina Solid (títulos e números) e Atkinson Hyperlegible Next (leitura). No máximo essas duas famílias.
 - Cantos têm significado: canto vivo é o que está impresso na página (vaga, fio); 4 px é ferramenta (botão, campo); 10 px com borda branca é o que se cola (figurinha, pacotinho, cupom).
 - Só a figurinha colada tem sombra. Só o que foi posto à mão fica levemente torto.

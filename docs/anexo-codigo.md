@@ -5,7 +5,7 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 37.
-- Linhas de código (com comentários): 13531.
+- Linhas de código (com comentários): 13981.
 
 | Arquivo | Linhas |
 |---|---|
@@ -15,13 +15,13 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `trocas.html` | 166 |
 | `login.html` | 183 |
 | `contato.html` | 160 |
-| `sobre.html` | 302 |
-| `css/tokens.css` | 247 |
-| `css/base.css` | 606 |
+| `sobre.html` | 305 |
+| `css/tokens.css` | 255 |
+| `css/base.css` | 619 |
 | `css/componentes.css` | 1361 |
 | `css/paginas.css` | 537 |
 | `css/acessibilidade.css` | 222 |
-| `css/cenas.css` | 1120 |
+| `css/cenas.css` | 1134 |
 | `js/tema-acessibilidade.js` | 226 |
 | `js/menu.js` | 52 |
 | `js/efeitos.js` | 106 |
@@ -33,7 +33,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/inicio.js` | 53 |
 | `js/carrossel.js` | 92 |
 | `js/cenas.js` | 272 |
-| `js/cenas-inicio.js` | 827 |
+| `js/cenas-inicio.js` | 867 |
 | `js/pacote3d.js` | 466 |
 | `js/pacotinho-3d.js` | 170 |
 | `js/formulario.js` | 53 |
@@ -42,8 +42,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/sobre.js` | 44 |
 | `js/demonstracao.js` | 39 |
 | `js/dados.js` | 2474 |
-| `scripts/contraste.js` | 358 |
-| `scripts/gerar-fundo.js` | 131 |
+| `scripts/contraste.js` | 311 |
+| `scripts/gerar-fundo.js` | 550 |
 | `scripts/gerar-anexo.js` | 103 |
 | `scripts/quadros.html` | 129 |
 
@@ -1551,6 +1551,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <h3>Bandeiras</h3>
       <p>Biblioteca <a href="https://github.com/lipis/flag-icons">flag-icons</a>, de Panayiotis Lipiridis. Licença MIT.</p>
 
+      <h3>Desenhos do fundo</h3>
+      <p>O estádio, a bola, as bandeirinhas e os outros recortes do fundo foram desenhados para este projeto, por código. Não usam foto nem imagem de fora.</p>
+
       <h3>Biblioteca de 3D</h3>
       <p>Biblioteca <a href="https://threejs.org/">Three.js</a>, revisão 128, dos autores do three.js. Licença MIT. Desenha o pacotinho em 3D na página Pacotinhos e gerou as imagens do pacotinho da página inicial.</p>
 
@@ -1752,8 +1755,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-papel-2: #FBD9BF;            /* pêssego */
   --cor-papel-3: #CDEBD8;            /* menta: lembra o gramado */
   --cor-papel-4: #E1D5F5;            /* lilás */
-  /* As linhas de campo desenhadas no fundo: a própria tinta, bem fraca */
-  --cor-traco-do-fundo: rgba(20, 32, 79, 0.09);
+  /* Os papéis dos desenhos recortados e colados no fundo (bola, estádio,
+     bandeirinhas...). O realce é o mais claro de todos no tema claro e o mais
+     fundo no escuro; o destaque é a cor que não aparece nos outros papéis.
+     Um texto pode passar por cima deles: por isso entram na conta do contraste. */
+  --cor-papel-realce: #FDF1F4;       /* branco de papel */
+  --cor-papel-destaque: #FFDD66;     /* amarelo */
 
   /* Tinta */
   --cor-texto: #14204F;              /* azul-tinteiro: a única tinta da página */
@@ -1806,7 +1813,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-papel-2: #3A1F87;            /* roxo */
   --cor-papel-3: #0D3A63;            /* petróleo */
   --cor-papel-4: #55195A;            /* vinho */
-  --cor-traco-do-fundo: rgba(251, 227, 233, 0.07);
+  --cor-papel-realce: #131D4A;       /* o mais fundo: o mesmo azul do rebaixo */
+  --cor-papel-destaque: #0F4A30;     /* verde fundo, de gramado à noite */
 
   --cor-texto: #FBE3E9;              /* tinta rosa */
   --cor-texto-secundario: #C9B4CC;
@@ -1848,7 +1856,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-papel-2: #FFFFFF;            /* no alto contraste o fundo é liso */
   --cor-papel-3: #FFFFFF;
   --cor-papel-4: #FFFFFF;
-  --cor-traco-do-fundo: transparent;
+  --cor-papel-realce: #FFFFFF;
+  --cor-papel-destaque: #FFFFFF;
 
   --cor-texto: #000000;
   --cor-texto-secundario: #1F1F1F;
@@ -1888,6 +1897,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-papel-2: #000000;
   --cor-papel-3: #000000;
   --cor-papel-4: #000000;
+  --cor-papel-realce: #000000;
+  --cor-papel-destaque: #000000;
 
   --cor-texto: #FFFFFF;
   --cor-texto-secundario: #E6E6E6;
@@ -2524,26 +2535,40 @@ a:hover {
 
 /* ---------- O fundo da página ----------
    Uma camada do tamanho da página inteira, atrás de todo o conteúdo. Ela tem
-   duas partes, uma por cima da outra:
+   quatro partes, uma por cima da outra (no "background", a de cima vem primeiro):
 
-   1. OS PAPÉIS (a última linha do "background"). O fundo muda de cor conforme
-      a página desce: rosa, pêssego, menta, lilás e de novo rosa. Entre um
-      papel e outro, bolinhas da cor seguinte vão crescendo até se juntarem,
-      como o degradê da impressão em papel. É uma tira estreita, repetida para
-      os lados e para baixo, desenhada pelo scripts/gerar-fundo.js.
+   1. O GRÃO DO PAPEL. Um chuvisco bem fino por cima de tudo, para o papel não
+      parecer uma cor chapada de computador.
 
-   2. AS LINHAS DE CAMPO (as outras linhas). Um campo de futebol visto de cima,
-      espalhado pela página: o círculo central, a grande área e os cantos, mais
-      duas cruzes de registro de gráfica. Cada linha é um degradê com uma faixa
-      fininha de cor e o resto transparente. Todas se repetem a cada 4400 px,
-      a mesma altura da tira dos papéis.
+   2. A COLAGEM. Desenhos de papel recortado colados na página: o varal de
+      bandeirinhas, o estádio, a bola, figurinhas, apito, trave, as linhas de
+      giz do gramado... Um arquivo por tema, desenhado pelo
+      scripts/gerar-fundo.js, com 1600 px de largura, centrado e repetido.
+      Só usa as cores de papel do tokens.css.
 
-   A tinta continua uma só: as linhas são a tinta da página, bem fraca. */
+   3. AS MANCHAS. Nuvens largas e bem fracas, como as de um papel pintado à mão.
+
+   4. OS PAPÉIS. O fundo muda de cor conforme a página desce: rosa, pêssego,
+      menta, lilás e de novo rosa. Entre um papel e outro, bolinhas da cor
+      seguinte vão crescendo até se juntarem, como o degradê da impressão em
+      papel. É uma tira estreita, repetida para os lados e para baixo, também
+      desenhada pelo scripts/gerar-fundo.js (fica no fim do tokens.css).
+
+   A colagem e os papéis se repetem juntos a cada 4400 px: cada desenho fica
+   sempre em cima do mesmo papel.
+
+   O grão e as manchas são imagens SVG com um filtro de ruído (feTurbulence).
+   A lista de números (feColorMatrix) pinta o ruído de uma cor só e usa o
+   desenho dele apenas para decidir a transparência. No tema claro a cor é o
+   branco, que só clareia o papel; no escuro é o preto, que só escurece.
+   Assim eles nunca tiram contraste do texto. */
 
 body::before {
-  --traco: var(--cor-traco-do-fundo);
-  --raio-do-centro: min(16rem, 38vw);
-  --raio-da-meia-lua: min(9rem, 20vw);
+  --escala: 1;      /* o tamanho do desenho: 1 = tamanho natural */
+  --desce: 0px;     /* quanto o desenho inteiro desce em relação ao topo da página */
+  --colagem: url("../assets/img/fundo/colagem-claro.svg");
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -0.6'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23r)'/%3E%3C/svg%3E");
+  --manchas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1120' height='880'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 -0.34'/%3E%3C/filter%3E%3Crect width='1120' height='880' filter='url(%23r)'/%3E%3C/svg%3E");
 
   content: "";
   position: absolute;
@@ -2551,36 +2576,35 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    /* Cruz de registro, em cima à esquerda (um risco deitado e um em pé) */
-    linear-gradient(to bottom, transparent 379px, var(--traco) 379px 381px, transparent 381px) left 24px top 0 / 22px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 369px, var(--traco) 369px 391px, transparent 391px) left 34px top 0 / 2px 4400px repeat-y,
-    /* Cruz de registro, mais abaixo à direita */
-    linear-gradient(to bottom, transparent 3049px, var(--traco) 3049px 3051px, transparent 3051px) right 24px top 0 / 22px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 3039px, var(--traco) 3039px 3061px, transparent 3061px) right 34px top 0 / 2px 4400px repeat-y,
+    var(--grao) 0 0 / 240px 240px repeat,
+    var(--colagem) center var(--desce) / calc(1600px * var(--escala)) calc(4400px * var(--escala)) repeat,
+    var(--manchas) 0 0 / 1120px 880px repeat,
+    var(--fundo-papeis) 0 var(--desce) / calc(16px * var(--escala)) calc(4400px * var(--escala)) repeat;
+}
 
-    /* O círculo central: um anel, a linha do meio do campo e o ponto do pontapé inicial */
-    radial-gradient(circle at 50% 1180px, transparent calc(var(--raio-do-centro) - 4px), var(--traco) calc(var(--raio-do-centro) - 3px), var(--traco) var(--raio-do-centro), transparent calc(var(--raio-do-centro) + 1px)) 0 0 / 100% 4400px repeat-y,
-    linear-gradient(to bottom, transparent 1178px, var(--traco) 1178px 1181px, transparent 1181px) 0 0 / 100% 4400px repeat-y,
-    radial-gradient(circle at 50% 1180px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
+/* No celular o desenho inteiro fica com metade do tamanho: assim cabem na tela
+   o estádio, a bola e os outros recortes. Ele também desce um pouco, para o
+   varal de bandeirinhas aparecer logo abaixo do cabeçalho. */
+@media (max-width: 47.99rem) {
+  body::before {
+    --escala: 0.5;
+    --desce: 44px;
+  }
+}
 
-    /* A grande área: a linha de fundo, os dois lados, a linha da frente, a marca do pênalti... */
-    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2002px, transparent 2002px) 0 0 / 100% 4400px repeat-y,
-    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 27% 0 / 3px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 1999px, var(--traco) 1999px 2332px, transparent 2332px) 73% 0 / 3px 4400px repeat-y,
-    linear-gradient(to bottom, transparent 2329px, var(--traco) 2329px 2332px, transparent 2332px) center top / 46% 4400px repeat-y,
-    radial-gradient(circle at 50% 2220px, var(--traco) 6px, transparent 7px) 0 0 / 100% 4400px repeat-y,
-    /* ...e a meia-lua. O anel tem o centro na marca do pênalti, mas esta camada
-       só começa na linha da frente da área: o que ficaria dentro da área não aparece. */
-    radial-gradient(circle at 50% -112px, transparent calc(var(--raio-da-meia-lua) - 4px), var(--traco) calc(var(--raio-da-meia-lua) - 3px), var(--traco) var(--raio-da-meia-lua), transparent calc(var(--raio-da-meia-lua) + 1px)) 0 2332px / 100% 4400px repeat-y,
+/* No tema escuro: a colagem com as cores do escuro; o grão e as manchas
+   pintados de preto e um pouco mais fracos (o preto pesa mais que o branco) */
+[data-tema="escuro"] body::before {
+  --colagem: url("../assets/img/fundo/colagem-escuro.svg");
+  --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.2 -0.54'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23r)'/%3E%3C/svg%3E");
+  --manchas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1120' height='880'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 -0.29'/%3E%3C/filter%3E%3Crect width='1120' height='880' filter='url(%23r)'/%3E%3C/svg%3E");
+}
 
-    /* Os cantos: outra linha de fundo e os dois quartos de círculo do escanteio.
-       Esta camada termina na linha: só aparece a metade de cima de cada anel. */
-    linear-gradient(to bottom, transparent 3399px, var(--traco) 3399px 3402px, transparent 3402px) 0 0 / 100% 4400px repeat-y,
-    radial-gradient(circle at 0 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
-    radial-gradient(circle at 100% 100%, transparent 66px, var(--traco) 67px, var(--traco) 70px, transparent 71px) 0 -1000px / 100% 4400px repeat-y,
-
-    /* Os papéis e as passagens em retícula */
-    var(--fundo-papeis) 0 0 / 16px 4400px repeat;
+/* No alto contraste o fundo é liso: sem colagem, sem grão e sem manchas */
+[data-contraste="alto"] body::before {
+  --colagem: none;
+  --grao: none;
+  --manchas: none;
 }
 ````
 
@@ -4969,8 +4993,8 @@ main:has(> .cena-abertura) {
   }
 }
 
-/* Em movimento: o desenho cobre o palco inteiro e o convite fica embaixo,
-   à esquerda, como em um cartaz */
+/* Em movimento: o desenho cobre o palco inteiro e o convite fica no meio,
+   com os pontinhos em volta, como em um cartaz */
 .com-cenas .cena-abertura .cena-palco {
   display: block;
 }
@@ -4982,19 +5006,37 @@ main:has(> .cena-abertura) {
   aspect-ratio: auto;
 }
 
+/* O convite fica no meio do palco, nos dois sentidos. A receita: prender os
+   quatro lados, dar à caixa o tamanho do conteúdo (fit-content) e deixar as
+   margens em "auto": o navegador divide a sobra por igual. */
 .com-cenas .abertura-convite {
   position: absolute;
   z-index: 2;
-  left: max(var(--espaco-4), 6vw);
-  right: max(var(--espaco-4), 6vw);
+  left: 0;
+  right: 0;
+  top: 0;
   /* A folga de baixo é a altura do cabeçalho ("--cabecalho" vem do JavaScript):
-     assim o convite aparece inteiro na primeira tela, com o cabeçalho ainda em cima */
-  bottom: max(calc(var(--cabecalho, 5rem) + 1.5rem), 12vh);
-  max-width: 46rem;
+     assim o meio do convite é o meio do que se vê na primeira tela, com o
+     cabeçalho ainda em cima */
+  bottom: var(--cabecalho, 5rem);
+  width: fit-content;
+  height: fit-content;
+  max-width: min(46rem, 100% - 2 * var(--espaco-4));
+  margin: auto;
+  text-align: center;
 }
 
 .com-cenas .abertura-convite h1 {
   font-size: clamp(3rem, 1.25rem + 7.5vw, 7rem);
+}
+
+/* Os botões e o aviso de descer são parágrafos, e parágrafo tem largura máxima
+   de leitura (ver base.css). Aqui eles ocupam a largura toda do convite, para
+   o meio deles ser o meio da tela. */
+.com-cenas .abertura-botoes,
+.com-cenas .rolar-dica {
+  max-width: none;
+  justify-content: center;
 }
 
 .com-cenas .abertura-assinatura {
@@ -5761,10 +5803,6 @@ html:not(.com-cenas) #pagina-base {
 
   .com-cenas .cena-titulo {
     top: 0.75rem;
-  }
-
-  .com-cenas .abertura-convite {
-    bottom: calc(var(--cabecalho, 4rem) + 0.5rem);
   }
 
   .com-cenas .abertura-convite h1 {
@@ -8538,6 +8576,43 @@ document.addEventListener('DOMContentLoaded', function () {
   let ultimoGesto = performance.now();   // a última vez em que a pessoa rolou ou mexeu o mouse
   let medidasDaReticula = '';            // as medidas usadas na última montagem
 
+  // Os pontinhos chegam perto do convite, mas não passam por trás do texto.
+  const FOLGA_DO_TEXTO = 14;      // a menos de 14 px do texto não há pontinho
+  const CHEGADA_AO_TEXTO = 110;   // de 14 a 110 px, o pontinho vai crescendo até o tamanho normal
+
+  // Onde está cada peça do convite, medida a partir do canto da tela de desenho:
+  // uma caixa para cada linha do título (a de baixo é mais curta que a de cima),
+  // uma para cada botão e uma para o aviso de descer.
+  function caixasDoConvite() {
+    if (!cenasEmMovimento) return [];
+    const origem = convite.getBoundingClientRect();
+    const linhasDoTitulo = document.createRange();
+    linhasDoTitulo.selectNodeContents(convite.querySelector('h1'));
+    const pecas = Array.from(linhasDoTitulo.getClientRects());
+    for (const peca of convite.querySelectorAll('.botao, .rolar-dica')) pecas.push(peca.getBoundingClientRect());
+
+    const caixas = [];
+    for (const peca of pecas) {
+      if (peca.width === 0 || peca.height === 0) continue;   // peça escondida
+      // A posição dentro do convite, somada ao lugar do convite no palco
+      const esquerda = Math.round(peca.left - origem.left + convite.offsetLeft);
+      const topo = Math.round(peca.top - origem.top + convite.offsetTop);
+      caixas.push({ esquerda: esquerda, topo: topo, direita: esquerda + Math.round(peca.width), base: topo + Math.round(peca.height) });
+    }
+    return caixas;
+  }
+
+  // A distância de um ponto até a caixa mais próxima (0 se ele está dentro de uma)
+  function distanciaAteAsCaixas(x, y, caixas) {
+    let menor = Infinity;
+    for (const caixa of caixas) {
+      const dx = Math.max(caixa.esquerda - x, 0, x - caixa.direita);
+      const dy = Math.max(caixa.topo - y, 0, y - caixa.base);
+      menor = Math.min(menor, Math.hypot(dx, dy));
+    }
+    return menor;
+  }
+
   function montarReticula() {
     // Ao abrir a página, o cabeçalho ainda está em cima do palco. O CSS usa a
     // altura dele (a distância do topo da página até a cena) para subir o
@@ -8554,7 +8629,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // da tela, a cor, o modo, a fonte, o tamanho do convite), fica a que já existe.
     // No celular isso acontece toda hora: a barra de endereço some e volta.
     const fonteChegou = !document.fonts || document.fonts.check('900 100px "Londrina Solid"');
-    const medidas = [largura, altura, tinta, cenasEmMovimento, fonteChegou, convite.offsetWidth, convite.offsetHeight].join('|');
+    const caixas = caixasDoConvite();
+    const medidas = [largura, altura, tinta, cenasEmMovimento, fonteChegou, JSON.stringify(caixas)].join('|');
     if (medidas === medidasDaReticula) return;
     medidasDaReticula = medidas;
 
@@ -8612,23 +8688,24 @@ document.addEventListener('DOMContentLoaded', function () {
     if (quantos === 0) return;
 
     // c) Os lugares soltos: uma retícula comum, cobrindo o palco inteiro, com
-    //    (quase) a mesma quantidade de pontos. Ela deixa uma janela em volta
-    //    do convite, para nenhum pontinho passar por trás do texto.
-    const janela = {
-      esquerda: convite.offsetLeft - 16,
-      direita: convite.offsetLeft + convite.offsetWidth + 16,
-      topo: convite.offsetTop - 16,
-      base: convite.offsetTop + convite.offsetHeight + 16,
-    };
-    const areaDaJanela = cenasEmMovimento ? (janela.direita - janela.esquerda) * (janela.base - janela.topo) : 0;
-    const areaLivre = Math.max(largura * altura * 0.3, largura * altura - areaDaJanela);
+    //    (quase) a mesma quantidade de pontos. Ela contorna cada linha do
+    //    convite: nenhum pontinho passa por trás do texto, e os que ficam
+    //    perto dele são menores, como um degradê de impressão.
+    let areaDoTexto = 0;
+    for (const caixa of caixas) {
+      areaDoTexto += (caixa.direita - caixa.esquerda + FOLGA_DO_TEXTO * 2) * (caixa.base - caixa.topo + FOLGA_DO_TEXTO * 2);
+    }
+    const areaLivre = Math.max(largura * altura * 0.3, largura * altura - areaDoTexto);
     vaoSolto = Math.sqrt(areaLivre / (quantos * 0.866)) * 0.98;
     let soltos = [];
     linha = 0;
     for (let y = vaoSolto / 2; y < altura; y += vaoSolto * 0.866) {
       for (let x = (linha % 2) * vaoSolto / 2; x < largura; x += vaoSolto) {
-        const naJanela = cenasEmMovimento && x > janela.esquerda && x < janela.direita && y > janela.topo && y < janela.base;
-        if (!naJanela) soltos.push({ x: x, y: y });
+        const distancia = distanciaAteAsCaixas(x, y, caixas);
+        if (distancia < FOLGA_DO_TEXTO) continue;
+        // "tamanho" vai de 0.35 (colado no texto) a 1 (longe dele)
+        const tamanho = misturar(0.35, 1, limitar((distancia - FOLGA_DO_TEXTO) / (CHEGADA_AO_TEXTO - FOLGA_DO_TEXTO)));
+        soltos.push({ x: x, y: y, tamanho: tamanho });
       }
       linha += 1;
     }
@@ -8665,6 +8742,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const descida = (fim.y - topo) / Math.max(1, base - topo);
       return {
         xSolto: solto.x, ySolto: solto.y,
+        tamanhoSolto: solto.tamanho,
         xFim: fim.x, yFim: fim.y,
         raioFim: passo * misturar(0.3, 0.57, descida),
         // Quem está mais perto do meio chega primeiro
@@ -8693,7 +8771,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const curva = Math.sin(e * Math.PI) * 0.2;
       let x = ponto.xSolto + dx * e - dy * curva;
       let y = ponto.ySolto + dy * e + dx * curva;
-      let raio = misturar(raioSolto, ponto.raioFim, e);
+      let raio = misturar(raioSolto * ponto.tamanhoSolto, ponto.raioFim, e);
 
       if (falta > 0.01) {
         // Enquanto está solto, o pontinho balança de leve...
@@ -13165,12 +13243,16 @@ const PARES = [
   { frente: ['foco', 'foco-vao'], fundo: 'etiqueta-fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre área na cor da tinta' },
 ];
 
-// Os outros papéis do fundo. A página muda de papel conforme a pessoa rola,
-// então tudo o que fica direto sobre a página precisa passar em cada um deles.
+// Os outros papéis do fundo. A página muda de papel conforme a pessoa rola, e
+// por cima dos papéis há desenhos recortados em mais duas cores (o realce e o
+// destaque). Um texto pode ficar em cima de qualquer uma delas: tudo o que
+// fica direto sobre a página precisa passar em todas.
 const PAPEIS = [
   { token: 'papel-2', nome: 'papel 2' },
   { token: 'papel-3', nome: 'papel 3' },
   { token: 'papel-4', nome: 'papel 4' },
+  { token: 'papel-realce', nome: 'recorte de realce' },
+  { token: 'papel-destaque', nome: 'recorte de destaque' },
 ];
 for (const papel of PAPEIS) {
   PARES.push(
@@ -13194,6 +13276,8 @@ const DESCRICAO = [
   { token: 'papel-2', nome: 'Papel pêssego / papel roxo', onde: 'Segunda faixa do fundo', motivo: 'Vizinho do rosa no círculo das cores: o papel muda sem brigar com o anterior. No escuro, o roxo é o vizinho do azul.' },
   { token: 'papel-3', nome: 'Papel menta / papel petróleo', onde: 'Terceira faixa do fundo', motivo: 'Verde claro lembra o gramado: é a faixa onde fica o desenho da grande área. No escuro, um azul-petróleo.' },
   { token: 'papel-4', nome: 'Papel lilás / papel vinho', onde: 'Quarta faixa do fundo', motivo: 'Fica entre o verde e o rosa do começo, para o fundo emendar quando se repete em páginas compridas.' },
+  { token: 'papel-realce', nome: 'Recorte branco / recorte fundo', onde: 'Desenhos recortados do fundo: estádio, bola, figurinhas, linhas de giz', motivo: 'O tom mais claro do tema claro e o mais fundo do escuro: o desenho aparece e o texto que passa por cima dele ganha contraste, em vez de perder.' },
+  { token: 'papel-destaque', nome: 'Recorte amarelo / recorte verde', onde: 'Detalhes dos desenhos do fundo: sol, estrelas, bandeiras, um dos cartões', motivo: 'A única cor que não está nos papéis: amarelo lembra o sol e o cartão do juiz; no escuro, um verde de gramado à noite.' },
   { token: 'superficie', nome: 'Papel de cupom', onde: 'Cartões, campos de formulário e painel', motivo: 'Quase branco: passa limpeza e marca o que é papel solto em cima da página. No escuro, o que está na frente fica mais claro.' },
   { token: 'vaga', nome: 'Rosa-sombra / rebaixo', onde: 'Espaço vazio da figurinha e trilho da barra de progresso', motivo: 'O próprio papel um tom abaixo: comunica ausência e lugar reservado sem usar cinza.' },
   { token: 'texto', nome: 'Azul-tinteiro / tinta rosa', onde: 'Textos, títulos e fios', motivo: 'Azul-escuro transmite confiança e seriedade de coisa impressa. No escuro, um rosa quase branco é mais macio que o branco puro.' },
@@ -13245,7 +13329,8 @@ linhas.push('## Como ler');
 linhas.push('');
 linhas.push('- Contraste é a diferença de claridade entre duas cores, de 1:1 (iguais) a 21:1 (preto no branco).');
 linhas.push('- Mínimos do WCAG 2.2: texto normal 4,5:1 (nível AA) e 7:1 (nível AAA); texto grande, bordas, ícones, anel de foco e barras 3:1.');
-linhas.push('- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página: são quatro papéis por tema.');
+linhas.push('- Direção visual: "Uma tinta só, vários papéis". A tinta é uma só (azul no tema claro, rosa no escuro). O papel do fundo muda de cor ao longo da página (quatro papéis por tema) e leva desenhos recortados em mais duas cores de papel.');
+linhas.push('- O grão e as manchas do fundo não entram na tabela porque não tiram contraste: no tema claro só clareiam o papel e no escuro só escurecem.');
 linhas.push('');
 linhas.push('## Paleta e motivo de cada cor');
 linhas.push('');
@@ -13284,61 +13369,7 @@ for (const tema of TEMAS) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. As linhas de campo desenhadas no fundo
-// ---------------------------------------------------------------------------
-// A linha é a própria tinta, bem fraca, por cima do papel (--cor-traco-do-fundo).
-// Um texto pode ficar em cima de uma linha. Por isso a conta é refeita com o
-// papel "riscado": a cor que o olho vê quando a linha se mistura com o papel.
-// No alto contraste não há linha (ela é transparente), então não há o que conferir.
-
-// Acha os dois valores no tokens.css, na ordem em que aparecem: claro e escuro.
-// Cada um tem o formato rgba(vermelho, verde, azul, força), com força de 0 a 1.
-const TRACOS = [...fs.readFileSync(ARQUIVO_TOKENS, 'utf8').matchAll(/--cor-traco-do-fundo:\s*rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/g)];
-
-// Mistura a linha com o papel e devolve a cor resultante em #HEX
-function papelRiscado(papelHex, traco) {
-  const forca = Number(traco[4]);
-  let hex = '#';
-  for (let canal = 0; canal < 3; canal++) {
-    const doPapel = parseInt(papelHex.slice(1 + canal * 2, 3 + canal * 2), 16);
-    const daLinha = Number(traco[1 + canal]);
-    const visto = Math.round(doPapel * (1 - forca) + daLinha * forca);
-    hex += visto.toString(16).padStart(2, '0');
-  }
-  return hex.toUpperCase();
-}
-
-const TEXTOS_SOBRE_A_PAGINA = ['texto', 'texto-secundario', 'acao', 'sucesso', 'erro'];
-let paresDasLinhas = 0;
-
-linhas.push('## Contraste: linhas de campo do fundo');
-linhas.push('');
-linhas.push('As linhas de campo são a tinta da página bem fraca, por cima do papel. A tabela mostra cada papel já com a linha por cima e o texto que menos contrasta com ele. Mínimo de 4,5:1. No alto contraste não há linhas.');
-linhas.push('');
-linhas.push('| Tema | Papel | Papel com a linha | Texto que menos contrasta | Contraste | Resultado |');
-linhas.push('|---|---|---|---|---|---|');
-[claro, escuro].forEach(function (cores, i) {
-  for (const papel of ['fundo', 'papel-2', 'papel-3', 'papel-4']) {
-    const riscado = papelRiscado(cores[papel], TRACOS[i]);
-    let pior = TEXTOS_SOBRE_A_PAGINA[0];
-    for (const nome of TEXTOS_SOBRE_A_PAGINA) {
-      if (contraste(cores[nome], riscado) < contraste(cores[pior], riscado)) pior = nome;
-    }
-    const razao = contraste(cores[pior], riscado);
-    const veredito = resultado(razao, 'texto');
-    total += TEXTOS_SOBRE_A_PAGINA.length;
-    paresDasLinhas += TEXTOS_SOBRE_A_PAGINA.length;
-    if (veredito === 'REPROVA') {
-      reprovados += 1;
-      console.log(`REPROVA  Linha do fundo, tema ${i === 0 ? 'claro' : 'escuro'}: --cor-${pior} sobre ${riscado} = ${formatar(razao)}`);
-    }
-    linhas.push(`| ${i === 0 ? 'Claro' : 'Escuro'} | \`${cores[papel]}\` | \`${riscado}\` | \`--cor-${pior}\` | ${formatar(razao)} | ${veredito} |`);
-  }
-});
-linhas.push('');
-
-// ---------------------------------------------------------------------------
-// 7. As cores das seleções (o desenho dentro da figurinha)
+// 6. As cores das seleções (o desenho dentro da figurinha)
 // ---------------------------------------------------------------------------
 // Cada seleção tem três cores em js/dados.js: campo, camisa e número.
 // O desenho precisa de dois contrastes de pelo menos 3:1:
@@ -13379,7 +13410,7 @@ linhas.push('');
 
 linhas.push('## Resumo');
 linhas.push('');
-linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais ${paresDasLinhas} pares de texto sobre as linhas do fundo, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
+linhas.push(`- Pares conferidos: ${total} (${PARES.length} pares da página em ${TEMAS.length} temas, mais 2 pares do desenho de cada uma das ${SELECOES.length} seleções).`);
 linhas.push(`- Reprovados: ${reprovados}.`);
 linhas.push('- A raridade da figurinha nunca depende só da cor: vem sempre com palavra, ícone e textura.');
 linhas.push('- A seleção de cada figurinha também vem escrita: as cores da camisa não são a única informação.');
@@ -13399,40 +13430,50 @@ process.exit(reprovados > 0 ? 1 : 0);
 // ============================================================================
 // gerar-fundo.js
 // ----------------------------------------------------------------------------
-// O que faz: desenha o fundo da página (os papéis coloridos e as passagens em
-// retícula entre eles) e guarda o desenho no fim do css/tokens.css.
+// O que faz: desenha o fundo da página com as cores do css/tokens.css.
+// São duas peças:
+//   1. A TIRA DOS PAPÉIS: os papéis coloridos e as passagens em retícula entre
+//      eles. Fica escrita no fim do css/tokens.css.
+//   2. A COLAGEM: desenhos de papel recortado (estádio, bola, bandeirinhas,
+//      figurinhas, apito...) colados por cima dos papéis. Fica em dois
+//      arquivos, um para cada tema: assets/img/fundo/colagem-claro.svg e
+//      assets/img/fundo/colagem-escuro.svg.
 //
 // Como rodar (na pasta do projeto):   node scripts/gerar-fundo.js
-// Rode de novo sempre que mudar uma cor de papel (--cor-fundo ou --cor-papel-2,
-// 3 e 4) no css/tokens.css.
+// Rode de novo sempre que mudar uma cor de papel no css/tokens.css
+// (--cor-fundo, --cor-papel-2, 3 e 4, --cor-papel-realce e --cor-papel-destaque).
 //
-// Por que um script: o fundo é uma imagem SVG escrita dentro do próprio CSS, e
-// uma imagem assim não consegue ler as variáveis de cor do site. O script lê
-// as cores no tokens.css e escreve a imagem com elas, uma para cada tema.
+// Por que um script: o fundo é feito de imagens SVG, e uma imagem não consegue
+// ler as variáveis de cor do site. O script lê as cores no tokens.css e escreve
+// as imagens com elas, uma para cada tema.
 //
-// Como é o desenho: uma tira bem estreita (16 px) e bem alta (4400 px), que o
-// navegador repete para os lados e para baixo. De cima para baixo:
-//   papel 1, passagem, papel 2, passagem, papel 3, passagem, papel 4, passagem
-// e volta ao papel 1. Em cada passagem, bolinhas da cor seguinte vão crescendo
-// linha a linha até se juntarem: é assim que a impressão em papel faz um
-// degradê (a retícula).
+// Todos os desenhos são do próprio projeto, feitos aqui com formas simples.
+// Não há foto, logo nem emblema de ninguém.
 // ============================================================================
 
 const fs = require('fs');
 const path = require('path');
 
 const ARQUIVO_TOKENS = path.join(__dirname, '..', 'css', 'tokens.css');
+const PASTA_DA_COLAGEM = path.join(__dirname, '..', 'assets', 'img', 'fundo');
 
-const LARGURA = 16;         // largura da tira, igual à distância entre as bolinhas
-const ALTURA = 4400;        // altura da tira: depois disso o fundo se repete
-const LINHAS = 16;          // quantas linhas de bolinhas tem cada passagem
-const ENTRE_LINHAS = 14;    // distância de uma linha de bolinhas até a próxima
-const PASSAGEM = LINHAS * ENTRE_LINHAS;
+const ALTURA = 4400;        // altura do desenho: depois disso o fundo se repete
 // Onde cada papel termina e começa a passagem para o próximo (em pixels, de cima para baixo)
 const FIM_DE_CADA_PAPEL = [520, 1600, 2680, 3760];
 
+// A tira dos papéis
+const LARGURA_DA_TIRA = 16; // igual à distância entre as bolinhas
+const LINHAS = 16;          // quantas linhas de bolinhas tem cada passagem
+const ENTRE_LINHAS = 14;    // distância de uma linha de bolinhas até a próxima
+const PASSAGEM = LINHAS * ENTRE_LINHAS;
+
+// A colagem
+const LARGURA_DA_COLAGEM = 1600;
+
 const INICIO = '/* FUNDO-INICIO */';
 const FIM = '/* FUNDO-FIM */';
+
+const NOMES_DAS_CORES = ['fundo', 'papel-2', 'papel-3', 'papel-4', 'papel-realce', 'papel-destaque'];
 
 // ---------------------------------------------------------------------------
 // 1. Ler as cores de papel de cada tema no tokens.css
@@ -13445,15 +13486,20 @@ function lerPapeis(css, seletor) {
     if (linha.trim().endsWith('{')) dentro = linha.trim() === seletor + ' {';
     if (linha.trim() === '}') dentro = false;
     if (!dentro) continue;
-    const achado = /--cor-(fundo|papel-[234])\s*:\s*(#[0-9a-fA-F]{6})\s*;/.exec(linha);
+    const achado = /--cor-(fundo|papel-[a-z0-9]+)\s*:\s*(#[0-9a-fA-F]{6})\s*;/.exec(linha);
     if (achado) papeis[achado[1]] = achado[2];
   }
   return papeis;
 }
 
 // ---------------------------------------------------------------------------
-// 2. Desenhar a tira
+// 2. Desenhar a tira dos papéis
 // ---------------------------------------------------------------------------
+// Uma tira bem estreita e bem alta, que o navegador repete para os lados e
+// para baixo. De cima para baixo: papel 1, passagem, papel 2, passagem,
+// papel 3, passagem, papel 4, passagem e volta ao papel 1. Em cada passagem,
+// bolinhas da cor seguinte vão crescendo linha a linha até se juntarem: é
+// assim que a impressão em papel faz um degradê (a retícula).
 
 function desenharTira(cores) {
   const papeis = [cores.fundo, cores['papel-2'], cores['papel-3'], cores['papel-4']];
@@ -13464,7 +13510,7 @@ function desenharTira(cores) {
     const seguinte = papeis[(i + 1) % papeis.length];
 
     // A faixa lisa deste papel, que continua por baixo das bolinhas da passagem
-    pecas.push("<rect y='" + y + "' width='" + LARGURA + "' height='" + (fim + PASSAGEM - y) + "' fill='" + papeis[i] + "'/>");
+    pecas.push("<rect y='" + y + "' width='" + LARGURA_DA_TIRA + "' height='" + (fim + PASSAGEM - y) + "' fill='" + papeis[i] + "'/>");
 
     // A passagem: bolinhas do papel seguinte, cada linha um pouco maiores.
     // As linhas são desencontradas (uma no meio, a outra nas beiradas da tira),
@@ -13472,7 +13518,7 @@ function desenharTira(cores) {
     for (let linha = 0; linha < LINHAS; linha++) {
       const cy = fim + ENTRE_LINHAS / 2 + linha * ENTRE_LINHAS;
       const raio = (1.5 + (linha / (LINHAS - 1)) * 8).toFixed(1);
-      const centros = linha % 2 === 0 ? [LARGURA / 2] : [0, LARGURA];
+      const centros = linha % 2 === 0 ? [LARGURA_DA_TIRA / 2] : [0, LARGURA_DA_TIRA];
       for (const cx of centros) {
         pecas.push("<circle cx='" + cx + "' cy='" + cy + "' r='" + raio + "' fill='" + seguinte + "'/>");
       }
@@ -13481,15 +13527,413 @@ function desenharTira(cores) {
   });
 
   // O resto da tira volta a ser o papel 1, que emenda com o começo da repetição
-  pecas.push("<rect y='" + y + "' width='" + LARGURA + "' height='" + (ALTURA - y) + "' fill='" + papeis[0] + "'/>");
+  pecas.push("<rect y='" + y + "' width='" + LARGURA_DA_TIRA + "' height='" + (ALTURA - y) + "' fill='" + papeis[0] + "'/>");
 
-  const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + LARGURA + "' height='" + ALTURA + "'>" + pecas.join('') + '</svg>';
+  const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + LARGURA_DA_TIRA + "' height='" + ALTURA + "'>" + pecas.join('') + '</svg>';
   // Dentro de um url() do CSS, estes três sinais precisam ir disfarçados
   return 'url("data:image/svg+xml,' + svg.replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E') + '")';
 }
 
 // ---------------------------------------------------------------------------
-// 3. Guardar no fim do tokens.css, entre as duas marcas
+// 3. As ferramentas de desenho da colagem
+// ---------------------------------------------------------------------------
+
+// Um sorteio que se repete: dá sempre a mesma sequência de números "ao acaso".
+// Assim o desenho sai igual toda vez que o script roda (o mesmo do js/cenas.js).
+let semente = 2026;
+function acaso() {
+  semente = (semente * 1664525 + 1013904223) % 4294967296;
+  return semente / 4294967296;
+}
+function entre(a, b) {
+  return a + (b - a) * acaso();
+}
+
+const GRAU = Math.PI / 180;   // quanto vale um grau na medida que o Math.cos usa
+
+// Arredonda para uma casa depois da vírgula: o arquivo fica menor
+function n(valor) {
+  return Math.round(valor * 10) / 10;
+}
+
+// Um ponto a certa distância do centro, em certa direção (em graus)
+function ponta(distancia, graus) {
+  return [Math.cos(graus * GRAU) * distancia, Math.sin(graus * GRAU) * distancia];
+}
+
+// RECORTAR À TESOURA. Recebe os cantos de uma forma e devolve a forma com as
+// beiradas um pouco tortas: cada lado comprido ganha pontos no meio, e todos
+// os pontos saem um tiquinho do lugar. É o que tira a cara de "régua".
+function recorte(cantos, cor, tremor) {
+  const pontos = [];
+  cantos.forEach(function (canto, i) {
+    const proximo = cantos[(i + 1) % cantos.length];
+    const comprimento = Math.hypot(proximo[0] - canto[0], proximo[1] - canto[1]);
+    const pedacos = Math.max(1, Math.round(comprimento / 42));
+    for (let p = 0; p < pedacos; p++) {
+      const t = p / pedacos;
+      pontos.push(n(canto[0] + (proximo[0] - canto[0]) * t + entre(-tremor, tremor)) + ' ' + n(canto[1] + (proximo[1] - canto[1]) * t + entre(-tremor, tremor)));
+    }
+  });
+  return "<path d='M" + pontos.join('L') + "Z' fill='" + cor + "'/>";
+}
+
+// Um círculo recortado à mão: na verdade, uma forma de muitos lados
+function circulo(cx, cy, raio, cor) {
+  const cantos = [];
+  const lados = Math.max(14, Math.round(raio / 3));
+  for (let i = 0; i < lados; i++) {
+    const p = ponta(raio, (i * 360) / lados);
+    cantos.push([cx + p[0], cy + p[1]]);
+  }
+  return recorte(cantos, cor, Math.min(1.4, raio * 0.02));
+}
+
+function retangulo(x, y, largura, altura, cor, tremor) {
+  return recorte([[x, y], [x + largura, y], [x + largura, y + altura], [x, y + altura]], cor, tremor === undefined ? 1.2 : tremor);
+}
+
+// Um traço (linha com grossura), de ponta redonda
+function traco(pontos, cor, grossura, extra) {
+  const caminho = pontos.map(function (p) { return n(p[0]) + ' ' + n(p[1]); }).join('L');
+  return "<path d='M" + caminho + "' fill='none' stroke='" + cor + "' stroke-width='" + n(grossura) + "' stroke-linecap='round' stroke-linejoin='round'" + (extra || '') + '/>';
+}
+
+// Põe um desenho em um lugar da colagem, com um giro (em graus)
+function colar(x, y, giro, desenho) {
+  return "<g transform='translate(" + n(x) + ' ' + n(y) + ') rotate(' + n(giro) + ")'>" + desenho + '</g>';
+}
+
+// ---------------------------------------------------------------------------
+// 4. Os desenhos. Cada função desenha em volta do ponto (0, 0).
+//    "c" traz as cores: c.papel (o papel que está atrás), c.a, c.b e c.d (os
+//    outros três papéis), c.realce e c.destaque.
+// ---------------------------------------------------------------------------
+
+// Bola: um disco claro, um gomo de cinco lados no meio, as costuras e os
+// cinco gomos da beirada
+function bola(raio, c) {
+  let d = circulo(0, 0, raio, c.realce);
+  const meio = [];
+  for (let i = 0; i < 5; i++) meio.push(ponta(raio * 0.34, -90 + i * 72));
+  d += recorte(meio, c.a, raio * 0.01);
+  for (let i = 0; i < 5; i++) {
+    const direcao = -90 + i * 72;
+    d += traco([ponta(raio * 0.34, direcao), ponta(raio * 0.63, direcao)], c.a, raio * 0.05);
+    const gomo = [ponta(raio * 0.62, direcao), ponta(raio * 0.8, direcao - 21)];
+    for (let passo = -15; passo <= 15; passo += 7.5) gomo.push(ponta(raio * 0.985, direcao + passo));
+    gomo.push(ponta(raio * 0.8, direcao + 21));
+    d += recorte(gomo, c.a, raio * 0.008);
+  }
+  return d;
+}
+
+// Estrela de cinco pontas
+function estrela(raio, cor) {
+  const cantos = [];
+  for (let i = 0; i < 10; i++) cantos.push(ponta(i % 2 === 0 ? raio : raio * 0.44, -90 + i * 36));
+  return recorte(cantos, cor, raio * 0.02);
+}
+
+// Figurinha: o papel adesivo, o retrato (cabeça e ombros) e as duas linhas do nome
+function figurinha(largura, c) {
+  const altura = largura * 1.36;
+  const topo = -altura / 2;
+  const baseDoRetrato = topo + largura * 0.9;
+  let d = "<rect x='" + n(-largura / 2) + "' y='" + n(topo) + "' width='" + n(largura) + "' height='" + n(altura) + "' rx='" + n(largura * 0.09) + "' fill='" + c.realce + "'/>";
+  d += retangulo(-largura * 0.42, topo + largura * 0.08, largura * 0.84, largura * 0.82, c.a, 0.6);
+  d += circulo(0, topo + largura * 0.38, largura * 0.15, c.realce);
+  d += "<path d='M" + n(-largura * 0.3) + ' ' + n(baseDoRetrato) + 'A' + n(largura * 0.3) + ' ' + n(largura * 0.3) + ' 0 0 1 ' + n(largura * 0.3) + ' ' + n(baseDoRetrato) + "Z' fill='" + c.realce + "'/>";
+  d += retangulo(-largura * 0.38, altura / 2 - largura * 0.36, largura * 0.52, largura * 0.07, c.a, 0.4);
+  d += retangulo(-largura * 0.38, altura / 2 - largura * 0.22, largura * 0.3, largura * 0.07, c.b, 0.4);
+  return d;
+}
+
+// Apito: o corpo redondo, o bocal, o furo e a argola do cordão
+function apito(tamanho, c) {
+  let d = "<circle cx='" + n(tamanho * 0.34) + "' cy='" + n(-tamanho * 0.3) + "' r='" + n(tamanho * 0.1) + "' fill='none' stroke='" + c.a + "' stroke-width='" + n(tamanho * 0.045) + "'/>";
+  d += retangulo(-tamanho * 0.56, -tamanho * 0.22, tamanho * 0.6, tamanho * 0.28, c.a, 0.8);
+  d += circulo(tamanho * 0.1, tamanho * 0.08, tamanho * 0.32, c.a);
+  d += circulo(tamanho * 0.1, tamanho * 0.08, tamanho * 0.13, c.realce);
+  d += retangulo(-tamanho * 0.3, -tamanho * 0.22, tamanho * 0.16, tamanho * 0.08, c.realce, 0.4);
+  return d;
+}
+
+// Os dois cartões do juiz, um por cima do outro
+function cartoes(tamanho, c) {
+  const cartao = function (cor) {
+    return "<rect x='" + n(-tamanho * 0.25) + "' y='" + n(-tamanho * 0.36) + "' width='" + n(tamanho * 0.5) + "' height='" + n(tamanho * 0.72) + "' rx='" + n(tamanho * 0.05) + "' fill='" + cor + "'/>";
+  };
+  return colar(-tamanho * 0.16, tamanho * 0.03, -14, cartao(c.a)) + colar(tamanho * 0.16, -tamanho * 0.02, 10, cartao(c.destaque));
+}
+
+// Trave: o fundo da rede, os fios da rede e os três paus
+function trave(largura, c) {
+  const altura = largura * 0.42;
+  const esquerda = -largura / 2;
+  const topo = -altura / 2;
+  let d = retangulo(esquerda, topo, largura, altura, c.a, 1);
+  const vao = largura / 16;
+  for (let x = esquerda + vao; x < largura / 2 - 1; x += vao) d += traco([[x, topo], [x, altura / 2]], c.realce, 1.6);
+  for (let y = topo + vao; y < altura / 2 - 1; y += vao) d += traco([[esquerda, y], [largura / 2, y]], c.realce, 1.6);
+  d += traco([[esquerda, altura / 2], [esquerda, topo], [largura / 2, topo], [largura / 2, altura / 2]], c.realce, largura * 0.03);
+  return d;
+}
+
+// Bandeira de escanteio: o mastro, a bandeira e o quarto de círculo no chão
+function escanteio(altura, c) {
+  let d = "<path d='M" + n(altura * 0.34) + ' ' + n(altura * 0.5) + 'A' + n(altura * 0.34) + ' ' + n(altura * 0.34) + ' 0 0 0 0 ' + n(altura * 0.16) + "' fill='none' stroke='" + c.realce + "' stroke-width='" + n(altura * 0.03) + "' stroke-linecap='round'/>";
+  d += recorte([[0, -altura * 0.5], [altura * 0.44, -altura * 0.37], [0, -altura * 0.2]], c.destaque, 1);
+  d += traco([[0, altura * 0.5], [0, -altura * 0.5]], c.realce, altura * 0.04);
+  return d;
+}
+
+// Cronômetro: a caixa, o botão, o mostrador e os dois ponteiros
+function cronometro(raio, c) {
+  let d = retangulo(-raio * 0.14, -raio * 1.3, raio * 0.28, raio * 0.36, c.a, 0.6);
+  d += colar(0, 0, 42, retangulo(-raio * 0.1, -raio * 1.2, raio * 0.2, raio * 0.3, c.a, 0.6));
+  d += circulo(0, 0, raio, c.a);
+  d += circulo(0, 0, raio * 0.76, c.realce);
+  for (let i = 0; i < 12; i++) d += traco([ponta(raio * 0.6, i * 30), ponta(raio * 0.68, i * 30)], c.a, raio * 0.04);
+  d += traco([[0, 0], [0, -raio * 0.5]], c.a, raio * 0.09);
+  d += traco([[0, 0], [raio * 0.3, raio * 0.14]], c.a, raio * 0.09);
+  return d;
+}
+
+// Prancheta de tática: os X de um time, as bolinhas do outro e a seta da jogada
+function tatica(largura, c) {
+  const xis = function (x, y) {
+    const t = largura * 0.045;
+    return traco([[x - t, y - t], [x + t, y + t]], c.realce, largura * 0.022) + traco([[x - t, y + t], [x + t, y - t]], c.realce, largura * 0.022);
+  };
+  const bolinha = function (x, y) {
+    return "<circle cx='" + n(x) + "' cy='" + n(y) + "' r='" + n(largura * 0.05) + "' fill='none' stroke='" + c.a + "' stroke-width='" + n(largura * 0.022) + "'/>";
+  };
+  let d = xis(-largura * 0.42, largura * 0.2) + xis(-largura * 0.16, -largura * 0.04) + xis(largura * 0.16, largura * 0.22);
+  d += bolinha(-largura * 0.3, -largura * 0.2) + bolinha(largura * 0.06, -largura * 0.22) + bolinha(largura * 0.4, largura * 0.02);
+  // A seta: uma curva tracejada e a ponta
+  d += "<path d='M" + n(-largura * 0.34) + ' ' + n(largura * 0.16) + 'Q' + n(-largura * 0.02) + ' ' + n(largura * 0.3) + ' ' + n(largura * 0.3) + ' ' + n(-largura * 0.1) + "' fill='none' stroke='" + c.realce + "' stroke-width='" + n(largura * 0.02) + "' stroke-linecap='round' stroke-dasharray='" + n(largura * 0.05) + ' ' + n(largura * 0.045) + "'/>";
+  d += colar(largura * 0.32, -largura * 0.13, -52, recorte([[largura * 0.06, 0], [-largura * 0.03, -largura * 0.04], [-largura * 0.03, largura * 0.04]], c.realce, 0.5));
+  return d;
+}
+
+// Camisa: o corpo com as mangas, a gola e a faixa do peito
+function camisa(tamanho, c) {
+  const t = tamanho;
+  let d = recorte([
+    [-0.3 * t, -0.42 * t], [-0.14 * t, -0.5 * t], [0, -0.44 * t], [0.14 * t, -0.5 * t], [0.3 * t, -0.42 * t],
+    [0.54 * t, -0.24 * t], [0.42 * t, -0.04 * t], [0.28 * t, -0.13 * t], [0.28 * t, 0.5 * t],
+    [-0.28 * t, 0.5 * t], [-0.28 * t, -0.13 * t], [-0.42 * t, -0.04 * t], [-0.54 * t, -0.24 * t],
+  ], c.a, 1.2);
+  d += recorte([[-0.14 * t, -0.5 * t], [0, -0.33 * t], [0.14 * t, -0.5 * t], [0, -0.44 * t]], c.realce, 0.5);
+  d += retangulo(-0.28 * t, -0.06 * t, 0.56 * t, 0.12 * t, c.realce, 0.6);
+  d += retangulo(-0.28 * t, 0.1 * t, 0.56 * t, 0.05 * t, c.b, 0.5);
+  return d;
+}
+
+// Pacotinho: o saquinho com as duas beiradas em serra e a etiqueta
+function pacotinho(altura, c) {
+  const largura = altura * 0.72;
+  const dentes = 9;
+  const cantos = [];
+  for (let i = 0; i <= dentes * 2; i++) cantos.push([-largura / 2 + (largura * i) / (dentes * 2), -altura / 2 + (i % 2) * altura * 0.035]);
+  for (let i = dentes * 2; i >= 0; i--) cantos.push([-largura / 2 + (largura * i) / (dentes * 2), altura / 2 - (i % 2) * altura * 0.035]);
+  let d = recorte(cantos, c.a, 0.5);
+  d += retangulo(-largura / 2, -altura * 0.16, largura, altura * 0.3, c.realce, 0.6);
+  d += estrela(altura * 0.09, c.destaque);
+  return d;
+}
+
+// Estádio visto de fora: o sol atrás, as torres de luz, a arquibancada com as
+// colunas, a cobertura, os portões e as bandeiras
+function estadio(largura, c) {
+  const l = largura;
+  // A beirada de cima da arquibancada é uma curva. Esta conta devolve a altura
+  // dela em cada ponto, de x = -0.46 a x = 0.46 da largura.
+  const beirada = function (x) {
+    const t = (x + 0.46) / 0.92;
+    return -0.16 - 0.2 * t * (1 - t);
+  };
+  let d = circulo(0.2 * l, -0.27 * l, 0.14 * l, c.destaque);
+
+  // As duas torres de luz
+  for (const lado of [-1, 1]) {
+    d += traco([[lado * 0.6 * l, 0], [lado * 0.57 * l, -0.4 * l]], c.realce, l * 0.012);
+    let refletor = retangulo(-0.065 * l, -0.04 * l, 0.13 * l, 0.08 * l, c.realce, 0.8);
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 2; j++) refletor += circulo((-0.042 + i * 0.028) * l, (-0.016 + j * 0.032) * l, 0.009 * l, c.a);
+    d += colar(lado * 0.57 * l, -0.43 * l, lado * 10, refletor);
+  }
+
+  // A arquibancada
+  const corpo = [[-0.5 * l, 0]];
+  for (let x = -0.46; x <= 0.461; x += 0.092) corpo.push([x * l, beirada(x) * l]);
+  corpo.push([0.5 * l, 0]);
+  d += recorte(corpo, c.realce, 1);
+
+  // As colunas e os portões
+  for (let x = -0.4; x <= 0.401; x += 0.08) d += traco([[x * l, (beirada(x) + 0.03) * l], [x * l, -0.012 * l]], c.a, l * 0.007);
+  for (let x = -0.32; x <= 0.321; x += 0.16) d += "<path d='M" + n((x - 0.022) * l) + ' 0V' + n(-0.045 * l) + 'A' + n(0.022 * l) + ' ' + n(0.022 * l) + ' 0 0 1 ' + n((x + 0.022) * l) + ' ' + n(-0.045 * l) + "V0Z' fill='" + c.a + "'/>";
+
+  // A cobertura: uma faixa que acompanha a curva
+  const cobertura = [];
+  for (let x = -0.47; x <= 0.471; x += 0.094) cobertura.push([x * l, (beirada(x * 0.978) - 0.004) * l]);
+  for (let x = 0.47; x >= -0.471; x -= 0.094) cobertura.push([x * l, (beirada(x * 0.978) - 0.034) * l]);
+  d += recorte(cobertura, c.b, 0.8);
+
+  // As bandeiras em cima da cobertura
+  [-0.26, 0, 0.26].forEach(function (x, i) {
+    const pe = (beirada(x) - 0.03) * l;
+    d += traco([[x * l, pe], [x * l, pe - 0.075 * l]], c.realce, l * 0.006);
+    d += recorte([[x * l, pe - 0.075 * l], [(x + 0.045) * l, pe - 0.06 * l], [x * l, pe - 0.045 * l]], i === 1 ? c.destaque : c.a, 0.5);
+  });
+  return d;
+}
+
+// Raios: fatias que saem de um ponto e abrem em leque para cima, como o sol
+// nascendo em um cartaz antigo. Entre uma fatia e outra fica um vão igual a ela.
+function raios(raio, cor, fatias) {
+  let d = '';
+  const abertura = 180 / (fatias * 2 - 1);   // o leque inteiro tem 180 graus
+  for (let i = 0; i < fatias; i++) {
+    const direcao = -180 + abertura * (i * 2 + 0.5);
+    d += recorte([[0, 0], ponta(raio, direcao - abertura / 2), ponta(raio, direcao + abertura / 2)], cor, 0.8);
+  }
+  return d;
+}
+
+// Linhas de giz do gramado: a linha do meio do campo, de um lado ao outro da
+// colagem, o círculo central e o ponto do pontapé inicial
+function giz(y, raio, cor) {
+  let d = traco([[0, y], [LARGURA_DA_COLAGEM, y]], cor, 5);
+  d += "<circle cx='" + LARGURA_DA_COLAGEM / 2 + "' cy='" + y + "' r='" + raio + "' fill='none' stroke='" + cor + "' stroke-width='5'/>";
+  d += circulo(LARGURA_DA_COLAGEM / 2, y, 9, cor);
+  return d;
+}
+
+// Um varal de bandeirinhas de um lado ao outro da colagem. "barriga" é o
+// quanto o cordão desce no meio.
+function bandeirinhas(y, barriga, quantas, cores, corDoCordao) {
+  const alturaEm = function (t) { return y + barriga * 4 * t * (1 - t); };   // a curva do cordão
+  let d = '';
+  const cordao = [];
+  for (let i = 0; i <= 40; i++) cordao.push([(LARGURA_DA_COLAGEM * i) / 40, alturaEm(i / 40)]);
+  d += traco(cordao, corDoCordao, 2.4);
+  const largura = LARGURA_DA_COLAGEM / quantas;
+  for (let i = 0; i < quantas; i++) {
+    const t = (i + 0.5) / quantas;
+    const x = t * LARGURA_DA_COLAGEM;
+    const topo = alturaEm(t);
+    d += colar(x, topo, entre(-5, 5), recorte([[-largura * 0.36, 0], [largura * 0.36, 0], [0, largura * 0.72]], cores[i % cores.length], 0.8));
+  }
+  return d;
+}
+
+// Um punhado de confete: papeizinhos de três formatos, espalhados em um retângulo
+function confete(esquerda, topo, largura, altura, quantos, cores) {
+  let d = '';
+  for (let i = 0; i < quantos; i++) {
+    const cor = cores[Math.floor(acaso() * cores.length)];
+    const formato = Math.floor(acaso() * 3);
+    let papel;
+    if (formato === 0) papel = retangulo(-5, -9, 10, 18, cor, 0.5);
+    else if (formato === 1) papel = circulo(0, 0, 6, cor);
+    else papel = recorte([[0, -9], [9, 7], [-9, 7]], cor, 0.5);
+    d += colar(esquerda + acaso() * largura, topo + acaso() * altura, entre(0, 360), papel);
+  }
+  return d;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Montar a colagem de um tema
+// ---------------------------------------------------------------------------
+
+// Qual papel está atrás de uma altura da colagem? (0, 1, 2 ou 3)
+// A passagem conta como o papel de cima até a metade dela.
+function papelEm(y) {
+  for (let i = 0; i < FIM_DE_CADA_PAPEL.length; i++) {
+    if (y < FIM_DE_CADA_PAPEL[i] + PASSAGEM / 2) return i;
+  }
+  return 0;
+}
+
+function desenharColagem(cores) {
+  semente = 2026;   // o sorteio recomeça: os dois temas saem com o mesmo desenho
+  const papeis = [cores.fundo, cores['papel-2'], cores['papel-3'], cores['papel-4']];
+
+  // As cores para quem vai ser colado na altura y: nunca a cor do papel de trás
+  const coresEm = function (y) {
+    const i = papelEm(y);
+    return {
+      papel: papeis[i], a: papeis[(i + 1) % 4], b: papeis[(i + 2) % 4], d: papeis[(i + 3) % 4],
+      realce: cores['papel-realce'], destaque: cores['papel-destaque'],
+    };
+  };
+  const pecas = [];
+  // Atalho: cola o desenho no lugar, já com as cores certas para aquela altura
+  const por = function (x, y, giro, desenhar) {
+    pecas.push(colar(x, y, giro, desenhar(coresEm(y))));
+  };
+  const confeteEm = function (esquerda, topo, largura, altura, quantos) {
+    const c = coresEm(topo + altura / 2);
+    pecas.push(confete(esquerda, topo, largura, altura, quantos, [c.a, c.b, c.d, c.realce, c.realce, c.destaque]));
+  };
+
+  // ----- Papel 1 (o topo de toda página): o varal, estrelas e uma bola pequena
+  let c = coresEm(100);
+  pecas.push(bandeirinhas(84, 16, 34, [c.a, c.realce, c.b, c.destaque, c.d, c.realce], c.realce));
+  confeteEm(60, 170, 1480, 300, 14);
+  por(1250, 265, 12, function (k) { return estrela(34, k.destaque); });
+  por(318, 352, -10, function (k) { return estrela(22, k.realce); });
+  por(1392, 408, 18, function (k) { return bola(62, k); });
+  por(150, 440, -12, function (k) { return figurinha(84, k); });
+
+  // ----- Papel 2: o estádio com os raios atrás, as figurinhas, o apito e a tática
+  por(1000, 1250, 0, function (k) { return raios(360, k.a, 7); });
+  por(1000, 1250, 0, function (k) { return estadio(540, k); });
+  por(210, 1100, -15, function (k) { return figurinha(124, k); });
+  por(332, 1080, -1, function (k) { return figurinha(124, { realce: k.realce, a: k.b, b: k.a }); });
+  por(454, 1104, 13, function (k) { return figurinha(124, { realce: k.realce, a: k.d, b: k.destaque }); });
+  por(700, 880, -22, function (k) { return apito(116, k); });
+  por(560, 1470, -4, function (k) { return tatica(300, k); });
+  por(1440, 1480, 6, function (k) { return cartoes(112, k); });
+  por(170, 1440, 8, function (k) { return estrela(30, k.destaque); });
+  confeteEm(60, 800, 1480, 760, 22);
+
+  // ----- Papel 3 (o verde): o gramado riscado de giz, a bola grande, a trave,
+  //       a camisa e a bandeira de escanteio
+  c = coresEm(2260);
+  pecas.push(giz(2260, 170, c.realce));
+  por(300, 2200, 14, function (k) { return bola(158, k); });
+  por(1250, 2040, -2, function (k) { return trave(430, k); });
+  por(1190, 2500, -7, function (k) { return camisa(196, k); });
+  por(1500, 2400, 4, function (k) { return escanteio(190, k); });
+  por(560, 1960, 16, function (k) { return estrela(26, k.destaque); });
+  por(640, 2560, -12, function (k) { return estrela(20, k.realce); });
+  confeteEm(60, 1880, 1480, 740, 18);
+
+  // ----- Papel 4: o pacotinho com uma figurinha saindo, a tática, o cronômetro,
+  //       os cartões e outra bola
+  por(380, 3250, 16, function (k) { return figurinha(112, k); });
+  por(280, 3210, -8, function (k) { return pacotinho(230, k); });
+  por(1250, 3150, 8, function (k) { return cronometro(92, k); });
+  por(880, 3540, -20, function (k) { return bola(84, k); });
+  por(800, 3120, 5, function (k) { return tatica(270, k); });
+  por(1440, 3600, -8, function (k) { return cartoes(104, k); });
+  por(540, 3640, 10, function (k) { return estrela(28, k.destaque); });
+  confeteEm(60, 2960, 1480, 740, 20);
+
+  // ----- De volta ao papel 1 (o fim do desenho, que emenda com o topo)
+  por(1100, 4190, -6, function (k) { return figurinha(108, k); });
+  por(1216, 4176, 9, function (k) { return figurinha(108, { realce: k.realce, a: k.b, b: k.destaque }); });
+  por(420, 4200, 24, function (k) { return apito(104, k); });
+  por(800, 4170, 0, function (k) { return estrela(32, k.destaque); });
+  confeteEm(60, 4040, 1480, 300, 10);
+
+  return "<svg xmlns='http://www.w3.org/2000/svg' width='" + LARGURA_DA_COLAGEM + "' height='" + ALTURA + "' viewBox='0 0 " + LARGURA_DA_COLAGEM + ' ' + ALTURA + "'>\n" + pecas.join('\n') + '\n</svg>\n';
+}
+
+// ---------------------------------------------------------------------------
+// 6. Ler as cores, desenhar e guardar
 // ---------------------------------------------------------------------------
 
 let css = fs.readFileSync(ARQUIVO_TOKENS, 'utf8').replace(/\r\n/g, '\n');
@@ -13497,11 +13941,12 @@ let css = fs.readFileSync(ARQUIVO_TOKENS, 'utf8').replace(/\r\n/g, '\n');
 const claro = lerPapeis(css, ':root');
 const escuro = Object.assign({}, claro, lerPapeis(css, '[data-tema="escuro"]'));
 for (const tema of [claro, escuro]) {
-  for (const nome of ['fundo', 'papel-2', 'papel-3', 'papel-4']) {
+  for (const nome of NOMES_DAS_CORES) {
     if (!tema[nome]) throw new Error('Não achei a cor --cor-' + nome + ' no tokens.css');
   }
 }
 
+// A tira dos papéis vai para o fim do tokens.css, entre as duas marcas
 const bloco = [
   INICIO,
   ':root {',
@@ -13524,9 +13969,14 @@ if (css.includes(INICIO) && css.includes(FIM)) {
 } else {
   css = css.trimEnd() + '\n\n/* ---------- Fundo da página ----------\n   Gerado por:  node scripts/gerar-fundo.js   (não edite à mão o que está\n   entre as duas marcas: mude as cores de papel lá em cima e rode o script) */\n' + bloco + '\n';
 }
-
 fs.writeFileSync(ARQUIVO_TOKENS, css, 'utf8');
-console.log('Fundo desenhado para os temas claro e escuro. Guardado em css/tokens.css');
+
+// A colagem vai para um arquivo por tema
+fs.mkdirSync(PASTA_DA_COLAGEM, { recursive: true });
+fs.writeFileSync(path.join(PASTA_DA_COLAGEM, 'colagem-claro.svg'), desenharColagem(claro), 'utf8');
+fs.writeFileSync(path.join(PASTA_DA_COLAGEM, 'colagem-escuro.svg'), desenharColagem(escuro), 'utf8');
+
+console.log('Fundo desenhado para os temas claro e escuro: a tira dos papéis (css/tokens.css) e a colagem (assets/img/fundo/).');
 ````
 
 ### scripts/gerar-anexo.js
