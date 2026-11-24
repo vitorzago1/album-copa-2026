@@ -197,11 +197,14 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  background: var(--campo, #8A8FB0);
+  /* A cor da seleção, com um clarão atrás da cabeça, como luz de estúdio */
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.4), transparent 62%),
+    var(--campo, #8A8FB0);
   border-radius: 6px 6px 0 0;
 }
 
-/* Retícula: os pontinhos de impressão que fazem a sombra do retrato.
+/* Retícula: os pontinhos de impressão no fundo do retrato, atrás da pessoa.
    São bolinhas desenhadas com gradiente, mais fortes embaixo. */
 .figurinha-arte::after {
   content: "";
@@ -212,31 +215,87 @@
   mask-image: linear-gradient(to top, #000, transparent 65%);
 }
 
-/* O retrato é genérico: uma cabeça lisa e uma camisa com o número.
-   Não é foto nem desenho de nenhuma pessoa. */
+/* O retrato: uma pessoa de frente, da cabeça aos ombros (o desenho está no
+   js/figurinha.js, na função desenharRetrato). É genérico: não é foto nem
+   desenho de nenhuma pessoa de verdade.
+   A pele não tem cor de pele: é o papel da figurinha com um pouco da tinta,
+   como em um retrato impresso em uma tinta só. Assim o desenho não "chuta" a
+   aparência de ninguém. */
 .figurinha-busto {
+  --pele: #DDE0E8;   /* para navegador antigo, que não conhece color-mix */
+  --pele: color-mix(in srgb, var(--cor-figurinha-tinta) 13%, var(--cor-figurinha-papel));
   position: absolute;
+  z-index: 1;   /* por cima dos pontinhos de retícula, que ficam só no fundo */
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 88%;
+  height: 94%;
 }
 
-.busto-cabeca {
+/* Rosto, orelhas e pescoço. O contorno na tinta da figurinha é o que separa
+   a pessoa do fundo colorido (contraste conferido no scripts/contraste.js). */
+.busto-pele {
+  fill: var(--pele);
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+/* A sombra de um lado do rosto e a do queixo no pescoço */
+.busto-sombra {
   fill: var(--cor-figurinha-tinta);
+  opacity: 0.16;
+}
+
+.busto-cabelo,
+.busto-olho {
+  fill: var(--cor-figurinha-tinta);
+}
+
+.busto-cabelo-raspado {
+  opacity: 0.55;
+}
+
+/* Sobrancelhas, nariz, boca e a costura das mangas: traços finos */
+.busto-traco {
+  fill: none;
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .busto-camisa {
   fill: var(--camisa, #FFFFFF);
   stroke: var(--cor-figurinha-tinta);
   stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+/* A gola tem a cor do número, que sempre contrasta com a da camisa */
+.busto-gola {
+  fill: var(--numero, var(--cor-figurinha-tinta));
+  stroke: var(--cor-figurinha-tinta);
+  stroke-width: 0.9;
+  stroke-linejoin: round;
 }
 
 .busto-numero {
   fill: var(--numero, var(--cor-figurinha-tinta));
   font-family: var(--fonte-destaque);
   font-weight: 900;
-  font-size: 15px;
+  font-size: 13px;
+}
+
+/* A bandeirinha da seleção, no canto de cima do retrato */
+.figurinha-pais {
+  position: absolute;
+  z-index: 1;
+  top: 6%;
+  left: 6%;
+  width: 24%;
+  border: 1.5px solid var(--cor-figurinha-papel);
+  outline: 1px solid var(--cor-figurinha-tinta);
 }
 
 /* Tarja: a faixa de baixo, onde fica o texto */
@@ -320,7 +379,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;   /* o reflexo passa por cima do retrato */
   background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
 }
 
