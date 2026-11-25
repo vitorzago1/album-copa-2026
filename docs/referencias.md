@@ -154,4 +154,4 @@ Pendências desta pesquisa:
   - calcular o contraste das cores e rodar os testes automáticos;
   - escrever esta documentação técnica.
 - A redação da Parte C.1 do relatório não usa IA.
-- Outras IAs usadas pelo aluno: a preencher pelo Vitor, se houver.
+- Outras IAs usadas: nenhuma.
