@@ -7,22 +7,15 @@
   <meta name="description" content="Abra o pacotinho do dia e descubra cinco figurinhas.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts dos pacotinhos, nesta ordem: os dados, o caderninho do progresso,
-       o desenho da figurinha e, por último, a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
   <script src="js/pacotinho.js" defer></script>
 
-  <!-- O pacotinho fechado em 3D. É a única parte do site que usa uma biblioteca
-       externa (Three.js, guardada em js/vendor). Sem ela, ou sem WebGL no
-       navegador, a página funciona igual, com o pacotinho desenhado em CSS. -->
   <script src="js/vendor/three.min.js" defer></script>
   <script src="js/pacote3d.js" defer></script>
   <script src="js/pacotinho-3d.js" defer></script>
@@ -34,15 +27,12 @@
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -57,7 +47,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -70,8 +59,6 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda a situação de hoje e a cartela da sequência;
-         à direita o palco, onde fica o pacotinho e, depois de rasgar, as figurinhas. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Pacotinhos</h1>
@@ -96,15 +83,12 @@
         <noscript><p>Os pacotinhos precisam do JavaScript ligado no navegador.</p></noscript>
       </div>
 
-      <!-- O conteúdo do palco é montado pelo js/pacotinho.js. -->
       <div class="palco" id="palco"></div>
     </section>
 
-    <!-- Recado para o leitor de tela (escondido da tela, mas lido em voz alta). -->
     <p class="escondido" id="aviso" role="status"></p>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">

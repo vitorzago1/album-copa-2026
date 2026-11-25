@@ -22,7 +22,7 @@ O prompt mestre do projeto é a fonte da verdade. Este arquivo resume as regras 
   - scripts comuns (`<script src>`), sem `type="module"`;
   - SVG escrito dentro do HTML, sem `<use>` apontando para outro arquivo;
   - fontes guardadas em `assets/fontes/`, sem depender de outro site.
-- Código comentado em português simples, explicando o porquê. Clareza vale mais que esperteza: o Vitor precisa explicar cada parte na apresentação.
+- Código sem comentários (decisão do Vitor em 25/11/2026, quando os comentários foram retirados de todo o código). Não voltar a pôr. A biblioteca em `js/vendor/` fica como veio, com a licença. Clareza vale mais que esperteza: nomes em português que digam o que cada coisa faz, porque o Vitor precisa explicar cada parte na apresentação.
 - Mobile first. Tem que funcionar em 320 px de largura.
 - Biblioteca externa só com autorização dele, e justificada no README. Autorizada até agora: Three.js r128 (em 21/11/2026), só para o pacotinho em 3D. Ela roda na página Pacotinhos e na ferramenta `scripts/quadros.html`; a página inicial usa as imagens já prontas.
 - Cabeçalho e rodapé são repetidos nas 7 páginas. Ao mudar um, mudar nos 7 arquivos.

@@ -1,28 +1,3 @@
-// ============================================================================
-// dados.js
-// ----------------------------------------------------------------------------
-// Tudo o que o álbum sabe sobre a Copa de 2026: seleções, figurinhas e sedes.
-//
-// Fica em um arquivo .js (e não em .json carregado com fetch) para o site
-// funcionar abrindo o index.html direto do computador.
-//
-// REGRA: nada aqui é inventado. Cada registro tem o campo "fonte", com os
-// apelidos das fontes listadas em FONTES. O que não foi possível confirmar
-// está escrito como 'a confirmar'.
-//
-// Os 12 grupos estão completos: 48 seleções e 288 figurinhas, mais as 16 sedes
-// e o resumo de como a Copa terminou.
-//   - O Grupo C foi pesquisado e escrito à mão (etapa 4 do projeto).
-//   - Os outros 11 grupos foram lidos por script das páginas listadas em
-//     FONTES e conferidos com uma segunda lista de elencos. As frases
-//     (campanha, curiosidade) são montadas a partir desses dados.
-// Consulta das fontes: 19 e 20/11/2026.
-// ============================================================================
-
-// ---------------------------------------------------------------------------
-// FONTES: de onde veio cada informação
-// ---------------------------------------------------------------------------
-
 const FONTES = {
   'fifa-elencos': {
     titulo: 'FIFA. World Cup 2026: 48 squads confirmed (comunicado de 2 de junho de 2026)',
@@ -182,19 +157,7 @@ const FONTES = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// SELEÇÕES
-// ---------------------------------------------------------------------------
-// "cores" partem das cores da bandeira e são usadas no desenho da figurinha:
-//   campo  = fundo do retrato      camisa = cor da camisa      numero = cor do número
-// Foram ajustadas para o número ter pelo menos 3:1 de contraste com a camisa
-// e a silhueta (azul-tinteiro) ter pelo menos 3:1 com o campo.
-// "campanha" e "depoisDoGrupo" contam os resultados do ponto de vista da
-// seleção: "2 a 0 no México" é vitória, "1 a 1 com o México" é empate e
-// "0 a 2 para o México" é derrota.
-
 const SELECOES = [
-  // ===== Grupo A e Grupo B =====
   {
     id: 'mexico',
     nome: 'México',
@@ -308,7 +271,6 @@ const SELECOES = [
     fonte: ['wiki-elencos', 'wiki-grupo-b', 'wiki-mata-mata'],
   },
 
-  // ===== Grupo C (pesquisado e escrito à mão) =====
   {
     id: 'brasil',
     nome: 'Brasil',
@@ -366,7 +328,6 @@ const SELECOES = [
     fonte: ['wiki-elencos', 'wiki-grupo-c', 'uefa-escocia'],
   },
 
-  // ===== Grupos D a L =====
   {
     id: 'estados-unidos',
     nome: 'Estados Unidos',
@@ -873,33 +834,7 @@ const SELECOES = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// FIGURINHAS
-// ---------------------------------------------------------------------------
-// Numeração: cada grupo tem 24 figurinhas (4 seleções x 6). O Grupo A fica com
-// 1 a 24, o B com 25 a 48, o C com 49 a 72 e assim por diante. Dentro do grupo,
-// as seleções seguem a ordem do sorteio (C1 Brasil, C2 Marrocos, C3 Haiti,
-// C4 Escócia): primeiro a bandeira, depois os 5 jogadores pelo número da camisa.
-//
-// Raridade (regra do álbum, não é dado da Copa):
-//   lendaria  = o camisa 10 da seleção
-//   brilhante = a bandeira e o capitão (se o capitão veste a 10, vale a lendária)
-//   comum     = os demais
-//
-// Quem entra, nos grupos lidos por script (todos menos o C), por ordem:
-//   1. o capitão;  2. o camisa 10;  3. quem fez mais gols pela seleção na Copa;
-//   4. o goleiro com mais jogos pela seleção;
-//   5. os jogadores com mais jogos pela seleção, primeiro nas posições que
-//      ainda não têm ninguém, até completar cinco.
-// "Jogos" e "gols pela seleção" são os da lista de elencos, contados até o
-// começo da Copa. "Gols na Copa" foram somados jogo a jogo.
-//
-// Posição: as quatro categorias da lista oficial (Goleiro, Defensor,
-// Meio-campista, Atacante). "clube" é o clube do jogador na época da Copa.
-
 const FIGURINHAS = [
-  // =============== Grupo A e Grupo B ===============
-  // ----- México -----
   { numero: 1, tipo: 'bandeira', selecao: 'mexico', nome: 'México', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 2, tipo: 'jogador', selecao: 'mexico', nome: 'Edson Álvarez', camisa: 4, posicao: 'Defensor', clube: 'Fenerbahçe', raridade: 'brilhante',
@@ -927,7 +862,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- África do Sul -----
   { numero: 7, tipo: 'bandeira', selecao: 'africa-do-sul', nome: 'África do Sul', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 8, tipo: 'jogador', selecao: 'africa-do-sul', nome: 'Ronwen Williams', camisa: 1, posicao: 'Goleiro', clube: 'Mamelodi Sundowns', raridade: 'brilhante',
@@ -955,7 +889,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Coreia do Sul -----
   { numero: 13, tipo: 'bandeira', selecao: 'coreia-do-sul', nome: 'Coreia do Sul', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 14, tipo: 'jogador', selecao: 'coreia-do-sul', nome: 'Kim Seung-gyu', camisa: 1, posicao: 'Goleiro', clube: 'FC Tokyo', raridade: 'comum',
@@ -983,7 +916,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Tchéquia -----
   { numero: 19, tipo: 'bandeira', selecao: 'tchequia', nome: 'Tchéquia', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 20, tipo: 'jogador', selecao: 'tchequia', nome: 'Matěj Kovář', camisa: 1, posicao: 'Goleiro', clube: 'PSV Eindhoven', raridade: 'comum',
@@ -1011,7 +943,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Canadá -----
   { numero: 25, tipo: 'bandeira', selecao: 'canada', nome: 'Canadá', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 26, tipo: 'jogador', selecao: 'canada', nome: 'Cyle Larin', camisa: 9, posicao: 'Atacante', clube: 'Southampton', raridade: 'comum',
@@ -1039,7 +970,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Bósnia e Herzegovina -----
   { numero: 31, tipo: 'bandeira', selecao: 'bosnia', nome: 'Bósnia e Herzegovina', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 32, tipo: 'jogador', selecao: 'bosnia', nome: 'Nikola Vasilj', camisa: 1, posicao: 'Goleiro', clube: 'FC St. Pauli', raridade: 'comum',
@@ -1067,7 +997,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Catar -----
   { numero: 37, tipo: 'bandeira', selecao: 'catar', nome: 'Catar', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 38, tipo: 'jogador', selecao: 'catar', nome: 'Abdulaziz Hatem', camisa: 6, posicao: 'Meio-campista', clube: 'Al-Rayyan', raridade: 'comum',
@@ -1095,7 +1024,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Suíça -----
   { numero: 43, tipo: 'bandeira', selecao: 'suica', nome: 'Suíça', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 44, tipo: 'jogador', selecao: 'suica', nome: 'Gregor Kobel', camisa: 1, posicao: 'Goleiro', clube: 'Borussia Dortmund', raridade: 'comum',
@@ -1123,8 +1051,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // =============== Grupo C (pesquisado e escrito à mão) ===============
-  // ----- Brasil -----
   { numero: 49, tipo: 'bandeira', selecao: 'brasil', nome: 'Brasil', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 50, tipo: 'jogador', selecao: 'brasil', nome: 'Alisson', camisa: 1, posicao: 'Goleiro', clube: 'Liverpool', raridade: 'comum',
@@ -1152,7 +1078,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'fourfourtwo-brasil', 'si-numeros-brasil'],
   },
 
-  // ----- Marrocos -----
   { numero: 55, tipo: 'bandeira', selecao: 'marrocos', nome: 'Marrocos', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 56, tipo: 'jogador', selecao: 'marrocos', nome: 'Yassine Bounou', camisa: 1, posicao: 'Goleiro', clube: 'Al-Hilal', raridade: 'comum',
@@ -1180,7 +1105,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Haiti -----
   { numero: 61, tipo: 'bandeira', selecao: 'haiti', nome: 'Haiti', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 62, tipo: 'jogador', selecao: 'haiti', nome: 'Johny Placide', camisa: 1, posicao: 'Goleiro', clube: 'Bastia', raridade: 'brilhante',
@@ -1208,7 +1132,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'concacaf-haiti'],
   },
 
-  // ----- Escócia -----
   { numero: 67, tipo: 'bandeira', selecao: 'escocia', nome: 'Escócia', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 68, tipo: 'jogador', selecao: 'escocia', nome: 'Andy Robertson', camisa: 3, posicao: 'Defensor', clube: 'Liverpool', raridade: 'brilhante',
@@ -1236,8 +1159,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'fifa-elencos'],
   },
 
-  // =============== Grupos D a L ===============
-  // ----- Estados Unidos -----
   { numero: 73, tipo: 'bandeira', selecao: 'estados-unidos', nome: 'Estados Unidos', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 74, tipo: 'jogador', selecao: 'estados-unidos', nome: 'Matt Turner', camisa: 1, posicao: 'Goleiro', clube: 'New England Revolution', raridade: 'comum',
@@ -1265,7 +1186,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Paraguai -----
   { numero: 79, tipo: 'bandeira', selecao: 'paraguai', nome: 'Paraguai', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 80, tipo: 'jogador', selecao: 'paraguai', nome: 'Gatito Fernández', camisa: 1, posicao: 'Goleiro', clube: 'Cerro Porteño', raridade: 'comum',
@@ -1293,7 +1213,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Austrália -----
   { numero: 85, tipo: 'bandeira', selecao: 'australia', nome: 'Austrália', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 86, tipo: 'jogador', selecao: 'australia', nome: 'Mathew Ryan', camisa: 1, posicao: 'Goleiro', clube: 'Levante', raridade: 'brilhante',
@@ -1321,7 +1240,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Turquia -----
   { numero: 91, tipo: 'bandeira', selecao: 'turquia', nome: 'Turquia', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 92, tipo: 'jogador', selecao: 'turquia', nome: 'Merih Demiral', camisa: 3, posicao: 'Defensor', clube: 'Al-Ahli', raridade: 'comum',
@@ -1349,7 +1267,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Alemanha -----
   { numero: 97, tipo: 'bandeira', selecao: 'alemanha', nome: 'Alemanha', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 98, tipo: 'jogador', selecao: 'alemanha', nome: 'Manuel Neuer', camisa: 1, posicao: 'Goleiro', clube: 'Bayern Munich', raridade: 'comum',
@@ -1377,7 +1294,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Curaçao -----
   { numero: 103, tipo: 'bandeira', selecao: 'curacao', nome: 'Curaçao', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 104, tipo: 'jogador', selecao: 'curacao', nome: 'Eloy Room', camisa: 1, posicao: 'Goleiro', clube: 'Miami FC', raridade: 'comum',
@@ -1405,7 +1321,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Costa do Marfim -----
   { numero: 109, tipo: 'bandeira', selecao: 'costa-do-marfim', nome: 'Costa do Marfim', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 110, tipo: 'jogador', selecao: 'costa-do-marfim', nome: 'Yahia Fofana', camisa: 1, posicao: 'Goleiro', clube: 'Çaykur Rizespor', raridade: 'comum',
@@ -1433,7 +1348,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Equador -----
   { numero: 115, tipo: 'bandeira', selecao: 'equador', nome: 'Equador', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 116, tipo: 'jogador', selecao: 'equador', nome: 'Hernán Galíndez', camisa: 1, posicao: 'Goleiro', clube: 'Huracán', raridade: 'comum',
@@ -1461,7 +1375,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Holanda -----
   { numero: 121, tipo: 'bandeira', selecao: 'holanda', nome: 'Holanda', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 122, tipo: 'jogador', selecao: 'holanda', nome: 'Bart Verbruggen', camisa: 1, posicao: 'Goleiro', clube: 'Brighton & Hove Albion', raridade: 'comum',
@@ -1489,7 +1402,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Japão -----
   { numero: 127, tipo: 'bandeira', selecao: 'japao', nome: 'Japão', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 128, tipo: 'jogador', selecao: 'japao', nome: 'Zion Suzuki', camisa: 1, posicao: 'Goleiro', clube: 'Parma', raridade: 'comum',
@@ -1517,7 +1429,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Suécia -----
   { numero: 133, tipo: 'bandeira', selecao: 'suecia', nome: 'Suécia', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 134, tipo: 'jogador', selecao: 'suecia', nome: 'Victor Lindelöf', camisa: 3, posicao: 'Defensor', clube: 'Aston Villa', raridade: 'brilhante',
@@ -1545,7 +1456,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Tunísia -----
   { numero: 139, tipo: 'bandeira', selecao: 'tunisia', nome: 'Tunísia', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 140, tipo: 'jogador', selecao: 'tunisia', nome: 'Montassar Talbi', camisa: 3, posicao: 'Defensor', clube: 'Lorient', raridade: 'comum',
@@ -1573,7 +1483,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Bélgica -----
   { numero: 145, tipo: 'bandeira', selecao: 'belgica', nome: 'Bélgica', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 146, tipo: 'jogador', selecao: 'belgica', nome: 'Thibaut Courtois', camisa: 1, posicao: 'Goleiro', clube: 'Real Madrid', raridade: 'comum',
@@ -1601,7 +1510,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Egito -----
   { numero: 151, tipo: 'bandeira', selecao: 'egito', nome: 'Egito', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 152, tipo: 'jogador', selecao: 'egito', nome: 'Mohamed El Shenawy', camisa: 1, posicao: 'Goleiro', clube: 'Al Ahly', raridade: 'comum',
@@ -1629,7 +1537,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Irã -----
   { numero: 157, tipo: 'bandeira', selecao: 'ira', nome: 'Irã', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 158, tipo: 'jogador', selecao: 'ira', nome: 'Alireza Beiranvand', camisa: 1, posicao: 'Goleiro', clube: 'Tractor', raridade: 'comum',
@@ -1657,7 +1564,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Nova Zelândia -----
   { numero: 163, tipo: 'bandeira', selecao: 'nova-zelandia', nome: 'Nova Zelândia', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 164, tipo: 'jogador', selecao: 'nova-zelandia', nome: 'Max Crocombe', camisa: 1, posicao: 'Goleiro', clube: 'Millwall', raridade: 'comum',
@@ -1685,7 +1591,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Espanha -----
   { numero: 169, tipo: 'bandeira', selecao: 'espanha', nome: 'Espanha', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 170, tipo: 'jogador', selecao: 'espanha', nome: 'Dani Olmo', camisa: 10, posicao: 'Atacante', clube: 'Barcelona', raridade: 'lendaria',
@@ -1713,7 +1618,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Cabo Verde -----
   { numero: 175, tipo: 'bandeira', selecao: 'cabo-verde', nome: 'Cabo Verde', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 176, tipo: 'jogador', selecao: 'cabo-verde', nome: 'Vozinha', camisa: 1, posicao: 'Goleiro', clube: 'Chaves', raridade: 'comum',
@@ -1741,7 +1645,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Arábia Saudita -----
   { numero: 181, tipo: 'bandeira', selecao: 'arabia-saudita', nome: 'Arábia Saudita', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 182, tipo: 'jogador', selecao: 'arabia-saudita', nome: 'Abdulelah Al-Amri', camisa: 4, posicao: 'Defensor', clube: 'Al-Nassr', raridade: 'comum',
@@ -1769,7 +1672,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Uruguai -----
   { numero: 187, tipo: 'bandeira', selecao: 'uruguai', nome: 'Uruguai', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 188, tipo: 'jogador', selecao: 'uruguai', nome: 'José María Giménez', camisa: 2, posicao: 'Defensor', clube: 'Atlético Madrid', raridade: 'brilhante',
@@ -1797,7 +1699,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- França -----
   { numero: 193, tipo: 'bandeira', selecao: 'franca', nome: 'França', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 194, tipo: 'jogador', selecao: 'franca', nome: 'Lucas Digne', camisa: 3, posicao: 'Defensor', clube: 'Aston Villa', raridade: 'comum',
@@ -1825,7 +1726,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Senegal -----
   { numero: 199, tipo: 'bandeira', selecao: 'senegal', nome: 'Senegal', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 200, tipo: 'jogador', selecao: 'senegal', nome: 'Kalidou Koulibaly', camisa: 3, posicao: 'Defensor', clube: 'Al-Hilal', raridade: 'brilhante',
@@ -1853,7 +1753,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Iraque -----
   { numero: 205, tipo: 'bandeira', selecao: 'iraque', nome: 'Iraque', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 206, tipo: 'jogador', selecao: 'iraque', nome: 'Rebin Sulaka', camisa: 2, posicao: 'Defensor', clube: 'Port', raridade: 'comum',
@@ -1881,7 +1780,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Noruega -----
   { numero: 211, tipo: 'bandeira', selecao: 'noruega', nome: 'Noruega', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 212, tipo: 'jogador', selecao: 'noruega', nome: 'Ørjan Nyland', camisa: 1, posicao: 'Goleiro', clube: 'Sevilla', raridade: 'comum',
@@ -1909,7 +1807,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Argentina -----
   { numero: 217, tipo: 'bandeira', selecao: 'argentina', nome: 'Argentina', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 218, tipo: 'jogador', selecao: 'argentina', nome: 'Leandro Paredes', camisa: 5, posicao: 'Meio-campista', clube: 'Boca Juniors', raridade: 'comum',
@@ -1937,7 +1834,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Argélia -----
   { numero: 223, tipo: 'bandeira', selecao: 'argelia', nome: 'Argélia', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 224, tipo: 'jogador', selecao: 'argelia', nome: 'Aïssa Mandi', camisa: 2, posicao: 'Defensor', clube: 'Lille', raridade: 'comum',
@@ -1965,7 +1861,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Áustria -----
   { numero: 229, tipo: 'bandeira', selecao: 'austria', nome: 'Áustria', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 230, tipo: 'jogador', selecao: 'austria', nome: 'Alexander Schlager', camisa: 1, posicao: 'Goleiro', clube: 'Red Bull Salzburg', raridade: 'comum',
@@ -1993,7 +1888,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Jordânia -----
   { numero: 235, tipo: 'bandeira', selecao: 'jordania', nome: 'Jordânia', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 236, tipo: 'jogador', selecao: 'jordania', nome: 'Yazeed Abulaila', camisa: 1, posicao: 'Goleiro', clube: 'Al-Hussein', raridade: 'comum',
@@ -2021,7 +1915,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Portugal -----
   { numero: 241, tipo: 'bandeira', selecao: 'portugal', nome: 'Portugal', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 242, tipo: 'jogador', selecao: 'portugal', nome: 'Diogo Costa', camisa: 1, posicao: 'Goleiro', clube: 'Porto', raridade: 'comum',
@@ -2049,7 +1942,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- RD Congo -----
   { numero: 247, tipo: 'bandeira', selecao: 'rd-congo', nome: 'RD Congo', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 248, tipo: 'jogador', selecao: 'rd-congo', nome: 'Lionel Mpasi', camisa: 1, posicao: 'Goleiro', clube: 'Le Havre', raridade: 'comum',
@@ -2077,7 +1969,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Uzbequistão -----
   { numero: 253, tipo: 'bandeira', selecao: 'uzbequistao', nome: 'Uzbequistão', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 254, tipo: 'jogador', selecao: 'uzbequistao', nome: 'Utkir Yusupov', camisa: 1, posicao: 'Goleiro', clube: 'Navbahor Namangan', raridade: 'comum',
@@ -2105,7 +1996,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Colômbia -----
   { numero: 259, tipo: 'bandeira', selecao: 'colombia', nome: 'Colômbia', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 260, tipo: 'jogador', selecao: 'colombia', nome: 'David Ospina', camisa: 1, posicao: 'Goleiro', clube: 'Atlético Nacional', raridade: 'comum',
@@ -2133,7 +2023,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Inglaterra -----
   { numero: 265, tipo: 'bandeira', selecao: 'inglaterra', nome: 'Inglaterra', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 266, tipo: 'jogador', selecao: 'inglaterra', nome: 'Jordan Pickford', camisa: 1, posicao: 'Goleiro', clube: 'Everton', raridade: 'comum',
@@ -2161,7 +2050,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Croácia -----
   { numero: 271, tipo: 'bandeira', selecao: 'croacia', nome: 'Croácia', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 272, tipo: 'jogador', selecao: 'croacia', nome: 'Dominik Livaković', camisa: 1, posicao: 'Goleiro', clube: 'Dinamo Zagreb', raridade: 'comum',
@@ -2189,7 +2077,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Gana -----
   { numero: 277, tipo: 'bandeira', selecao: 'gana', nome: 'Gana', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 278, tipo: 'jogador', selecao: 'gana', nome: 'Lawrence Ati-Zigi', camisa: 1, posicao: 'Goleiro', clube: 'St. Gallen', raridade: 'comum',
@@ -2217,7 +2104,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Panamá -----
   { numero: 283, tipo: 'bandeira', selecao: 'panama', nome: 'Panamá', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 284, tipo: 'jogador', selecao: 'panama', nome: 'Luis Mejía', camisa: 1, posicao: 'Goleiro', clube: 'Nacional', raridade: 'comum',
@@ -2245,21 +2131,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 ];
-
-// ---------------------------------------------------------------------------
-// SEDES: as 16 cidades e os estádios da Copa
-// ---------------------------------------------------------------------------
-// Ordem: do maior estádio para o menor, como na tabela da fonte.
-//   cidade      = nome usado pela organização (região metropolitana)
-//   municipio   = onde o estádio fica de fato, quando não é na própria cidade
-//   nomeNaCopa  = nome usado durante o torneio (a FIFA não usa nomes de patrocinador)
-//   jogos       = quantas partidas da Copa de 2026 o estádio recebeu
-//   capacidade  = lugares, segundo a tabela da fonte
-//   nota        = um fato a mais, tirado da mesma tabela
-//
-// Fotos: Wikimedia Commons, todas com licença livre. O arquivo de cada foto é
-// assets/img/sedes/ + id + .jpg (versão de 960 px de largura, sem outra
-// alteração). "origem" é a página da foto original, com autor e licença.
 
 const SEDES = [
   {
@@ -2439,13 +2310,6 @@ const SEDES = [
     fonte: ['wiki-copa'],
   },
 ];
-
-// ---------------------------------------------------------------------------
-// COPA: como terminou
-// ---------------------------------------------------------------------------
-// Resumo usado na última página do álbum. O placar da final foi conferido em
-// três reportagens além da Wikipedia. O total de gols e o artilheiro foram
-// somados jogo a jogo pelo script e batem com a tabela de prêmios da fonte.
 
 const COPA = {
   campea: 'espanha',

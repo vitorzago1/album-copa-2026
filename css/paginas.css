@@ -1,19 +1,7 @@
-/* ==========================================================================
-   paginas.css
-   --------------------------------------------------------------------------
-   O que é próprio de cada página. As peças que se repetem pelo site ficam em
-   componentes.css; aqui fica só a arrumação de cada tela.
-   ========================================================================== */
-
-/* ---------- Início ---------- */
-
-/* O primeiro parágrafo de cada página, um pouco maior que o texto comum */
 .abertura-texto {
   font-size: var(--texto-medio);
 }
 
-/* Raridades: no celular, figurinha à esquerda e texto à direita;
-   em telas maiores, as três lado a lado */
 .raridades {
   list-style: none;
   padding: 0;
@@ -23,8 +11,6 @@
 
 .raridades > li {
   display: grid;
-  /* A figurinha ocupa cerca de um terço (entre 5rem e 7rem); o texto fica com o resto.
-     O minmax(0, 1fr) deixa a coluna do texto encolher em telas estreitas. */
   grid-template-columns: clamp(5rem, 32%, 7rem) minmax(0, 1fr);
   gap: var(--espaco-4);
   align-items: center;
@@ -49,7 +35,6 @@
   }
 }
 
-/* Cartela da sequência: sete casas impressas, uma por dia */
 .cartela {
   list-style: none;
   padding: 0;
@@ -69,7 +54,6 @@
   font-weight: 700;
 }
 
-/* Bilhete de troca: duas linhas, "Tenho" e "Preciso" */
 .bilhete {
   max-width: 26rem;
 }
@@ -85,11 +69,9 @@
 }
 
 .bilhete dd {
-  font-variant-numeric: tabular-nums;   /* números com a mesma largura, alinhados */
+  font-variant-numeric: tabular-nums;
 }
 
-/* Dia carimbado na cartela: um círculo de tinta em volta do número,
-   posto à mão (por isso torto). O formato muda, não só a cor. */
 .cartela > li.carimbado .cartela-dia {
   display: grid;
   place-items: center;
@@ -101,17 +83,10 @@
   rotate: -8deg;
 }
 
-/* ---------- Álbum ---------- */
-
-/* O recado fica preso no pé da tela. Esta folga faz o navegador parar a
-   rolagem um pouco antes, para o recado nunca cobrir o que está em foco. */
 html {
   scroll-padding-bottom: 10rem;
 }
 
-/* Enquanto o recado está na tela, a página ganha um espaço a mais no fim.
-   Sem ele, os últimos links do rodapé não teriam para onde subir e ficariam
-   embaixo do recado. (A classe é posta e tirada pelo js/album.js.) */
 .com-recado {
   padding-bottom: 10rem;
 }
@@ -120,7 +95,6 @@ html {
   padding-bottom: var(--espaco-6);
 }
 
-/* Placar: o número de coladas bem grande, na fonte de destaque */
 .placar {
   display: flex;
   flex-wrap: wrap;
@@ -137,7 +111,6 @@ html {
   line-height: 0.9;
 }
 
-/* Índice dos grupos: a tira de 12 casas, cada casa é um link para o grupo */
 .tira-indice a {
   display: flex;
   flex-direction: column;
@@ -152,7 +125,6 @@ html {
   border-width: 3px;
 }
 
-/* Como terminou: a seleção campeã em destaque e os quatro primeiros em lista */
 .final-campea {
   display: flex;
   flex-wrap: wrap;
@@ -190,7 +162,6 @@ html {
   width: 2.25rem;
 }
 
-/* Bandeja: as figurinhas na mão, cada uma com o seu botão "Colar" embaixo */
 .bandeja {
   list-style: none;
   padding: 0;
@@ -206,10 +177,9 @@ html {
 }
 
 .bandeja .figurinha {
-  cursor: grab;   /* a mãozinha avisa que dá para arrastar */
+  cursor: grab;
 }
 
-/* Filtros: dois por linha no celular, os quatro lado a lado em telas maiores */
 .filtros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -231,7 +201,6 @@ html {
   font-weight: 700;
 }
 
-/* Grupo: o título e a conta de coladas na mesma linha */
 .grupo-cabeca {
   display: flex;
   flex-wrap: wrap;
@@ -245,7 +214,6 @@ html {
   font-weight: 700;
 }
 
-/* Seleção: uma página dupla, com a ficha de um lado e as casas do outro */
 .selecao {
   padding-block: var(--espaco-6);
   border-top: 2px solid var(--cor-texto);
@@ -277,16 +245,9 @@ html {
   margin-top: var(--espaco-3);
 }
 
-/* As casas: duas colunas no celular e três quando há largura.
-   Entre 48rem e 64rem a página já é dupla e a metade direita ainda é
-   estreita, então voltam a ser duas. */
 .vagas {
   list-style: none;
   padding: 0;
-  /* A figurinha que acabou de ser colada chega maior e torta, e passaria da
-     beirada da tela. "overflow-x: clip" corta essa sobra sem criar barra de
-     rolagem. A margem negativa com o mesmo tanto de respiro leva o corte um
-     pouco para fora da grade, até a beira da página. */
   overflow-x: clip;
   margin-inline: calc(var(--espaco-4) * -1);
   padding-inline: var(--espaco-4);
@@ -308,18 +269,13 @@ html {
   }
 }
 
-/* A casa empilha a figurinha (ou a vaga) e, se houver, o botão "Desfazer" */
 .casa {
-  position: relative;   /* o anel da batida se mede por ela */
+  position: relative;
   display: grid;
   gap: var(--espaco-2);
   align-content: start;
 }
 
-/* Entrar ao rolar: cada casa do álbum assenta no lugar enquanto entra na tela.
-   "animation-timeline: view()" troca o relógio da animação pela rolagem: ela
-   anda conforme a casa aparece e termina com a casa inteira à vista.
-   Onde o navegador não conhece isso, as casas simplesmente já estão no lugar. */
 @supports (animation-timeline: view()) {
   .vagas > .casa {
     animation: assentar linear both;
@@ -332,10 +288,6 @@ html {
   from { opacity: 0; translate: 0 2rem; rotate: -4deg; scale: 0.86; }
 }
 
-/* A largura de cada casa é a da coluna, e pronto: "minmax(0, 1fr)" proíbe o
-   conteúdo de alargar a coluna. Sem isto, quando o texto fica alto (letra
-   maior), a proporção 3 por 4 alargaria a figurinha junto e ela passaria da
-   tela. Com a largura presa, só a altura cresce. */
 .vagas > li,
 .mesa > li,
 .bandeja > li {
@@ -352,9 +304,6 @@ html {
   border-top: 2px solid var(--cor-texto);
 }
 
-/* ---------- Pacotinhos ---------- */
-
-/* O palco: onde fica o pacotinho fechado e, depois de rasgar, as figurinhas */
 .palco {
   display: grid;
   gap: var(--espaco-5);
@@ -365,7 +314,6 @@ html {
   margin: var(--espaco-2) var(--espaco-4);
 }
 
-/* A mesa: as cinco figurinhas do pacotinho, três em cima e duas embaixo */
 .mesa {
   list-style: none;
   padding: 0;
@@ -393,9 +341,6 @@ html {
   max-width: none;
 }
 
-/* ---------- Trocas ---------- */
-
-/* Tenho para trocar: uma linha impressa por figurinha, com a contagem na ponta */
 .lista-troca {
   list-style: none;
   padding: 0;
@@ -411,7 +356,6 @@ html {
   border-bottom: 1.5px solid var(--cor-borda);
 }
 
-/* Preciso: os números que faltam, cada um em um quadrinho impresso (como uma vaga pequena) */
 .lista-faltam {
   list-style: none;
   padding: 0;
@@ -428,7 +372,6 @@ html {
   font-size: var(--texto-pequeno);
 }
 
-/* O resumo da gaveta "Ver os números que faltam": área de toque de 44 px */
 #faltam-gaveta summary {
   min-height: 2.75rem;
   display: flex;
@@ -441,7 +384,6 @@ html {
   cursor: pointer;
 }
 
-/* Um sinal de mais ou de menos na frente mostra se a gaveta está fechada ou aberta */
 #faltam-gaveta summary::before {
   content: "+";
   font-weight: 800;
@@ -451,12 +393,10 @@ html {
   content: "−";
 }
 
-/* A lista pronta ocupa o cartão inteiro */
 .bilhete .campo {
   max-width: none;
 }
 
-/* Banca: as duas perguntas lado a lado quando há largura */
 .banca-grade {
   display: grid;
   gap: var(--espaco-5);
@@ -468,8 +408,6 @@ html {
   }
 }
 
-/* ---------- Sobre ---------- */
-
 .sobre-ficha dt {
   font-weight: 700;
 }
@@ -478,7 +416,6 @@ html {
   margin-top: var(--espaco-3);
 }
 
-/* Listas de créditos e de fontes: uma linha impressa por item */
 .lista-fontes {
   list-style: none;
   padding: 0;
@@ -490,7 +427,6 @@ html {
   border-bottom: 1.5px solid var(--cor-borda);
 }
 
-/* Lista comum, com marcador, dentro do texto corrido */
 .lista-simples {
   padding-left: 1.2em;
   max-width: var(--largura-leitura);
@@ -499,9 +435,6 @@ html {
 .lista-simples > li + li {
   margin-top: var(--espaco-2);
 }
-
-/* ---------- Sobre: guia de estilo ----------
-   As peças do site todas juntas, para consulta e para testar os temas. */
 
 .guia h3 {
   margin-top: var(--espaco-6);

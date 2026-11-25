@@ -1,27 +1,7 @@
-// ============================================================================
-// laboratorio.js
-// ----------------------------------------------------------------------------
-// A página de testes (laboratorio.html). Não é usada pelas 7 páginas do site.
-//
-// O que faz:
-//   1. Guarda a lista das 24 ideias e escreve a ficha de cada uma.
-//   2. Liga e desliga as camadas de fundo na folha de prova.
-//   3. Faz funcionar a demonstração de cada animação e de cada tecnologia.
-//   4. Monta a lista do que foi marcado, pronta para copiar.
-//
-// Depende de: js/dados.js e js/figurinha.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // -------------------------------------------------------------------------
-  // 1. As 24 ideias
-  // -------------------------------------------------------------------------
-  // explicar = o quanto é fácil explicar o código na apresentação
-
   const IDEIAS = [
-    // Fundo e detalhes
     { id: 'grao', grupo: 'fundo', nome: 'Grão de papel', resumo: 'A página deixa de ser uma cor lisa e ganha a fibra de um papel de verdade.', como: 'Um filtro do SVG (feTurbulence) desenha um chuvisco. Ele fica por cima da página, bem fraco.', onde: 'Todo navegador atual.', acesso: 'É só enfeite: o leitor de tela ignora. O contraste do texto precisa ser conferido de novo.', explicar: 'Fácil' },
     { id: 'reticula', grupo: 'fundo', nome: 'Retícula nos cantos', resumo: 'Pontinhos de impressão que crescem em direção ao canto, como em gibi e jornal.', como: 'Três camadas de bolinhas (radial-gradient). Uma máscara (mask-image) faz as maiores aparecerem só perto do canto.', onde: 'Todo navegador atual.', acesso: 'Enfeite. Fica atrás do texto, com pouca força.', explicar: 'Médio' },
     { id: 'marcas', grupo: 'fundo', nome: 'Marcas de gráfica', resumo: 'Marcas de corte, cruz de registro, barra de tons e número de página: a tela vira uma prova de impressão.', como: 'Caixinhas posicionadas nas bordas, desenhadas só com bordas e gradientes do CSS.', onde: 'Todo navegador atual.', acesso: 'Enfeite, escondido do leitor de tela.', explicar: 'Fácil' },
@@ -32,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     { id: 'falhada', grupo: 'fundo', nome: 'Títulos com tinta falhada', resumo: 'Os títulos e os números grandes ganham pequenas falhas, como impressão antiga.', como: 'Uma máscara (mask-image) de chuvisco deixa o papel aparecer em pontinhos.', onde: 'Todo navegador atual.', acesso: 'Só em letra grande. É preciso conferir se não atrapalha a leitura.', explicar: 'Médio' },
     { id: 'picote', grupo: 'fundo', nome: 'Picote com tesourinha', resumo: 'As seções passam a ser separadas por uma linha de picote com uma tesoura, no lugar do fio liso.', como: 'Borda tracejada e um desenho pequeno em SVG.', onde: 'Todo navegador atual.', acesso: 'Enfeite.', explicar: 'Fácil' },
 
-    // Movimento
     { id: 'holografica', grupo: 'movimento', nome: 'Lendária holográfica', resumo: 'A figurinha lendária inclina e o brilho corre conforme o mouse passa por cima.', como: 'O JavaScript lê a posição do ponteiro e guarda em variáveis do CSS. O CSS usa as variáveis para inclinar a figurinha e mover um degradê colorido.', onde: 'Todo navegador atual. No celular, funciona arrastando o dedo.', acesso: 'Com menos movimento, a figurinha não inclina: fica só o brilho.', explicar: 'Médio' },
     { id: 'batida', grupo: 'movimento', nome: 'Colar com batida', resumo: 'A figurinha desce, bate no lugar, amassa de leve e solta um anel de tinta.', como: 'Três animações de CSS (@keyframes) disparadas juntas: a queda, o anel e a tremida.', onde: 'Todo navegador atual.', acesso: 'Com menos movimento, a figurinha só aparece no lugar.', explicar: 'Fácil' },
     { id: 'carimbada', grupo: 'movimento', nome: 'Carimbo de conquista', resumo: 'Ao ganhar uma conquista, o carimbo bate com força no quadro.', como: 'Uma animação de CSS: o carimbo começa grande e transparente e encolhe até o tamanho certo.', onde: 'Todo navegador atual.', acesso: 'Com menos movimento, o carimbo só aparece.', explicar: 'Fácil' },
@@ -44,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
     { id: 'vivo', grupo: 'movimento', nome: 'Retícula que acende', resumo: 'No fundo, os pontinhos de impressão aparecem em volta do mouse, como uma lanterna no papel.', como: 'O JavaScript passa a posição do ponteiro ao CSS, que move uma máscara.', onde: 'Computador. No celular, os pontinhos ficam parados no meio.', acesso: 'Enfeite. Não esconde texto.', explicar: 'Médio' },
     { id: 'traco', grupo: 'movimento', nome: 'Traço que se desenha', resumo: 'As linhas do campo se desenham sozinhas quando a seção aparece.', como: 'O tracejado do SVG é animado (stroke-dashoffset), como uma caneta percorrendo a linha.', onde: 'Todo navegador atual.', acesso: 'Com menos movimento, o desenho aparece pronto.', explicar: 'Fácil' },
 
-    // Tecnologias do navegador
     { id: 'sons', grupo: 'tecnologia', nome: 'Sons feitos na hora', resumo: 'Rasgar, colar, virar e carimbar com som, sem nenhum arquivo de áudio.', como: 'A Web Audio API fabrica o som com contas: um chiado para o rasgo, uma batida grave para a colagem.', onde: 'Todo navegador atual.', acesso: 'Só toca depois de um clique. Precisa de uma chave para ligar e desligar no painel de acessibilidade.', explicar: 'Difícil' },
     { id: 'vibracao', grupo: 'tecnologia', nome: 'Vibração no celular', resumo: 'O celular dá uma tremidinha na hora de colar.', como: 'Uma linha de código: navigator.vibrate.', onde: 'Só no Android. O iPhone não tem esse recurso.', acesso: 'Entraria junto com a chave dos sons.', explicar: 'Fácil' },
     { id: 'inclinacao', grupo: 'tecnologia', nome: 'Brilho pela inclinação do celular', resumo: 'A figurinha lendária brilha conforme a pessoa inclina o aparelho.', como: 'O navegador avisa a inclinação do aparelho (evento deviceorientation), e ela move o mesmo brilho da ideia 10.', onde: 'Celulares. O iPhone pede permissão antes.', acesso: 'Depende da ideia 10. Desliga com menos movimento.', explicar: 'Difícil' },
@@ -54,29 +32,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
   IDEIAS.forEach(function (ideia, posicao) { ideia.numero = posicao + 1; });
 
-  // -------------------------------------------------------------------------
-  // 2. O que foi marcado (guardado no navegador, para não perder ao recarregar)
-  // -------------------------------------------------------------------------
-
   const CHAVE = 'colei.laboratorio';
   let guardado = { quero: [], notas: '' };
   try {
     guardado = Object.assign(guardado, JSON.parse(localStorage.getItem(CHAVE)));
   } catch (erro) {
-    // Sem nada guardado: começa vazio.
   }
 
   function guardar() {
     try {
       localStorage.setItem(CHAVE, JSON.stringify(guardado));
     } catch (erro) {
-      // Sem localStorage, as escolhas valem até fechar a página.
     }
   }
-
-  // -------------------------------------------------------------------------
-  // 3. As fichas
-  // -------------------------------------------------------------------------
 
   const prova = document.getElementById('prova');
 
@@ -84,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     lista.append(criarElemento('dt', '', rotulo), criarElemento('dd', '', valor));
   }
 
-  // Devolve as três partes da ficha: o título com o resumo, a chave e os detalhes
   function criarFicha(ideia) {
     const titulo = criarElemento('h3', 'lab-nome');
     titulo.append(criarElemento('span', 'lab-numero', String(ideia.numero)), ideia.nome);
@@ -112,22 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const ficha = criarFicha(ideia);
 
     if (ideia.grupo === 'fundo') {
-      // No fundo, a ficha inteira vai para a lista ao lado da folha de prova
       const caixa = criarElemento('div', 'lab-ficha');
       caixa.append(ficha.titulo, ficha.resumo, ficha.chave, ficha.detalhes);
       document.getElementById('lista-fundo').append(caixa);
       prova.classList.toggle('ef-' + ideia.id, ficha.caixa.checked);
     } else {
-      // Nos outros grupos, o título vai em cima do palco e a chave embaixo
       const cartao = document.querySelector('.lab-item[data-id="' + ideia.id + '"]');
       cartao.prepend(ficha.titulo, ficha.resumo);
       cartao.append(ficha.chave, ficha.detalhes);
     }
   }
-
-  // -------------------------------------------------------------------------
-  // 4. A lista de escolhas
-  // -------------------------------------------------------------------------
 
   const campoNotas = document.getElementById('escolhas-notas');
   const campoTexto = document.getElementById('escolhas-texto');
@@ -157,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
     campoTexto.value = linhas.join('\n');
   }
 
-  // Um ouvinte só para todas as caixas "quero"
   document.addEventListener('change', function (evento) {
     const id = evento.target.dataset ? evento.target.dataset.quero : undefined;
     if (!id) return;
@@ -165,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (evento.target.checked) guardado.quero.push(id);
     guardar();
 
-    // As ideias de fundo aparecem na folha de prova na hora
     const ideia = IDEIAS.find(function (i) { return i.id === id; });
     if (ideia.grupo === 'fundo') prova.classList.toggle('ef-' + id, evento.target.checked);
     desenharEscolhas();
@@ -201,12 +160,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, selecionar);
   });
 
-  // -------------------------------------------------------------------------
-  // 5. Aviso de menos movimento
-  // -------------------------------------------------------------------------
-  // Se o aparelho pede menos movimento, o site desliga as animações. Aqui dá
-  // para ligar de novo, só nesta página, para conseguir avaliar as ideias.
-
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.getElementById('aviso-movimento').hidden = false;
   }
@@ -214,17 +167,11 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('forcar-movimento').addEventListener('click', function () {
     const raiz = document.documentElement;
     raiz.dataset.movimento = 'completo';
-    // O painel de acessibilidade reescreve esse atributo quando é usado.
-    // Este vigia põe o "completo" de volta sempre que isso acontecer.
     new MutationObserver(function () {
       if (raiz.dataset.movimento === 'normal') raiz.dataset.movimento = 'completo';
     }).observe(raiz, { attributes: true, attributeFilter: ['data-movimento'] });
     document.getElementById('forcar-aviso').textContent = 'Animações ligadas nesta página, até ela ser fechada ou recarregada.';
   });
-
-  // -------------------------------------------------------------------------
-  // 6. A folha de prova: duas figurinhas coladas e uma vaga
-  // -------------------------------------------------------------------------
 
   function criarVaga(numero, nome) {
     const vaga = criarElemento('div', 'vaga');
@@ -232,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return vaga;
   }
 
-  // Um rabisco em SVG. "d" é o caminho do traço, como uma lista de curvas.
   function criarRabisco(classe, caixa, d) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'rabisco ' + classe);
@@ -259,27 +205,20 @@ document.addEventListener('DOMContentLoaded', function () {
   casaVazia.append(criarRabisco('rabisco-seta', '0 0 60 40', 'M4 6c14 16 30 24 50 26M54 32 42 34M54 32 46 22'));
   casasDaProva.append(casaVazia);
 
-  // -------------------------------------------------------------------------
-  // 7. As demonstrações de movimento
-  // -------------------------------------------------------------------------
-
-  // Tira uma classe e põe de novo, para a animação de CSS recomeçar.
-  // Ler offsetWidth no meio obriga o navegador a notar que a classe saiu.
   function recomecar(elemento, classe) {
     elemento.classList.remove(classe);
     void elemento.offsetWidth;
     elemento.classList.add(classe);
   }
 
-  // 10. Lendária holográfica
   const holo = criarFigurinha(figurinhaPorNumero(54), {});
   holo.classList.add('holo');
   document.getElementById('palco-holografica').append(holo);
 
   holo.addEventListener('pointermove', function (evento) {
     const caixa = holo.getBoundingClientRect();
-    const x = (evento.clientX - caixa.left) / caixa.width;    // 0 na esquerda, 1 na direita
-    const y = (evento.clientY - caixa.top) / caixa.height;    // 0 em cima, 1 embaixo
+    const x = (evento.clientX - caixa.left) / caixa.width;
+    const y = (evento.clientY - caixa.top) / caixa.height;
     holo.style.setProperty('--px', (x * 100) + '%');
     holo.style.setProperty('--py', (y * 100) + '%');
     holo.style.setProperty('--brilho', '0.9');
@@ -293,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
     for (const nome of ['--px', '--py', '--rx', '--ry', '--brilho']) holo.style.removeProperty(nome);
   });
 
-  // 11. Colar com batida
   const palcoBatida = document.getElementById('palco-batida');
   const casaDeBatida = criarElemento('div', 'casa-de-batida');
   palcoBatida.append(casaDeBatida);
@@ -315,7 +253,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('batida-desfazer').addEventListener('click', function () { desenharBatida(false); });
   desenharBatida(false);
 
-  // 12. Carimbo de conquista
   const carimbo = document.getElementById('carimbada-carimbo');
   const cartaoDoCarimbo = document.getElementById('carimbada-cartao');
 
@@ -329,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
     carimbo.hidden = true;
   });
 
-  // 13. Pacotinho com rasgo de verdade
   const pacote = document.getElementById('pacote-2');
   const leque = document.querySelector('.leque');
 
@@ -345,7 +281,6 @@ document.addEventListener('DOMContentLoaded', function () {
     leque.classList.remove('aberto');
   });
 
-  // 14. Virar a página
   const folha = document.getElementById('folha-de-album');
   const LETRAS = ['A', 'B', 'C', 'D'];
   let paginaAtual = 0;
@@ -363,13 +298,12 @@ document.addEventListener('DOMContentLoaded', function () {
       paginaAtual = (paginaAtual + passo + LETRAS.length) % LETRAS.length;
       desenharFolha();
     }
-    // Sem a API (Firefox) ou com menos movimento, a troca é seca
     if (!document.startViewTransition || movimentoReduzido()) {
       trocar();
       return;
     }
     document.documentElement.dataset.virada = passo > 0 ? 'avancar' : 'voltar';
-    document.startViewTransition(trocar);   // o navegador anima do estado velho para o novo
+    document.startViewTransition(trocar);
   }
 
   document.getElementById('pagina-proxima').addEventListener('click', function () { virarPagina(1); });
@@ -379,7 +313,6 @@ document.addEventListener('DOMContentLoaded', function () {
     : 'Este navegador ainda não tem a View Transitions API: aqui a troca é seca.';
   desenharFolha();
 
-  // 15. Entrar ao rolar
   const gradeDaRolagem = criarElemento('div', 'rolagem-grade');
   for (const numero of [217, 220, 222, 49, 53, 54, 193, 195, 196, 271, 274, 276]) {
     const item = criarElemento('div', 'rolagem-item');
@@ -391,11 +324,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('rolagem-suporte').textContent = 'Este navegador ainda não tem animação presa à rolagem: aqui as figurinhas aparecem paradas.';
   }
 
-  // 16. Papel picado
   const tela = document.getElementById('confete-tela');
 
   function soltarConfete() {
-    if (movimentoReduzido()) return;   // quem pediu menos movimento não vê o papel picado
+    if (movimentoReduzido()) return;
 
     const caixa = tela.getBoundingClientRect();
     tela.width = caixa.width;
@@ -403,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const pincel = tela.getContext('2d');
     const CORES = ['#228B59', '#F7D417', '#1B3F8F', '#F2C230', '#FFFFFF', '#14204F'];
 
-    // Cada papelzinho nasce no meio do palco e sai com um empurrão para cima e para os lados
     const papeis = [];
     for (let i = 0; i < 110; i++) {
       papeis.push({
@@ -422,14 +353,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const inicio = performance.now();
     const DURACAO = 2000;
 
-    // Um "quadro" da animação: move cada papelzinho um pouco e desenha de novo
     function quadro(agora) {
       const passou = agora - inicio;
       pincel.clearRect(0, 0, tela.width, tela.height);
-      pincel.globalAlpha = Math.max(0, 1 - Math.max(0, passou - 1300) / 700);   // some no fim
+      pincel.globalAlpha = Math.max(0, 1 - Math.max(0, passou - 1300) / 700);
       for (const papel of papeis) {
-        papel.velY += 0.3;      // a gravidade puxa para baixo
-        papel.velX *= 0.99;     // o ar freia para os lados
+        papel.velY += 0.3;
+        papel.velX *= 0.99;
         papel.x += papel.velX;
         papel.y += papel.velY;
         papel.giro += papel.velGiro;
@@ -448,13 +378,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('confete-soltar').addEventListener('click', soltarConfete);
 
-  // 17. Placar girando
   const odometro = document.getElementById('odometro');
 
   function mostrarNoOdometro(valor) {
     const digitos = String(valor).split('');
     odometro.textContent = '';
-    odometro.setAttribute('aria-label', String(valor));   // o leitor de tela lê só o número final
+    odometro.setAttribute('aria-label', String(valor));
 
     const fitas = [];
     digitos.forEach(function (digito, posicao) {
@@ -462,13 +391,12 @@ document.addEventListener('DOMContentLoaded', function () {
       casa.setAttribute('aria-hidden', 'true');
       const fita = criarElemento('span', 'odo-fita');
       for (let n = 0; n <= 9; n++) fita.append(criarElemento('span', '', String(n)));
-      fita.style.transitionDelay = (posicao * 140) + 'ms';   // cada casa começa um pouco depois da anterior
+      fita.style.transitionDelay = (posicao * 140) + 'ms';
       casa.append(fita);
       odometro.append(casa);
       fitas.push({ fita: fita, digito: digito });
     });
 
-    // No quadro seguinte, cada fita sobe até o seu número: o CSS faz a subida
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         for (const item of fitas) item.fita.style.setProperty('--digito', item.digito);
@@ -480,7 +408,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('placar-zerar').addEventListener('click', function () { mostrarNoOdometro(0); });
   mostrarNoOdometro(0);
 
-  // 18. Retícula que acende
   const palcoVivo = document.getElementById('palco-vivo');
   palcoVivo.addEventListener('pointermove', function (evento) {
     const caixa = palcoVivo.getBoundingClientRect();
@@ -488,18 +415,10 @@ document.addEventListener('DOMContentLoaded', function () {
     palcoVivo.style.setProperty('--y', (evento.clientY - caixa.top) + 'px');
   });
 
-  // 19. Traço que se desenha
   document.getElementById('traco-desenhar').addEventListener('click', function () {
     recomecar(document.getElementById('traco-campo'), 'desenhando');
   });
 
-  // -------------------------------------------------------------------------
-  // 8. As demonstrações de tecnologias
-  // -------------------------------------------------------------------------
-
-  // 20. Sons feitos na hora, com a Web Audio API.
-  // O "contexto" é a mesa de som do navegador. Só pode ser criado depois de
-  // um clique: os navegadores não deixam página nenhuma tocar som sozinha.
   let mesaDeSom = null;
 
   function pegarMesaDeSom() {
@@ -507,8 +426,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return mesaDeSom;
   }
 
-  // Chiado: números ao acaso viram um som de "shhh". Passa por um filtro que
-  // escolhe a faixa de agudos e por um volume que começa alto e cai a zero.
   function tocarChiado(duracao, tipoDeFiltro, agudoNoComeco, agudoNoFim, volume) {
     const mesa = pegarMesaDeSom();
     const agora = mesa.currentTime;
@@ -532,7 +449,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fonte.start(agora);
   }
 
-  // Batida: uma nota grave que desce rápido, como um "tum"
   function tocarBatida(notaNoComeco, notaNoFim, duracao, volume) {
     const mesa = pegarMesaDeSom();
     const agora = mesa.currentTime;
@@ -562,18 +478,16 @@ document.addEventListener('DOMContentLoaded', function () {
     botao.addEventListener('click', function () { SONS[botao.dataset.som](); });
   }
 
-  // 21. Vibração
   document.getElementById('vibrar').addEventListener('click', function () {
     const aviso = document.getElementById('vibrar-aviso');
     if (!navigator.vibrate) {
       aviso.textContent = 'Este aparelho ou navegador não tem vibração. Teste em um celular Android.';
       return;
     }
-    navigator.vibrate([18, 40, 30]);   // vibra 18 ms, espera 40 ms, vibra 30 ms
+    navigator.vibrate([18, 40, 30]);
     aviso.textContent = 'Pedido de vibração enviado. No computador não acontece nada.';
   });
 
-  // 24. Compartilhar pelo sistema
   document.getElementById('compartilhar').addEventListener('click', function () {
     const aviso = document.getElementById('compartilhar-aviso');
     if (!navigator.share) {
@@ -586,10 +500,6 @@ document.addEventListener('DOMContentLoaded', function () {
       aviso.textContent = 'O compartilhamento foi fechado sem enviar.';
     });
   });
-
-  // -------------------------------------------------------------------------
-  // 9. Começar
-  // -------------------------------------------------------------------------
 
   desenharEscolhas();
 });

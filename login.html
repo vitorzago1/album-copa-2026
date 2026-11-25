@@ -7,14 +7,10 @@
   <meta name="description" content="Entre ou crie sua conta para guardar o seu álbum.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts da conta: os dados e o caderninho do progresso (para mostrar o álbum de
-       quem entrou), os ajudantes de formulário e, por último, a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/formulario.js" defer></script>
@@ -27,15 +23,12 @@
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -50,7 +43,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -63,8 +55,6 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda a explicação, à direita a conta (ou os formulários).
-         Só uma das três partes da direita aparece por vez; quem escolhe é o js/login.js. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Entrar</h1>
@@ -79,10 +69,8 @@
       </div>
 
       <div class="fluxo">
-        <!-- Recado geral ("Conta criada", "Você saiu"). role="status": o leitor de tela lê quando muda. -->
         <p class="aviso-sucesso" id="conta-aviso" role="status" tabindex="-1"></p>
 
-        <!-- 1. QUEM JÁ ENTROU -->
         <section class="fluxo" id="painel-conta" aria-labelledby="titulo-conta" hidden>
           <h2 id="titulo-conta" tabindex="-1">Sua conta</h2>
           <p id="conta-quem"></p>
@@ -93,7 +81,6 @@
           </p>
         </section>
 
-        <!-- 2. ENTRAR. "novalidate" desliga os balões do navegador: as mensagens são as do site. -->
         <form class="formulario" id="form-entrar" aria-labelledby="titulo-entrar" novalidate hidden>
           <h2 id="titulo-entrar" tabindex="-1">Já tenho conta</h2>
 
@@ -110,14 +97,12 @@
             <p class="campo-erro" id="entrar-senha-erro" hidden></p>
           </div>
 
-          <!-- Erro do formulário inteiro ("e-mail ou senha não conferem"). role="alert": lido na hora. -->
           <p class="campo-erro" id="entrar-erro" role="alert" hidden></p>
 
           <p><button class="botao" type="submit">Entrar</button></p>
           <p>Ainda não tem conta? <button class="botao-link" type="button" id="ir-criar">Criar conta</button></p>
         </form>
 
-        <!-- 3. CRIAR CONTA -->
         <form class="formulario" id="form-criar" aria-labelledby="titulo-criar" novalidate hidden>
           <h2 id="titulo-criar" tabindex="-1">Criar conta</h2>
 
@@ -150,7 +135,6 @@
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">

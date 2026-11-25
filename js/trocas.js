@@ -1,14 +1,3 @@
-// ============================================================================
-// trocas.js
-// ----------------------------------------------------------------------------
-// A página de trocas. Faz três coisas:
-//   1. Lista as repetidas ("tenho para trocar") e as que faltam ("preciso").
-//   2. Monta o texto da lista de troca, para copiar ou mandar pelo WhatsApp.
-//   3. Simula uma troca na "banca": sai uma repetida, chega uma que faltava.
-//
-// Depende de: js/dados.js, js/estado.js e js/figurinha.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
@@ -18,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const formulario = document.getElementById('form-troca');
   const avisoDaTroca = document.getElementById('troca-aviso');
 
-  // Como a figurinha é chamada nas listas: "Alisson (Brasil)" ou "Brasil (bandeira)"
   function nomeNaLista(fig) {
     const selecao = selecaoPorId(fig.selecao);
     return fig.tipo === 'bandeira' ? selecao.nome + ' (bandeira)' : fig.nome + ' (' + selecao.nome + ')';
@@ -28,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return quantas === 1 ? '1 repetida' : quantas + ' repetidas';
   }
 
-  // As figurinhas com pelo menos uma repetida, e as que ainda não saíram
   function separar(album) {
     return {
       repetidas: FIGURINHAS.filter(function (fig) { return repetidasDe(album, fig.numero) > 0; }),
@@ -36,15 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }
 
-  // -------------------------------------------------------------------------
-  // 1 e 2. As duas listas e o texto pronto
-  // -------------------------------------------------------------------------
-
   function desenharListas() {
     const album = lerAlbum();
     const listas = separar(album);
 
-    // Tenho para trocar
     const listaRepetidas = document.getElementById('lista-repetidas');
     listaRepetidas.textContent = '';
     for (const fig of listas.repetidas) {
@@ -57,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
       ? 'Nenhuma repetida por enquanto. Elas aparecem quando uma figurinha sai de novo no pacotinho.'
       : 'Estas saíram mais de uma vez. A primeira cópia é do álbum; as outras podem ir embora.';
 
-    // Preciso
     const listaFaltam = document.getElementById('lista-faltam');
     listaFaltam.textContent = '';
     for (const fig of listas.faltam) {
@@ -70,13 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (listas.faltam.length === 0) textoFaltam = 'Não falta nenhuma: todas as figurinhas já saíram para você.';
     document.getElementById('faltam-texto').textContent = textoFaltam;
 
-    // A gaveta da lista some se não falta nada e já vem aberta se a lista é curta
     const gaveta = document.getElementById('faltam-gaveta');
     gaveta.hidden = listas.faltam.length === 0;
     gaveta.open = listas.faltam.length <= 40;
     document.getElementById('faltam-resumo').textContent = 'Ver os números que faltam (' + listas.faltam.length + ')';
 
-    // O texto da lista de troca, uma linha para cada parte
     const tenho = listas.repetidas.map(function (fig) {
       return fig.numero + ' ' + (fig.tipo === 'bandeira' ? 'Bandeira ' + fig.nome : fig.nome) + ' (x' + repetidasDe(album, fig.numero) + ')';
     });
@@ -88,13 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     campoTexto.value = linhas.join('\n');
 
-    // O link do WhatsApp leva o texto no endereço. encodeURIComponent troca
-    // espaços, acentos e quebras de linha por códigos que cabem em um endereço.
     document.getElementById('mandar-whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(campoTexto.value);
   }
 
-  // Copiar: usa a área de transferência do navegador. Se ele não deixar,
-  // o texto fica selecionado para a pessoa copiar com Ctrl+C.
   document.getElementById('copiar-lista').addEventListener('click', function () {
     const aviso = document.getElementById('copiar-aviso');
 
@@ -113,11 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, selecionarParaCopiar);
   });
 
-  // -------------------------------------------------------------------------
-  // 3. A banca de trocas
-  // -------------------------------------------------------------------------
-
-  // Uma opção de escolha: uma caixinha redonda (radio) com o texto ao lado
   function criarOpcao(grupo, fig, texto, marcada) {
     const caixa = document.createElement('input');
     caixa.type = 'radio';
@@ -135,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const listas = separar(album);
     const vazia = document.getElementById('banca-vazia');
 
-    // Sem repetida para dar ou sem figurinha faltando, não há troca possível
     if (listas.repetidas.length === 0 || listas.faltam.length === 0) {
       formulario.hidden = true;
       vazia.hidden = false;
@@ -147,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
     formulario.hidden = false;
     vazia.hidden = true;
 
-    // Você dá: todas as repetidas. A primeira já vem marcada.
     const opcoesDou = document.getElementById('opcoes-dou');
     opcoesDou.textContent = '';
     listas.repetidas.forEach(function (fig, posicao) {
@@ -155,8 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
       opcoesDou.append(criarOpcao('dou', fig, texto, posicao === 0));
     });
 
-    // Você recebe: a banca sorteia até três das que faltam
-    const sobra = listas.faltam.slice();   // cópia, para poder tirar as sorteadas
+    const sobra = listas.faltam.slice();
     const opcoesRecebo = document.getElementById('opcoes-recebo');
     opcoesRecebo.textContent = '';
     for (let i = 0; i < OFERTAS_DA_BANCA && sobra.length > 0; i++) {
@@ -167,14 +134,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   formulario.addEventListener('submit', function (evento) {
-    evento.preventDefault();   // não deixa o navegador recarregar a página
+    evento.preventDefault();
 
-    // Descobre qual opção está marcada em cada grupo
     const sai = figurinhaPorNumero(Number(formulario.querySelector('input[name="dou"]:checked').value));
     const chega = figurinhaPorNumero(Number(formulario.querySelector('input[name="recebo"]:checked').value));
 
     const conquistas = trocarFigurinha(sai.numero, chega.numero);
-    if (conquistas === null) return;   // a troca não valia mais (o álbum mudou em outra aba, por exemplo)
+    if (conquistas === null) return;
 
     let texto = 'Troca feita. Saiu uma repetida da Nº ' + sai.numero + ', ' + sai.nome + ', e chegou a Nº ' + chega.numero + ', ' + chega.nome + '. ';
     for (const nome of conquistas) texto += 'Conquista: ' + nome + '. Você ganhou um pacotinho extra. ';
@@ -190,10 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.getElementById('outras-ofertas').addEventListener('click', desenharBanca);
-
-  // -------------------------------------------------------------------------
-  // Começar
-  // -------------------------------------------------------------------------
 
   desenharListas();
   desenharBanca();

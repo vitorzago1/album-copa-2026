@@ -1,24 +1,9 @@
-// ============================================================================
-// gerar-anexo.js
-// ----------------------------------------------------------------------------
-// O que faz: junta todos os arquivos HTML, CSS e JavaScript do projeto em um
-// arquivo só, docs/anexo-codigo.md, para o anexo de código do relatório.
-//
-// Como rodar (na pasta do projeto):   node scripts/gerar-anexo.js
-//
-// Rode de novo sempre que o código mudar: o anexo é reescrito do zero.
-// ============================================================================
-
 const fs = require('fs');
 const path = require('path');
 
 const RAIZ = path.join(__dirname, '..');
 const ARQUIVO_SAIDA = path.join(RAIZ, 'docs', 'anexo-codigo.md');
 
-// Os grupos de arquivos, na ordem em que aparecem no anexo.
-// "primeiro" lista os arquivos que vêm na frente, na ordem em que fazem mais
-// sentido para ler. Os que não estiverem na lista entram depois, em ordem
-// alfabética: assim um arquivo novo nunca fica de fora.
 const GRUPOS = [
   {
     titulo: 'Páginas (HTML)', pasta: '', extensao: '.html', linguagem: 'html',
@@ -42,13 +27,11 @@ const GRUPOS = [
   },
 ];
 
-// Arquivos de trabalho, que não fazem parte do site entregue: ficam fora do anexo
 const FORA_DO_ANEXO = [
   'laboratorio.html', 'laboratorio.css', 'laboratorio.js',
   'laboratorio-2.html', 'laboratorio-2.css', 'laboratorio-2.js',
 ];
 
-// Lista os arquivos de um grupo: primeiro os da lista "primeiro", depois os outros
 function arquivosDoGrupo(grupo) {
   const pasta = path.join(RAIZ, grupo.pasta);
   const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao) && !FORA_DO_ANEXO.includes(nome); }).sort();
@@ -76,8 +59,6 @@ for (const grupo of GRUPOS) {
 
     linhas.push('### ' + caminho);
     linhas.push('');
-    // Quatro crases abrem e fecham o bloco de código: assim um arquivo que
-    // tenha três crases dentro dele não fecha o bloco antes da hora.
     linhas.push('````' + grupo.linguagem);
     linhas.push(conteudo);
     linhas.push('````');
@@ -93,7 +74,7 @@ const cabecalho = [
   'Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.',
   '',
   '- Arquivos: ' + totalDeArquivos + '.',
-  '- Linhas de código (com comentários): ' + totalDeLinhas + '.',
+  '- Linhas de código: ' + totalDeLinhas + '.',
   '',
   '| Arquivo | Linhas |',
   '|---|---|',

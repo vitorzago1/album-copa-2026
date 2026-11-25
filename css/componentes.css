@@ -1,25 +1,9 @@
-/* ==========================================================================
-   componentes.css
-   --------------------------------------------------------------------------
-   As peças que se repetem pelo site: botão, etiqueta, cartão, vaga,
-   figurinha (parada e que vira), barra de progresso, abas, tira de grupos,
-   cartela, conquista, recado, pacotinho e campo de formulário.
-
-   Regra dos cantos (vem de tokens.css):
-   - canto vivo  = o que está impresso na página (vaga, tira)
-   - 4 px        = ferramenta (botão, campo)
-   - 10 px       = o que se cola (figurinha, cartão de papel, cupom)
-   Linha tracejada sempre quer dizer picote: "dá para destacar".
-   ========================================================================== */
-
-/* ---------- Botão ---------- */
-
 .botao {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--espaco-2);
-  min-height: 2.75rem;   /* 44 px */
+  min-height: 2.75rem;
   padding: 0 var(--espaco-5);
   background: var(--cor-acao);
   color: var(--cor-sobre-acao);
@@ -39,12 +23,10 @@
   color: var(--cor-sobre-acao);
 }
 
-/* O botão "afunda" um pouco ao ser apertado: resposta ao toque */
 .botao:active {
   transform: translateY(1px);
 }
 
-/* Botão secundário: só o contorno, na cor da tinta */
 .botao-contorno {
   background: transparent;
   color: var(--cor-texto);
@@ -57,7 +39,6 @@
   border-color: var(--cor-texto);
 }
 
-/* Botão desligado: continua legível, mas com cara de "agora não" */
 .botao[disabled],
 .botao[aria-disabled="true"] {
   background: var(--cor-vaga);
@@ -66,15 +47,10 @@
   cursor: not-allowed;
 }
 
-/* Botão menor, para caber dentro da vaga e embaixo da figurinha.
-   A altura continua 44 px: só o texto e as laterais diminuem. */
 .botao-pequeno {
   padding: 0 var(--espaco-3);
   font-size: var(--texto-pequeno);
 }
-
-/* ---------- Etiqueta ----------
-   O negativo da tinta: destaca "Nova" e "Repetida" sem trazer cor nova. */
 
 .etiqueta {
   display: inline-block;
@@ -86,9 +62,6 @@
   font-weight: 700;
   line-height: 1.4;
 }
-
-/* ---------- Cartão ----------
-   Um papel solto em cima da página: mais claro que o fundo e com canto de 10 px. */
 
 .cartao {
   background: var(--cor-superficie);
@@ -102,15 +75,11 @@
   margin-top: var(--espaco-3);
 }
 
-/* Cupom: um cartão com canhoto. A linha tracejada é o picote. */
 .cupom-canhoto {
   margin-top: var(--espaco-4);
   padding-top: var(--espaco-4);
   border-top: 2px dashed var(--cor-borda);
 }
-
-/* ---------- Vaga ----------
-   O espaço vazio do álbum, impresso na página: canto vivo e número grande. */
 
 .vaga {
   aspect-ratio: 3 / 4;
@@ -139,7 +108,6 @@
   font-weight: 600;
 }
 
-/* O nome de quem vai ali, impresso na página como nos álbuns de papel */
 .vaga-nome {
   color: var(--cor-texto);
   font-size: var(--texto-pequeno);
@@ -147,32 +115,19 @@
   line-height: 1.2;
 }
 
-/* A figurinha desta vaga já saiu e está na mão: moldura mais grossa e botão "Colar" */
 .vaga-na-mao {
   border-width: 4px;
   border-color: var(--cor-texto);
 }
 
-/* Enquanto uma figurinha é arrastada, a vaga dela fica marcada... */
 .casa-alvo .vaga {
   outline: 3px solid var(--cor-acao);
   outline-offset: 3px;
 }
 
-/* ...e clareia quando a figurinha passa por cima */
 .casa-em-cima .vaga {
   background: var(--cor-superficie);
 }
-
-/* ---------- Figurinha ----------
-   Um adesivo: canto de 10 px e moldura do próprio papel.
-   A cor da moldura já diz a raridade: branca (comum), prata (brilhante), ouro (lendária).
-   Mesmo assim a raridade vem SEMPRE escrita, com um ícone e uma textura:
-   nunca depende só da cor.
-
-   As cores da seleção entram por variáveis no HTML:
-     style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F"
-   Nenhum texto é escrito em cima dessas cores, só na tarja. */
 
 .figurinha {
   position: relative;
@@ -184,10 +139,9 @@
   color: var(--cor-figurinha-tinta);
   border-radius: var(--raio-adesivo);
   box-shadow: var(--sombra-colada);
-  transform: rotate(var(--giro, 0deg));   /* colada à mão: levemente torta */
+  transform: rotate(var(--giro, 0deg));
 }
 
-/* Figurinha na mão, ainda não colada: sem sombra e mais torta */
 .figurinha-solta {
   box-shadow: 0 0 0 1.5px var(--cor-borda);
 }
@@ -197,15 +151,12 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  /* A cor da seleção, com um clarão atrás da cabeça, como luz de estúdio */
   background:
     radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.4), transparent 62%),
     var(--campo, #8A8FB0);
   border-radius: 6px 6px 0 0;
 }
 
-/* Retícula: os pontinhos de impressão no fundo do retrato, atrás da pessoa.
-   São bolinhas desenhadas com gradiente, mais fortes embaixo. */
 .figurinha-arte::after {
   content: "";
   position: absolute;
@@ -215,25 +166,17 @@
   mask-image: linear-gradient(to top, #000, transparent 65%);
 }
 
-/* O retrato: uma pessoa de frente, da cabeça aos ombros (o desenho está no
-   js/figurinha.js, na função desenharRetrato). É genérico: não é foto nem
-   desenho de nenhuma pessoa de verdade.
-   A pele não tem cor de pele: é o papel da figurinha com um pouco da tinta,
-   como em um retrato impresso em uma tinta só. Assim o desenho não "chuta" a
-   aparência de ninguém. */
 .figurinha-busto {
-  --pele: #DDE0E8;   /* para navegador antigo, que não conhece color-mix */
+  --pele: #DDE0E8;
   --pele: color-mix(in srgb, var(--cor-figurinha-tinta) 13%, var(--cor-figurinha-papel));
   position: absolute;
-  z-index: 1;   /* por cima dos pontinhos de retícula, que ficam só no fundo */
+  z-index: 1;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 94%;
 }
 
-/* Rosto, orelhas e pescoço. O contorno na tinta da figurinha é o que separa
-   a pessoa do fundo colorido (contraste conferido no scripts/contraste.js). */
 .busto-pele {
   fill: var(--pele);
   stroke: var(--cor-figurinha-tinta);
@@ -241,7 +184,6 @@
   stroke-linejoin: round;
 }
 
-/* A sombra de um lado do rosto e a do queixo no pescoço */
 .busto-sombra {
   fill: var(--cor-figurinha-tinta);
   opacity: 0.16;
@@ -256,7 +198,6 @@
   opacity: 0.55;
 }
 
-/* Sobrancelhas, nariz, boca e a costura das mangas: traços finos */
 .busto-traco {
   fill: none;
   stroke: var(--cor-figurinha-tinta);
@@ -272,7 +213,6 @@
   stroke-linejoin: round;
 }
 
-/* A gola tem a cor do número, que sempre contrasta com a da camisa */
 .busto-gola {
   fill: var(--numero, var(--cor-figurinha-tinta));
   stroke: var(--cor-figurinha-tinta);
@@ -287,7 +227,6 @@
   font-size: 13px;
 }
 
-/* A bandeirinha da seleção, no canto de cima do retrato */
 .figurinha-pais {
   position: absolute;
   z-index: 1;
@@ -298,7 +237,6 @@
   outline: 1px solid var(--cor-figurinha-tinta);
 }
 
-/* Tarja: a faixa de baixo, onde fica o texto */
 .figurinha-tarja {
   position: relative;
   display: flex;
@@ -309,7 +247,6 @@
   line-height: 1.25;
 }
 
-/* A faixinha de textura no topo da tarja (o "acabamento" da figurinha) */
 .figurinha-tarja::before {
   content: "";
   position: absolute;
@@ -329,8 +266,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Última linha da tarja: raridade de um lado, número do outro.
-   Se não couberem lado a lado, o número desce para a linha de baixo. */
 .figurinha-linha {
   display: flex;
   flex-wrap: wrap;
@@ -344,7 +279,6 @@
   font-weight: 700;
 }
 
-/* Figurinha de bandeira: a bandeira no meio do retrato, com moldura de papel */
 .figurinha-bandeira {
   position: absolute;
   inset: 0;
@@ -354,18 +288,15 @@
   outline: 1px solid var(--cor-figurinha-tinta);
 }
 
-/* Comum: fosca, sem textura */
 .figurinha-comum {
   --material: var(--cor-figurinha-papel);
 }
 
-/* Brilhante: laminada, com listras diagonais */
 .figurinha-brilhante {
   --material: var(--cor-prata-clara);
   --trama: repeating-linear-gradient(115deg, var(--cor-prata) 0 4px, var(--cor-figurinha-tinta) 4px 6px);
 }
 
-/* Lendária: holográfica, com trama de losangos */
 .figurinha-lendaria {
   --material: var(--cor-ouro);
   --trama:
@@ -373,40 +304,30 @@
     linear-gradient(-45deg, transparent 42%, var(--cor-figurinha-tinta) 42% 58%, transparent 58%) 0 0 / 6px 6px;
 }
 
-/* Reflexo parado sobre o retrato da brilhante e da lendária */
 .figurinha-brilhante .figurinha-arte::before,
 .figurinha-lendaria .figurinha-arte::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;   /* o reflexo passa por cima do retrato */
+  z-index: 2;
   background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
 }
 
-/* ---------- Lendária holográfica ----------
-   O js/efeitos.js escreve na figurinha a posição do ponteiro (--px e --py, de
-   0% a 100%) e a inclinação (--rx e --ry). Com isso a figurinha inclina e o
-   brilho corre. Sem ponteiro em cima, fica só um brilho fraco e parado. */
 .figurinha-lendaria {
   --px: 50%;
   --py: 50%;
   --brilho: 0.3;
 }
 
-/* A que não vira (na mão, nas amostras) */
 .figurinha-lendaria:not(.figurinha-vira) {
   transform: perspective(42rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform 160ms ease-out;
 }
 
-/* A que vira (colada no álbum, saída do pacotinho): só inclina de frente */
 .figurinha-vira.figurinha-lendaria[data-face="frente"] {
   transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
 }
 
-/* Duas camadas por cima da figurinha: o arco-íris (::after) e o reflexo
-   branco que acompanha o ponteiro (::before). Os modos de mistura "overlay" e
-   "soft-light" tingem as cores de baixo sem apagar o texto. */
 .figurinha-lendaria::before,
 .figurinha-lendaria::after {
   content: "";
@@ -416,8 +337,6 @@
   border-radius: inherit;
   pointer-events: none;
   transition: opacity 250ms ease-out;
-  /* Na faixa de baixo fica o texto: ali o brilho cai para um terço da força,
-     para o nome e a raridade continuarem fáceis de ler (contraste medido) */
   -webkit-mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
   mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
 }
@@ -434,8 +353,6 @@
   opacity: var(--brilho);
 }
 
-/* De costas ou mostrando o verso, o brilho some: ali só há texto para ler.
-   Nas cenas da página inicial em que as figurinhas são enfeite, também. */
 .figurinha-lendaria[data-face="verso"]::before,
 .figurinha-lendaria[data-face="verso"]::after,
 .figurinha-lendaria[data-face="costas"]::before,
@@ -447,8 +364,6 @@
   display: none;
 }
 
-/* Etiqueta presa na figurinha: usa a tinta e o papel da própria figurinha,
-   porque a figurinha não muda de cor quando o tema muda. */
 .figurinha .etiqueta {
   position: absolute;
   z-index: 2;
@@ -463,18 +378,6 @@
   font-size: 0.75rem;
 }
 
-/* ---------- Figurinha que vira ----------
-   É um <button> com as faces uma em cima da outra (todas na mesma casa de uma
-   grade). O atributo data-face diz qual aparece:
-     frente = o retrato      verso = as informações      costas = ainda fechada
-
-   O giro: a figurinha roda meia volta (180 graus) em torno do eixo vertical.
-   Bem no meio do caminho, quando ela está de lado e não dá para ver nada,
-   a face que aparece é trocada (a "visibility" muda com meio tempo de atraso).
-
-   O verso é desenhado espelhado: como a figurinha inteira está virada ao
-   contrário, o espelhado volta a ficar legível. */
-
 .figurinha-vira {
   --tempo-de-virar: 420ms;
   --meia-volta: 180deg;
@@ -485,7 +388,6 @@
   text-align: left;
   cursor: pointer;
   transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateY(0deg);
-  /* "--tempo-do-movimento" só existe enquanto a lendária acompanha o ponteiro (mais abaixo) */
   transition: transform var(--tempo-do-movimento, var(--tempo-de-virar)) ease-in-out;
 }
 
@@ -495,7 +397,7 @@
 }
 
 .figurinha-face {
-  grid-area: 1 / 1;   /* todas as faces na mesma casa da grade: uma em cima da outra */
+  grid-area: 1 / 1;
   position: relative;
   min-width: 0;
   display: flex;
@@ -517,7 +419,6 @@
   transform: rotateY(var(--meia-volta));
 }
 
-/* Verso: número, nome, dois dados e a curiosidade */
 .figurinha-verso {
   gap: 1px;
   padding: 9px 8px;
@@ -542,8 +443,6 @@
   border-top: 1.5px solid currentColor;
 }
 
-/* Costas: a figurinha que acabou de sair do pacotinho. Cobre a moldura inteira,
-   para a cor da raridade não entregar a surpresa antes da hora. */
 .figurinha-costas {
   align-items: center;
   justify-content: center;
@@ -561,15 +460,10 @@
   rotate: -8deg;
 }
 
-/* Colar: a figurinha chega maior e mais torta e assenta no lugar.
-   ("scale" e "rotate" são propriedades separadas do "transform",
-   por isso não atrapalham o giro de virar.) */
 .figurinha-colando {
   animation: bater 520ms cubic-bezier(0.3, 0.9, 0.4, 1) backwards;
 }
 
-/* A batida: a figurinha desce torta e maior, bate no lugar (55%), amassa de
-   leve (70%) e volta ao tamanho. */
 @keyframes bater {
   0% { translate: 0 -60%; rotate: -12deg; scale: 1.35; opacity: 0; box-shadow: none; }
   55% { translate: 0 0; rotate: 0deg; scale: 1; opacity: 1; }
@@ -577,9 +471,6 @@
   100% { scale: 1; }
 }
 
-/* A casa em que a figurinha acabou de bater: abre um anel de tinta em volta
-   da figurinha e dá uma tremida. (A classe "bateu" é posta pelo js/album.js.) */
-/* (".vagas > .casa.bateu" precisa ganhar da regra de entrar ao rolar, em paginas.css) */
 .vagas > .casa.bateu {
   animation: tremer 260ms linear 280ms;
 }
@@ -590,7 +481,7 @@
   left: 0;
   right: 0;
   top: 0;
-  aspect-ratio: 3 / 4;   /* o mesmo formato da figurinha, que fica no topo da casa */
+  aspect-ratio: 3 / 4;
   border: 3px solid var(--cor-texto);
   border-radius: var(--raio-adesivo);
   pointer-events: none;
@@ -609,8 +500,6 @@
   70% { translate: -1px 0; }
 }
 
-/* Revelar: o reflexo passa uma vez pela brilhante e pela lendária,
-   e a lendária dá um pulinho. */
 .figurinha-revelada .figurinha-arte::before {
   animation: reflexo 800ms ease-out 250ms backwards;
 }
@@ -626,8 +515,6 @@
 @keyframes pulo {
   40% { scale: 1.08; }
 }
-
-/* ---------- Raridade: palavra + ícone ---------- */
 
 .raridade {
   display: inline-flex;
@@ -652,16 +539,11 @@
   transform: rotate(45deg) scale(0.85);
 }
 
-/* Estrela de cinco pontas, recortada com clip-path (uma lista de pontos x y) */
 .raridade-icone-estrela {
   width: 1em;
   height: 1em;
   clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
-
-/* ---------- Tira de grupos ----------
-   12 casas, uma por grupo (A a L). O preenchimento sobe conforme o grupo
-   enche: a variável --parte vai de 0 (vazio) a 1 (completo). */
 
 .tira {
   list-style: none;
@@ -693,9 +575,6 @@
   }
 }
 
-/* ---------- Passos numerados ----------
-   Só para o que é sequência de verdade (primeiro isto, depois aquilo). */
-
 .passos {
   list-style: none;
   padding: 0;
@@ -708,7 +587,7 @@
   counter-increment: passo;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;   /* o título fica colado no texto; a sobra de altura vai para baixo */
+  grid-template-rows: auto 1fr;
   column-gap: var(--espaco-3);
   align-items: start;
 }
@@ -731,8 +610,6 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/* ---------- Campo de formulário ---------- */
 
 .campo {
   display: flex;
@@ -765,7 +642,6 @@ textarea.campo-entrada {
   resize: vertical;
 }
 
-/* Campo com erro: a borda engrossa e muda de cor, e a mensagem vem com ícone e texto */
 .campo-entrada[aria-invalid="true"] {
   border-width: 3px;
   border-color: var(--cor-erro);
@@ -785,30 +661,25 @@ textarea.campo-entrada {
   margin-top: 0.1em;
 }
 
-/* O "x" desenhado dentro do ícone de cartão usa a cor do papel */
 .campo-erro .cartao-x {
   stroke: var(--cor-superficie);
 }
 
-/* Formulário: os campos empilhados, com o mesmo espaço entre eles */
 .formulario {
   display: grid;
   gap: var(--espaco-4);
   max-width: 28rem;
 }
 
-/* O botão "Mostrar senha" fica embaixo do campo, do tamanho do próprio texto */
 .campo > .botao {
   align-self: start;
 }
 
-/* Título de segundo nível em tamanho menor, para dentro de cartões e formulários */
 .titulo-menor {
   font-size: var(--titulo-3);
   line-height: 1.1;
 }
 
-/* Botão com cara de link: para ações pequenas no meio de uma frase */
 .botao-link {
   min-height: 2.75rem;
   padding: 0 var(--espaco-1);
@@ -826,7 +697,6 @@ textarea.campo-entrada {
   text-decoration-thickness: 0.16em;
 }
 
-/* Resumo dos erros: aparece no topo do formulário quando o envio falha */
 .resumo-erros {
   max-width: 28rem;
   padding: var(--espaco-4);
@@ -849,8 +719,6 @@ textarea.campo-entrada {
   padding-block: var(--espaco-1);
 }
 
-/* Recado de "deu certo". A caixa existe sempre (o leitor de tela precisa dela
-   pronta para ler o texto quando ele chegar), mas só ganha moldura quando tem texto. */
 .aviso-sucesso:empty {
   margin: 0;
 }
@@ -865,7 +733,6 @@ textarea.campo-entrada {
   font-weight: 600;
 }
 
-/* Caixas de marcar e de escolher: maiores e na cor da ação */
 .opcao {
   display: flex;
   align-items: center;
@@ -883,10 +750,6 @@ textarea.campo-entrada {
   cursor: pointer;
 }
 
-/* ---------- Barra de progresso ----------
-   Impressa na página (canto vivo). A variável --parte vai de 0 a 1.
-   O número sempre vem escrito ao lado: a barra é só o desenho. */
-
 .barra {
   height: 0.875rem;
   max-width: 28rem;
@@ -901,10 +764,6 @@ textarea.campo-entrada {
   background: var(--cor-texto);
   transition: width var(--duracao) ease-out;
 }
-
-/* ---------- Abas ----------
-   Escolhem quais figurinhas aparecem. A aba escolhida fica no negativo da
-   tinta, mais pesada e sublinhada: não depende só da cor. */
 
 .abas {
   display: flex;
@@ -936,10 +795,6 @@ textarea.campo-entrada {
   margin-left: 0.3em;
   font-variant-numeric: tabular-nums;
 }
-
-/* ---------- Conquista ----------
-   Um quadro impresso na página. Quando a conquista é feita, ganha um carimbo:
-   posto à mão, por isso levemente torto. */
 
 .conquistas {
   list-style: none;
@@ -981,8 +836,6 @@ textarea.campo-entrada {
   rotate: -3deg;
 }
 
-/* Conquista que acabou de sair: o carimbo só aparece quando o quadro entra na
-   tela, e aí bate com força (as classes são postas pelo js/album.js) */
 .conquista-nova:not(.conquista-carimbando) .conquista-estado {
   opacity: 0;
 }
@@ -995,7 +848,6 @@ textarea.campo-entrada {
   animation: carimbar 420ms cubic-bezier(0.3, 0.8, 0.4, 1) backwards;
 }
 
-/* O carimbo chega grande, torto e transparente e encolhe até o tamanho certo */
 @keyframes carimbar {
   0% { scale: 2.8; opacity: 0; rotate: -20deg; }
   60% { scale: 0.92; opacity: 1; rotate: -7deg; }
@@ -1014,10 +866,6 @@ textarea.campo-entrada {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-
-/* ---------- Recado ----------
-   Aviso preso no pé da tela depois de colar: confirma o que aconteceu e
-   oferece "Desfazer". Não some sozinho: fica até a próxima ação ou até fechar. */
 
 .recado {
   position: fixed;
@@ -1054,18 +902,13 @@ textarea.campo-entrada {
   cursor: pointer;
 }
 
-/* ---------- Pacotinho ----------
-   O envelope fechado. É uma peça só de desenho: quem abre é o botão
-   "Rasgar o pacotinho". A linha tracejada é o picote, e a parte de cima
-   (a aba) é a que sai quando rasga. */
-
 .pacotinho {
   width: min(15rem, 72%);
   aspect-ratio: 5 / 7;
   display: flex;
   flex-direction: column;
   color: var(--cor-etiqueta-texto);
-  rotate: -3deg;   /* posto à mão em cima da página */
+  rotate: -3deg;
   cursor: pointer;
 }
 
@@ -1075,7 +918,6 @@ textarea.campo-entrada {
   background: var(--cor-etiqueta-fundo);
 }
 
-/* Retícula do pacotinho: pontinhos na cor do texto, bem fracos (30% de opacidade) */
 .pacotinho-aba::before,
 .pacotinho-corpo::before {
   content: "";
@@ -1094,11 +936,10 @@ textarea.campo-entrada {
   border-bottom: 2px dashed var(--cor-etiqueta-texto);
 }
 
-/* Os textos ficam em cima de uma faixa lisa, para os pontinhos não atrapalharem a leitura */
 .pacotinho-aba span,
 .pacotinho-marca,
 .pacotinho-texto {
-  position: relative;   /* fica na frente dos pontinhos */
+  position: relative;
   padding: 0 0.4em;
   background: var(--cor-etiqueta-fundo);
 }
@@ -1130,10 +971,6 @@ textarea.campo-entrada {
   font-weight: 700;
 }
 
-/* Pacotinho 3D ao vivo (página Pacotinhos, js/pacotinho-3d.js). A tela de desenho
-   entra dentro do pacotinho de CSS, que fica só como molde: guarda o tamanho,
-   o lugar e o clique. A tela é maior que o molde, para o pacotinho poder
-   inclinar e a aba ter para onde voar. */
 .pacotinho-com-3d {
   position: relative;
 }
@@ -1149,12 +986,9 @@ textarea.campo-entrada {
   top: -25%;
   width: 160%;
   height: 150%;
-  pointer-events: none;   /* o clique e o ponteiro passam direto para o molde */
+  pointer-events: none;
 }
 
-/* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
-   Este é o único momento "ensaiado" do site. */
-/* Antes de rasgar, o pacotinho balança quando o ponteiro passa por cima */
 .palco .pacotinho:hover:not(.pacotinho-rasgando) {
   animation: balancar 700ms ease-in-out;
 }
@@ -1165,7 +999,6 @@ textarea.campo-entrada {
   70% { rotate: 1deg; }
 }
 
-/* O brilho de papel laminado que atravessa o pacotinho de CSS */
 .pacotinho-corpo {
   overflow: hidden;
 }
@@ -1187,8 +1020,6 @@ textarea.campo-entrada {
   to { translate: 120% 0; }
 }
 
-/* Rasgado: a borda do picote vira dente de serra. "clip-path" recorta a forma
-   por uma lista de pontos: sobe, desce, sobe, desce. */
 .pacotinho-rasgando .pacotinho-aba {
   border-bottom-color: transparent;
   clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 84% 78%, 76% 100%, 68% 78%, 60% 100%, 52% 78%, 44% 100%, 36% 78%, 28% 100%, 20% 78%, 12% 100%, 4% 78%, 0 100%);
@@ -1209,10 +1040,6 @@ textarea.campo-entrada {
   to { transform: translateY(16%); opacity: 0; }
 }
 
-/* As figurinhas saem do pacotinho em leque. Todas partem do mesmo ponto (a
-   distância até ele vem em --dx e --dy, postas pelo js/pacotinho.js), abrem
-   como um leque de cartas (40%) e depois cada uma vai para a sua casa.
-   --ordem (0 a 4) dá o ângulo de cada uma no leque e o pequeno atraso. */
 .mesa > li {
   animation: sair-em-leque 720ms cubic-bezier(0.2, 0.8, 0.3, 1.1) backwards;
   animation-delay: calc(var(--ordem, 0) * 90ms);
@@ -1233,19 +1060,10 @@ textarea.campo-entrada {
   }
 }
 
-/* ---------- Foto em uma tinta só ----------
-   O arquivo da foto é colorido. Aqui ela é mostrada como se tivesse sido
-   impressa com a tinta da página, em três passos:
-     1. a foto vira preto e branco (filter: grayscale);
-     2. uma camada na cor da sombra, misturada no modo "screen", tinge as
-        partes escuras e deixa as claras brancas;
-     3. uma camada na cor da luz, no modo "multiply", tinge as partes claras.
-   Pense em duas folhas de celofane colorido em cima de uma foto em preto e branco. */
-
 .foto {
   position: relative;
   overflow: hidden;
-  isolation: isolate;   /* as misturas de cor valem só aqui dentro */
+  isolation: isolate;
   aspect-ratio: 16 / 10;
   background: var(--cor-foto-luz);
   border: 2px solid var(--cor-texto);
@@ -1255,7 +1073,7 @@ textarea.campo-entrada {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* a foto preenche a moldura, cortando a sobra */
+  object-fit: cover;
   filter: grayscale(1) contrast(1.15);
 }
 
@@ -1276,9 +1094,6 @@ textarea.campo-entrada {
   background: var(--cor-foto-luz);
   mix-blend-mode: multiply;
 }
-
-/* ---------- Carrossel ----------
-   Uma sede por vez. Os botões e os números ficam embaixo da foto. */
 
 .carrossel-cidade {
   font-size: var(--titulo-2);
@@ -1334,8 +1149,6 @@ textarea.campo-entrada {
   gap: var(--espaco-2);
 }
 
-/* Indicador: um quadro numerado, impresso como as casas da tira de grupos.
-   O da sede atual fica no negativo da tinta e sublinhado. */
 .carrossel-numero {
   width: 2.75rem;
   height: 2.75rem;
@@ -1355,11 +1168,6 @@ textarea.campo-entrada {
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
-
-/* ---------- Placar girando ----------
-   Cada casa do número é uma janelinha com a altura de uma linha, que mostra
-   uma fita com os algarismos de 0 a 9, um embaixo do outro. "--digito" (posto
-   pelo js/album.js) diz quantos degraus a fita sobe. */
 
 .odometro {
   display: inline-flex;
@@ -1383,12 +1191,6 @@ textarea.campo-entrada {
   height: 1em;
 }
 
-/* ---------- Traço que se desenha ----------
-   As linhas de um campo de futebol. Cada linha "mede 1" (pathLength="1" no
-   HTML) e é tracejada com um traço de tamanho 1: escondendo o traço inteiro
-   (stroke-dashoffset: 1) a linha some; trazendo de volta aos poucos, ela se
-   desenha como uma caneta percorrendo o papel. */
-
 .campo-tracado {
   display: block;
   width: min(100%, 20rem);
@@ -1400,10 +1202,9 @@ textarea.campo-entrada {
 
 .campo-tracado * {
   stroke-dasharray: 1;
-  stroke-dashoffset: var(--falta, 0);   /* a página inicial manda "--falta" pela rolagem */
+  stroke-dashoffset: var(--falta, 0);
 }
 
-/* Antes de aparecer na tela (página do álbum), as linhas ficam escondidas */
 .campo-tracado.por-desenhar * {
   stroke-dashoffset: 1;
 }

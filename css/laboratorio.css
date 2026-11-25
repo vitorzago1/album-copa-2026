@@ -1,25 +1,6 @@
-/* ==========================================================================
-   laboratorio.css
-   --------------------------------------------------------------------------
-   Estilos da página de testes (laboratorio.html). Não é usada pelas 7 páginas
-   do site. Cada efeito aprovado sai daqui e vai para o CSS do site.
-
-   Partes:
-   1. A página do laboratório (cartões, palcos, fichas)
-   2. A folha de prova e as nove camadas de fundo
-   3. As dez animações
-   4. Tecnologias e lista de escolhas
-   ========================================================================== */
-
-/* ---------- 1. A página do laboratório ---------- */
-
 .lab {
-  /* Chuvisco desenhado por um filtro do SVG (feTurbulence), guardado em uma
-     variável para ser usado como imagem de fundo. Um para papel claro (grãos
-     escuros) e outro para papel escuro (grãos claros). */
   --ruido: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.08 0 0 0 0 0.12 0 0 0 0 0.31 0 0 0 0.9 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
   --ruido-claro: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.98 0 0 0 0 0.89 0 0 0 0 0.91 0 0 0 0.9 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)'/%3E%3C/svg%3E");
-  /* Máscara de falhas: quase toda opaca, com pontinhos transparentes */
   --falha: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 0 0 0 6.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
 }
 
@@ -31,7 +12,6 @@
   line-height: 1;
 }
 
-/* Em tela bem estreita não cabe: o título da página já diz "Laboratório" */
 @media (max-width: 29.99rem) {
   .lab-selo {
     display: none;
@@ -57,7 +37,6 @@
   border-color: var(--cor-texto);
 }
 
-/* A ficha de cada ideia: número, nome, resumo, chave "quero" e detalhes */
 .lab-nome {
   display: flex;
   align-items: center;
@@ -120,7 +99,6 @@
   margin-top: var(--espaco-2);
 }
 
-/* Fundo e detalhes: a folha de prova de um lado, as nove chaves do outro */
 .lab-fundo {
   display: grid;
   gap: var(--espaco-6);
@@ -144,14 +122,12 @@
     align-items: start;
   }
 
-  /* A folha de prova acompanha a rolagem enquanto as chaves passam */
   .lab-prova-coluna {
     position: sticky;
     top: var(--espaco-4);
   }
 }
 
-/* Movimento e tecnologias: uma grade de cartões */
 .lab-grade {
   display: grid;
   gap: var(--espaco-5);
@@ -172,7 +148,6 @@
   border: 2px solid var(--cor-borda);
 }
 
-/* O palco: onde a demonstração acontece */
 .lab-palco {
   position: relative;
   min-height: 15rem;
@@ -225,11 +200,9 @@
   max-width: none;
 }
 
-/* ---------- 2. A folha de prova ---------- */
-
 .prova {
   position: relative;
-  isolation: isolate;   /* as misturas de cor das camadas ficam aqui dentro */
+  isolation: isolate;
   overflow: hidden;
   padding: var(--espaco-7) var(--espaco-6) var(--espaco-6);
   background: var(--cor-fundo);
@@ -276,7 +249,6 @@
   }
 }
 
-/* Toda camada de efeito começa invisível e aparece com a classe dela na folha */
 .prova-campo,
 .prova-reticula,
 .prova-dobra,
@@ -290,7 +262,6 @@
   transition: opacity 300ms ease-out;
 }
 
-/* 1. Grão de papel: o chuvisco por cima de tudo, bem fraco */
 .prova-grao {
   z-index: 3;
   background-image: var(--ruido);
@@ -310,9 +281,6 @@
   opacity: 0.3;
 }
 
-/* 2. Retícula nos cantos: três camadas de bolinhas na mesma grade. A de
-      bolinhas maiores só aparece bem perto do canto, por causa da máscara:
-      o resultado são pontos que crescem em direção ao canto. */
 .prova-reticula,
 .prova-reticula::before,
 .prova-reticula::after {
@@ -348,12 +316,10 @@
   opacity: 0.32;
 }
 
-/* 3. Marcas de gráfica */
 .ef-marcas .prova-marcas {
   opacity: 1;
 }
 
-/* Marca de corte: dois tracinhos em cada canto, um deitado e um em pé */
 .marca-corte {
   position: absolute;
   width: 22px;
@@ -368,7 +334,6 @@
 .marca-corte-3 { right: 6px; bottom: 6px; rotate: 180deg; }
 .marca-corte-4 { left: 6px; bottom: 6px; rotate: 270deg; }
 
-/* Cruz de registro: um círculo com uma cruz, usada na gráfica para alinhar as tintas */
 .marca-registro {
   position: absolute;
   width: 16px;
@@ -383,7 +348,6 @@
 .marca-registro-1 { left: 50%; top: 5px; translate: -50% 0; }
 .marca-registro-2 { left: 50%; bottom: 5px; translate: -50% 0; }
 
-/* Barra de tons: a mesma tinta de 12% a 100%, para conferir a impressão */
 .barra-de-tons {
   position: absolute;
   right: 34px;
@@ -409,13 +373,12 @@
   position: absolute;
   right: 4px;
   top: 34px;
-  writing-mode: vertical-rl;   /* texto de cima para baixo, na margem */
+  writing-mode: vertical-rl;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.04em;
 }
 
-/* 4. Linhas do campo */
 .prova-campo {
   width: 100%;
   height: 100%;
@@ -425,14 +388,13 @@
 }
 
 .prova-campo * {
-  vector-effect: non-scaling-stroke;   /* o traço não engrossa quando o desenho estica */
+  vector-effect: non-scaling-stroke;
 }
 
 .ef-campo .prova-campo {
   opacity: 0.17;
 }
 
-/* 5. Dobra e grampos (só quando a folha tem duas colunas) */
 .prova-dobra {
   display: none;
 }
@@ -465,9 +427,6 @@
 .grampo:nth-child(1) { top: 20%; }
 .grampo:nth-child(2) { top: 70%; }
 
-/* 6. Rabiscos de caneta: traços em SVG na cor da caneta.
-      pathLength="1" no HTML faz o traço "medir 1": assim o tracejado de
-      tamanho 1 cobre o traço inteiro e dá para animá-lo se desenhando. */
 .rabisco {
   position: absolute;
   z-index: 4;
@@ -522,7 +481,6 @@
   height: 26%;
 }
 
-/* 7. Carimbos de tinta gasta */
 .carimbo {
   display: inline-block;
   padding: 0.15em 0.75em;
@@ -532,7 +490,7 @@
   font-weight: 800;
   line-height: 1.3;
   rotate: -7deg;
-  filter: url(#tinta-gasta);   /* o filtro do SVG que entorta o contorno */
+  filter: url(#tinta-gasta);
 }
 
 .carimbo-verde {
@@ -547,7 +505,6 @@
   display: inline-block;
 }
 
-/* 8. Títulos com tinta falhada: a máscara deixa o papel aparecer em pontinhos */
 .ef-falhada .prova-titulo,
 .ef-falhada .prova .vaga-numero {
   -webkit-mask-image: var(--falha);
@@ -556,7 +513,6 @@
   mask-size: 180px 180px;
 }
 
-/* 9. Picote com tesourinha: sem o efeito, é o fio liso que o site usa hoje */
 .prova-picote {
   position: relative;
   z-index: 2;
@@ -585,10 +541,6 @@
   display: block;
 }
 
-/* ---------- 3. As animações ---------- */
-
-/* 10. Lendária holográfica. O JavaScript escreve a posição do ponteiro nas
-       variáveis --px e --py (de 0% a 100%) e a inclinação em --rx e --ry. */
 .holo {
   --px: 50%;
   --py: 50%;
@@ -597,12 +549,9 @@
   --brilho: 0.35;
   transform: perspective(42rem) rotateX(var(--rx)) rotateY(var(--ry));
   transition: transform 180ms ease-out;
-  touch-action: none;   /* no celular, arrastar o dedo mexe o brilho em vez de rolar a página */
+  touch-action: none;
 }
 
-/* Duas camadas por cima da figurinha: o degradê colorido (::after) e o
-   reflexo branco que acompanha o ponteiro (::before). Os modos de mistura
-   "overlay" e "soft-light" tingem as cores de baixo sem apagar o texto. */
 .holo::before,
 .holo::after {
   content: "";
@@ -626,7 +575,6 @@
   opacity: var(--brilho);
 }
 
-/* 11. Colar com batida */
 .figurinha-batendo {
   animation: bater 520ms cubic-bezier(0.3, 0.9, 0.4, 1) both;
 }
@@ -638,7 +586,6 @@
   100% { transform: rotate(var(--giro, 0deg)) scale(1); }
 }
 
-/* O anel de tinta que se abre em volta da figurinha na hora da batida */
 .casa-de-batida {
   position: relative;
   width: 8.5rem;
@@ -674,7 +621,6 @@
   70% { translate: -1px 0; }
 }
 
-/* 12. Carimbo de conquista */
 .lab-conquista {
   width: min(100%, 17rem);
   background: var(--cor-fundo);
@@ -700,7 +646,6 @@
   100% { scale: 1; }
 }
 
-/* 13. Pacotinho com rasgo de verdade */
 .pacotinho-2 {
   position: relative;
   z-index: 2;
@@ -711,7 +656,6 @@
   font-size: 2.5rem;
 }
 
-/* Antes de rasgar, o pacotinho balança quando o mouse chega perto */
 .lab-palco:hover .pacotinho-2:not(.rasgado) {
   animation: balancar 700ms ease-in-out;
 }
@@ -722,7 +666,6 @@
   70% { rotate: 1deg; }
 }
 
-/* O brilho de papel laminado que atravessa o pacotinho */
 .pacotinho-2 .pacotinho-corpo::after {
   content: "";
   position: absolute;
@@ -740,7 +683,6 @@
   to { translate: 120% 0; }
 }
 
-/* Rasgado: a borda vira dente de serra (clip-path recorta a forma) e a aba sai voando */
 .pacotinho-2.rasgado .pacotinho-aba {
   border-bottom-color: transparent;
   clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 84% 78%, 76% 100%, 68% 78%, 60% 100%, 52% 78%, 44% 100%, 36% 78%, 28% 100%, 20% 78%, 12% 100%, 4% 78%, 0 100%);
@@ -756,10 +698,9 @@
   100% { transform: translate(80%, -190%) rotate(48deg); opacity: 0; }
 }
 
-/* As figurinhas saem de trás do pacotinho e se abrem em leque */
 .pacote-conjunto {
   position: relative;
-  align-self: end;   /* o conjunto fica no pé do palco: sobra espaço em cima para o leque */
+  align-self: end;
 }
 
 .leque {
@@ -788,9 +729,6 @@
 .leque.aberto .leque-carta:nth-child(2) { transform: translateY(-78%) rotate(0deg); transition-delay: 520ms; }
 .leque.aberto .leque-carta:nth-child(3) { transform: translateY(-62%) rotate(26deg); transition-delay: 620ms; }
 
-/* 14. Virar a página. A View Transitions API tira um retrato do estado
-       velho e do novo do elemento que tem view-transition-name, e estas
-       regras dizem como um sai e o outro entra. */
 .folha-de-album {
   width: min(100%, 19rem);
   display: grid;
@@ -836,7 +774,6 @@
   animation: folha-entra 420ms ease-out both;
 }
 
-/* Voltando, a folha vira para o outro lado */
 [data-virada="voltar"]::view-transition-old(folha-de-album),
 [data-virada="voltar"]::view-transition-new(folha-de-album) {
   transform-origin: right center;
@@ -850,8 +787,6 @@
   from { transform: perspective(50rem) rotateY(70deg); opacity: 0; }
 }
 
-/* 15. Entrar ao rolar. "animation-timeline: view()" prende o andamento da
-       animação à rolagem: o item anima enquanto entra na área visível. */
 .rolagem-caixa {
   display: block;
   height: 16rem;
@@ -883,7 +818,6 @@
   from { opacity: 0; transform: translateY(2.5rem) rotate(-8deg) scale(0.88); }
 }
 
-/* 16. Papel picado: o <canvas> cobre o palco e fica por cima do texto */
 .confete-tela {
   position: absolute;
   inset: 0;
@@ -892,8 +826,6 @@
   pointer-events: none;
 }
 
-/* 17. Placar girando: cada casa é uma janelinha de 1 linha de altura que
-       mostra uma fita com os números de 0 a 9, um embaixo do outro. */
 .odometro {
   display: inline-flex;
   overflow: hidden;
@@ -916,8 +848,6 @@
   height: 1em;
 }
 
-/* 18. Retícula que acende: os pontinhos cobrem o quadro, mas a máscara só
-       deixa ver os que estão perto do ponteiro (posição em --x e --y). */
 .vivo-palco {
   --x: 50%;
   --y: 50%;
@@ -938,7 +868,6 @@
   position: relative;
 }
 
-/* 19. Traço que se desenha */
 .traco-campo {
   width: min(100%, 22rem);
   fill: none;
@@ -962,8 +891,6 @@
 @keyframes desenhar-campo {
   from { stroke-dashoffset: 1; }
 }
-
-/* ---------- 4. Tecnologias e lista de escolhas ---------- */
 
 .lab-icone-app {
   display: grid;

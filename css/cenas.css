@@ -1,45 +1,7 @@
-/* ==========================================================================
-   cenas.css
-   --------------------------------------------------------------------------
-   As cenas presas à rolagem da página inicial (index.html).
-
-   Cada cena existe de dois jeitos:
-
-   1. PARADA (o padrão deste arquivo). É uma seção comum, com tudo já no
-      lugar. Vale sem JavaScript e para quem pede menos movimento.
-
-   2. EM MOVIMENTO. Quando o js/cenas.js põe a classe "com-cenas" no <html>:
-        .cena        vira uma seção bem alta (240vh = quase duas telas e meia);
-        .cena-palco  gruda no topo da tela (position: sticky) e fica parado
-                     enquanto a pessoa rola por dentro da cena.
-      O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
-      js/cenas-inicio.js, escrevendo "transform" e "opacity" no elemento.
-
-   Este arquivo também guarda duas partes da página inicial que NÃO são cenas
-   presas à rolagem: a frase que acende sozinha e o carrossel dos grupos.
-
-   Partes:
-   1. A cena e o palco
-   2. Abertura: a retícula forma a marca
-   3. A frase acende (animação, não é cena)
-   4. O pacotinho gira e abre
-   5. O álbum abre
-   6. Mergulho na figurinha
-   7. Os números contam
-   8. O carrossel dos grupos (não é cena)
-   9. Voo pelas figurinhas
-   ========================================================================== */
-
-/* ---------- 1. A cena e o palco ---------- */
-
-/* O site reserva uma folga no pé da tela para o recado do álbum (ver
-   paginas.css). Esta página não tem recado, e a folga faria o navegador rolar
-   a página sozinho ao dar o foco em um botão de dentro de uma cena. */
 html:has(.cena) {
   scroll-padding-bottom: 0;
 }
 
-/* Parada: o palco é uma seção igual às outras, no miolo da página */
 .cena-palco {
   position: relative;
   max-width: var(--largura-maxima);
@@ -52,8 +14,6 @@ html:has(.cena) {
   border-top: 2px solid var(--cor-texto);
 }
 
-/* Em movimento. A altura vem do HTML: style="--altura: 240vh". Quanto mais
-   alta a cena, mais devagar ela anda, porque há mais rolagem para gastar. */
 .com-cenas .cena {
   height: var(--altura, 300vh);
 }
@@ -63,7 +23,7 @@ html:has(.cena) {
   top: 0;
   max-width: none;
   height: 100vh;
-  height: 100svh;   /* no celular, desconta a barra de endereço do navegador */
+  height: 100svh;
   margin: 0;
   padding: 0;
   border: 0;
@@ -73,15 +33,12 @@ html:has(.cena) {
   overflow: hidden;
 }
 
-/* No celular a tela é mais alta que larga e o dedo rola menos por vez:
-   as cenas ficam 20% mais curtas */
 @media (max-width: 47.99rem) {
   .com-cenas .cena {
     height: calc(var(--altura, 300vh) * 0.8);
   }
 }
 
-/* Título de cena. Parado, é um título comum. */
 .cena-titulo {
   max-width: none;
   font-family: var(--fonte-destaque);
@@ -95,7 +52,6 @@ html:has(.cena) {
   margin-top: var(--espaco-2);
 }
 
-/* Em movimento, fica no alto do palco, no meio */
 .com-cenas .cena-titulo {
   position: absolute;
   z-index: 4;
@@ -108,12 +64,10 @@ html:has(.cena) {
   pointer-events: none;
 }
 
-/* O que foi montado pelo JavaScript some quando ele está desligado */
 html:not(.com-js) .so-com-js {
   display: none;
 }
 
-/* "Desça para continuar" da abertura: um fio que desce. Só existe com as cenas em movimento. */
 .rolar-dica {
   display: none;
 }
@@ -135,11 +89,9 @@ html:not(.com-js) .so-com-js {
 }
 
 .rolar-dica i {
-  animation: fio-descendo 1.6s ease-in-out 3;   /* três vezes e para */
+  animation: fio-descendo 1.6s ease-in-out 3;
 }
 
-/* O aviso "Desça para continuar", no pé de cada palco (posto pelo js/cenas.js).
-   Fica em uma etiqueta de papel claro, para ser lido por cima de qualquer cena. */
 .cena-desca {
   display: none;
 }
@@ -166,7 +118,6 @@ html:not(.com-js) .so-com-js {
   height: 1.5rem;
 }
 
-/* O fio desce três vezes cada vez que a cena chega à tela, e para */
 .cena-na-tela .cena-desca i {
   animation: fio-descendo 1.6s ease-in-out 3;
 }
@@ -177,9 +128,6 @@ html:not(.com-js) .so-com-js {
   100% { transform: scaleY(1); opacity: 0; }
 }
 
-/* ---------- 2. Abertura: a retícula forma a marca ---------- */
-
-/* Na página inicial a abertura encosta no cabeçalho, sem a folga de cima do <main> */
 main:has(> .cena-abertura) {
   padding-top: 0;
 }
@@ -192,7 +140,7 @@ main:has(> .cena-abertura) {
 }
 
 .abertura-convite {
-  order: -1;   /* no celular, o convite vem antes do desenho */
+  order: -1;
 }
 
 .abertura-convite > * + * {
@@ -205,8 +153,6 @@ main:has(> .cena-abertura) {
   gap: var(--espaco-3);
 }
 
-/* A tela de desenho (canvas) onde os pontinhos são desenhados.
-   Parada, mostra a marca já formada. */
 .reticula-tela {
   display: block;
   width: 100%;
@@ -222,7 +168,6 @@ main:has(> .cena-abertura) {
   line-height: 1.1;
 }
 
-/* O aviso para quem está vendo a página parada sem ter pedido isso no site */
 .aviso-movimento {
   display: flex;
   flex-wrap: wrap;
@@ -248,8 +193,6 @@ main:has(> .cena-abertura) {
   }
 }
 
-/* Em movimento: o desenho cobre o palco inteiro e o convite fica no meio,
-   com os pontinhos em volta, como em um cartaz */
 .com-cenas .cena-abertura .cena-palco {
   display: block;
 }
@@ -261,18 +204,12 @@ main:has(> .cena-abertura) {
   aspect-ratio: auto;
 }
 
-/* O convite fica no meio do palco, nos dois sentidos. A receita: prender os
-   quatro lados, dar à caixa o tamanho do conteúdo (fit-content) e deixar as
-   margens em "auto": o navegador divide a sobra por igual. */
 .com-cenas .abertura-convite {
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
   top: 0;
-  /* A folga de baixo é a altura do cabeçalho ("--cabecalho" vem do JavaScript):
-     assim o meio do convite é o meio do que se vê na primeira tela, com o
-     cabeçalho ainda em cima */
   bottom: var(--cabecalho, 5rem);
   width: fit-content;
   height: fit-content;
@@ -285,9 +222,6 @@ main:has(> .cena-abertura) {
   font-size: clamp(3rem, 1.25rem + 7.5vw, 7rem);
 }
 
-/* Os botões e o aviso de descer são parágrafos, e parágrafo tem largura máxima
-   de leitura (ver base.css). Aqui eles ocupam a largura toda do convite, para
-   o meio deles ser o meio da tela. */
 .com-cenas .abertura-botoes,
 .com-cenas .rolar-dica {
   max-width: none;
@@ -298,12 +232,10 @@ main:has(> .cena-abertura) {
   position: absolute;
   left: 0;
   right: 0;
-  top: 70%;   /* o JavaScript acerta a altura, logo abaixo das letras */
+  top: 70%;
   padding-inline: var(--espaco-4);
   opacity: 0;
 }
-
-/* ---------- 3. A frase acende ---------- */
 
 .frase {
   max-width: 24ch;
@@ -313,8 +245,6 @@ main:has(> .cena-abertura) {
   line-height: 1.04;
 }
 
-/* O sublinhado de caneta: o traço inteiro mede 1 (pathLength="1" no HTML).
-   "--falta" diz quanto do traço ainda não foi desenhado. */
 .frase-traco {
   display: block;
   width: min(100%, 24rem);
@@ -332,29 +262,20 @@ main:has(> .cena-abertura) {
   stroke-dashoffset: var(--falta, 0);
 }
 
-/* A frase ganha espaço em cima e embaixo: é um respiro entre a abertura e o
-   resto da página */
 .frase-secao {
   padding-block: clamp(4rem, 14vh, 9rem);
 }
 
-/* As palavras acendem uma depois da outra. "--ordem" é a posição da palavra na
-   frase (vem do JavaScript): cada uma espera 110 milésimos de segundo a mais
-   que a anterior. A frase inteira leva menos de 3 segundos. */
 .frase span {
   transition: color 320ms ease-out;
   transition-delay: calc(var(--ordem, 0) * 110ms);
 }
 
-/* O sublinhado se desenha depois da última palavra ("--palavras" é quantas são) */
 .frase-traco path {
   transition: stroke-dashoffset 700ms ease-out;
   transition-delay: calc(var(--palavras, 0) * 110ms);
 }
 
-/* Antes de aparecer na tela, a frase espera apagada: a tinta bem diluída e o
-   sublinhado por desenhar. Quem põe e tira esta classe é o js/cenas-inicio.js.
-   Sem JavaScript, ou com menos movimento, ela nunca é posta. */
 .frase-apagada .frase span {
   color: var(--cor-vaga);
   color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
@@ -366,9 +287,6 @@ main:has(> .cena-abertura) {
   transition: none;
 }
 
-/* ---------- 4. O pacotinho gira e abre ---------- */
-
-/* Parada: o pacotinho de um lado e as cinco figurinhas do outro */
 .pacote-cena {
   --pacote-l: 9rem;
   display: flex;
@@ -410,9 +328,6 @@ main:has(> .cena-abertura) {
   gap: var(--espaco-4);
 }
 
-/* Em movimento: tudo no mesmo ponto do espaço, uma peça na frente da outra.
-   "perspective" é a distância do olho até a tela. Sem ela, girar em 3D
-   pareceria só achatar a peça. */
 .com-cenas .palco-3d {
   perspective: 1100px;
 }
@@ -424,7 +339,7 @@ main:has(> .cena-abertura) {
   width: var(--pacote-l);
   height: calc(var(--pacote-l) * 1.4);
   margin-top: 9vh;
-  transform-style: preserve-3d;   /* os filhos ficam no mesmo espaço 3D */
+  transform-style: preserve-3d;
 }
 
 .com-cenas .pacote3d {
@@ -436,8 +351,6 @@ main:has(> .cena-abertura) {
   transform-style: preserve-3d;
 }
 
-/* As duas faces ocupam o mesmo lugar. "backface-visibility: hidden" esconde
-   a face que está de costas para quem olha. */
 .com-cenas .pacote3d-face {
   position: absolute;
   inset: 0;
@@ -473,9 +386,6 @@ main:has(> .cena-abertura) {
   transform-style: preserve-3d;
 }
 
-/* A sequência de quadros: uma tela de desenho maior que o pacotinho, com folga
-   para ele entrar, girar e cair. Fica escondida até todas as imagens chegarem;
-   aí a classe "com-quadros" troca o pacotinho de CSS por ela. */
 .pacote-quadros {
   display: none;
 }
@@ -496,7 +406,6 @@ main:has(> .cena-abertura) {
   display: none;
 }
 
-/* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
 .com-cenas .pacote-carta {
   position: absolute;
   left: 50%;
@@ -507,9 +416,6 @@ main:has(> .cena-abertura) {
   opacity: 0;
 }
 
-/* ---------- 5. O álbum abre ---------- */
-
-/* Parada: o álbum já aberto, com duas páginas lado a lado */
 .livro {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -518,7 +424,7 @@ main:has(> .cena-abertura) {
 }
 
 .folha {
-  display: contents;   /* a folha "some" e as faces dela viram filhas diretas da grade */
+  display: contents;
 }
 
 .face {
@@ -529,7 +435,6 @@ main:has(> .cena-abertura) {
   border: 2px solid var(--cor-texto);
 }
 
-/* Parada, só aparecem as duas páginas da primeira abertura */
 html:not(.com-cenas) .capa,
 html:not(.com-cenas) #pagina-3,
 html:not(.com-cenas) #pagina-base {
@@ -543,8 +448,6 @@ html:not(.com-cenas) #pagina-base {
   margin-top: var(--espaco-5);
 }
 
-/* Em movimento. A caixa do livro tem o tamanho de UMA página (a da direita).
-   As folhas giram em torno da borda esquerda dela, que é a lombada. */
 .com-cenas .livro {
   --pagina-l: min(46vw, 22rem, calc((100vh - 15rem) / 1.35));
   position: relative;
@@ -566,11 +469,10 @@ html:not(.com-cenas) #pagina-base {
   display: block;
   position: absolute;
   inset: 0;
-  transform-origin: left center;   /* gira em torno da lombada */
+  transform-origin: left center;
   transform-style: preserve-3d;
 }
 
-/* Cada folha tem duas faces: a frente e o verso (este já nasce virado) */
 .com-cenas .face {
   display: block;
   position: absolute;
@@ -583,7 +485,6 @@ html:not(.com-cenas) #pagina-base {
   transform: rotateY(180deg);
 }
 
-/* Enquanto a folha vira, o lado da lombada escurece ("--sombra" vem do JavaScript) */
 .com-cenas .face::after {
   content: "";
   position: absolute;
@@ -597,7 +498,6 @@ html:not(.com-cenas) #pagina-base {
   background: linear-gradient(to left, rgba(10, 16, 40, 0.6), transparent 55%);
 }
 
-/* A capa: o negativo da página, como o pacotinho */
 .com-cenas .capa {
   display: flex;
   flex-direction: column;
@@ -619,7 +519,7 @@ html:not(.com-cenas) #pagina-base {
 }
 
 .capa span {
-  position: relative;   /* na frente dos pontinhos */
+  position: relative;
   padding: 0 0.3em;
   background: var(--cor-etiqueta-fundo);
 }
@@ -656,9 +556,6 @@ html:not(.com-cenas) #pagina-base {
   opacity: 0;
 }
 
-/* O miolo da página é desenhado sempre com 480 por 648 pixels e depois
-   encolhido ou aumentado ("--escala" vem do JavaScript) para caber na folha.
-   Assim a página do álbum se comporta como uma gravura: tudo cresce junto. */
 .miolo {
   position: absolute;
   left: 0;
@@ -730,15 +627,10 @@ html:not(.com-cenas) #pagina-base {
   font-weight: 700;
 }
 
-/* ---------- 6. Mergulho na figurinha ---------- */
-
-/* Parada: só a faixa de cor com a etiqueta. A figurinha que cresce não aparece. */
 .mergulho {
   display: none;
 }
 
-/* A camada de cor. A cor é a do retrato da figurinha ("--campo", posta pelo
-   JavaScript; sem ele, fica a tinta da página). */
 .mergulho-fim {
   display: grid;
   place-items: center;
@@ -748,8 +640,6 @@ html:not(.com-cenas) #pagina-base {
   background-size: 9px 9px;
 }
 
-/* Nenhum texto é escrito direto em cima da cor da seleção: a frase vem em
-   uma etiqueta de papel branco, colada como uma figurinha. */
 .mergulho-etiqueta {
   max-width: 15ch;
   padding: var(--espaco-5);
@@ -777,8 +667,6 @@ html:not(.com-cenas) #pagina-base {
   opacity: 0;
 }
 
-/* ---------- 7. Os números contam ---------- */
-
 .numeros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -792,7 +680,6 @@ html:not(.com-cenas) #pagina-base {
   }
 }
 
-/* As linhas do campo, atrás dos números. É enfeite: fica bem fraco. */
 .campo-dos-numeros {
   position: absolute;
   z-index: 0;
@@ -804,7 +691,7 @@ html:not(.com-cenas) #pagina-base {
 }
 
 .numeros {
-  position: relative;   /* na frente do campo */
+  position: relative;
   z-index: 1;
 }
 
@@ -817,12 +704,11 @@ html:not(.com-cenas) #pagina-base {
   translate: -50% -50%;
 }
 
-/* "--aceso" vai de 0 a 1 conforme chega a vez do número. Parado, vale 1. */
 .numero {
   position: relative;
   isolation: isolate;
   display: flex;
-  flex-direction: column-reverse;   /* no HTML vem a legenda e depois o número; na tela, o número fica em cima */
+  flex-direction: column-reverse;
   opacity: calc(0.22 + var(--aceso, 1) * 0.78);
 }
 
@@ -838,7 +724,6 @@ html:not(.com-cenas) #pagina-base {
   font-weight: 700;
 }
 
-/* A mancha de retícula atrás do número: bolinhas que somem em direção à borda */
 .numero::before {
   content: "";
   position: absolute;
@@ -857,20 +742,13 @@ html:not(.com-cenas) #pagina-base {
   padding-inline: var(--espaco-4);
 }
 
-/* ---------- 8. O carrossel dos grupos ---------- */
-
-/* A seção vai de um lado ao outro da tela, para a faixa poder passar das
-   margens. O título e os botões ficam no miolo (classe "largura"). */
 .secao-grupos {
   border-top: 2px solid var(--cor-texto);
   padding-block: var(--espaco-6);
 }
 
-/* A janela: mostra um pedaço da faixa e rola para os lados. Cada painel "gruda"
-   no meio dela quando a rolagem para (scroll-snap). A barra de rolagem fica
-   escondida: os botões "Anterior" e "Próximo" fazem esse papel. */
 .grupos-janela {
-  position: relative;   /* os painéis medem a posição deles a partir daqui */
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -882,8 +760,6 @@ html:not(.com-cenas) #pagina-base {
   display: none;
 }
 
-/* A faixa: os doze grupos em fila. A folga dos lados (metade da janela menos
-   metade de um painel) deixa o primeiro e o último chegarem ao meio. */
 .trilha {
   --grupo-l: min(78vw, 21rem);
   display: flex;
@@ -915,7 +791,6 @@ html:not(.com-cenas) #pagina-base {
   font-size: var(--titulo-3);
 }
 
-/* A letra do grupo, bem grande */
 .grupo-letra {
   font-size: clamp(4.5rem, 3rem + 6vw, 7.5rem);
   line-height: 0.8;
@@ -936,12 +811,6 @@ html:not(.com-cenas) #pagina-base {
   line-height: 1.2;
 }
 
-/* O selo: a bandeira de uma seleção.
-   "--f" vai de 0 (grupo longe do meio da tela) a 1 (grupo no meio).
-   Com 0 ele é uma vaga impressa em uma tinta só, de canto vivo.
-   Com 1 ele é uma figurinha: colorida, de canto arredondado e um pouco torta.
-   A impressão em uma tinta usa a mesma receita das fotos do site
-   (ver "Foto em uma tinta só", em componentes.css). */
 .selo {
   position: relative;
   overflow: hidden;
@@ -985,7 +854,6 @@ html:not(.com-cenas) #pagina-base {
   mix-blend-mode: multiply;
 }
 
-/* Passou da metade do caminho: ganha a borda branca e a sombra de quem foi colado */
 .grupo-colado .selo {
   border-color: var(--cor-figurinha-papel);
   box-shadow: 0 0 0 2px var(--cor-figurinha-papel), var(--sombra-colada);
@@ -999,13 +867,10 @@ html:not(.com-cenas) #pagina-base {
 .grupo a {
   display: inline-flex;
   align-items: center;
-  min-height: 2.75rem;   /* 44 px: alvo de toque confortável */
+  min-height: 2.75rem;
   font-weight: 700;
 }
 
-/* ---------- 9. Voo pelas figurinhas ---------- */
-
-/* Parada: só o título e o botão */
 .voo {
   display: none;
 }
@@ -1018,8 +883,6 @@ html:not(.com-cenas) #pagina-base {
   perspective: 900px;
 }
 
-/* Um ponto no meio do palco. As figurinhas são espalhadas em volta dele,
-   cada uma com a sua profundidade (translateZ). */
 .com-cenas .voo {
   --voo-l: clamp(8rem, 22vmin, 11rem);
   display: block;
@@ -1052,8 +915,6 @@ html:not(.com-cenas) #pagina-base {
   pointer-events: auto;
 }
 
-/* ---------- Tela baixa (celular deitado, janela pequena) ----------
-   Com menos de 480 px de altura, as peças encolhem para caber no palco. */
 @media (max-height: 30rem) {
   .com-cenas .cena-titulo,
   .com-cenas .mergulho-etiqueta {

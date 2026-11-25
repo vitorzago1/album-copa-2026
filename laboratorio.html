@@ -8,9 +8,6 @@
   <meta name="robots" content="noindex">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- PÁGINA DE TRABALHO. Não faz parte do site entregue: serve para testar
-       ideias de visual antes de aplicar nas 7 páginas. Usa os mesmos estilos,
-       as mesmas fontes e as mesmas figurinhas do site de verdade. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/dados.js" defer></script>
   <script src="js/figurinha.js" defer></script>
@@ -26,7 +23,6 @@
 <body class="lab">
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- Filtro do SVG usado pelos carimbos: entorta de leve o contorno, como tinta gasta. -->
   <svg class="escondido" aria-hidden="true" focusable="false" width="0" height="0">
     <filter id="tinta-gasta">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="chuvisco"/>
@@ -50,7 +46,6 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ABERTURA -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Laboratório</h1>
@@ -68,7 +63,6 @@
       </div>
     </section>
 
-    <!-- AVISO: só aparece se o aparelho estiver pedindo menos movimento. -->
     <section class="largura" id="aviso-movimento" hidden>
       <div class="cartao lab-aviso">
         <h2 class="titulo-menor">Seu computador está pedindo menos movimento</h2>
@@ -79,7 +73,6 @@
       </div>
     </section>
 
-    <!-- 1. FUNDO E DETALHES -->
     <section class="largura secao" aria-labelledby="titulo-fundo">
       <div class="fluxo lab-cabeca">
         <h2 id="titulo-fundo">Fundo e detalhes</h2>
@@ -87,8 +80,6 @@
       </div>
 
       <div class="lab-fundo">
-        <!-- A FOLHA DE PROVA: um pedaço do álbum de verdade. Cada efeito é uma
-             camada que aparece quando a classe ef-(nome) entra na folha. -->
         <div class="lab-prova-coluna">
           <div class="prova" id="prova">
             <svg class="prova-campo" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
@@ -131,7 +122,6 @@
               </div>
 
               <div class="prova-casas" id="prova-casas">
-                <!-- duas figurinhas coladas e uma vaga: postas pelo js/laboratorio.js -->
               </div>
             </div>
 
@@ -148,12 +138,10 @@
           <p class="texto-apoio">Folha de prova: um pedaço do álbum de verdade, com as figurinhas e as cores do site.</p>
         </div>
 
-        <!-- As nove chaves. Os cartões são preenchidos pelo js/laboratorio.js. -->
         <div class="lab-lista" id="lista-fundo"></div>
       </div>
     </section>
 
-    <!-- 2. MOVIMENTO -->
     <section class="largura secao" aria-labelledby="titulo-movimento">
       <div class="fluxo lab-cabeca">
         <h2 id="titulo-movimento">Movimento</h2>
@@ -184,7 +172,6 @@
 
         <article class="lab-item" data-id="pacote">
           <div class="lab-palco lab-palco-alto" id="palco-pacote">
-            <!-- O conjunto junta o leque de figurinhas (atrás) e o pacotinho (na frente) -->
             <div class="pacote-conjunto">
               <div class="leque" aria-hidden="true"><span class="leque-carta"></span><span class="leque-carta"></span><span class="leque-carta"></span></div>
               <div class="pacotinho pacotinho-2" id="pacote-2" aria-hidden="true">
@@ -208,7 +195,6 @@
         </article>
 
         <article class="lab-item" data-id="rolagem">
-          <!-- tabindex="0": a caixa rola também pelo teclado -->
           <div class="lab-palco rolagem-caixa" id="palco-rolagem" tabindex="0" role="region" aria-label="Caixa de rolagem de exemplo"></div>
           <p class="texto-apoio" id="rolagem-suporte">Role a caixa para baixo.</p>
         </article>
@@ -254,7 +240,6 @@
       </div>
     </section>
 
-    <!-- 3. TECNOLOGIAS DO NAVEGADOR -->
     <section class="largura secao" aria-labelledby="titulo-tecnologias">
       <div class="fluxo lab-cabeca">
         <h2 id="titulo-tecnologias">Tecnologias do navegador</h2>
@@ -301,7 +286,6 @@
       </div>
     </section>
 
-    <!-- 4. AS ESCOLHAS -->
     <section class="largura secao" aria-labelledby="titulo-escolhas">
       <div class="dobra">
         <div class="fluxo">

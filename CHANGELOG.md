@@ -49,6 +49,7 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Retrato novo nas figurinhas de jogador: uma pessoa desenhada (rosto, cabelo em quatro cortes, pescoço, camisa com gola e número), no lugar do boneco de círculo e meio círculo. Continua genérico e sem foto.
 - Bandeirinha da seleção no canto de cada figurinha de jogador.
 - 22 verificações automáticas novas (532 no total).
+- Comentários retirados de todo o código (HTML, CSS e JavaScript). A biblioteca Three.js fica como veio, com a licença.
 
 ## v0.4-acessibilidade (20/11/2026)
 

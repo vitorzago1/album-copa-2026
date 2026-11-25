@@ -1,27 +1,11 @@
-// ============================================================================
-// album.js
-// ----------------------------------------------------------------------------
-// A página do álbum. Faz quatro coisas:
-//   1. Monta as páginas: grupo > seleção > uma "casa" para cada figurinha.
-//   2. Mostra o que está na mão e cola: arrastando até a vaga ou pelo botão
-//      "Colar". Dá para desfazer a última colagem.
-//   3. Aplica a busca, as abas e os filtros.
-//   4. Mantém o placar e as conquistas em dia.
-//
-// Depende de: js/dados.js, js/estado.js e js/figurinha.js.
-// ============================================================================
-
-// Espera o HTML ficar pronto antes de mexer na página
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // O que está escolhido na busca, nas abas e nos filtros
   const escolha = { aba: 'todas', busca: '', grupo: '', selecao: '', posicao: '', raridade: '' };
 
-  let ultimaColada = null;   // número da última figurinha colada: é a que o "Desfazer" descola
-  let arrastando = null;     // número da figurinha que está sendo arrastada agora
+  let ultimaColada = null;
+  let arrastando = null;
 
-  // Os pedaços da página que este arquivo usa
   const paginas = document.getElementById('paginas');
   const bandeja = document.getElementById('bandeja');
   const painel = document.getElementById('painel-album');
@@ -35,17 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
     raridade: document.getElementById('filtro-raridade'),
   };
 
-  // -------------------------------------------------------------------------
-  // 1. Montar as páginas (feito uma vez só)
-  // -------------------------------------------------------------------------
-
   function acrescentarOpcao(select, valor, texto) {
     const opcao = criarElemento('option', '', texto);
     opcao.value = valor;
     select.append(opcao);
   }
 
-  // As opções dos filtros saem dos dados: assim nunca ficam diferentes do álbum
   function montarFiltros() {
     for (const grupo of gruposDoAlbum()) acrescentarOpcao(filtros.grupo, grupo, 'Grupo ' + grupo);
     for (const selecao of SELECOES) acrescentarOpcao(filtros.selecao, selecao.id, selecao.nome);
@@ -53,12 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
     for (const raridade of ['comum', 'brilhante', 'lendaria']) acrescentarOpcao(filtros.raridade, raridade, NOME_DA_RARIDADE[raridade]);
   }
 
-  // Uma linha da ficha da seleção: "Técnico" e o nome dele, por exemplo
   function acrescentarDado(lista, rotulo, valor) {
     lista.append(criarElemento('dt', '', rotulo), criarElemento('dd', '', valor));
   }
 
-  // A página dupla de uma seleção: a ficha à esquerda e as seis casas à direita
   function montarSelecao(selecao) {
     const pagina = criarElemento('section', 'selecao dobra');
     pagina.id = 'selecao-' + selecao.id;
@@ -94,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
       vagas.append(casa);
     }
 
-    // A lista fica dentro de uma caixa: é a caixa que recebe o espaço da dobra da página
     const direita = document.createElement('div');
     direita.append(vagas);
 
@@ -102,8 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return pagina;
   }
 
-  // A bandeirinha que acompanha o nome de uma seleção.
-  // É decorativa (alt vazio): o nome vem sempre escrito ao lado.
   function criarBandeirinha(selecao) {
     const bandeira = document.createElement('img');
     bandeira.className = 'bandeirinha';
@@ -111,12 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
     bandeira.alt = '';
     bandeira.width = 48;
     bandeira.height = 36;
-    bandeira.loading = 'lazy';   // só baixa a imagem quando ela está perto de aparecer na tela
+    bandeira.loading = 'lazy';
     return bandeira;
   }
 
-  // O índice: uma casa por grupo, que é um link para o grupo.
-  // O preenchimento de cada casa é atualizado em atualizarPlacar().
   function montarIndice() {
     const indice = document.getElementById('indice-grupos');
     for (const grupo of gruposDoAlbum()) {
@@ -132,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
       letra.append(criarElemento('span', 'escondido', 'Grupo '), grupo, conta);
       link.append(quadro, letra);
 
-      // Se a busca ou um filtro estiver escondendo o grupo, limpa tudo antes de ir até ele
       link.addEventListener('click', function () {
         if (document.getElementById('titulo-grupo-' + grupo).closest('.grupo').hidden) limparFiltros();
       });
@@ -143,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // A última página do álbum: como a Copa terminou
   function montarFinal() {
     const campea = selecaoPorId(COPA.campea);
     const titulo = document.getElementById('final-campea');
@@ -190,33 +160,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // -------------------------------------------------------------------------
-  // 2. Desenhar o que muda: casas, bandeja, placar e conquistas
-  // -------------------------------------------------------------------------
-
   function textoDeRepetidas(quantas) {
     if (quantas === 0) return '';
     return quantas === 1 ? '+1 repetida' : '+' + quantas + ' repetidas';
   }
 
-  // O botão "Colar" de uma figurinha (o mesmo na vaga e na bandeja)
   function criarBotaoColar(fig) {
     const botao = criarElemento('button', 'botao botao-pequeno', 'Colar');
     botao.type = 'button';
     botao.dataset.colar = fig.numero;
-    // Para o leitor de tela o botão diz qual figurinha cola: "Colar a figurinha 50, Alisson"
     botao.append(criarElemento('span', 'escondido', ' a figurinha ' + fig.numero + ', ' + fig.nome));
     return botao;
   }
 
-  // Uma casa do álbum tem três situações: figurinha colada, vaga com a
-  // figurinha na mão (mostra o botão "Colar") ou vaga em que ainda falta.
   function desenharCasa(numero, acabouDeColar) {
     const album = lerAlbum();
     const fig = figurinhaPorNumero(numero);
     const casa = document.getElementById('casa-' + numero);
-    casa.textContent = '';   // apaga o desenho anterior
-    // A batida (o anel de tinta e a tremida) vale só para a figurinha que acabou de ser colada
+    casa.textContent = '';
     casa.classList.toggle('bateu', acabouDeColar === true);
 
     if (estaColada(album, numero)) {
@@ -224,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (acabouDeColar) figurinha.classList.add('figurinha-colando');
       casa.append(figurinha);
 
-      // Cola fresca: só a última figurinha colada tem o botão "Desfazer"
       if (numero === ultimaColada) {
         const desfazer = criarElemento('button', 'botao botao-contorno botao-pequeno', 'Desfazer');
         desfazer.type = 'button';
@@ -248,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
     casa.append(vaga);
   }
 
-  // A bandeja: as figurinhas que já saíram e ainda não foram coladas
   function desenharBandeja() {
     const album = lerAlbum();
     bandeja.textContent = '';
@@ -259,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
       quantas += 1;
 
       const figurinha = criarFigurinha(fig, { solta: true, etiqueta: textoDeRepetidas(repetidasDe(album, fig.numero)) });
-      figurinha.draggable = true;   // liga o arrastar do próprio navegador
+      figurinha.draggable = true;
 
       const item = document.createElement('li');
       item.append(figurinha, criarBotaoColar(fig));
@@ -273,19 +232,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('mao-vazia').hidden = quantas > 0;
   }
 
-  // "3 de 6 coladas"
   function textoDeColadas(coladas, total) {
     return coladas + ' de ' + total + (coladas === 1 ? ' colada' : ' coladas');
   }
 
-  // O placar gira como um marcador antigo. Cada casa do número é uma janelinha
-  // que mostra uma fita com os algarismos de 0 a 9, um embaixo do outro. Para
-  // mostrar o 7, a fita sobe sete degraus (o CSS faz a subida, devagar).
   function mostrarNoOdometro(odometro, valor) {
     const algarismos = String(valor);
     odometro.dataset.valor = algarismos;
 
-    // Cada fita sobe até o algarismo que lhe cabe
     function subir() {
       const atual = odometro.dataset.valor;
       Array.from(odometro.children).forEach(function (casa, i) {
@@ -293,24 +247,20 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // A quantidade de casas é a mesma (de 12 para 13, por exemplo): só gira
     if (odometro.children.length === algarismos.length) {
       subir();
       return;
     }
 
-    // Mudou a quantidade de casas (de 9 para 10): monta as fitas de novo
     odometro.textContent = '';
     for (let i = 0; i < algarismos.length; i++) {
       const casa = criarElemento('span', 'odo-casa');
       const fita = criarElemento('span', 'odo-fita');
       for (let n = 0; n <= 9; n++) fita.append(criarElemento('span', '', String(n)));
-      fita.style.transitionDelay = (i * 120) + 'ms';   // cada casa começa um pouco depois da anterior
+      fita.style.transitionDelay = (i * 120) + 'ms';
       casa.append(fita);
       odometro.append(casa);
     }
-    // As fitas nascem no zero. Dois quadros depois elas sobem: o navegador
-    // precisa desenhar o zero primeiro para haver um caminho a percorrer.
     requestAnimationFrame(function () { requestAnimationFrame(subir); });
   }
 
@@ -333,7 +283,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const lista = figurinhasDoGrupo(grupo);
       const coladas = contarColadas(album, lista);
       document.getElementById('conta-grupo-' + grupo).textContent = textoDeColadas(coladas, lista.length);
-      // A casa do grupo no índice enche junto, e o leitor de tela ouve a conta
       document.getElementById('indice-quadro-' + grupo).style.setProperty('--parte', coladas / lista.length);
       document.getElementById('indice-conta-' + grupo).textContent = ': ' + textoDeColadas(coladas, lista.length);
     }
@@ -344,28 +293,23 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('barra-selecao-' + selecao.id).style.setProperty('--parte', coladas / lista.length);
     }
 
-    // Os números das abas
     document.getElementById('conta-todas').textContent = resumo.total;
     document.getElementById('conta-tenho').textContent = resumo.tenho;
     document.getElementById('conta-faltam').textContent = resumo.faltam;
     document.getElementById('conta-repetidas').textContent = resumo.comRepetida;
   }
 
-  // As conquistas que acabaram de sair e ainda não foram vistas. O carimbo
-  // delas só bate quando o quadro aparece na tela (a lista fica lá no fim da
-  // página, longe de onde a pessoa cola).
   const carimbosPorBater = [];
   const vigiaDosCarimbos = 'IntersectionObserver' in window ? new IntersectionObserver(function (entradas) {
     for (const entrada of entradas) {
       if (!entrada.isIntersecting) continue;
-      entrada.target.classList.add('conquista-carimbando');   // o CSS faz o carimbo bater
+      entrada.target.classList.add('conquista-carimbando');
       vigiaDosCarimbos.unobserve(entrada.target);
       const posicao = carimbosPorBater.indexOf(entrada.target.dataset.conquista);
       if (posicao >= 0) carimbosPorBater.splice(posicao, 1);
     }
   }, { threshold: 0.6 }) : null;
 
-  // "novas" são os nomes das conquistas que acabaram de sair (ou nada)
   function desenharConquistas(novas) {
     const album = lerAlbum();
     const lista = document.getElementById('conquistas');
@@ -382,7 +326,6 @@ document.addEventListener('DOMContentLoaded', function () {
       item.append(criarElemento('span', 'conquista-estado', dia ? 'Feita em ' + dataPorExtenso(dia) : 'Ainda não'));
       lista.append(item);
 
-      // Conquista nova: fica sem o carimbo até aparecer na tela
       if (dia && carimbosPorBater.includes(conquista.nome)) {
         item.classList.add('conquista-nova');
         item.dataset.conquista = conquista.nome;
@@ -391,17 +334,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // -------------------------------------------------------------------------
-  // 3. Busca, abas e filtros
-  // -------------------------------------------------------------------------
-
-  // "Vinícius" vira "vinicius": sem acento e em minúsculas,
-  // para a busca achar mesmo que a pessoa não digite o acento.
   function semAcento(texto) {
     return String(texto).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   }
 
-  // Esta figurinha passa pela aba, pelos filtros e pela busca escolhidos?
   function combina(fig, album) {
     const selecao = selecaoPorId(fig.selecao);
     const quantas = quantasTenho(album, fig.numero);
@@ -415,7 +351,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (escolha.posicao && fig.posicao !== escolha.posicao) return false;
     if (escolha.raridade && fig.raridade !== escolha.raridade) return false;
 
-    // Busca: todas as palavras digitadas precisam aparecer em algum dado da figurinha
     const dados = semAcento([fig.numero, fig.nome, selecao.nome, fig.posicao || 'bandeira', fig.clube || '', NOME_DA_RARIDADE[fig.raridade]].join(' '));
     for (const palavra of semAcento(escolha.busca).split(' ')) {
       if (!dados.includes(palavra)) return false;
@@ -433,7 +368,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (aparece) achadas += 1;
     }
 
-    // Seleção e grupo que ficaram sem nenhuma casa à mostra também somem
     for (const pagina of paginas.querySelectorAll('.selecao')) {
       pagina.hidden = pagina.querySelector('.casa:not([hidden])') === null;
     }
@@ -454,8 +388,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('limpar-filtros').hidden = !filtrando;
   }
 
-  // Marca uma aba como escolhida. Só a aba escolhida fica na ordem do Tab;
-  // para ir às outras, usam-se as setas (padrão de abas do WAI-ARIA).
   function escolherAba(aba) {
     for (const outra of abas) {
       outra.setAttribute('aria-selected', outra === aba ? 'true' : 'false');
@@ -466,16 +398,12 @@ document.addEventListener('DOMContentLoaded', function () {
     aplicarFiltros();
   }
 
-  // -------------------------------------------------------------------------
-  // 4. Colar e desfazer
-  // -------------------------------------------------------------------------
-
   function mostrarRecado(texto, podeDesfazer) {
     document.getElementById('recado-texto').textContent = texto;
     document.getElementById('recado-desfazer').hidden = !podeDesfazer;
     recado.hidden = false;
-    document.body.classList.add('com-recado');   // abre uma folga no fim da página (ver css/paginas.css)
-    avisar(texto);   // o mesmo texto, lido pelo leitor de tela
+    document.body.classList.add('com-recado');
+    avisar(texto);
   }
 
   function atualizarTudo(conquistasNovas) {
@@ -485,18 +413,16 @@ document.addEventListener('DOMContentLoaded', function () {
     aplicarFiltros();
   }
 
-  // "origem" diz de onde veio o pedido: 'vaga', 'bandeja' ou 'arrasto'
   function colar(numero, origem) {
-    // Guarda a posição do botão na bandeja, para devolver o foco ao vizinho depois
     const botoesAntes = Array.from(bandeja.querySelectorAll('[data-colar]'));
     const posicao = botoesAntes.findIndex(function (botao) { return Number(botao.dataset.colar) === numero; });
 
     const conquistas = colarFigurinha(numero);
-    if (conquistas === null) return;   // não estava na mão
+    if (conquistas === null) return;
 
     const anterior = ultimaColada;
     ultimaColada = numero;
-    if (anterior !== null) desenharCasa(anterior);   // a colagem anterior perde o "Desfazer"
+    if (anterior !== null) desenharCasa(anterior);
     desenharCasa(numero, true);
     atualizarTudo(conquistas);
 
@@ -511,7 +437,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     mostrarRecado(texto, true);
 
-    // Para onde vai o foco do teclado: o botão em que ele estava deixou de existir
     if (origem === 'vaga') {
       document.querySelector('#casa-' + numero + ' .figurinha').focus();
     }
@@ -540,17 +465,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function fecharRecado() {
     recado.hidden = true;
     document.body.classList.remove('com-recado');
-    // O foco estava no recado, que sumiu: volta para o começo do conteúdo, sem rolar a página
     document.getElementById('conteudo').focus({ preventScroll: true });
   }
 
-  // -------------------------------------------------------------------------
-  // 5. Ligar os botões, a busca, as abas e o arrastar
-  // -------------------------------------------------------------------------
-
-  // Um ouvinte só para todos os botões "Colar" e "Desfazer": como eles são
-  // criados e apagados o tempo todo, é mais simples ouvir o clique na página
-  // inteira e descobrir em que botão foi.
   document.addEventListener('click', function (evento) {
     const botaoColar = evento.target.closest('[data-colar]');
     if (botaoColar) {
@@ -562,8 +479,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('recado-desfazer').addEventListener('click', desfazer);
   document.getElementById('recado-fechar').addEventListener('click', fecharRecado);
 
-  // Busca: espera a pessoa parar de digitar por um instante antes de procurar,
-  // para o leitor de tela não anunciar um resultado a cada letra.
   let esperaDaBusca = null;
   campoBusca.addEventListener('input', function () {
     clearTimeout(esperaDaBusca);
@@ -580,7 +495,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Volta tudo ao começo: busca vazia, filtros em "Todos" e aba "Todas"
   function limparFiltros() {
     campoBusca.value = '';
     escolha.busca = '';
@@ -600,7 +514,6 @@ document.addEventListener('DOMContentLoaded', function () {
     aba.addEventListener('click', function () { escolherAba(aba); });
   }
 
-  // Setas, Home e End passam de uma aba para a outra
   document.querySelector('.abas').addEventListener('keydown', function (evento) {
     const atual = abas.indexOf(document.activeElement);
     let proxima = null;
@@ -610,18 +523,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (evento.key === 'End') proxima = abas.length - 1;
     if (atual === -1 || proxima === null) return;
 
-    evento.preventDefault();   // a seta não rola a página
+    evento.preventDefault();
     abas[proxima].focus();
     escolherAba(abas[proxima]);
   });
 
-  // Arrastar e soltar, com a API do próprio HTML.
-  // 1) Começou a arrastar uma figurinha da bandeja: anota qual é e marca a vaga dela.
   bandeja.addEventListener('dragstart', function (evento) {
     const figurinha = evento.target.closest('.figurinha');
     if (!figurinha) return;
     arrastando = Number(figurinha.dataset.numero);
-    evento.dataTransfer.setData('text/plain', String(arrastando));   // o Firefox só arrasta se houver algum dado
+    evento.dataTransfer.setData('text/plain', String(arrastando));
     evento.dataTransfer.effectAllowed = 'move';
     document.getElementById('casa-' + arrastando).classList.add('casa-alvo');
   });
@@ -635,15 +546,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   bandeja.addEventListener('dragend', terminarArrasto);
 
-  // A casa embaixo do mouse é a da figurinha arrastada?
   function casaCerta(evento) {
     const casa = evento.target.closest('.casa');
     if (casa && arrastando !== null && Number(casa.dataset.numero) === arrastando) return casa;
     return null;
   }
 
-  // 2) Passando por cima da vaga certa: o preventDefault() avisa o navegador
-  //    que ali pode soltar. Nas outras vagas ele mostra o sinal de "proibido".
   paginas.addEventListener('dragover', function (evento) {
     const casa = casaCerta(evento);
     if (!casa) return;
@@ -656,7 +564,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (casa && !casa.contains(evento.relatedTarget)) casa.classList.remove('casa-em-cima');
   });
 
-  // 3) Soltou na vaga certa: cola.
   paginas.addEventListener('drop', function (evento) {
     const casa = casaCerta(evento);
     if (!casa) return;
@@ -666,10 +573,6 @@ document.addEventListener('DOMContentLoaded', function () {
     colar(numero, 'arrasto');
   });
 
-  // -------------------------------------------------------------------------
-  // 6. Começar
-  // -------------------------------------------------------------------------
-
   montarFiltros();
   montarIndice();
   montarPaginas();
@@ -677,8 +580,6 @@ document.addEventListener('DOMContentLoaded', function () {
   for (const fig of FIGURINHAS) desenharCasa(fig.numero);
   atualizarTudo();
 
-  // O campo desenhado no fim do álbum: o traço só começa quando ele aparece na
-  // tela. Com menos movimento (ou em navegador antigo), ele já vem pronto.
   const campoDoFinal = document.getElementById('campo-do-final');
   if (campoDoFinal && 'IntersectionObserver' in window && !movimentoReduzido()) {
     campoDoFinal.classList.add('por-desenhar');
@@ -691,8 +592,6 @@ document.addEventListener('DOMContentLoaded', function () {
     vigiaDoCampo.observe(campoDoFinal);
   }
 
-  // Se o endereço veio com uma âncora (album.html#casa-50), rola até ela.
-  // O navegador não faz isso sozinho porque as casas só passam a existir agora.
   if (location.hash.length > 1) {
     const alvo = document.getElementById(location.hash.slice(1));
     if (alvo) alvo.scrollIntoView();

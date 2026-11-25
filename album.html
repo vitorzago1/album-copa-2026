@@ -7,15 +7,10 @@
   <meta name="description" content="As páginas do álbum, organizadas por grupo e por seleção.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts do álbum, nesta ordem: os dados, o caderninho do progresso,
-       o desenho da figurinha e, por último, a página. O "defer" espera o HTML
-       ficar pronto e mantém a ordem. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
@@ -28,15 +23,12 @@
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -51,7 +43,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -64,22 +55,16 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- TOPO. Página dupla: à esquerda o placar do álbum, à direita as figurinhas que estão na mão. -->
     <section class="largura dobra album-topo">
       <div class="fluxo">
         <h1>Álbum</h1>
         <p class="placar">
-          <!-- O número grande gira como um marcador antigo (js/album.js). Quem lê o
-               número para o leitor de tela é o texto escondido ao lado. -->
           <span class="placar-numero"><span class="odometro" id="placar-odometro" aria-hidden="true"></span><span class="escondido" id="placar-coladas">0</span></span>
           <span>de <span id="placar-total">24</span> figurinhas coladas</span>
         </p>
-        <!-- A barra é só desenho: o número já está escrito acima. -->
         <div class="barra" aria-hidden="true"><span class="barra-cheia" id="placar-barra"></span></div>
         <p id="placar-texto">Falta colar tudo: o álbum está novinho.</p>
 
-        <!-- ÍNDICE DOS GRUPOS. Cada casa leva ao grupo e enche conforme ele é colado.
-             As casas são montadas pelo js/album.js. -->
         <nav class="fluxo" aria-labelledby="titulo-indice">
           <h2 class="titulo-menor" id="titulo-indice">Ir para um grupo</h2>
           <ol class="tira tira-indice" id="indice-grupos"></ol>
@@ -90,13 +75,11 @@
       <div class="fluxo">
         <h2 id="titulo-mao" tabindex="-1">Na mão</h2>
         <p id="mao-texto">As figurinhas que saem do pacotinho aparecem aqui, prontas para colar.</p>
-        <!-- Cada figurinha desta lista pode ser arrastada até a vaga ou colada pelo botão. -->
         <ul class="bandeja" id="bandeja" aria-labelledby="titulo-mao"></ul>
         <p id="mao-vazia"><a class="botao" href="pacotinhos.html">Abrir um pacotinho</a></p>
       </div>
     </section>
 
-    <!-- BUSCA, ABAS E FILTROS. Tudo aqui muda quais figurinhas aparecem logo abaixo. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-procurar">
       <h2 id="titulo-procurar">Procurar no álbum</h2>
 
@@ -106,7 +89,6 @@
         <input class="campo-entrada" type="search" id="busca" autocomplete="off" aria-describedby="busca-dica">
       </div>
 
-      <!-- Abas no padrão WAI-ARIA: as setas do teclado passam de uma para a outra. -->
       <div class="abas" role="tablist" aria-label="Quais figurinhas mostrar">
         <button class="aba" type="button" role="tab" id="aba-todas" data-aba="todas" aria-selected="true" aria-controls="painel-album">Todas<span class="aba-conta" id="conta-todas">24</span></button>
         <button class="aba" type="button" role="tab" id="aba-tenho" data-aba="tenho" aria-selected="false" aria-controls="painel-album" tabindex="-1">Tenho<span class="aba-conta" id="conta-tenho">0</span></button>
@@ -134,13 +116,11 @@
       </div>
 
       <div class="resultado">
-        <!-- role="status": o leitor de tela lê este texto sempre que ele muda. -->
         <p id="resultado" role="status">24 figurinhas</p>
         <button class="botao botao-contorno botao-pequeno" type="button" id="limpar-filtros" hidden>Limpar busca e filtros</button>
       </div>
     </section>
 
-    <!-- AS PÁGINAS DO ÁLBUM. É o painel das abas: o conteúdo é montado pelo js/album.js. -->
     <div class="largura" role="tabpanel" id="painel-album" aria-labelledby="aba-todas">
       <div id="paginas"></div>
       <div class="vazio fluxo" id="vazio" hidden>
@@ -149,8 +129,6 @@
       </div>
     </div>
 
-    <!-- COMO TERMINOU. A última página do álbum: o resultado da Copa.
-         Os textos são preenchidos pelo js/album.js, a partir do objeto COPA de js/dados.js. -->
     <section class="largura secao" aria-labelledby="titulo-final">
       <div class="dobra">
         <div class="fluxo">
@@ -159,7 +137,6 @@
           <p id="final-placar"></p>
           <p id="final-onde"></p>
           <p id="final-numeros"></p>
-          <!-- Enfeite: as linhas de um campo, que se desenham quando esta parte aparece na tela. -->
           <svg class="campo-tracado" id="campo-do-final" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
             <rect pathLength="1" x="20" y="20" width="560" height="360"/>
             <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
@@ -183,17 +160,14 @@
       </div>
     </section>
 
-    <!-- CONQUISTAS. Cada uma vale um pacotinho extra. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-conquistas">
       <h2 id="titulo-conquistas">Conquistas</h2>
       <p>Cada conquista vale um pacotinho extra, para abrir quando quiser.</p>
       <ul class="conquistas" id="conquistas"></ul>
     </section>
 
-    <!-- Recado para o leitor de tela (escondido da tela, mas lido em voz alta). -->
     <p class="escondido" id="aviso" role="status"></p>
 
-    <!-- Recado visível, preso no pé da tela depois de colar. -->
     <div class="recado" id="recado" hidden>
       <p class="recado-texto" id="recado-texto"></p>
       <button class="recado-botao" type="button" id="recado-desfazer">Desfazer</button>
@@ -201,7 +175,6 @@
     </div>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">

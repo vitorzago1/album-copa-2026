@@ -7,13 +7,10 @@
   <meta name="description" content="Fale com o autor do projeto.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os ajudantes de formulário e a conferência dos campos desta página. -->
   <script src="js/formulario.js" defer></script>
   <script src="js/contato.js" defer></script>
 
@@ -24,15 +21,12 @@
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -47,7 +41,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -60,7 +53,6 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda a explicação, à direita o formulário. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Contato</h1>
@@ -75,17 +67,13 @@
       </div>
 
       <div class="fluxo">
-        <!-- RESUMO DOS ERROS. Aparece quando o envio falha, lista o que falta
-             e leva a cada campo. Recebe o foco para ser lido primeiro. -->
         <div class="resumo-erros" id="resumo-erros" tabindex="-1" aria-labelledby="resumo-titulo" hidden>
           <h2 class="titulo-menor" id="resumo-titulo"></h2>
           <ul id="resumo-lista"></ul>
         </div>
 
-        <!-- MENSAGEM DE SUCESSO. aria-live="polite": o leitor de tela lê quando o texto aparece. -->
         <p class="aviso-sucesso" id="contato-sucesso" role="status" aria-live="polite" tabindex="-1"></p>
 
-        <!-- "novalidate" desliga os balões do navegador: as mensagens são as do site. -->
         <form class="formulario" id="form-contato" novalidate>
           <p>Todos os campos são obrigatórios.</p>
 
@@ -127,7 +115,6 @@
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">

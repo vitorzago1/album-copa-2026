@@ -1,31 +1,18 @@
-// ============================================================================
-// inicio.js
-// ----------------------------------------------------------------------------
-// Na página inicial, troca os textos de exemplo pelo progresso de verdade:
-// a tira de grupos, o resumo do álbum, o pacotinho do dia e a cartela.
-//
-// Sem JavaScript, a página continua mostrando os textos que estão no HTML.
-// Depende de: js/dados.js e js/estado.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   const album = lerAlbum();
   const resumo = resumoDoAlbum(album);
 
-  // Tira de grupos: as 12 casas estão no HTML, na ordem de A a L.
-  // Cada casa enche conforme as figurinhas do grupo são coladas.
   const letras = 'ABCDEFGHIJKL';
   const casas = document.querySelectorAll('.tira-casa');
   for (let i = 0; i < casas.length; i++) {
     const lista = figurinhasDoGrupo(letras[i]);
-    if (lista.length === 0) continue;   // grupo que ainda não entrou no álbum
+    if (lista.length === 0) continue;
 
     const coladas = contarColadas(album, lista);
     casas[i].querySelector('.tira-quadro').style.setProperty('--parte', coladas / lista.length);
 
-    // Para o leitor de tela, a casa diz a conta: "Grupo C: 5 de 24 coladas"
     const conta = document.createElement('span');
     conta.className = 'escondido';
     conta.textContent = ': ' + coladas + ' de ' + lista.length + ' coladas';
@@ -40,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (resumo.naMao > 1) texto += ' Há ' + resumo.naMao + ' figurinhas na mão, esperando para ser coladas.';
   document.getElementById('progresso-texto').textContent = texto;
 
-  // Pacotinho do dia
   let pacotinho = temPacotinhoDoDia(album)
     ? 'O pacotinho de hoje está fechado, esperando você. São cinco figurinhas.'
     : 'O pacotinho de hoje já foi aberto. Amanhã tem outro.';
@@ -48,6 +34,5 @@ document.addEventListener('DOMContentLoaded', function () {
   if (album.extras > 1) pacotinho += ' Você tem ' + album.extras + ' pacotinhos extras guardados.';
   document.getElementById('pacotinho-texto').textContent = pacotinho;
 
-  // Cartela da sequência
   document.getElementById('sequencia-texto').textContent = marcarCartela(document.getElementById('cartela'), album);
 });

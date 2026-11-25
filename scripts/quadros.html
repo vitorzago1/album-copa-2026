@@ -6,14 +6,6 @@
   <title>Gerador de quadros do pacotinho | Colei!</title>
   <meta name="robots" content="noindex">
 
-  <!-- FERRAMENTA DE APOIO. Não faz parte do site entregue.
-       Esta página desenha o pacotinho 3D (js/pacote3d.js) em 90 poses seguidas
-       e salva cada pose como uma imagem. É a "sequência de quadros" que a cena
-       do pacotinho, na página inicial, mostra conforme a rolagem.
-
-       Para gerar de novo (depois de mudar o js/pacote3d.js, por exemplo):
-       abra esta página pelo servidor local, no Edge ou no Chrome, clique em
-       "Salvar os quadros em uma pasta" e escolha a pasta assets/img/pacotinho. -->
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/componentes.css">
@@ -42,15 +34,14 @@
     </div>
     <p class="painel-aviso" id="aviso" role="status"></p>
 
-    <!-- O tamanho da tela é o tamanho de cada imagem salva: 720 por 924 pixels. -->
     <canvas class="quadros-tela" id="tela" width="720" height="924" aria-label="Pré-visualização do quadro escolhido"></canvas>
   </main>
 
   <script>
     'use strict';
 
-    const QUADROS = 90;          // quantas poses
-    const QUALIDADE = 0.82;      // do arquivo WebP: de 0 (leve e feio) a 1 (pesado e fiel)
+    const QUADROS = 90;
+    const QUALIDADE = 0.82;
     const TEMAS = ['claro', 'escuro'];
 
     const tela = document.getElementById('tela');
@@ -58,11 +49,8 @@
     const controle = document.getElementById('quadro');
     document.documentElement.dataset.tema = 'claro';
 
-    // alturaVisivel: 15.4 deixa uma folga em volta do pacotinho, porque ele
-    // entra por baixo, gira e a aba voa para cima
     const pacote = criarPacote3d(tela, { alturaVisivel: 15.4, nitidez: 1, largura: 720, altura: 924 });
 
-    // Desenha a pose de número "i" (de 1 a 90)
     function desenharQuadro(i) {
       pacote.posar((i - 1) / (QUADROS - 1));
       pacote.desenhar();
@@ -75,7 +63,7 @@
 
     function usarTema(tema) {
       document.documentElement.dataset.tema = tema;
-      pacote.estampar();   // refaz a estampa com as cores do tema
+      pacote.estampar();
       mostrar();
     }
 
@@ -84,15 +72,12 @@
       usarTema(document.documentElement.dataset.tema === 'claro' ? 'escuro' : 'claro');
     });
 
-    // Usado também pelo teste automático: devolve um quadro já em forma de arquivo
-    // (um texto comprido que começa com "data:image/webp;base64,")
     function quadroComoArquivo(tema, i, tipo) {
       if (document.documentElement.dataset.tema !== tema) usarTema(tema);
       desenharQuadro(i);
       return tela.toDataURL(tipo || 'image/webp', QUALIDADE);
     }
 
-    // Salva tudo em uma pasta escolhida pela pessoa: claro/001.webp ... escuro/090.webp
     document.getElementById('salvar').addEventListener('click', async function () {
       if (!window.showDirectoryPicker) {
         aviso.textContent = 'Este navegador não deixa uma página salvar em uma pasta. Use o Edge ou o Chrome.';
@@ -115,7 +100,6 @@
       aviso.textContent = 'Pronto: ' + (QUADROS * TEMAS.length) + ' quadros salvos.';
     });
 
-    // A estampa usa as letras do site: só pode ser desenhada depois que elas chegarem
     const pronto = Promise.all([
       document.fonts.load('900 100px "Londrina Solid"'),
       document.fonts.load('700 60px "Atkinson Hyperlegible Next"'),

@@ -7,20 +7,16 @@
   <meta name="description" content="Álbum de figurinhas digital da Copa do Mundo de 2026: abra o pacotinho do dia, cole as figurinhas e troque as repetidas.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
   <script src="js/inicio.js" defer></script>
   <script src="js/carrossel.js" defer></script>
 
-  <!-- As cenas presas à rolagem: o motor e, depois, as seis cenas desta página. -->
   <script src="js/cenas.js" defer></script>
   <script src="js/cenas-inicio.js" defer></script>
 
@@ -32,15 +28,12 @@
   <link rel="stylesheet" href="css/cenas.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -55,7 +48,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -68,16 +60,12 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ABERTURA (cena 1). Os pontinhos de impressão se juntam e formam "Colei!".
-         Parada, a cena mostra o convite ao lado da marca já formada.
-         O desenho é feito pelo js/cenas-inicio.js dentro do <canvas>. -->
     <section class="cena cena-abertura" style="--altura: 240vh" data-aviso-de="0.2" aria-labelledby="titulo-abertura">
       <div class="cena-palco">
         <canvas class="reticula-tela so-com-js" id="reticula-tela" aria-hidden="true"></canvas>
 
         <div class="abertura-convite" id="abertura-convite">
           <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
-          <!-- data-visivel-em="0": estes botões aparecem no começo da cena (ver js/cenas.js). -->
           <p class="abertura-botoes" data-visivel-em="0">
             <a class="botao" href="album.html">Abrir o álbum</a>
             <a class="botao botao-contorno" href="pacotinhos.html">Ir para os pacotinhos</a>
@@ -87,7 +75,6 @@
 
         <p class="abertura-assinatura" id="abertura-assinatura">O álbum de figurinhas da Copa de 2026</p>
 
-        <!-- Só aparece para quem vê a página parada porque o aparelho pede menos movimento. -->
         <div class="aviso-movimento" id="aviso-movimento" hidden>
           <p>A apresentação desta página está parada porque o seu aparelho pede menos movimento.</p>
           <button class="botao botao-contorno botao-pequeno" type="button" id="ligar-movimento">Ligar as animações neste site</button>
@@ -95,10 +82,6 @@
       </div>
     </section>
 
-    <!-- A FRASE ACENDE. Não é uma cena presa à rolagem: quando a frase aparece na
-         tela, as palavras acendem sozinhas, uma depois da outra, e o sublinhado se
-         desenha (js/cenas-inicio.js). Sem JavaScript, ou com menos movimento, ela já
-         vem toda acesa. -->
     <div class="largura secao frase-secao" id="frase-secao">
       <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
       <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -106,8 +89,6 @@
       </svg>
     </div>
 
-    <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
-         conforme as figurinhas do grupo são coladas e troca o texto de baixo. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-progresso">
       <h2 id="titulo-progresso">Seu álbum até agora</h2>
       <ol class="tira" aria-label="Progresso por grupo">
@@ -127,7 +108,6 @@
       <p id="progresso-texto">Nenhuma figurinha colada ainda. Cada casa é um grupo, de A a L, e vai enchendo conforme você cola.</p>
     </section>
 
-    <!-- COMO FUNCIONA. É uma sequência de verdade, por isso é uma lista numerada. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-como">
       <h2 id="titulo-como">Como funciona</h2>
       <ol class="passos">
@@ -146,12 +126,6 @@
       </ol>
     </section>
 
-    <!-- O PACOTINHO GIRA E ABRE (cena 2). O pacotinho aparece de dois jeitos:
-         1. uma sequência de 90 imagens de um pacotinho 3D (a técnica das páginas de
-            produto), mostradas uma a uma no <canvas> conforme a rolagem;
-         2. um pacotinho desenhado em CSS, usado na versão parada e enquanto as
-            imagens ainda estão chegando.
-         As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
     <section class="cena cena-pacote" style="--altura: 360vh" aria-labelledby="titulo-cena-pacote">
       <div class="cena-palco palco-3d">
         <h2 class="cena-titulo" id="titulo-cena-pacote">Todo dia, um pacotinho.</h2>
@@ -171,13 +145,11 @@
               <span class="pacotinho-texto">Abra pelo picote</span>
             </div>
           </div>
-          <!-- Cada imagem da sequência tem 720 por 924 pixels. -->
           <canvas class="pacote-quadros so-com-js" id="pacote-quadros" width="720" height="924" aria-hidden="true"></canvas>
         </div>
       </div>
     </section>
 
-    <!-- PACOTINHO DO DIA e RARIDADES, lado a lado na página dupla. -->
     <section class="largura secao dobra">
       <div>
         <article class="cartao" aria-labelledby="titulo-pacotinho">
@@ -185,7 +157,6 @@
           <p id="pacotinho-texto">Um pacotinho grátis por dia, com cinco figurinhas. Amanhã tem outro.</p>
           <p><a class="botao" href="pacotinhos.html">Ir para os pacotinhos</a></p>
 
-          <!-- O canhoto do cupom: a cartela da sequência de dias. -->
           <div class="cupom-canhoto fluxo">
             <h3>Sua sequência</h3>
             <ol class="cartela" id="cartela" aria-label="Cartela de sete dias seguidos">
@@ -306,8 +277,6 @@
       </div>
     </section>
 
-    <!-- O ÁLBUM ABRE (cena 3). Três folhas empilhadas; cada uma tem frente e verso.
-         As páginas (Grupo C, como amostra) são montadas pelo js/cenas-inicio.js. -->
     <section class="cena cena-album" style="--altura: 360vh" aria-labelledby="titulo-cena-album">
       <div class="cena-palco palco-3d">
         <h2 class="cena-titulo" id="titulo-cena-album">O álbum abre na sua frente.</h2>
@@ -327,12 +296,10 @@
             <div class="face face-verso" id="pagina-1"></div>
           </div>
         </div>
-        <!-- data-visivel-em="1": este botão só aparece no fim da cena. -->
         <p class="cena-acao" id="acao-do-album" data-visivel-em="1"><a class="botao" href="album.html">Abrir o meu álbum</a></p>
       </div>
     </section>
 
-    <!-- MERGULHO NA FIGURINHA (cena 4). A figurinha cresce até a tela ficar da cor dela. -->
     <div class="cena cena-mergulho" style="--altura: 240vh">
       <div class="cena-palco">
         <div class="mergulho so-com-js" id="mergulho" aria-hidden="true"></div>
@@ -342,12 +309,9 @@
       </div>
     </div>
 
-    <!-- OS NÚMEROS CONTAM (cena 5). Os valores escritos aqui são os finais; o
-         js/cenas-inicio.js confere com os dados e faz a contagem. -->
     <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
       <div class="cena-palco">
         <h2 class="cena-titulo" id="titulo-numeros">A Copa de 2026 em números</h2>
-        <!-- Enfeite: as linhas de um campo, atrás dos números. A rolagem desenha o traço. -->
         <svg class="campo-tracado campo-dos-numeros" id="campo-dos-numeros" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
           <rect pathLength="1" x="20" y="20" width="560" height="360"/>
           <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
@@ -368,10 +332,6 @@
       </div>
     </section>
 
-    <!-- CARROSSEL DOS GRUPOS. Os doze grupos ficam lado a lado em uma faixa que anda
-         para os lados. O grupo que está no meio vira figurinha e ganha cor. Os
-         painéis são montados pelo js/carrossel.js, a partir de js/dados.js.
-         Não passa sozinho: só anda quando a pessoa aperta um botão ou arrasta. -->
     <section class="secao fluxo secao-grupos" aria-labelledby="titulo-grupos" aria-roledescription="carrossel">
       <div class="largura fluxo">
         <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
@@ -380,7 +340,6 @@
       </div>
 
       <div class="fluxo" id="carrossel-grupos" hidden>
-        <!-- A janela: mostra um pedaço da faixa. tabindex="0" deixa rolar com as setas do teclado. -->
         <div class="grupos-janela" id="grupos-janela" tabindex="0" role="group" aria-label="Os 12 grupos, lado a lado">
           <div class="trilha" id="trilha"></div>
         </div>
@@ -388,7 +347,6 @@
         <div class="largura fluxo">
           <div class="carrossel-controles">
             <button class="botao botao-contorno" type="button" id="grupo-anterior">Anterior</button>
-            <!-- role="status": o leitor de tela lê "3 de 12: Grupo C" a cada troca. -->
             <p class="carrossel-posicao" id="grupo-posicao" role="status"></p>
             <button class="botao botao-contorno" type="button" id="grupo-proximo">Próximo</button>
           </div>
@@ -397,9 +355,6 @@
       </div>
     </section>
 
-    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
-         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
-         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
       <h2 id="titulo-sedes">As 16 sedes</h2>
       <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
@@ -422,7 +377,6 @@
           </div>
 
           <figure class="carrossel-figura">
-            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
             <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
             <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
           </figure>
@@ -430,7 +384,6 @@
 
         <div class="carrossel-controles">
           <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
-          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
           <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
           <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
         </div>
@@ -438,7 +391,6 @@
       </div>
     </section>
 
-    <!-- COMO TROCAR. À direita, um bilhete com um exemplo de lista de troca. -->
     <section class="largura secao dobra" aria-labelledby="titulo-trocar">
       <div class="fluxo">
         <h2 id="titulo-trocar">Como trocar</h2>
@@ -459,8 +411,6 @@
       </div>
     </section>
 
-    <!-- VOO PELAS FIGURINHAS (cena 6). As figurinhas ficam espalhadas em profundidade
-         e a rolagem leva a câmera por entre elas. -->
     <section class="cena cena-voo" style="--altura: 300vh" aria-labelledby="voo-titulo">
       <div class="cena-palco palco-voo">
         <div class="voo so-com-js" id="voo" aria-hidden="true"></div>
@@ -473,7 +423,6 @@
 
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">

@@ -5,47 +5,47 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 37.
-- Linhas de código (com comentários): 14221.
+- Linhas de código: 12070.
 
 | Arquivo | Linhas |
 |---|---|
-| `index.html` | 506 |
-| `album.html` | 234 |
-| `pacotinhos.html` | 137 |
-| `trocas.html` | 166 |
-| `login.html` | 183 |
-| `contato.html` | 160 |
-| `sobre.html` | 344 |
-| `css/tokens.css` | 255 |
-| `css/base.css` | 619 |
-| `css/componentes.css` | 1420 |
-| `css/paginas.css` | 537 |
-| `css/acessibilidade.css` | 224 |
-| `css/cenas.css` | 1119 |
-| `js/tema-acessibilidade.js` | 226 |
-| `js/menu.js` | 52 |
-| `js/efeitos.js` | 106 |
-| `js/estado.js` | 417 |
-| `js/figurinha.js` | 270 |
-| `js/album.js` | 700 |
-| `js/pacotinho.js` | 242 |
-| `js/trocas.js` | 200 |
-| `js/inicio.js` | 53 |
-| `js/carrossel.js` | 235 |
-| `js/cenas.js` | 272 |
-| `js/cenas-inicio.js` | 781 |
-| `js/pacote3d.js` | 466 |
-| `js/pacotinho-3d.js` | 170 |
-| `js/formulario.js` | 53 |
-| `js/login.js` | 312 |
-| `js/contato.js` | 112 |
-| `js/sobre.js` | 44 |
-| `js/demonstracao.js` | 39 |
-| `js/dados.js` | 2474 |
-| `scripts/contraste.js` | 311 |
-| `scripts/gerar-fundo.js` | 550 |
-| `scripts/gerar-anexo.js` | 103 |
-| `scripts/quadros.html` | 129 |
+| `index.html` | 455 |
+| `album.html` | 207 |
+| `pacotinhos.html` | 121 |
+| `trocas.html` | 149 |
+| `login.html` | 167 |
+| `contato.html` | 147 |
+| `sobre.html` | 325 |
+| `css/tokens.css` | 198 |
+| `css/base.css` | 506 |
+| `css/componentes.css` | 1221 |
+| `css/paginas.css` | 470 |
+| `css/acessibilidade.css` | 184 |
+| `css/cenas.css` | 980 |
+| `js/tema-acessibilidade.js` | 186 |
+| `js/menu.js` | 37 |
+| `js/efeitos.js` | 66 |
+| `js/estado.js` | 329 |
+| `js/figurinha.js` | 204 |
+| `js/album.js` | 599 |
+| `js/pacotinho.js` | 201 |
+| `js/trocas.js` | 162 |
+| `js/inicio.js` | 38 |
+| `js/carrossel.js` | 185 |
+| `js/cenas.js` | 179 |
+| `js/cenas-inicio.js` | 617 |
+| `js/pacote3d.js` | 371 |
+| `js/pacotinho-3d.js` | 132 |
+| `js/formulario.js` | 35 |
+| `js/login.js` | 244 |
+| `js/contato.js` | 88 |
+| `js/sobre.js` | 28 |
+| `js/demonstracao.js` | 26 |
+| `js/dados.js` | 2338 |
+| `scripts/contraste.js` | 247 |
+| `scripts/gerar-fundo.js` | 431 |
+| `scripts/gerar-anexo.js` | 84 |
+| `scripts/quadros.html` | 113 |
 
 ## Páginas (HTML)
 
@@ -61,20 +61,16 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="Álbum de figurinhas digital da Copa do Mundo de 2026: abra o pacotinho do dia, cole as figurinhas e troque as repetidas.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Mostram o progresso de verdade na página: os dados, o caderninho do progresso e a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
   <script src="js/inicio.js" defer></script>
   <script src="js/carrossel.js" defer></script>
 
-  <!-- As cenas presas à rolagem: o motor e, depois, as seis cenas desta página. -->
   <script src="js/cenas.js" defer></script>
   <script src="js/cenas-inicio.js" defer></script>
 
@@ -86,15 +82,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/cenas.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -109,7 +102,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -122,16 +114,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ABERTURA (cena 1). Os pontinhos de impressão se juntam e formam "Colei!".
-         Parada, a cena mostra o convite ao lado da marca já formada.
-         O desenho é feito pelo js/cenas-inicio.js dentro do <canvas>. -->
     <section class="cena cena-abertura" style="--altura: 240vh" data-aviso-de="0.2" aria-labelledby="titulo-abertura">
       <div class="cena-palco">
         <canvas class="reticula-tela so-com-js" id="reticula-tela" aria-hidden="true"></canvas>
 
         <div class="abertura-convite" id="abertura-convite">
           <h1 id="titulo-abertura">A Copa acabou. Seu álbum, não.</h1>
-          <!-- data-visivel-em="0": estes botões aparecem no começo da cena (ver js/cenas.js). -->
           <p class="abertura-botoes" data-visivel-em="0">
             <a class="botao" href="album.html">Abrir o álbum</a>
             <a class="botao botao-contorno" href="pacotinhos.html">Ir para os pacotinhos</a>
@@ -141,7 +129,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
         <p class="abertura-assinatura" id="abertura-assinatura">O álbum de figurinhas da Copa de 2026</p>
 
-        <!-- Só aparece para quem vê a página parada porque o aparelho pede menos movimento. -->
         <div class="aviso-movimento" id="aviso-movimento" hidden>
           <p>A apresentação desta página está parada porque o seu aparelho pede menos movimento.</p>
           <button class="botao botao-contorno botao-pequeno" type="button" id="ligar-movimento">Ligar as animações neste site</button>
@@ -149,10 +136,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- A FRASE ACENDE. Não é uma cena presa à rolagem: quando a frase aparece na
-         tela, as palavras acendem sozinhas, uma depois da outra, e o sublinhado se
-         desenha (js/cenas-inicio.js). Sem JavaScript, ou com menos movimento, ela já
-         vem toda acesa. -->
     <div class="largura secao frase-secao" id="frase-secao">
       <p class="frase" id="frase">São 48 seleções, 16 cidades-sede e muito espaço vazio esperando figurinha. Abra um pacotinho por dia, cole no lugar certo e troque as repetidas.</p>
       <svg class="frase-traco" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -160,8 +143,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </svg>
     </div>
 
-    <!-- PROGRESSO. Uma casa por grupo, de A a L. O js/inicio.js enche cada casa
-         conforme as figurinhas do grupo são coladas e troca o texto de baixo. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-progresso">
       <h2 id="titulo-progresso">Seu álbum até agora</h2>
       <ol class="tira" aria-label="Progresso por grupo">
@@ -181,7 +162,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <p id="progresso-texto">Nenhuma figurinha colada ainda. Cada casa é um grupo, de A a L, e vai enchendo conforme você cola.</p>
     </section>
 
-    <!-- COMO FUNCIONA. É uma sequência de verdade, por isso é uma lista numerada. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-como">
       <h2 id="titulo-como">Como funciona</h2>
       <ol class="passos">
@@ -200,12 +180,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </ol>
     </section>
 
-    <!-- O PACOTINHO GIRA E ABRE (cena 2). O pacotinho aparece de dois jeitos:
-         1. uma sequência de 90 imagens de um pacotinho 3D (a técnica das páginas de
-            produto), mostradas uma a uma no <canvas> conforme a rolagem;
-         2. um pacotinho desenhado em CSS, usado na versão parada e enquanto as
-            imagens ainda estão chegando.
-         As cinco figurinhas são postas pelo js/cenas-inicio.js. -->
     <section class="cena cena-pacote" style="--altura: 360vh" aria-labelledby="titulo-cena-pacote">
       <div class="cena-palco palco-3d">
         <h2 class="cena-titulo" id="titulo-cena-pacote">Todo dia, um pacotinho.</h2>
@@ -225,13 +199,11 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
               <span class="pacotinho-texto">Abra pelo picote</span>
             </div>
           </div>
-          <!-- Cada imagem da sequência tem 720 por 924 pixels. -->
           <canvas class="pacote-quadros so-com-js" id="pacote-quadros" width="720" height="924" aria-hidden="true"></canvas>
         </div>
       </div>
     </section>
 
-    <!-- PACOTINHO DO DIA e RARIDADES, lado a lado na página dupla. -->
     <section class="largura secao dobra">
       <div>
         <article class="cartao" aria-labelledby="titulo-pacotinho">
@@ -239,7 +211,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <p id="pacotinho-texto">Um pacotinho grátis por dia, com cinco figurinhas. Amanhã tem outro.</p>
           <p><a class="botao" href="pacotinhos.html">Ir para os pacotinhos</a></p>
 
-          <!-- O canhoto do cupom: a cartela da sequência de dias. -->
           <div class="cupom-canhoto fluxo">
             <h3>Sua sequência</h3>
             <ol class="cartela" id="cartela" aria-label="Cartela de sete dias seguidos">
@@ -360,8 +331,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- O ÁLBUM ABRE (cena 3). Três folhas empilhadas; cada uma tem frente e verso.
-         As páginas (Grupo C, como amostra) são montadas pelo js/cenas-inicio.js. -->
     <section class="cena cena-album" style="--altura: 360vh" aria-labelledby="titulo-cena-album">
       <div class="cena-palco palco-3d">
         <h2 class="cena-titulo" id="titulo-cena-album">O álbum abre na sua frente.</h2>
@@ -381,12 +350,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <div class="face face-verso" id="pagina-1"></div>
           </div>
         </div>
-        <!-- data-visivel-em="1": este botão só aparece no fim da cena. -->
         <p class="cena-acao" id="acao-do-album" data-visivel-em="1"><a class="botao" href="album.html">Abrir o meu álbum</a></p>
       </div>
     </section>
 
-    <!-- MERGULHO NA FIGURINHA (cena 4). A figurinha cresce até a tela ficar da cor dela. -->
     <div class="cena cena-mergulho" style="--altura: 240vh">
       <div class="cena-palco">
         <div class="mergulho so-com-js" id="mergulho" aria-hidden="true"></div>
@@ -396,12 +363,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </div>
 
-    <!-- OS NÚMEROS CONTAM (cena 5). Os valores escritos aqui são os finais; o
-         js/cenas-inicio.js confere com os dados e faz a contagem. -->
     <section class="cena cena-numeros" style="--altura: 240vh" aria-labelledby="titulo-numeros">
       <div class="cena-palco">
         <h2 class="cena-titulo" id="titulo-numeros">A Copa de 2026 em números</h2>
-        <!-- Enfeite: as linhas de um campo, atrás dos números. A rolagem desenha o traço. -->
         <svg class="campo-tracado campo-dos-numeros" id="campo-dos-numeros" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
           <rect pathLength="1" x="20" y="20" width="560" height="360"/>
           <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
@@ -422,10 +386,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- CARROSSEL DOS GRUPOS. Os doze grupos ficam lado a lado em uma faixa que anda
-         para os lados. O grupo que está no meio vira figurinha e ganha cor. Os
-         painéis são montados pelo js/carrossel.js, a partir de js/dados.js.
-         Não passa sozinho: só anda quando a pessoa aperta um botão ou arrasta. -->
     <section class="secao fluxo secao-grupos" aria-labelledby="titulo-grupos" aria-roledescription="carrossel">
       <div class="largura fluxo">
         <h2 id="titulo-grupos">12 grupos, de A a L.</h2>
@@ -434,7 +394,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
 
       <div class="fluxo" id="carrossel-grupos" hidden>
-        <!-- A janela: mostra um pedaço da faixa. tabindex="0" deixa rolar com as setas do teclado. -->
         <div class="grupos-janela" id="grupos-janela" tabindex="0" role="group" aria-label="Os 12 grupos, lado a lado">
           <div class="trilha" id="trilha"></div>
         </div>
@@ -442,7 +401,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <div class="largura fluxo">
           <div class="carrossel-controles">
             <button class="botao botao-contorno" type="button" id="grupo-anterior">Anterior</button>
-            <!-- role="status": o leitor de tela lê "3 de 12: Grupo C" a cada troca. -->
             <p class="carrossel-posicao" id="grupo-posicao" role="status"></p>
             <button class="botao botao-contorno" type="button" id="grupo-proximo">Próximo</button>
           </div>
@@ -451,9 +409,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- CARROSSEL DAS SEDES. Uma sede por vez, com a foto do estádio. Os textos e a foto
-         são trocados pelo js/carrossel.js, a partir da lista SEDES de js/dados.js.
-         Não passa sozinho: só muda quando a pessoa aperta um botão. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-sedes" aria-roledescription="carrossel">
       <h2 id="titulo-sedes">As 16 sedes</h2>
       <p>A Copa de 2026 passou por 16 cidades de três países: Estados Unidos, México e Canadá. Passe as fotos para conhecer cada estádio.</p>
@@ -476,7 +431,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           </div>
 
           <figure class="carrossel-figura">
-            <!-- A foto é colorida no arquivo. O CSS (classe "foto") é que a mostra em uma tinta só. -->
             <div class="foto"><img id="sede-foto" src="assets/img/sedes/cidade-do-mexico.jpg" alt="" width="960" height="540"></div>
             <figcaption><a class="texto-apoio" id="sede-credito" href="sobre.html"></a></figcaption>
           </figure>
@@ -484,7 +438,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
         <div class="carrossel-controles">
           <button class="botao botao-contorno" type="button" id="sede-anterior">Anterior</button>
-          <!-- role="status": o leitor de tela lê "3 de 16: Dallas" a cada troca. -->
           <p class="carrossel-posicao" id="sede-posicao" role="status"></p>
           <button class="botao botao-contorno" type="button" id="sede-proxima">Próxima</button>
         </div>
@@ -492,7 +445,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- COMO TROCAR. À direita, um bilhete com um exemplo de lista de troca. -->
     <section class="largura secao dobra" aria-labelledby="titulo-trocar">
       <div class="fluxo">
         <h2 id="titulo-trocar">Como trocar</h2>
@@ -513,8 +465,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- VOO PELAS FIGURINHAS (cena 6). As figurinhas ficam espalhadas em profundidade
-         e a rolagem leva a câmera por entre elas. -->
     <section class="cena cena-voo" style="--altura: 300vh" aria-labelledby="voo-titulo">
       <div class="cena-palco palco-voo">
         <div class="voo so-com-js" id="voo" aria-hidden="true"></div>
@@ -527,7 +477,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -572,15 +521,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="As páginas do álbum, organizadas por grupo e por seleção.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts do álbum, nesta ordem: os dados, o caderninho do progresso,
-       o desenho da figurinha e, por último, a página. O "defer" espera o HTML
-       ficar pronto e mantém a ordem. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
@@ -593,15 +537,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -616,7 +557,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -629,22 +569,16 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- TOPO. Página dupla: à esquerda o placar do álbum, à direita as figurinhas que estão na mão. -->
     <section class="largura dobra album-topo">
       <div class="fluxo">
         <h1>Álbum</h1>
         <p class="placar">
-          <!-- O número grande gira como um marcador antigo (js/album.js). Quem lê o
-               número para o leitor de tela é o texto escondido ao lado. -->
           <span class="placar-numero"><span class="odometro" id="placar-odometro" aria-hidden="true"></span><span class="escondido" id="placar-coladas">0</span></span>
           <span>de <span id="placar-total">24</span> figurinhas coladas</span>
         </p>
-        <!-- A barra é só desenho: o número já está escrito acima. -->
         <div class="barra" aria-hidden="true"><span class="barra-cheia" id="placar-barra"></span></div>
         <p id="placar-texto">Falta colar tudo: o álbum está novinho.</p>
 
-        <!-- ÍNDICE DOS GRUPOS. Cada casa leva ao grupo e enche conforme ele é colado.
-             As casas são montadas pelo js/album.js. -->
         <nav class="fluxo" aria-labelledby="titulo-indice">
           <h2 class="titulo-menor" id="titulo-indice">Ir para um grupo</h2>
           <ol class="tira tira-indice" id="indice-grupos"></ol>
@@ -655,13 +589,11 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <div class="fluxo">
         <h2 id="titulo-mao" tabindex="-1">Na mão</h2>
         <p id="mao-texto">As figurinhas que saem do pacotinho aparecem aqui, prontas para colar.</p>
-        <!-- Cada figurinha desta lista pode ser arrastada até a vaga ou colada pelo botão. -->
         <ul class="bandeja" id="bandeja" aria-labelledby="titulo-mao"></ul>
         <p id="mao-vazia"><a class="botao" href="pacotinhos.html">Abrir um pacotinho</a></p>
       </div>
     </section>
 
-    <!-- BUSCA, ABAS E FILTROS. Tudo aqui muda quais figurinhas aparecem logo abaixo. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-procurar">
       <h2 id="titulo-procurar">Procurar no álbum</h2>
 
@@ -671,7 +603,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <input class="campo-entrada" type="search" id="busca" autocomplete="off" aria-describedby="busca-dica">
       </div>
 
-      <!-- Abas no padrão WAI-ARIA: as setas do teclado passam de uma para a outra. -->
       <div class="abas" role="tablist" aria-label="Quais figurinhas mostrar">
         <button class="aba" type="button" role="tab" id="aba-todas" data-aba="todas" aria-selected="true" aria-controls="painel-album">Todas<span class="aba-conta" id="conta-todas">24</span></button>
         <button class="aba" type="button" role="tab" id="aba-tenho" data-aba="tenho" aria-selected="false" aria-controls="painel-album" tabindex="-1">Tenho<span class="aba-conta" id="conta-tenho">0</span></button>
@@ -699,13 +630,11 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
 
       <div class="resultado">
-        <!-- role="status": o leitor de tela lê este texto sempre que ele muda. -->
         <p id="resultado" role="status">24 figurinhas</p>
         <button class="botao botao-contorno botao-pequeno" type="button" id="limpar-filtros" hidden>Limpar busca e filtros</button>
       </div>
     </section>
 
-    <!-- AS PÁGINAS DO ÁLBUM. É o painel das abas: o conteúdo é montado pelo js/album.js. -->
     <div class="largura" role="tabpanel" id="painel-album" aria-labelledby="aba-todas">
       <div id="paginas"></div>
       <div class="vazio fluxo" id="vazio" hidden>
@@ -714,8 +643,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </div>
 
-    <!-- COMO TERMINOU. A última página do álbum: o resultado da Copa.
-         Os textos são preenchidos pelo js/album.js, a partir do objeto COPA de js/dados.js. -->
     <section class="largura secao" aria-labelledby="titulo-final">
       <div class="dobra">
         <div class="fluxo">
@@ -724,7 +651,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <p id="final-placar"></p>
           <p id="final-onde"></p>
           <p id="final-numeros"></p>
-          <!-- Enfeite: as linhas de um campo, que se desenham quando esta parte aparece na tela. -->
           <svg class="campo-tracado" id="campo-do-final" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
             <rect pathLength="1" x="20" y="20" width="560" height="360"/>
             <line pathLength="1" x1="300" y1="20" x2="300" y2="380"/>
@@ -748,17 +674,14 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- CONQUISTAS. Cada uma vale um pacotinho extra. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-conquistas">
       <h2 id="titulo-conquistas">Conquistas</h2>
       <p>Cada conquista vale um pacotinho extra, para abrir quando quiser.</p>
       <ul class="conquistas" id="conquistas"></ul>
     </section>
 
-    <!-- Recado para o leitor de tela (escondido da tela, mas lido em voz alta). -->
     <p class="escondido" id="aviso" role="status"></p>
 
-    <!-- Recado visível, preso no pé da tela depois de colar. -->
     <div class="recado" id="recado" hidden>
       <p class="recado-texto" id="recado-texto"></p>
       <button class="recado-botao" type="button" id="recado-desfazer">Desfazer</button>
@@ -766,7 +689,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     </div>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -811,22 +733,15 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="Abra o pacotinho do dia e descubra cinco figurinhas.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts dos pacotinhos, nesta ordem: os dados, o caderninho do progresso,
-       o desenho da figurinha e, por último, a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
   <script src="js/pacotinho.js" defer></script>
 
-  <!-- O pacotinho fechado em 3D. É a única parte do site que usa uma biblioteca
-       externa (Three.js, guardada em js/vendor). Sem ela, ou sem WebGL no
-       navegador, a página funciona igual, com o pacotinho desenhado em CSS. -->
   <script src="js/vendor/three.min.js" defer></script>
   <script src="js/pacote3d.js" defer></script>
   <script src="js/pacotinho-3d.js" defer></script>
@@ -838,15 +753,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -861,7 +773,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -874,8 +785,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda a situação de hoje e a cartela da sequência;
-         à direita o palco, onde fica o pacotinho e, depois de rasgar, as figurinhas. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Pacotinhos</h1>
@@ -900,15 +809,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <noscript><p>Os pacotinhos precisam do JavaScript ligado no navegador.</p></noscript>
       </div>
 
-      <!-- O conteúdo do palco é montado pelo js/pacotinho.js. -->
       <div class="palco" id="palco"></div>
     </section>
 
-    <!-- Recado para o leitor de tela (escondido da tela, mas lido em voz alta). -->
     <p class="escondido" id="aviso" role="status"></p>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -953,14 +859,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="Veja suas repetidas e faltantes e monte a lista de troca.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts das trocas, nesta ordem: os dados, o caderninho do progresso,
-       os ajudantes da figurinha e, por último, a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
@@ -973,15 +875,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -996,7 +895,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -1009,8 +907,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda o que tenho e o que falta; à direita a lista pronta para mandar.
-         Tudo é preenchido pelo js/trocas.js, a partir do álbum guardado. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Trocas</h1>
@@ -1023,8 +919,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
         <h2 id="titulo-preciso">Preciso</h2>
         <p id="faltam-texto"></p>
-        <!-- <details> é uma gaveta do próprio HTML: abre e fecha ao clicar no resumo, sem JavaScript.
-             A lista pode ter quase 300 números, por isso começa fechada quando é longa. -->
         <details id="faltam-gaveta">
           <summary id="faltam-resumo">Ver a lista</summary>
           <ul class="lista-faltam" id="lista-faltam" aria-labelledby="titulo-preciso"></ul>
@@ -1038,12 +932,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <div class="cartao bilhete">
           <div class="campo">
             <label class="campo-rotulo" for="texto-troca">Sua lista</label>
-            <!-- "readonly": dá para selecionar e copiar, mas não para editar. -->
             <textarea class="campo-entrada" id="texto-troca" rows="7" readonly></textarea>
           </div>
           <p class="guia-linha">
             <button class="botao" type="button" id="copiar-lista">Copiar lista</button>
-            <!-- O endereço wa.me abre o WhatsApp com o texto já escrito. O js/trocas.js completa o link. -->
             <a class="botao botao-contorno" id="mandar-whatsapp" href="https://wa.me/" target="_blank" rel="noopener">Mandar pelo WhatsApp<span class="escondido"> (abre em outra aba)</span></a>
           </p>
           <p class="painel-aviso" id="copiar-aviso" role="status"></p>
@@ -1051,7 +943,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- BANCA DE TROCAS: a simulação de uma troca. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-banca">
       <h2 id="titulo-banca">Banca de trocas</h2>
       <p>Como o site não tem servidor, aqui a troca é uma simulação: a banca sorteia três figurinhas que você ainda não tem. Escolha uma repetida para dar e uma da banca para receber.</p>
@@ -1061,7 +952,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
       <form class="fluxo" id="form-troca" hidden>
         <div class="banca-grade">
-          <!-- fieldset + legend: o leitor de tela diz a pergunta antes de cada opção. -->
           <fieldset class="painel-grupo">
             <legend>Você dá (uma repetida)</legend>
             <div id="opcoes-dou"></div>
@@ -1079,7 +969,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -1124,14 +1013,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="Entre ou crie sua conta para guardar o seu álbum.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts da conta: os dados e o caderninho do progresso (para mostrar o álbum de
-       quem entrou), os ajudantes de formulário e, por último, a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/formulario.js" defer></script>
@@ -1144,15 +1029,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -1167,7 +1049,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -1180,8 +1061,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda a explicação, à direita a conta (ou os formulários).
-         Só uma das três partes da direita aparece por vez; quem escolhe é o js/login.js. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Entrar</h1>
@@ -1196,10 +1075,8 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
 
       <div class="fluxo">
-        <!-- Recado geral ("Conta criada", "Você saiu"). role="status": o leitor de tela lê quando muda. -->
         <p class="aviso-sucesso" id="conta-aviso" role="status" tabindex="-1"></p>
 
-        <!-- 1. QUEM JÁ ENTROU -->
         <section class="fluxo" id="painel-conta" aria-labelledby="titulo-conta" hidden>
           <h2 id="titulo-conta" tabindex="-1">Sua conta</h2>
           <p id="conta-quem"></p>
@@ -1210,7 +1087,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           </p>
         </section>
 
-        <!-- 2. ENTRAR. "novalidate" desliga os balões do navegador: as mensagens são as do site. -->
         <form class="formulario" id="form-entrar" aria-labelledby="titulo-entrar" novalidate hidden>
           <h2 id="titulo-entrar" tabindex="-1">Já tenho conta</h2>
 
@@ -1227,14 +1103,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
             <p class="campo-erro" id="entrar-senha-erro" hidden></p>
           </div>
 
-          <!-- Erro do formulário inteiro ("e-mail ou senha não conferem"). role="alert": lido na hora. -->
           <p class="campo-erro" id="entrar-erro" role="alert" hidden></p>
 
           <p><button class="botao" type="submit">Entrar</button></p>
           <p>Ainda não tem conta? <button class="botao-link" type="button" id="ir-criar">Criar conta</button></p>
         </form>
 
-        <!-- 3. CRIAR CONTA -->
         <form class="formulario" id="form-criar" aria-labelledby="titulo-criar" novalidate hidden>
           <h2 id="titulo-criar" tabindex="-1">Criar conta</h2>
 
@@ -1267,7 +1141,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -1312,13 +1185,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="Fale com o autor do projeto.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os ajudantes de formulário e a conferência dos campos desta página. -->
   <script src="js/formulario.js" defer></script>
   <script src="js/contato.js" defer></script>
 
@@ -1329,15 +1199,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -1352,7 +1219,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -1365,7 +1231,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda a explicação, à direita o formulário. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Contato</h1>
@@ -1380,17 +1245,13 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
 
       <div class="fluxo">
-        <!-- RESUMO DOS ERROS. Aparece quando o envio falha, lista o que falta
-             e leva a cada campo. Recebe o foco para ser lido primeiro. -->
         <div class="resumo-erros" id="resumo-erros" tabindex="-1" aria-labelledby="resumo-titulo" hidden>
           <h2 class="titulo-menor" id="resumo-titulo"></h2>
           <ul id="resumo-lista"></ul>
         </div>
 
-        <!-- MENSAGEM DE SUCESSO. aria-live="polite": o leitor de tela lê quando o texto aparece. -->
         <p class="aviso-sucesso" id="contato-sucesso" role="status" aria-live="polite" tabindex="-1"></p>
 
-        <!-- "novalidate" desliga os balões do navegador: as mensagens são as do site. -->
         <form class="formulario" id="form-contato" novalidate>
           <p>Todos os campos são obrigatórios.</p>
 
@@ -1432,7 +1293,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -1477,13 +1337,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <meta name="description" content="Projeto acadêmico de Desenvolvimento de Interfaces: o que foi usado e como foi feito.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Para o modo demonstração: os dados, o caderninho do progresso e os dois botões. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/demonstracao.js" defer></script>
@@ -1496,15 +1353,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -1519,7 +1373,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -1532,7 +1385,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- O QUE É. Página dupla: à esquerda a apresentação, à direita a ficha do projeto. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Sobre o projeto</h1>
@@ -1554,7 +1406,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </dl>
     </section>
 
-    <!-- O QUE É DE VERDADE E O QUE É SIMULADO. -->
     <section class="largura secao dobra">
       <div class="fluxo">
         <h2>O que é de verdade</h2>
@@ -1577,7 +1428,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </section>
 
-    <!-- COMO FOI FEITO. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-feito">
       <h2 id="titulo-feito">Como foi feito</h2>
       <ul class="lista-simples">
@@ -1591,7 +1441,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </ul>
     </section>
 
-    <!-- CRÉDITOS. A lista das fotos é montada pelo js/sobre.js, a partir de js/dados.js. -->
     <section class="largura secao fluxo" id="creditos" aria-labelledby="titulo-creditos">
       <h2 id="titulo-creditos">Créditos</h2>
 
@@ -1616,7 +1465,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <noscript><p>A lista completa das fotos está no arquivo <code>docs/referencias.md</code> do repositório.</p></noscript>
     </section>
 
-    <!-- FONTES DOS DADOS. Lista montada pelo js/sobre.js, a partir de js/dados.js. -->
     <section class="largura secao fluxo" id="fontes" aria-labelledby="titulo-fontes">
       <h2 id="titulo-fontes">Fontes dos dados</h2>
       <p>De onde vieram os dados da Copa usados no álbum. Consultas feitas em novembro de 2026.</p>
@@ -1624,8 +1472,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       <noscript><p>A lista completa das fontes está no arquivo <code>docs/referencias.md</code> do repositório.</p></noscript>
     </section>
 
-    <!-- MODO DEMONSTRAÇÃO: para testar o álbum na apresentação sem esperar um pacotinho por dia.
-         Os botões são ligados pelo js/demonstracao.js. -->
     <section class="largura secao fluxo" id="demonstracao" aria-labelledby="titulo-demonstracao">
       <h2 id="titulo-demonstracao">Modo demonstração</h2>
       <p>Feito para a apresentação: dá para testar o álbum inteiro sem esperar um pacotinho por dia. Vale só para este navegador.</p>
@@ -1633,11 +1479,9 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
         <button class="botao" type="button" id="demo-extras">Ganhar 5 pacotinhos extras</button>
         <button class="botao botao-contorno" type="button" id="demo-zerar">Zerar álbum</button>
       </p>
-      <!-- role="status": o leitor de tela lê este texto quando ele muda. -->
       <p class="painel-aviso" id="demo-aviso" role="status"></p>
     </section>
 
-    <!-- Janela de confirmação do "Zerar álbum". O <dialog> prende o foco e fecha com Esc. -->
     <dialog class="painel" id="dialogo-zerar" aria-labelledby="titulo-zerar">
       <div class="painel-dentro">
         <div class="painel-cabeca">
@@ -1651,7 +1495,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
       </div>
     </dialog>
 
-    <!-- GUIA DE ESTILO: as peças do site, todas juntas. Serve de consulta e de teste dos temas. -->
     <section class="largura secao fluxo guia" aria-labelledby="titulo-guia">
       <h2 id="titulo-guia">Guia de estilo</h2>
       <p>As peças que o site usa, todas juntas. Troque o tema no botão Acessibilidade e veja como cada uma se comporta.</p>
@@ -1678,7 +1521,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
           <input class="campo-entrada" id="guia-nome" type="text" autocomplete="off" aria-describedby="guia-nome-dica">
         </div>
 
-        <!-- Campo com erro: borda grossa, ícone de cartão e frase que explica o conserto. -->
         <div class="campo">
           <label class="campo-rotulo" for="guia-email">E-mail</label>
           <input class="campo-entrada" id="guia-email" type="email" value="nome.exemplo" autocomplete="off" aria-invalid="true" aria-describedby="guia-email-erro">
@@ -1781,7 +1623,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
@@ -1819,101 +1660,64 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 ### css/tokens.css
 
 ````css
-/* ==========================================================================
-   tokens.css
-   --------------------------------------------------------------------------
-   "Token" é um valor com nome. Em vez de escrever #14204F em vinte lugares,
-   o site inteiro usa var(--cor-texto). Para mudar a cor, muda-se uma linha só.
-
-   Direção visual: "Uma tinta só, vários papéis".
-   - Tema claro:  tinta azul sobre papel claro (rosa, pêssego, menta e lilás).
-   - Tema escuro: tinta rosa sobre papel fundo (azul, roxo, petróleo e vinho).
-   A tinta é uma só; o papel do fundo é que muda ao longo da página.
-   A cor viva só chega pelas figurinhas.
-
-   IMPORTANTE: toda cor nova entra aqui, com nome começando em --cor-, e depois
-   é conferida com:  node scripts/contraste.js
-   ========================================================================== */
-
-/* ---------- Tema claro (o padrão) ---------- */
 :root {
-  /* Papel */
-  --cor-fundo: #FAC3D3;              /* papel rosa: o fundo da página */
-  --cor-superficie: #FDF1F4;         /* papel de cupom: cartões e campos */
-  --cor-vaga: #F4B1C5;               /* rosa-sombra: espaço vazio e trilho da barra */
+  --cor-fundo: #FAC3D3;
+  --cor-superficie: #FDF1F4;
+  --cor-vaga: #F4B1C5;
 
-  /* Os outros papéis. O fundo muda de cor ao longo da página, como as páginas
-     coloridas de um álbum. Todos são claros o bastante para a tinta azul. */
-  --cor-papel-2: #FFD0A6;            /* pêssego */
-  --cor-papel-3: #B5EBCB;            /* menta: lembra o gramado */
-  --cor-papel-4: #D8C7FB;            /* lilás */
-  /* Os papéis dos desenhos recortados e colados no fundo (bola, estádio,
-     bandeirinhas...). O realce é o mais claro de todos no tema claro e o mais
-     fundo no escuro; o destaque é a cor que não aparece nos outros papéis.
-     Um texto pode passar por cima deles: por isso entram na conta do contraste. */
-  --cor-papel-realce: #FDF1F4;       /* branco de papel */
-  --cor-papel-destaque: #FFD43B;     /* amarelo */
+  --cor-papel-2: #FFD0A6;
+  --cor-papel-3: #B5EBCB;
+  --cor-papel-4: #D8C7FB;
+  --cor-papel-realce: #FDF1F4;
+  --cor-papel-destaque: #FFD43B;
 
-  /* Tinta */
-  --cor-texto: #14204F;              /* azul-tinteiro: a única tinta da página */
-  --cor-texto-secundario: #474C7A;   /* tinta diluída: legendas e apoio */
-  --cor-borda: #4F5487;              /* linha impressa: bordas de campo e de vaga */
+  --cor-texto: #14204F;
+  --cor-texto-secundario: #474C7A;
+  --cor-borda: #4F5487;
 
-  /* Ação: o que a pessoa pode apertar */
-  --cor-acao: #2340C4;               /* azul-caneta: botões e links */
-  --cor-acao-forte: #1A3299;         /* a caneta apertada: botão com o mouse em cima */
-  --cor-sobre-acao: #FDF1F4;         /* texto escrito em cima do botão */
+  --cor-acao: #2340C4;
+  --cor-acao-forte: #1A3299;
+  --cor-sobre-acao: #FDF1F4;
 
-  /* Foco do teclado: um anel e um vão, sempre um claro e um escuro */
   --cor-foco: #14204F;
   --cor-foco-vao: #FDF1F4;
 
-  /* Recados */
-  --cor-sucesso: #0A5C33;            /* verde-gramado: deu certo */
-  --cor-erro: #9E001A;               /* vermelho-cartão: precisa corrigir */
+  --cor-sucesso: #0A5C33;
+  --cor-erro: #9E001A;
 
-  /* Etiqueta: o negativo da tinta ("Nova", "Repetida") */
   --cor-etiqueta-fundo: #14204F;
   --cor-etiqueta-texto: #F6CDD7;
 
-  /* Figurinha: é um objeto impresso, então a tinta dela não muda com o tema */
-  --cor-figurinha-papel: #FFFFFF;    /* comum: papel adesivo fosco */
+  --cor-figurinha-papel: #FFFFFF;
   --cor-figurinha-tinta: #14204F;
-  --cor-prata: #C5CAD6;              /* brilhante: laminado */
+  --cor-prata: #C5CAD6;
   --cor-prata-clara: #ECEEF3;
-  --cor-ouro: #F2C230;               /* lendária: holográfico */
-  /* O arco-íris do papel holográfico. Fica por cima da lendária, bem fraco;
-     é brilho, não é texto nem fundo de texto. Não muda com o tema. */
+  --cor-ouro: #F2C230;
   --holografico: linear-gradient(115deg, #FF5D8F, #FFD166 22%, #5EEAD4 45%, #60A5FA 68%, #C084FC 90%);
 
-  /* Foto impressa em uma tinta só: a parte escura da foto sai na cor da tinta
-     e a parte clara fica na cor do papel */
   --cor-foto-sombra: #14204F;
   --cor-foto-luz: #F6CDD7;
 
-  /* Sombra da figurinha colada (só ela tem sombra no site) */
   --sombra-colada: 0 0 0 1.5px var(--cor-borda), 3px 4px 0 0 rgba(20, 32, 79, 0.55);
 }
 
-/* ---------- Tema escuro ---------- */
 [data-tema="escuro"] {
-  --cor-fundo: #1B2B8C;              /* papel azul */
-  --cor-superficie: #25359A;         /* papel azul claro: no escuro, o que está na frente fica mais claro */
-  --cor-vaga: #131D4A;               /* rebaixo: mais escuro que a página */
+  --cor-fundo: #1B2B8C;
+  --cor-superficie: #25359A;
+  --cor-vaga: #131D4A;
 
-  /* Os outros papéis, no escuro: todos fundos o bastante para a tinta rosa */
-  --cor-papel-2: #4A1FA6;            /* roxo */
-  --cor-papel-3: #06437A;            /* petróleo */
-  --cor-papel-4: #6E1672;            /* vinho */
-  --cor-papel-realce: #131D4A;       /* o mais fundo: o mesmo azul do rebaixo */
-  --cor-papel-destaque: #0F4A30;     /* verde fundo, de gramado à noite */
+  --cor-papel-2: #4A1FA6;
+  --cor-papel-3: #06437A;
+  --cor-papel-4: #6E1672;
+  --cor-papel-realce: #131D4A;
+  --cor-papel-destaque: #0F4A30;
 
-  --cor-texto: #FBE3E9;              /* tinta rosa */
+  --cor-texto: #FBE3E9;
   --cor-texto-secundario: #C9B4CC;
   --cor-borda: #9AA3E6;
 
-  --cor-acao: #A9BEFF;               /* caneta gel: a que escreve em papel escuro */
-  --cor-acao-forte: #C5D3FF;         /* no escuro, o botão clareia em vez de escurecer */
+  --cor-acao: #A9BEFF;
+  --cor-acao-forte: #C5D3FF;
   --cor-sobre-acao: #1B2A80;
 
   --cor-foco: #FBE3E9;
@@ -1925,27 +1729,23 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-etiqueta-fundo: #FBE3E9;
   --cor-etiqueta-texto: #1B2A80;
 
-  --cor-figurinha-papel: #EFE6EC;    /* branco puro ofusca à noite */
+  --cor-figurinha-papel: #EFE6EC;
   --cor-figurinha-tinta: #14204F;
   --cor-prata: #AEB6C6;
   --cor-prata-clara: #DDE1E9;
   --cor-ouro: #E0AC1F;
 
-  /* No escuro o papel é que é escuro: a sombra da foto fica no azul do rebaixo
-     e a luz, na tinta rosa */
   --cor-foto-sombra: #131D4A;
   --cor-foto-luz: #FBE3E9;
 
-  /* No escuro não se vê sombra: a figurinha colada ganha só o contorno */
   --sombra-colada: 0 0 0 1.5px var(--cor-borda);
 }
 
-/* ---------- Alto contraste, tema claro ---------- */
 [data-contraste="alto"] {
   --cor-fundo: #FFFFFF;
   --cor-superficie: #FFFFFF;
   --cor-vaga: #FFFFFF;
-  --cor-papel-2: #FFFFFF;            /* no alto contraste o fundo é liso */
+  --cor-papel-2: #FFFFFF;
   --cor-papel-3: #FFFFFF;
   --cor-papel-4: #FFFFFF;
   --cor-papel-realce: #FFFFFF;
@@ -1974,14 +1774,12 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --cor-prata-clara: #FFFFFF;
   --cor-ouro: #FFE066;
 
-  /* No alto contraste (claro e escuro) a foto fica em preto e branco */
   --cor-foto-sombra: #000000;
   --cor-foto-luz: #FFFFFF;
 
   --sombra-colada: 0 0 0 2px var(--cor-borda);
 }
 
-/* ---------- Alto contraste, tema escuro ---------- */
 [data-tema="escuro"][data-contraste="alto"] {
   --cor-fundo: #000000;
   --cor-superficie: #000000;
@@ -2018,14 +1816,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --sombra-colada: 0 0 0 2px var(--cor-borda);
 }
 
-/* ---------- Medidas (valem para todos os temas) ---------- */
 :root {
-  /* Fontes: uma de destaque (títulos e números) e uma de leitura */
   --fonte-destaque: "Londrina Solid", "Arial Black", Impact, sans-serif;
   --fonte-leitura: "Atkinson Hyperlegible Next", "Segoe UI", Arial, sans-serif;
 
-  /* Tamanhos de texto em rem: 1rem é o tamanho de letra que a pessoa escolheu
-     no navegador (16 px na maioria). Assim tudo cresce junto no painel. */
   --texto-pequeno: 0.875rem;
   --texto-base: 1.0625rem;
   --texto-medio: 1.25rem;
@@ -2034,7 +1828,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --titulo-1: clamp(2.75rem, 1.75rem + 5vw, 4.5rem);
   --entrelinha: 1.55;
 
-  /* Espaços: uma escada de medidas, para o site ter ritmo */
   --espaco-1: 0.25rem;
   --espaco-2: 0.5rem;
   --espaco-3: 0.75rem;
@@ -2044,23 +1837,16 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --espaco-7: 3rem;
   --espaco-8: 4.5rem;
 
-  /* Cantos: cada raio quer dizer uma coisa */
-  --raio-impresso: 0;        /* o que está impresso na página: vaga, fio, tira */
-  --raio-ferramenta: 4px;    /* o que se usa: botão, campo */
-  --raio-adesivo: 10px;      /* o que se cola: figurinha, pacotinho, cupom */
+  --raio-impresso: 0;
+  --raio-ferramenta: 4px;
+  --raio-adesivo: 10px;
 
-  /* Larguras */
-  --largura-maxima: 70rem;   /* largura do miolo da página */
-  --largura-leitura: 62ch;   /* linha de texto confortável: cerca de 62 letras */
+  --largura-maxima: 70rem;
+  --largura-leitura: 62ch;
 
-  /* Movimento */
   --duracao: 200ms;
 }
 
-/* ---------- Fundo da página ----------
-   Gerado por:  node scripts/gerar-fundo.js   (não edite à mão o que está
-   entre as duas marcas: mude as cores de papel lá em cima e rode o script) */
-/* FUNDO-INICIO */
 :root {
   --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%23FFD0A6'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%23FFD0A6'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%23FFD0A6'/%3E%3Crect y='744' width='16' height='1080' fill='%23FFD0A6'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%23B5EBCB'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%23B5EBCB'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%23B5EBCB'/%3E%3Crect y='1824' width='16' height='1080' fill='%23B5EBCB'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%23D8C7FB'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%23D8C7FB'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%23D8C7FB'/%3E%3Crect y='2904' width='16' height='1080' fill='%23D8C7FB'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%23FAC3D3'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%23FAC3D3'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%23FAC3D3'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%23FAC3D3'/%3E%3Crect y='3984' width='16' height='416' fill='%23FAC3D3'/%3E%3C/svg%3E");
 }
@@ -2069,28 +1855,14 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   --fundo-papeis: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4400'%3E%3Crect y='0' width='16' height='744' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='527' r='1.5' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='541' r='2.0' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='541' r='2.0' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='555' r='2.6' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='569' r='3.1' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='569' r='3.1' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='583' r='3.6' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='597' r='4.2' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='597' r='4.2' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='611' r='4.7' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='625' r='5.2' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='625' r='5.2' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='639' r='5.8' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='653' r='6.3' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='653' r='6.3' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='667' r='6.8' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='681' r='7.4' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='681' r='7.4' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='695' r='7.9' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='709' r='8.4' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='709' r='8.4' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='723' r='9.0' fill='%234A1FA6'/%3E%3Ccircle cx='0' cy='737' r='9.5' fill='%234A1FA6'/%3E%3Ccircle cx='16' cy='737' r='9.5' fill='%234A1FA6'/%3E%3Crect y='744' width='16' height='1080' fill='%234A1FA6'/%3E%3Ccircle cx='8' cy='1607' r='1.5' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1621' r='2.0' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1621' r='2.0' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1635' r='2.6' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1649' r='3.1' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1649' r='3.1' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1663' r='3.6' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1677' r='4.2' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1677' r='4.2' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1691' r='4.7' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1705' r='5.2' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1705' r='5.2' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1719' r='5.8' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1733' r='6.3' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1733' r='6.3' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1747' r='6.8' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1761' r='7.4' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1761' r='7.4' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1775' r='7.9' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1789' r='8.4' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1789' r='8.4' fill='%2306437A'/%3E%3Ccircle cx='8' cy='1803' r='9.0' fill='%2306437A'/%3E%3Ccircle cx='0' cy='1817' r='9.5' fill='%2306437A'/%3E%3Ccircle cx='16' cy='1817' r='9.5' fill='%2306437A'/%3E%3Crect y='1824' width='16' height='1080' fill='%2306437A'/%3E%3Ccircle cx='8' cy='2687' r='1.5' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2701' r='2.0' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2701' r='2.0' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2715' r='2.6' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2729' r='3.1' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2729' r='3.1' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2743' r='3.6' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2757' r='4.2' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2757' r='4.2' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2771' r='4.7' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2785' r='5.2' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2785' r='5.2' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2799' r='5.8' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2813' r='6.3' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2813' r='6.3' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2827' r='6.8' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2841' r='7.4' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2841' r='7.4' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2855' r='7.9' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2869' r='8.4' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2869' r='8.4' fill='%236E1672'/%3E%3Ccircle cx='8' cy='2883' r='9.0' fill='%236E1672'/%3E%3Ccircle cx='0' cy='2897' r='9.5' fill='%236E1672'/%3E%3Ccircle cx='16' cy='2897' r='9.5' fill='%236E1672'/%3E%3Crect y='2904' width='16' height='1080' fill='%236E1672'/%3E%3Ccircle cx='8' cy='3767' r='1.5' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3781' r='2.0' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3781' r='2.0' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3795' r='2.6' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3809' r='3.1' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3809' r='3.1' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3823' r='3.6' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3837' r='4.2' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3837' r='4.2' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3851' r='4.7' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3865' r='5.2' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3865' r='5.2' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3879' r='5.8' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3893' r='6.3' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3893' r='6.3' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3907' r='6.8' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3921' r='7.4' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3921' r='7.4' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3935' r='7.9' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3949' r='8.4' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3949' r='8.4' fill='%231B2B8C'/%3E%3Ccircle cx='8' cy='3963' r='9.0' fill='%231B2B8C'/%3E%3Ccircle cx='0' cy='3977' r='9.5' fill='%231B2B8C'/%3E%3Ccircle cx='16' cy='3977' r='9.5' fill='%231B2B8C'/%3E%3Crect y='3984' width='16' height='416' fill='%231B2B8C'/%3E%3C/svg%3E");
 }
 
-/* No alto contraste o fundo é liso: branco ou preto, sem desenho */
 [data-contraste="alto"] {
   --fundo-papeis: none;
 }
-/* FUNDO-FIM */
 ````
 
 ### css/base.css
 
 ````css
-/* ==========================================================================
-   base.css
-   --------------------------------------------------------------------------
-   O que vale para o site inteiro: fontes, texto, links, foco do teclado,
-   cabeçalho, rodapé e as grades de página. Usa as cores de tokens.css.
-   ========================================================================== */
-
-/* ---------- Fontes ----------
-   Os arquivos ficam em assets/fontes, dentro do projeto: o site não depende
-   de outro site para mostrar as letras. "font-display: swap" mostra o texto
-   na hora com uma fonte do sistema e troca quando a fonte certa carrega. */
-
 @font-face {
   font-family: "Londrina Solid";
   src: url("../assets/fontes/londrina-solid-300.woff2") format("woff2");
@@ -2106,12 +1878,6 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   font-style: normal;
   font-display: swap;
 }
-
-/* A Atkinson é uma fonte "variável": um arquivo só guarda todos os pesos,
-   de 200 a 800. Ela vem em duas partes: "latin" (o português inteiro) e
-   "latin-ext" (letras como ł, ř, ş, de nomes estrangeiros). O unicode-range
-   diz ao navegador quais letras cada arquivo tem; a segunda parte só é
-   baixada se a página usar alguma dessas letras. */
 
 @font-face {
   font-family: "Atkinson Hyperlegible Next";
@@ -2149,13 +1915,10 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* ---------- Ajustes iniciais ----------
-   Cada navegador tem margens e medidas próprias. Aqui todos partem do mesmo ponto. */
-
 *,
 *::before,
 *::after {
-  box-sizing: border-box; /* a largura de uma caixa já inclui a borda e o espaço interno */
+  box-sizing: border-box;
 }
 
 body, h1, h2, h3, p, ul, ol, dl, dd, figure {
@@ -2168,47 +1931,39 @@ img {
 }
 
 button, input, select, textarea {
-  font: inherit;   /* campos e botões usam a mesma letra do resto da página */
+  font: inherit;
   color: inherit;
-  /* e acompanham a opção "Mais espaço no texto" do painel de acessibilidade */
   letter-spacing: inherit;
   word-spacing: inherit;
 }
 
-/* O atributo "hidden" do HTML esconde um elemento. Sem esta regra, qualquer
-   "display" escrito no CSS (flex, grid) faria o elemento aparecer de novo. */
 [hidden] {
   display: none !important;
 }
 
-/* ---------- Página ---------- */
-
 body {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;   /* cabeçalho, conteúdo e rodapé empilhados */
+  flex-direction: column;
   font-family: var(--fonte-leitura);
   font-size: var(--texto-base);
   line-height: var(--entrelinha);
-  position: relative;   /* o desenho do fundo (body::before, mais abaixo) se mede pela página inteira */
+  position: relative;
   background: var(--cor-fundo);
   color: var(--cor-texto);
-  overflow-wrap: break-word;   /* palavra comprida demais quebra em vez de empurrar a página */
+  overflow-wrap: break-word;
 }
 
 main {
-  flex: 1;   /* o conteúdo estica e empurra o rodapé para o fim da tela */
+  flex: 1;
   padding-block: var(--espaco-6) var(--espaco-7);
 }
 
-/* O "Pular para o conteúdo" leva o foco para o <main>. Como ele não é um
-   controle, não precisa do anel de foco em volta da página inteira. */
 main:focus {
   outline: none;
   box-shadow: none;
 }
 
-/* Miolo centralizado, com respiro nas laterais */
 .largura {
   width: 100%;
   max-width: var(--largura-maxima);
@@ -2216,13 +1971,11 @@ main:focus {
   padding-inline: var(--espaco-4);
 }
 
-/* ---------- Texto ---------- */
-
 h1, h2, h3 {
   font-family: var(--fonte-destaque);
   font-weight: 900;
   line-height: 1;
-  text-wrap: balance;   /* quebra o título em linhas de tamanho parecido */
+  text-wrap: balance;
 }
 
 h1 { font-size: var(--titulo-1); line-height: 0.95; }
@@ -2233,14 +1986,11 @@ p {
   max-width: var(--largura-leitura);
 }
 
-/* Nome de arquivo ou de comando no meio do texto: mesma letra, mais pesada.
-   (Sem isto o navegador usaria uma terceira fonte, de máquina de escrever.) */
 code {
   font-family: inherit;
   font-weight: 700;
 }
 
-/* Empilha os filhos com o mesmo espaço entre eles */
 .fluxo > * + * {
   margin-top: var(--espaco-4);
 }
@@ -2249,9 +1999,6 @@ code {
   color: var(--cor-texto-secundario);
   font-size: var(--texto-pequeno);
 }
-
-/* ---------- Links ----------
-   Todo link é sublinhado: assim ele não depende só da cor para ser reconhecido. */
 
 a {
   color: var(--cor-acao);
@@ -2265,19 +2012,12 @@ a:hover {
   text-decoration-thickness: 0.16em;
 }
 
-/* ---------- Foco do teclado ----------
-   Dois tons: um anel (outline) e um vão (box-shadow) de claridade oposta.
-   Em qualquer fundo, claro ou escuro, pelo menos um dos dois aparece. */
-
 :focus-visible {
   outline: 3px solid var(--cor-foco);
   outline-offset: 3px;
   box-shadow: 0 0 0 3px var(--cor-foco-vao);
 }
 
-/* ---------- Ajudas de acessibilidade ---------- */
-
-/* Esconde da tela, mas o leitor de tela continua lendo */
 .escondido {
   position: absolute;
   width: 1px;
@@ -2287,7 +2027,6 @@ a:hover {
   white-space: nowrap;
 }
 
-/* "Pular para o conteúdo": fica fora da tela até receber o foco do teclado */
 .pular {
   position: absolute;
   left: var(--espaco-4);
@@ -2308,11 +2047,6 @@ a:hover {
 .pular:focus {
   transform: translateY(0);
 }
-
-/* ---------- Cabeçalho ----------
-   No celular: marca, botão Menu e botão de acessibilidade na primeira linha;
-   o menu abre embaixo. No computador: tudo em uma linha só.
-   O cabeçalho não é fixo: ele sobe com a página, então nunca cobre o foco. */
 
 .cabecalho {
   border-bottom: 2px solid var(--cor-texto);
@@ -2347,15 +2081,14 @@ a:hover {
   text-decoration-thickness: 3px;
 }
 
-/* Os dois botões do cabeçalho: contorno de tinta, sem preenchimento */
 .botao-menu,
 .botao-acessibilidade {
-  display: none;   /* só aparecem se o JavaScript estiver ligado (ver abaixo) */
+  display: none;
   align-items: center;
   justify-content: center;
   gap: var(--espaco-2);
   min-width: 2.75rem;
-  min-height: 2.75rem;   /* 44 px: alvo de toque confortável */
+  min-height: 2.75rem;
   padding: 0 var(--espaco-3);
   background: transparent;
   color: var(--cor-texto);
@@ -2374,14 +2107,11 @@ a:hover {
 .botao-menu { grid-area: botao-menu; }
 .botao-acessibilidade { grid-area: acessibilidade; }
 
-/* A classe "com-js" é posta no <html> pelo js/tema-acessibilidade.js.
-   Sem JavaScript, os botões que dependem dele nem aparecem e o menu fica sempre aberto. */
 .com-js .botao-menu,
 .com-js .botao-acessibilidade {
   display: inline-flex;
 }
 
-/* No celular, o texto "Acessibilidade" fica só para o leitor de tela; sobra o ícone */
 .botao-acessibilidade-texto {
   position: absolute;
   width: 1px;
@@ -2426,7 +2156,6 @@ a:hover {
   text-underline-offset: 6px;
 }
 
-/* Página atual: sublinhado grosso e peso maior (não depende de cor) */
 .menu a[aria-current="page"] {
   font-weight: 800;
   text-decoration: underline;
@@ -2470,8 +2199,6 @@ a:hover {
   }
 }
 
-/* ---------- Rodapé ---------- */
-
 .rodape {
   border-top: 2px solid var(--cor-texto);
   padding-block: var(--espaco-6);
@@ -2514,17 +2241,13 @@ a:hover {
   }
 }
 
-/* ---------- Página dupla ----------
-   A grade principal do site: duas "páginas" de larguras diferentes com uma
-   dobra no meio, como um álbum aberto. No celular vira uma página só. */
-
 .dobra {
   display: grid;
   gap: var(--espaco-5);
 }
 
 .dobra > * {
-  min-width: 0;   /* deixa o conteúdo encolher em telas estreitas */
+  min-width: 0;
 }
 
 .dobra > * + * {
@@ -2551,7 +2274,6 @@ a:hover {
   }
 }
 
-/* Uma seção da página, separada da anterior por um fio impresso */
 .secao {
   padding-block: var(--espaco-6);
 }
@@ -2560,15 +2282,10 @@ a:hover {
   border-top: 2px solid var(--cor-texto);
 }
 
-/* ---------- Retícula que acende ----------
-   Uma camada do tamanho da tela, atrás de tudo, coberta de pontinhos de
-   impressão. A máscara só deixa ver os que estão perto do ponteiro: a posição
-   chega em --x e --y, escrita pelo js/efeitos.js. É só enfeite. */
-
 .lanterna {
   position: fixed;
   inset: 0;
-  z-index: -1;            /* atrás de todo o conteúdo, em cima só do papel */
+  z-index: -1;
   pointer-events: none;
   background: radial-gradient(circle, var(--cor-texto) 1.6px, transparent 2px) 0 0 / 11px 11px;
   -webkit-mask-image: radial-gradient(circle 9rem at var(--x, 50%) var(--y, 50%), #000, transparent);
@@ -2581,24 +2298,14 @@ a:hover {
   opacity: 0.2;
 }
 
-/* Na página inicial em movimento a abertura já tem os seus pontinhos */
 .com-cenas .lanterna {
   display: none;
 }
-
-/* ---------- Virar a página ----------
-   Ao ir de uma página do site para outra, o navegador tira um retrato da
-   página velha e um da nova e anima entre os dois (View Transitions API).
-   A regra abaixo liga isso para os links do próprio site. A página velha sai
-   como uma folha virando em torno da borda esquerda, e a nova chega.
-   Onde o navegador não conhece a regra (Firefox, por exemplo), ou com o site
-   aberto direto do arquivo, a troca é seca e nada quebra. */
 
 @view-transition {
   navigation: auto;
 }
 
-/* O cabeçalho e o rodapé são iguais em todas as páginas: ficam parados */
 .cabecalho {
   view-transition-name: cabecalho;
 }
@@ -2625,39 +2332,9 @@ a:hover {
   from { transform: perspective(60rem) rotateY(60deg); opacity: 0; }
 }
 
-/* ---------- O fundo da página ----------
-   Uma camada do tamanho da página inteira, atrás de todo o conteúdo. Ela tem
-   quatro partes, uma por cima da outra (no "background", a de cima vem primeiro):
-
-   1. O GRÃO DO PAPEL. Um chuvisco bem fino por cima de tudo, para o papel não
-      parecer uma cor chapada de computador.
-
-   2. A COLAGEM. Desenhos de papel recortado colados na página: o varal de
-      bandeirinhas, o estádio, a bola, figurinhas, apito, trave, as linhas de
-      giz do gramado... Um arquivo por tema, desenhado pelo
-      scripts/gerar-fundo.js, com 1600 px de largura, centrado e repetido.
-      Só usa as cores de papel do tokens.css.
-
-   3. AS MANCHAS. Nuvens largas e bem fracas, como as de um papel pintado à mão.
-
-   4. OS PAPÉIS. O fundo muda de cor conforme a página desce: rosa, pêssego,
-      menta, lilás e de novo rosa. Entre um papel e outro, bolinhas da cor
-      seguinte vão crescendo até se juntarem, como o degradê da impressão em
-      papel. É uma tira estreita, repetida para os lados e para baixo, também
-      desenhada pelo scripts/gerar-fundo.js (fica no fim do tokens.css).
-
-   A colagem e os papéis se repetem juntos a cada 4400 px: cada desenho fica
-   sempre em cima do mesmo papel.
-
-   O grão e as manchas são imagens SVG com um filtro de ruído (feTurbulence).
-   A lista de números (feColorMatrix) pinta o ruído de uma cor só e usa o
-   desenho dele apenas para decidir a transparência. No tema claro a cor é o
-   branco, que só clareia o papel; no escuro é o preto, que só escurece.
-   Assim eles nunca tiram contraste do texto. */
-
 body::before {
-  --escala: 1;      /* o tamanho do desenho: 1 = tamanho natural */
-  --desce: 0px;     /* quanto o desenho inteiro desce em relação ao topo da página */
+  --escala: 1;
+  --desce: 0px;
   --colagem: url("../assets/img/fundo/colagem-claro.svg");
   --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -0.6'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23r)'/%3E%3C/svg%3E");
   --manchas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1120' height='880'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 -0.34'/%3E%3C/filter%3E%3Crect width='1120' height='880' filter='url(%23r)'/%3E%3C/svg%3E");
@@ -2674,9 +2351,6 @@ body::before {
     var(--fundo-papeis) 0 var(--desce) / calc(16px * var(--escala)) calc(4400px * var(--escala)) repeat;
 }
 
-/* No celular o desenho inteiro fica com metade do tamanho: assim cabem na tela
-   o estádio, a bola e os outros recortes. Ele também desce um pouco, para o
-   varal de bandeirinhas aparecer logo abaixo do cabeçalho. */
 @media (max-width: 47.99rem) {
   body::before {
     --escala: 0.5;
@@ -2684,15 +2358,12 @@ body::before {
   }
 }
 
-/* No tema escuro: a colagem com as cores do escuro; o grão e as manchas
-   pintados de preto e um pouco mais fracos (o preto pesa mais que o branco) */
 [data-tema="escuro"] body::before {
   --colagem: url("../assets/img/fundo/colagem-escuro.svg");
   --grao: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.2 -0.54'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23r)'/%3E%3C/svg%3E");
   --manchas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1120' height='880'%3E%3Cfilter id='r' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.7 -0.29'/%3E%3C/filter%3E%3Crect width='1120' height='880' filter='url(%23r)'/%3E%3C/svg%3E");
 }
 
-/* No alto contraste o fundo é liso: sem colagem, sem grão e sem manchas */
 [data-contraste="alto"] body::before {
   --colagem: none;
   --grao: none;
@@ -2703,28 +2374,12 @@ body::before {
 ### css/componentes.css
 
 ````css
-/* ==========================================================================
-   componentes.css
-   --------------------------------------------------------------------------
-   As peças que se repetem pelo site: botão, etiqueta, cartão, vaga,
-   figurinha (parada e que vira), barra de progresso, abas, tira de grupos,
-   cartela, conquista, recado, pacotinho e campo de formulário.
-
-   Regra dos cantos (vem de tokens.css):
-   - canto vivo  = o que está impresso na página (vaga, tira)
-   - 4 px        = ferramenta (botão, campo)
-   - 10 px       = o que se cola (figurinha, cartão de papel, cupom)
-   Linha tracejada sempre quer dizer picote: "dá para destacar".
-   ========================================================================== */
-
-/* ---------- Botão ---------- */
-
 .botao {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--espaco-2);
-  min-height: 2.75rem;   /* 44 px */
+  min-height: 2.75rem;
   padding: 0 var(--espaco-5);
   background: var(--cor-acao);
   color: var(--cor-sobre-acao);
@@ -2744,12 +2399,10 @@ body::before {
   color: var(--cor-sobre-acao);
 }
 
-/* O botão "afunda" um pouco ao ser apertado: resposta ao toque */
 .botao:active {
   transform: translateY(1px);
 }
 
-/* Botão secundário: só o contorno, na cor da tinta */
 .botao-contorno {
   background: transparent;
   color: var(--cor-texto);
@@ -2762,7 +2415,6 @@ body::before {
   border-color: var(--cor-texto);
 }
 
-/* Botão desligado: continua legível, mas com cara de "agora não" */
 .botao[disabled],
 .botao[aria-disabled="true"] {
   background: var(--cor-vaga);
@@ -2771,15 +2423,10 @@ body::before {
   cursor: not-allowed;
 }
 
-/* Botão menor, para caber dentro da vaga e embaixo da figurinha.
-   A altura continua 44 px: só o texto e as laterais diminuem. */
 .botao-pequeno {
   padding: 0 var(--espaco-3);
   font-size: var(--texto-pequeno);
 }
-
-/* ---------- Etiqueta ----------
-   O negativo da tinta: destaca "Nova" e "Repetida" sem trazer cor nova. */
 
 .etiqueta {
   display: inline-block;
@@ -2791,9 +2438,6 @@ body::before {
   font-weight: 700;
   line-height: 1.4;
 }
-
-/* ---------- Cartão ----------
-   Um papel solto em cima da página: mais claro que o fundo e com canto de 10 px. */
 
 .cartao {
   background: var(--cor-superficie);
@@ -2807,15 +2451,11 @@ body::before {
   margin-top: var(--espaco-3);
 }
 
-/* Cupom: um cartão com canhoto. A linha tracejada é o picote. */
 .cupom-canhoto {
   margin-top: var(--espaco-4);
   padding-top: var(--espaco-4);
   border-top: 2px dashed var(--cor-borda);
 }
-
-/* ---------- Vaga ----------
-   O espaço vazio do álbum, impresso na página: canto vivo e número grande. */
 
 .vaga {
   aspect-ratio: 3 / 4;
@@ -2844,7 +2484,6 @@ body::before {
   font-weight: 600;
 }
 
-/* O nome de quem vai ali, impresso na página como nos álbuns de papel */
 .vaga-nome {
   color: var(--cor-texto);
   font-size: var(--texto-pequeno);
@@ -2852,32 +2491,19 @@ body::before {
   line-height: 1.2;
 }
 
-/* A figurinha desta vaga já saiu e está na mão: moldura mais grossa e botão "Colar" */
 .vaga-na-mao {
   border-width: 4px;
   border-color: var(--cor-texto);
 }
 
-/* Enquanto uma figurinha é arrastada, a vaga dela fica marcada... */
 .casa-alvo .vaga {
   outline: 3px solid var(--cor-acao);
   outline-offset: 3px;
 }
 
-/* ...e clareia quando a figurinha passa por cima */
 .casa-em-cima .vaga {
   background: var(--cor-superficie);
 }
-
-/* ---------- Figurinha ----------
-   Um adesivo: canto de 10 px e moldura do próprio papel.
-   A cor da moldura já diz a raridade: branca (comum), prata (brilhante), ouro (lendária).
-   Mesmo assim a raridade vem SEMPRE escrita, com um ícone e uma textura:
-   nunca depende só da cor.
-
-   As cores da seleção entram por variáveis no HTML:
-     style="--campo: #1E7B4F; --camisa: #F7D417; --numero: #14204F"
-   Nenhum texto é escrito em cima dessas cores, só na tarja. */
 
 .figurinha {
   position: relative;
@@ -2889,10 +2515,9 @@ body::before {
   color: var(--cor-figurinha-tinta);
   border-radius: var(--raio-adesivo);
   box-shadow: var(--sombra-colada);
-  transform: rotate(var(--giro, 0deg));   /* colada à mão: levemente torta */
+  transform: rotate(var(--giro, 0deg));
 }
 
-/* Figurinha na mão, ainda não colada: sem sombra e mais torta */
 .figurinha-solta {
   box-shadow: 0 0 0 1.5px var(--cor-borda);
 }
@@ -2902,15 +2527,12 @@ body::before {
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  /* A cor da seleção, com um clarão atrás da cabeça, como luz de estúdio */
   background:
     radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.4), transparent 62%),
     var(--campo, #8A8FB0);
   border-radius: 6px 6px 0 0;
 }
 
-/* Retícula: os pontinhos de impressão no fundo do retrato, atrás da pessoa.
-   São bolinhas desenhadas com gradiente, mais fortes embaixo. */
 .figurinha-arte::after {
   content: "";
   position: absolute;
@@ -2920,25 +2542,17 @@ body::before {
   mask-image: linear-gradient(to top, #000, transparent 65%);
 }
 
-/* O retrato: uma pessoa de frente, da cabeça aos ombros (o desenho está no
-   js/figurinha.js, na função desenharRetrato). É genérico: não é foto nem
-   desenho de nenhuma pessoa de verdade.
-   A pele não tem cor de pele: é o papel da figurinha com um pouco da tinta,
-   como em um retrato impresso em uma tinta só. Assim o desenho não "chuta" a
-   aparência de ninguém. */
 .figurinha-busto {
-  --pele: #DDE0E8;   /* para navegador antigo, que não conhece color-mix */
+  --pele: #DDE0E8;
   --pele: color-mix(in srgb, var(--cor-figurinha-tinta) 13%, var(--cor-figurinha-papel));
   position: absolute;
-  z-index: 1;   /* por cima dos pontinhos de retícula, que ficam só no fundo */
+  z-index: 1;
   left: 0;
   bottom: 0;
   width: 100%;
   height: 94%;
 }
 
-/* Rosto, orelhas e pescoço. O contorno na tinta da figurinha é o que separa
-   a pessoa do fundo colorido (contraste conferido no scripts/contraste.js). */
 .busto-pele {
   fill: var(--pele);
   stroke: var(--cor-figurinha-tinta);
@@ -2946,7 +2560,6 @@ body::before {
   stroke-linejoin: round;
 }
 
-/* A sombra de um lado do rosto e a do queixo no pescoço */
 .busto-sombra {
   fill: var(--cor-figurinha-tinta);
   opacity: 0.16;
@@ -2961,7 +2574,6 @@ body::before {
   opacity: 0.55;
 }
 
-/* Sobrancelhas, nariz, boca e a costura das mangas: traços finos */
 .busto-traco {
   fill: none;
   stroke: var(--cor-figurinha-tinta);
@@ -2977,7 +2589,6 @@ body::before {
   stroke-linejoin: round;
 }
 
-/* A gola tem a cor do número, que sempre contrasta com a da camisa */
 .busto-gola {
   fill: var(--numero, var(--cor-figurinha-tinta));
   stroke: var(--cor-figurinha-tinta);
@@ -2992,7 +2603,6 @@ body::before {
   font-size: 13px;
 }
 
-/* A bandeirinha da seleção, no canto de cima do retrato */
 .figurinha-pais {
   position: absolute;
   z-index: 1;
@@ -3003,7 +2613,6 @@ body::before {
   outline: 1px solid var(--cor-figurinha-tinta);
 }
 
-/* Tarja: a faixa de baixo, onde fica o texto */
 .figurinha-tarja {
   position: relative;
   display: flex;
@@ -3014,7 +2623,6 @@ body::before {
   line-height: 1.25;
 }
 
-/* A faixinha de textura no topo da tarja (o "acabamento" da figurinha) */
 .figurinha-tarja::before {
   content: "";
   position: absolute;
@@ -3034,8 +2642,6 @@ body::before {
   font-variant-numeric: tabular-nums;
 }
 
-/* Última linha da tarja: raridade de um lado, número do outro.
-   Se não couberem lado a lado, o número desce para a linha de baixo. */
 .figurinha-linha {
   display: flex;
   flex-wrap: wrap;
@@ -3049,7 +2655,6 @@ body::before {
   font-weight: 700;
 }
 
-/* Figurinha de bandeira: a bandeira no meio do retrato, com moldura de papel */
 .figurinha-bandeira {
   position: absolute;
   inset: 0;
@@ -3059,18 +2664,15 @@ body::before {
   outline: 1px solid var(--cor-figurinha-tinta);
 }
 
-/* Comum: fosca, sem textura */
 .figurinha-comum {
   --material: var(--cor-figurinha-papel);
 }
 
-/* Brilhante: laminada, com listras diagonais */
 .figurinha-brilhante {
   --material: var(--cor-prata-clara);
   --trama: repeating-linear-gradient(115deg, var(--cor-prata) 0 4px, var(--cor-figurinha-tinta) 4px 6px);
 }
 
-/* Lendária: holográfica, com trama de losangos */
 .figurinha-lendaria {
   --material: var(--cor-ouro);
   --trama:
@@ -3078,40 +2680,30 @@ body::before {
     linear-gradient(-45deg, transparent 42%, var(--cor-figurinha-tinta) 42% 58%, transparent 58%) 0 0 / 6px 6px;
 }
 
-/* Reflexo parado sobre o retrato da brilhante e da lendária */
 .figurinha-brilhante .figurinha-arte::before,
 .figurinha-lendaria .figurinha-arte::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;   /* o reflexo passa por cima do retrato */
+  z-index: 2;
   background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 45%, transparent 60%);
 }
 
-/* ---------- Lendária holográfica ----------
-   O js/efeitos.js escreve na figurinha a posição do ponteiro (--px e --py, de
-   0% a 100%) e a inclinação (--rx e --ry). Com isso a figurinha inclina e o
-   brilho corre. Sem ponteiro em cima, fica só um brilho fraco e parado. */
 .figurinha-lendaria {
   --px: 50%;
   --py: 50%;
   --brilho: 0.3;
 }
 
-/* A que não vira (na mão, nas amostras) */
 .figurinha-lendaria:not(.figurinha-vira) {
   transform: perspective(42rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform 160ms ease-out;
 }
 
-/* A que vira (colada no álbum, saída do pacotinho): só inclina de frente */
 .figurinha-vira.figurinha-lendaria[data-face="frente"] {
   transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
 }
 
-/* Duas camadas por cima da figurinha: o arco-íris (::after) e o reflexo
-   branco que acompanha o ponteiro (::before). Os modos de mistura "overlay" e
-   "soft-light" tingem as cores de baixo sem apagar o texto. */
 .figurinha-lendaria::before,
 .figurinha-lendaria::after {
   content: "";
@@ -3121,8 +2713,6 @@ body::before {
   border-radius: inherit;
   pointer-events: none;
   transition: opacity 250ms ease-out;
-  /* Na faixa de baixo fica o texto: ali o brilho cai para um terço da força,
-     para o nome e a raridade continuarem fáceis de ler (contraste medido) */
   -webkit-mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
   mask-image: linear-gradient(to bottom, #000 58%, rgba(0, 0, 0, 0.33) 74%);
 }
@@ -3139,8 +2729,6 @@ body::before {
   opacity: var(--brilho);
 }
 
-/* De costas ou mostrando o verso, o brilho some: ali só há texto para ler.
-   Nas cenas da página inicial em que as figurinhas são enfeite, também. */
 .figurinha-lendaria[data-face="verso"]::before,
 .figurinha-lendaria[data-face="verso"]::after,
 .figurinha-lendaria[data-face="costas"]::before,
@@ -3152,8 +2740,6 @@ body::before {
   display: none;
 }
 
-/* Etiqueta presa na figurinha: usa a tinta e o papel da própria figurinha,
-   porque a figurinha não muda de cor quando o tema muda. */
 .figurinha .etiqueta {
   position: absolute;
   z-index: 2;
@@ -3168,18 +2754,6 @@ body::before {
   font-size: 0.75rem;
 }
 
-/* ---------- Figurinha que vira ----------
-   É um <button> com as faces uma em cima da outra (todas na mesma casa de uma
-   grade). O atributo data-face diz qual aparece:
-     frente = o retrato      verso = as informações      costas = ainda fechada
-
-   O giro: a figurinha roda meia volta (180 graus) em torno do eixo vertical.
-   Bem no meio do caminho, quando ela está de lado e não dá para ver nada,
-   a face que aparece é trocada (a "visibility" muda com meio tempo de atraso).
-
-   O verso é desenhado espelhado: como a figurinha inteira está virada ao
-   contrário, o espelhado volta a ficar legível. */
-
 .figurinha-vira {
   --tempo-de-virar: 420ms;
   --meia-volta: 180deg;
@@ -3190,7 +2764,6 @@ body::before {
   text-align: left;
   cursor: pointer;
   transform: perspective(40rem) rotate(var(--giro, 0deg)) rotateY(0deg);
-  /* "--tempo-do-movimento" só existe enquanto a lendária acompanha o ponteiro (mais abaixo) */
   transition: transform var(--tempo-do-movimento, var(--tempo-de-virar)) ease-in-out;
 }
 
@@ -3200,7 +2773,7 @@ body::before {
 }
 
 .figurinha-face {
-  grid-area: 1 / 1;   /* todas as faces na mesma casa da grade: uma em cima da outra */
+  grid-area: 1 / 1;
   position: relative;
   min-width: 0;
   display: flex;
@@ -3222,7 +2795,6 @@ body::before {
   transform: rotateY(var(--meia-volta));
 }
 
-/* Verso: número, nome, dois dados e a curiosidade */
 .figurinha-verso {
   gap: 1px;
   padding: 9px 8px;
@@ -3247,8 +2819,6 @@ body::before {
   border-top: 1.5px solid currentColor;
 }
 
-/* Costas: a figurinha que acabou de sair do pacotinho. Cobre a moldura inteira,
-   para a cor da raridade não entregar a surpresa antes da hora. */
 .figurinha-costas {
   align-items: center;
   justify-content: center;
@@ -3266,15 +2836,10 @@ body::before {
   rotate: -8deg;
 }
 
-/* Colar: a figurinha chega maior e mais torta e assenta no lugar.
-   ("scale" e "rotate" são propriedades separadas do "transform",
-   por isso não atrapalham o giro de virar.) */
 .figurinha-colando {
   animation: bater 520ms cubic-bezier(0.3, 0.9, 0.4, 1) backwards;
 }
 
-/* A batida: a figurinha desce torta e maior, bate no lugar (55%), amassa de
-   leve (70%) e volta ao tamanho. */
 @keyframes bater {
   0% { translate: 0 -60%; rotate: -12deg; scale: 1.35; opacity: 0; box-shadow: none; }
   55% { translate: 0 0; rotate: 0deg; scale: 1; opacity: 1; }
@@ -3282,9 +2847,6 @@ body::before {
   100% { scale: 1; }
 }
 
-/* A casa em que a figurinha acabou de bater: abre um anel de tinta em volta
-   da figurinha e dá uma tremida. (A classe "bateu" é posta pelo js/album.js.) */
-/* (".vagas > .casa.bateu" precisa ganhar da regra de entrar ao rolar, em paginas.css) */
 .vagas > .casa.bateu {
   animation: tremer 260ms linear 280ms;
 }
@@ -3295,7 +2857,7 @@ body::before {
   left: 0;
   right: 0;
   top: 0;
-  aspect-ratio: 3 / 4;   /* o mesmo formato da figurinha, que fica no topo da casa */
+  aspect-ratio: 3 / 4;
   border: 3px solid var(--cor-texto);
   border-radius: var(--raio-adesivo);
   pointer-events: none;
@@ -3314,8 +2876,6 @@ body::before {
   70% { translate: -1px 0; }
 }
 
-/* Revelar: o reflexo passa uma vez pela brilhante e pela lendária,
-   e a lendária dá um pulinho. */
 .figurinha-revelada .figurinha-arte::before {
   animation: reflexo 800ms ease-out 250ms backwards;
 }
@@ -3331,8 +2891,6 @@ body::before {
 @keyframes pulo {
   40% { scale: 1.08; }
 }
-
-/* ---------- Raridade: palavra + ícone ---------- */
 
 .raridade {
   display: inline-flex;
@@ -3357,16 +2915,11 @@ body::before {
   transform: rotate(45deg) scale(0.85);
 }
 
-/* Estrela de cinco pontas, recortada com clip-path (uma lista de pontos x y) */
 .raridade-icone-estrela {
   width: 1em;
   height: 1em;
   clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
-
-/* ---------- Tira de grupos ----------
-   12 casas, uma por grupo (A a L). O preenchimento sobe conforme o grupo
-   enche: a variável --parte vai de 0 (vazio) a 1 (completo). */
 
 .tira {
   list-style: none;
@@ -3398,9 +2951,6 @@ body::before {
   }
 }
 
-/* ---------- Passos numerados ----------
-   Só para o que é sequência de verdade (primeiro isto, depois aquilo). */
-
 .passos {
   list-style: none;
   padding: 0;
@@ -3413,7 +2963,7 @@ body::before {
   counter-increment: passo;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;   /* o título fica colado no texto; a sobra de altura vai para baixo */
+  grid-template-rows: auto 1fr;
   column-gap: var(--espaco-3);
   align-items: start;
 }
@@ -3436,8 +2986,6 @@ body::before {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-/* ---------- Campo de formulário ---------- */
 
 .campo {
   display: flex;
@@ -3470,7 +3018,6 @@ textarea.campo-entrada {
   resize: vertical;
 }
 
-/* Campo com erro: a borda engrossa e muda de cor, e a mensagem vem com ícone e texto */
 .campo-entrada[aria-invalid="true"] {
   border-width: 3px;
   border-color: var(--cor-erro);
@@ -3490,30 +3037,25 @@ textarea.campo-entrada {
   margin-top: 0.1em;
 }
 
-/* O "x" desenhado dentro do ícone de cartão usa a cor do papel */
 .campo-erro .cartao-x {
   stroke: var(--cor-superficie);
 }
 
-/* Formulário: os campos empilhados, com o mesmo espaço entre eles */
 .formulario {
   display: grid;
   gap: var(--espaco-4);
   max-width: 28rem;
 }
 
-/* O botão "Mostrar senha" fica embaixo do campo, do tamanho do próprio texto */
 .campo > .botao {
   align-self: start;
 }
 
-/* Título de segundo nível em tamanho menor, para dentro de cartões e formulários */
 .titulo-menor {
   font-size: var(--titulo-3);
   line-height: 1.1;
 }
 
-/* Botão com cara de link: para ações pequenas no meio de uma frase */
 .botao-link {
   min-height: 2.75rem;
   padding: 0 var(--espaco-1);
@@ -3531,7 +3073,6 @@ textarea.campo-entrada {
   text-decoration-thickness: 0.16em;
 }
 
-/* Resumo dos erros: aparece no topo do formulário quando o envio falha */
 .resumo-erros {
   max-width: 28rem;
   padding: var(--espaco-4);
@@ -3554,8 +3095,6 @@ textarea.campo-entrada {
   padding-block: var(--espaco-1);
 }
 
-/* Recado de "deu certo". A caixa existe sempre (o leitor de tela precisa dela
-   pronta para ler o texto quando ele chegar), mas só ganha moldura quando tem texto. */
 .aviso-sucesso:empty {
   margin: 0;
 }
@@ -3570,7 +3109,6 @@ textarea.campo-entrada {
   font-weight: 600;
 }
 
-/* Caixas de marcar e de escolher: maiores e na cor da ação */
 .opcao {
   display: flex;
   align-items: center;
@@ -3588,10 +3126,6 @@ textarea.campo-entrada {
   cursor: pointer;
 }
 
-/* ---------- Barra de progresso ----------
-   Impressa na página (canto vivo). A variável --parte vai de 0 a 1.
-   O número sempre vem escrito ao lado: a barra é só o desenho. */
-
 .barra {
   height: 0.875rem;
   max-width: 28rem;
@@ -3606,10 +3140,6 @@ textarea.campo-entrada {
   background: var(--cor-texto);
   transition: width var(--duracao) ease-out;
 }
-
-/* ---------- Abas ----------
-   Escolhem quais figurinhas aparecem. A aba escolhida fica no negativo da
-   tinta, mais pesada e sublinhada: não depende só da cor. */
 
 .abas {
   display: flex;
@@ -3641,10 +3171,6 @@ textarea.campo-entrada {
   margin-left: 0.3em;
   font-variant-numeric: tabular-nums;
 }
-
-/* ---------- Conquista ----------
-   Um quadro impresso na página. Quando a conquista é feita, ganha um carimbo:
-   posto à mão, por isso levemente torto. */
 
 .conquistas {
   list-style: none;
@@ -3686,8 +3212,6 @@ textarea.campo-entrada {
   rotate: -3deg;
 }
 
-/* Conquista que acabou de sair: o carimbo só aparece quando o quadro entra na
-   tela, e aí bate com força (as classes são postas pelo js/album.js) */
 .conquista-nova:not(.conquista-carimbando) .conquista-estado {
   opacity: 0;
 }
@@ -3700,7 +3224,6 @@ textarea.campo-entrada {
   animation: carimbar 420ms cubic-bezier(0.3, 0.8, 0.4, 1) backwards;
 }
 
-/* O carimbo chega grande, torto e transparente e encolhe até o tamanho certo */
 @keyframes carimbar {
   0% { scale: 2.8; opacity: 0; rotate: -20deg; }
   60% { scale: 0.92; opacity: 1; rotate: -7deg; }
@@ -3719,10 +3242,6 @@ textarea.campo-entrada {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-
-/* ---------- Recado ----------
-   Aviso preso no pé da tela depois de colar: confirma o que aconteceu e
-   oferece "Desfazer". Não some sozinho: fica até a próxima ação ou até fechar. */
 
 .recado {
   position: fixed;
@@ -3759,18 +3278,13 @@ textarea.campo-entrada {
   cursor: pointer;
 }
 
-/* ---------- Pacotinho ----------
-   O envelope fechado. É uma peça só de desenho: quem abre é o botão
-   "Rasgar o pacotinho". A linha tracejada é o picote, e a parte de cima
-   (a aba) é a que sai quando rasga. */
-
 .pacotinho {
   width: min(15rem, 72%);
   aspect-ratio: 5 / 7;
   display: flex;
   flex-direction: column;
   color: var(--cor-etiqueta-texto);
-  rotate: -3deg;   /* posto à mão em cima da página */
+  rotate: -3deg;
   cursor: pointer;
 }
 
@@ -3780,7 +3294,6 @@ textarea.campo-entrada {
   background: var(--cor-etiqueta-fundo);
 }
 
-/* Retícula do pacotinho: pontinhos na cor do texto, bem fracos (30% de opacidade) */
 .pacotinho-aba::before,
 .pacotinho-corpo::before {
   content: "";
@@ -3799,11 +3312,10 @@ textarea.campo-entrada {
   border-bottom: 2px dashed var(--cor-etiqueta-texto);
 }
 
-/* Os textos ficam em cima de uma faixa lisa, para os pontinhos não atrapalharem a leitura */
 .pacotinho-aba span,
 .pacotinho-marca,
 .pacotinho-texto {
-  position: relative;   /* fica na frente dos pontinhos */
+  position: relative;
   padding: 0 0.4em;
   background: var(--cor-etiqueta-fundo);
 }
@@ -3835,10 +3347,6 @@ textarea.campo-entrada {
   font-weight: 700;
 }
 
-/* Pacotinho 3D ao vivo (página Pacotinhos, js/pacotinho-3d.js). A tela de desenho
-   entra dentro do pacotinho de CSS, que fica só como molde: guarda o tamanho,
-   o lugar e o clique. A tela é maior que o molde, para o pacotinho poder
-   inclinar e a aba ter para onde voar. */
 .pacotinho-com-3d {
   position: relative;
 }
@@ -3854,12 +3362,9 @@ textarea.campo-entrada {
   top: -25%;
   width: 160%;
   height: 150%;
-  pointer-events: none;   /* o clique e o ponteiro passam direto para o molde */
+  pointer-events: none;
 }
 
-/* Rasgar: a aba sai voando pelo picote e o corpo do pacotinho escorrega para baixo.
-   Este é o único momento "ensaiado" do site. */
-/* Antes de rasgar, o pacotinho balança quando o ponteiro passa por cima */
 .palco .pacotinho:hover:not(.pacotinho-rasgando) {
   animation: balancar 700ms ease-in-out;
 }
@@ -3870,7 +3375,6 @@ textarea.campo-entrada {
   70% { rotate: 1deg; }
 }
 
-/* O brilho de papel laminado que atravessa o pacotinho de CSS */
 .pacotinho-corpo {
   overflow: hidden;
 }
@@ -3892,8 +3396,6 @@ textarea.campo-entrada {
   to { translate: 120% 0; }
 }
 
-/* Rasgado: a borda do picote vira dente de serra. "clip-path" recorta a forma
-   por uma lista de pontos: sobe, desce, sobe, desce. */
 .pacotinho-rasgando .pacotinho-aba {
   border-bottom-color: transparent;
   clip-path: polygon(0 0, 100% 0, 100% 78%, 92% 100%, 84% 78%, 76% 100%, 68% 78%, 60% 100%, 52% 78%, 44% 100%, 36% 78%, 28% 100%, 20% 78%, 12% 100%, 4% 78%, 0 100%);
@@ -3914,10 +3416,6 @@ textarea.campo-entrada {
   to { transform: translateY(16%); opacity: 0; }
 }
 
-/* As figurinhas saem do pacotinho em leque. Todas partem do mesmo ponto (a
-   distância até ele vem em --dx e --dy, postas pelo js/pacotinho.js), abrem
-   como um leque de cartas (40%) e depois cada uma vai para a sua casa.
-   --ordem (0 a 4) dá o ângulo de cada uma no leque e o pequeno atraso. */
 .mesa > li {
   animation: sair-em-leque 720ms cubic-bezier(0.2, 0.8, 0.3, 1.1) backwards;
   animation-delay: calc(var(--ordem, 0) * 90ms);
@@ -3938,19 +3436,10 @@ textarea.campo-entrada {
   }
 }
 
-/* ---------- Foto em uma tinta só ----------
-   O arquivo da foto é colorido. Aqui ela é mostrada como se tivesse sido
-   impressa com a tinta da página, em três passos:
-     1. a foto vira preto e branco (filter: grayscale);
-     2. uma camada na cor da sombra, misturada no modo "screen", tinge as
-        partes escuras e deixa as claras brancas;
-     3. uma camada na cor da luz, no modo "multiply", tinge as partes claras.
-   Pense em duas folhas de celofane colorido em cima de uma foto em preto e branco. */
-
 .foto {
   position: relative;
   overflow: hidden;
-  isolation: isolate;   /* as misturas de cor valem só aqui dentro */
+  isolation: isolate;
   aspect-ratio: 16 / 10;
   background: var(--cor-foto-luz);
   border: 2px solid var(--cor-texto);
@@ -3960,7 +3449,7 @@ textarea.campo-entrada {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* a foto preenche a moldura, cortando a sobra */
+  object-fit: cover;
   filter: grayscale(1) contrast(1.15);
 }
 
@@ -3981,9 +3470,6 @@ textarea.campo-entrada {
   background: var(--cor-foto-luz);
   mix-blend-mode: multiply;
 }
-
-/* ---------- Carrossel ----------
-   Uma sede por vez. Os botões e os números ficam embaixo da foto. */
 
 .carrossel-cidade {
   font-size: var(--titulo-2);
@@ -4039,8 +3525,6 @@ textarea.campo-entrada {
   gap: var(--espaco-2);
 }
 
-/* Indicador: um quadro numerado, impresso como as casas da tira de grupos.
-   O da sede atual fica no negativo da tinta e sublinhado. */
 .carrossel-numero {
   width: 2.75rem;
   height: 2.75rem;
@@ -4060,11 +3544,6 @@ textarea.campo-entrada {
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
-
-/* ---------- Placar girando ----------
-   Cada casa do número é uma janelinha com a altura de uma linha, que mostra
-   uma fita com os algarismos de 0 a 9, um embaixo do outro. "--digito" (posto
-   pelo js/album.js) diz quantos degraus a fita sobe. */
 
 .odometro {
   display: inline-flex;
@@ -4088,12 +3567,6 @@ textarea.campo-entrada {
   height: 1em;
 }
 
-/* ---------- Traço que se desenha ----------
-   As linhas de um campo de futebol. Cada linha "mede 1" (pathLength="1" no
-   HTML) e é tracejada com um traço de tamanho 1: escondendo o traço inteiro
-   (stroke-dashoffset: 1) a linha some; trazendo de volta aos poucos, ela se
-   desenha como uma caneta percorrendo o papel. */
-
 .campo-tracado {
   display: block;
   width: min(100%, 20rem);
@@ -4105,10 +3578,9 @@ textarea.campo-entrada {
 
 .campo-tracado * {
   stroke-dasharray: 1;
-  stroke-dashoffset: var(--falta, 0);   /* a página inicial manda "--falta" pela rolagem */
+  stroke-dashoffset: var(--falta, 0);
 }
 
-/* Antes de aparecer na tela (página do álbum), as linhas ficam escondidas */
 .campo-tracado.por-desenhar * {
   stroke-dashoffset: 1;
 }
@@ -4128,22 +3600,10 @@ textarea.campo-entrada {
 ### css/paginas.css
 
 ````css
-/* ==========================================================================
-   paginas.css
-   --------------------------------------------------------------------------
-   O que é próprio de cada página. As peças que se repetem pelo site ficam em
-   componentes.css; aqui fica só a arrumação de cada tela.
-   ========================================================================== */
-
-/* ---------- Início ---------- */
-
-/* O primeiro parágrafo de cada página, um pouco maior que o texto comum */
 .abertura-texto {
   font-size: var(--texto-medio);
 }
 
-/* Raridades: no celular, figurinha à esquerda e texto à direita;
-   em telas maiores, as três lado a lado */
 .raridades {
   list-style: none;
   padding: 0;
@@ -4153,8 +3613,6 @@ textarea.campo-entrada {
 
 .raridades > li {
   display: grid;
-  /* A figurinha ocupa cerca de um terço (entre 5rem e 7rem); o texto fica com o resto.
-     O minmax(0, 1fr) deixa a coluna do texto encolher em telas estreitas. */
   grid-template-columns: clamp(5rem, 32%, 7rem) minmax(0, 1fr);
   gap: var(--espaco-4);
   align-items: center;
@@ -4179,7 +3637,6 @@ textarea.campo-entrada {
   }
 }
 
-/* Cartela da sequência: sete casas impressas, uma por dia */
 .cartela {
   list-style: none;
   padding: 0;
@@ -4199,7 +3656,6 @@ textarea.campo-entrada {
   font-weight: 700;
 }
 
-/* Bilhete de troca: duas linhas, "Tenho" e "Preciso" */
 .bilhete {
   max-width: 26rem;
 }
@@ -4215,11 +3671,9 @@ textarea.campo-entrada {
 }
 
 .bilhete dd {
-  font-variant-numeric: tabular-nums;   /* números com a mesma largura, alinhados */
+  font-variant-numeric: tabular-nums;
 }
 
-/* Dia carimbado na cartela: um círculo de tinta em volta do número,
-   posto à mão (por isso torto). O formato muda, não só a cor. */
 .cartela > li.carimbado .cartela-dia {
   display: grid;
   place-items: center;
@@ -4231,17 +3685,10 @@ textarea.campo-entrada {
   rotate: -8deg;
 }
 
-/* ---------- Álbum ---------- */
-
-/* O recado fica preso no pé da tela. Esta folga faz o navegador parar a
-   rolagem um pouco antes, para o recado nunca cobrir o que está em foco. */
 html {
   scroll-padding-bottom: 10rem;
 }
 
-/* Enquanto o recado está na tela, a página ganha um espaço a mais no fim.
-   Sem ele, os últimos links do rodapé não teriam para onde subir e ficariam
-   embaixo do recado. (A classe é posta e tirada pelo js/album.js.) */
 .com-recado {
   padding-bottom: 10rem;
 }
@@ -4250,7 +3697,6 @@ html {
   padding-bottom: var(--espaco-6);
 }
 
-/* Placar: o número de coladas bem grande, na fonte de destaque */
 .placar {
   display: flex;
   flex-wrap: wrap;
@@ -4267,7 +3713,6 @@ html {
   line-height: 0.9;
 }
 
-/* Índice dos grupos: a tira de 12 casas, cada casa é um link para o grupo */
 .tira-indice a {
   display: flex;
   flex-direction: column;
@@ -4282,7 +3727,6 @@ html {
   border-width: 3px;
 }
 
-/* Como terminou: a seleção campeã em destaque e os quatro primeiros em lista */
 .final-campea {
   display: flex;
   flex-wrap: wrap;
@@ -4320,7 +3764,6 @@ html {
   width: 2.25rem;
 }
 
-/* Bandeja: as figurinhas na mão, cada uma com o seu botão "Colar" embaixo */
 .bandeja {
   list-style: none;
   padding: 0;
@@ -4336,10 +3779,9 @@ html {
 }
 
 .bandeja .figurinha {
-  cursor: grab;   /* a mãozinha avisa que dá para arrastar */
+  cursor: grab;
 }
 
-/* Filtros: dois por linha no celular, os quatro lado a lado em telas maiores */
 .filtros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4361,7 +3803,6 @@ html {
   font-weight: 700;
 }
 
-/* Grupo: o título e a conta de coladas na mesma linha */
 .grupo-cabeca {
   display: flex;
   flex-wrap: wrap;
@@ -4375,7 +3816,6 @@ html {
   font-weight: 700;
 }
 
-/* Seleção: uma página dupla, com a ficha de um lado e as casas do outro */
 .selecao {
   padding-block: var(--espaco-6);
   border-top: 2px solid var(--cor-texto);
@@ -4407,16 +3847,9 @@ html {
   margin-top: var(--espaco-3);
 }
 
-/* As casas: duas colunas no celular e três quando há largura.
-   Entre 48rem e 64rem a página já é dupla e a metade direita ainda é
-   estreita, então voltam a ser duas. */
 .vagas {
   list-style: none;
   padding: 0;
-  /* A figurinha que acabou de ser colada chega maior e torta, e passaria da
-     beirada da tela. "overflow-x: clip" corta essa sobra sem criar barra de
-     rolagem. A margem negativa com o mesmo tanto de respiro leva o corte um
-     pouco para fora da grade, até a beira da página. */
   overflow-x: clip;
   margin-inline: calc(var(--espaco-4) * -1);
   padding-inline: var(--espaco-4);
@@ -4438,18 +3871,13 @@ html {
   }
 }
 
-/* A casa empilha a figurinha (ou a vaga) e, se houver, o botão "Desfazer" */
 .casa {
-  position: relative;   /* o anel da batida se mede por ela */
+  position: relative;
   display: grid;
   gap: var(--espaco-2);
   align-content: start;
 }
 
-/* Entrar ao rolar: cada casa do álbum assenta no lugar enquanto entra na tela.
-   "animation-timeline: view()" troca o relógio da animação pela rolagem: ela
-   anda conforme a casa aparece e termina com a casa inteira à vista.
-   Onde o navegador não conhece isso, as casas simplesmente já estão no lugar. */
 @supports (animation-timeline: view()) {
   .vagas > .casa {
     animation: assentar linear both;
@@ -4462,10 +3890,6 @@ html {
   from { opacity: 0; translate: 0 2rem; rotate: -4deg; scale: 0.86; }
 }
 
-/* A largura de cada casa é a da coluna, e pronto: "minmax(0, 1fr)" proíbe o
-   conteúdo de alargar a coluna. Sem isto, quando o texto fica alto (letra
-   maior), a proporção 3 por 4 alargaria a figurinha junto e ela passaria da
-   tela. Com a largura presa, só a altura cresce. */
 .vagas > li,
 .mesa > li,
 .bandeja > li {
@@ -4482,9 +3906,6 @@ html {
   border-top: 2px solid var(--cor-texto);
 }
 
-/* ---------- Pacotinhos ---------- */
-
-/* O palco: onde fica o pacotinho fechado e, depois de rasgar, as figurinhas */
 .palco {
   display: grid;
   gap: var(--espaco-5);
@@ -4495,7 +3916,6 @@ html {
   margin: var(--espaco-2) var(--espaco-4);
 }
 
-/* A mesa: as cinco figurinhas do pacotinho, três em cima e duas embaixo */
 .mesa {
   list-style: none;
   padding: 0;
@@ -4523,9 +3943,6 @@ html {
   max-width: none;
 }
 
-/* ---------- Trocas ---------- */
-
-/* Tenho para trocar: uma linha impressa por figurinha, com a contagem na ponta */
 .lista-troca {
   list-style: none;
   padding: 0;
@@ -4541,7 +3958,6 @@ html {
   border-bottom: 1.5px solid var(--cor-borda);
 }
 
-/* Preciso: os números que faltam, cada um em um quadrinho impresso (como uma vaga pequena) */
 .lista-faltam {
   list-style: none;
   padding: 0;
@@ -4558,7 +3974,6 @@ html {
   font-size: var(--texto-pequeno);
 }
 
-/* O resumo da gaveta "Ver os números que faltam": área de toque de 44 px */
 #faltam-gaveta summary {
   min-height: 2.75rem;
   display: flex;
@@ -4571,7 +3986,6 @@ html {
   cursor: pointer;
 }
 
-/* Um sinal de mais ou de menos na frente mostra se a gaveta está fechada ou aberta */
 #faltam-gaveta summary::before {
   content: "+";
   font-weight: 800;
@@ -4581,12 +3995,10 @@ html {
   content: "−";
 }
 
-/* A lista pronta ocupa o cartão inteiro */
 .bilhete .campo {
   max-width: none;
 }
 
-/* Banca: as duas perguntas lado a lado quando há largura */
 .banca-grade {
   display: grid;
   gap: var(--espaco-5);
@@ -4598,8 +4010,6 @@ html {
   }
 }
 
-/* ---------- Sobre ---------- */
-
 .sobre-ficha dt {
   font-weight: 700;
 }
@@ -4608,7 +4018,6 @@ html {
   margin-top: var(--espaco-3);
 }
 
-/* Listas de créditos e de fontes: uma linha impressa por item */
 .lista-fontes {
   list-style: none;
   padding: 0;
@@ -4620,7 +4029,6 @@ html {
   border-bottom: 1.5px solid var(--cor-borda);
 }
 
-/* Lista comum, com marcador, dentro do texto corrido */
 .lista-simples {
   padding-left: 1.2em;
   max-width: var(--largura-leitura);
@@ -4629,9 +4037,6 @@ html {
 .lista-simples > li + li {
   margin-top: var(--espaco-2);
 }
-
-/* ---------- Sobre: guia de estilo ----------
-   As peças do site todas juntas, para consulta e para testar os temas. */
 
 .guia h3 {
   margin-top: var(--espaco-6);
@@ -4670,22 +4075,6 @@ html {
 ### css/acessibilidade.css
 
 ````css
-/* ==========================================================================
-   acessibilidade.css
-   --------------------------------------------------------------------------
-   Duas coisas:
-   1. A aparência do painel de acessibilidade.
-   2. O que cada preferência do painel muda na página.
-
-   As preferências chegam como atributos no <html>, postos pelo
-   js/tema-acessibilidade.js. Exemplo: <html data-tema="escuro" data-fonte="grande">
-   (As cores de cada tema e do alto contraste ficam em tokens.css.)
-   ========================================================================== */
-
-/* ---------- 1. O painel ----------
-   É um <dialog>: uma janela que o próprio navegador sabe abrir por cima da
-   página, prender o foco do teclado dentro dela e fechar com a tecla Esc. */
-
 .painel {
   width: min(26rem, calc(100% - 2rem));
   max-height: calc(100% - 2rem);
@@ -4696,7 +4085,6 @@ html {
   border-radius: var(--raio-adesivo);
 }
 
-/* O fundo escurecido atrás do painel */
 .painel::backdrop {
   background: rgba(10, 16, 40, 0.65);
 }
@@ -4718,7 +4106,6 @@ html {
   font-size: var(--titulo-3);
 }
 
-/* Cada grupo de opções é um <fieldset> com a pergunta no <legend> */
 .painel-grupo {
   min-width: 0;
   margin: 0;
@@ -4738,7 +4125,6 @@ html {
   gap: var(--espaco-3);
 }
 
-/* Aviso lido pelo leitor de tela quando uma preferência é salva */
 .painel-aviso {
   min-height: 1.5em;
   color: var(--cor-sucesso);
@@ -4746,14 +4132,9 @@ html {
   font-weight: 600;
 }
 
-/* ---------- 2. O que cada preferência muda ---------- */
-
-/* Tamanho da letra: como o site inteiro usa rem, basta mudar o tamanho da raiz */
 html[data-fonte="grande"] { font-size: 112.5%; }
 html[data-fonte="maior"] { font-size: 125%; }
 
-/* Mais espaço no texto: linhas, letras, palavras e parágrafos mais afastados
-   (as medidas seguem o critério 1.4.12 do WCAG, com folga) */
 [data-espacamento="amplo"] body {
   line-height: 1.8;
   letter-spacing: 0.12em;
@@ -4772,7 +4153,6 @@ html[data-fonte="maior"] { font-size: 125%; }
   margin-top: 2em;
 }
 
-/* Destacar links: sublinhado grosso, negrito e um fundo atrás */
 [data-links="destacados"] a:not(.botao):not(.marca) {
   background: var(--cor-superficie);
   font-weight: 700;
@@ -4781,7 +4161,6 @@ html[data-fonte="maior"] { font-size: 125%; }
   text-underline-offset: 4px;
 }
 
-/* Reduzir animações: vale se a pessoa ligou no painel... */
 [data-movimento="reduzido"] *,
 [data-movimento="reduzido"] *::before,
 [data-movimento="reduzido"] *::after {
@@ -4789,19 +4168,15 @@ html[data-fonte="maior"] { font-size: 125%; }
   animation-delay: 0s !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
-  transition-delay: 0s !important;   /* sem fila de espera: tudo muda na hora */
+  transition-delay: 0s !important;
   scroll-behavior: auto !important;
 }
 
-/* Sem movimento, a figurinha não gira: a face só é trocada, na hora */
 [data-movimento="reduzido"] .figurinha-vira {
   --meia-volta: 0deg;
   --tempo-de-virar: 0s;
 }
 
-/* ...ou se o próprio aparelho já pede menos movimento.
-   A exceção é quando a pessoa pede as animações de propósito
-   (data-movimento="completo", usado pela página do laboratório). */
 @media (prefers-reduced-motion: reduce) {
   html:not([data-movimento="completo"]) *,
   html:not([data-movimento="completo"]) *::before,
@@ -4820,8 +4195,6 @@ html[data-fonte="maior"] { font-size: 125%; }
   }
 }
 
-/* Alto contraste: além das cores (tokens.css), as linhas engrossam
-   e a retícula decorativa da figurinha some */
 [data-contraste="alto"] .cartao,
 [data-contraste="alto"] .campo-entrada {
   border-width: 3px;
@@ -4831,7 +4204,6 @@ html[data-fonte="maior"] { font-size: 125%; }
   display: none;
 }
 
-/* Os pontinhos do pacotinho e das costas da figurinha também somem */
 [data-contraste="alto"] .pacotinho-aba::before,
 [data-contraste="alto"] .pacotinho-corpo::before {
   display: none;
@@ -4850,17 +4222,12 @@ html[data-fonte="maior"] { font-size: 125%; }
   text-decoration-thickness: 2px;
 }
 
-/* No alto contraste, somem também o brilho colorido da lendária e a retícula
-   que segue o ponteiro */
 [data-contraste="alto"] .figurinha-lendaria::before,
 [data-contraste="alto"] .figurinha-lendaria::after,
 [data-contraste="alto"] .lanterna {
   display: none;
 }
 
-/* Reduzir animações vale também para a virada de página: a troca fica seca.
-   (Os retratos da página velha e da nova são peças do próprio navegador,
-   por isso não entram na regra geral lá de cima e precisam desta.) */
 html[data-movimento="reduzido"]::view-transition-group(*),
 html[data-movimento="reduzido"]::view-transition-old(*),
 html[data-movimento="reduzido"]::view-transition-new(*) {
@@ -4883,8 +4250,6 @@ html[data-movimento="reduzido"]::view-transition-new(*) {
   }
 }
 
-/* A entrada das casas do álbum é presa à rolagem, e não a um relógio: a regra
-   geral de reduzir animações não a alcança. Aqui ela é desligada de vez. */
 [data-movimento="reduzido"] .vagas > .casa {
   animation: none;
 }
@@ -4899,48 +4264,10 @@ html[data-movimento="reduzido"]::view-transition-new(*) {
 ### css/cenas.css
 
 ````css
-/* ==========================================================================
-   cenas.css
-   --------------------------------------------------------------------------
-   As cenas presas à rolagem da página inicial (index.html).
-
-   Cada cena existe de dois jeitos:
-
-   1. PARADA (o padrão deste arquivo). É uma seção comum, com tudo já no
-      lugar. Vale sem JavaScript e para quem pede menos movimento.
-
-   2. EM MOVIMENTO. Quando o js/cenas.js põe a classe "com-cenas" no <html>:
-        .cena        vira uma seção bem alta (240vh = quase duas telas e meia);
-        .cena-palco  gruda no topo da tela (position: sticky) e fica parado
-                     enquanto a pessoa rola por dentro da cena.
-      O CSS só arruma as peças. Quem move cada peça conforme a rolagem é o
-      js/cenas-inicio.js, escrevendo "transform" e "opacity" no elemento.
-
-   Este arquivo também guarda duas partes da página inicial que NÃO são cenas
-   presas à rolagem: a frase que acende sozinha e o carrossel dos grupos.
-
-   Partes:
-   1. A cena e o palco
-   2. Abertura: a retícula forma a marca
-   3. A frase acende (animação, não é cena)
-   4. O pacotinho gira e abre
-   5. O álbum abre
-   6. Mergulho na figurinha
-   7. Os números contam
-   8. O carrossel dos grupos (não é cena)
-   9. Voo pelas figurinhas
-   ========================================================================== */
-
-/* ---------- 1. A cena e o palco ---------- */
-
-/* O site reserva uma folga no pé da tela para o recado do álbum (ver
-   paginas.css). Esta página não tem recado, e a folga faria o navegador rolar
-   a página sozinho ao dar o foco em um botão de dentro de uma cena. */
 html:has(.cena) {
   scroll-padding-bottom: 0;
 }
 
-/* Parada: o palco é uma seção igual às outras, no miolo da página */
 .cena-palco {
   position: relative;
   max-width: var(--largura-maxima);
@@ -4953,8 +4280,6 @@ html:has(.cena) {
   border-top: 2px solid var(--cor-texto);
 }
 
-/* Em movimento. A altura vem do HTML: style="--altura: 240vh". Quanto mais
-   alta a cena, mais devagar ela anda, porque há mais rolagem para gastar. */
 .com-cenas .cena {
   height: var(--altura, 300vh);
 }
@@ -4964,7 +4289,7 @@ html:has(.cena) {
   top: 0;
   max-width: none;
   height: 100vh;
-  height: 100svh;   /* no celular, desconta a barra de endereço do navegador */
+  height: 100svh;
   margin: 0;
   padding: 0;
   border: 0;
@@ -4974,15 +4299,12 @@ html:has(.cena) {
   overflow: hidden;
 }
 
-/* No celular a tela é mais alta que larga e o dedo rola menos por vez:
-   as cenas ficam 20% mais curtas */
 @media (max-width: 47.99rem) {
   .com-cenas .cena {
     height: calc(var(--altura, 300vh) * 0.8);
   }
 }
 
-/* Título de cena. Parado, é um título comum. */
 .cena-titulo {
   max-width: none;
   font-family: var(--fonte-destaque);
@@ -4996,7 +4318,6 @@ html:has(.cena) {
   margin-top: var(--espaco-2);
 }
 
-/* Em movimento, fica no alto do palco, no meio */
 .com-cenas .cena-titulo {
   position: absolute;
   z-index: 4;
@@ -5009,12 +4330,10 @@ html:has(.cena) {
   pointer-events: none;
 }
 
-/* O que foi montado pelo JavaScript some quando ele está desligado */
 html:not(.com-js) .so-com-js {
   display: none;
 }
 
-/* "Desça para continuar" da abertura: um fio que desce. Só existe com as cenas em movimento. */
 .rolar-dica {
   display: none;
 }
@@ -5036,11 +4355,9 @@ html:not(.com-js) .so-com-js {
 }
 
 .rolar-dica i {
-  animation: fio-descendo 1.6s ease-in-out 3;   /* três vezes e para */
+  animation: fio-descendo 1.6s ease-in-out 3;
 }
 
-/* O aviso "Desça para continuar", no pé de cada palco (posto pelo js/cenas.js).
-   Fica em uma etiqueta de papel claro, para ser lido por cima de qualquer cena. */
 .cena-desca {
   display: none;
 }
@@ -5067,7 +4384,6 @@ html:not(.com-js) .so-com-js {
   height: 1.5rem;
 }
 
-/* O fio desce três vezes cada vez que a cena chega à tela, e para */
 .cena-na-tela .cena-desca i {
   animation: fio-descendo 1.6s ease-in-out 3;
 }
@@ -5078,9 +4394,6 @@ html:not(.com-js) .so-com-js {
   100% { transform: scaleY(1); opacity: 0; }
 }
 
-/* ---------- 2. Abertura: a retícula forma a marca ---------- */
-
-/* Na página inicial a abertura encosta no cabeçalho, sem a folga de cima do <main> */
 main:has(> .cena-abertura) {
   padding-top: 0;
 }
@@ -5093,7 +4406,7 @@ main:has(> .cena-abertura) {
 }
 
 .abertura-convite {
-  order: -1;   /* no celular, o convite vem antes do desenho */
+  order: -1;
 }
 
 .abertura-convite > * + * {
@@ -5106,8 +4419,6 @@ main:has(> .cena-abertura) {
   gap: var(--espaco-3);
 }
 
-/* A tela de desenho (canvas) onde os pontinhos são desenhados.
-   Parada, mostra a marca já formada. */
 .reticula-tela {
   display: block;
   width: 100%;
@@ -5123,7 +4434,6 @@ main:has(> .cena-abertura) {
   line-height: 1.1;
 }
 
-/* O aviso para quem está vendo a página parada sem ter pedido isso no site */
 .aviso-movimento {
   display: flex;
   flex-wrap: wrap;
@@ -5149,8 +4459,6 @@ main:has(> .cena-abertura) {
   }
 }
 
-/* Em movimento: o desenho cobre o palco inteiro e o convite fica no meio,
-   com os pontinhos em volta, como em um cartaz */
 .com-cenas .cena-abertura .cena-palco {
   display: block;
 }
@@ -5162,18 +4470,12 @@ main:has(> .cena-abertura) {
   aspect-ratio: auto;
 }
 
-/* O convite fica no meio do palco, nos dois sentidos. A receita: prender os
-   quatro lados, dar à caixa o tamanho do conteúdo (fit-content) e deixar as
-   margens em "auto": o navegador divide a sobra por igual. */
 .com-cenas .abertura-convite {
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
   top: 0;
-  /* A folga de baixo é a altura do cabeçalho ("--cabecalho" vem do JavaScript):
-     assim o meio do convite é o meio do que se vê na primeira tela, com o
-     cabeçalho ainda em cima */
   bottom: var(--cabecalho, 5rem);
   width: fit-content;
   height: fit-content;
@@ -5186,9 +4488,6 @@ main:has(> .cena-abertura) {
   font-size: clamp(3rem, 1.25rem + 7.5vw, 7rem);
 }
 
-/* Os botões e o aviso de descer são parágrafos, e parágrafo tem largura máxima
-   de leitura (ver base.css). Aqui eles ocupam a largura toda do convite, para
-   o meio deles ser o meio da tela. */
 .com-cenas .abertura-botoes,
 .com-cenas .rolar-dica {
   max-width: none;
@@ -5199,12 +4498,10 @@ main:has(> .cena-abertura) {
   position: absolute;
   left: 0;
   right: 0;
-  top: 70%;   /* o JavaScript acerta a altura, logo abaixo das letras */
+  top: 70%;
   padding-inline: var(--espaco-4);
   opacity: 0;
 }
-
-/* ---------- 3. A frase acende ---------- */
 
 .frase {
   max-width: 24ch;
@@ -5214,8 +4511,6 @@ main:has(> .cena-abertura) {
   line-height: 1.04;
 }
 
-/* O sublinhado de caneta: o traço inteiro mede 1 (pathLength="1" no HTML).
-   "--falta" diz quanto do traço ainda não foi desenhado. */
 .frase-traco {
   display: block;
   width: min(100%, 24rem);
@@ -5233,29 +4528,20 @@ main:has(> .cena-abertura) {
   stroke-dashoffset: var(--falta, 0);
 }
 
-/* A frase ganha espaço em cima e embaixo: é um respiro entre a abertura e o
-   resto da página */
 .frase-secao {
   padding-block: clamp(4rem, 14vh, 9rem);
 }
 
-/* As palavras acendem uma depois da outra. "--ordem" é a posição da palavra na
-   frase (vem do JavaScript): cada uma espera 110 milésimos de segundo a mais
-   que a anterior. A frase inteira leva menos de 3 segundos. */
 .frase span {
   transition: color 320ms ease-out;
   transition-delay: calc(var(--ordem, 0) * 110ms);
 }
 
-/* O sublinhado se desenha depois da última palavra ("--palavras" é quantas são) */
 .frase-traco path {
   transition: stroke-dashoffset 700ms ease-out;
   transition-delay: calc(var(--palavras, 0) * 110ms);
 }
 
-/* Antes de aparecer na tela, a frase espera apagada: a tinta bem diluída e o
-   sublinhado por desenhar. Quem põe e tira esta classe é o js/cenas-inicio.js.
-   Sem JavaScript, ou com menos movimento, ela nunca é posta. */
 .frase-apagada .frase span {
   color: var(--cor-vaga);
   color: color-mix(in srgb, var(--cor-texto) 16%, transparent);
@@ -5267,9 +4553,6 @@ main:has(> .cena-abertura) {
   transition: none;
 }
 
-/* ---------- 4. O pacotinho gira e abre ---------- */
-
-/* Parada: o pacotinho de um lado e as cinco figurinhas do outro */
 .pacote-cena {
   --pacote-l: 9rem;
   display: flex;
@@ -5311,9 +4594,6 @@ main:has(> .cena-abertura) {
   gap: var(--espaco-4);
 }
 
-/* Em movimento: tudo no mesmo ponto do espaço, uma peça na frente da outra.
-   "perspective" é a distância do olho até a tela. Sem ela, girar em 3D
-   pareceria só achatar a peça. */
 .com-cenas .palco-3d {
   perspective: 1100px;
 }
@@ -5325,7 +4605,7 @@ main:has(> .cena-abertura) {
   width: var(--pacote-l);
   height: calc(var(--pacote-l) * 1.4);
   margin-top: 9vh;
-  transform-style: preserve-3d;   /* os filhos ficam no mesmo espaço 3D */
+  transform-style: preserve-3d;
 }
 
 .com-cenas .pacote3d {
@@ -5337,8 +4617,6 @@ main:has(> .cena-abertura) {
   transform-style: preserve-3d;
 }
 
-/* As duas faces ocupam o mesmo lugar. "backface-visibility: hidden" esconde
-   a face que está de costas para quem olha. */
 .com-cenas .pacote3d-face {
   position: absolute;
   inset: 0;
@@ -5374,9 +4652,6 @@ main:has(> .cena-abertura) {
   transform-style: preserve-3d;
 }
 
-/* A sequência de quadros: uma tela de desenho maior que o pacotinho, com folga
-   para ele entrar, girar e cair. Fica escondida até todas as imagens chegarem;
-   aí a classe "com-quadros" troca o pacotinho de CSS por ela. */
 .pacote-quadros {
   display: none;
 }
@@ -5397,7 +4672,6 @@ main:has(> .cena-abertura) {
   display: none;
 }
 
-/* Cada figurinha começa escondida atrás do pacotinho, bem no meio dele */
 .com-cenas .pacote-carta {
   position: absolute;
   left: 50%;
@@ -5408,9 +4682,6 @@ main:has(> .cena-abertura) {
   opacity: 0;
 }
 
-/* ---------- 5. O álbum abre ---------- */
-
-/* Parada: o álbum já aberto, com duas páginas lado a lado */
 .livro {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -5419,7 +4690,7 @@ main:has(> .cena-abertura) {
 }
 
 .folha {
-  display: contents;   /* a folha "some" e as faces dela viram filhas diretas da grade */
+  display: contents;
 }
 
 .face {
@@ -5430,7 +4701,6 @@ main:has(> .cena-abertura) {
   border: 2px solid var(--cor-texto);
 }
 
-/* Parada, só aparecem as duas páginas da primeira abertura */
 html:not(.com-cenas) .capa,
 html:not(.com-cenas) #pagina-3,
 html:not(.com-cenas) #pagina-base {
@@ -5444,8 +4714,6 @@ html:not(.com-cenas) #pagina-base {
   margin-top: var(--espaco-5);
 }
 
-/* Em movimento. A caixa do livro tem o tamanho de UMA página (a da direita).
-   As folhas giram em torno da borda esquerda dela, que é a lombada. */
 .com-cenas .livro {
   --pagina-l: min(46vw, 22rem, calc((100vh - 15rem) / 1.35));
   position: relative;
@@ -5467,11 +4735,10 @@ html:not(.com-cenas) #pagina-base {
   display: block;
   position: absolute;
   inset: 0;
-  transform-origin: left center;   /* gira em torno da lombada */
+  transform-origin: left center;
   transform-style: preserve-3d;
 }
 
-/* Cada folha tem duas faces: a frente e o verso (este já nasce virado) */
 .com-cenas .face {
   display: block;
   position: absolute;
@@ -5484,7 +4751,6 @@ html:not(.com-cenas) #pagina-base {
   transform: rotateY(180deg);
 }
 
-/* Enquanto a folha vira, o lado da lombada escurece ("--sombra" vem do JavaScript) */
 .com-cenas .face::after {
   content: "";
   position: absolute;
@@ -5498,7 +4764,6 @@ html:not(.com-cenas) #pagina-base {
   background: linear-gradient(to left, rgba(10, 16, 40, 0.6), transparent 55%);
 }
 
-/* A capa: o negativo da página, como o pacotinho */
 .com-cenas .capa {
   display: flex;
   flex-direction: column;
@@ -5520,7 +4785,7 @@ html:not(.com-cenas) #pagina-base {
 }
 
 .capa span {
-  position: relative;   /* na frente dos pontinhos */
+  position: relative;
   padding: 0 0.3em;
   background: var(--cor-etiqueta-fundo);
 }
@@ -5557,9 +4822,6 @@ html:not(.com-cenas) #pagina-base {
   opacity: 0;
 }
 
-/* O miolo da página é desenhado sempre com 480 por 648 pixels e depois
-   encolhido ou aumentado ("--escala" vem do JavaScript) para caber na folha.
-   Assim a página do álbum se comporta como uma gravura: tudo cresce junto. */
 .miolo {
   position: absolute;
   left: 0;
@@ -5631,15 +4893,10 @@ html:not(.com-cenas) #pagina-base {
   font-weight: 700;
 }
 
-/* ---------- 6. Mergulho na figurinha ---------- */
-
-/* Parada: só a faixa de cor com a etiqueta. A figurinha que cresce não aparece. */
 .mergulho {
   display: none;
 }
 
-/* A camada de cor. A cor é a do retrato da figurinha ("--campo", posta pelo
-   JavaScript; sem ele, fica a tinta da página). */
 .mergulho-fim {
   display: grid;
   place-items: center;
@@ -5649,8 +4906,6 @@ html:not(.com-cenas) #pagina-base {
   background-size: 9px 9px;
 }
 
-/* Nenhum texto é escrito direto em cima da cor da seleção: a frase vem em
-   uma etiqueta de papel branco, colada como uma figurinha. */
 .mergulho-etiqueta {
   max-width: 15ch;
   padding: var(--espaco-5);
@@ -5678,8 +4933,6 @@ html:not(.com-cenas) #pagina-base {
   opacity: 0;
 }
 
-/* ---------- 7. Os números contam ---------- */
-
 .numeros {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -5693,7 +4946,6 @@ html:not(.com-cenas) #pagina-base {
   }
 }
 
-/* As linhas do campo, atrás dos números. É enfeite: fica bem fraco. */
 .campo-dos-numeros {
   position: absolute;
   z-index: 0;
@@ -5705,7 +4957,7 @@ html:not(.com-cenas) #pagina-base {
 }
 
 .numeros {
-  position: relative;   /* na frente do campo */
+  position: relative;
   z-index: 1;
 }
 
@@ -5718,12 +4970,11 @@ html:not(.com-cenas) #pagina-base {
   translate: -50% -50%;
 }
 
-/* "--aceso" vai de 0 a 1 conforme chega a vez do número. Parado, vale 1. */
 .numero {
   position: relative;
   isolation: isolate;
   display: flex;
-  flex-direction: column-reverse;   /* no HTML vem a legenda e depois o número; na tela, o número fica em cima */
+  flex-direction: column-reverse;
   opacity: calc(0.22 + var(--aceso, 1) * 0.78);
 }
 
@@ -5739,7 +4990,6 @@ html:not(.com-cenas) #pagina-base {
   font-weight: 700;
 }
 
-/* A mancha de retícula atrás do número: bolinhas que somem em direção à borda */
 .numero::before {
   content: "";
   position: absolute;
@@ -5758,20 +5008,13 @@ html:not(.com-cenas) #pagina-base {
   padding-inline: var(--espaco-4);
 }
 
-/* ---------- 8. O carrossel dos grupos ---------- */
-
-/* A seção vai de um lado ao outro da tela, para a faixa poder passar das
-   margens. O título e os botões ficam no miolo (classe "largura"). */
 .secao-grupos {
   border-top: 2px solid var(--cor-texto);
   padding-block: var(--espaco-6);
 }
 
-/* A janela: mostra um pedaço da faixa e rola para os lados. Cada painel "gruda"
-   no meio dela quando a rolagem para (scroll-snap). A barra de rolagem fica
-   escondida: os botões "Anterior" e "Próximo" fazem esse papel. */
 .grupos-janela {
-  position: relative;   /* os painéis medem a posição deles a partir daqui */
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -5783,8 +5026,6 @@ html:not(.com-cenas) #pagina-base {
   display: none;
 }
 
-/* A faixa: os doze grupos em fila. A folga dos lados (metade da janela menos
-   metade de um painel) deixa o primeiro e o último chegarem ao meio. */
 .trilha {
   --grupo-l: min(78vw, 21rem);
   display: flex;
@@ -5816,7 +5057,6 @@ html:not(.com-cenas) #pagina-base {
   font-size: var(--titulo-3);
 }
 
-/* A letra do grupo, bem grande */
 .grupo-letra {
   font-size: clamp(4.5rem, 3rem + 6vw, 7.5rem);
   line-height: 0.8;
@@ -5837,12 +5077,6 @@ html:not(.com-cenas) #pagina-base {
   line-height: 1.2;
 }
 
-/* O selo: a bandeira de uma seleção.
-   "--f" vai de 0 (grupo longe do meio da tela) a 1 (grupo no meio).
-   Com 0 ele é uma vaga impressa em uma tinta só, de canto vivo.
-   Com 1 ele é uma figurinha: colorida, de canto arredondado e um pouco torta.
-   A impressão em uma tinta usa a mesma receita das fotos do site
-   (ver "Foto em uma tinta só", em componentes.css). */
 .selo {
   position: relative;
   overflow: hidden;
@@ -5886,7 +5120,6 @@ html:not(.com-cenas) #pagina-base {
   mix-blend-mode: multiply;
 }
 
-/* Passou da metade do caminho: ganha a borda branca e a sombra de quem foi colado */
 .grupo-colado .selo {
   border-color: var(--cor-figurinha-papel);
   box-shadow: 0 0 0 2px var(--cor-figurinha-papel), var(--sombra-colada);
@@ -5900,13 +5133,10 @@ html:not(.com-cenas) #pagina-base {
 .grupo a {
   display: inline-flex;
   align-items: center;
-  min-height: 2.75rem;   /* 44 px: alvo de toque confortável */
+  min-height: 2.75rem;
   font-weight: 700;
 }
 
-/* ---------- 9. Voo pelas figurinhas ---------- */
-
-/* Parada: só o título e o botão */
 .voo {
   display: none;
 }
@@ -5919,8 +5149,6 @@ html:not(.com-cenas) #pagina-base {
   perspective: 900px;
 }
 
-/* Um ponto no meio do palco. As figurinhas são espalhadas em volta dele,
-   cada uma com a sua profundidade (translateZ). */
 .com-cenas .voo {
   --voo-l: clamp(8rem, 22vmin, 11rem);
   display: block;
@@ -5953,8 +5181,6 @@ html:not(.com-cenas) #pagina-base {
   pointer-events: auto;
 }
 
-/* ---------- Tela baixa (celular deitado, janela pequena) ----------
-   Com menos de 480 px de altura, as peças encolhem para caber no palco. */
 @media (max-height: 30rem) {
   .com-cenas .cena-titulo,
   .com-cenas .mergulho-etiqueta {
@@ -6025,38 +5251,20 @@ html:not(.com-cenas) #pagina-base {
 ### js/tema-acessibilidade.js
 
 ````js
-// ============================================================================
-// tema-acessibilidade.js
-// ----------------------------------------------------------------------------
-// Cuida de duas coisas:
-//   1. Aplicar as preferências salvas (tema, tamanho da letra etc.) ANTES de a
-//      página aparecer. Por isso este arquivo é chamado lá no <head>.
-//   2. Montar o painel de acessibilidade e guardar o que a pessoa escolher.
-//
-// As preferências viram atributos no <html>, por exemplo:
-//   <html data-tema="escuro" data-fonte="grande">
-// e o CSS (tokens.css e acessibilidade.css) faz o resto.
-//
-// Onde fica guardado: no localStorage, uma "gaveta" do navegador que mantém
-// pequenos textos mesmo depois de fechar a página.
-// ============================================================================
-
 (function () {
   'use strict';
 
   const CHAVE = 'colei.preferencias';
 
-  // O que vale quando a pessoa ainda não escolheu nada
   const PADRAO = {
-    tema: 'automatico',      // claro, escuro ou automatico (segue o aparelho)
-    fonte: 'normal',         // normal, grande ou maior
-    contraste: 'normal',     // normal ou alto
-    movimento: 'normal',     // normal (segue o aparelho), reduzido ou completo
-    espacamento: 'normal',   // normal ou amplo
-    links: 'normal',         // normal ou destacados
+    tema: 'automatico',
+    fonte: 'normal',
+    contraste: 'normal',
+    movimento: 'normal',
+    espacamento: 'normal',
+    links: 'normal',
   };
 
-  // Os únicos valores aceitos. Qualquer outra coisa é ignorada.
   const VALORES = {
     tema: ['claro', 'escuro', 'automatico'],
     fonte: ['normal', 'grande', 'maior'],
@@ -6066,10 +5274,6 @@ html:not(.com-cenas) #pagina-base {
     links: ['normal', 'destacados'],
   };
 
-  // -------------------------------------------------------------------------
-  // 1. Ler, guardar e aplicar
-  // -------------------------------------------------------------------------
-
   function lerPreferencias() {
     const preferencias = Object.assign({}, PADRAO);
     try {
@@ -6078,7 +5282,6 @@ html:not(.com-cenas) #pagina-base {
         if (VALORES[nome].includes(salvo[nome])) preferencias[nome] = salvo[nome];
       }
     } catch (erro) {
-      // localStorage bloqueado ou texto estragado: fica o padrão.
     }
     return preferencias;
   }
@@ -6087,15 +5290,13 @@ html:not(.com-cenas) #pagina-base {
     try {
       localStorage.setItem(CHAVE, JSON.stringify(preferencias));
     } catch (erro) {
-      // Sem localStorage a escolha vale só até fechar a página.
     }
   }
 
-  // Pergunta ao aparelho se ele está em modo escuro
   const sistemaEscuro = window.matchMedia('(prefers-color-scheme: dark)');
 
   function aplicar() {
-    const raiz = document.documentElement; // o <html>
+    const raiz = document.documentElement;
 
     let tema = preferencias.tema;
     if (tema === 'automatico') tema = sistemaEscuro.matches ? 'escuro' : 'claro';
@@ -6110,8 +5311,6 @@ html:not(.com-cenas) #pagina-base {
 
   const preferencias = lerPreferencias();
 
-  // Atalho pelo endereço: index.html?tema=escuro abre no tema escuro sem mexer
-  // no que está salvo. Serve para mandar um link e para tirar os prints.
   const doEndereco = new URLSearchParams(window.location.search);
   for (const nome in PADRAO) {
     if (VALORES[nome].includes(doEndereco.get(nome))) preferencias[nome] = doEndereco.get(nome);
@@ -6119,24 +5318,16 @@ html:not(.com-cenas) #pagina-base {
 
   aplicar();
 
-  // Avisa o CSS de que o JavaScript está ligado (mostra os botões que dependem dele)
   document.documentElement.classList.add('com-js');
 
-  // Se o aparelho trocar de claro para escuro com a página aberta, acompanha
   sistemaEscuro.addEventListener('change', aplicar);
 
-  // Deixa outro script do site guardar uma preferência, do mesmo jeito que o
-  // painel faz. Exemplo: guardarPreferencia('movimento', 'completo').
   window.guardarPreferencia = function (nome, valor) {
     if (!VALORES[nome] || !VALORES[nome].includes(valor)) return;
     preferencias[nome] = valor;
     salvarPreferencias();
     aplicar();
   };
-
-  // -------------------------------------------------------------------------
-  // 2. O painel
-  // -------------------------------------------------------------------------
 
   const HTML_DO_PAINEL = `
     <dialog class="painel" id="painel-acessibilidade" aria-labelledby="painel-titulo">
@@ -6185,7 +5376,6 @@ html:not(.com-cenas) #pagina-base {
     document.body.insertAdjacentHTML('beforeend', HTML_DO_PAINEL);
     const painel = document.getElementById('painel-acessibilidade');
 
-    // Navegador muito antigo, sem <dialog>: esconde o botão em vez de quebrar.
     if (typeof painel.showModal !== 'function') {
       botaoAbrir.hidden = true;
       return;
@@ -6194,28 +5384,25 @@ html:not(.com-cenas) #pagina-base {
     const aviso = painel.querySelector('.painel-aviso');
     const campos = painel.querySelectorAll('input');
 
-    // Marca nos campos o que está valendo agora
     function mostrarNosCampos() {
       campos.forEach(function (campo) {
         campo.checked = preferencias[campo.name] === campo.value;
       });
     }
 
-    // A opção de mostrar as animações só faz sentido quando o aparelho pede menos movimento
     const pedeMenosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     botaoAbrir.addEventListener('click', function () {
       painel.querySelector('[data-so-com-menos-movimento]').hidden = !pedeMenosMovimento.matches;
       mostrarNosCampos();
       aviso.textContent = '';
-      painel.showModal(); // abre por cima da página e prende o foco dentro
+      painel.showModal();
     });
 
     painel.querySelector('[data-fechar]').addEventListener('click', function () {
-      painel.close(); // o navegador devolve o foco para o botão que abriu
+      painel.close();
     });
 
-    // Clicar no fundo escurecido (fora da caixa) também fecha
     painel.addEventListener('click', function (evento) {
       if (evento.target === painel) painel.close();
     });
@@ -6235,7 +5422,7 @@ html:not(.com-cenas) #pagina-base {
 
         salvarPreferencias();
         aplicar();
-        mostrarNosCampos();   // "reduzir" e "mostrar" são a mesma preferência: marcar uma desmarca a outra
+        mostrarNosCampos();
       });
     });
 
@@ -6248,7 +5435,6 @@ html:not(.com-cenas) #pagina-base {
     });
   }
 
-  // O painel só pode ser montado depois que o <body> existir
   document.addEventListener('DOMContentLoaded', montarPainel);
 })();
 ````
@@ -6256,26 +5442,12 @@ html:not(.com-cenas) #pagina-base {
 ### js/menu.js
 
 ````js
-// ============================================================================
-// menu.js
-// ----------------------------------------------------------------------------
-// Em telas pequenas, o menu fica recolhido atrás do botão "Menu".
-// Este arquivo abre e fecha o menu e conta isso ao leitor de tela pelo
-// atributo aria-expanded ("expandido: sim ou não").
-// Em telas grandes o CSS mostra o menu sempre aberto e esconde o botão.
-//
-// Também troca o link "Entrar" por "Minha conta" quando alguém já entrou.
-// ============================================================================
-
-// Quem entrou no site fica anotado no localStorage (ver js/login.js).
-// Se houver alguém, o link "Entrar" do menu passa a dizer "Minha conta".
 function atualizarLinkDaConta() {
   let entrou = false;
   try {
     const sessao = JSON.parse(localStorage.getItem('colei.sessao'));
     entrou = Boolean(sessao && sessao.email);
   } catch (erro) {
-    // Sem localStorage, ninguém entrou.
   }
   for (const link of document.querySelectorAll('.menu-entrar')) {
     link.textContent = entrou ? 'Minha conta' : 'Entrar';
@@ -6299,7 +5471,6 @@ document.addEventListener('DOMContentLoaded', function () {
     definirAberto(!estaAberto);
   });
 
-  // A tecla Esc fecha o menu e devolve o foco para o botão
   document.addEventListener('keydown', function (evento) {
     const estaAberto = botao.getAttribute('aria-expanded') === 'true';
     if (evento.key === 'Escape' && estaAberto) {
@@ -6313,27 +5484,9 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/efeitos.js
 
 ````js
-// ============================================================================
-// efeitos.js
-// ----------------------------------------------------------------------------
-// Dois efeitos que valem nas 7 páginas e respondem ao ponteiro (o mouse):
-//
-//   1. Retícula que acende: os pontinhos de impressão aparecem no papel em
-//      volta do ponteiro, como uma lanterna passando pela página.
-//   2. Lendária holográfica: a figurinha lendária inclina e o brilho colorido
-//      corre conforme o ponteiro passa por cima dela.
-//
-// Nos dois casos o JavaScript só anota a posição do ponteiro em variáveis do
-// CSS (--x, --y, --px, --py...). Quem desenha é o CSS (base.css e componentes.css).
-//
-// Não depende de nenhum outro arquivo do site.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // A pessoa pediu menos movimento? (no painel de acessibilidade ou no aparelho)
-  // "completo" é o pedido contrário: ver as animações mesmo que o aparelho peça menos.
   function querMenosMovimento() {
     const pedido = document.documentElement.dataset.movimento;
     if (pedido === 'reduzido') return true;
@@ -6341,28 +5494,16 @@ document.addEventListener('DOMContentLoaded', function () {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
-  // -------------------------------------------------------------------------
-  // 1. Retícula que acende
-  // -------------------------------------------------------------------------
-  // Uma camada do tamanho da tela, atrás de tudo, coberta de pontinhos. Uma
-  // máscara (no CSS) só deixa ver os que estão perto do ponteiro. A posição
-  // fica guardada na própria camada, que não tem nada dentro: assim, mexer o
-  // mouse não obriga o navegador a recalcular o estilo da página inteira.
-
   const lanterna = document.createElement('div');
   lanterna.className = 'lanterna';
-  lanterna.setAttribute('aria-hidden', 'true');   // é só enfeite
+  lanterna.setAttribute('aria-hidden', 'true');
   document.body.prepend(lanterna);
 
   function apagarLanterna() {
     lanterna.classList.remove('lanterna-acesa');
   }
 
-  // -------------------------------------------------------------------------
-  // 2. Lendária holográfica
-  // -------------------------------------------------------------------------
-
-  let brilhando = null;   // a figurinha lendária que está sob o ponteiro agora
+  let brilhando = null;
 
   function apagarBrilho() {
     if (!brilhando) return;
@@ -6372,14 +5513,9 @@ document.addEventListener('DOMContentLoaded', function () {
     brilhando = null;
   }
 
-  // -------------------------------------------------------------------------
-  // Um ouvinte só para o site inteiro
-  // -------------------------------------------------------------------------
-
   document.addEventListener('pointermove', function (evento) {
     const parado = querMenosMovimento();
 
-    // A lanterna segue só o mouse. No celular não existe ponteiro parado em cima da página.
     if (evento.pointerType === 'mouse' && !parado) {
       lanterna.style.setProperty('--x', evento.clientX + 'px');
       lanterna.style.setProperty('--y', evento.clientY + 'px');
@@ -6388,7 +5524,6 @@ document.addEventListener('DOMContentLoaded', function () {
       apagarLanterna();
     }
 
-    // A figurinha lendária que está embaixo do ponteiro (se houver uma, e de frente)
     let figurinha = evento.target.closest ? evento.target.closest('.figurinha-lendaria') : null;
     if (figurinha && (figurinha.dataset.face === 'verso' || figurinha.dataset.face === 'costas')) figurinha = null;
     if (figurinha !== brilhando) apagarBrilho();
@@ -6396,24 +5531,20 @@ document.addEventListener('DOMContentLoaded', function () {
     brilhando = figurinha;
 
     const caixa = figurinha.getBoundingClientRect();
-    const x = (evento.clientX - caixa.left) / caixa.width;    // 0 na esquerda, 1 na direita
-    const y = (evento.clientY - caixa.top) / caixa.height;    // 0 em cima, 1 embaixo
+    const x = (evento.clientX - caixa.left) / caixa.width;
+    const y = (evento.clientY - caixa.top) / caixa.height;
     figurinha.style.setProperty('--px', (x * 100).toFixed(1) + '%');
     figurinha.style.setProperty('--py', (y * 100).toFixed(1) + '%');
     figurinha.style.setProperty('--brilho', '0.9');
-    // Com menos movimento, a figurinha não inclina: fica só o brilho
     if (!parado) {
       figurinha.style.setProperty('--ry', ((x - 0.5) * 22).toFixed(1) + 'deg');
       figurinha.style.setProperty('--rx', ((0.5 - y) * 22).toFixed(1) + 'deg');
-      figurinha.style.setProperty('--tempo-do-movimento', '160ms');   // inclina rápido, para acompanhar o ponteiro
+      figurinha.style.setProperty('--tempo-do-movimento', '160ms');
     }
   });
 
-  // Ao clicar, a figurinha vai virar: ela volta ao prumo antes, para o giro
-  // sair inteiro. O "true" faz este ouvinte rodar antes do clique da figurinha.
   document.addEventListener('click', apagarBrilho, true);
 
-  // O ponteiro saiu da janela
   document.documentElement.addEventListener('pointerleave', function () {
     apagarLanterna();
     apagarBrilho();
@@ -6424,31 +5555,10 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/estado.js
 
 ````js
-// ============================================================================
-// estado.js
-// ----------------------------------------------------------------------------
-// O "caderninho" do álbum: guarda no navegador o que a pessoa já ganhou, o que
-// já colou, os pacotinhos, a sequência de dias e as conquistas.
-//
-// Onde fica guardado: no localStorage, uma gaveta que todo navegador tem e que
-// continua lá depois de fechar a página. A gaveta só guarda texto. Por isso o
-// álbum vira texto na hora de guardar (JSON.stringify) e volta a ser objeto na
-// hora de ler (JSON.parse).
-//
-// Cada pessoa tem a sua gaveta: o nome da gaveta leva quem entrou no site.
-// Enquanto ninguém entrou, a gaveta é "colei.album.visitante".
-//
-// Depende de: js/dados.js (as listas SELECOES e FIGURINHAS).
-// ============================================================================
-
 const FIGURINHAS_POR_PACOTINHO = 5;
 
-// Chance de cada raridade sair. Pense em uma urna de sorteio: cada figurinha
-// comum entra com 6 bilhetes, cada brilhante com 3 e cada lendária com 1.
 const BILHETES_DA_RARIDADE = { comum: 6, brilhante: 3, lendaria: 1 };
 
-// As conquistas do álbum. Cada uma vale um pacotinho extra.
-// A regra de cada uma está na função conquistaFeita(), mais abaixo.
 const CONQUISTAS = [
   { id: 'primeira-colada', nome: 'Primeira colada', como: 'Cole a sua primeira figurinha.' },
   { id: 'achei-lendaria', nome: 'Achei uma lendária', como: 'Tire uma figurinha lendária no pacotinho.' },
@@ -6459,18 +5569,11 @@ const CONQUISTAS = [
   { id: 'primeira-troca', nome: 'Primeira troca', como: 'Troque uma repetida na banca de trocas.' },
 ];
 
-// ---------------------------------------------------------------------------
-// 1. Ler e guardar
-// ---------------------------------------------------------------------------
-
-// Quem está usando o álbum agora. A página Entrar grava a sessão;
-// sem sessão, a pessoa é "visitante".
 function usuarioAtual() {
   try {
     const sessao = JSON.parse(localStorage.getItem('colei.sessao'));
     if (sessao && sessao.email) return sessao.email;
   } catch (erro) {
-    // Sem sessão ou gaveta bloqueada: segue como visitante.
   }
   return 'visitante';
 }
@@ -6479,23 +5582,19 @@ function chaveDoAlbum() {
   return 'colei.album.' + usuarioAtual();
 }
 
-// Um álbum que ainda não tem nada
 function albumVazio() {
   return {
-    quantidade: {},   // quantas cópias de cada figurinha já saíram: { "50": 2, "54": 1 }
-    coladas: [],      // números das figurinhas coladas: [50, 54]
-    extras: 0,        // pacotinhos extras guardados
-    pacotinhos: 0,    // quantos pacotinhos já foram abertos
-    trocas: 0,        // quantas trocas já foram feitas na banca
-    ultimoDia: '',    // dia do último pacotinho grátis, no formato "2026-11-19"
-    sequencia: 0,     // dias seguidos abrindo o pacotinho grátis
-    conquistas: {},   // conquistas feitas e o dia de cada uma: { "primeira-colada": "2026-11-19" }
+    quantidade: {},
+    coladas: [],
+    extras: 0,
+    pacotinhos: 0,
+    trocas: 0,
+    ultimoDia: '',
+    sequencia: 0,
+    conquistas: {},
   };
 }
 
-// Se o navegador bloquear o localStorage (acontece em janela anônima de alguns
-// navegadores), o álbum fica guardado aqui, uma reserva por pessoa, e vale só
-// até fechar a página.
 const albunsDeReserva = {};
 
 function lerAlbum() {
@@ -6504,16 +5603,13 @@ function lerAlbum() {
   try {
     texto = localStorage.getItem(chave);
   } catch (erro) {
-    // Gaveta bloqueada: vale a reserva, logo abaixo.
   }
   if (texto === null && albunsDeReserva[chave]) texto = albunsDeReserva[chave];
 
   try {
     const salvo = JSON.parse(texto);
-    // Object.assign completa o que estiver faltando com os valores do álbum vazio
     if (salvo && typeof salvo === 'object') return Object.assign(albumVazio(), salvo);
   } catch (erro) {
-    // Texto estragado: começa um álbum novo.
   }
   return albumVazio();
 }
@@ -6523,26 +5619,20 @@ function salvarAlbum(album) {
   const texto = JSON.stringify(album);
   try {
     localStorage.setItem(chave, texto);
-    delete albunsDeReserva[chave];   // guardou na gaveta: a reserva não é mais necessária
+    delete albunsDeReserva[chave];
   } catch (erro) {
-    albunsDeReserva[chave] = texto;  // não deu para guardar: fica na reserva
+    albunsDeReserva[chave] = texto;
   }
 }
 
-// Apaga tudo de quem está usando o álbum agora
 function zerarAlbum() {
   const chave = chaveDoAlbum();
   delete albunsDeReserva[chave];
   try {
     localStorage.removeItem(chave);
   } catch (erro) {
-    // Nada a apagar.
   }
 }
-
-// ---------------------------------------------------------------------------
-// 2. Perguntas sobre o álbum
-// ---------------------------------------------------------------------------
 
 function quantasTenho(album, numero) {
   return album.quantidade[numero] || 0;
@@ -6552,17 +5642,14 @@ function estaColada(album, numero) {
   return album.coladas.includes(numero);
 }
 
-// Repetidas: tudo o que passar de uma cópia (a primeira é a do álbum)
 function repetidasDe(album, numero) {
   return Math.max(0, quantasTenho(album, numero) - 1);
 }
 
-// Está na mão: já saiu no pacotinho, mas ainda não foi colada
 function estaNaMao(album, numero) {
   return quantasTenho(album, numero) > 0 && !estaColada(album, numero);
 }
 
-// Quantas figurinhas de uma lista estão coladas
 function contarColadas(album, figurinhas) {
   let conta = 0;
   for (const fig of figurinhas) {
@@ -6582,7 +5669,6 @@ function figurinhasDoGrupo(grupo) {
   });
 }
 
-// As letras dos grupos que já têm figurinhas, sem repetir: ["C"]
 function gruposDoAlbum() {
   const grupos = [];
   for (const selecao of SELECOES) {
@@ -6591,7 +5677,6 @@ function gruposDoAlbum() {
   return grupos;
 }
 
-// Os números do placar
 function resumoDoAlbum(album) {
   const total = FIGURINHAS.length;
   const coladas = contarColadas(album, FIGURINHAS);
@@ -6608,18 +5693,13 @@ function resumoDoAlbum(album) {
     coladas: coladas,
     faltaColar: total - coladas,
     porcento: Math.round((coladas / total) * 100),
-    tenho: tenho,                 // figurinhas diferentes que já saíram
-    faltam: total - tenho,        // figurinhas que ainda não saíram
+    tenho: tenho,
+    faltam: total - tenho,
     naMao: naMao,
-    comRepetida: comRepetida,     // figurinhas diferentes com pelo menos uma repetida
+    comRepetida: comRepetida,
   };
 }
 
-// ---------------------------------------------------------------------------
-// 3. Datas (para o pacotinho do dia e a sequência)
-// ---------------------------------------------------------------------------
-
-// Transforma uma data em texto "2026-11-19", no horário do aparelho
 function dataEmTexto(data) {
   const ano = data.getFullYear();
   const mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -6637,7 +5717,6 @@ function ontem() {
   return dataEmTexto(data);
 }
 
-// "2026-11-19" vira "19/11/2026"
 function dataPorExtenso(texto) {
   const partes = texto.split('-');
   return partes[2] + '/' + partes[1] + '/' + partes[0];
@@ -6651,11 +5730,6 @@ function temPacotinho(album) {
   return temPacotinhoDoDia(album) || album.extras > 0;
 }
 
-// ---------------------------------------------------------------------------
-// 4. Conquistas
-// ---------------------------------------------------------------------------
-
-// A regra de cada conquista. Devolve true se ela já foi cumprida.
 function conquistaFeita(id, album) {
   if (id === 'primeira-colada') {
     return album.coladas.length >= 1;
@@ -6689,8 +5763,6 @@ function conquistaFeita(id, album) {
   return false;
 }
 
-// Confere se alguma conquista nova foi cumprida. Cada conquista nova é
-// anotada com a data e vale um pacotinho extra. Devolve os nomes das novas.
 function conferirConquistas(album) {
   const novas = [];
   for (const conquista of CONQUISTAS) {
@@ -6704,21 +5776,14 @@ function conferirConquistas(album) {
   return novas;
 }
 
-// ---------------------------------------------------------------------------
-// 5. Ações: abrir pacotinho, colar e descolar
-// ---------------------------------------------------------------------------
-
-// Sorteia figurinhas diferentes entre si, respeitando a chance de cada raridade
 function sortearFigurinhas(quantas) {
-  const urna = FIGURINHAS.slice();   // uma cópia da lista, para poder tirar figurinhas dela
+  const urna = FIGURINHAS.slice();
   const sorteadas = [];
 
   while (sorteadas.length < quantas && urna.length > 0) {
-    // Conta quantos bilhetes há na urna
     let bilhetes = 0;
     for (const fig of urna) bilhetes += BILHETES_DA_RARIDADE[fig.raridade];
 
-    // Sorteia um bilhete e descobre de qual figurinha ele é
     let sorteado = Math.random() * bilhetes;
     let posicao = urna.length - 1;
     for (let i = 0; i < urna.length; i++) {
@@ -6730,22 +5795,17 @@ function sortearFigurinhas(quantas) {
     }
 
     sorteadas.push(urna[posicao]);
-    urna.splice(posicao, 1);   // sai da urna: não repete no mesmo pacotinho
+    urna.splice(posicao, 1);
   }
   return sorteadas;
 }
 
-// Abre um pacotinho: primeiro o grátis do dia; se já foi aberto hoje, um extra.
-// Devolve null se não há pacotinho, ou um objeto com:
-//   figurinhas: lista de { figurinha, nova }   (nova = ainda não tinha)
-//   conquistas: nomes das conquistas feitas com este pacotinho
 function abrirPacotinho() {
   const album = lerAlbum();
   const eDoDia = temPacotinhoDoDia(album);
   if (!eDoDia && album.extras < 1) return null;
 
   if (eDoDia) {
-    // Abriu ontem também? A sequência cresce. Senão, recomeça do 1.
     album.sequencia = album.ultimoDia === ontem() ? album.sequencia + 1 : 1;
     album.ultimoDia = hoje();
   } else {
@@ -6765,8 +5825,6 @@ function abrirPacotinho() {
   return { figurinhas: figurinhas, conquistas: conquistas };
 }
 
-// Cola uma figurinha que está na mão. Devolve os nomes das conquistas novas,
-// ou null se não deu para colar (não tem a figurinha ou ela já está colada).
 function colarFigurinha(numero) {
   const album = lerAlbum();
   if (!estaNaMao(album, numero)) return null;
@@ -6777,17 +5835,12 @@ function colarFigurinha(numero) {
   return conquistas;
 }
 
-// Desfaz a colagem: a figurinha volta para a mão.
-// (Conquista já feita continua feita.)
 function descolarFigurinha(numero) {
   const album = lerAlbum();
   album.coladas = album.coladas.filter(function (colada) { return colada !== numero; });
   salvarAlbum(album);
 }
 
-// Troca na banca (simulação): sai uma repetida e chega uma figurinha que faltava.
-// Devolve os nomes das conquistas novas, ou null se a troca não vale
-// (a figurinha dada não é repetida, ou a recebida a pessoa já tem).
 function trocarFigurinha(numeroQueSai, numeroQueChega) {
   const album = lerAlbum();
   if (repetidasDe(album, numeroQueSai) < 1) return null;
@@ -6802,26 +5855,17 @@ function trocarFigurinha(numeroQueSai, numeroQueChega) {
   return conquistas;
 }
 
-// Modo demonstração: ganha pacotinhos extras de uma vez
 function ganharPacotinhosExtras(quantos) {
   const album = lerAlbum();
   album.extras += quantos;
   salvarAlbum(album);
 }
 
-// ---------------------------------------------------------------------------
-// 6. Cartela da sequência (aparece nas páginas Início e Pacotinhos)
-// ---------------------------------------------------------------------------
-
-// A sequência só continua valendo se o último pacotinho do dia foi aberto
-// hoje ou ontem. Passou disso, ela recomeça no próximo pacotinho.
 function sequenciaAtual(album) {
   const emDia = album.ultimoDia === hoje() || album.ultimoDia === ontem();
   return emDia ? album.sequencia : 0;
 }
 
-// Carimba as casas da cartela (uma lista com 7 itens) e devolve a frase que
-// explica a sequência. No 8º dia a cartela recomeça: 8 dias marcam 1 casa.
 function marcarCartela(lista, album) {
   const dias = sequenciaAtual(album);
   const marcadas = dias === 0 ? 0 : ((dias - 1) % 7) + 1;
@@ -6830,7 +5874,6 @@ function marcarCartela(lista, album) {
   for (let i = 0; i < casas.length; i++) {
     const carimbado = i < marcadas;
     casas[i].classList.toggle('carimbado', carimbado);
-    // O texto escondido é para o leitor de tela: "Dia 2, carimbado"
     casas[i].innerHTML = '<span class="cartela-dia"><span class="escondido">Dia </span>' + (i + 1) +
       (carimbado ? '<span class="escondido">, carimbado</span>' : '') + '</span>';
   }
@@ -6846,23 +5889,8 @@ function marcarCartela(lista, album) {
 ### js/figurinha.js
 
 ````js
-// ============================================================================
-// figurinha.js
-// ----------------------------------------------------------------------------
-// Desenha uma figurinha na tela a partir de um registro de js/dados.js e cuida
-// de virá-la: frente (retrato), verso (informações) e costas (quando ela acabou
-// de sair do pacotinho e ainda não foi revelada).
-//
-// Usado pelas páginas Álbum e Pacotinhos.
-// Depende de: js/dados.js.
-// ============================================================================
-
 const NOME_DA_RARIDADE = { comum: 'Comum', brilhante: 'Brilhante', lendaria: 'Lendária' };
 const ICONE_DA_RARIDADE = { comum: 'circulo', brilhante: 'losango', lendaria: 'estrela' };
-
-// ---------------------------------------------------------------------------
-// Ajudantes
-// ---------------------------------------------------------------------------
 
 function selecaoPorId(id) {
   return SELECOES.find(function (selecao) { return selecao.id === id; });
@@ -6872,7 +5900,6 @@ function figurinhaPorNumero(numero) {
   return FIGURINHAS.find(function (fig) { return fig.numero === numero; });
 }
 
-// Atalho para criar um elemento já com classe e texto
 function criarElemento(tag, classe, texto) {
   const elemento = document.createElement(tag);
   if (classe) elemento.className = classe;
@@ -6880,21 +5907,16 @@ function criarElemento(tag, classe, texto) {
   return elemento;
 }
 
-// Cada figurinha fica um pouco torta, como se tivesse sido colada à mão.
-// A conta usa o número da figurinha: assim a mesma figurinha fica sempre
-// torta do mesmo jeito, entre -1,4 e 1,4 grau.
 function giroDaFigurinha(numero) {
   return ((numero * 7) % 5 - 2) * 0.7;
 }
 
-// A figurinha em uma frase, para o leitor de tela: "Nº 50, Alisson, Brasil, comum"
 function descreverFigurinha(fig) {
   const selecao = selecaoPorId(fig.selecao);
   const quem = fig.tipo === 'bandeira' ? 'bandeira de ' + selecao.nome : fig.nome + ', ' + selecao.nome;
   return 'Nº ' + fig.numero + ', ' + quem + ', ' + NOME_DA_RARIDADE[fig.raridade].toLowerCase();
 }
 
-// As linhas do verso da figurinha
 function linhasDoVerso(fig) {
   const selecao = selecaoPorId(fig.selecao);
   if (fig.tipo === 'bandeira') {
@@ -6909,8 +5931,6 @@ function linhasDoVerso(fig) {
   };
 }
 
-// A pessoa pediu menos movimento? (no painel de acessibilidade ou no aparelho)
-// "completo" é o pedido contrário: ver as animações mesmo que o aparelho peça menos.
 function movimentoReduzido() {
   const pedido = document.documentElement.dataset.movimento;
   if (pedido === 'reduzido') return true;
@@ -6918,62 +5938,39 @@ function movimentoReduzido() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-// Escreve um recado para o leitor de tela. A página tem um parágrafo escondido
-// com id="aviso" e role="status": tudo o que é escrito nele é lido em voz alta.
 function avisar(texto) {
   const caixa = document.getElementById('aviso');
   if (!caixa) return;
   caixa.textContent = '';
-  // A pequena espera faz o leitor de tela ler de novo mesmo se o texto for igual ao anterior
   setTimeout(function () { caixa.textContent = texto; }, 60);
 }
 
-// ---------------------------------------------------------------------------
-// Desenho
-// ---------------------------------------------------------------------------
-
-// Os quatro cortes de cabelo do retrato. Cada um é um desenho em SVG, posto
-// por cima da cabeça. O último é o cabelo raspado, que sai mais claro.
 const PENTEADOS = [
-  // curto
   '<path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>',
-  // penteado para o lado
   '<path class="busto-cabelo" d="M19.6 21C18.2 10.4 24.4 4.2 31.6 4.8C38.2 5.4 42 11 40.4 21C39.6 17.4 38.2 15.2 35.6 14C31 16.4 25 16.6 21.8 15.4C20.6 17 20 19 19.6 21Z"/>',
-  // cacheado: o cabelo curto com seis cachos em volta
   '<path class="busto-cabelo" d="M19.6 21C18.6 11 23.6 5.4 30 5.4C36.4 5.4 41.4 11 40.4 21C39.4 16.6 36.6 14.2 30 14.2C23.4 14.2 20.6 16.6 19.6 21Z"/>' +
   '<circle class="busto-cabelo" cx="21.4" cy="13.8" r="3.6"/><circle class="busto-cabelo" cx="25" cy="9.2" r="3.9"/><circle class="busto-cabelo" cx="30" cy="7.2" r="4.1"/>' +
   '<circle class="busto-cabelo" cx="35" cy="9.2" r="3.9"/><circle class="busto-cabelo" cx="38.6" cy="13.8" r="3.6"/><circle class="busto-cabelo" cx="30" cy="11.6" r="4"/>',
-  // raspado
   '<path class="busto-cabelo busto-cabelo-raspado" d="M20.2 18.6C20.4 11.4 24.4 7.2 30 7.2C35.6 7.2 39.6 11.4 39.8 18.6C38.2 14.4 35.4 12.6 30 12.6C24.6 12.6 21.8 14.4 20.2 18.6Z"/>',
 ];
 
-// O retrato: uma pessoa de frente, da cabeça aos ombros, com a camisa da
-// seleção e o número. É um desenho genérico, igual para todos; só o corte de
-// cabelo muda, conforme o número da figurinha (para o álbum não parecer uma
-// fila de bonecos iguais). Não é foto nem tenta parecer com o jogador de verdade.
-// As cores vêm do CSS (ver ".busto-...", em css/componentes.css).
 function desenharRetrato(numeroDaCamisa, penteado) {
   return '<svg class="figurinha-busto" viewBox="0 0 60 60" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">' +
-    // a camisa, com a costura das duas mangas
     '<path class="busto-camisa" d="M3 61C3 50 8 45.5 17 43.5L24.5 41.5Q30 45 35.5 41.5L43 43.5C52 45.5 57 50 57 61Z"/>' +
     '<path class="busto-traco" d="M12.5 48.5L14.5 61M47.5 48.5L45.5 61"/>' +
-    // o pescoço, a sombra do queixo e a gola
     '<path class="busto-pele" d="M25 32V41.8Q30 45.6 35 41.8V32Z"/>' +
     '<path class="busto-sombra" d="M25 35.2Q30 39.5 35 35.2V37.6Q30 41.8 25 37.6Z"/>' +
     '<path class="busto-gola" d="M23.6 41.2Q30 45.6 36.4 41.2L38.6 42.4Q30 48.2 21.4 42.4Z"/>' +
-    // as orelhas e o rosto, com a sombra de um dos lados
     '<ellipse class="busto-pele" cx="19.8" cy="22.6" rx="2.3" ry="3.3"/><ellipse class="busto-pele" cx="40.2" cy="22.6" rx="2.3" ry="3.3"/>' +
     '<path class="busto-pele" d="M20.2 19.5C20.2 11.5 24.4 7.2 30 7.2C35.6 7.2 39.8 11.5 39.8 19.5V24C39.8 31.2 35.4 36 30 36C24.6 36 20.2 31.2 20.2 24Z"/>' +
     '<path class="busto-sombra" d="M34.6 9.2C38 11.3 39.8 14.8 39.8 19.5V24C39.8 31.2 35.4 36 30 36C33.6 33.4 35.6 29.2 35.6 24Z"/>' +
     PENTEADOS[penteado % PENTEADOS.length] +
-    // as sobrancelhas, os olhos, o nariz e a boca
     '<path class="busto-traco" d="M23.6 19.4Q25.8 18.2 28 19.2M32 19.2Q34.2 18.2 36.4 19.4M30 23.2L29.1 27.2L30.9 27.5M27 31Q30 32.8 33 31"/>' +
     '<circle class="busto-olho" cx="25.9" cy="22.4" r="1.1"/><circle class="busto-olho" cx="34.1" cy="22.4" r="1.1"/>' +
     '<text class="busto-numero" x="30" y="58" text-anchor="middle">' + Number(numeroDaCamisa) + '</text>' +
     '</svg>';
 }
 
-// A frente: o retrato (ou a bandeira) em cima e a tarja com o texto embaixo
 function preencherFrente(onde, fig, etiqueta) {
   const selecao = selecaoPorId(fig.selecao);
 
@@ -6985,17 +5982,15 @@ function preencherFrente(onde, fig, etiqueta) {
     bandeira.className = 'figurinha-bandeira';
     bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
     bandeira.alt = 'Bandeira';
-    bandeira.draggable = false;   // quem é arrastada é a figurinha inteira, não só a imagem
+    bandeira.draggable = false;
     arte.append(bandeira);
   } else {
-    // Retrato genérico, desenhado: não é foto de ninguém
     arte.innerHTML = desenharRetrato(fig.camisa, fig.numero);
 
-    // A bandeirinha da seleção, no canto de cima
     const pais = document.createElement('img');
     pais.className = 'figurinha-pais';
     pais.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
-    pais.alt = '';                // o nome da seleção vem escrito na tarja, logo abaixo
+    pais.alt = '';
     pais.loading = 'lazy';
     pais.draggable = false;
     arte.append(pais);
@@ -7003,7 +5998,6 @@ function preencherFrente(onde, fig, etiqueta) {
 
   const tarja = criarElemento('span', 'figurinha-tarja');
   tarja.append(criarElemento('span', 'figurinha-nome', fig.nome));
-  // A seleção vem escrita: as cores da camisa sozinhas não bastam para saber de quem é
   tarja.append(criarElemento('span', 'figurinha-selecao', fig.tipo === 'bandeira' ? 'Bandeira' : selecao.nome));
 
   const linha = criarElemento('span', 'figurinha-linha');
@@ -7017,7 +6011,6 @@ function preencherFrente(onde, fig, etiqueta) {
   onde.append(arte, tarja);
 }
 
-// O verso: número, nome, dois dados e uma curiosidade
 function criarVerso(fig) {
   const verso = criarElemento('span', 'figurinha-face figurinha-verso');
   const linhas = linhasDoVerso(fig);
@@ -7030,38 +6023,26 @@ function criarVerso(fig) {
   return verso;
 }
 
-// Cria a figurinha. "opcoes" é um objeto com o que for preciso:
-//   vira: true        a figurinha vira ao clicar (ela é um botão)
-//   fechada: true     começa de costas, sem mostrar quem é (pacotinho)
-//   solta: true       ainda não colada: sem sombra
-//   etiqueta: 'Nova'  etiqueta presa no canto
-//   dica: '...'       texto lido pelo leitor de tela enquanto ela está de costas
-//   aoRevelar: função chamada quando a figurinha de costas é virada pela primeira vez
 function criarFigurinha(fig, opcoes) {
   opcoes = opcoes || {};
   const selecao = selecaoPorId(fig.selecao);
 
-  // Figurinha que vira é um <button>: com ele, Enter e Espaço já funcionam sozinhos
   const figurinha = document.createElement(opcoes.vira ? 'button' : 'div');
   figurinha.className = 'figurinha';
   if (opcoes.solta) figurinha.classList.add('figurinha-solta');
   figurinha.dataset.numero = fig.numero;
 
-  // As cores da seleção e o giro entram como variáveis do CSS
   figurinha.style.setProperty('--campo', selecao.cores.campo);
   figurinha.style.setProperty('--camisa', selecao.cores.camisa);
   figurinha.style.setProperty('--numero', selecao.cores.numero);
   figurinha.style.setProperty('--giro', giroDaFigurinha(fig.numero) + 'deg');
 
-  // Figurinha parada (a que está na mão): só a frente
   if (!opcoes.vira) {
     figurinha.classList.add('figurinha-' + fig.raridade);
     preencherFrente(figurinha, fig, opcoes.etiqueta);
     return figurinha;
   }
 
-  // Figurinha que vira: as faces ficam uma em cima da outra e o atributo
-  // data-face diz qual aparece (o CSS faz o giro).
   figurinha.type = 'button';
   figurinha.classList.add('figurinha-vira');
 
@@ -7069,7 +6050,6 @@ function criarFigurinha(fig, opcoes) {
   preencherFrente(frente, fig, opcoes.etiqueta);
   figurinha.append(frente, criarVerso(fig));
 
-  // Instrução lida só pelo leitor de tela
   const dica = criarElemento('span', 'escondido figurinha-dica', 'Virar para ver o verso.');
   figurinha.append(dica);
 
@@ -7081,8 +6061,6 @@ function criarFigurinha(fig, opcoes) {
     figurinha.dataset.face = 'costas';
     dica.textContent = opcoes.dica || 'Figurinha de costas. Virar.';
   } else {
-    // A raridade só entra na classe quando a frente aparece:
-    // de costas, a cor da moldura entregaria a surpresa.
     figurinha.classList.add('figurinha-' + fig.raridade);
     figurinha.dataset.face = 'frente';
   }
@@ -7093,7 +6071,6 @@ function criarFigurinha(fig, opcoes) {
   return figurinha;
 }
 
-// Vira a figurinha: costas -> frente (a revelação), frente <-> verso
 function virarFigurinha(figurinha, fig, aoRevelar) {
   const dica = figurinha.querySelector('.figurinha-dica');
 
@@ -7121,30 +6098,14 @@ function virarFigurinha(figurinha, fig, aoRevelar) {
 ### js/album.js
 
 ````js
-// ============================================================================
-// album.js
-// ----------------------------------------------------------------------------
-// A página do álbum. Faz quatro coisas:
-//   1. Monta as páginas: grupo > seleção > uma "casa" para cada figurinha.
-//   2. Mostra o que está na mão e cola: arrastando até a vaga ou pelo botão
-//      "Colar". Dá para desfazer a última colagem.
-//   3. Aplica a busca, as abas e os filtros.
-//   4. Mantém o placar e as conquistas em dia.
-//
-// Depende de: js/dados.js, js/estado.js e js/figurinha.js.
-// ============================================================================
-
-// Espera o HTML ficar pronto antes de mexer na página
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // O que está escolhido na busca, nas abas e nos filtros
   const escolha = { aba: 'todas', busca: '', grupo: '', selecao: '', posicao: '', raridade: '' };
 
-  let ultimaColada = null;   // número da última figurinha colada: é a que o "Desfazer" descola
-  let arrastando = null;     // número da figurinha que está sendo arrastada agora
+  let ultimaColada = null;
+  let arrastando = null;
 
-  // Os pedaços da página que este arquivo usa
   const paginas = document.getElementById('paginas');
   const bandeja = document.getElementById('bandeja');
   const painel = document.getElementById('painel-album');
@@ -7158,17 +6119,12 @@ document.addEventListener('DOMContentLoaded', function () {
     raridade: document.getElementById('filtro-raridade'),
   };
 
-  // -------------------------------------------------------------------------
-  // 1. Montar as páginas (feito uma vez só)
-  // -------------------------------------------------------------------------
-
   function acrescentarOpcao(select, valor, texto) {
     const opcao = criarElemento('option', '', texto);
     opcao.value = valor;
     select.append(opcao);
   }
 
-  // As opções dos filtros saem dos dados: assim nunca ficam diferentes do álbum
   function montarFiltros() {
     for (const grupo of gruposDoAlbum()) acrescentarOpcao(filtros.grupo, grupo, 'Grupo ' + grupo);
     for (const selecao of SELECOES) acrescentarOpcao(filtros.selecao, selecao.id, selecao.nome);
@@ -7176,12 +6132,10 @@ document.addEventListener('DOMContentLoaded', function () {
     for (const raridade of ['comum', 'brilhante', 'lendaria']) acrescentarOpcao(filtros.raridade, raridade, NOME_DA_RARIDADE[raridade]);
   }
 
-  // Uma linha da ficha da seleção: "Técnico" e o nome dele, por exemplo
   function acrescentarDado(lista, rotulo, valor) {
     lista.append(criarElemento('dt', '', rotulo), criarElemento('dd', '', valor));
   }
 
-  // A página dupla de uma seleção: a ficha à esquerda e as seis casas à direita
   function montarSelecao(selecao) {
     const pagina = criarElemento('section', 'selecao dobra');
     pagina.id = 'selecao-' + selecao.id;
@@ -7217,7 +6171,6 @@ document.addEventListener('DOMContentLoaded', function () {
       vagas.append(casa);
     }
 
-    // A lista fica dentro de uma caixa: é a caixa que recebe o espaço da dobra da página
     const direita = document.createElement('div');
     direita.append(vagas);
 
@@ -7225,8 +6178,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return pagina;
   }
 
-  // A bandeirinha que acompanha o nome de uma seleção.
-  // É decorativa (alt vazio): o nome vem sempre escrito ao lado.
   function criarBandeirinha(selecao) {
     const bandeira = document.createElement('img');
     bandeira.className = 'bandeirinha';
@@ -7234,12 +6185,10 @@ document.addEventListener('DOMContentLoaded', function () {
     bandeira.alt = '';
     bandeira.width = 48;
     bandeira.height = 36;
-    bandeira.loading = 'lazy';   // só baixa a imagem quando ela está perto de aparecer na tela
+    bandeira.loading = 'lazy';
     return bandeira;
   }
 
-  // O índice: uma casa por grupo, que é um link para o grupo.
-  // O preenchimento de cada casa é atualizado em atualizarPlacar().
   function montarIndice() {
     const indice = document.getElementById('indice-grupos');
     for (const grupo of gruposDoAlbum()) {
@@ -7255,7 +6204,6 @@ document.addEventListener('DOMContentLoaded', function () {
       letra.append(criarElemento('span', 'escondido', 'Grupo '), grupo, conta);
       link.append(quadro, letra);
 
-      // Se a busca ou um filtro estiver escondendo o grupo, limpa tudo antes de ir até ele
       link.addEventListener('click', function () {
         if (document.getElementById('titulo-grupo-' + grupo).closest('.grupo').hidden) limparFiltros();
       });
@@ -7266,7 +6214,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // A última página do álbum: como a Copa terminou
   function montarFinal() {
     const campea = selecaoPorId(COPA.campea);
     const titulo = document.getElementById('final-campea');
@@ -7313,33 +6260,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // -------------------------------------------------------------------------
-  // 2. Desenhar o que muda: casas, bandeja, placar e conquistas
-  // -------------------------------------------------------------------------
-
   function textoDeRepetidas(quantas) {
     if (quantas === 0) return '';
     return quantas === 1 ? '+1 repetida' : '+' + quantas + ' repetidas';
   }
 
-  // O botão "Colar" de uma figurinha (o mesmo na vaga e na bandeja)
   function criarBotaoColar(fig) {
     const botao = criarElemento('button', 'botao botao-pequeno', 'Colar');
     botao.type = 'button';
     botao.dataset.colar = fig.numero;
-    // Para o leitor de tela o botão diz qual figurinha cola: "Colar a figurinha 50, Alisson"
     botao.append(criarElemento('span', 'escondido', ' a figurinha ' + fig.numero + ', ' + fig.nome));
     return botao;
   }
 
-  // Uma casa do álbum tem três situações: figurinha colada, vaga com a
-  // figurinha na mão (mostra o botão "Colar") ou vaga em que ainda falta.
   function desenharCasa(numero, acabouDeColar) {
     const album = lerAlbum();
     const fig = figurinhaPorNumero(numero);
     const casa = document.getElementById('casa-' + numero);
-    casa.textContent = '';   // apaga o desenho anterior
-    // A batida (o anel de tinta e a tremida) vale só para a figurinha que acabou de ser colada
+    casa.textContent = '';
     casa.classList.toggle('bateu', acabouDeColar === true);
 
     if (estaColada(album, numero)) {
@@ -7347,7 +6285,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (acabouDeColar) figurinha.classList.add('figurinha-colando');
       casa.append(figurinha);
 
-      // Cola fresca: só a última figurinha colada tem o botão "Desfazer"
       if (numero === ultimaColada) {
         const desfazer = criarElemento('button', 'botao botao-contorno botao-pequeno', 'Desfazer');
         desfazer.type = 'button';
@@ -7371,7 +6308,6 @@ document.addEventListener('DOMContentLoaded', function () {
     casa.append(vaga);
   }
 
-  // A bandeja: as figurinhas que já saíram e ainda não foram coladas
   function desenharBandeja() {
     const album = lerAlbum();
     bandeja.textContent = '';
@@ -7382,7 +6318,7 @@ document.addEventListener('DOMContentLoaded', function () {
       quantas += 1;
 
       const figurinha = criarFigurinha(fig, { solta: true, etiqueta: textoDeRepetidas(repetidasDe(album, fig.numero)) });
-      figurinha.draggable = true;   // liga o arrastar do próprio navegador
+      figurinha.draggable = true;
 
       const item = document.createElement('li');
       item.append(figurinha, criarBotaoColar(fig));
@@ -7396,19 +6332,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('mao-vazia').hidden = quantas > 0;
   }
 
-  // "3 de 6 coladas"
   function textoDeColadas(coladas, total) {
     return coladas + ' de ' + total + (coladas === 1 ? ' colada' : ' coladas');
   }
 
-  // O placar gira como um marcador antigo. Cada casa do número é uma janelinha
-  // que mostra uma fita com os algarismos de 0 a 9, um embaixo do outro. Para
-  // mostrar o 7, a fita sobe sete degraus (o CSS faz a subida, devagar).
   function mostrarNoOdometro(odometro, valor) {
     const algarismos = String(valor);
     odometro.dataset.valor = algarismos;
 
-    // Cada fita sobe até o algarismo que lhe cabe
     function subir() {
       const atual = odometro.dataset.valor;
       Array.from(odometro.children).forEach(function (casa, i) {
@@ -7416,24 +6347,20 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // A quantidade de casas é a mesma (de 12 para 13, por exemplo): só gira
     if (odometro.children.length === algarismos.length) {
       subir();
       return;
     }
 
-    // Mudou a quantidade de casas (de 9 para 10): monta as fitas de novo
     odometro.textContent = '';
     for (let i = 0; i < algarismos.length; i++) {
       const casa = criarElemento('span', 'odo-casa');
       const fita = criarElemento('span', 'odo-fita');
       for (let n = 0; n <= 9; n++) fita.append(criarElemento('span', '', String(n)));
-      fita.style.transitionDelay = (i * 120) + 'ms';   // cada casa começa um pouco depois da anterior
+      fita.style.transitionDelay = (i * 120) + 'ms';
       casa.append(fita);
       odometro.append(casa);
     }
-    // As fitas nascem no zero. Dois quadros depois elas sobem: o navegador
-    // precisa desenhar o zero primeiro para haver um caminho a percorrer.
     requestAnimationFrame(function () { requestAnimationFrame(subir); });
   }
 
@@ -7456,7 +6383,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const lista = figurinhasDoGrupo(grupo);
       const coladas = contarColadas(album, lista);
       document.getElementById('conta-grupo-' + grupo).textContent = textoDeColadas(coladas, lista.length);
-      // A casa do grupo no índice enche junto, e o leitor de tela ouve a conta
       document.getElementById('indice-quadro-' + grupo).style.setProperty('--parte', coladas / lista.length);
       document.getElementById('indice-conta-' + grupo).textContent = ': ' + textoDeColadas(coladas, lista.length);
     }
@@ -7467,28 +6393,23 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('barra-selecao-' + selecao.id).style.setProperty('--parte', coladas / lista.length);
     }
 
-    // Os números das abas
     document.getElementById('conta-todas').textContent = resumo.total;
     document.getElementById('conta-tenho').textContent = resumo.tenho;
     document.getElementById('conta-faltam').textContent = resumo.faltam;
     document.getElementById('conta-repetidas').textContent = resumo.comRepetida;
   }
 
-  // As conquistas que acabaram de sair e ainda não foram vistas. O carimbo
-  // delas só bate quando o quadro aparece na tela (a lista fica lá no fim da
-  // página, longe de onde a pessoa cola).
   const carimbosPorBater = [];
   const vigiaDosCarimbos = 'IntersectionObserver' in window ? new IntersectionObserver(function (entradas) {
     for (const entrada of entradas) {
       if (!entrada.isIntersecting) continue;
-      entrada.target.classList.add('conquista-carimbando');   // o CSS faz o carimbo bater
+      entrada.target.classList.add('conquista-carimbando');
       vigiaDosCarimbos.unobserve(entrada.target);
       const posicao = carimbosPorBater.indexOf(entrada.target.dataset.conquista);
       if (posicao >= 0) carimbosPorBater.splice(posicao, 1);
     }
   }, { threshold: 0.6 }) : null;
 
-  // "novas" são os nomes das conquistas que acabaram de sair (ou nada)
   function desenharConquistas(novas) {
     const album = lerAlbum();
     const lista = document.getElementById('conquistas');
@@ -7505,7 +6426,6 @@ document.addEventListener('DOMContentLoaded', function () {
       item.append(criarElemento('span', 'conquista-estado', dia ? 'Feita em ' + dataPorExtenso(dia) : 'Ainda não'));
       lista.append(item);
 
-      // Conquista nova: fica sem o carimbo até aparecer na tela
       if (dia && carimbosPorBater.includes(conquista.nome)) {
         item.classList.add('conquista-nova');
         item.dataset.conquista = conquista.nome;
@@ -7514,17 +6434,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // -------------------------------------------------------------------------
-  // 3. Busca, abas e filtros
-  // -------------------------------------------------------------------------
-
-  // "Vinícius" vira "vinicius": sem acento e em minúsculas,
-  // para a busca achar mesmo que a pessoa não digite o acento.
   function semAcento(texto) {
     return String(texto).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   }
 
-  // Esta figurinha passa pela aba, pelos filtros e pela busca escolhidos?
   function combina(fig, album) {
     const selecao = selecaoPorId(fig.selecao);
     const quantas = quantasTenho(album, fig.numero);
@@ -7538,7 +6451,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (escolha.posicao && fig.posicao !== escolha.posicao) return false;
     if (escolha.raridade && fig.raridade !== escolha.raridade) return false;
 
-    // Busca: todas as palavras digitadas precisam aparecer em algum dado da figurinha
     const dados = semAcento([fig.numero, fig.nome, selecao.nome, fig.posicao || 'bandeira', fig.clube || '', NOME_DA_RARIDADE[fig.raridade]].join(' '));
     for (const palavra of semAcento(escolha.busca).split(' ')) {
       if (!dados.includes(palavra)) return false;
@@ -7556,7 +6468,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (aparece) achadas += 1;
     }
 
-    // Seleção e grupo que ficaram sem nenhuma casa à mostra também somem
     for (const pagina of paginas.querySelectorAll('.selecao')) {
       pagina.hidden = pagina.querySelector('.casa:not([hidden])') === null;
     }
@@ -7577,8 +6488,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('limpar-filtros').hidden = !filtrando;
   }
 
-  // Marca uma aba como escolhida. Só a aba escolhida fica na ordem do Tab;
-  // para ir às outras, usam-se as setas (padrão de abas do WAI-ARIA).
   function escolherAba(aba) {
     for (const outra of abas) {
       outra.setAttribute('aria-selected', outra === aba ? 'true' : 'false');
@@ -7589,16 +6498,12 @@ document.addEventListener('DOMContentLoaded', function () {
     aplicarFiltros();
   }
 
-  // -------------------------------------------------------------------------
-  // 4. Colar e desfazer
-  // -------------------------------------------------------------------------
-
   function mostrarRecado(texto, podeDesfazer) {
     document.getElementById('recado-texto').textContent = texto;
     document.getElementById('recado-desfazer').hidden = !podeDesfazer;
     recado.hidden = false;
-    document.body.classList.add('com-recado');   // abre uma folga no fim da página (ver css/paginas.css)
-    avisar(texto);   // o mesmo texto, lido pelo leitor de tela
+    document.body.classList.add('com-recado');
+    avisar(texto);
   }
 
   function atualizarTudo(conquistasNovas) {
@@ -7608,18 +6513,16 @@ document.addEventListener('DOMContentLoaded', function () {
     aplicarFiltros();
   }
 
-  // "origem" diz de onde veio o pedido: 'vaga', 'bandeja' ou 'arrasto'
   function colar(numero, origem) {
-    // Guarda a posição do botão na bandeja, para devolver o foco ao vizinho depois
     const botoesAntes = Array.from(bandeja.querySelectorAll('[data-colar]'));
     const posicao = botoesAntes.findIndex(function (botao) { return Number(botao.dataset.colar) === numero; });
 
     const conquistas = colarFigurinha(numero);
-    if (conquistas === null) return;   // não estava na mão
+    if (conquistas === null) return;
 
     const anterior = ultimaColada;
     ultimaColada = numero;
-    if (anterior !== null) desenharCasa(anterior);   // a colagem anterior perde o "Desfazer"
+    if (anterior !== null) desenharCasa(anterior);
     desenharCasa(numero, true);
     atualizarTudo(conquistas);
 
@@ -7634,7 +6537,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     mostrarRecado(texto, true);
 
-    // Para onde vai o foco do teclado: o botão em que ele estava deixou de existir
     if (origem === 'vaga') {
       document.querySelector('#casa-' + numero + ' .figurinha').focus();
     }
@@ -7663,17 +6565,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function fecharRecado() {
     recado.hidden = true;
     document.body.classList.remove('com-recado');
-    // O foco estava no recado, que sumiu: volta para o começo do conteúdo, sem rolar a página
     document.getElementById('conteudo').focus({ preventScroll: true });
   }
 
-  // -------------------------------------------------------------------------
-  // 5. Ligar os botões, a busca, as abas e o arrastar
-  // -------------------------------------------------------------------------
-
-  // Um ouvinte só para todos os botões "Colar" e "Desfazer": como eles são
-  // criados e apagados o tempo todo, é mais simples ouvir o clique na página
-  // inteira e descobrir em que botão foi.
   document.addEventListener('click', function (evento) {
     const botaoColar = evento.target.closest('[data-colar]');
     if (botaoColar) {
@@ -7685,8 +6579,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('recado-desfazer').addEventListener('click', desfazer);
   document.getElementById('recado-fechar').addEventListener('click', fecharRecado);
 
-  // Busca: espera a pessoa parar de digitar por um instante antes de procurar,
-  // para o leitor de tela não anunciar um resultado a cada letra.
   let esperaDaBusca = null;
   campoBusca.addEventListener('input', function () {
     clearTimeout(esperaDaBusca);
@@ -7703,7 +6595,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Volta tudo ao começo: busca vazia, filtros em "Todos" e aba "Todas"
   function limparFiltros() {
     campoBusca.value = '';
     escolha.busca = '';
@@ -7723,7 +6614,6 @@ document.addEventListener('DOMContentLoaded', function () {
     aba.addEventListener('click', function () { escolherAba(aba); });
   }
 
-  // Setas, Home e End passam de uma aba para a outra
   document.querySelector('.abas').addEventListener('keydown', function (evento) {
     const atual = abas.indexOf(document.activeElement);
     let proxima = null;
@@ -7733,18 +6623,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (evento.key === 'End') proxima = abas.length - 1;
     if (atual === -1 || proxima === null) return;
 
-    evento.preventDefault();   // a seta não rola a página
+    evento.preventDefault();
     abas[proxima].focus();
     escolherAba(abas[proxima]);
   });
 
-  // Arrastar e soltar, com a API do próprio HTML.
-  // 1) Começou a arrastar uma figurinha da bandeja: anota qual é e marca a vaga dela.
   bandeja.addEventListener('dragstart', function (evento) {
     const figurinha = evento.target.closest('.figurinha');
     if (!figurinha) return;
     arrastando = Number(figurinha.dataset.numero);
-    evento.dataTransfer.setData('text/plain', String(arrastando));   // o Firefox só arrasta se houver algum dado
+    evento.dataTransfer.setData('text/plain', String(arrastando));
     evento.dataTransfer.effectAllowed = 'move';
     document.getElementById('casa-' + arrastando).classList.add('casa-alvo');
   });
@@ -7758,15 +6646,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   bandeja.addEventListener('dragend', terminarArrasto);
 
-  // A casa embaixo do mouse é a da figurinha arrastada?
   function casaCerta(evento) {
     const casa = evento.target.closest('.casa');
     if (casa && arrastando !== null && Number(casa.dataset.numero) === arrastando) return casa;
     return null;
   }
 
-  // 2) Passando por cima da vaga certa: o preventDefault() avisa o navegador
-  //    que ali pode soltar. Nas outras vagas ele mostra o sinal de "proibido".
   paginas.addEventListener('dragover', function (evento) {
     const casa = casaCerta(evento);
     if (!casa) return;
@@ -7779,7 +6664,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (casa && !casa.contains(evento.relatedTarget)) casa.classList.remove('casa-em-cima');
   });
 
-  // 3) Soltou na vaga certa: cola.
   paginas.addEventListener('drop', function (evento) {
     const casa = casaCerta(evento);
     if (!casa) return;
@@ -7789,10 +6673,6 @@ document.addEventListener('DOMContentLoaded', function () {
     colar(numero, 'arrasto');
   });
 
-  // -------------------------------------------------------------------------
-  // 6. Começar
-  // -------------------------------------------------------------------------
-
   montarFiltros();
   montarIndice();
   montarPaginas();
@@ -7800,8 +6680,6 @@ document.addEventListener('DOMContentLoaded', function () {
   for (const fig of FIGURINHAS) desenharCasa(fig.numero);
   atualizarTudo();
 
-  // O campo desenhado no fim do álbum: o traço só começa quando ele aparece na
-  // tela. Com menos movimento (ou em navegador antigo), ele já vem pronto.
   const campoDoFinal = document.getElementById('campo-do-final');
   if (campoDoFinal && 'IntersectionObserver' in window && !movimentoReduzido()) {
     campoDoFinal.classList.add('por-desenhar');
@@ -7814,8 +6692,6 @@ document.addEventListener('DOMContentLoaded', function () {
     vigiaDoCampo.observe(campoDoFinal);
   }
 
-  // Se o endereço veio com uma âncora (album.html#casa-50), rola até ela.
-  // O navegador não faz isso sozinho porque as casas só passam a existir agora.
   if (location.hash.length > 1) {
     const alvo = document.getElementById(location.hash.slice(1));
     if (alvo) alvo.scrollIntoView();
@@ -7826,30 +6702,13 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/pacotinho.js
 
 ````js
-// ============================================================================
-// pacotinho.js
-// ----------------------------------------------------------------------------
-// A página dos pacotinhos. O "palco" (lado direito) tem três situações:
-//   1. Tem pacotinho para abrir: mostra o pacotinho e o botão "Rasgar".
-//   2. Acabou de rasgar: as cinco figurinhas saem de costas e a pessoa vira
-//      uma por uma. No fim, um resumo e o botão de colar as novas.
-//   3. Não tem pacotinho: avisa que o próximo chega amanhã.
-//
-// Depende de: js/dados.js, js/estado.js e js/figurinha.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   const palco = document.getElementById('palco');
-  let rasgando = false;   // evita abrir dois pacotinhos com um clique duplo
+  let rasgando = false;
 
-  // Tempo da animação de rasgar, em milésimos de segundo (igual ao do CSS)
   const TEMPO_DE_RASGAR = 800;
-
-  // -------------------------------------------------------------------------
-  // Lado esquerdo: a situação de hoje, os extras e a cartela
-  // -------------------------------------------------------------------------
 
   function atualizarLateral() {
     const album = lerAlbum();
@@ -7867,23 +6726,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('sequencia-texto').textContent = marcarCartela(document.getElementById('cartela'), album);
   }
 
-  // -------------------------------------------------------------------------
-  // Palco
-  // -------------------------------------------------------------------------
-
   function desenharPalco() {
-    palco.textContent = '';   // apaga o que havia
+    palco.textContent = '';
     const album = lerAlbum();
     if (temPacotinho(album)) desenharPacotinho(album);
     else desenharEspera();
   }
 
-  // Situação 1: o pacotinho fechado
   function desenharPacotinho(album) {
     const titulo = criarElemento('h2', '', temPacotinhoDoDia(album) ? 'Pacotinho do dia' : 'Pacotinho extra');
 
-    // O desenho do pacotinho é escondido do leitor de tela: quem tem nome e
-    // funciona pelo teclado é o botão logo abaixo. Clicar no desenho é um atalho para o mouse.
     const pacotinho = criarElemento('div', 'pacotinho');
     pacotinho.setAttribute('aria-hidden', 'true');
     const aba = criarElemento('span', 'pacotinho-aba');
@@ -7904,7 +6756,6 @@ document.addEventListener('DOMContentLoaded', function () {
     palco.append(titulo, pacotinho, linha);
   }
 
-  // Situação 3: sem pacotinho
   function desenharEspera() {
     const cartao = criarElemento('div', 'cartao');
     const botao = criarElemento('a', 'botao', 'Ir para o álbum');
@@ -7919,9 +6770,6 @@ document.addEventListener('DOMContentLoaded', function () {
     palco.append(cartao);
   }
 
-  // Rasgar: as figurinhas são sorteadas e guardadas NA HORA do clique. A
-  // animação vem depois e é só o espetáculo: se a pessoa fechar a página no
-  // meio, as figurinhas já estão salvas e aparecem na mão, no álbum.
   function rasgar() {
     if (rasgando) return;
     const resultado = abrirPacotinho();
@@ -7932,23 +6780,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     rasgando = true;
     atualizarLateral();
-    palco.querySelector('.pacotinho').classList.add('pacotinho-rasgando');   // o CSS faz a aba sair voando
+    palco.querySelector('.pacotinho').classList.add('pacotinho-rasgando');
 
-    // Quem pediu menos movimento não espera a animação
     setTimeout(function () {
       rasgando = false;
       desenharMesa(resultado);
     }, movimentoReduzido() ? 0 : TEMPO_DE_RASGAR);
   }
 
-  // Situação 2: a mesa, com as cinco figurinhas de costas
   function desenharMesa(resultado) {
     palco.textContent = '';
     const total = resultado.figurinhas.length;
     let faltaVirar = total;
 
     const titulo = criarElemento('h2', '', 'Saiu do pacotinho');
-    titulo.tabIndex = -1;   // deixa o título receber o foco pelo script (não entra na ordem do Tab)
+    titulo.tabIndex = -1;
     const texto = criarElemento('p', '', 'Elas saíram de costas. Vire uma por uma.');
 
     const mesa = criarElemento('ol', 'mesa');
@@ -7962,7 +6808,7 @@ document.addEventListener('DOMContentLoaded', function () {
         aoRevelar: function (fig, botao) { revelou(item, botao); },
       });
       const casa = document.createElement('li');
-      casa.style.setProperty('--ordem', posicao);   // a ordem de saída, usada pela animação do CSS
+      casa.style.setProperty('--ordem', posicao);
       casa.append(figurinha);
       mesa.append(casa);
     });
@@ -7977,10 +6823,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     palco.append(titulo, texto, mesa, botoes, resumo);
 
-    // As figurinhas saem todas do mesmo ponto, onde o pacotinho estava: no alto
-    // e no meio da mesa. Cada casa guarda a distância até esse ponto (--dx e
-    // --dy), e a animação do CSS começa de lá, abre em leque e só depois leva
-    // cada figurinha para a sua casa.
     for (const casa of mesa.children) {
       casa.style.setProperty('--dx', Math.round(mesa.offsetLeft + mesa.offsetWidth / 2 - casa.offsetLeft - casa.offsetWidth / 2) + 'px');
       casa.style.setProperty('--dy', Math.round(mesa.offsetTop - casa.offsetTop) + 'px');
@@ -7992,10 +6834,9 @@ document.addEventListener('DOMContentLoaded', function () {
       for (const fechada of mesa.querySelectorAll('[data-face="costas"]')) fechada.click();
     });
 
-    // Chamada cada vez que uma figurinha de costas é virada
     function revelou(item, botao) {
       faltaVirar -= 1;
-      botao.classList.add('figurinha-revelada');   // liga o reflexo da brilhante e da lendária
+      botao.classList.add('figurinha-revelada');
       avisar(descreverFigurinha(item.figurinha) + '. ' + (item.nova ? 'Nova!' : 'Repetida.'));
       texto.textContent = faltaVirar === 1 ? 'Falta virar 1.' : 'Faltam virar ' + faltaVirar + '.';
       if (faltaVirar === 0) mostrarResumo();
@@ -8020,7 +6861,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const verAlbum = criarElemento('a', 'botao botao-contorno', 'Ver no álbum');
       verAlbum.href = 'album.html';
 
-      // "Colar direto": cola de uma vez as figurinhas novas deste pacotinho
       if (novas.length > 0) {
         const colarNovas = criarElemento('button', 'botao', novas.length === 1 ? 'Colar a nova' : 'Colar as ' + novas.length + ' novas');
         colarNovas.type = 'button';
@@ -8036,8 +6876,8 @@ document.addEventListener('DOMContentLoaded', function () {
           avisar(recado);
           colarNovas.remove();
           atualizarLateral();
-          acrescentarOutro();   // uma conquista pode ter rendido um pacotinho extra
-          verAlbum.focus();     // o botão sumiu: o foco vai para o link ao lado
+          acrescentarOutro();
+          verAlbum.focus();
         });
         linha.append(colarNovas);
       }
@@ -8046,7 +6886,6 @@ document.addEventListener('DOMContentLoaded', function () {
       acrescentarOutro();
       avisar(frase);
 
-      // O botão "Abrir outro pacotinho" só aparece se houver outro para abrir
       function acrescentarOutro() {
         if (linha.querySelector('#abrir-outro') || !temPacotinho(lerAlbum())) return;
         const outro = criarElemento('button', 'botao botao-contorno', 'Abrir outro pacotinho');
@@ -8061,10 +6900,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // -------------------------------------------------------------------------
-  // Começar
-  // -------------------------------------------------------------------------
-
   atualizarLateral();
   desenharPalco();
 });
@@ -8073,17 +6908,6 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/trocas.js
 
 ````js
-// ============================================================================
-// trocas.js
-// ----------------------------------------------------------------------------
-// A página de trocas. Faz três coisas:
-//   1. Lista as repetidas ("tenho para trocar") e as que faltam ("preciso").
-//   2. Monta o texto da lista de troca, para copiar ou mandar pelo WhatsApp.
-//   3. Simula uma troca na "banca": sai uma repetida, chega uma que faltava.
-//
-// Depende de: js/dados.js, js/estado.js e js/figurinha.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
@@ -8093,7 +6917,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const formulario = document.getElementById('form-troca');
   const avisoDaTroca = document.getElementById('troca-aviso');
 
-  // Como a figurinha é chamada nas listas: "Alisson (Brasil)" ou "Brasil (bandeira)"
   function nomeNaLista(fig) {
     const selecao = selecaoPorId(fig.selecao);
     return fig.tipo === 'bandeira' ? selecao.nome + ' (bandeira)' : fig.nome + ' (' + selecao.nome + ')';
@@ -8103,7 +6926,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return quantas === 1 ? '1 repetida' : quantas + ' repetidas';
   }
 
-  // As figurinhas com pelo menos uma repetida, e as que ainda não saíram
   function separar(album) {
     return {
       repetidas: FIGURINHAS.filter(function (fig) { return repetidasDe(album, fig.numero) > 0; }),
@@ -8111,15 +6933,10 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }
 
-  // -------------------------------------------------------------------------
-  // 1 e 2. As duas listas e o texto pronto
-  // -------------------------------------------------------------------------
-
   function desenharListas() {
     const album = lerAlbum();
     const listas = separar(album);
 
-    // Tenho para trocar
     const listaRepetidas = document.getElementById('lista-repetidas');
     listaRepetidas.textContent = '';
     for (const fig of listas.repetidas) {
@@ -8132,7 +6949,6 @@ document.addEventListener('DOMContentLoaded', function () {
       ? 'Nenhuma repetida por enquanto. Elas aparecem quando uma figurinha sai de novo no pacotinho.'
       : 'Estas saíram mais de uma vez. A primeira cópia é do álbum; as outras podem ir embora.';
 
-    // Preciso
     const listaFaltam = document.getElementById('lista-faltam');
     listaFaltam.textContent = '';
     for (const fig of listas.faltam) {
@@ -8145,13 +6961,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (listas.faltam.length === 0) textoFaltam = 'Não falta nenhuma: todas as figurinhas já saíram para você.';
     document.getElementById('faltam-texto').textContent = textoFaltam;
 
-    // A gaveta da lista some se não falta nada e já vem aberta se a lista é curta
     const gaveta = document.getElementById('faltam-gaveta');
     gaveta.hidden = listas.faltam.length === 0;
     gaveta.open = listas.faltam.length <= 40;
     document.getElementById('faltam-resumo').textContent = 'Ver os números que faltam (' + listas.faltam.length + ')';
 
-    // O texto da lista de troca, uma linha para cada parte
     const tenho = listas.repetidas.map(function (fig) {
       return fig.numero + ' ' + (fig.tipo === 'bandeira' ? 'Bandeira ' + fig.nome : fig.nome) + ' (x' + repetidasDe(album, fig.numero) + ')';
     });
@@ -8163,13 +6977,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     campoTexto.value = linhas.join('\n');
 
-    // O link do WhatsApp leva o texto no endereço. encodeURIComponent troca
-    // espaços, acentos e quebras de linha por códigos que cabem em um endereço.
     document.getElementById('mandar-whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(campoTexto.value);
   }
 
-  // Copiar: usa a área de transferência do navegador. Se ele não deixar,
-  // o texto fica selecionado para a pessoa copiar com Ctrl+C.
   document.getElementById('copiar-lista').addEventListener('click', function () {
     const aviso = document.getElementById('copiar-aviso');
 
@@ -8188,11 +6998,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, selecionarParaCopiar);
   });
 
-  // -------------------------------------------------------------------------
-  // 3. A banca de trocas
-  // -------------------------------------------------------------------------
-
-  // Uma opção de escolha: uma caixinha redonda (radio) com o texto ao lado
   function criarOpcao(grupo, fig, texto, marcada) {
     const caixa = document.createElement('input');
     caixa.type = 'radio';
@@ -8210,7 +7015,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const listas = separar(album);
     const vazia = document.getElementById('banca-vazia');
 
-    // Sem repetida para dar ou sem figurinha faltando, não há troca possível
     if (listas.repetidas.length === 0 || listas.faltam.length === 0) {
       formulario.hidden = true;
       vazia.hidden = false;
@@ -8222,7 +7026,6 @@ document.addEventListener('DOMContentLoaded', function () {
     formulario.hidden = false;
     vazia.hidden = true;
 
-    // Você dá: todas as repetidas. A primeira já vem marcada.
     const opcoesDou = document.getElementById('opcoes-dou');
     opcoesDou.textContent = '';
     listas.repetidas.forEach(function (fig, posicao) {
@@ -8230,8 +7033,7 @@ document.addEventListener('DOMContentLoaded', function () {
       opcoesDou.append(criarOpcao('dou', fig, texto, posicao === 0));
     });
 
-    // Você recebe: a banca sorteia até três das que faltam
-    const sobra = listas.faltam.slice();   // cópia, para poder tirar as sorteadas
+    const sobra = listas.faltam.slice();
     const opcoesRecebo = document.getElementById('opcoes-recebo');
     opcoesRecebo.textContent = '';
     for (let i = 0; i < OFERTAS_DA_BANCA && sobra.length > 0; i++) {
@@ -8242,14 +7044,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   formulario.addEventListener('submit', function (evento) {
-    evento.preventDefault();   // não deixa o navegador recarregar a página
+    evento.preventDefault();
 
-    // Descobre qual opção está marcada em cada grupo
     const sai = figurinhaPorNumero(Number(formulario.querySelector('input[name="dou"]:checked').value));
     const chega = figurinhaPorNumero(Number(formulario.querySelector('input[name="recebo"]:checked').value));
 
     const conquistas = trocarFigurinha(sai.numero, chega.numero);
-    if (conquistas === null) return;   // a troca não valia mais (o álbum mudou em outra aba, por exemplo)
+    if (conquistas === null) return;
 
     let texto = 'Troca feita. Saiu uma repetida da Nº ' + sai.numero + ', ' + sai.nome + ', e chegou a Nº ' + chega.numero + ', ' + chega.nome + '. ';
     for (const nome of conquistas) texto += 'Conquista: ' + nome + '. Você ganhou um pacotinho extra. ';
@@ -8266,10 +7067,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('outras-ofertas').addEventListener('click', desenharBanca);
 
-  // -------------------------------------------------------------------------
-  // Começar
-  // -------------------------------------------------------------------------
-
   desenharListas();
   desenharBanca();
 });
@@ -8278,34 +7075,21 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/inicio.js
 
 ````js
-// ============================================================================
-// inicio.js
-// ----------------------------------------------------------------------------
-// Na página inicial, troca os textos de exemplo pelo progresso de verdade:
-// a tira de grupos, o resumo do álbum, o pacotinho do dia e a cartela.
-//
-// Sem JavaScript, a página continua mostrando os textos que estão no HTML.
-// Depende de: js/dados.js e js/estado.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   const album = lerAlbum();
   const resumo = resumoDoAlbum(album);
 
-  // Tira de grupos: as 12 casas estão no HTML, na ordem de A a L.
-  // Cada casa enche conforme as figurinhas do grupo são coladas.
   const letras = 'ABCDEFGHIJKL';
   const casas = document.querySelectorAll('.tira-casa');
   for (let i = 0; i < casas.length; i++) {
     const lista = figurinhasDoGrupo(letras[i]);
-    if (lista.length === 0) continue;   // grupo que ainda não entrou no álbum
+    if (lista.length === 0) continue;
 
     const coladas = contarColadas(album, lista);
     casas[i].querySelector('.tira-quadro').style.setProperty('--parte', coladas / lista.length);
 
-    // Para o leitor de tela, a casa diz a conta: "Grupo C: 5 de 24 coladas"
     const conta = document.createElement('span');
     conta.className = 'escondido';
     conta.textContent = ': ' + coladas + ' de ' + lista.length + ' coladas';
@@ -8320,7 +7104,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (resumo.naMao > 1) texto += ' Há ' + resumo.naMao + ' figurinhas na mão, esperando para ser coladas.';
   document.getElementById('progresso-texto').textContent = texto;
 
-  // Pacotinho do dia
   let pacotinho = temPacotinhoDoDia(album)
     ? 'O pacotinho de hoje está fechado, esperando você. São cinco figurinhas.'
     : 'O pacotinho de hoje já foi aberto. Amanhã tem outro.';
@@ -8328,7 +7111,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (album.extras > 1) pacotinho += ' Você tem ' + album.extras + ' pacotinhos extras guardados.';
   document.getElementById('pacotinho-texto').textContent = pacotinho;
 
-  // Cartela da sequência
   document.getElementById('sequencia-texto').textContent = marcarCartela(document.getElementById('cartela'), album);
 });
 ````
@@ -8336,29 +7118,9 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/carrossel.js
 
 ````js
-// ============================================================================
-// carrossel.js
-// ----------------------------------------------------------------------------
-// Os dois carrosséis da página inicial:
-//   1. o das 16 sedes: mostra uma sede por vez, com a foto do estádio;
-//   2. o dos 12 grupos: uma faixa de grupos lado a lado, que anda para os lados.
-//
-// Como são feitos para funcionar com teclado e leitor de tela:
-//   - botões "Anterior" e "Próxima" de verdade (<button>);
-//   - um botão para cada item (os indicadores), que leva direto a ele;
-//   - a posição ("3 de 16: Dallas") fica em um texto com role="status", que o
-//     leitor de tela lê sozinho a cada troca;
-//   - não passam sozinhos: só mudam quando a pessoa pede.
-//
-// Depende de: js/dados.js (as listas SEDES e SELECOES), js/estado.js
-// (gruposDoAlbum e figurinhasDoGrupo) e js/figurinha.js (criarElemento e
-// movimentoReduzido).
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // Marca o indicador do item atual (aria-current diz ao leitor de tela qual é)
   function marcarIndicador(lista, atual) {
     const botoes = lista.querySelectorAll('button');
     for (let i = 0; i < botoes.length; i++) {
@@ -8367,23 +7129,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // -------------------------------------------------------------------------
-  // 1. O carrossel das sedes
-  // -------------------------------------------------------------------------
-
   function montarCarrosselDasSedes() {
     const carrossel = document.getElementById('carrossel');
     if (!carrossel) return;
 
     const indicadores = document.getElementById('sede-indicadores');
-    let atual = 0;   // posição da sede que está na tela (0 é a primeira)
+    let atual = 0;
 
-    // Escreve os números com ponto de milhar, do jeito brasileiro: 80824 vira "80.824"
     function comPonto(numero) {
       return numero.toLocaleString('pt-BR');
     }
 
-    // Cria um botão numerado para cada sede
     SEDES.forEach(function (sede, posicao) {
       const botao = document.createElement('button');
       botao.type = 'button';
@@ -8397,12 +7153,10 @@ document.addEventListener('DOMContentLoaded', function () {
       indicadores.append(item);
     });
 
-    // Troca a sede que está na tela
     function mostrar(posicao) {
       atual = posicao;
       const sede = SEDES[atual];
 
-      // Textos
       document.getElementById('sede-cidade').textContent = sede.cidade;
       document.getElementById('sede-estadio').textContent = sede.estadio;
       document.getElementById('sede-pais').textContent = sede.municipio ? sede.municipio + ', ' + sede.pais : sede.pais;
@@ -8414,7 +7168,6 @@ document.addEventListener('DOMContentLoaded', function () {
       nota.textContent = sede.nota;
       nota.hidden = sede.nota === '';
 
-      // Foto e crédito
       const foto = document.getElementById('sede-foto');
       foto.src = 'assets/img/sedes/' + sede.id + '.jpg';
       foto.alt = sede.foto.alt;
@@ -8422,12 +7175,10 @@ document.addEventListener('DOMContentLoaded', function () {
       credito.textContent = 'Foto: ' + sede.foto.autor + ', ' + sede.foto.licenca + ', Wikimedia Commons';
       credito.href = sede.foto.origem;
 
-      // Posição: lida pelo leitor de tela a cada troca
       document.getElementById('sede-posicao').textContent = (atual + 1) + ' de ' + SEDES.length + ': ' + sede.cidade;
       marcarIndicador(indicadores, atual);
     }
 
-    // "Anterior" na primeira vai para a última, e "Próxima" na última volta para a primeira
     document.getElementById('sede-anterior').addEventListener('click', function () {
       mostrar((atual - 1 + SEDES.length) % SEDES.length);
     });
@@ -8436,18 +7187,9 @@ document.addEventListener('DOMContentLoaded', function () {
       mostrar((atual + 1) % SEDES.length);
     });
 
-    carrossel.hidden = false;   // o carrossel só aparece se o JavaScript estiver ligado
+    carrossel.hidden = false;
     mostrar(0);
   }
-
-  // -------------------------------------------------------------------------
-  // 2. O carrossel dos grupos
-  // -------------------------------------------------------------------------
-  // Os doze painéis ficam lado a lado dentro de uma "janela" que rola para os
-  // lados (a rolagem é a do próprio navegador: funciona com o dedo, com o
-  // mouse e com as setas do teclado). Os botões só pedem à janela para rolar
-  // até um painel. O grupo que está no meio da janela é o "atual": as bandeiras
-  // dele deixam de ser impressas em uma tinta só e viram figurinhas coloridas.
 
   function montarCarrosselDosGrupos() {
     const carrossel = document.getElementById('carrossel-grupos');
@@ -8458,10 +7200,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const indicadores = document.getElementById('grupo-indicadores');
     const posicao = document.getElementById('grupo-posicao');
     const letras = gruposDoAlbum().sort();
-    let atual = -1;            // o grupo que está no meio da janela
-    let quadroPedido = false;  // já existe uma medição agendada?
+    let atual = -1;
+    let quadroPedido = false;
 
-    // Um painel por grupo: a letra, as quatro seleções e o link para o álbum
     const paineis = letras.map(function (letra, i) {
       const painel = criarElemento('div', 'grupo');
       painel.setAttribute('role', 'group');
@@ -8477,8 +7218,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const selo = criarElemento('span', 'selo');
         const bandeira = document.createElement('img');
         bandeira.src = 'assets/bandeiras/' + selecao.bandeira + '.svg';
-        bandeira.alt = '';              // o nome da seleção vem escrito logo abaixo
-        bandeira.loading = 'lazy';      // a imagem só é baixada quando está chegando perto da tela
+        bandeira.alt = '';
+        bandeira.loading = 'lazy';
         selo.append(bandeira);
         item.append(selo, selecao.nome);
         lista.append(item);
@@ -8493,7 +7234,6 @@ document.addEventListener('DOMContentLoaded', function () {
       painel.append(titulo, lista, numeros, link);
       trilha.append(painel);
 
-      // O indicador deste grupo: um botão com a letra
       const botao = criarElemento('button', 'carrossel-numero', letra);
       botao.type = 'button';
       botao.setAttribute('aria-label', 'Grupo ' + letra);
@@ -8505,19 +7245,14 @@ document.addEventListener('DOMContentLoaded', function () {
       return painel;
     });
 
-    // Onde a janela precisa estar para o painel i ficar bem no meio dela
     function lugarDoPainel(i) {
       return paineis[i].offsetLeft + paineis[i].offsetWidth / 2 - janela.clientWidth / 2;
     }
 
-    // Rola a janela até o painel i. Com menos movimento, vai de uma vez.
     function irPara(i) {
       janela.scrollTo({ left: lugarDoPainel(i), behavior: movimentoReduzido() ? 'auto' : 'smooth' });
     }
 
-    // Olha onde a rolagem está e arruma cada painel. "--f" vai de 0 (longe do
-    // meio da janela) a 1 (bem no meio): é ele que o CSS usa para dar cor à
-    // bandeira (ver ".selo", em css/cenas.css).
     function medir() {
       quadroPedido = false;
       const meio = janela.scrollLeft + janela.clientWidth / 2;
@@ -8528,7 +7263,7 @@ document.addEventListener('DOMContentLoaded', function () {
       paineis.forEach(function (painel, i) {
         const distancia = Math.abs(painel.offsetLeft + painel.offsetWidth / 2 - meio);
         const perto = Math.min(1, Math.max(0, 1 - distancia / alcance));
-        const foco = perto * perto * (3 - 2 * perto);   // arranca e freia com suavidade
+        const foco = perto * perto * (3 - 2 * perto);
         painel.style.setProperty('--f', foco.toFixed(3));
         painel.classList.toggle('grupo-colado', foco > 0.55);
         if (distancia < menorDistancia) {
@@ -8537,7 +7272,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
 
-      // Mudou o grupo do meio: atualiza o texto da posição e o indicador
       if (maisPerto !== atual) {
         atual = maisPerto;
         posicao.textContent = (atual + 1) + ' de ' + letras.length + ': Grupo ' + letras[atual];
@@ -8545,7 +7279,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // A rolagem dispara muitos avisos por segundo: mede no máximo uma vez por quadro
     function pedirMedida() {
       if (quadroPedido) return;
       quadroPedido = true;
@@ -8554,7 +7287,6 @@ document.addEventListener('DOMContentLoaded', function () {
     janela.addEventListener('scroll', pedirMedida, { passive: true });
     window.addEventListener('resize', pedirMedida);
 
-    // "Anterior" no primeiro vai para o último, e "Próximo" no último volta para o primeiro
     document.getElementById('grupo-anterior').addEventListener('click', function () {
       irPara((atual - 1 + letras.length) % letras.length);
     });
@@ -8563,7 +7295,7 @@ document.addEventListener('DOMContentLoaded', function () {
       irPara((atual + 1) % letras.length);
     });
 
-    carrossel.hidden = false;   // o carrossel só aparece se o JavaScript estiver ligado
+    carrossel.hidden = false;
     janela.scrollLeft = lugarDoPainel(0);
     medir();
   }
@@ -8576,52 +7308,19 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/cenas.js
 
 ````js
-// ============================================================================
-// cenas.js
-// ----------------------------------------------------------------------------
-// O motor das cenas presas à rolagem. Ele não sabe o que cada cena desenha:
-// só mede a rolagem e avisa cada cena do quanto ela já andou.
-//
-// A ideia:
-//   1. A cena é uma seção bem alta (240vh = quase duas telas e meia).
-//   2. Dentro dela, o palco fica grudado na tela (position: sticky, no CSS).
-//   3. Enquanto a pessoa rola por dentro da cena, o motor transforma a rolagem
-//      em um número de 0 a 1: o "progresso".
-//   4. Cada cena tem uma função desenhar(progresso), que põe cada peça no lugar
-//      certo para aquele progresso. Rolar para cima desfaz tudo.
-//
-// As cenas existem de dois jeitos (ver css/cenas.css):
-//   - em movimento: o <html> ganha a classe "com-cenas";
-//   - paradas: para quem pede menos movimento, cada cena vira uma seção comum.
-//
-// Quem cria as cenas da página inicial é o js/cenas-inicio.js.
-// Depende de: js/figurinha.js (a função movimentoReduzido).
-// ============================================================================
-
-// ---------------------------------------------------------------------------
-// Contas que as cenas usam
-// ---------------------------------------------------------------------------
-
-// Prende um número entre 0 e 1
 function limitar(valor) {
   return Math.min(1, Math.max(0, valor));
 }
 
-// "Quanto deste trecho já passou?" Devolve 0 antes de "inicio", 1 depois de
-// "fim" e, no meio, um valor que arranca e freia com suavidade.
-// Exemplo: trecho(0.2, 0.5, p) faz uma peça se mover só entre 20% e 50% da cena.
 function trecho(inicio, fim, p) {
   const t = limitar((p - inicio) / (fim - inicio));
   return t * t * (3 - 2 * t);
 }
 
-// O valor que fica entre "a" e "b": com t = 0 é "a", com t = 1 é "b"
 function misturar(a, b, t) {
   return a + (b - a) * t;
 }
 
-// Um sorteio que se repete: dá sempre a mesma sequência de números "ao acaso".
-// Assim a cena fica igual toda vez que a página é aberta.
 function sorteador(semente) {
   return function () {
     semente = (semente * 1664525 + 1013904223) % 4294967296;
@@ -8629,37 +7328,22 @@ function sorteador(semente) {
   };
 }
 
-// Tira os estilos que o JavaScript escreveu direto nos elementos,
-// para eles voltarem a obedecer só ao CSS
 function limparEstilos(elementos) {
   for (const elemento of elementos) elemento.removeAttribute('style');
 }
 
-// ---------------------------------------------------------------------------
-// A lista de cenas
-// ---------------------------------------------------------------------------
-
 const CENAS = [];
-let cenasEmMovimento = false;   // as cenas estão presas à rolagem agora?
-let quadroPedido = false;       // já existe um próximo quadro agendado?
+let cenasEmMovimento = false;
+let quadroPedido = false;
 
-// Guarda uma cena. "cena" é um objeto com até quatro funções:
-//   medir()               mede o que depende do tamanho da tela
-//   desenhar(p, agora)    põe as peças no lugar para o progresso p (de 0 a 1)
-//   parar()               deixa a cena pronta para ser vista parada
-//   viva(agora)           (opcional) responde se a cena se mexe sozinha agora
 function registrarCena(elemento, cena) {
   cena.elemento = elemento;
-  cena.alvo = 0;          // o progresso que a rolagem pede agora
-  cena.p = 0;             // o progresso mostrado (corre atrás do alvo, com suavidade)
+  cena.alvo = 0;
+  cena.p = 0;
   cena.naTela = false;
-  cena.suja = true;       // "precisa ser redesenhada"
+  cena.suja = true;
   cena.comecou = false;
 
-  // O aviso "Desça para continuar", no pé do palco. Ele avisa que a cena só
-  // anda com a rolagem. Por padrão aparece desde o começo da cena; o atributo
-  // data-aviso-de="0.2" no HTML faz aparecer só a partir de 20%.
-  // É uma ajuda para os olhos: fica fora da leitura de tela.
   cena.aviso = document.createElement('p');
   cena.aviso.className = 'cena-desca';
   cena.aviso.setAttribute('aria-hidden', 'true');
@@ -8671,19 +7355,12 @@ function registrarCena(elemento, cena) {
   return cena;
 }
 
-// Põe a cena direto no progresso p, sem a suavização. Usado quando um botão
-// recebe o foco do teclado: ele precisa aparecer na hora, não meio segundo depois.
 function mostrarJa(cena, p) {
   cena.p = p;
   cena.comecou = true;
   cena.suja = true;
 }
 
-// Alguém dentro da cena recebeu o foco do teclado e só aparece no progresso p.
-// Ao dar o foco, o navegador pode rolar a página por conta própria, tentando
-// "mostrar" o elemento, e com isso a cena andaria e o esconderia. Por isso a
-// correção espera o próximo quadro: aí mede onde a rolagem foi parar e a põe
-// no ponto certo.
 function focarNaCena(cena, p) {
   requestAnimationFrame(function () {
     medirRolagem();
@@ -8692,32 +7369,22 @@ function focarNaCena(cena, p) {
   });
 }
 
-// Leva a rolagem da página até o ponto em que a cena está no progresso p
 function irParaProgresso(cena, p) {
   const topo = cena.elemento.getBoundingClientRect().top + window.scrollY;
   window.scrollTo(0, topo + p * (cena.elemento.offsetHeight - window.innerHeight));
 }
 
-// ---------------------------------------------------------------------------
-// O laço: mede a rolagem e chama o desenho de cada cena
-// ---------------------------------------------------------------------------
-
-// Transforma a posição de cada cena na tela em progresso de 0 a 1.
-// caixa.top é a distância do topo da cena até o topo da tela: começa em 0
-// (a cena acabou de grudar) e vai ficando negativa conforme a pessoa rola.
 function medirRolagem() {
   const alturaDaTela = window.innerHeight;
   for (const cena of CENAS) {
     const caixa = cena.elemento.getBoundingClientRect();
     cena.alvo = limitar(-caixa.top / (caixa.height - alturaDaTela));
     const naTela = caixa.bottom > 0 && caixa.top < alturaDaTela;
-    // A classe "cena-na-tela" faz o fio do aviso descer de novo quando a cena chega
     if (naTela !== cena.naTela) cena.elemento.classList.toggle('cena-na-tela', naTela);
     cena.naTela = naTela;
   }
 }
 
-// Um "quadro": o navegador chama esta função cerca de 60 vezes por segundo
 function quadro(agora) {
   quadroPedido = false;
   if (!cenasEmMovimento) return;
@@ -8728,10 +7395,9 @@ function quadro(agora) {
 
     const antes = cena.p;
     if (!cena.comecou) {
-      cena.p = cena.alvo;   // na primeira vez, vai direto para onde a rolagem está
+      cena.p = cena.alvo;
       cena.comecou = true;
     } else {
-      // Suavização: a cada quadro, anda 14% do caminho que falta até o alvo
       cena.p += (cena.alvo - cena.p) * 0.14;
       if (Math.abs(cena.alvo - cena.p) < 0.0004) cena.p = cena.alvo;
     }
@@ -8739,7 +7405,6 @@ function quadro(agora) {
     if (cena.p !== antes || cena.suja || (cena.viva && cena.viva(agora))) {
       cena.desenhar(cena.p, agora);
       cena.suja = false;
-      // O aviso de descer some perto do fim da cena, quando não há mais o que esperar
       cena.aviso.style.opacity = String(trecho(cena.avisoDe, cena.avisoDe + 0.06, cena.p) * (1 - trecho(0.8, 0.88, cena.p)));
     }
   }
@@ -8752,10 +7417,6 @@ function pedirQuadro() {
   requestAnimationFrame(quadro);
 }
 
-// ---------------------------------------------------------------------------
-// Ligar e desligar
-// ---------------------------------------------------------------------------
-
 function medirCenas() {
   for (const cena of CENAS) {
     if (cena.medir) cena.medir();
@@ -8763,24 +7424,16 @@ function medirCenas() {
   }
 }
 
-// As cenas podem ficar em movimento? Duas coisas pedem a versão parada:
-//   1. a pessoa (ou o aparelho dela) pediu menos movimento;
-//   2. a letra está maior que o normal ou o texto está com mais espaço. O palco
-//      tem a altura exata da tela: um texto que cresce poderia não caber e
-//      ficar cortado. Parada, a página deixa o texto crescer à vontade.
 function cenasPodemMover() {
   const raiz = document.documentElement;
   const letraNormal = parseFloat(getComputedStyle(raiz).fontSize) <= 17;
   return !movimentoReduzido() && letraNormal && raiz.dataset.espacamento !== 'amplo';
 }
 
-// Decide se as cenas ficam em movimento ou paradas e arruma a página para isso.
-// É chamada ao abrir a página e sempre que uma preferência muda.
 function aplicarModoDasCenas() {
   cenasEmMovimento = cenasPodemMover();
   document.documentElement.classList.toggle('com-cenas', cenasEmMovimento);
 
-  // Primeiro tudo volta ao que o CSS manda; depois cada cena mede a tela nova
   for (const cena of CENAS) {
     cena.parar();
     cena.aviso.removeAttribute('style');
@@ -8791,18 +7444,14 @@ function aplicarModoDasCenas() {
   if (cenasEmMovimento) pedirQuadro();
   else for (const cena of CENAS) cena.parar();
 
-  // Quem vê a página parada só porque o aparelho pede menos movimento (sem ter
-  // escolhido nada no painel) recebe um aviso com um botão para ligar as animações
   const aviso = document.getElementById('aviso-movimento');
   const soPeloAparelho = document.documentElement.dataset.movimento === 'normal' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (aviso) aviso.hidden = !soPeloAparelho;
 }
 
-// Chamada pelo js/cenas-inicio.js depois de registrar todas as cenas
 function comecarCenas() {
   aplicarModoDasCenas();
 
-  // A janela mudou de tamanho: espera a pessoa parar de arrastar e mede de novo
   let espera = 0;
   window.addEventListener('resize', function () {
     clearTimeout(espera);
@@ -8812,10 +7461,6 @@ function comecarCenas() {
     }, 150);
   });
 
-  // O painel de acessibilidade mexe nos atributos do <html>. Um vigia avisa
-  // quando isso acontece. Se a mudança troca o modo (movimento, letra ou
-  // espaço), a página é arrumada de novo; se muda só cores ou medidas, basta
-  // medir e desenhar de novo.
   new MutationObserver(function (mudancas) {
     const mudouOMovimento = mudancas.some(function (mudanca) { return mudanca.attributeName === 'data-movimento'; });
     if (mudouOMovimento || cenasPodemMover() !== cenasEmMovimento) {
@@ -8826,19 +7471,13 @@ function comecarCenas() {
     if (!cenasEmMovimento) for (const cena of CENAS) cena.parar();
   }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-movimento', 'data-tema', 'data-contraste', 'data-fonte', 'data-espacamento'] });
 
-  // O aparelho também pode mudar de ideia com a página aberta
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', aplicarModoDasCenas);
 
-  // As fontes e as imagens chegam depois e mudam medidas
   window.addEventListener('load', function () {
     medirCenas();
     if (!cenasEmMovimento) for (const cena of CENAS) cena.parar();
   });
 
-  // Teclado: um botão ou link dentro de uma cena pode estar invisível no ponto
-  // em que a rolagem está (ele só aparece no fim da cena, por exemplo).
-  // O atributo data-visivel-em="1" diz em que progresso ele aparece: quando
-  // ele recebe o foco, a rolagem vai até lá. Assim o foco nunca fica escondido.
   document.addEventListener('focusin', function (evento) {
     if (!cenasEmMovimento || !evento.target.closest) return;
     const marcado = evento.target.closest('[data-visivel-em]');
@@ -8853,42 +7492,8 @@ function comecarCenas() {
 ### js/cenas-inicio.js
 
 ````js
-// ============================================================================
-// cenas-inicio.js
-// ----------------------------------------------------------------------------
-// As seis cenas da página inicial. Cada uma é registrada no motor
-// (js/cenas.js) com três funções:
-//   medir()             mede o que depende do tamanho da tela;
-//   desenhar(p, agora)  põe as peças no lugar para o progresso p, de 0 a 1;
-//   parar()             deixa a cena pronta para ser vista parada.
-//
-// As cenas, na ordem em que aparecem na página:
-//   1. Abertura: a retícula forma a marca (partículas em canvas)
-//   2. O pacotinho gira e abre (3D em CSS)
-//   3. O álbum abre (livro 3D em CSS)
-//   4. Mergulho na figurinha (zoom que atravessa)
-//   5. Os números contam (contador preso à rolagem)
-//   6. Voo pelas figurinhas (câmera em profundidade)
-//
-// Este arquivo também cuida da frase que acende sozinha, logo depois da
-// abertura. Ela não é uma cena: é uma animação que toca quando aparece na tela.
-// Os 12 grupos ficam em um carrossel (js/carrossel.js).
-//
-// Depende de: js/dados.js, js/estado.js, js/figurinha.js e js/cenas.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
-
-  // -------------------------------------------------------------------------
-  // 1. Abertura: a retícula forma a marca
-  // -------------------------------------------------------------------------
-  // Passos:
-  //   a) escrever "Colei!" em uma tela escondida;
-  //   b) olhar essa tela ponto por ponto e guardar onde há tinta;
-  //   c) dar a cada ponto um lugar "solto", em uma retícula que cobre o palco;
-  //   d) a cada quadro, desenhar cada pontinho entre o lugar solto e o lugar
-  //      final, conforme o progresso.
 
   const telaReticula = document.getElementById('reticula-tela');
   const pincel = telaReticula.getContext('2d');
@@ -8901,16 +7506,12 @@ document.addEventListener('DOMContentLoaded', function () {
   let vaoSolto = 10;
   let corDaTinta = '#14204F';
   const ponteiro = { x: -9999, y: -9999 };
-  let ultimoGesto = performance.now();   // a última vez em que a pessoa rolou ou mexeu o mouse
-  let medidasDaReticula = '';            // as medidas usadas na última montagem
+  let ultimoGesto = performance.now();
+  let medidasDaReticula = '';
 
-  // Os pontinhos chegam perto do convite, mas não passam por trás do texto.
-  const FOLGA_DO_TEXTO = 14;      // a menos de 14 px do texto não há pontinho
-  const CHEGADA_AO_TEXTO = 110;   // de 14 a 110 px, o pontinho vai crescendo até o tamanho normal
+  const FOLGA_DO_TEXTO = 14;
+  const CHEGADA_AO_TEXTO = 110;
 
-  // Onde está cada peça do convite, medida a partir do canto da tela de desenho:
-  // uma caixa para cada linha do título (a de baixo é mais curta que a de cima),
-  // uma para cada botão e uma para o aviso de descer.
   function caixasDoConvite() {
     if (!cenasEmMovimento) return [];
     const origem = convite.getBoundingClientRect();
@@ -8921,8 +7522,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const caixas = [];
     for (const peca of pecas) {
-      if (peca.width === 0 || peca.height === 0) continue;   // peça escondida
-      // A posição dentro do convite, somada ao lugar do convite no palco
+      if (peca.width === 0 || peca.height === 0) continue;
       const esquerda = Math.round(peca.left - origem.left + convite.offsetLeft);
       const topo = Math.round(peca.top - origem.top + convite.offsetTop);
       caixas.push({ esquerda: esquerda, topo: topo, direita: esquerda + Math.round(peca.width), base: topo + Math.round(peca.height) });
@@ -8930,7 +7530,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return caixas;
   }
 
-  // A distância de um ponto até a caixa mais próxima (0 se ele está dentro de uma)
   function distanciaAteAsCaixas(x, y, caixas) {
     let menor = Infinity;
     for (const caixa of caixas) {
@@ -8942,9 +7541,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function montarReticula() {
-    // Ao abrir a página, o cabeçalho ainda está em cima do palco. O CSS usa a
-    // altura dele (a distância do topo da página até a cena) para subir o
-    // convite e deixá-lo inteiro na primeira tela.
     const topoDaCena = Math.round(palcoDaAbertura.parentElement.getBoundingClientRect().top + window.scrollY);
     palcoDaAbertura.style.setProperty('--cabecalho', topoDaCena + 'px');
 
@@ -8953,9 +7549,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const altura = Math.round(caixa.height);
     const tinta = getComputedStyle(document.documentElement).getPropertyValue('--cor-texto').trim() || '#14204F';
 
-    // Montar a retícula dá trabalho. Se nada do que ela usa mudou (o tamanho
-    // da tela, a cor, o modo, a fonte, o tamanho do convite), fica a que já existe.
-    // No celular isso acontece toda hora: a barra de endereço some e volta.
     const fonteChegou = !document.fonts || document.fonts.check('900 100px "Londrina Solid"');
     const caixas = caixasDoConvite();
     const medidas = [largura, altura, tinta, cenasEmMovimento, fonteChegou, JSON.stringify(caixas)].join('|');
@@ -8965,8 +7558,6 @@ document.addEventListener('DOMContentLoaded', function () {
     pontos = [];
     if (largura < 20 || altura < 20) return;
 
-    // Em tela de celular, cada pixel do CSS tem 2 ou 3 pixels de verdade:
-    // a tela de desenho é criada maior para os pontinhos saírem nítidos.
     const nitidez = Math.min(window.devicePixelRatio || 1, 2);
     telaReticula.width = largura * nitidez;
     telaReticula.height = altura * nitidez;
@@ -8975,8 +7566,6 @@ document.addEventListener('DOMContentLoaded', function () {
     alturaDaTela = altura;
     corDaTinta = tinta;
 
-    // a) A palavra, em uma tela escondida do mesmo tamanho.
-    //    Em movimento, a tela é o palco inteiro; parada, é uma faixa baixa.
     const rascunho = document.createElement('canvas');
     rascunho.width = largura;
     rascunho.height = altura;
@@ -8994,7 +7583,6 @@ document.addEventListener('DOMContentLoaded', function () {
     lapis.fillText('Colei!', meioX, meioY);
     if (cenasEmMovimento) assinatura.style.top = Math.round(meioY + corpo * 0.5) + 'px';
 
-    // b) Onde há tinta? As linhas são desencontradas, como na retícula de jornal.
     const pixels = lapis.getImageData(0, 0, largura, altura).data;
     const passo = Math.max(3, corpo / 52);
     const finais = [];
@@ -9015,10 +7603,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const quantos = finais.length;
     if (quantos === 0) return;
 
-    // c) Os lugares soltos: uma retícula comum, cobrindo o palco inteiro, com
-    //    (quase) a mesma quantidade de pontos. Ela contorna cada linha do
-    //    convite: nenhum pontinho passa por trás do texto, e os que ficam
-    //    perto dele são menores, como um degradê de impressão.
     let areaDoTexto = 0;
     for (const caixa of caixas) {
       areaDoTexto += (caixa.direita - caixa.esquerda + FOLGA_DO_TEXTO * 2) * (caixa.base - caixa.topo + FOLGA_DO_TEXTO * 2);
@@ -9031,13 +7615,11 @@ document.addEventListener('DOMContentLoaded', function () {
       for (let x = (linha % 2) * vaoSolto / 2; x < largura; x += vaoSolto) {
         const distancia = distanciaAteAsCaixas(x, y, caixas);
         if (distancia < FOLGA_DO_TEXTO) continue;
-        // "tamanho" vai de 0.35 (colado no texto) a 1 (longe dele)
         const tamanho = misturar(0.35, 1, limitar((distancia - FOLGA_DO_TEXTO) / (CHEGADA_AO_TEXTO - FOLGA_DO_TEXTO)));
         soltos.push({ x: x, y: y, tamanho: tamanho });
       }
       linha += 1;
     }
-    // Sobrou lugar? Tira alguns, espalhados por igual.
     const sobra = soltos.length;
     if (sobra > quantos) {
       soltos = soltos.filter(function (lugar, i) {
@@ -9045,10 +7627,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // Quem vai para onde: as duas listas são postas na mesma ordem (da
-    // esquerda para a direita e, dentro de cada faixa, de cima para baixo).
-    // Assim cada pedaço do palco desce para o pedaço da palavra que fica na
-    // mesma direção, e os caminhos não se embaralham.
     function ordenarEmFaixas(lista) {
       lista.sort(function (a, b) { return a.x - b.x; });
       const tamanho = Math.max(1, Math.round(Math.sqrt(lista.length)));
@@ -9066,22 +7644,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const maiorDistancia = Math.hypot(largura / 2, altura / 2);
     pontos = finaisEmOrdem.map(function (fim, i) {
       const solto = soltosEmOrdem[i % soltosEmOrdem.length];
-      // Retícula de verdade: os pontinhos de baixo são maiores que os de cima
       const descida = (fim.y - topo) / Math.max(1, base - topo);
       return {
         xSolto: solto.x, ySolto: solto.y,
         tamanhoSolto: solto.tamanho,
         xFim: fim.x, yFim: fim.y,
         raioFim: passo * misturar(0.3, 0.57, descida),
-        // Quem está mais perto do meio chega primeiro
         atraso: 0.3 * Math.hypot(solto.x - meioX, solto.y - meioY) / maiorDistancia + 0.08 * acaso(),
         fase: acaso() * 6.283,
       };
     });
   }
 
-  // Desenha todos os pontinhos. "andamento" vai de 0 (soltos) a 1 (palavra
-  // formada); "balanco" vai de 0 (parados) a 1 (balançando de leve).
   function desenharPontos(andamento, agora, balanco) {
     const raioSolto = vaoSolto * 0.13;
     pincel.clearRect(0, 0, larguraDaTela, alturaDaTela);
@@ -9090,10 +7664,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const ponto of pontos) {
       const t = limitar((andamento - ponto.atraso) / 0.62);
-      const e = t * t * (3 - 2 * t);       // arranca e freia com suavidade
+      const e = t * t * (3 - 2 * t);
       const falta = 1 - e;
 
-      // O caminho faz uma curva: um desvio para o lado, maior no meio do caminho
       const dx = ponto.xFim - ponto.xSolto;
       const dy = ponto.yFim - ponto.ySolto;
       const curva = Math.sin(e * Math.PI) * 0.2;
@@ -9102,10 +7675,8 @@ document.addEventListener('DOMContentLoaded', function () {
       let raio = misturar(raioSolto * ponto.tamanhoSolto, ponto.raioFim, e);
 
       if (falta > 0.01) {
-        // Enquanto está solto, o pontinho balança de leve...
         x += Math.sin(agora / 900 + ponto.fase) * 2.5 * falta * balanco;
         y += Math.cos(agora / 1100 + ponto.fase) * 2.5 * falta * balanco;
-        // ...e cresce perto do mouse, como uma lanterna passando no papel
         const distancia = Math.hypot(x - ponteiro.x, y - ponteiro.y);
         if (distancia < 150) {
           const perto = 1 - distancia / 150;
@@ -9123,12 +7694,9 @@ document.addEventListener('DOMContentLoaded', function () {
     medir: montarReticula,
 
     desenhar: function (p, agora) {
-      // O balanço dura 3 segundos depois do último gesto e some nos 2 seguintes:
-      // nada na página fica se mexendo sozinho por mais de 5 segundos.
       const balanco = limitar(1 - (agora - ultimoGesto - 3000) / 2000);
       desenharPontos(limitar((p - 0.08) / 0.72), agora, balanco);
 
-      // O convite sai de cena enquanto os pontinhos se juntam
       const some = trecho(0.03, 0.18, p);
       convite.style.opacity = 1 - some;
       convite.style.transform = 'translateY(' + (some * -30) + 'px)';
@@ -9141,7 +7709,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     parar: function () {
       limparEstilos([convite, assinatura]);
-      desenharPontos(1, 0, 0);   // a marca já formada
+      desenharPontos(1, 0, 0);
     },
 
     viva: function (agora) {
@@ -9162,32 +7730,17 @@ document.addEventListener('DOMContentLoaded', function () {
     ponteiro.y = -9999;
   });
 
-  // O botão do aviso: liga as animações neste site mesmo com o aparelho
-  // pedindo menos movimento. A escolha fica guardada (js/tema-acessibilidade.js).
   document.getElementById('ligar-movimento').addEventListener('click', function () {
     if (typeof guardarPreferencia === 'function') {
       guardarPreferencia('movimento', 'completo');
     } else {
-      // O navegador pode estar com uma cópia antiga do tema-acessibilidade.js na
-      // memória, ainda sem essa função. Aí a escolha vale só até fechar a página.
       document.documentElement.dataset.movimento = 'completo';
     }
-    // O aviso some com o botão dentro: o foco vai para o primeiro botão do convite
     convite.querySelector('a').focus();
   });
 
-  // -------------------------------------------------------------------------
-  // A frase acende sozinha (não é uma cena presa à rolagem)
-  // -------------------------------------------------------------------------
-  // Quando a frase aparece na tela, a classe "frase-apagada" sai e o CSS acende
-  // as palavras uma depois da outra (cada uma espera um pouco mais que a
-  // anterior). Acontece uma vez só. Com menos movimento, a frase nunca fica
-  // apagada.
-
   const secaoDaFrase = document.getElementById('frase-secao');
   const frase = document.getElementById('frase');
-  // A frase é desmontada em palavras: cada uma vira um <span> para poder acender
-  // sozinha. "--ordem" diz ao CSS a posição dela na fila.
   const palavras = frase.textContent.trim().split(/\s+/);
   frase.textContent = '';
   palavras.forEach(function (texto, i) {
@@ -9200,36 +7753,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!movimentoReduzido() && 'IntersectionObserver' in window) {
     secaoDaFrase.classList.add('frase-apagada');
-    // O vigia avisa quando pelo menos 40% da frase está dentro da tela
     const vigiaDaFrase = new IntersectionObserver(function (entradas) {
       if (!entradas[0].isIntersecting) return;
       secaoDaFrase.classList.remove('frase-apagada');
-      vigiaDaFrase.disconnect();   // acende uma vez só
+      vigiaDaFrase.disconnect();
     }, { threshold: 0.4 });
     vigiaDaFrase.observe(frase);
-    // Se a pessoa ligar "Reduzir animações" antes de chegar aqui, a frase acende de vez
     new MutationObserver(function () {
       if (movimentoReduzido()) secaoDaFrase.classList.remove('frase-apagada');
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-movimento'] });
   }
-
-  // -------------------------------------------------------------------------
-  // 2. O pacotinho gira e abre
-  // -------------------------------------------------------------------------
-  // O pacotinho aparece de dois jeitos, com a mesma coreografia:
-  //   - a sequência de quadros: 90 imagens de um pacotinho 3D, já prontas em
-  //     assets/img/pacotinho/. A rolagem escolhe qual imagem mostrar. É a
-  //     técnica das páginas de produto: o 3D pesado é feito antes, uma vez só,
-  //     e o site só mostra fotos. (As imagens saem de scripts/quadros.html.)
-  //   - o pacotinho de CSS: fica no lugar enquanto as imagens não chegam.
-  // As figurinhas são elementos comuns da página, atrás do pacotinho.
 
   const pacote = document.getElementById('pacote3d');
   const abaDoPacote = document.getElementById('pacote3d-aba');
   const cenaDoPacote = pacote.parentElement;
   const tituloDoPacote1 = document.getElementById('titulo-cena-pacote');
   const tituloDoPacote2 = document.getElementById('pacote-titulo-2');
-  // Cinco figurinhas de verdade, uma de cada tipo: comum, brilhante, lendária e bandeira
   const cartas = [50, 222, 54, 193, 276].map(function (numero) {
     const carta = criarElemento('div', 'pacote-carta');
     carta.append(criarFigurinha(figurinhaPorNumero(numero), {}));
@@ -9239,18 +7778,15 @@ document.addEventListener('DOMContentLoaded', function () {
   let alturaDoPacote = 300;
   let passoDoLeque = 120;
 
-  // ----- A sequência de quadros
   const telaDeQuadros = document.getElementById('pacote-quadros');
   const pincelDeQuadros = telaDeQuadros.getContext('2d');
   const QUADROS = 90;
-  const FIM_DO_PACOTE = 0.72;     // o pacotinho sai de cena com 72% da rolagem; o resto é das figurinhas
-  let quadros = [];               // as imagens do tema em uso
+  const FIM_DO_PACOTE = 0.72;
+  let quadros = [];
   let temaDosQuadros = '';
   let quadroMostrado = -1;
   let paginaCarregada = document.readyState === 'complete';
 
-  // Busca as 90 imagens do tema atual. Só quando a última chega é que elas
-  // entram em cena: até lá, quem aparece é o pacotinho de CSS.
   function carregarQuadros() {
     const tema = document.documentElement.dataset.tema === 'escuro' ? 'escuro' : 'claro';
     if (tema === temaDosQuadros) return;
@@ -9269,13 +7805,11 @@ document.addEventListener('DOMContentLoaded', function () {
         cenaDoPacoteNoMotor.suja = true;
         pedirQuadro();
       };
-      // Os arquivos se chamam 001.webp, 002.webp ... 090.webp
       imagem.src = 'assets/img/pacotinho/' + tema + '/' + String(i).padStart(3, '0') + '.webp';
       novos.push(imagem);
     }
   }
 
-  // Mostra a imagem que corresponde ao progresso p da cena
   function mostrarQuadro(p) {
     const numero = Math.round(limitar(p / FIM_DO_PACOTE) * (QUADROS - 1));
     if (numero === quadroMostrado) return;
@@ -9288,25 +7822,20 @@ document.addEventListener('DOMContentLoaded', function () {
     medir: function () {
       alturaDoPacote = cenaDoPacote.offsetHeight;
       const larguraDaCarta = cartas[0].offsetWidth;
-      // No celular as cinco não cabem lado a lado: o leque fica mais fechado
       passoDoLeque = Math.min(larguraDaCarta * 1.08, (cenaDoPacote.parentElement.clientWidth - larguraDaCarta * 1.3 - 24) / 4);
-      // As imagens só são buscadas se as cenas estão em movimento e depois que o
-      // resto da página carregou. Trocar o tema busca as do outro tema.
       if (cenasEmMovimento && paginaCarregada) carregarQuadros();
     },
 
     desenhar: function (p) {
-      // A coreografia do pacotinho (a mesma de posar(), no js/pacote3d.js):
-      const chegada = trecho(0, 0.28, p);       // entra girando, de costas para a frente
-      const rasgo = trecho(0.28, 0.4, p);       // a aba sai pelo picote
-      const queda = trecho(0.55, 0.72, p);      // vazio, cai para fora da cena
+      const chegada = trecho(0, 0.28, p);
+      const rasgo = trecho(0.28, 0.4, p);
+      const queda = trecho(0.55, 0.72, p);
       const some = String(trecho(0, 0.06, p) * (1 - trecho(0.64, 0.72, p)));
 
       if (quadros.length === QUADROS) {
         mostrarQuadro(p);
         telaDeQuadros.style.opacity = some;
       } else {
-        // O pacotinho de CSS, com os mesmos movimentos
         const giro = misturar(-205, 9, chegada) - trecho(0.28, 0.55, p) * 18;
         const tombo = misturar(22, 0, chegada) + queda * 62;
         const desce = misturar(alturaDoPacote * 0.46, 0, chegada) + queda * queda * alturaDoPacote * 1.86;
@@ -9316,21 +7845,15 @@ document.addEventListener('DOMContentLoaded', function () {
         abaDoPacote.style.opacity = 1 - trecho(0.34, 0.4, p);
       }
 
-      // As cinco figurinhas: sobem por dentro do pacotinho, passam por cima dele
-      // e, quando ele já caiu, descem e abrem em leque. Cada uma começa um
-      // pouco depois da anterior. Elas ficam sempre atrás do pacotinho.
       cartas.forEach(function (carta, i) {
         const t = trecho(0.38 + i * 0.03, 0.74 + i * 0.03, p);
-        const lado = i - 2;   // -2, -1, 0, 1, 2: a do meio fica no meio
+        const lado = i - 2;
         const x = lado * passoDoLeque * t * t;
         const y = misturar(0, alturaDoPacote * 0.03, t) - Math.sin(t * Math.PI) * alturaDoPacote * 0.75;
-        // Profundidade: sempre negativa (atrás da frente do pacotinho). No leque,
-        // a figurinha do meio fica um pouco à frente das dos lados.
         const z = misturar(-(34 + i * 2), -4 - Math.abs(lado) * 10, trecho(0.5, 0.8, t));
         const giroDaCarta = lado * 5 * t;
-        const viradaDaCarta = Math.sin(t * Math.PI) * -20;   // vira de lado só no meio do caminho
+        const viradaDaCarta = Math.sin(t * Math.PI) * -20;
         carta.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px) rotateY(' + viradaDaCarta + 'deg) rotate(' + giroDaCarta + 'deg)';
-        // Só aparece quando o pacotinho já está de frente (antes disso ficaria de fora, no giro)
         carta.style.opacity = trecho(0.25, 0.29, p);
       });
 
@@ -9353,18 +7876,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cenasEmMovimento) carregarQuadros();
   });
 
-  // -------------------------------------------------------------------------
-  // 3. O álbum abre
-  // -------------------------------------------------------------------------
-
   const livro = document.getElementById('livro');
   const folhaCapa = document.getElementById('folha-capa');
   const folha1 = document.getElementById('folha-1');
   const tituloDoLivro = document.getElementById('titulo-cena-album');
   const acaoDoLivro = document.getElementById('acao-do-album');
 
-  // Monta uma página do álbum: o nome da seleção e as seis figurinhas dela,
-  // umas coladas e outras ainda em vaga. É uma amostra, não o álbum da pessoa.
   function montarPagina(idDaFace, selecao) {
     const miolo = criarElemento('div', 'miolo');
 
@@ -9378,7 +7895,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const figurinhas = figurinhasDaSelecao(selecao.id);
     for (const fig of figurinhas) {
       if (fig.numero % 4 === 2) {
-        // Uma vaga: a figurinha que ainda falta
         const vaga = criarElemento('div', 'vaga');
         vaga.append(criarElemento('span', 'vaga-numero', String(fig.numero)), criarElemento('span', 'vaga-nome', fig.nome));
         grade.append(vaga);
@@ -9400,31 +7916,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   registrarCena(document.querySelector('.cena-album'), {
     medir: function () {
-      // O miolo foi desenhado com 480 px de largura: aqui se calcula o quanto
-      // encolher ou aumentar para caber na folha (descontando a borda de 2 px de cada lado)
       const larguraDaPagina = document.getElementById('pagina-2').offsetWidth;
       livro.style.setProperty('--escala', ((larguraDaPagina - 4) / 480).toFixed(4));
     },
 
     desenhar: function (p) {
-      const levanta = trecho(0, 0.16, p);    // o álbum deitado se levanta
-      const capa = trecho(0.14, 0.5, p);     // a capa vira
-      const folha = trecho(0.58, 0.86, p);   // a primeira folha vira
+      const levanta = trecho(0, 0.16, p);
+      const capa = trecho(0.14, 0.5, p);
+      const folha = trecho(0.58, 0.86, p);
 
-      // Fechado, o álbum fica no meio do palco. Aberto, quem fica no meio é a
-      // lombada: por isso ele anda meia página para a direita enquanto a capa vira.
       const inclinado = misturar(58, 14, levanta) - trecho(0.9, 1, p) * 6;
       livro.style.transform = 'translateX(' + (capa * 50) + '%) rotateX(' + inclinado + 'deg) scale(' + misturar(0.72, 1, levanta) + ')';
 
-      // Cada folha gira até 180 graus em torno da lombada. As sobras de menos de
-      // um grau deixam a folha de cima um fio acima da de baixo, para o navegador
-      // nunca ficar em dúvida sobre qual está na frente.
       folhaCapa.style.transform = 'rotateY(' + misturar(-0.6, -180, capa) + 'deg)';
       folha1.style.transform = 'rotateY(' + misturar(-0.3, -179.7, folha) + 'deg)';
       folhaCapa.style.zIndex = capa > 0.5 ? 1 : 3;
       folha1.style.zIndex = 2;
 
-      // A sombra é mais forte com a folha em pé (90 graus) e some com ela deitada
       folhaCapa.style.setProperty('--sombra', (Math.sin(capa * Math.PI) * 0.7).toFixed(3));
       folha1.style.setProperty('--sombra', (Math.sin(folha * Math.PI) * 0.7).toFixed(3));
 
@@ -9441,25 +7949,18 @@ document.addEventListener('DOMContentLoaded', function () {
     },
   });
 
-  // -------------------------------------------------------------------------
-  // 4. Mergulho na figurinha
-  // -------------------------------------------------------------------------
-
   const mergulho = document.getElementById('mergulho');
   const fimDoMergulho = document.getElementById('mergulho-fim');
   const etiquetaDoMergulho = fimDoMergulho.querySelector('.mergulho-etiqueta');
   const figurinhaDoMergulho = criarFigurinha(figurinhaPorNumero(54), {});
   const giroDoMergulho = giroDaFigurinha(54) + 4;
   mergulho.append(figurinhaDoMergulho);
-  // A camada de cor do fim usa a mesma cor do retrato da figurinha
   fimDoMergulho.style.setProperty('--campo', selecaoPorId(figurinhaPorNumero(54).selecao).cores.campo);
   let aumentoMaximo = 30;
 
   registrarCena(document.querySelector('.cena-mergulho'), {
     medir: function () {
-      if (!cenasEmMovimento) return;   // parada, a figurinha nem aparece
-      // O mergulho mira em um ponto do retrato onde só existe a cor lisa:
-      // o canto de cima, à esquerda da cabeça e acima dos pontinhos.
+      if (!cenasEmMovimento) return;
       const arte = figurinhaDoMergulho.querySelector('.figurinha-arte');
       const folgaX = arte.offsetWidth * 0.18;
       const folgaY = arte.offsetHeight * 0.17;
@@ -9467,7 +7968,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const miraY = arte.offsetTop + folgaY;
       mergulho.style.transformOrigin = miraX + 'px ' + miraY + 'px';
 
-      // Quanto aumentar para esse pedaço liso cobrir a tela inteira?
       const palco = mergulho.parentElement;
       const naTelaX = mergulho.offsetLeft + miraX;
       const naTelaY = mergulho.offsetTop + miraY;
@@ -9480,15 +7980,12 @@ document.addEventListener('DOMContentLoaded', function () {
     },
 
     desenhar: function (p) {
-      // O aumento cresce como juros compostos (potência): assim a velocidade
-      // do mergulho parece constante, em vez de disparar no fim
       const aumento = Math.pow(aumentoMaximo, trecho(0.1, 0.62, p));
       const giro = giroDoMergulho * (1 - trecho(0.08, 0.3, p));
       mergulho.style.transform = 'scale(' + aumento.toFixed(3) + ') rotate(' + giro.toFixed(2) + 'deg)';
 
       const cor = trecho(0.5, 0.63, p);
       fimDoMergulho.style.opacity = cor;
-      // Com a tela já tomada pela cor, a figurinha gigante deixa de ser desenhada
       mergulho.style.visibility = cor >= 1 ? 'hidden' : 'visible';
 
       const etiqueta = trecho(0.66, 0.82, p);
@@ -9503,15 +8000,8 @@ document.addEventListener('DOMContentLoaded', function () {
     },
   });
 
-  // -------------------------------------------------------------------------
-  // 5. Os números contam
-  // -------------------------------------------------------------------------
-
-  // Os valores vêm dos dados do site, na mesma ordem das casas do HTML:
-  // seleções, figurinhas, cidades-sede e jogos
   const VALORES = [SELECOES.length, FIGURINHAS.length, SEDES.length, COPA.numeros.jogos];
   const numeros = Array.from(document.querySelectorAll('#numeros .numero')).map(function (caixa, i) {
-    // O número que conta é só para os olhos. O leitor de tela lê o valor final.
     const visor = criarElemento('span', '', String(VALORES[i]));
     visor.setAttribute('aria-hidden', 'true');
     const casa = caixa.querySelector('dd');
@@ -9531,12 +8021,10 @@ document.addEventListener('DOMContentLoaded', function () {
   registrarCena(document.querySelector('.cena-numeros'), {
     desenhar: function (p) {
       numeros.forEach(function (numero, i) {
-        const t = trecho(0.08 + i * 0.2, 0.3 + i * 0.2, p);   // cada número tem a sua vez
+        const t = trecho(0.08 + i * 0.2, 0.3 + i * 0.2, p);
         mostrarNumero(numero, Math.round(numero.valor * t));
         numero.caixa.style.setProperty('--aceso', t.toFixed(3));
       });
-      // As linhas do campo se desenham enquanto os números contam
-      // ("--falta" é o pedaço do traço que ainda não apareceu)
       campoDosNumeros.style.setProperty('--falta', (1 - trecho(0.02, 0.62, p)).toFixed(3));
     },
 
@@ -9545,29 +8033,24 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarNumero(numero, numero.valor);
         numero.caixa.style.removeProperty('--aceso');
       }
-      campoDosNumeros.style.removeProperty('--falta');   // parado, o campo aparece pronto
+      campoDosNumeros.style.removeProperty('--falta');
     },
   });
-
-  // -------------------------------------------------------------------------
-  // 6. Voo pelas figurinhas
-  // -------------------------------------------------------------------------
 
   const voo = document.getElementById('voo');
   const fimDoVoo = document.getElementById('voo-fim');
   const QUANTAS_NO_VOO = window.innerWidth < 640 ? 26 : 44;
-  const FUNDO_DO_VOO = 5200;   // a profundidade da figurinha mais distante, em pixels
+  const FUNDO_DO_VOO = 5200;
   const acasoDoVoo = sorteador(288);
   const itensDoVoo = [];
 
   for (let i = 0; i < QUANTAS_NO_VOO; i++) {
-    // 37 e 288 não têm divisor em comum: a conta passa por seleções bem diferentes
     const figurinha = criarFigurinha(figurinhaPorNumero(1 + (i * 37) % FIGURINHAS.length), {});
     figurinha.classList.add('voo-item');
     voo.append(figurinha);
     itensDoVoo.push({
       elemento: figurinha,
-      lugarX: acasoDoVoo() * 2 - 1,     // de -1 (esquerda) a 1 (direita)
+      lugarX: acasoDoVoo() * 2 - 1,
       lugarY: acasoDoVoo() * 2 - 1,
       z: -300 - (i / (QUANTAS_NO_VOO - 1)) * FUNDO_DO_VOO,
       giro: (acasoDoVoo() * 2 - 1) * 12,
@@ -9584,7 +8067,6 @@ document.addEventListener('DOMContentLoaded', function () {
       for (const item of itensDoVoo) {
         let x = item.lugarX * largura;
         const y = item.lugarY * altura * 0.8;
-        // O meio fica livre: a câmera passa por ali, e é onde entra o título
         if (Math.abs(x) < largura * 0.16 && Math.abs(y) < altura * 0.22) {
           x = (item.lugarX < 0 ? -1 : 1) * largura * (0.16 + Math.abs(item.lugarY) * 0.2);
         }
@@ -9594,13 +8076,11 @@ document.addEventListener('DOMContentLoaded', function () {
     },
 
     desenhar: function (p) {
-      // A câmera não anda: é o conjunto das figurinhas que vem para a frente
       const camera = trecho(0, 0.9, p) * (FUNDO_DO_VOO + 900);
       voo.style.transform = 'translateZ(' + camera.toFixed(1) + 'px)';
 
       for (const item of itensDoVoo) {
-        const distancia = item.z + camera;   // negativa = ainda longe; perto de 900 = encostando no olho
-        // Longe, a figurinha aparece aos poucos (neblina). Bem perto, some antes de bater na câmera.
+        const distancia = item.z + camera;
         const aparece = Number((limitar((distancia + 4200) / 1400) * limitar((700 - distancia) / 350)).toFixed(2));
         if (aparece === item.aparece) continue;
         item.aparece = aparece;
@@ -9619,13 +8099,8 @@ document.addEventListener('DOMContentLoaded', function () {
     },
   });
 
-  // -------------------------------------------------------------------------
-  // Começar
-  // -------------------------------------------------------------------------
-
   comecarCenas();
 
-  // As letras de "Colei!" só podem ser lidas depois que a fonte do site chegar
   if (document.fonts && document.fonts.load) {
     document.fonts.load('900 100px "Londrina Solid"').then(function () {
       montarReticula();
@@ -9639,41 +8114,16 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/pacote3d.js
 
 ````js
-// ============================================================================
-// pacote3d.js
-// ----------------------------------------------------------------------------
-// O pacotinho de figurinhas como um objeto 3D de verdade, desenhado pela placa
-// de vídeo (WebGL) com a biblioteca Three.js.
-//
-// É a ÚNICA parte do site que usa uma biblioteca externa. Ela serve para duas
-// coisas:
-//   1. gerar a sequência de quadros da página inicial (scripts/quadros.html);
-//   2. mostrar o pacotinho ao vivo na página Pacotinhos.
-//
-// Como o pacotinho é montado:
-//   - duas folhas (frente e costas), cada uma um plano cheio de pontos;
-//   - cada ponto é empurrado para fora no meio, formando a "barriga" do
-//     pacotinho cheio, e fica chato nas bordas, onde ele é selado;
-//   - a estampa (marca, picote, retícula) é desenhada em um <canvas> comum e
-//     colada nas folhas como uma textura;
-//   - a parte de cima (a aba) é uma peça separada, para poder ser rasgada.
-//
-// Depende de: js/vendor/three.min.js (Three.js r128, licença MIT).
-// ============================================================================
-
 function criarPacote3d(tela, opcoes) {
   'use strict';
   opcoes = opcoes || {};
 
-  // Medidas do pacotinho, em "unidades" do mundo 3D. A proporção é 5 por 7,
-  // a mesma do pacotinho desenhado em CSS.
   const LARGURA = 5;
   const ALTURA = 7;
-  const CORTE = 0.86;      // o picote fica a 86% da altura; acima dele é a aba
-  const BARRIGA = 0.5;     // o quanto o meio do pacotinho estufa
-  const DISTANCIA = 30;    // da câmera até o pacotinho
+  const CORTE = 0.86;
+  const BARRIGA = 0.5;
+  const DISTANCIA = 30;
 
-  // "Quanto deste trecho já passou?" (0 antes, 1 depois, suave no meio)
   function suave(inicio, fim, t) {
     const x = Math.min(1, Math.max(0, (t - inicio) / (fim - inicio)));
     return x * x * (3 - 2 * x);
@@ -9683,30 +8133,21 @@ function criarPacote3d(tela, opcoes) {
     return a + (b - a) * t;
   }
 
-  const GRAU = Math.PI / 180;   // a Three.js mede ângulos em radianos
+  const GRAU = Math.PI / 180;
 
-  // -------------------------------------------------------------------------
-  // 1. Desenhista, cena, câmera e luz
-  // -------------------------------------------------------------------------
-
-  // alpha: true deixa o fundo transparente: só o pacotinho é desenhado.
-  // preserveDrawingBuffer: true permite copiar o desenho para uma imagem.
   const desenhista = new THREE.WebGLRenderer({ canvas: tela, alpha: true, antialias: true, preserveDrawingBuffer: true });
   desenhista.setClearColor(0x000000, 0);
-  desenhista.outputEncoding = THREE.sRGBEncoding;   // cores na tela iguais às do CSS
+  desenhista.outputEncoding = THREE.sRGBEncoding;
 
   const cena = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(30, 1, 1, 100);
   camera.position.z = DISTANCIA;
 
-  cena.add(new THREE.HemisphereLight(0xffffff, 0xd0c8cc, 0.5));   // luz geral, de cima e de baixo
-  const lampada = new THREE.DirectionalLight(0xffffff, 0.8);       // uma lâmpada, em cima à esquerda
+  cena.add(new THREE.HemisphereLight(0xffffff, 0xd0c8cc, 0.5));
+  const lampada = new THREE.DirectionalLight(0xffffff, 0.8);
   lampada.position.set(-9, 10, 9);
   cena.add(lampada);
 
-  // Papel laminado só parece laminado se tiver o que refletir. Aqui é montado
-  // um "estúdio" de mentira: uma sala escura com painéis de luz. A Three.js
-  // fotografa essa sala em todas as direções e usa a foto como reflexo.
   function criarReflexos() {
     const estudio = new THREE.Scene();
     estudio.background = new THREE.Color(0x303034);
@@ -9716,20 +8157,16 @@ function criarPacote3d(tela, opcoes) {
       luz.lookAt(0, 0, 0);
       estudio.add(luz);
     }
-    painel(0xffffff, 14, 8, -10, 12, 10);    // janela grande, em cima à esquerda
-    painel(0xffffff, 3, 16, 14, 2, 6);       // faixa de luz à direita
-    painel(0xd8d2d6, 20, 6, 0, -12, 8);      // rebatedor embaixo
-    painel(0xffffff, 10, 10, 0, 6, -14);     // luz de trás
+    painel(0xffffff, 14, 8, -10, 12, 10);
+    painel(0xffffff, 3, 16, 14, 2, 6);
+    painel(0xd8d2d6, 20, 6, 0, -12, 8);
+    painel(0xffffff, 10, 10, 0, 6, -14);
     const fotografo = new THREE.PMREMGenerator(desenhista);
     const reflexos = fotografo.fromScene(estudio, 0.03).texture;
     fotografo.dispose();
     return reflexos;
   }
   const reflexos = criarReflexos();
-
-  // -------------------------------------------------------------------------
-  // 2. A estampa: desenhada em <canvas> comum e usada como textura
-  // -------------------------------------------------------------------------
 
   const ESTAMPA_L = 1000;
   const ESTAMPA_A = 1400;
@@ -9748,8 +8185,6 @@ function criarPacote3d(tela, opcoes) {
   const telaDoRecorte = novaTela();
   const telaDoRelevo = novaTela();
 
-  // As cores vêm do CSS (tokens.css): as mesmas do pacotinho desenhado em CSS.
-  // Assim o pacotinho 3D troca de cor junto com o tema.
   function lerCores() {
     const estilo = getComputedStyle(document.documentElement);
     return {
@@ -9759,15 +8194,12 @@ function criarPacote3d(tela, opcoes) {
     };
   }
 
-  // O que frente e costas têm em comum: o papel, a retícula, o picote e as
-  // faixas seladas em cima e embaixo
   function estamparBase(pincel, cores) {
     pincel.globalCompositeOperation = 'source-over';
     pincel.globalAlpha = 1;
     pincel.fillStyle = cores.papel;
     pincel.fillRect(0, 0, ESTAMPA_L, ESTAMPA_A);
 
-    // Retícula: pontinhos na cor da tinta, bem fracos
     pincel.fillStyle = cores.tinta;
     pincel.globalAlpha = 0.3;
     pincel.beginPath();
@@ -9779,14 +8211,12 @@ function criarPacote3d(tela, opcoes) {
     }
     pincel.fill();
 
-    // As faixas seladas: risquinhos deitados, como o papel prensado
     pincel.globalAlpha = 0.28;
     for (let y = 6; y < 74; y += 10) {
       pincel.fillRect(0, y, ESTAMPA_L, 3);
       pincel.fillRect(0, ESTAMPA_A - y - 3, ESTAMPA_L, 3);
     }
 
-    // O picote: linha tracejada na altura do corte
     pincel.globalAlpha = 1;
     pincel.strokeStyle = cores.tinta;
     pincel.lineWidth = 6;
@@ -9798,7 +8228,6 @@ function criarPacote3d(tela, opcoes) {
     pincel.setLineDash([]);
   }
 
-  // Um texto em cima de uma faixa lisa, para os pontinhos não atrapalharem a leitura
   function estamparTexto(pincel, cores, texto, fonte, x, y, giro) {
     pincel.save();
     pincel.translate(x, y);
@@ -9815,8 +8244,6 @@ function criarPacote3d(tela, opcoes) {
     pincel.restore();
   }
 
-  // As bordas de cima e de baixo são cortadas em serrilha, como em um pacotinho
-  // de verdade. O recorte é feito apagando triângulos do desenho.
   function serrilhar(pincel) {
     pincel.globalCompositeOperation = 'destination-out';
     pincel.beginPath();
@@ -9835,7 +8262,6 @@ function criarPacote3d(tela, opcoes) {
   function estampar() {
     const cores = lerCores();
 
-    // Frente
     let pincel = telaDaFrente.getContext('2d');
     pincel.clearRect(0, 0, ESTAMPA_L, ESTAMPA_A);
     estamparBase(pincel, cores);
@@ -9844,7 +8270,6 @@ function criarPacote3d(tela, opcoes) {
     estamparTexto(pincel, cores, '5 figurinhas', '700 74px ' + FONTE_LEITURA, 500, 1010);
     serrilhar(pincel);
 
-    // Costas: a emenda do papel no meio e dois textos
     pincel = telaDasCostas.getContext('2d');
     pincel.clearRect(0, 0, ESTAMPA_L, ESTAMPA_A);
     estamparBase(pincel, cores);
@@ -9859,7 +8284,6 @@ function criarPacote3d(tela, opcoes) {
     estamparTexto(pincel, cores, 'Abra pelo picote', '700 66px ' + FONTE_LEITURA, 500, 760);
     serrilhar(pincel);
 
-    // O recorte sozinho, em preto e branco, para o lado de dentro do pacotinho
     pincel = telaDoRecorte.getContext('2d');
     pincel.fillStyle = '#FFFFFF';
     pincel.fillRect(0, 0, ESTAMPA_L, ESTAMPA_A);
@@ -9881,21 +8305,17 @@ function criarPacote3d(tela, opcoes) {
     materialDeDentro.color.set(cores.prata);
   }
 
-  // O relevo: um desenho em tons de cinza que diz onde o papel é amassado.
-  // Claro = alto, escuro = fundo. A luz usa isso para fazer brilhos e sombras.
   function desenharRelevo() {
     const pincel = telaDoRelevo.getContext('2d');
     pincel.fillStyle = '#808080';
     pincel.fillRect(0, 0, ESTAMPA_L, ESTAMPA_A);
 
-    // Um sorteio que se repete, para o amassado ser sempre o mesmo
     let semente = 2026;
     function acaso() {
       semente = (semente * 1664525 + 1013904223) % 4294967296;
       return semente / 4294967296;
     }
 
-    // Vincos: riscos largos e esfumados, uns claros e outros escuros
     pincel.lineCap = 'round';
     for (let i = 0; i < 70; i++) {
       const x = acaso() * ESTAMPA_L;
@@ -9913,7 +8333,6 @@ function criarPacote3d(tela, opcoes) {
       }
     }
 
-    // Faixas seladas: degraus bem marcados
     for (let y = 0; y < 76; y += 10) {
       pincel.fillStyle = '#C8C8C8';
       pincel.fillRect(0, y, ESTAMPA_L, 5);
@@ -9927,7 +8346,7 @@ function criarPacote3d(tela, opcoes) {
   function criarTextura(telaDeOrigem, colorida) {
     const textura = new THREE.CanvasTexture(telaDeOrigem);
     if (colorida) textura.encoding = THREE.sRGBEncoding;
-    textura.anisotropy = desenhista.capabilities.getMaxAnisotropy();   // nitidez quando o pacotinho está de lado
+    textura.anisotropy = desenhista.capabilities.getMaxAnisotropy();
     return textura;
   }
 
@@ -9935,12 +8354,6 @@ function criarPacote3d(tela, opcoes) {
   const texturaDasCostas = criarTextura(telaDasCostas, true);
   const texturaDoRecorte = criarTextura(telaDoRecorte, false);
   const texturaDoRelevo = criarTextura(telaDoRelevo, false);
-
-  // -------------------------------------------------------------------------
-  // 3. Os materiais
-  // -------------------------------------------------------------------------
-  // metalness = o quanto parece metal; roughness = o quanto é áspero (fosco).
-  // Papel laminado: bastante metal e pouco áspero.
 
   function criarMaterialDeFora(textura, some) {
     return new THREE.MeshStandardMaterial({
@@ -9950,13 +8363,12 @@ function criarPacote3d(tela, opcoes) {
       metalness: 0.55,
       roughness: 0.36,
       envMap: reflexos,
-      envMapIntensity: 1,      // a força dos reflexos
-      alphaTest: 0.5,          // o que é transparente na estampa (a serrilha) não é desenhado
-      transparent: some,       // só a aba precisa sumir aos poucos
+      envMapIntensity: 1,
+      alphaTest: 0.5,
+      transparent: some,
     });
   }
 
-  // O lado de dentro é prateado, como em todo pacotinho laminado
   const materialDeDentro = new THREE.MeshStandardMaterial({
     color: 0xC5CAD6,
     metalness: 0.85,
@@ -9964,24 +8376,16 @@ function criarPacote3d(tela, opcoes) {
     envMap: reflexos,
     alphaMap: texturaDoRecorte,
     alphaTest: 0.5,
-    side: THREE.BackSide,      // só é desenhado quando visto por dentro
+    side: THREE.BackSide,
   });
 
-  // -------------------------------------------------------------------------
-  // 4. A forma
-  // -------------------------------------------------------------------------
-
-  // O quanto o ponto (u, v) estufa para fora. u vai de 0 (esquerda) a 1
-  // (direita); v vai de 0 (embaixo) a 1 (em cima).
   function barriga(u, v) {
-    const dosLados = Math.pow(Math.sin(Math.PI * u), 0.55);           // chato nas laterais
-    const dasPontas = suave(0.05, 0.24, v) * (1 - suave(0.78, 0.95, v));   // chato nas faixas seladas
+    const dosLados = Math.pow(Math.sin(Math.PI * u), 0.55);
+    const dasPontas = suave(0.05, 0.24, v) * (1 - suave(0.78, 0.95, v));
     const rugas = 0.03 * Math.sin(u * 19 + v * 9) * Math.sin(v * 27 - u * 6);
     return (BARRIGA * dosLados + rugas) * dasPontas;
   }
 
-  // Uma folha: um plano que vai de vInicio a vFim da altura do pacotinho.
-  // Ela tem dois lados: o de fora, com a estampa, e o de dentro, prateado.
   function criarFolha(vInicio, vFim, materialDeFora) {
     const fatia = vFim - vInicio;
     const forma = new THREE.PlaneGeometry(LARGURA, ALTURA * fatia, 28, Math.max(6, Math.round(64 * fatia)));
@@ -9990,18 +8394,16 @@ function criarPacote3d(tela, opcoes) {
     for (let i = 0; i < lugares.count; i++) {
       const u = uvs.getX(i);
       const v = vInicio + uvs.getY(i) * fatia;
-      uvs.setY(i, v);                         // a textura usa só a fatia que cabe a esta folha
-      lugares.setZ(i, barriga(u, v));         // empurra o ponto para fora
+      uvs.setY(i, v);
+      lugares.setZ(i, barriga(u, v));
     }
-    forma.computeVertexNormals();             // recalcula para onde cada pedacinho "olha", para a luz
+    forma.computeVertexNormals();
 
     const folha = new THREE.Group();
     folha.add(new THREE.Mesh(forma, materialDeFora), new THREE.Mesh(forma, materialDeDentro));
     return folha;
   }
 
-  // Uma peça: frente e costas da mesma fatia. As costas são a mesma folha,
-  // virada meia volta.
   function criarPeca(vInicio, vFim, some) {
     const materiais = [criarMaterialDeFora(texturaDaFrente, some), criarMaterialDeFora(texturaDasCostas, some)];
     const peca = new THREE.Group();
@@ -10013,16 +8415,13 @@ function criarPacote3d(tela, opcoes) {
     return peca;
   }
 
-  const pacote = new THREE.Group();   // o pacotinho inteiro: é ele que gira e cai
+  const pacote = new THREE.Group();
   cena.add(pacote);
 
-  // O corpo: do pé até o picote
   const corpo = criarPeca(0, CORTE, false);
   corpo.position.y = ALTURA * (CORTE / 2 - 0.5);
   pacote.add(corpo);
 
-  // A aba: do picote até o topo. Ela fica presa a um "eixo" no canto de baixo,
-  // à esquerda: é em torno desse canto que ela gira quando é rasgada.
   const alturaDaAba = ALTURA * (1 - CORTE);
   const eixoDaAba = new THREE.Group();
   eixoDaAba.position.set(-LARGURA / 2, ALTURA * (CORTE - 0.5), 0);
@@ -10031,12 +8430,6 @@ function criarPacote3d(tela, opcoes) {
   eixoDaAba.add(aba);
   pacote.add(eixoDaAba);
 
-  // -------------------------------------------------------------------------
-  // 5. As poses
-  // -------------------------------------------------------------------------
-
-  // Põe o pacotinho em uma pose. Tudo em graus e em unidades do mundo 3D.
-  //   rasgo: 0 = aba no lugar; 1 = aba arrancada e sumida
   function aplicar(pose) {
     pacote.rotation.set((pose.giroX || 0) * GRAU, (pose.giroY || 0) * GRAU, (pose.giroZ || 0) * GRAU);
     pacote.position.set(pose.x || 0, pose.y || 0, 0);
@@ -10050,33 +8443,20 @@ function criarPacote3d(tela, opcoes) {
     for (const material of aba.userData.materiais) material.opacity = opacidade;
   }
 
-  // A coreografia da cena da página inicial. t vai de 0 a 1:
-  //   0,00 a 0,39  o pacotinho entra girando, de costas para a frente
-  //   0,39 a 0,56  a aba é rasgada pelo picote
-  //   0,56 a 0,76  ele espera, aberto, virando devagar (é quando as figurinhas sobem)
-  //   0,76 a 1,00  vazio, ele cai para fora do quadro
   function posar(t) {
     const chegada = suave(0, 0.39, t);
     const rasgo = suave(0.39, 0.56, t);
     const queda = suave(0.76, 1, t);
     aplicar({
-      giroY: misturar(-205, 9, chegada) - suave(0.39, 0.76, t) * 18,   // depois de chegar, vira devagar de um lado para o outro
+      giroY: misturar(-205, 9, chegada) - suave(0.39, 0.76, t) * 18,
       giroX: misturar(22, 0, chegada) + queda * 62,
-      giroZ: Math.sin(rasgo * Math.PI) * -3 + queda * -12,   // dá um tranco quando a aba sai
-      y: misturar(-3.2, 0, chegada) - queda * queda * 13,     // a queda acelera, como tudo que cai
+      giroZ: Math.sin(rasgo * Math.PI) * -3 + queda * -12,
+      y: misturar(-3.2, 0, chegada) - queda * queda * 13,
       tamanho: misturar(0.72, 1, chegada),
       rasgo: rasgo,
     });
   }
 
-  // -------------------------------------------------------------------------
-  // 6. Tamanho e desenho
-  // -------------------------------------------------------------------------
-
-  // Ajusta o desenho ao tamanho da tela. "alturaVisivel" diz quantas unidades
-  // do mundo 3D cabem de cima a baixo: quanto maior, menor o pacotinho aparece.
-  // O tamanho vem da página (o espaço que a tela ocupa). O gerador de quadros
-  // passa um tamanho fixo em 'opcoes', para toda imagem sair igual.
   function medir() {
     const largura = opcoes.largura || tela.clientWidth || tela.width;
     const altura = opcoes.altura || tela.clientHeight || tela.height;
@@ -10098,9 +8478,9 @@ function criarPacote3d(tela, opcoes) {
   aplicar({});
 
   return {
-    posar: posar,         // coreografia da página inicial (t de 0 a 1)
-    aplicar: aplicar,     // pose livre (página Pacotinhos)
-    estampar: estampar,   // refaz a estampa (quando o tema muda ou a fonte chega)
+    posar: posar,
+    aplicar: aplicar,
+    estampar: estampar,
     medir: medir,
     desenhar: desenhar,
   };
@@ -10110,39 +8490,15 @@ function criarPacote3d(tela, opcoes) {
 ### js/pacotinho-3d.js
 
 ````js
-// ============================================================================
-// pacotinho-3d.js
-// ----------------------------------------------------------------------------
-// Na página Pacotinhos, troca o desenho do pacotinho fechado (feito em CSS)
-// pelo pacotinho 3D ao vivo (js/pacote3d.js, com a biblioteca Three.js).
-//
-// O que ele faz a mais que o de CSS:
-//   - inclina conforme o mouse (ou o dedo) passa por cima, e o brilho do papel
-//     laminado anda junto;
-//   - na hora de rasgar, a aba sai de verdade e mostra o lado prateado.
-//
-// Este arquivo NÃO mexe nas regras da página: quem sorteia, guarda e mostra as
-// figurinhas continua sendo o js/pacotinho.js. Aqui só se troca o desenho.
-// Se o navegador não tiver WebGL (o desenho 3D), nada acontece e o pacotinho
-// de CSS continua no lugar.
-//
-// Depende de: js/vendor/three.min.js, js/pacote3d.js, js/figurinha.js
-// (movimentoReduzido) e js/pacotinho.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   const palco = document.getElementById('palco');
   if (!palco || typeof THREE === 'undefined' || typeof criarPacote3d !== 'function') return;
 
-  // Uma única tela de desenho para a página inteira. Ela é guardada e posta de
-  // novo dentro de cada pacotinho que aparece ("Abrir outro pacotinho").
   const tela = document.createElement('canvas');
   tela.className = 'pacotinho-vivo';
 
-  // O navegador sabe desenhar em 3D (WebGL)? A pergunta é feita antes, com uma
-  // tela de teste, para a Three.js não escrever um erro no console à toa.
   function temWebGL() {
     try {
       const teste = document.createElement('canvas');
@@ -10151,23 +8507,20 @@ document.addEventListener('DOMContentLoaded', function () {
       return false;
     }
   }
-  if (!temWebGL()) return;   // sem WebGL: fica o pacotinho de CSS
+  if (!temWebGL()) return;
 
   let pacote;
   try {
-    // alturaVisivel: 10.5 = a altura do pacotinho (7) mais metade de folga,
-    // para a aba ter para onde voar
     pacote = criarPacote3d(tela, { alturaVisivel: 10.5 });
   } catch (erro) {
-    return;   // algo deu errado ao montar o 3D: fica o pacotinho de CSS
+    return;
   }
 
-  const TEMPO_DE_RASGAR = 800;   // o mesmo do js/pacotinho.js, em milésimos de segundo
-  let dono = null;               // o pacotinho de CSS que está "vestido" com a tela
+  const TEMPO_DE_RASGAR = 800;
+  let dono = null;
   let rasgando = false;
   let quadroPedido = false;
 
-  // A pose de agora e a pose para onde o pacotinho quer ir
   const pose = { giroX: 0, giroY: 0, rasgo: 0, y: 0 };
   const alvo = { giroX: 0, giroY: 0 };
 
@@ -10176,7 +8529,6 @@ document.addEventListener('DOMContentLoaded', function () {
     pacote.desenhar();
   }
 
-  // Põe a tela dentro de um pacotinho de CSS que acabou de aparecer no palco
   function vestir(pacotinho) {
     dono = pacotinho;
     rasgando = false;
@@ -10184,17 +8536,16 @@ document.addEventListener('DOMContentLoaded', function () {
     alvo.giroX = alvo.giroY = 0;
     tela.style.opacity = '';
 
-    pacotinho.classList.add('pacotinho-com-3d');   // o CSS esconde o desenho antigo
+    pacotinho.classList.add('pacotinho-com-3d');
     pacotinho.append(tela);
     pacote.medir();
     desenhar();
 
-    // O pacotinho inclina para o lado em que o ponteiro está
     pacotinho.addEventListener('pointermove', function (evento) {
       if (rasgando || movimentoReduzido()) return;
       const caixa = pacotinho.getBoundingClientRect();
-      const x = (evento.clientX - caixa.left) / caixa.width - 0.5;    // de -0,5 (esquerda) a 0,5 (direita)
-      const y = (evento.clientY - caixa.top) / caixa.height - 0.5;    // de -0,5 (em cima) a 0,5 (embaixo)
+      const x = (evento.clientX - caixa.left) / caixa.width - 0.5;
+      const y = (evento.clientY - caixa.top) / caixa.height - 0.5;
       alvo.giroY = x * 34;
       alvo.giroX = y * 22;
       pedirQuadroDoPacote();
@@ -10205,8 +8556,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Um quadro da inclinação: anda 15% do caminho até o alvo e desenha.
-  // O laço para sozinho quando o pacotinho chega: nada fica rodando à toa.
   function quadroDoPacote() {
     quadroPedido = false;
     if (rasgando || !tela.isConnected) return;
@@ -10222,19 +8571,17 @@ document.addEventListener('DOMContentLoaded', function () {
     requestAnimationFrame(quadroDoPacote);
   }
 
-  // A animação de rasgar, no mesmo tempo da animação de CSS que ela substitui:
-  // primeiro a aba sai; no fim, o pacotinho vazio escorrega e some.
   function rasgar() {
-    if (rasgando || movimentoReduzido()) return;   // com menos movimento, a página nem espera a animação
+    if (rasgando || movimentoReduzido()) return;
     rasgando = true;
     const inicio = performance.now();
     const giroX = pose.giroX;
     const giroY = pose.giroY;
 
     function quadroDoRasgo(agora) {
-      if (!tela.isConnected) return;   // o palco já foi trocado pelas figurinhas
+      if (!tela.isConnected) return;
       const t = Math.min(1, (agora - inicio) / TEMPO_DE_RASGAR);
-      const fim = Math.max(0, (t - 0.55) / 0.45);   // 0 até 55% do tempo; depois sobe até 1
+      const fim = Math.max(0, (t - 0.55) / 0.45);
       pose.rasgo = Math.min(1, t / 0.65);
       pose.giroX = giroX * (1 - t);
       pose.giroY = giroY * (1 - t);
@@ -10246,9 +8593,6 @@ document.addEventListener('DOMContentLoaded', function () {
     requestAnimationFrame(quadroDoRasgo);
   }
 
-  // Um vigia olha o palco. Ele avisa em dois casos:
-  //   - apareceu um pacotinho novo (a página desenhou o palco de novo);
-  //   - o pacotinho ganhou a classe "pacotinho-rasgando" (a pessoa rasgou).
   function olharOPalco() {
     const pacotinho = palco.querySelector('.pacotinho');
     if (pacotinho && pacotinho !== dono) vestir(pacotinho);
@@ -10257,7 +8601,6 @@ document.addEventListener('DOMContentLoaded', function () {
   new MutationObserver(olharOPalco).observe(palco, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
   olharOPalco();
 
-  // Tema novo, cores novas: a estampa é refeita
   new MutationObserver(function () {
     pacote.estampar();
     if (tela.isConnected) desenhar();
@@ -10269,7 +8612,6 @@ document.addEventListener('DOMContentLoaded', function () {
     desenhar();
   });
 
-  // A estampa usa as letras do site: quando elas chegam, é desenhada de novo
   if (document.fonts && document.fonts.load) {
     Promise.all([
       document.fonts.load('900 100px "Londrina Solid"'),
@@ -10285,31 +8627,17 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/formulario.js
 
 ````js
-// ============================================================================
-// formulario.js
-// ----------------------------------------------------------------------------
-// Ajudantes usados pelos formulários das páginas Entrar e Contato:
-// mostrar e limpar o erro de um campo, conferir e-mail e o botão de mostrar a senha.
-//
-// Como o erro chega a quem usa leitor de tela: no HTML, cada campo aponta para
-// a sua caixa de erro com aria-describedby. Quando o campo recebe o foco, o
-// leitor lê o rótulo e, em seguida, a frase do erro.
-// ============================================================================
-
-// O ícone que acompanha toda mensagem de erro: um cartão com um "x".
-// (O erro nunca é avisado só pela cor: vem com ícone e frase.)
 const ICONE_DE_ERRO =
   '<svg viewBox="0 0 16 20" width="16" height="20" aria-hidden="true" focusable="false">' +
   '<rect x="1" y="1" width="14" height="18" rx="2" fill="currentColor"/>' +
   '<path class="cartao-x" d="M5 7l6 6M11 7l-6 6" stroke-width="2" stroke-linecap="round"/>' +
   '</svg>';
 
-// Mostra o erro de um campo. A caixa do erro tem o id do campo mais "-erro".
 function mostrarErro(campo, mensagem) {
   const caixa = document.getElementById(campo.id + '-erro');
-  campo.setAttribute('aria-invalid', 'true');   // "este campo está com problema"
+  campo.setAttribute('aria-invalid', 'true');
   caixa.innerHTML = ICONE_DE_ERRO;
-  caixa.append(mensagem);   // append com texto escreve o texto como ele é, sem interpretar HTML
+  caixa.append(mensagem);
   caixa.hidden = false;
 }
 
@@ -10320,14 +8648,10 @@ function limparErro(campo) {
   caixa.hidden = true;
 }
 
-// Confere o formato do e-mail: algo, arroba, algo, ponto, algo. Sem espaços.
 function emailValido(texto) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(texto);
 }
 
-// Botões "Mostrar senha": cada um aponta para o campo dele pelo atributo
-// data-mostrar-senha. O campo troca entre type="password" (bolinhas) e
-// type="text" (letras), e o texto do botão acompanha.
 document.addEventListener('DOMContentLoaded', function () {
   for (const botao of document.querySelectorAll('[data-mostrar-senha]')) {
     botao.addEventListener('click', function () {
@@ -10343,30 +8667,6 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/login.js
 
 ````js
-// ============================================================================
-// login.js
-// ----------------------------------------------------------------------------
-// A página Entrar: criar conta, entrar e sair. É uma SIMULAÇÃO: não existe
-// servidor, tudo fica guardado no localStorage deste navegador.
-//
-// O que fica guardado:
-//   colei.contas  = as contas criadas: { "ana@exemplo.com": { nome, sal, hash } }
-//   colei.sessao  = quem entrou agora: { email, nome }
-//
-// A SENHA NUNCA É GUARDADA. Guarda-se o "hash" dela.
-//   Hash é como um moedor de carne: a senha entra, sai uma sequência de letras
-//   e números, e não existe caminho de volta (não dá para "desmoer"). Para
-//   conferir a senha na hora de entrar, mói-se de novo o que a pessoa digitou
-//   e compara-se o resultado com o que está guardado.
-//   O "sal" é um tempero sorteado para cada conta e misturado à senha antes de
-//   moer. Com ele, duas pessoas com a mesma senha ficam com hashes diferentes.
-//
-// Em um site de verdade, essa conta seria feita no servidor, com um moedor
-// mais lento de propósito (para atrapalhar quem tenta adivinhar senhas).
-//
-// Depende de: js/dados.js, js/estado.js, js/formulario.js e js/menu.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
@@ -10379,19 +8679,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const formCriar = document.getElementById('form-criar');
   const aviso = document.getElementById('conta-aviso');
 
-  // -------------------------------------------------------------------------
-  // 1. Guardar e ler contas e sessão
-  // -------------------------------------------------------------------------
-
   function lerDaGaveta(chave) {
     try {
       return JSON.parse(localStorage.getItem(chave));
     } catch (erro) {
-      return null;   // gaveta bloqueada ou texto estragado
+      return null;
     }
   }
 
-  // Devolve true se conseguiu guardar
   function guardarNaGaveta(chave, valor) {
     try {
       localStorage.setItem(chave, JSON.stringify(valor));
@@ -10410,18 +8705,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return sessao && sessao.email ? sessao : null;
   }
 
-  // -------------------------------------------------------------------------
-  // 2. O hash da senha
-  // -------------------------------------------------------------------------
-
-  // O navegador tem a ferramenta de hash? (Ela se chama crypto.subtle e só
-  // funciona em página aberta do próprio computador ou por https.)
   function temFerramentaDeHash() {
     return Boolean(window.crypto && window.crypto.subtle && window.TextEncoder);
   }
 
-  // Transforma uma lista de bytes em texto. Cada byte (um número de 0 a 255)
-  // vira dois caracteres em hexadecimal: 255 vira "ff", 10 vira "0a".
   function emHexadecimal(bytes) {
     let texto = '';
     for (const numero of bytes) {
@@ -10430,25 +8717,16 @@ document.addEventListener('DOMContentLoaded', function () {
     return texto;
   }
 
-  // Sorteia o sal: 16 bytes ao acaso, pedidos ao sorteador seguro do navegador
   function sortearSal() {
     return emHexadecimal(crypto.getRandomValues(new Uint8Array(16)));
   }
 
-  // Mistura o sal com a senha e passa pelo moedor (o algoritmo SHA-256).
-  // "async" e "await": a conta demora um instante, e o await espera a resposta
-  // chegar antes de continuar.
   async function calcularHash(sal, senha) {
-    const bytes = new TextEncoder().encode(sal + ':' + senha);   // texto vira bytes
+    const bytes = new TextEncoder().encode(sal + ':' + senha);
     const resultado = await crypto.subtle.digest('SHA-256', bytes);
     return emHexadecimal(new Uint8Array(resultado));
   }
 
-  // -------------------------------------------------------------------------
-  // 3. O que aparece na tela
-  // -------------------------------------------------------------------------
-
-  // Mostra só uma das três partes: 'conta', 'entrar' ou 'criar'
   function mostrarParte(parte) {
     painelConta.hidden = parte !== 'conta';
     formEntrar.hidden = parte !== 'entrar';
@@ -10467,7 +8745,6 @@ document.addEventListener('DOMContentLoaded', function () {
     mostrarParte('conta');
   }
 
-  // Tira os erros e os valores de um formulário
   function limparFormulario(formulario) {
     formulario.reset();
     for (const campo of formulario.querySelectorAll('.campo-entrada')) limparErro(campo);
@@ -10477,7 +8754,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Erro do formulário inteiro (não de um campo só)
   function mostrarErroGeral(id, mensagem) {
     const caixa = document.getElementById(id);
     caixa.innerHTML = ICONE_DE_ERRO;
@@ -10485,12 +8761,8 @@ document.addEventListener('DOMContentLoaded', function () {
     caixa.hidden = false;
   }
 
-  // -------------------------------------------------------------------------
-  // 4. Criar conta
-  // -------------------------------------------------------------------------
-
   formCriar.addEventListener('submit', async function (evento) {
-    evento.preventDefault();   // não deixa o navegador recarregar a página
+    evento.preventDefault();
 
     const campoNome = document.getElementById('criar-nome');
     const campoEmail = document.getElementById('criar-email');
@@ -10500,7 +8772,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const senha = campoSenha.value;
     const contas = lerContas();
 
-    // Confere campo por campo e guarda o primeiro que tiver problema
     let primeiroComErro = null;
     function conferir(campo, mensagem) {
       if (mensagem === '') {
@@ -10525,7 +8796,7 @@ document.addEventListener('DOMContentLoaded', function () {
     conferir(campoSenha, erroDaSenha);
 
     if (primeiroComErro) {
-      primeiroComErro.focus();   // leva o teclado direto ao primeiro campo a consertar
+      primeiroComErro.focus();
       return;
     }
 
@@ -10541,7 +8812,6 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // As figurinhas de visitante vão junto para a conta nova
     let trouxeFigurinhas = false;
     try {
       const albumDeVisitante = localStorage.getItem('colei.album.visitante');
@@ -10551,20 +8821,15 @@ document.addEventListener('DOMContentLoaded', function () {
         trouxeFigurinhas = true;
       }
     } catch (erro) {
-      // Sem gaveta não há o que trazer.
     }
 
     guardarNaGaveta(CHAVE_SESSAO, { email: email, nome: nome });
     limparFormulario(formCriar);
-    atualizarLinkDaConta();   // o menu passa a mostrar "Minha conta" (função de js/menu.js)
+    atualizarLinkDaConta();
     desenharConta();
     aviso.textContent = 'Conta criada. ' + (trouxeFigurinhas ? 'As figurinhas que você tinha como visitante vieram junto.' : 'O álbum desta conta começa vazio.');
     document.getElementById('titulo-conta').focus();
   });
-
-  // -------------------------------------------------------------------------
-  // 5. Entrar e sair
-  // -------------------------------------------------------------------------
 
   formEntrar.addEventListener('submit', async function (evento) {
     evento.preventDefault();
@@ -10605,9 +8870,6 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // Mói a senha digitada com o sal da conta e compara com o hash guardado.
-    // A mensagem de erro é a mesma para e-mail desconhecido e para senha
-    // errada: assim ninguém descobre quais e-mails têm conta.
     const conta = lerContas()[email];
     const confere = Boolean(conta) && (await calcularHash(conta.sal, senha)) === conta.hash;
     if (!confere) {
@@ -10628,7 +8890,6 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       localStorage.removeItem(CHAVE_SESSAO);
     } catch (erro) {
-      // Sem gaveta não há sessão para apagar.
     }
     atualizarLinkDaConta();
     desenharConta();
@@ -10636,7 +8897,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('titulo-entrar').focus();
   });
 
-  // Trocar entre "Entrar" e "Criar conta"
   document.getElementById('ir-criar').addEventListener('click', function () {
     aviso.textContent = '';
     mostrarParte('criar');
@@ -10649,10 +8909,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('titulo-entrar').focus();
   });
 
-  // -------------------------------------------------------------------------
-  // 6. Começar
-  // -------------------------------------------------------------------------
-
   desenharConta();
 });
 ````
@@ -10660,22 +8916,6 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/contato.js
 
 ````js
-// ============================================================================
-// contato.js
-// ----------------------------------------------------------------------------
-// Confere o formulário de contato na hora de enviar. O envio é SIMULADO:
-// não existe servidor, a mensagem não vai para lugar nenhum.
-//
-// Quando algo está errado:
-//   - cada campo com problema ganha a sua frase de erro, com ícone;
-//   - um resumo no topo lista tudo o que falta, com um link para cada campo;
-//   - o foco vai para o resumo, para ele ser a primeira coisa lida.
-// Quando está tudo certo, aparece a mensagem de sucesso, que o leitor de tela
-// lê sozinho (ela fica em uma região com aria-live).
-//
-// Depende de: js/formulario.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
@@ -10690,7 +8930,6 @@ document.addEventListener('DOMContentLoaded', function () {
     mensagem: document.getElementById('contato-mensagem'),
   };
 
-  // A regra de cada campo. Devolve a frase do erro, ou '' se está certo.
   function erroDoCampo(nome) {
     const valor = campos[nome].value.trim();
 
@@ -10711,7 +8950,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return '';
   }
 
-  // Confere um campo e mostra ou tira o erro dele. Devolve a frase do erro.
   function conferirCampo(nome) {
     const erro = erroDoCampo(nome);
     if (erro === '') limparErro(campos[nome]);
@@ -10720,10 +8958,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   formulario.addEventListener('submit', function (evento) {
-    evento.preventDefault();   // não deixa o navegador recarregar a página
+    evento.preventDefault();
     sucesso.textContent = '';
 
-    // Confere todos os campos e junta os erros
     const erros = [];
     for (const nome in campos) {
       const erro = conferirCampo(nome);
@@ -10731,7 +8968,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (erros.length > 0) {
-      // Monta o resumo: um link para cada campo com problema
       document.getElementById('resumo-titulo').textContent =
         erros.length === 1 ? 'Falta acertar 1 campo' : 'Falta acertar ' + erros.length + ' campos';
 
@@ -10741,7 +8977,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const link = document.createElement('a');
         link.href = '#' + erro.campo.id;
         link.textContent = erro.campo.labels[0].textContent + ': ' + erro.frase;
-        // O link leva o foco direto para o campo (só a âncora não faria isso em todo navegador)
         link.addEventListener('click', function (clique) {
           clique.preventDefault();
           erro.campo.focus();
@@ -10756,7 +8991,6 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // Tudo certo: aqui um site de verdade mandaria a mensagem ao servidor
     const nome = campos.nome.value.trim();
     resumo.hidden = true;
     formulario.reset();
@@ -10764,8 +8998,6 @@ document.addEventListener('DOMContentLoaded', function () {
     sucesso.focus();
   });
 
-  // Depois que um campo ganhou erro, ele é conferido de novo a cada mudança:
-  // assim a frase some na hora em que a pessoa conserta.
   for (const nome in campos) {
     campos[nome].addEventListener('input', function () {
       if (campos[nome].getAttribute('aria-invalid') === 'true') conferirCampo(nome);
@@ -10777,22 +9009,9 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/sobre.js
 
 ````js
-// ============================================================================
-// sobre.js
-// ----------------------------------------------------------------------------
-// Na página Sobre, monta duas listas a partir de js/dados.js:
-//   - o crédito de cada foto de estádio (autor, licença e link para a original);
-//   - as fontes dos dados da Copa.
-// Como as listas saem dos mesmos dados que o site usa, o crédito nunca fica
-// diferente da foto que está no ar.
-//
-// Depende de: js/dados.js (as listas SEDES e FONTES).
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
-  // Cria um link que abre a página de origem
   function criarLink(texto, endereco) {
     const link = document.createElement('a');
     link.href = endereco;
@@ -10800,20 +9019,17 @@ document.addEventListener('DOMContentLoaded', function () {
     return link;
   }
 
-  // Créditos das fotos: "Cidade do México, Estadio Azteca. Foto de Fulano, licença CC BY 4.0."
   const listaFotos = document.getElementById('creditos-fotos');
   for (const sede of SEDES) {
     const item = document.createElement('li');
     item.append(criarLink(sede.cidade + ', ' + sede.estadio, sede.foto.origem));
     item.append('. Foto de ' + sede.foto.autor + ', licença ');
-    // Domínio público não tem página de licença para apontar
     if (sede.foto.licencaUrl) item.append(criarLink(sede.foto.licenca, sede.foto.licencaUrl));
     else item.append(sede.foto.licenca);
     item.append('.');
     listaFotos.append(item);
   }
 
-  // Fontes dos dados: um link para cada uma
   const listaFontes = document.getElementById('fontes-dados');
   for (const apelido in FONTES) {
     const item = document.createElement('li');
@@ -10826,17 +9042,6 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/demonstracao.js
 
 ````js
-// ============================================================================
-// demonstracao.js
-// ----------------------------------------------------------------------------
-// O modo demonstração da página Sobre: dois botões para testar o álbum rápido
-// na apresentação.
-//   - "Ganhar 5 pacotinhos extras": para não depender de um pacotinho por dia.
-//   - "Zerar álbum": apaga tudo, depois de uma confirmação.
-//
-// Depende de: js/dados.js e js/estado.js.
-// ============================================================================
-
 document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
@@ -10849,14 +9054,12 @@ document.addEventListener('DOMContentLoaded', function () {
     aviso.textContent = 'Pronto: agora há ' + extras + ' pacotinhos extras esperando na página Pacotinhos.';
   });
 
-  // Zerar é uma ação sem volta, por isso passa por uma janela de confirmação.
-  // showModal() abre o <dialog> por cima da página e prende o foco dentro dele.
   document.getElementById('demo-zerar').addEventListener('click', function () {
     dialogo.showModal();
   });
 
   document.getElementById('zerar-cancelar').addEventListener('click', function () {
-    dialogo.close();   // o navegador devolve o foco ao botão que abriu a janela
+    dialogo.close();
   });
 
   document.getElementById('zerar-confirmar').addEventListener('click', function () {
@@ -10870,31 +9073,6 @@ document.addEventListener('DOMContentLoaded', function () {
 ### js/dados.js
 
 ````js
-// ============================================================================
-// dados.js
-// ----------------------------------------------------------------------------
-// Tudo o que o álbum sabe sobre a Copa de 2026: seleções, figurinhas e sedes.
-//
-// Fica em um arquivo .js (e não em .json carregado com fetch) para o site
-// funcionar abrindo o index.html direto do computador.
-//
-// REGRA: nada aqui é inventado. Cada registro tem o campo "fonte", com os
-// apelidos das fontes listadas em FONTES. O que não foi possível confirmar
-// está escrito como 'a confirmar'.
-//
-// Os 12 grupos estão completos: 48 seleções e 288 figurinhas, mais as 16 sedes
-// e o resumo de como a Copa terminou.
-//   - O Grupo C foi pesquisado e escrito à mão (etapa 4 do projeto).
-//   - Os outros 11 grupos foram lidos por script das páginas listadas em
-//     FONTES e conferidos com uma segunda lista de elencos. As frases
-//     (campanha, curiosidade) são montadas a partir desses dados.
-// Consulta das fontes: 19 e 20/11/2026.
-// ============================================================================
-
-// ---------------------------------------------------------------------------
-// FONTES: de onde veio cada informação
-// ---------------------------------------------------------------------------
-
 const FONTES = {
   'fifa-elencos': {
     titulo: 'FIFA. World Cup 2026: 48 squads confirmed (comunicado de 2 de junho de 2026)',
@@ -11054,19 +9232,7 @@ const FONTES = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// SELEÇÕES
-// ---------------------------------------------------------------------------
-// "cores" partem das cores da bandeira e são usadas no desenho da figurinha:
-//   campo  = fundo do retrato      camisa = cor da camisa      numero = cor do número
-// Foram ajustadas para o número ter pelo menos 3:1 de contraste com a camisa
-// e a silhueta (azul-tinteiro) ter pelo menos 3:1 com o campo.
-// "campanha" e "depoisDoGrupo" contam os resultados do ponto de vista da
-// seleção: "2 a 0 no México" é vitória, "1 a 1 com o México" é empate e
-// "0 a 2 para o México" é derrota.
-
 const SELECOES = [
-  // ===== Grupo A e Grupo B =====
   {
     id: 'mexico',
     nome: 'México',
@@ -11180,7 +9346,6 @@ const SELECOES = [
     fonte: ['wiki-elencos', 'wiki-grupo-b', 'wiki-mata-mata'],
   },
 
-  // ===== Grupo C (pesquisado e escrito à mão) =====
   {
     id: 'brasil',
     nome: 'Brasil',
@@ -11238,7 +9403,6 @@ const SELECOES = [
     fonte: ['wiki-elencos', 'wiki-grupo-c', 'uefa-escocia'],
   },
 
-  // ===== Grupos D a L =====
   {
     id: 'estados-unidos',
     nome: 'Estados Unidos',
@@ -11745,33 +9909,7 @@ const SELECOES = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// FIGURINHAS
-// ---------------------------------------------------------------------------
-// Numeração: cada grupo tem 24 figurinhas (4 seleções x 6). O Grupo A fica com
-// 1 a 24, o B com 25 a 48, o C com 49 a 72 e assim por diante. Dentro do grupo,
-// as seleções seguem a ordem do sorteio (C1 Brasil, C2 Marrocos, C3 Haiti,
-// C4 Escócia): primeiro a bandeira, depois os 5 jogadores pelo número da camisa.
-//
-// Raridade (regra do álbum, não é dado da Copa):
-//   lendaria  = o camisa 10 da seleção
-//   brilhante = a bandeira e o capitão (se o capitão veste a 10, vale a lendária)
-//   comum     = os demais
-//
-// Quem entra, nos grupos lidos por script (todos menos o C), por ordem:
-//   1. o capitão;  2. o camisa 10;  3. quem fez mais gols pela seleção na Copa;
-//   4. o goleiro com mais jogos pela seleção;
-//   5. os jogadores com mais jogos pela seleção, primeiro nas posições que
-//      ainda não têm ninguém, até completar cinco.
-// "Jogos" e "gols pela seleção" são os da lista de elencos, contados até o
-// começo da Copa. "Gols na Copa" foram somados jogo a jogo.
-//
-// Posição: as quatro categorias da lista oficial (Goleiro, Defensor,
-// Meio-campista, Atacante). "clube" é o clube do jogador na época da Copa.
-
 const FIGURINHAS = [
-  // =============== Grupo A e Grupo B ===============
-  // ----- México -----
   { numero: 1, tipo: 'bandeira', selecao: 'mexico', nome: 'México', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 2, tipo: 'jogador', selecao: 'mexico', nome: 'Edson Álvarez', camisa: 4, posicao: 'Defensor', clube: 'Fenerbahçe', raridade: 'brilhante',
@@ -11799,7 +9937,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- África do Sul -----
   { numero: 7, tipo: 'bandeira', selecao: 'africa-do-sul', nome: 'África do Sul', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 8, tipo: 'jogador', selecao: 'africa-do-sul', nome: 'Ronwen Williams', camisa: 1, posicao: 'Goleiro', clube: 'Mamelodi Sundowns', raridade: 'brilhante',
@@ -11827,7 +9964,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Coreia do Sul -----
   { numero: 13, tipo: 'bandeira', selecao: 'coreia-do-sul', nome: 'Coreia do Sul', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 14, tipo: 'jogador', selecao: 'coreia-do-sul', nome: 'Kim Seung-gyu', camisa: 1, posicao: 'Goleiro', clube: 'FC Tokyo', raridade: 'comum',
@@ -11855,7 +9991,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Tchéquia -----
   { numero: 19, tipo: 'bandeira', selecao: 'tchequia', nome: 'Tchéquia', raridade: 'brilhante', fonte: ['wiki-grupo-a'] },
   {
     numero: 20, tipo: 'jogador', selecao: 'tchequia', nome: 'Matěj Kovář', camisa: 1, posicao: 'Goleiro', clube: 'PSV Eindhoven', raridade: 'comum',
@@ -11883,7 +10018,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Canadá -----
   { numero: 25, tipo: 'bandeira', selecao: 'canada', nome: 'Canadá', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 26, tipo: 'jogador', selecao: 'canada', nome: 'Cyle Larin', camisa: 9, posicao: 'Atacante', clube: 'Southampton', raridade: 'comum',
@@ -11911,7 +10045,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Bósnia e Herzegovina -----
   { numero: 31, tipo: 'bandeira', selecao: 'bosnia', nome: 'Bósnia e Herzegovina', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 32, tipo: 'jogador', selecao: 'bosnia', nome: 'Nikola Vasilj', camisa: 1, posicao: 'Goleiro', clube: 'FC St. Pauli', raridade: 'comum',
@@ -11939,7 +10072,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Catar -----
   { numero: 37, tipo: 'bandeira', selecao: 'catar', nome: 'Catar', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 38, tipo: 'jogador', selecao: 'catar', nome: 'Abdulaziz Hatem', camisa: 6, posicao: 'Meio-campista', clube: 'Al-Rayyan', raridade: 'comum',
@@ -11967,7 +10099,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Suíça -----
   { numero: 43, tipo: 'bandeira', selecao: 'suica', nome: 'Suíça', raridade: 'brilhante', fonte: ['wiki-grupo-b'] },
   {
     numero: 44, tipo: 'jogador', selecao: 'suica', nome: 'Gregor Kobel', camisa: 1, posicao: 'Goleiro', clube: 'Borussia Dortmund', raridade: 'comum',
@@ -11995,8 +10126,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // =============== Grupo C (pesquisado e escrito à mão) ===============
-  // ----- Brasil -----
   { numero: 49, tipo: 'bandeira', selecao: 'brasil', nome: 'Brasil', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 50, tipo: 'jogador', selecao: 'brasil', nome: 'Alisson', camisa: 1, posicao: 'Goleiro', clube: 'Liverpool', raridade: 'comum',
@@ -12024,7 +10153,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'fourfourtwo-brasil', 'si-numeros-brasil'],
   },
 
-  // ----- Marrocos -----
   { numero: 55, tipo: 'bandeira', selecao: 'marrocos', nome: 'Marrocos', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 56, tipo: 'jogador', selecao: 'marrocos', nome: 'Yassine Bounou', camisa: 1, posicao: 'Goleiro', clube: 'Al-Hilal', raridade: 'comum',
@@ -12052,7 +10180,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Haiti -----
   { numero: 61, tipo: 'bandeira', selecao: 'haiti', nome: 'Haiti', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 62, tipo: 'jogador', selecao: 'haiti', nome: 'Johny Placide', camisa: 1, posicao: 'Goleiro', clube: 'Bastia', raridade: 'brilhante',
@@ -12080,7 +10207,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'concacaf-haiti'],
   },
 
-  // ----- Escócia -----
   { numero: 67, tipo: 'bandeira', selecao: 'escocia', nome: 'Escócia', raridade: 'brilhante', fonte: ['wiki-grupo-c'] },
   {
     numero: 68, tipo: 'jogador', selecao: 'escocia', nome: 'Andy Robertson', camisa: 3, posicao: 'Defensor', clube: 'Liverpool', raridade: 'brilhante',
@@ -12108,8 +10234,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'fifa-elencos'],
   },
 
-  // =============== Grupos D a L ===============
-  // ----- Estados Unidos -----
   { numero: 73, tipo: 'bandeira', selecao: 'estados-unidos', nome: 'Estados Unidos', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 74, tipo: 'jogador', selecao: 'estados-unidos', nome: 'Matt Turner', camisa: 1, posicao: 'Goleiro', clube: 'New England Revolution', raridade: 'comum',
@@ -12137,7 +10261,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Paraguai -----
   { numero: 79, tipo: 'bandeira', selecao: 'paraguai', nome: 'Paraguai', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 80, tipo: 'jogador', selecao: 'paraguai', nome: 'Gatito Fernández', camisa: 1, posicao: 'Goleiro', clube: 'Cerro Porteño', raridade: 'comum',
@@ -12165,7 +10288,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Austrália -----
   { numero: 85, tipo: 'bandeira', selecao: 'australia', nome: 'Austrália', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 86, tipo: 'jogador', selecao: 'australia', nome: 'Mathew Ryan', camisa: 1, posicao: 'Goleiro', clube: 'Levante', raridade: 'brilhante',
@@ -12193,7 +10315,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Turquia -----
   { numero: 91, tipo: 'bandeira', selecao: 'turquia', nome: 'Turquia', raridade: 'brilhante', fonte: ['wiki-grupo-d'] },
   {
     numero: 92, tipo: 'jogador', selecao: 'turquia', nome: 'Merih Demiral', camisa: 3, posicao: 'Defensor', clube: 'Al-Ahli', raridade: 'comum',
@@ -12221,7 +10342,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Alemanha -----
   { numero: 97, tipo: 'bandeira', selecao: 'alemanha', nome: 'Alemanha', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 98, tipo: 'jogador', selecao: 'alemanha', nome: 'Manuel Neuer', camisa: 1, posicao: 'Goleiro', clube: 'Bayern Munich', raridade: 'comum',
@@ -12249,7 +10369,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Curaçao -----
   { numero: 103, tipo: 'bandeira', selecao: 'curacao', nome: 'Curaçao', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 104, tipo: 'jogador', selecao: 'curacao', nome: 'Eloy Room', camisa: 1, posicao: 'Goleiro', clube: 'Miami FC', raridade: 'comum',
@@ -12277,7 +10396,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Costa do Marfim -----
   { numero: 109, tipo: 'bandeira', selecao: 'costa-do-marfim', nome: 'Costa do Marfim', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 110, tipo: 'jogador', selecao: 'costa-do-marfim', nome: 'Yahia Fofana', camisa: 1, posicao: 'Goleiro', clube: 'Çaykur Rizespor', raridade: 'comum',
@@ -12305,7 +10423,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Equador -----
   { numero: 115, tipo: 'bandeira', selecao: 'equador', nome: 'Equador', raridade: 'brilhante', fonte: ['wiki-grupo-e'] },
   {
     numero: 116, tipo: 'jogador', selecao: 'equador', nome: 'Hernán Galíndez', camisa: 1, posicao: 'Goleiro', clube: 'Huracán', raridade: 'comum',
@@ -12333,7 +10450,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Holanda -----
   { numero: 121, tipo: 'bandeira', selecao: 'holanda', nome: 'Holanda', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 122, tipo: 'jogador', selecao: 'holanda', nome: 'Bart Verbruggen', camisa: 1, posicao: 'Goleiro', clube: 'Brighton & Hove Albion', raridade: 'comum',
@@ -12361,7 +10477,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Japão -----
   { numero: 127, tipo: 'bandeira', selecao: 'japao', nome: 'Japão', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 128, tipo: 'jogador', selecao: 'japao', nome: 'Zion Suzuki', camisa: 1, posicao: 'Goleiro', clube: 'Parma', raridade: 'comum',
@@ -12389,7 +10504,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Suécia -----
   { numero: 133, tipo: 'bandeira', selecao: 'suecia', nome: 'Suécia', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 134, tipo: 'jogador', selecao: 'suecia', nome: 'Victor Lindelöf', camisa: 3, posicao: 'Defensor', clube: 'Aston Villa', raridade: 'brilhante',
@@ -12417,7 +10531,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Tunísia -----
   { numero: 139, tipo: 'bandeira', selecao: 'tunisia', nome: 'Tunísia', raridade: 'brilhante', fonte: ['wiki-grupo-f'] },
   {
     numero: 140, tipo: 'jogador', selecao: 'tunisia', nome: 'Montassar Talbi', camisa: 3, posicao: 'Defensor', clube: 'Lorient', raridade: 'comum',
@@ -12445,7 +10558,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Bélgica -----
   { numero: 145, tipo: 'bandeira', selecao: 'belgica', nome: 'Bélgica', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 146, tipo: 'jogador', selecao: 'belgica', nome: 'Thibaut Courtois', camisa: 1, posicao: 'Goleiro', clube: 'Real Madrid', raridade: 'comum',
@@ -12473,7 +10585,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Egito -----
   { numero: 151, tipo: 'bandeira', selecao: 'egito', nome: 'Egito', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 152, tipo: 'jogador', selecao: 'egito', nome: 'Mohamed El Shenawy', camisa: 1, posicao: 'Goleiro', clube: 'Al Ahly', raridade: 'comum',
@@ -12501,7 +10612,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Irã -----
   { numero: 157, tipo: 'bandeira', selecao: 'ira', nome: 'Irã', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 158, tipo: 'jogador', selecao: 'ira', nome: 'Alireza Beiranvand', camisa: 1, posicao: 'Goleiro', clube: 'Tractor', raridade: 'comum',
@@ -12529,7 +10639,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Nova Zelândia -----
   { numero: 163, tipo: 'bandeira', selecao: 'nova-zelandia', nome: 'Nova Zelândia', raridade: 'brilhante', fonte: ['wiki-grupo-g'] },
   {
     numero: 164, tipo: 'jogador', selecao: 'nova-zelandia', nome: 'Max Crocombe', camisa: 1, posicao: 'Goleiro', clube: 'Millwall', raridade: 'comum',
@@ -12557,7 +10666,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Espanha -----
   { numero: 169, tipo: 'bandeira', selecao: 'espanha', nome: 'Espanha', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 170, tipo: 'jogador', selecao: 'espanha', nome: 'Dani Olmo', camisa: 10, posicao: 'Atacante', clube: 'Barcelona', raridade: 'lendaria',
@@ -12585,7 +10693,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Cabo Verde -----
   { numero: 175, tipo: 'bandeira', selecao: 'cabo-verde', nome: 'Cabo Verde', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 176, tipo: 'jogador', selecao: 'cabo-verde', nome: 'Vozinha', camisa: 1, posicao: 'Goleiro', clube: 'Chaves', raridade: 'comum',
@@ -12613,7 +10720,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Arábia Saudita -----
   { numero: 181, tipo: 'bandeira', selecao: 'arabia-saudita', nome: 'Arábia Saudita', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 182, tipo: 'jogador', selecao: 'arabia-saudita', nome: 'Abdulelah Al-Amri', camisa: 4, posicao: 'Defensor', clube: 'Al-Nassr', raridade: 'comum',
@@ -12641,7 +10747,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Uruguai -----
   { numero: 187, tipo: 'bandeira', selecao: 'uruguai', nome: 'Uruguai', raridade: 'brilhante', fonte: ['wiki-grupo-h'] },
   {
     numero: 188, tipo: 'jogador', selecao: 'uruguai', nome: 'José María Giménez', camisa: 2, posicao: 'Defensor', clube: 'Atlético Madrid', raridade: 'brilhante',
@@ -12669,7 +10774,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- França -----
   { numero: 193, tipo: 'bandeira', selecao: 'franca', nome: 'França', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 194, tipo: 'jogador', selecao: 'franca', nome: 'Lucas Digne', camisa: 3, posicao: 'Defensor', clube: 'Aston Villa', raridade: 'comum',
@@ -12697,7 +10801,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Senegal -----
   { numero: 199, tipo: 'bandeira', selecao: 'senegal', nome: 'Senegal', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 200, tipo: 'jogador', selecao: 'senegal', nome: 'Kalidou Koulibaly', camisa: 3, posicao: 'Defensor', clube: 'Al-Hilal', raridade: 'brilhante',
@@ -12725,7 +10828,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Iraque -----
   { numero: 205, tipo: 'bandeira', selecao: 'iraque', nome: 'Iraque', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 206, tipo: 'jogador', selecao: 'iraque', nome: 'Rebin Sulaka', camisa: 2, posicao: 'Defensor', clube: 'Port', raridade: 'comum',
@@ -12753,7 +10855,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Noruega -----
   { numero: 211, tipo: 'bandeira', selecao: 'noruega', nome: 'Noruega', raridade: 'brilhante', fonte: ['wiki-grupo-i'] },
   {
     numero: 212, tipo: 'jogador', selecao: 'noruega', nome: 'Ørjan Nyland', camisa: 1, posicao: 'Goleiro', clube: 'Sevilla', raridade: 'comum',
@@ -12781,7 +10882,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Argentina -----
   { numero: 217, tipo: 'bandeira', selecao: 'argentina', nome: 'Argentina', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 218, tipo: 'jogador', selecao: 'argentina', nome: 'Leandro Paredes', camisa: 5, posicao: 'Meio-campista', clube: 'Boca Juniors', raridade: 'comum',
@@ -12809,7 +10909,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Argélia -----
   { numero: 223, tipo: 'bandeira', selecao: 'argelia', nome: 'Argélia', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 224, tipo: 'jogador', selecao: 'argelia', nome: 'Aïssa Mandi', camisa: 2, posicao: 'Defensor', clube: 'Lille', raridade: 'comum',
@@ -12837,7 +10936,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Áustria -----
   { numero: 229, tipo: 'bandeira', selecao: 'austria', nome: 'Áustria', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 230, tipo: 'jogador', selecao: 'austria', nome: 'Alexander Schlager', camisa: 1, posicao: 'Goleiro', clube: 'Red Bull Salzburg', raridade: 'comum',
@@ -12865,7 +10963,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Jordânia -----
   { numero: 235, tipo: 'bandeira', selecao: 'jordania', nome: 'Jordânia', raridade: 'brilhante', fonte: ['wiki-grupo-j'] },
   {
     numero: 236, tipo: 'jogador', selecao: 'jordania', nome: 'Yazeed Abulaila', camisa: 1, posicao: 'Goleiro', clube: 'Al-Hussein', raridade: 'comum',
@@ -12893,7 +10990,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Portugal -----
   { numero: 241, tipo: 'bandeira', selecao: 'portugal', nome: 'Portugal', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 242, tipo: 'jogador', selecao: 'portugal', nome: 'Diogo Costa', camisa: 1, posicao: 'Goleiro', clube: 'Porto', raridade: 'comum',
@@ -12921,7 +11017,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- RD Congo -----
   { numero: 247, tipo: 'bandeira', selecao: 'rd-congo', nome: 'RD Congo', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 248, tipo: 'jogador', selecao: 'rd-congo', nome: 'Lionel Mpasi', camisa: 1, posicao: 'Goleiro', clube: 'Le Havre', raridade: 'comum',
@@ -12949,7 +11044,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Uzbequistão -----
   { numero: 253, tipo: 'bandeira', selecao: 'uzbequistao', nome: 'Uzbequistão', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 254, tipo: 'jogador', selecao: 'uzbequistao', nome: 'Utkir Yusupov', camisa: 1, posicao: 'Goleiro', clube: 'Navbahor Namangan', raridade: 'comum',
@@ -12977,7 +11071,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Colômbia -----
   { numero: 259, tipo: 'bandeira', selecao: 'colombia', nome: 'Colômbia', raridade: 'brilhante', fonte: ['wiki-grupo-k'] },
   {
     numero: 260, tipo: 'jogador', selecao: 'colombia', nome: 'David Ospina', camisa: 1, posicao: 'Goleiro', clube: 'Atlético Nacional', raridade: 'comum',
@@ -13005,7 +11098,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Inglaterra -----
   { numero: 265, tipo: 'bandeira', selecao: 'inglaterra', nome: 'Inglaterra', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 266, tipo: 'jogador', selecao: 'inglaterra', nome: 'Jordan Pickford', camisa: 1, posicao: 'Goleiro', clube: 'Everton', raridade: 'comum',
@@ -13033,7 +11125,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Croácia -----
   { numero: 271, tipo: 'bandeira', selecao: 'croacia', nome: 'Croácia', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 272, tipo: 'jogador', selecao: 'croacia', nome: 'Dominik Livaković', camisa: 1, posicao: 'Goleiro', clube: 'Dinamo Zagreb', raridade: 'comum',
@@ -13061,7 +11152,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos', 'wiki-jogos'],
   },
 
-  // ----- Gana -----
   { numero: 277, tipo: 'bandeira', selecao: 'gana', nome: 'Gana', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 278, tipo: 'jogador', selecao: 'gana', nome: 'Lawrence Ati-Zigi', camisa: 1, posicao: 'Goleiro', clube: 'St. Gallen', raridade: 'comum',
@@ -13089,7 +11179,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 
-  // ----- Panamá -----
   { numero: 283, tipo: 'bandeira', selecao: 'panama', nome: 'Panamá', raridade: 'brilhante', fonte: ['wiki-grupo-l'] },
   {
     numero: 284, tipo: 'jogador', selecao: 'panama', nome: 'Luis Mejía', camisa: 1, posicao: 'Goleiro', clube: 'Nacional', raridade: 'comum',
@@ -13117,21 +11206,6 @@ const FIGURINHAS = [
     fonte: ['wiki-elencos', 'f365-elencos'],
   },
 ];
-
-// ---------------------------------------------------------------------------
-// SEDES: as 16 cidades e os estádios da Copa
-// ---------------------------------------------------------------------------
-// Ordem: do maior estádio para o menor, como na tabela da fonte.
-//   cidade      = nome usado pela organização (região metropolitana)
-//   municipio   = onde o estádio fica de fato, quando não é na própria cidade
-//   nomeNaCopa  = nome usado durante o torneio (a FIFA não usa nomes de patrocinador)
-//   jogos       = quantas partidas da Copa de 2026 o estádio recebeu
-//   capacidade  = lugares, segundo a tabela da fonte
-//   nota        = um fato a mais, tirado da mesma tabela
-//
-// Fotos: Wikimedia Commons, todas com licença livre. O arquivo de cada foto é
-// assets/img/sedes/ + id + .jpg (versão de 960 px de largura, sem outra
-// alteração). "origem" é a página da foto original, com autor e licença.
 
 const SEDES = [
   {
@@ -13312,13 +11386,6 @@ const SEDES = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// COPA: como terminou
-// ---------------------------------------------------------------------------
-// Resumo usado na última página do álbum. O placar da final foi conferido em
-// três reportagens além da Wikipedia. O total de gols e o artilheiro foram
-// somados jogo a jogo pelo script e batem com a tabela de prêmios da fonte.
-
 const COPA = {
   campea: 'espanha',
   vice: 'argentina',
@@ -13351,37 +11418,17 @@ const COPA = {
 ### scripts/contraste.js
 
 ````js
-// ============================================================================
-// contraste.js
-// ----------------------------------------------------------------------------
-// O que faz: lê as cores de css/tokens.css, calcula o contraste de cada par
-// de cores que o site usa de verdade (nos 4 temas) e escreve docs/cores.md.
-//
-// Como rodar (na pasta do projeto):   node scripts/contraste.js
-//
-// Por que existe: o contraste precisa ser calculado, não "chutado". Como o
-// script lê o próprio tokens.css, a tabela nunca fica diferente do site.
-// ============================================================================
-
 const fs = require('fs');
 const path = require('path');
 
 const ARQUIVO_TOKENS = path.join(__dirname, '..', 'css', 'tokens.css');
 const ARQUIVO_SAIDA = path.join(__dirname, '..', 'docs', 'cores.md');
 
-// ---------------------------------------------------------------------------
-// 1. A conta do contraste (fórmula do WCAG 2.x)
-// ---------------------------------------------------------------------------
-
-// Cada cor tem 3 canais (vermelho, verde, azul), de 0 a 255.
-// Esta função converte um canal para a escala "linear" que a fórmula pede.
 function canalLinear(valor) {
   const c = valor / 255;
   return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 }
 
-// Luminância: o quanto a cor parece clara para o olho (0 = preto, 1 = branco).
-// O verde pesa mais porque o olho humano é mais sensível a ele.
 function luminancia(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -13389,23 +11436,16 @@ function luminancia(hex) {
   return 0.2126 * canalLinear(r) + 0.7152 * canalLinear(g) + 0.0722 * canalLinear(b);
 }
 
-// Contraste: (cor mais clara + 0,05) dividido por (cor mais escura + 0,05).
-// Vai de 1 (cores iguais) a 21 (preto no branco).
 function contraste(corA, corB) {
   const a = luminancia(corA);
   const b = luminancia(corB);
   return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 }
 
-// ---------------------------------------------------------------------------
-// 2. Ler as cores do tokens.css
-// ---------------------------------------------------------------------------
-
-// Devolve um objeto no formato { 'seletor': { 'nome-da-cor': '#HEX' } }.
 function lerBlocos(css) {
   const semComentarios = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const blocos = {};
-  const regra = /([^{}]+)\{([^{}]*)\}/g; // casa com "seletor { conteúdo }"
+  const regra = /([^{}]+)\{([^{}]*)\}/g;
   let achado;
   while ((achado = regra.exec(semComentarios)) !== null) {
     const seletor = achado[1].trim();
@@ -13422,8 +11462,6 @@ function lerBlocos(css) {
 
 const blocos = lerBlocos(fs.readFileSync(ARQUIVO_TOKENS, 'utf8'));
 
-// Cada tema herda do anterior, igual à cascata do CSS:
-// o que o tema não redefine continua valendo do tema de baixo.
 const claro = blocos[':root'];
 const escuro = { ...claro, ...blocos['[data-tema="escuro"]'] };
 const altoClaro = { ...claro, ...blocos['[data-contraste="alto"]'] };
@@ -13435,12 +11473,6 @@ const TEMAS = [
   { nome: 'Alto contraste, claro', cores: altoClaro },
   { nome: 'Alto contraste, escuro', cores: altoEscuro },
 ];
-
-// ---------------------------------------------------------------------------
-// 3. Os pares de cor que o site usa de verdade
-// ---------------------------------------------------------------------------
-// tipo 'texto'      = texto de tamanho normal: mínimo 4,5:1 (AA) e 7:1 (AAA)
-// tipo 'componente' = texto grande, borda, ícone, anel de foco, barra: mínimo 3:1
 
 const PARES = [
   { frente: 'texto', fundo: 'fundo', tipo: 'texto', uso: 'Texto principal sobre o fundo da página' },
@@ -13471,8 +11503,6 @@ const PARES = [
   { frente: 'texto', fundo: 'vaga', tipo: 'componente', uso: 'Preenchimento da barra de progresso sobre o trilho' },
   { frente: 'figurinha-papel', fundo: 'figurinha-tinta', tipo: 'texto', uso: 'Texto da etiqueta colada na figurinha' },
 
-  // Pares com DUAS cores na frente: o desenho tem dois tons (um claro e um escuro)
-  // e basta UM deles contrastar com o que está atrás. Vale o melhor dos dois.
   { frente: ['figurinha-tinta', 'figurinha-papel'], fundo: 'fundo', tipo: 'componente', uso: 'Etiqueta da figurinha (fundo ou contorno) sobre a página' },
   { frente: 'foco', fundo: 'foco-vao', tipo: 'componente', uso: 'Os dois tons do foco, um ao lado do outro' },
   { frente: ['foco', 'foco-vao'], fundo: 'fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre o fundo' },
@@ -13483,10 +11513,6 @@ const PARES = [
   { frente: ['foco', 'foco-vao'], fundo: 'etiqueta-fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre área na cor da tinta' },
 ];
 
-// Os outros papéis do fundo. A página muda de papel conforme a pessoa rola, e
-// por cima dos papéis há desenhos recortados em mais duas cores (o realce e o
-// destaque). Um texto pode ficar em cima de qualquer uma delas: tudo o que
-// fica direto sobre a página precisa passar em todas.
 const PAPEIS = [
   { token: 'papel-2', nome: 'papel 2' },
   { token: 'papel-3', nome: 'papel 3' },
@@ -13506,10 +11532,6 @@ for (const papel of PAPEIS) {
     { frente: ['foco', 'foco-vao'], fundo: papel.token, tipo: 'componente', uso: 'Foco (anel ou vão) sobre o ' + papel.nome }
   );
 }
-
-// ---------------------------------------------------------------------------
-// 4. O que cada cor é e por que foi escolhida (frases curtas, para o relatório)
-// ---------------------------------------------------------------------------
 
 const DESCRICAO = [
   { token: 'fundo', nome: 'Papel rosa / papel azul', onde: 'Primeira faixa do fundo de todas as páginas (e a cor do cabeçalho)', motivo: 'Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto.' },
@@ -13541,11 +11563,6 @@ const DESCRICAO = [
   { token: 'foto-luz', nome: 'Luz da foto', onde: 'Partes claras das fotos dos estádios', motivo: 'A cor do papel (no escuro, a da tinta rosa): a foto parece pertencer à página em vez de ser um retângulo colado nela.' },
 ];
 
-// ---------------------------------------------------------------------------
-// 5. Montar o arquivo docs/cores.md
-// ---------------------------------------------------------------------------
-
-// 10.84 vira "10,84:1" (vírgula, como se escreve em português).
 function formatar(razao) {
   return razao.toFixed(2).replace('.', ',') + ':1';
 }
@@ -13588,8 +11605,6 @@ for (const tema of TEMAS) {
   linhas.push('|---|---|---|---|---|---|');
   for (const par of PARES) {
     const fundo = tema.cores[par.fundo];
-    // "frente" pode ser um nome só ou uma lista de dois nomes (ver o comentário nos PARES).
-    // Com dois, fica a cor que contrasta mais com o fundo.
     const candidatas = Array.isArray(par.frente) ? par.frente : [par.frente];
     let frente = tema.cores[candidatas[0]];
     for (const nome of candidatas) {
@@ -13608,17 +11623,6 @@ for (const tema of TEMAS) {
   linhas.push('');
 }
 
-// ---------------------------------------------------------------------------
-// 6. As cores das seleções (o desenho dentro da figurinha)
-// ---------------------------------------------------------------------------
-// Cada seleção tem três cores em js/dados.js: campo, camisa e número.
-// O desenho precisa de dois contrastes de pelo menos 3:1:
-//   - o número sobre a camisa (é um número grande, em negrito);
-//   - o contorno do retrato, na tinta da figurinha, sobre o campo.
-// A figurinha não muda de cor com o tema; só a tinta muda no alto contraste.
-
-// Lê a lista SELECOES de js/dados.js. O arquivo é um script de navegador,
-// sem "exports"; por isso ele é executado dentro de uma função que devolve a lista.
 const codigoDosDados = fs.readFileSync(path.join(__dirname, '..', 'js', 'dados.js'), 'utf8');
 const SELECOES = new Function(codigoDosDados + '; return SELECOES;')();
 
@@ -13660,64 +11664,32 @@ fs.writeFileSync(ARQUIVO_SAIDA, linhas.join('\n'), 'utf8');
 
 console.log(`${total} pares conferidos, ${reprovados} reprovados. Tabela escrita em docs/cores.md`);
 
-// Se algum par reprovar, o script termina com erro (código 1), para ninguém deixar passar.
 process.exit(reprovados > 0 ? 1 : 0);
 ````
 
 ### scripts/gerar-fundo.js
 
 ````js
-// ============================================================================
-// gerar-fundo.js
-// ----------------------------------------------------------------------------
-// O que faz: desenha o fundo da página com as cores do css/tokens.css.
-// São duas peças:
-//   1. A TIRA DOS PAPÉIS: os papéis coloridos e as passagens em retícula entre
-//      eles. Fica escrita no fim do css/tokens.css.
-//   2. A COLAGEM: desenhos de papel recortado (estádio, bola, bandeirinhas,
-//      figurinhas, apito...) colados por cima dos papéis. Fica em dois
-//      arquivos, um para cada tema: assets/img/fundo/colagem-claro.svg e
-//      assets/img/fundo/colagem-escuro.svg.
-//
-// Como rodar (na pasta do projeto):   node scripts/gerar-fundo.js
-// Rode de novo sempre que mudar uma cor de papel no css/tokens.css
-// (--cor-fundo, --cor-papel-2, 3 e 4, --cor-papel-realce e --cor-papel-destaque).
-//
-// Por que um script: o fundo é feito de imagens SVG, e uma imagem não consegue
-// ler as variáveis de cor do site. O script lê as cores no tokens.css e escreve
-// as imagens com elas, uma para cada tema.
-//
-// Todos os desenhos são do próprio projeto, feitos aqui com formas simples.
-// Não há foto, logo nem emblema de ninguém.
-// ============================================================================
-
 const fs = require('fs');
 const path = require('path');
 
 const ARQUIVO_TOKENS = path.join(__dirname, '..', 'css', 'tokens.css');
 const PASTA_DA_COLAGEM = path.join(__dirname, '..', 'assets', 'img', 'fundo');
 
-const ALTURA = 4400;        // altura do desenho: depois disso o fundo se repete
-// Onde cada papel termina e começa a passagem para o próximo (em pixels, de cima para baixo)
+const ALTURA = 4400;
 const FIM_DE_CADA_PAPEL = [520, 1600, 2680, 3760];
 
-// A tira dos papéis
-const LARGURA_DA_TIRA = 16; // igual à distância entre as bolinhas
-const LINHAS = 16;          // quantas linhas de bolinhas tem cada passagem
-const ENTRE_LINHAS = 14;    // distância de uma linha de bolinhas até a próxima
+const LARGURA_DA_TIRA = 16;
+const LINHAS = 16;
+const ENTRE_LINHAS = 14;
 const PASSAGEM = LINHAS * ENTRE_LINHAS;
 
-// A colagem
 const LARGURA_DA_COLAGEM = 1600;
 
-const INICIO = '/* FUNDO-INICIO */';
-const FIM = '/* FUNDO-FIM */';
+const INICIO = ':root {\n  --fundo-papeis: ';
+const FIM = '[data-contraste="alto"] {\n  --fundo-papeis: none;\n}';
 
 const NOMES_DAS_CORES = ['fundo', 'papel-2', 'papel-3', 'papel-4', 'papel-realce', 'papel-destaque'];
-
-// ---------------------------------------------------------------------------
-// 1. Ler as cores de papel de cada tema no tokens.css
-// ---------------------------------------------------------------------------
 
 function lerPapeis(css, seletor) {
   const papeis = {};
@@ -13732,15 +11704,6 @@ function lerPapeis(css, seletor) {
   return papeis;
 }
 
-// ---------------------------------------------------------------------------
-// 2. Desenhar a tira dos papéis
-// ---------------------------------------------------------------------------
-// Uma tira bem estreita e bem alta, que o navegador repete para os lados e
-// para baixo. De cima para baixo: papel 1, passagem, papel 2, passagem,
-// papel 3, passagem, papel 4, passagem e volta ao papel 1. Em cada passagem,
-// bolinhas da cor seguinte vão crescendo linha a linha até se juntarem: é
-// assim que a impressão em papel faz um degradê (a retícula).
-
 function desenharTira(cores) {
   const papeis = [cores.fundo, cores['papel-2'], cores['papel-3'], cores['papel-4']];
   const pecas = [];
@@ -13749,12 +11712,8 @@ function desenharTira(cores) {
   FIM_DE_CADA_PAPEL.forEach(function (fim, i) {
     const seguinte = papeis[(i + 1) % papeis.length];
 
-    // A faixa lisa deste papel, que continua por baixo das bolinhas da passagem
     pecas.push("<rect y='" + y + "' width='" + LARGURA_DA_TIRA + "' height='" + (fim + PASSAGEM - y) + "' fill='" + papeis[i] + "'/>");
 
-    // A passagem: bolinhas do papel seguinte, cada linha um pouco maiores.
-    // As linhas são desencontradas (uma no meio, a outra nas beiradas da tira),
-    // como na retícula de jornal.
     for (let linha = 0; linha < LINHAS; linha++) {
       const cy = fim + ENTRE_LINHAS / 2 + linha * ENTRE_LINHAS;
       const raio = (1.5 + (linha / (LINHAS - 1)) * 8).toFixed(1);
@@ -13766,20 +11725,12 @@ function desenharTira(cores) {
     y = fim + PASSAGEM;
   });
 
-  // O resto da tira volta a ser o papel 1, que emenda com o começo da repetição
   pecas.push("<rect y='" + y + "' width='" + LARGURA_DA_TIRA + "' height='" + (ALTURA - y) + "' fill='" + papeis[0] + "'/>");
 
   const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='" + LARGURA_DA_TIRA + "' height='" + ALTURA + "'>" + pecas.join('') + '</svg>';
-  // Dentro de um url() do CSS, estes três sinais precisam ir disfarçados
   return 'url("data:image/svg+xml,' + svg.replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E') + '")';
 }
 
-// ---------------------------------------------------------------------------
-// 3. As ferramentas de desenho da colagem
-// ---------------------------------------------------------------------------
-
-// Um sorteio que se repete: dá sempre a mesma sequência de números "ao acaso".
-// Assim o desenho sai igual toda vez que o script roda (o mesmo do js/cenas.js).
 let semente = 2026;
 function acaso() {
   semente = (semente * 1664525 + 1013904223) % 4294967296;
@@ -13789,21 +11740,16 @@ function entre(a, b) {
   return a + (b - a) * acaso();
 }
 
-const GRAU = Math.PI / 180;   // quanto vale um grau na medida que o Math.cos usa
+const GRAU = Math.PI / 180;
 
-// Arredonda para uma casa depois da vírgula: o arquivo fica menor
 function n(valor) {
   return Math.round(valor * 10) / 10;
 }
 
-// Um ponto a certa distância do centro, em certa direção (em graus)
 function ponta(distancia, graus) {
   return [Math.cos(graus * GRAU) * distancia, Math.sin(graus * GRAU) * distancia];
 }
 
-// RECORTAR À TESOURA. Recebe os cantos de uma forma e devolve a forma com as
-// beiradas um pouco tortas: cada lado comprido ganha pontos no meio, e todos
-// os pontos saem um tiquinho do lugar. É o que tira a cara de "régua".
 function recorte(cantos, cor, tremor) {
   const pontos = [];
   cantos.forEach(function (canto, i) {
@@ -13818,7 +11764,6 @@ function recorte(cantos, cor, tremor) {
   return "<path d='M" + pontos.join('L') + "Z' fill='" + cor + "'/>";
 }
 
-// Um círculo recortado à mão: na verdade, uma forma de muitos lados
 function circulo(cx, cy, raio, cor) {
   const cantos = [];
   const lados = Math.max(14, Math.round(raio / 3));
@@ -13833,25 +11778,15 @@ function retangulo(x, y, largura, altura, cor, tremor) {
   return recorte([[x, y], [x + largura, y], [x + largura, y + altura], [x, y + altura]], cor, tremor === undefined ? 1.2 : tremor);
 }
 
-// Um traço (linha com grossura), de ponta redonda
 function traco(pontos, cor, grossura, extra) {
   const caminho = pontos.map(function (p) { return n(p[0]) + ' ' + n(p[1]); }).join('L');
   return "<path d='M" + caminho + "' fill='none' stroke='" + cor + "' stroke-width='" + n(grossura) + "' stroke-linecap='round' stroke-linejoin='round'" + (extra || '') + '/>';
 }
 
-// Põe um desenho em um lugar da colagem, com um giro (em graus)
 function colar(x, y, giro, desenho) {
   return "<g transform='translate(" + n(x) + ' ' + n(y) + ') rotate(' + n(giro) + ")'>" + desenho + '</g>';
 }
 
-// ---------------------------------------------------------------------------
-// 4. Os desenhos. Cada função desenha em volta do ponto (0, 0).
-//    "c" traz as cores: c.papel (o papel que está atrás), c.a, c.b e c.d (os
-//    outros três papéis), c.realce e c.destaque.
-// ---------------------------------------------------------------------------
-
-// Bola: um disco claro, um gomo de cinco lados no meio, as costuras e os
-// cinco gomos da beirada
 function bola(raio, c) {
   let d = circulo(0, 0, raio, c.realce);
   const meio = [];
@@ -13868,14 +11803,12 @@ function bola(raio, c) {
   return d;
 }
 
-// Estrela de cinco pontas
 function estrela(raio, cor) {
   const cantos = [];
   for (let i = 0; i < 10; i++) cantos.push(ponta(i % 2 === 0 ? raio : raio * 0.44, -90 + i * 36));
   return recorte(cantos, cor, raio * 0.02);
 }
 
-// Figurinha: o papel adesivo, o retrato (cabeça e ombros) e as duas linhas do nome
 function figurinha(largura, c) {
   const altura = largura * 1.36;
   const topo = -altura / 2;
@@ -13889,7 +11822,6 @@ function figurinha(largura, c) {
   return d;
 }
 
-// Apito: o corpo redondo, o bocal, o furo e a argola do cordão
 function apito(tamanho, c) {
   let d = "<circle cx='" + n(tamanho * 0.34) + "' cy='" + n(-tamanho * 0.3) + "' r='" + n(tamanho * 0.1) + "' fill='none' stroke='" + c.a + "' stroke-width='" + n(tamanho * 0.045) + "'/>";
   d += retangulo(-tamanho * 0.56, -tamanho * 0.22, tamanho * 0.6, tamanho * 0.28, c.a, 0.8);
@@ -13899,7 +11831,6 @@ function apito(tamanho, c) {
   return d;
 }
 
-// Os dois cartões do juiz, um por cima do outro
 function cartoes(tamanho, c) {
   const cartao = function (cor) {
     return "<rect x='" + n(-tamanho * 0.25) + "' y='" + n(-tamanho * 0.36) + "' width='" + n(tamanho * 0.5) + "' height='" + n(tamanho * 0.72) + "' rx='" + n(tamanho * 0.05) + "' fill='" + cor + "'/>";
@@ -13907,7 +11838,6 @@ function cartoes(tamanho, c) {
   return colar(-tamanho * 0.16, tamanho * 0.03, -14, cartao(c.a)) + colar(tamanho * 0.16, -tamanho * 0.02, 10, cartao(c.destaque));
 }
 
-// Trave: o fundo da rede, os fios da rede e os três paus
 function trave(largura, c) {
   const altura = largura * 0.42;
   const esquerda = -largura / 2;
@@ -13920,7 +11850,6 @@ function trave(largura, c) {
   return d;
 }
 
-// Bandeira de escanteio: o mastro, a bandeira e o quarto de círculo no chão
 function escanteio(altura, c) {
   let d = "<path d='M" + n(altura * 0.34) + ' ' + n(altura * 0.5) + 'A' + n(altura * 0.34) + ' ' + n(altura * 0.34) + ' 0 0 0 0 ' + n(altura * 0.16) + "' fill='none' stroke='" + c.realce + "' stroke-width='" + n(altura * 0.03) + "' stroke-linecap='round'/>";
   d += recorte([[0, -altura * 0.5], [altura * 0.44, -altura * 0.37], [0, -altura * 0.2]], c.destaque, 1);
@@ -13928,7 +11857,6 @@ function escanteio(altura, c) {
   return d;
 }
 
-// Cronômetro: a caixa, o botão, o mostrador e os dois ponteiros
 function cronometro(raio, c) {
   let d = retangulo(-raio * 0.14, -raio * 1.3, raio * 0.28, raio * 0.36, c.a, 0.6);
   d += colar(0, 0, 42, retangulo(-raio * 0.1, -raio * 1.2, raio * 0.2, raio * 0.3, c.a, 0.6));
@@ -13940,7 +11868,6 @@ function cronometro(raio, c) {
   return d;
 }
 
-// Prancheta de tática: os X de um time, as bolinhas do outro e a seta da jogada
 function tatica(largura, c) {
   const xis = function (x, y) {
     const t = largura * 0.045;
@@ -13951,13 +11878,11 @@ function tatica(largura, c) {
   };
   let d = xis(-largura * 0.42, largura * 0.2) + xis(-largura * 0.16, -largura * 0.04) + xis(largura * 0.16, largura * 0.22);
   d += bolinha(-largura * 0.3, -largura * 0.2) + bolinha(largura * 0.06, -largura * 0.22) + bolinha(largura * 0.4, largura * 0.02);
-  // A seta: uma curva tracejada e a ponta
   d += "<path d='M" + n(-largura * 0.34) + ' ' + n(largura * 0.16) + 'Q' + n(-largura * 0.02) + ' ' + n(largura * 0.3) + ' ' + n(largura * 0.3) + ' ' + n(-largura * 0.1) + "' fill='none' stroke='" + c.realce + "' stroke-width='" + n(largura * 0.02) + "' stroke-linecap='round' stroke-dasharray='" + n(largura * 0.05) + ' ' + n(largura * 0.045) + "'/>";
   d += colar(largura * 0.32, -largura * 0.13, -52, recorte([[largura * 0.06, 0], [-largura * 0.03, -largura * 0.04], [-largura * 0.03, largura * 0.04]], c.realce, 0.5));
   return d;
 }
 
-// Camisa: o corpo com as mangas, a gola e a faixa do peito
 function camisa(tamanho, c) {
   const t = tamanho;
   let d = recorte([
@@ -13971,7 +11896,6 @@ function camisa(tamanho, c) {
   return d;
 }
 
-// Pacotinho: o saquinho com as duas beiradas em serra e a etiqueta
 function pacotinho(altura, c) {
   const largura = altura * 0.72;
   const dentes = 9;
@@ -13984,19 +11908,14 @@ function pacotinho(altura, c) {
   return d;
 }
 
-// Estádio visto de fora: o sol atrás, as torres de luz, a arquibancada com as
-// colunas, a cobertura, os portões e as bandeiras
 function estadio(largura, c) {
   const l = largura;
-  // A beirada de cima da arquibancada é uma curva. Esta conta devolve a altura
-  // dela em cada ponto, de x = -0.46 a x = 0.46 da largura.
   const beirada = function (x) {
     const t = (x + 0.46) / 0.92;
     return -0.16 - 0.2 * t * (1 - t);
   };
   let d = circulo(0.2 * l, -0.27 * l, 0.14 * l, c.destaque);
 
-  // As duas torres de luz
   for (const lado of [-1, 1]) {
     d += traco([[lado * 0.6 * l, 0], [lado * 0.57 * l, -0.4 * l]], c.realce, l * 0.012);
     let refletor = retangulo(-0.065 * l, -0.04 * l, 0.13 * l, 0.08 * l, c.realce, 0.8);
@@ -14004,23 +11923,19 @@ function estadio(largura, c) {
     d += colar(lado * 0.57 * l, -0.43 * l, lado * 10, refletor);
   }
 
-  // A arquibancada
   const corpo = [[-0.5 * l, 0]];
   for (let x = -0.46; x <= 0.461; x += 0.092) corpo.push([x * l, beirada(x) * l]);
   corpo.push([0.5 * l, 0]);
   d += recorte(corpo, c.realce, 1);
 
-  // As colunas e os portões
   for (let x = -0.4; x <= 0.401; x += 0.08) d += traco([[x * l, (beirada(x) + 0.03) * l], [x * l, -0.012 * l]], c.a, l * 0.007);
   for (let x = -0.32; x <= 0.321; x += 0.16) d += "<path d='M" + n((x - 0.022) * l) + ' 0V' + n(-0.045 * l) + 'A' + n(0.022 * l) + ' ' + n(0.022 * l) + ' 0 0 1 ' + n((x + 0.022) * l) + ' ' + n(-0.045 * l) + "V0Z' fill='" + c.a + "'/>";
 
-  // A cobertura: uma faixa que acompanha a curva
   const cobertura = [];
   for (let x = -0.47; x <= 0.471; x += 0.094) cobertura.push([x * l, (beirada(x * 0.978) - 0.004) * l]);
   for (let x = 0.47; x >= -0.471; x -= 0.094) cobertura.push([x * l, (beirada(x * 0.978) - 0.034) * l]);
   d += recorte(cobertura, c.b, 0.8);
 
-  // As bandeiras em cima da cobertura
   [-0.26, 0, 0.26].forEach(function (x, i) {
     const pe = (beirada(x) - 0.03) * l;
     d += traco([[x * l, pe], [x * l, pe - 0.075 * l]], c.realce, l * 0.006);
@@ -14029,11 +11944,9 @@ function estadio(largura, c) {
   return d;
 }
 
-// Raios: fatias que saem de um ponto e abrem em leque para cima, como o sol
-// nascendo em um cartaz antigo. Entre uma fatia e outra fica um vão igual a ela.
 function raios(raio, cor, fatias) {
   let d = '';
-  const abertura = 180 / (fatias * 2 - 1);   // o leque inteiro tem 180 graus
+  const abertura = 180 / (fatias * 2 - 1);
   for (let i = 0; i < fatias; i++) {
     const direcao = -180 + abertura * (i * 2 + 0.5);
     d += recorte([[0, 0], ponta(raio, direcao - abertura / 2), ponta(raio, direcao + abertura / 2)], cor, 0.8);
@@ -14041,8 +11954,6 @@ function raios(raio, cor, fatias) {
   return d;
 }
 
-// Linhas de giz do gramado: a linha do meio do campo, de um lado ao outro da
-// colagem, o círculo central e o ponto do pontapé inicial
 function giz(y, raio, cor) {
   let d = traco([[0, y], [LARGURA_DA_COLAGEM, y]], cor, 5);
   d += "<circle cx='" + LARGURA_DA_COLAGEM / 2 + "' cy='" + y + "' r='" + raio + "' fill='none' stroke='" + cor + "' stroke-width='5'/>";
@@ -14050,10 +11961,8 @@ function giz(y, raio, cor) {
   return d;
 }
 
-// Um varal de bandeirinhas de um lado ao outro da colagem. "barriga" é o
-// quanto o cordão desce no meio.
 function bandeirinhas(y, barriga, quantas, cores, corDoCordao) {
-  const alturaEm = function (t) { return y + barriga * 4 * t * (1 - t); };   // a curva do cordão
+  const alturaEm = function (t) { return y + barriga * 4 * t * (1 - t); };
   let d = '';
   const cordao = [];
   for (let i = 0; i <= 40; i++) cordao.push([(LARGURA_DA_COLAGEM * i) / 40, alturaEm(i / 40)]);
@@ -14068,7 +11977,6 @@ function bandeirinhas(y, barriga, quantas, cores, corDoCordao) {
   return d;
 }
 
-// Um punhado de confete: papeizinhos de três formatos, espalhados em um retângulo
 function confete(esquerda, topo, largura, altura, quantos, cores) {
   let d = '';
   for (let i = 0; i < quantos; i++) {
@@ -14083,12 +11991,6 @@ function confete(esquerda, topo, largura, altura, quantos, cores) {
   return d;
 }
 
-// ---------------------------------------------------------------------------
-// 5. Montar a colagem de um tema
-// ---------------------------------------------------------------------------
-
-// Qual papel está atrás de uma altura da colagem? (0, 1, 2 ou 3)
-// A passagem conta como o papel de cima até a metade dela.
 function papelEm(y) {
   for (let i = 0; i < FIM_DE_CADA_PAPEL.length; i++) {
     if (y < FIM_DE_CADA_PAPEL[i] + PASSAGEM / 2) return i;
@@ -14097,10 +11999,9 @@ function papelEm(y) {
 }
 
 function desenharColagem(cores) {
-  semente = 2026;   // o sorteio recomeça: os dois temas saem com o mesmo desenho
+  semente = 2026;
   const papeis = [cores.fundo, cores['papel-2'], cores['papel-3'], cores['papel-4']];
 
-  // As cores para quem vai ser colado na altura y: nunca a cor do papel de trás
   const coresEm = function (y) {
     const i = papelEm(y);
     return {
@@ -14109,7 +12010,6 @@ function desenharColagem(cores) {
     };
   };
   const pecas = [];
-  // Atalho: cola o desenho no lugar, já com as cores certas para aquela altura
   const por = function (x, y, giro, desenhar) {
     pecas.push(colar(x, y, giro, desenhar(coresEm(y))));
   };
@@ -14118,7 +12018,6 @@ function desenharColagem(cores) {
     pecas.push(confete(esquerda, topo, largura, altura, quantos, [c.a, c.b, c.d, c.realce, c.realce, c.destaque]));
   };
 
-  // ----- Papel 1 (o topo de toda página): o varal, estrelas e uma bola pequena
   let c = coresEm(100);
   pecas.push(bandeirinhas(84, 16, 34, [c.a, c.realce, c.b, c.destaque, c.d, c.realce], c.realce));
   confeteEm(60, 170, 1480, 300, 14);
@@ -14127,7 +12026,6 @@ function desenharColagem(cores) {
   por(1392, 408, 18, function (k) { return bola(62, k); });
   por(150, 440, -12, function (k) { return figurinha(84, k); });
 
-  // ----- Papel 2: o estádio com os raios atrás, as figurinhas, o apito e a tática
   por(1000, 1250, 0, function (k) { return raios(360, k.a, 7); });
   por(1000, 1250, 0, function (k) { return estadio(540, k); });
   por(210, 1100, -15, function (k) { return figurinha(124, k); });
@@ -14139,8 +12037,6 @@ function desenharColagem(cores) {
   por(170, 1440, 8, function (k) { return estrela(30, k.destaque); });
   confeteEm(60, 800, 1480, 760, 22);
 
-  // ----- Papel 3 (o verde): o gramado riscado de giz, a bola grande, a trave,
-  //       a camisa e a bandeira de escanteio
   c = coresEm(2260);
   pecas.push(giz(2260, 170, c.realce));
   por(300, 2200, 14, function (k) { return bola(158, k); });
@@ -14151,8 +12047,6 @@ function desenharColagem(cores) {
   por(640, 2560, -12, function (k) { return estrela(20, k.realce); });
   confeteEm(60, 1880, 1480, 740, 18);
 
-  // ----- Papel 4: o pacotinho com uma figurinha saindo, a tática, o cronômetro,
-  //       os cartões e outra bola
   por(380, 3250, 16, function (k) { return figurinha(112, k); });
   por(280, 3210, -8, function (k) { return pacotinho(230, k); });
   por(1250, 3150, 8, function (k) { return cronometro(92, k); });
@@ -14162,7 +12056,6 @@ function desenharColagem(cores) {
   por(540, 3640, 10, function (k) { return estrela(28, k.destaque); });
   confeteEm(60, 2960, 1480, 740, 20);
 
-  // ----- De volta ao papel 1 (o fim do desenho, que emenda com o topo)
   por(1100, 4190, -6, function (k) { return figurinha(108, k); });
   por(1216, 4176, 9, function (k) { return figurinha(108, { realce: k.realce, a: k.b, b: k.destaque }); });
   por(420, 4200, 24, function (k) { return apito(104, k); });
@@ -14171,10 +12064,6 @@ function desenharColagem(cores) {
 
   return "<svg xmlns='http://www.w3.org/2000/svg' width='" + LARGURA_DA_COLAGEM + "' height='" + ALTURA + "' viewBox='0 0 " + LARGURA_DA_COLAGEM + ' ' + ALTURA + "'>\n" + pecas.join('\n') + '\n</svg>\n';
 }
-
-// ---------------------------------------------------------------------------
-// 6. Ler as cores, desenhar e guardar
-// ---------------------------------------------------------------------------
 
 let css = fs.readFileSync(ARQUIVO_TOKENS, 'utf8').replace(/\r\n/g, '\n');
 
@@ -14186,9 +12075,7 @@ for (const tema of [claro, escuro]) {
   }
 }
 
-// A tira dos papéis vai para o fim do tokens.css, entre as duas marcas
 const bloco = [
-  INICIO,
   ':root {',
   '  --fundo-papeis: ' + desenharTira(claro) + ';',
   '}',
@@ -14197,21 +12084,18 @@ const bloco = [
   '  --fundo-papeis: ' + desenharTira(escuro) + ';',
   '}',
   '',
-  '/* No alto contraste o fundo é liso: branco ou preto, sem desenho */',
-  '[data-contraste="alto"] {',
-  '  --fundo-papeis: none;',
-  '}',
   FIM,
 ].join('\n');
 
-if (css.includes(INICIO) && css.includes(FIM)) {
-  css = css.slice(0, css.indexOf(INICIO)) + bloco + css.slice(css.indexOf(FIM) + FIM.length);
+const comecoDoBloco = css.indexOf(INICIO);
+const fimDoBloco = comecoDoBloco === -1 ? -1 : css.indexOf(FIM, comecoDoBloco);
+if (fimDoBloco !== -1) {
+  css = css.slice(0, comecoDoBloco) + bloco + css.slice(fimDoBloco + FIM.length);
 } else {
-  css = css.trimEnd() + '\n\n/* ---------- Fundo da página ----------\n   Gerado por:  node scripts/gerar-fundo.js   (não edite à mão o que está\n   entre as duas marcas: mude as cores de papel lá em cima e rode o script) */\n' + bloco + '\n';
+  css = css.trimEnd() + '\n\n' + bloco + '\n';
 }
 fs.writeFileSync(ARQUIVO_TOKENS, css, 'utf8');
 
-// A colagem vai para um arquivo por tema
 fs.mkdirSync(PASTA_DA_COLAGEM, { recursive: true });
 fs.writeFileSync(path.join(PASTA_DA_COLAGEM, 'colagem-claro.svg'), desenharColagem(claro), 'utf8');
 fs.writeFileSync(path.join(PASTA_DA_COLAGEM, 'colagem-escuro.svg'), desenharColagem(escuro), 'utf8');
@@ -14222,27 +12106,12 @@ console.log('Fundo desenhado para os temas claro e escuro: a tira dos papéis (c
 ### scripts/gerar-anexo.js
 
 ````js
-// ============================================================================
-// gerar-anexo.js
-// ----------------------------------------------------------------------------
-// O que faz: junta todos os arquivos HTML, CSS e JavaScript do projeto em um
-// arquivo só, docs/anexo-codigo.md, para o anexo de código do relatório.
-//
-// Como rodar (na pasta do projeto):   node scripts/gerar-anexo.js
-//
-// Rode de novo sempre que o código mudar: o anexo é reescrito do zero.
-// ============================================================================
-
 const fs = require('fs');
 const path = require('path');
 
 const RAIZ = path.join(__dirname, '..');
 const ARQUIVO_SAIDA = path.join(RAIZ, 'docs', 'anexo-codigo.md');
 
-// Os grupos de arquivos, na ordem em que aparecem no anexo.
-// "primeiro" lista os arquivos que vêm na frente, na ordem em que fazem mais
-// sentido para ler. Os que não estiverem na lista entram depois, em ordem
-// alfabética: assim um arquivo novo nunca fica de fora.
 const GRUPOS = [
   {
     titulo: 'Páginas (HTML)', pasta: '', extensao: '.html', linguagem: 'html',
@@ -14266,13 +12135,11 @@ const GRUPOS = [
   },
 ];
 
-// Arquivos de trabalho, que não fazem parte do site entregue: ficam fora do anexo
 const FORA_DO_ANEXO = [
   'laboratorio.html', 'laboratorio.css', 'laboratorio.js',
   'laboratorio-2.html', 'laboratorio-2.css', 'laboratorio-2.js',
 ];
 
-// Lista os arquivos de um grupo: primeiro os da lista "primeiro", depois os outros
 function arquivosDoGrupo(grupo) {
   const pasta = path.join(RAIZ, grupo.pasta);
   const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao) && !FORA_DO_ANEXO.includes(nome); }).sort();
@@ -14300,8 +12167,6 @@ for (const grupo of GRUPOS) {
 
     linhas.push('### ' + caminho);
     linhas.push('');
-    // Quatro crases abrem e fecham o bloco de código: assim um arquivo que
-    // tenha três crases dentro dele não fecha o bloco antes da hora.
     linhas.push('````' + grupo.linguagem);
     linhas.push(conteudo);
     linhas.push('````');
@@ -14317,7 +12182,7 @@ const cabecalho = [
   'Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.',
   '',
   '- Arquivos: ' + totalDeArquivos + '.',
-  '- Linhas de código (com comentários): ' + totalDeLinhas + '.',
+  '- Linhas de código: ' + totalDeLinhas + '.',
   '',
   '| Arquivo | Linhas |',
   '|---|---|',
@@ -14340,14 +12205,6 @@ console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo es
   <title>Gerador de quadros do pacotinho | Colei!</title>
   <meta name="robots" content="noindex">
 
-  <!-- FERRAMENTA DE APOIO. Não faz parte do site entregue.
-       Esta página desenha o pacotinho 3D (js/pacote3d.js) em 90 poses seguidas
-       e salva cada pose como uma imagem. É a "sequência de quadros" que a cena
-       do pacotinho, na página inicial, mostra conforme a rolagem.
-
-       Para gerar de novo (depois de mudar o js/pacote3d.js, por exemplo):
-       abra esta página pelo servidor local, no Edge ou no Chrome, clique em
-       "Salvar os quadros em uma pasta" e escolha a pasta assets/img/pacotinho. -->
   <link rel="stylesheet" href="../css/tokens.css">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/componentes.css">
@@ -14376,15 +12233,14 @@ console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo es
     </div>
     <p class="painel-aviso" id="aviso" role="status"></p>
 
-    <!-- O tamanho da tela é o tamanho de cada imagem salva: 720 por 924 pixels. -->
     <canvas class="quadros-tela" id="tela" width="720" height="924" aria-label="Pré-visualização do quadro escolhido"></canvas>
   </main>
 
   <script>
     'use strict';
 
-    const QUADROS = 90;          // quantas poses
-    const QUALIDADE = 0.82;      // do arquivo WebP: de 0 (leve e feio) a 1 (pesado e fiel)
+    const QUADROS = 90;
+    const QUALIDADE = 0.82;
     const TEMAS = ['claro', 'escuro'];
 
     const tela = document.getElementById('tela');
@@ -14392,11 +12248,8 @@ console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo es
     const controle = document.getElementById('quadro');
     document.documentElement.dataset.tema = 'claro';
 
-    // alturaVisivel: 15.4 deixa uma folga em volta do pacotinho, porque ele
-    // entra por baixo, gira e a aba voa para cima
     const pacote = criarPacote3d(tela, { alturaVisivel: 15.4, nitidez: 1, largura: 720, altura: 924 });
 
-    // Desenha a pose de número "i" (de 1 a 90)
     function desenharQuadro(i) {
       pacote.posar((i - 1) / (QUADROS - 1));
       pacote.desenhar();
@@ -14409,7 +12262,7 @@ console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo es
 
     function usarTema(tema) {
       document.documentElement.dataset.tema = tema;
-      pacote.estampar();   // refaz a estampa com as cores do tema
+      pacote.estampar();
       mostrar();
     }
 
@@ -14418,15 +12271,12 @@ console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo es
       usarTema(document.documentElement.dataset.tema === 'claro' ? 'escuro' : 'claro');
     });
 
-    // Usado também pelo teste automático: devolve um quadro já em forma de arquivo
-    // (um texto comprido que começa com "data:image/webp;base64,")
     function quadroComoArquivo(tema, i, tipo) {
       if (document.documentElement.dataset.tema !== tema) usarTema(tema);
       desenharQuadro(i);
       return tela.toDataURL(tipo || 'image/webp', QUALIDADE);
     }
 
-    // Salva tudo em uma pasta escolhida pela pessoa: claro/001.webp ... escuro/090.webp
     document.getElementById('salvar').addEventListener('click', async function () {
       if (!window.showDirectoryPicker) {
         aviso.textContent = 'Este navegador não deixa uma página salvar em uma pasta. Use o Edge ou o Chrome.';
@@ -14449,7 +12299,6 @@ console.log(totalDeArquivos + ' arquivos, ' + totalDeLinhas + ' linhas. Anexo es
       aviso.textContent = 'Pronto: ' + (QUADROS * TEMAS.length) + ' quadros salvos.';
     });
 
-    // A estampa usa as letras do site: só pode ser desenhada depois que elas chegarem
     const pronto = Promise.all([
       document.fonts.load('900 100px "Londrina Solid"'),
       document.fonts.load('700 60px "Atkinson Hyperlegible Next"'),

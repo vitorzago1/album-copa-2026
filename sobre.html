@@ -7,13 +7,10 @@
   <meta name="description" content="Projeto acadêmico de Desenvolvimento de Interfaces: o que foi usado e como foi feito.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Para o modo demonstração: os dados, o caderninho do progresso e os dois botões. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/demonstracao.js" defer></script>
@@ -26,15 +23,12 @@
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -49,7 +43,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -62,7 +55,6 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- O QUE É. Página dupla: à esquerda a apresentação, à direita a ficha do projeto. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Sobre o projeto</h1>
@@ -84,7 +76,6 @@
       </dl>
     </section>
 
-    <!-- O QUE É DE VERDADE E O QUE É SIMULADO. -->
     <section class="largura secao dobra">
       <div class="fluxo">
         <h2>O que é de verdade</h2>
@@ -107,7 +98,6 @@
       </div>
     </section>
 
-    <!-- COMO FOI FEITO. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-feito">
       <h2 id="titulo-feito">Como foi feito</h2>
       <ul class="lista-simples">
@@ -121,7 +111,6 @@
       </ul>
     </section>
 
-    <!-- CRÉDITOS. A lista das fotos é montada pelo js/sobre.js, a partir de js/dados.js. -->
     <section class="largura secao fluxo" id="creditos" aria-labelledby="titulo-creditos">
       <h2 id="titulo-creditos">Créditos</h2>
 
@@ -146,7 +135,6 @@
       <noscript><p>A lista completa das fotos está no arquivo <code>docs/referencias.md</code> do repositório.</p></noscript>
     </section>
 
-    <!-- FONTES DOS DADOS. Lista montada pelo js/sobre.js, a partir de js/dados.js. -->
     <section class="largura secao fluxo" id="fontes" aria-labelledby="titulo-fontes">
       <h2 id="titulo-fontes">Fontes dos dados</h2>
       <p>De onde vieram os dados da Copa usados no álbum. Consultas feitas em novembro de 2026.</p>
@@ -154,8 +142,6 @@
       <noscript><p>A lista completa das fontes está no arquivo <code>docs/referencias.md</code> do repositório.</p></noscript>
     </section>
 
-    <!-- MODO DEMONSTRAÇÃO: para testar o álbum na apresentação sem esperar um pacotinho por dia.
-         Os botões são ligados pelo js/demonstracao.js. -->
     <section class="largura secao fluxo" id="demonstracao" aria-labelledby="titulo-demonstracao">
       <h2 id="titulo-demonstracao">Modo demonstração</h2>
       <p>Feito para a apresentação: dá para testar o álbum inteiro sem esperar um pacotinho por dia. Vale só para este navegador.</p>
@@ -163,11 +149,9 @@
         <button class="botao" type="button" id="demo-extras">Ganhar 5 pacotinhos extras</button>
         <button class="botao botao-contorno" type="button" id="demo-zerar">Zerar álbum</button>
       </p>
-      <!-- role="status": o leitor de tela lê este texto quando ele muda. -->
       <p class="painel-aviso" id="demo-aviso" role="status"></p>
     </section>
 
-    <!-- Janela de confirmação do "Zerar álbum". O <dialog> prende o foco e fecha com Esc. -->
     <dialog class="painel" id="dialogo-zerar" aria-labelledby="titulo-zerar">
       <div class="painel-dentro">
         <div class="painel-cabeca">
@@ -181,7 +165,6 @@
       </div>
     </dialog>
 
-    <!-- GUIA DE ESTILO: as peças do site, todas juntas. Serve de consulta e de teste dos temas. -->
     <section class="largura secao fluxo guia" aria-labelledby="titulo-guia">
       <h2 id="titulo-guia">Guia de estilo</h2>
       <p>As peças que o site usa, todas juntas. Troque o tema no botão Acessibilidade e veja como cada uma se comporta.</p>
@@ -208,7 +191,6 @@
           <input class="campo-entrada" id="guia-nome" type="text" autocomplete="off" aria-describedby="guia-nome-dica">
         </div>
 
-        <!-- Campo com erro: borda grossa, ícone de cartão e frase que explica o conserto. -->
         <div class="campo">
           <label class="campo-rotulo" for="guia-email">E-mail</label>
           <input class="campo-entrada" id="guia-email" type="email" value="nome.exemplo" autocomplete="off" aria-invalid="true" aria-describedby="guia-email-erro">
@@ -311,7 +293,6 @@
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">

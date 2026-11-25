@@ -1,34 +1,14 @@
-// ============================================================================
-// contraste.js
-// ----------------------------------------------------------------------------
-// O que faz: lê as cores de css/tokens.css, calcula o contraste de cada par
-// de cores que o site usa de verdade (nos 4 temas) e escreve docs/cores.md.
-//
-// Como rodar (na pasta do projeto):   node scripts/contraste.js
-//
-// Por que existe: o contraste precisa ser calculado, não "chutado". Como o
-// script lê o próprio tokens.css, a tabela nunca fica diferente do site.
-// ============================================================================
-
 const fs = require('fs');
 const path = require('path');
 
 const ARQUIVO_TOKENS = path.join(__dirname, '..', 'css', 'tokens.css');
 const ARQUIVO_SAIDA = path.join(__dirname, '..', 'docs', 'cores.md');
 
-// ---------------------------------------------------------------------------
-// 1. A conta do contraste (fórmula do WCAG 2.x)
-// ---------------------------------------------------------------------------
-
-// Cada cor tem 3 canais (vermelho, verde, azul), de 0 a 255.
-// Esta função converte um canal para a escala "linear" que a fórmula pede.
 function canalLinear(valor) {
   const c = valor / 255;
   return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 }
 
-// Luminância: o quanto a cor parece clara para o olho (0 = preto, 1 = branco).
-// O verde pesa mais porque o olho humano é mais sensível a ele.
 function luminancia(hex) {
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -36,23 +16,16 @@ function luminancia(hex) {
   return 0.2126 * canalLinear(r) + 0.7152 * canalLinear(g) + 0.0722 * canalLinear(b);
 }
 
-// Contraste: (cor mais clara + 0,05) dividido por (cor mais escura + 0,05).
-// Vai de 1 (cores iguais) a 21 (preto no branco).
 function contraste(corA, corB) {
   const a = luminancia(corA);
   const b = luminancia(corB);
   return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 }
 
-// ---------------------------------------------------------------------------
-// 2. Ler as cores do tokens.css
-// ---------------------------------------------------------------------------
-
-// Devolve um objeto no formato { 'seletor': { 'nome-da-cor': '#HEX' } }.
 function lerBlocos(css) {
   const semComentarios = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const blocos = {};
-  const regra = /([^{}]+)\{([^{}]*)\}/g; // casa com "seletor { conteúdo }"
+  const regra = /([^{}]+)\{([^{}]*)\}/g;
   let achado;
   while ((achado = regra.exec(semComentarios)) !== null) {
     const seletor = achado[1].trim();
@@ -69,8 +42,6 @@ function lerBlocos(css) {
 
 const blocos = lerBlocos(fs.readFileSync(ARQUIVO_TOKENS, 'utf8'));
 
-// Cada tema herda do anterior, igual à cascata do CSS:
-// o que o tema não redefine continua valendo do tema de baixo.
 const claro = blocos[':root'];
 const escuro = { ...claro, ...blocos['[data-tema="escuro"]'] };
 const altoClaro = { ...claro, ...blocos['[data-contraste="alto"]'] };
@@ -82,12 +53,6 @@ const TEMAS = [
   { nome: 'Alto contraste, claro', cores: altoClaro },
   { nome: 'Alto contraste, escuro', cores: altoEscuro },
 ];
-
-// ---------------------------------------------------------------------------
-// 3. Os pares de cor que o site usa de verdade
-// ---------------------------------------------------------------------------
-// tipo 'texto'      = texto de tamanho normal: mínimo 4,5:1 (AA) e 7:1 (AAA)
-// tipo 'componente' = texto grande, borda, ícone, anel de foco, barra: mínimo 3:1
 
 const PARES = [
   { frente: 'texto', fundo: 'fundo', tipo: 'texto', uso: 'Texto principal sobre o fundo da página' },
@@ -118,8 +83,6 @@ const PARES = [
   { frente: 'texto', fundo: 'vaga', tipo: 'componente', uso: 'Preenchimento da barra de progresso sobre o trilho' },
   { frente: 'figurinha-papel', fundo: 'figurinha-tinta', tipo: 'texto', uso: 'Texto da etiqueta colada na figurinha' },
 
-  // Pares com DUAS cores na frente: o desenho tem dois tons (um claro e um escuro)
-  // e basta UM deles contrastar com o que está atrás. Vale o melhor dos dois.
   { frente: ['figurinha-tinta', 'figurinha-papel'], fundo: 'fundo', tipo: 'componente', uso: 'Etiqueta da figurinha (fundo ou contorno) sobre a página' },
   { frente: 'foco', fundo: 'foco-vao', tipo: 'componente', uso: 'Os dois tons do foco, um ao lado do outro' },
   { frente: ['foco', 'foco-vao'], fundo: 'fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre o fundo' },
@@ -130,10 +93,6 @@ const PARES = [
   { frente: ['foco', 'foco-vao'], fundo: 'etiqueta-fundo', tipo: 'componente', uso: 'Foco (anel ou vão) sobre área na cor da tinta' },
 ];
 
-// Os outros papéis do fundo. A página muda de papel conforme a pessoa rola, e
-// por cima dos papéis há desenhos recortados em mais duas cores (o realce e o
-// destaque). Um texto pode ficar em cima de qualquer uma delas: tudo o que
-// fica direto sobre a página precisa passar em todas.
 const PAPEIS = [
   { token: 'papel-2', nome: 'papel 2' },
   { token: 'papel-3', nome: 'papel 3' },
@@ -153,10 +112,6 @@ for (const papel of PAPEIS) {
     { frente: ['foco', 'foco-vao'], fundo: papel.token, tipo: 'componente', uso: 'Foco (anel ou vão) sobre o ' + papel.nome }
   );
 }
-
-// ---------------------------------------------------------------------------
-// 4. O que cada cor é e por que foi escolhida (frases curtas, para o relatório)
-// ---------------------------------------------------------------------------
 
 const DESCRICAO = [
   { token: 'fundo', nome: 'Papel rosa / papel azul', onde: 'Primeira faixa do fundo de todas as páginas (e a cor do cabeçalho)', motivo: 'Rosa claro é lido como lúdico, acolhedor e nostálgico (papel de figurinha de chiclete). No escuro, o azul profundo acalma e descansa a vista mais que o preto.' },
@@ -188,11 +143,6 @@ const DESCRICAO = [
   { token: 'foto-luz', nome: 'Luz da foto', onde: 'Partes claras das fotos dos estádios', motivo: 'A cor do papel (no escuro, a da tinta rosa): a foto parece pertencer à página em vez de ser um retângulo colado nela.' },
 ];
 
-// ---------------------------------------------------------------------------
-// 5. Montar o arquivo docs/cores.md
-// ---------------------------------------------------------------------------
-
-// 10.84 vira "10,84:1" (vírgula, como se escreve em português).
 function formatar(razao) {
   return razao.toFixed(2).replace('.', ',') + ':1';
 }
@@ -235,8 +185,6 @@ for (const tema of TEMAS) {
   linhas.push('|---|---|---|---|---|---|');
   for (const par of PARES) {
     const fundo = tema.cores[par.fundo];
-    // "frente" pode ser um nome só ou uma lista de dois nomes (ver o comentário nos PARES).
-    // Com dois, fica a cor que contrasta mais com o fundo.
     const candidatas = Array.isArray(par.frente) ? par.frente : [par.frente];
     let frente = tema.cores[candidatas[0]];
     for (const nome of candidatas) {
@@ -255,17 +203,6 @@ for (const tema of TEMAS) {
   linhas.push('');
 }
 
-// ---------------------------------------------------------------------------
-// 6. As cores das seleções (o desenho dentro da figurinha)
-// ---------------------------------------------------------------------------
-// Cada seleção tem três cores em js/dados.js: campo, camisa e número.
-// O desenho precisa de dois contrastes de pelo menos 3:1:
-//   - o número sobre a camisa (é um número grande, em negrito);
-//   - o contorno do retrato, na tinta da figurinha, sobre o campo.
-// A figurinha não muda de cor com o tema; só a tinta muda no alto contraste.
-
-// Lê a lista SELECOES de js/dados.js. O arquivo é um script de navegador,
-// sem "exports"; por isso ele é executado dentro de uma função que devolve a lista.
 const codigoDosDados = fs.readFileSync(path.join(__dirname, '..', 'js', 'dados.js'), 'utf8');
 const SELECOES = new Function(codigoDosDados + '; return SELECOES;')();
 
@@ -307,5 +244,4 @@ fs.writeFileSync(ARQUIVO_SAIDA, linhas.join('\n'), 'utf8');
 
 console.log(`${total} pares conferidos, ${reprovados} reprovados. Tabela escrita em docs/cores.md`);
 
-// Se algum par reprovar, o script termina com erro (código 1), para ninguém deixar passar.
 process.exit(reprovados > 0 ? 1 : 0);

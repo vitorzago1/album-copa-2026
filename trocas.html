@@ -7,14 +7,10 @@
   <meta name="description" content="Veja suas repetidas e faltantes e monte a lista de troca.">
   <link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
 
-  <!-- Este script fica no começo de propósito: ele aplica o tema e as preferências
-       salvas antes de a página aparecer, para a tela não "piscar" no tema errado. -->
   <script src="js/tema-acessibilidade.js"></script>
   <script src="js/menu.js" defer></script>
   <script src="js/efeitos.js" defer></script>
 
-  <!-- Os scripts das trocas, nesta ordem: os dados, o caderninho do progresso,
-       os ajudantes da figurinha e, por último, a página. -->
   <script src="js/dados.js" defer></script>
   <script src="js/estado.js" defer></script>
   <script src="js/figurinha.js" defer></script>
@@ -27,15 +23,12 @@
   <link rel="stylesheet" href="css/acessibilidade.css">
 </head>
 <body>
-  <!-- Primeiro link da página: quem navega pelo teclado pula o menu e vai direto ao conteúdo. -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- CABEÇALHO. É igual nas 7 páginas; só muda qual link leva aria-current="page". -->
   <header class="cabecalho">
     <div class="largura cabecalho-grade">
       <a class="marca" href="index.html" aria-label="Colei!, página inicial">Colei!</a>
 
-      <!-- Em telas pequenas, este botão abre e fecha o menu (ver js/menu.js). -->
       <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
 
       <nav class="menu" id="menu-principal" aria-label="Principal">
@@ -50,7 +43,6 @@
         </ul>
       </nav>
 
-      <!-- Abre o painel de acessibilidade (ver js/tema-acessibilidade.js). -->
       <button class="botao-acessibilidade" type="button" id="abrir-acessibilidade" aria-haspopup="dialog">
         <svg class="icone" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="4.5" r="2.2" fill="currentColor"/>
@@ -63,8 +55,6 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- Página dupla: à esquerda o que tenho e o que falta; à direita a lista pronta para mandar.
-         Tudo é preenchido pelo js/trocas.js, a partir do álbum guardado. -->
     <section class="largura dobra">
       <div class="fluxo">
         <h1>Trocas</h1>
@@ -77,8 +67,6 @@
 
         <h2 id="titulo-preciso">Preciso</h2>
         <p id="faltam-texto"></p>
-        <!-- <details> é uma gaveta do próprio HTML: abre e fecha ao clicar no resumo, sem JavaScript.
-             A lista pode ter quase 300 números, por isso começa fechada quando é longa. -->
         <details id="faltam-gaveta">
           <summary id="faltam-resumo">Ver a lista</summary>
           <ul class="lista-faltam" id="lista-faltam" aria-labelledby="titulo-preciso"></ul>
@@ -92,12 +80,10 @@
         <div class="cartao bilhete">
           <div class="campo">
             <label class="campo-rotulo" for="texto-troca">Sua lista</label>
-            <!-- "readonly": dá para selecionar e copiar, mas não para editar. -->
             <textarea class="campo-entrada" id="texto-troca" rows="7" readonly></textarea>
           </div>
           <p class="guia-linha">
             <button class="botao" type="button" id="copiar-lista">Copiar lista</button>
-            <!-- O endereço wa.me abre o WhatsApp com o texto já escrito. O js/trocas.js completa o link. -->
             <a class="botao botao-contorno" id="mandar-whatsapp" href="https://wa.me/" target="_blank" rel="noopener">Mandar pelo WhatsApp<span class="escondido"> (abre em outra aba)</span></a>
           </p>
           <p class="painel-aviso" id="copiar-aviso" role="status"></p>
@@ -105,7 +91,6 @@
       </div>
     </section>
 
-    <!-- BANCA DE TROCAS: a simulação de uma troca. -->
     <section class="largura secao fluxo" aria-labelledby="titulo-banca">
       <h2 id="titulo-banca">Banca de trocas</h2>
       <p>Como o site não tem servidor, aqui a troca é uma simulação: a banca sorteia três figurinhas que você ainda não tem. Escolha uma repetida para dar e uma da banca para receber.</p>
@@ -115,7 +100,6 @@
 
       <form class="fluxo" id="form-troca" hidden>
         <div class="banca-grade">
-          <!-- fieldset + legend: o leitor de tela diz a pergunta antes de cada opção. -->
           <fieldset class="painel-grupo">
             <legend>Você dá (uma repetida)</legend>
             <div id="opcoes-dou"></div>
@@ -133,7 +117,6 @@
     </section>
   </main>
 
-  <!-- RODAPÉ. É igual nas 7 páginas. -->
   <footer class="rodape">
     <div class="largura rodape-grade">
       <div class="rodape-sobre">
