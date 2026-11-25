@@ -5,7 +5,7 @@ Arquivo gerado por `node scripts/gerar-anexo.js`. Não edite à mão: mude o có
 Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Morais.
 
 - Arquivos: 37.
-- Linhas de código: 12070.
+- Linhas de código: 12065.
 
 | Arquivo | Linhas |
 |---|---|
@@ -44,7 +44,7 @@ Projeto: Colei! Álbum de figurinhas da Copa 2026. Aluno: Vitor Zago Pontes Mora
 | `js/dados.js` | 2338 |
 | `scripts/contraste.js` | 247 |
 | `scripts/gerar-fundo.js` | 431 |
-| `scripts/gerar-anexo.js` | 84 |
+| `scripts/gerar-anexo.js` | 79 |
 | `scripts/quadros.html` | 113 |
 
 ## Páginas (HTML)
@@ -12135,14 +12135,9 @@ const GRUPOS = [
   },
 ];
 
-const FORA_DO_ANEXO = [
-  'laboratorio.html', 'laboratorio.css', 'laboratorio.js',
-  'laboratorio-2.html', 'laboratorio-2.css', 'laboratorio-2.js',
-];
-
 function arquivosDoGrupo(grupo) {
   const pasta = path.join(RAIZ, grupo.pasta);
-  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao) && !FORA_DO_ANEXO.includes(nome); }).sort();
+  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao); }).sort();
   const naFrente = grupo.primeiro.filter(function (nome) { return todos.includes(nome); });
   const resto = todos.filter(function (nome) { return !grupo.primeiro.includes(nome); });
   return naFrente.concat(resto);

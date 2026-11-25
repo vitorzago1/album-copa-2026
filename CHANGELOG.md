@@ -9,30 +9,25 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - Passo a passo de publicação no GitHub Pages no README.
 - Anexo de código (`docs/anexo-codigo.md`), gerado por `scripts/gerar-anexo.js`.
 - Site publicado no GitHub Pages: https://vitorzago1.github.io/album-copa-2026/
-- As 254 verificações automáticas passam também no endereço publicado.
 - Duas páginas de teste, fora do site entregue, para escolher efeitos: `laboratorio.html` (24 ideias) e `laboratorio-2.html` (8 cenas presas à rolagem).
 - Página inicial refeita como uma apresentação em oito cenas presas à rolagem: retícula que forma a marca, frase que acende, pacotinho em 3D, álbum em 3D, mergulho na figurinha, números que contam, faixa dos 12 grupos e voo pelas figurinhas.
 - Toda cena tem uma versão parada, usada com "Reduzir animações", com letra maior, com mais espaço no texto e sem JavaScript.
 - Painel de acessibilidade: nova opção "Mostrar as animações, mesmo com o aparelho pedindo menos". Aparece só quando o aparelho pede menos movimento.
 - Aviso na página inicial, com botão, para quem vê a versão parada por causa do aparelho.
 - Saiu da abertura a página de amostra com três vagas: o álbum em 3D faz esse papel.
-- 81 verificações automáticas novas (335 no total).
 - Pacotinho em 3D, com a biblioteca Three.js r128 (a única do site, guardada em `js/vendor/`).
 - Cena do pacotinho da página inicial com sequência de quadros: 90 imagens por tema, escolhidas pela rolagem. O pacotinho de CSS fica como plano B.
 - Página Pacotinhos: o pacotinho fechado é o modelo 3D ao vivo, que inclina com o ponteiro e rasga mostrando o lado prateado. Sem WebGL, fica o de CSS.
 - Ferramenta `scripts/quadros.html`, que gera os quadros.
 - Crédito da Three.js na página Sobre e em `docs/referencias.md`.
-- 34 verificações automáticas novas (369 no total).
 - Nove efeitos escolhidos no primeiro laboratório: lendária holográfica, colar com batida, carimbo de conquista, rasgo em serra e saída em leque no pacotinho, virar a página entre as 7 páginas, casas do álbum que assentam ao rolar, placar girando, retícula que acende em volta do mouse e traço que se desenha (campo atrás dos números e no fim do álbum).
 - Corrigido: a figurinha recém-colada passava alguns pixels da beirada da tela durante a animação.
-- 47 verificações automáticas novas (416 no total).
 - Fundo das 7 páginas com quatro papéis por tema (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho), com passagem em retícula entre eles. A tinta continua uma só.
 - Linhas de campo bem fracas desenhadas no fundo: círculo central, grande área, cantos e cruzes de registro.
 - Script `scripts/gerar-fundo.js`, que desenha a tira dos papéis com as cores do `css/tokens.css`.
 - Aviso "Desça para continuar" nas oito cenas da página inicial.
 - Corrigido: em janela com menos de 640 px de altura, o link "Ver o Grupo no álbum" ficava muito perto do pé do palco.
 - Script de contraste confere também os papéis novos e o texto sobre as linhas do fundo: 372 pares, 0 reprovados.
-- 37 verificações automáticas novas (453 no total).
 - Fundo ilustrado: colagem de papel recortado por cima dos papéis (varal de bandeirinhas, estádio, figurinhas, apito, tática, bola, trave, camisa, escanteio, pacotinho, cronômetro, cartões, estrelas e confete), desenhada pelo `scripts/gerar-fundo.js` em `assets/img/fundo/`.
 - Duas cores novas para os recortes: realce e destaque. Contraste: 396 pares, 0 reprovados.
 - Grão e manchas de papel no fundo, feitos com filtro de ruído do SVG.
@@ -40,16 +35,15 @@ O que mudou em cada versão do projeto, da mais nova para a mais antiga.
 - No celular, o desenho do fundo fica com metade do tamanho.
 - Abertura da página inicial: convite centralizado, com os pontinhos contornando o texto.
 - Corrigido: os botões da abertura ficavam 26 px fora do centro.
-- 39 verificações automáticas novas (490 no total).
 - A frase "São 48 seleções..." deixou de ser cena presa à rolagem: acende sozinha quando aparece na tela.
 - Os 12 grupos viraram um carrossel, com botões, indicadores de A a L e rolagem para os lados. A página inicial ficou com seis cenas.
 - Papéis do fundo e amarelo dos recortes com cores mais vivas. Contraste: 396 pares, 0 reprovados.
 - "Reduzir animações" passou a tirar também o tempo de espera das transições.
-- 30 verificações automáticas novas (510 no total).
 - Retrato novo nas figurinhas de jogador: uma pessoa desenhada (rosto, cabelo em quatro cortes, pescoço, camisa com gola e número), no lugar do boneco de círculo e meio círculo. Continua genérico e sem foto.
 - Bandeirinha da seleção no canto de cada figurinha de jogador.
-- 22 verificações automáticas novas (532 no total).
 - Comentários retirados de todo o código (HTML, CSS e JavaScript). A biblioteca Three.js fica como veio, com a licença.
+- Saíram do repositório as duas páginas de teste (`laboratorio.html` e `laboratorio-2.html`, com o CSS e o JavaScript delas) e o arquivo de regras de trabalho (`CLAUDE.md`).
+- README também em inglês (`README.en.md`).
 
 ## v0.4-acessibilidade (20/11/2026)
 

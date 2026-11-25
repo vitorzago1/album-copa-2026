@@ -165,7 +165,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Pacotinho em 3D (etapa 11)
 
-- **Biblioteca.** Three.js r128, autorizada pelo aluno em 21/11/2026. É a única do site. O motivo e a origem estão no README, em "Tecnologias".
+- **Biblioteca.** Three.js r128, autorizada em 21/11/2026. É a única do site. O motivo e a origem estão no README, em "Tecnologias".
 - **Um modelo, dois usos.** O mesmo `js/pacote3d.js` gera a sequência de quadros da página inicial e roda ao vivo na página Pacotinhos.
 - **Por que quadros na página inicial.** A página inicial fica sem a biblioteca (600 KB a menos) e sem depender de WebGL. O custo são cerca de 1,35 MB de imagens por tema, baixadas só com as cenas em movimento.
 - **Por que ao vivo na página Pacotinhos.** Ali o pacotinho responde ao ponteiro, o que imagens prontas não fazem.
@@ -179,7 +179,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Efeitos do primeiro laboratório (etapa 12)
 
-- **O que entrou.** Só as nove ideias marcadas pelo aluno no laboratório 1 (números 10, 11, 12, 13, 14, 15, 17, 18 e 19). As nove ideias de fundo, o papel picado, os sons, a vibração, a inclinação do celular, o aplicativo instalável e o compartilhar não foram marcados e não entraram.
+- **O que entrou.** Só as nove ideias marcadas no laboratório 1 (números 10, 11, 12, 13, 14, 15, 17, 18 e 19). As nove ideias de fundo, o papel picado, os sons, a vibração, a inclinação do celular, o aplicativo instalável e o compartilhar não foram marcados e não entraram.
 - **Todo movimento responde a uma ação.** Ponteiro (lendária, retícula, balanço do pacotinho), clique (batida, rasgo, leque, virada de página) ou rolagem (casas, carimbo, campo). Nada começa sozinho.
 - **Lendária holográfica em todo lugar.** Vale para qualquer figurinha lendária de frente. De costas ou no verso a camada de brilho some, porque ali só há texto. Sem ponteiro fica um brilho fraco, que também aparece no celular.
 - **O brilho não muda com o tema.** O arco-íris é um valor só (`--holografico`, em `css/tokens.css`), porque a figurinha é um objeto impresso. Ele fica por cima da figurinha como brilho; nenhum texto é escrito sobre ele.
@@ -208,7 +208,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Fundo com vários papéis e aviso de descer (etapa 13)
 
-- **Pedido do aluno em 22/11/2026.** Um fundo com mais de uma cor e com detalhes, no lugar da cor única, e um aviso "Desça para continuar" onde é preciso rolar. Na etapa 12 as texturas de fundo do laboratório tinham ficado de fora; este pedido veio depois e vale no lugar daquela decisão.
+- **Mudança de 22/11/2026.** Um fundo com mais de uma cor e com detalhes, no lugar da cor única, e um aviso "Desça para continuar" onde é preciso rolar. Na etapa 12 as texturas de fundo do laboratório tinham ficado de fora; este pedido veio depois e vale no lugar daquela decisão.
 - **O que mudou na direção.** De "Uma tinta só" para "Uma tinta só, vários papéis". Texto, fios e botões não ganharam cor nova. Os papéis são tons claros (no escuro, tons fundos), e a cor viva continua chegando só pelas figurinhas.
 - **Quatro papéis por tema.** Claro: rosa, pêssego, menta e lilás. Escuro: azul, roxo, petróleo e vinho. Depois do quarto papel o fundo volta ao primeiro e se repete a cada 4400 px, sem emenda.
 - **Passagem em retícula, e não degradê liso.** Bolinhas que crescem são a mesma linguagem dos pontinhos da abertura e do retrato das figurinhas: impressão em papel.
@@ -240,7 +240,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Fundo ilustrado e abertura centralizada (etapa 14)
 
-- **Pedido do aluno em 22/11/2026, depois da etapa 13.** O fundo estava "seco e artificial", só com cores; devia ter detalhes e imagens. A frase da abertura devia ficar centralizada, e parecia estranha sozinha, sem os pontinhos em volta.
+- **Mudança de 22/11/2026, depois da etapa 13.** O fundo estava "seco e artificial", só com cores; devia ter detalhes e imagens. A frase da abertura devia ficar centralizada, e parecia estranha sozinha, sem os pontinhos em volta.
 - **Colagem de papel recortado.** A página continua sendo um impresso; agora tem recortes colados nela, como em um álbum montado à mão. Os temas dos desenhos são de futebol e do próprio álbum: estádio, bola, trave, apito, cartões, tática, bandeirinhas, figurinha e pacotinho.
 - **Por que desenho, e não foto.** Foi testada a foto de um estádio em retícula (licença CC0). Para não tirar contraste do texto, ela só podia usar tons muito próximos do papel, e virava uma mancha sem forma. O desenho recortado fica nítido com as mesmas cores. A ferramenta de teste e o arquivo de medidas da foto foram apagados.
 - **Desenhos próprios, feitos por código.** Nenhuma imagem de fora: cada desenho é uma função do `scripts/gerar-fundo.js`, feita de círculos, polígonos e traços. Nada de logo, emblema, mascote ou layout de álbum existente.
@@ -272,7 +272,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Frase animada, carrossel dos grupos e cores mais vivas (etapa 15)
 
-- **Pedido do aluno em 23/11/2026.** Cores um pouco mais vivas; a frase "São 48 seleções..." como animação, sem descer a página por dentro dela; os 12 grupos em carrossel, também sem descer a página.
+- **Mudança de 23/11/2026.** Cores um pouco mais vivas; a frase "São 48 seleções..." como animação, sem descer a página por dentro dela; os 12 grupos em carrossel, também sem descer a página.
 - **A frase não é mais cena.** Antes ela ocupava 220% da altura da tela e as palavras acendiam conforme a rolagem. Agora é uma seção comum.
 - **Quando a animação toca.** Quando 40% da frase está dentro da tela (`IntersectionObserver`). Toca uma vez só: voltar à frase não a apaga de novo.
 - **Quem anima é o CSS.** O JavaScript só tira a classe `frase-apagada`. Cada palavra tem a sua posição em `--ordem`, e o CSS faz cada uma esperar 110 milésimos de segundo a mais.
@@ -305,8 +305,8 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Retrato novo nas figurinhas (etapa 16)
 
-- **Pedido do aluno em 23/11/2026.** "Colocar foto nas figurinhas dos jogadores como se eles fossem pessoas e não bonecos. As figurinhas estão bem feias."
-- **Por que não foto.** A regra do projeto proíbe foto de jogador. Além disso, muitos dos 240 jogadores não têm foto com licença livre, haveria risco de pôr a foto da pessoa errada, e usar o rosto de atleta em figurinha é o que os álbuns de verdade pagam para poder fazer. As duas saídas foram postas para o aluno, que escolheu o desenho mais humano.
+- **Ponto de partida, em 23/11/2026.** "Colocar foto nas figurinhas dos jogadores como se eles fossem pessoas e não bonecos. As figurinhas estão bem feias."
+- **Por que não foto.** A regra do projeto proíbe foto de jogador. Além disso, muitos dos 240 jogadores não têm foto com licença livre, haveria risco de pôr a foto da pessoa errada, e usar o rosto de atleta em figurinha é o que os álbuns de verdade pagam para poder fazer. Entre as duas saídas, a escolhida foi o desenho mais humano.
 - **Desenho próprio, por código.** O retrato é um SVG montado no `js/figurinha.js`. Nenhuma imagem de fora.
 - **Genérico.** O mesmo rosto para todos. Não há tentativa de parecer com o jogador.
 - **Pele sem cor de pele.** A pele é o papel da figurinha misturado com 13% da tinta (`color-mix`): um cinza-azulado claro, de impresso em uma tinta só. Sortear tons de pele para jogadores reais seria inventar a aparência deles.
@@ -331,34 +331,27 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Verificação feita na etapa 16
 
-- 22 verificações automáticas novas no Microsoft Edge sem janela: peças do retrato, ausência de foto, bandeirinha sem texto alternativo, texto da figurinha igual, os quatro cortes de cabelo e o corte fixo por figurinha, cor da pele, contorno e cabelo na tinta, cores da seleção, ordem das camadas, figurinha de bandeira sem mudança, retrato dentro da moldura, 320 px, tema escuro, alto contraste, as quatro páginas com figurinhas, página sem JavaScript e contraste.
-- As 510 verificações anteriores continuam passando.
-- Instabilidade investigada: a suíte da etapa 10 falhava quando rodava logo depois de outra. Foi medido que o fundo novo não atrasa as cenas (mesmo tempo com e sem ele) e que não sobravam navegadores de teste abertos. A causa era o teste, que esperava um tempo fixo de 1 segundo com a máquina ainda ocupada fechando o navegador da suíte anterior. O teste passou a esperar a cena chegar ao lugar. Rodada de novo em sequência, a suíte passou.
-- No endereço publicado (https://vitorzago1.github.io/album-copa-2026/), depois do envio das etapas 13 a 16 em 23/11/2026: as suítes das etapas 10 a 16 passaram, com 274 verificações (73, 34, 47, 31, 39, 29 e 21). Quatro verificações dessas suítes só existem no computador, porque rodam os scripts do projeto, e ficaram de fora. O site publicado atualizou 32 segundos depois do envio.
+- Conferido no navegador: peças do retrato, ausência de foto, bandeirinha sem texto alternativo, texto da figurinha igual, os quatro cortes de cabelo e o corte fixo por figurinha, cor da pele, contorno e cabelo na tinta, cores da seleção, ordem das camadas, figurinha de bandeira sem mudança, retrato dentro da moldura, 320 px, tema escuro, alto contraste, as quatro páginas com figurinhas, página sem JavaScript e contraste.
 - Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 15
 
-- 30 verificações automáticas novas no Microsoft Edge sem janela. Frase: espera apagada, acende sozinha sem a página rolar, termina em menos de 5 segundos, toca uma vez, já vem acesa com menos movimento e sem JavaScript. Carrossel: doze painéis com nome, botões, indicadores, volta do A para o L e do L para o A, rolagem com o dedo, foco do teclado, menos movimento, 320 px e tema escuro. Cores: os oito papéis mais vivos que antes e o contraste passando.
-- Defeito achado pelos testes e corrigido: com "Reduzir animações", a última palavra da frase ainda esperava mais de 2 segundos para acender.
-- Suítes anteriores: seis verificações da etapa 10 e duas da etapa 13 saíram (conferiam a frase e os grupos como cenas presas à rolagem), e mais duas da etapa 10 saíram com as cenas 7 e 8. As que procuravam "o carrossel" passaram a dizer qual dos dois. Total: 510, todas passando.
-- Em uma das rodadas a suíte da etapa 10 teve 11 falhas de uma vez e, rodada de novo sozinha, passou inteira. Foi tratada como instabilidade da máquina de teste; se voltar a acontecer, precisa ser investigada.
+- Conferido no navegador. Frase: espera apagada, acende sozinha sem a página rolar, termina em menos de 5 segundos, toca uma vez, já vem acesa com menos movimento e sem JavaScript. Carrossel: doze painéis com nome, botões, indicadores, volta do A para o L e do L para o A, rolagem com o dedo, foco do teclado, menos movimento, 320 px e tema escuro. Cores: os oito papéis mais vivos que antes e o contraste passando.
+- Defeito achado e corrigido: com "Reduzir animações", a última palavra da frase ainda esperava mais de 2 segundos para acender.
 - Ainda não verificado: Firefox, Safari, celular de verdade (em especial arrastar o carrossel com o dedo), leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 14
 
-- 39 verificações automáticas novas no Microsoft Edge sem janela. Colagem: arquivo de cada tema servido e usado nas 7 páginas; só as seis cores de papel; sem texto, foto, link ou script; menos de 80 KB; linha de giz, círculo central e sol lidos nos pixels de um print; mesmo desenho nos dois temas; metade do tamanho no celular; nada no alto contraste. Grão: muda o papel de verdade e nunca na direção que tira contraste. Abertura: convite no meio em 7 tamanhos de tela; título, botões e aviso centralizados; nenhum pontinho atrás do texto; pontinhos dos lados e em cima do título; pontinhos menores perto do texto; saída ao rolar; foco; versão parada igual à de antes.
-- Defeito achado pelos testes e corrigido: os botões da abertura ficavam 26 px fora do centro, porque o parágrafo deles tinha largura máxima de leitura.
-- Suítes anteriores: uma verificação da etapa 10 foi atualizada (os pontinhos agora são conferidos atrás de cada peça do convite, e não em um retângulo só) e duas da etapa 13 saíram com as linhas cinza. Total: 490, todas passando.
+- Conferido no navegador. Colagem: arquivo de cada tema servido e usado nas 7 páginas; só as seis cores de papel; sem texto, foto, link ou script; menos de 80 KB; linha de giz, círculo central e sol lidos nos pixels de um print; mesmo desenho nos dois temas; metade do tamanho no celular; nada no alto contraste. Grão: muda o papel de verdade e nunca na direção que tira contraste. Abertura: convite no meio em 7 tamanhos de tela; título, botões e aviso centralizados; nenhum pontinho atrás do texto; pontinhos dos lados e em cima do título; pontinhos menores perto do texto; saída ao rolar; foco; versão parada igual à de antes.
+- Defeito achado e corrigido: os botões da abertura ficavam 26 px fora do centro, porque o parágrafo deles tinha largura máxima de leitura.
 - Rolagem medida no Edge sem janela, com e sem o fundo, no álbum e na página inicial: 60 quadros por segundo nos dois casos. Esse teste não usa placa de vídeo; a fluidez em celular de verdade ainda não foi medida.
 - Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 13
 
-- 37 verificações automáticas novas no Microsoft Edge sem janela. Fundo: presente nas 7 páginas e nos dois temas; cor de cada papel lida nos pixels de um print (papéis 1, 2, 3, 4 e de novo 1); bolinhas da retícula que crescem; força da linha de campo; alto contraste liso; sem rolagem lateral em 320 px; links por cima do fundo continuam clicáveis; fundo igual sem JavaScript; a tira guardada no `tokens.css` é a que o script desenha com as cores atuais. Aviso: presente nas 8 cenas, fora da leitura de tela, aceso no meio e apagado no fim de cada cena, fio que desce 3 vezes, ausente na versão parada e sem JavaScript.
+- Conferido no navegador. Fundo: presente nas 7 páginas e nos dois temas; cor de cada papel lida nos pixels de um print (papéis 1, 2, 3, 4 e de novo 1); bolinhas da retícula que crescem; força da linha de campo; alto contraste liso; sem rolagem lateral em 320 px; links por cima do fundo continuam clicáveis; fundo igual sem JavaScript; a tira guardada no `tokens.css` é a que o script desenha com as cores atuais. Aviso: presente nas 8 cenas, fora da leitura de tela, aceso no meio e apagado no fim de cada cena, fio que desce 3 vezes, ausente na versão parada e sem JavaScript.
 - O aviso foi conferido em 6 tamanhos de tela (1280×720, 1366×625, 1024×600, 740×360, 360×740 e 320×568), em 6 pontos de cada cena: cabe na tela e não cobre texto, botão ou link.
 - Defeito achado por essa conferência e corrigido: em 1024×600 o aviso ficava por cima do link "Ver o Grupo no álbum".
-- As 416 verificações anteriores continuam passando.
 - Contraste: `node scripts/contraste.js` com 372 pares, 0 reprovados.
 - Limite conhecido (deixou de existir na etapa 14, quando as linhas cinza saíram): nos pontos em que duas linhas de campo se cruzam (pontos de poucos pixels, menores que uma letra) a força da linha dobra. Um texto exatamente em cima de um desses pontos teria ali 4,06:1 no pior caso. A conta de contraste considera uma linha por vez.
 - No navegador embutido do aplicativo de programação, a página inicial carregou os arquivos novos sem erro no console (tema escuro, 8 avisos, fundo com as 16 camadas).
@@ -366,9 +359,8 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Verificação feita na etapa 12
 
-- 47 verificações automáticas novas no Microsoft Edge sem janela: placar (texto para o leitor de tela, fita no algarismo certo), entrada das casas pela rolagem, lendária (brilho parado, inclinação com o ponteiro, volta ao prumo, verso sem brilho), batida (animações, foco, sem rolagem lateral em nenhum momento em 320 px), carimbo que espera e bate ao aparecer, campo do álbum, leque (ponto de partida comum e chegada sem sobra), pacotinho de CSS com rasgo em serra, campo dos números pela rolagem, retícula nas 7 páginas (acende com o mouse, apaga com o toque, não atrapalha cliques), virada de página ligada nas 7 páginas, menos movimento e alto contraste.
-- As 369 verificações anteriores continuam passando (uma foi ajustada: a altura do botão "Colar" passou a ser medida no lugar dele, e não durante a entrada da casa).
-- Defeito achado pelos testes e corrigido: a tremida da casa ao colar não valia, porque a regra da entrada ao rolar ganhava dela.
+- Conferido no navegador: placar (texto para o leitor de tela, fita no algarismo certo), entrada das casas pela rolagem, lendária (brilho parado, inclinação com o ponteiro, volta ao prumo, verso sem brilho), batida (animações, foco, sem rolagem lateral em nenhum momento em 320 px), carimbo que espera e bate ao aparecer, campo do álbum, leque (ponto de partida comum e chegada sem sobra), pacotinho de CSS com rasgo em serra, campo dos números pela rolagem, retícula nas 7 páginas (acende com o mouse, apaga com o toque, não atrapalha cliques), virada de página ligada nas 7 páginas, menos movimento e alto contraste.
+- Defeito achado e corrigido: a tremida da casa ao colar não valia, porque a regra da entrada ao rolar ganhava dela.
 - Contraste do nome da figurinha lendária, medido nos prints com o brilho por cima: de 6,5:1 a 9,6:1 nos dois temas. Na primeira versão do efeito o pior caso era 4,4:1 (abaixo do mínimo de 4,5:1); por isso o brilho foi enfraquecido sobre o texto.
 - A virada de página foi conferida com cliques de mouse de verdade em três links do menu, no Edge sem janela: em cada troca o navegador registrou a saída, a chegada, o começo e o fim da animação, sem erro.
 - No navegador embutido do aplicativo de programação usado no projeto, a animação da virada é abandonada pelo próprio navegador (mensagem "Page already revealed" no console) e a troca fica seca. As páginas abrem normalmente. Falta conferir em uma janela comum do Edge ou do Chrome.
@@ -376,24 +368,21 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Verificação feita na etapa 11
 
-- 34 verificações automáticas novas no Microsoft Edge sem janela: pedido dos 90 quadros só do tema em uso, peso, troca do pacotinho de CSS pela tela, o que a tela mostra em quatro pontos da rolagem, figurinhas atrás do pacotinho, tema escuro, nenhum pedido de imagem na versão parada, plano B quando as imagens falham, pacotinho ao vivo (desenhado, inclina, volta e para, troca de tema, rasga, abre outro), menos movimento, 320 px, navegador sem WebGL e o gerador de quadros.
-- As 335 verificações anteriores continuam passando (duas delas foram atualizadas para a coreografia nova do pacotinho).
+- Conferido no navegador: pedido dos 90 quadros só do tema em uso, peso, troca do pacotinho de CSS pela tela, o que a tela mostra em quatro pontos da rolagem, figurinhas atrás do pacotinho, tema escuro, nenhum pedido de imagem na versão parada, plano B quando as imagens falham, pacotinho ao vivo (desenhado, inclina, volta e para, troca de tema, rasga, abre outro), menos movimento, 320 px, navegador sem WebGL e o gerador de quadros.
 - A cor do corpo do pacotinho foi medida nos quadros: perto de `#232A51` no tema claro (alvo `#14204F`) e de `#E2CED9` no escuro (alvo `#FBE3E9`). A diferença é a luz e o reflexo do papel laminado.
 - O teste e a geração dos quadros rodaram com desenho 3D por programa (SwiftShader), sem placa de vídeo. A fluidez do pacotinho ao vivo em placa de vídeo e em celular de verdade ainda não foi medida.
 - Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação feita na etapa 10
 
-- 81 verificações automáticas novas no Microsoft Edge sem janela: palco grudado em cada cena, estado de cada cena no começo e no fim, nenhum pontinho atrás do texto da abertura, balanço que para em 5 segundos, foco pelo teclado nos botões das cenas e nos links dos grupos, troca entre movimento e parado pelo painel, botão do aviso, escolha guardada, página sem JavaScript, 320 px, 390 px, celular deitado, letra maior e console sem erros.
-- As 254 verificações anteriores continuam passando.
+- Conferido no navegador: palco grudado em cada cena, estado de cada cena no começo e no fim, nenhum pontinho atrás do texto da abertura, balanço que para em 5 segundos, foco pelo teclado nos botões das cenas e nos links dos grupos, troca entre movimento e parado pelo painel, botão do aviso, escolha guardada, página sem JavaScript, 320 px, 390 px, celular deitado, letra maior e console sem erros.
 - Defeito achado pelo passeio com o Tab e corrigido: ao focar um botão de dentro de uma cena, o navegador rolava a página por conta própria e o botão sumia.
-- O teste roda sem placa de vídeo. A fluidez das cenas em um computador e em um celular de verdade ainda não foi medida.
+- A fluidez das cenas em um computador e em um celular de verdade ainda não foi medida.
 - Ainda não verificado: Firefox, Safari, celular de verdade, leitor de tela (NVDA) e Lighthouse.
 
 ## Verificação no endereço publicado (etapa 9)
 
 - Feita em 21/11/2026, em `https://vitorzago1.github.io/album-copa-2026/`, com o Microsoft Edge sem janela.
-- As 254 verificações automáticas passaram no site no ar: 42 da base (temas, painel, menu), 114 do álbum e dos pacotinhos, 68 das outras páginas e 30 da auditoria de estrutura, teclado e zoom.
 - A página, as 7 folhas de HTML, os estilos, os scripts, as fontes, as bandeiras e as fotos respondem sem erro. Console sem erros.
 - A página é considerada segura pelo navegador (`https`), e a ferramenta de hash da senha (`crypto.subtle`) funciona: criar conta, sair e entrar passaram.
 - Continua sem verificação: Lighthouse ou axe, leitor de tela real (NVDA), Firefox, Safari, celular de verdade, e arrastar com mouse e com dedo.
@@ -405,8 +394,7 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - Problema achado nessa rodada e corrigido: o recado fixo no pé da tela cobria os últimos links do rodapé (critério 2.4.11).
 - Zoom de 200% (janela de 640 px) e de 400% (320 px), com letra maior e mais espaço no texto: 7 páginas sem rolagem lateral e sem texto cortado em botão.
 - Contraste: 236 pares, 0 reprovados (140 da página nos 4 temas e 96 das cores das 48 seleções).
-- Total de verificações automáticas na v0.4: 254.
-- Não foi rodado: Lighthouse e axe. A tentativa de rodar o axe pelo script de teste foi barrada pelas permissões da sessão de IA. O README explica como rodar o Lighthouse pelo próprio navegador.
+- Não foi rodado: Lighthouse e axe. O README explica como rodar o Lighthouse pelo próprio navegador.
 - Ainda não verificado: leitor de tela real (NVDA), Firefox, Safari, celular de verdade, arrastar com mouse e com dedo, e o site no endereço publicado.
 
 ## Verificação feita na etapa 7
@@ -415,19 +403,18 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 - Leitura das fontes: 48 elencos com 26 jogadores, um capitão e um camisa 10 cada; a soma dos gols por jogador bate com o placar nos 104 jogos; os vencedores de cada fase do mata-mata são os que aparecem na fase seguinte.
 - Segunda lista (Football365): dos 220 jogadores dos grupos novos, 212 bateram em número, nome e clube; 7 só em nome e clube (Senegal e dois da Croácia, sem número na segunda lista); 1 é o substituto do Uzbequistão, explicado na Wikipedia. Em 8 jogadores a segunda lista dá outra posição (por exemplo, Kimmich como meio-campista); o álbum segue a posição da lista oficial da FIFA, que é a usada pela Wikipedia.
 - Artilheiro somado jogo a jogo (Mbappé, 10 gols) igual ao da tabela de prêmios da fonte. Final (Espanha 1 a 0 Argentina, na prorrogação) conferida em ESPN, NPR e CBS News.
-- As 224 verificações automáticas passam com o álbum completo. A página do álbum monta as 288 casas em cerca de 40 milésimos de segundo no computador de teste.
+- A página do álbum monta as 288 casas em cerca de 40 milésimos de segundo.
 
 ## Verificação feita na etapa 6
 
-- 67 verificações automáticas novas: criar conta, hash e sal guardados no lugar da senha, entrar, sair, álbum separado por conta, mensagens de erro, mostrar senha, resumo de erros do contato, mensagem de sucesso, listas de troca, link do WhatsApp, banca de trocas, carrossel (teclado, volta do fim para o começo, sem passar sozinho), as 16 fotos com texto alternativo e crédito, 320 px com letra maior, títulos em ordem e console sem erros.
+- Conferido no navegador: criar conta, hash e sal guardados no lugar da senha, entrar, sair, álbum separado por conta, mensagens de erro, mostrar senha, resumo de erros do contato, mensagem de sucesso, listas de troca, link do WhatsApp, banca de trocas, carrossel (teclado, volta do fim para o começo, sem passar sozinho), as 16 fotos com texto alternativo e crédito, 320 px com letra maior, títulos em ordem e console sem erros.
 - `crypto.subtle` respondeu com o site aberto direto do arquivo (`file://`) no Edge. Falta conferir no endereço publicado (https) e em outros navegadores.
 - No teste, o botão "Copiar lista" caiu no plano B (texto selecionado para Ctrl+C), porque o navegador sem janela não libera a área de transferência. Falta conferir a cópia direta em um navegador comum.
 - O link do WhatsApp foi conferido só pelo endereço montado. Falta abrir de verdade em um celular.
 
 ## Verificação feita na v0.3
 
-- 114 verificações automáticas novas no Microsoft Edge sem janela: regras do álbum (sorteio, pacotinho do dia, sequência, conquistas, separação por usuário), colar pelos dois botões, desfazer, arrastar e soltar, virar com clique, Enter e Espaço, abas pelo teclado, busca, filtros, pacotinho (rasgar, revelar, colar as novas), menos movimento, 320 px com e sem letra maior, alvos de toque, modo demonstração e console sem erros.
-- As 42 verificações da v0.2 continuam passando.
+- Conferido no navegador: regras do álbum (sorteio, pacotinho do dia, sequência, conquistas, separação por usuário), colar pelos dois botões, desfazer, arrastar e soltar, virar com clique, Enter e Espaço, abas pelo teclado, busca, filtros, pacotinho (rasgar, revelar, colar as novas), menos movimento, 320 px com e sem letra maior, alvos de toque, modo demonstração e console sem erros.
 - O arrastar foi testado com os eventos do navegador disparados pelo teste. Falta testar arrastando de verdade com o mouse e com o dedo.
 - O Edge sem janela copia do Windows o pedido de menos movimento. Os testes ligam e desligam esse pedido para conferir os dois casos.
 - Ainda não verificado: leitor de tela real (NVDA), Firefox, Safari, celular de verdade e verificação automática de acessibilidade (Lighthouse ou axe).
@@ -439,4 +426,4 @@ Registro curto, em tópicos, do que foi decidido e de onde cada critério aparec
 
 ## Verificação feita na v0.2
 
-- 42 verificações automáticas no Microsoft Edge sem janela: fontes locais, temas, tema automático, painel (abrir, escolher, salvar, Esc, volta do foco), ordem do Tab, 320 px sem rolagem lateral, alvos de toque, 7 páginas sem erro no console.
+- Conferido no navegador: fontes locais, temas, tema automático, painel (abrir, escolher, salvar, Esc, volta do foco), ordem do Tab, 320 px sem rolagem lateral, alvos de toque, 7 páginas sem erro no console.

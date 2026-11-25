@@ -27,14 +27,9 @@ const GRUPOS = [
   },
 ];
 
-const FORA_DO_ANEXO = [
-  'laboratorio.html', 'laboratorio.css', 'laboratorio.js',
-  'laboratorio-2.html', 'laboratorio-2.css', 'laboratorio-2.js',
-];
-
 function arquivosDoGrupo(grupo) {
   const pasta = path.join(RAIZ, grupo.pasta);
-  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao) && !FORA_DO_ANEXO.includes(nome); }).sort();
+  const todos = fs.readdirSync(pasta).filter(function (nome) { return nome.endsWith(grupo.extensao); }).sort();
   const naFrente = grupo.primeiro.filter(function (nome) { return todos.includes(nome); });
   const resto = todos.filter(function (nome) { return !grupo.primeiro.includes(nome); });
   return naFrente.concat(resto);

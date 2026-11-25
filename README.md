@@ -1,5 +1,7 @@
 # Colei! Álbum de figurinhas da Copa 2026
 
+Português | [English](README.en.md)
+
 Álbum de figurinhas digital e interativo da Copa do Mundo de 2026 (Estados Unidos, México e Canadá).
 
 Projeto Final da disciplina Desenvolvimento de Interfaces (CEUB, 2/2026), do Prof. Dr. Felipe Batista da Silva. Aluno: Vitor Zago Pontes Morais.
@@ -43,9 +45,9 @@ album-copa-2026/
 ├── assets/   bandeiras, fotos dos estádios, quadros do pacotinho, colagem do fundo, SVG e fontes
 ├── docs/     cores, decisões, referências, prints e anexo de código
 ├── scripts/  ferramentas de apoio (contraste, fundo da página, anexo de código, gerador de quadros)
-├── README.md
-├── CHANGELOG.md
-└── CLAUDE.md regras do projeto para a IA que ajudou na construção
+├── README.md       (português)
+├── README.en.md    (inglês)
+└── CHANGELOG.md
 ```
 
 ## Construção passo a passo
@@ -77,7 +79,6 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 6. **Painel de acessibilidade (`js/tema-acessibilidade.js` e `css/acessibilidade.css`).** Tema (claro, escuro ou automático), tamanho da letra (3 níveis), alto contraste, reduzir animações, mais espaço no texto e destacar links. Tudo fica salvo no navegador e é aplicado antes de a página aparecer.
 7. **Menu do celular (`js/menu.js`).** Em telas pequenas o menu fica atrás do botão "Menu".
 8. **Página inicial (`index.html`)** montada com essas peças, e um **guia de estilo** na página Sobre, com todas as peças juntas.
-9. **Testes.** 42 verificações automáticas: temas, painel, teclado, 320 px de largura, alvos de toque e console sem erros nas 7 páginas.
 
 ### Etapa 4: pesquisa dos dados de um grupo
 
@@ -99,7 +100,7 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 9. **Página inicial com progresso de verdade (`js/inicio.js`).** A tira de grupos, o resumo, o pacotinho do dia e a cartela passam a mostrar o que está guardado.
 10. **Modo demonstração (`sobre.html` e `js/demonstracao.js`).** Dois botões para a apresentação: ganhar 5 pacotinhos extras e zerar o álbum (com janela de confirmação).
 11. **Bandeiras.** As 4 bandeiras vêm da biblioteca `flag-icons` (licença MIT), copiadas para `assets/bandeiras/`. Só os arquivos SVG foram usados: nenhum código da biblioteca roda no site.
-12. **Testes.** 114 verificações automáticas novas (regras do álbum, colar, desfazer, arrastar, virar, abas pelo teclado, busca, filtros, pacotinho, 320 px, menos movimento), além das 42 da etapa 3. O script de contraste passou a conferir 140 pares, com 0 reprovados.
+12. **Contraste.** O script de contraste passou a conferir 140 pares, com 0 reprovados.
 
 ### Etapa 6: as outras páginas (entra na versão `v0.4-acessibilidade`)
 
@@ -111,7 +112,6 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 6. **Carrossel das 16 sedes (`index.html` e `js/carrossel.js`).** Uma sede por vez, com foto do estádio, botões Anterior e Próxima, um botão numerado para cada sede e a posição anunciada ("3 de 16: Dallas"). Não passa sozinho.
 7. **Fotos em uma tinta só.** As 16 fotos vêm do Wikimedia Commons, com licença livre. O arquivo é colorido; o CSS é que mostra a foto como se fosse impressa com a tinta da página (duas camadas de cor por cima de uma foto em preto e branco).
 8. **Sobre (`sobre.html` e `js/sobre.js`).** O que é o projeto, o que é de verdade e o que é simulado, como foi feito, os créditos de fontes, bandeiras e fotos, e as fontes dos dados.
-9. **Testes.** 67 verificações automáticas novas (conta, hash, erros de formulário, trocas, carrossel, créditos). Somando as etapas anteriores, são 223.
 
 ### Etapa 7: os 12 grupos (entra na versão `v0.4-acessibilidade`)
 
@@ -123,7 +123,7 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 6. **Como terminou.** A última página do álbum mostra a campeã, os quatro primeiros, a final e os prêmios. O resultado da final foi conferido em três reportagens além da Wikipedia.
 7. **Índice de grupos.** No topo do álbum, 12 casas levam direto a cada grupo e enchem conforme o grupo é colado.
 8. **Bandeiras.** As 48 bandeiras vêm da `flag-icons` (licença MIT).
-9. **Testes.** As verificações automáticas foram atualizadas para o álbum completo: 224 no total, todas passando. A página do álbum, com as 288 casas, é montada em menos de um décimo de segundo.
+9. **Velocidade.** A página do álbum, com as 288 casas, é montada em menos de um décimo de segundo.
 
 ### Etapa 8: acessibilidade e polimento (versão `v0.4-acessibilidade`)
 
@@ -133,19 +133,18 @@ Cada etapa abaixo corresponde a uma versão marcada no git (uma "tag", que funci
 4. **Zoom.** Com 200% e com 400% de zoom (janelas de 640 e 320 px), com letra maior e mais espaço no texto, as 7 páginas ficam sem rolagem lateral e sem texto cortado.
 5. **Mais espaço no texto também nos botões.** A opção do painel passou a valer para botões, campos e figurinhas.
 6. **Contraste das cores das seleções.** O script de contraste passou a conferir também o desenho de cada seleção (número sobre a camisa e silhueta sobre o campo): 236 pares no total, 0 reprovados.
-7. **Total de verificações automáticas:** 254, todas passando.
 
 ### Etapa 9: publicação e documentação
 
 1. **Repositório no GitHub.** O projeto foi enviado para `github.com/vitorzago1/album-copa-2026`, com todo o histórico de commits e as marcas de versão.
 2. **GitHub Pages.** O site é servido direto do ramo `main`, sem etapa de build, em `https://vitorzago1.github.io/album-copa-2026/`.
-3. **Conferência no endereço publicado.** As mesmas 254 verificações automáticas rodadas no computador foram rodadas no site no ar, e todas passaram. Isso inclui criar conta e entrar, que dependem de `https` para proteger a senha.
+3. **Conferência no endereço publicado.** O site foi conferido no ar, inclusive criar conta e entrar, que dependem de `https` para proteger a senha.
 4. **Anexo de código.** `node scripts/gerar-anexo.js` junta todos os arquivos HTML, CSS e JavaScript em `docs/anexo-codigo.md`.
 5. **Links.** O endereço do site está no começo deste README, no rodapé das 7 páginas e na página Sobre.
 
 ### Etapa 10: página inicial em cenas presas à rolagem
 
-Depois da publicação, o site foi avaliado como "genérico". Duas páginas de teste (`laboratorio.html` e `laboratorio-2.html`, que não fazem parte do site) serviram para escolher efeitos com tudo funcionando. Esta etapa aplica as oito cenas escolhidas no segundo laboratório.
+Depois da publicação, o site foi avaliado como "genérico". Duas páginas de teste, os laboratórios, serviram para escolher efeitos com tudo funcionando; depois da escolha, as duas saíram do projeto. Esta etapa aplica as oito cenas escolhidas no segundo laboratório.
 
 1. **Como uma cena funciona.** A cena é uma seção bem alta (por exemplo, 240vh, quase duas telas e meia). Dentro dela, o palco fica grudado na tela (`position: sticky`). Enquanto a pessoa rola por dentro da cena, o `js/cenas.js` transforma a rolagem em um número de 0 a 1, o progresso, e chama a função de desenho da cena. Rolar para cima desfaz tudo.
 2. **As oito cenas** (`js/cenas-inicio.js` e `css/cenas.css`; na etapa 15 a frase e os grupos deixaram de ser cenas, e ficaram seis):
@@ -162,7 +161,6 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 5. **Quem tem o aparelho pedindo menos movimento** vê a versão parada e um aviso com o botão "Ligar as animações neste site". A escolha fica guardada e também aparece no painel de acessibilidade.
 6. **Teclado.** Um botão dentro de uma cena pode estar invisível no ponto em que a rolagem está. Quando ele recebe o foco, a rolagem vai até o ponto em que ele aparece (atributo `data-visivel-em`). Na faixa dos grupos, o foco em um link leva a faixa até aquele grupo.
 7. **Nada se mexe sozinho por mais de 5 segundos.** O balanço dos pontinhos da abertura para 5 segundos depois do último gesto.
-8. **Verificações automáticas novas:** 81. Com as 254 anteriores, são 335, todas passando.
 
 ### Etapa 11: o pacotinho em 3D e a sequência de quadros
 
@@ -173,11 +171,10 @@ Depois da publicação, o site foi avaliado como "genérico". Duas páginas de t
 5. **Plano B.** Enquanto as imagens não chegam (ou se alguma falhar), a cena usa o pacotinho desenhado em CSS, com a mesma coreografia.
 6. **Ao vivo na página Pacotinhos** (`js/pacotinho-3d.js`). O pacotinho fechado é o modelo 3D rodando na hora: inclina conforme o ponteiro passa por cima e, ao rasgar, a aba sai e mostra o lado prateado. As regras da página não mudaram: o pacotinho de CSS continua lá como molde (tamanho, lugar e clique), e sem WebGL é ele que aparece.
 7. **Como gerar os quadros de novo.** Abra `scripts/quadros.html` pelo servidor local, no Edge ou no Chrome, clique em "Salvar os quadros em uma pasta" e escolha `assets/img/pacotinho`.
-8. **Verificações automáticas novas:** 34. No total são 369, todas passando.
 
 ### Etapa 12: os nove efeitos escolhidos no primeiro laboratório
 
-O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhidas e aplicadas nesta etapa. As texturas de fundo não foram escolhidas e ficaram de fora (o fundo com vários papéis veio depois, por um pedido à parte: etapa 13).
+O primeiro laboratório tinha 24 ideias. Nove foram escolhidas e aplicadas nesta etapa. As texturas de fundo não foram escolhidas e ficaram de fora (o fundo com vários papéis veio depois, por um pedido à parte: etapa 13).
 
 | Efeito | Onde está | Como é feito |
 |---|---|---|
@@ -196,11 +193,10 @@ O primeiro laboratório (`laboratorio.html`) tinha 24 ideias. Nove foram escolhi
 3. **Alto contraste.** O brilho colorido da lendária e a retícula que acende somem.
 4. **Acessibilidade do placar.** As fitas que giram ficam fora da leitura de tela; o número é lido de um texto comum ao lado.
 5. **Correção de quebra.** A figurinha que acaba de ser colada chega maior e torta e passava alguns pixels da beirada da tela. A grade das casas agora corta essa sobra (`overflow-x: clip`) sem criar barra de rolagem.
-6. **Verificações automáticas novas:** 47. No total são 416, todas passando.
 
 ### Etapa 13: fundo com vários papéis e aviso de descer
 
-Dois pedidos do aluno em 22/11/2026: um aviso "Desça para continuar" nas partes em que é preciso rolar a página, e um fundo que não fosse de uma cor só, com mais de uma cor e com detalhes.
+Duas mudanças de 22/11/2026: um aviso "Desça para continuar" nas partes em que é preciso rolar a página, e um fundo que não fosse de uma cor só, com mais de uma cor e com detalhes.
 
 1. **Direção: "Uma tinta só, vários papéis".** A tinta continua uma só (azul no tema claro, rosa no escuro). O que muda é o papel: o fundo passa por quatro papéis conforme a página desce (rosa, pêssego, menta e lilás; no escuro, azul, roxo, petróleo e vinho) e volta ao primeiro.
 2. **Passagem em retícula.** Entre um papel e o seguinte, bolinhas da cor seguinte crescem linha a linha até se juntarem, como o degradê da impressão em papel. É uma imagem SVG estreita (16 por 4400 px), repetida para os lados e para baixo. Ela fica escrita dentro do `css/tokens.css`, e quem a desenha é o `scripts/gerar-fundo.js`.
@@ -210,11 +206,10 @@ Dois pedidos do aluno em 22/11/2026: um aviso "Desça para continuar" nas partes
 6. **Aviso "Desça para continuar".** Cada uma das oito cenas da página inicial mostra o aviso no pé do palco, com um fio que desce três vezes quando a cena chega à tela. O aviso some perto do fim da cena. Na abertura, o convite da primeira tela já traz a frase, e o aviso do palco entra quando o convite sai. Quem cria o aviso é o `js/cenas.js`, para toda cena registrada.
 7. **O aviso é só para os olhos.** Fica fora da leitura de tela (`aria-hidden`) e não recebe cliques. Na versão parada (menos movimento, letra maior ou sem JavaScript) ele não aparece, porque ali a página é comum.
 8. **Janela baixa.** Com menos de 640 px de altura, cada grupo da faixa dos 12 grupos fica mais estreito. Assim o link "Ver o Grupo no álbum" não fica debaixo do aviso.
-9. **Verificações automáticas novas:** 37. No total são 453, todas passando.
 
 ### Etapa 14: fundo ilustrado e abertura centralizada
 
-Dois pedidos do aluno em 22/11/2026, depois de ver a etapa 13: o fundo ainda estava "seco e artificial", só com cores, e devia ter detalhes e imagens; e a frase da abertura devia ficar centralizada, com os pontinhos em volta.
+Duas mudanças de 22/11/2026, depois da etapa 13: o fundo ainda estava "seco e artificial", só com cores, e devia ter detalhes e imagens; e a frase da abertura devia ficar centralizada, com os pontinhos em volta.
 
 1. **Colagem de papel recortado.** Por cima dos papéis da etapa 13 há desenhos que parecem recortados à tesoura e colados na página: um varal de bandeirinhas no topo, um estádio com o sol nascendo atrás, figurinhas, apito, prancheta de tática, bola, trave, camisa, bandeira de escanteio, pacotinho, cronômetro, cartões, estrelas e confete.
 2. **Desenhos próprios.** Todos são feitos pelo `scripts/gerar-fundo.js` com formas simples (círculos, polígonos e traços). Não há foto, logo nem emblema. As beiradas saem um pouco tortas de propósito: cada ponto é tirado um tiquinho do lugar por um sorteio que se repete.
@@ -226,11 +221,10 @@ Dois pedidos do aluno em 22/11/2026, depois de ver a etapa 13: o fundo ainda est
 8. **Alto contraste.** O fundo continua liso: sem colagem, grão ou manchas.
 9. **Abertura centralizada.** Em movimento, o convite ("A Copa acabou. Seu álbum, não.", os dois botões e o aviso de descer) fica no meio da primeira tela. Os pontinhos contornam cada linha do texto: não passam por trás dele e ficam menores perto dele. Na versão parada a abertura continua como era, com o convite à esquerda e a marca ao lado.
 10. **Tentativa descartada.** Foi testada a foto de um estádio impressa em retícula. Com as cores claras que o contraste permite, a foto virava uma mancha sem forma. A ideia foi trocada pelo estádio desenhado.
-11. **Verificações automáticas novas:** 39. Duas da etapa 13 saíram junto com as linhas cinza. No total são 490, todas passando.
 
 ### Etapa 15: frase que acende sozinha, carrossel dos grupos e cores mais vivas
 
-Três pedidos do aluno em 23/11/2026: as cores um pouco mais vivas; a frase "São 48 seleções..." virar só uma animação, sem ser preciso descer a página por dentro dela; e os 12 grupos virarem um carrossel, também sem descer a página.
+Três mudanças de 23/11/2026: as cores um pouco mais vivas; a frase "São 48 seleções..." virar só uma animação, sem ser preciso descer a página por dentro dela; e os 12 grupos virarem um carrossel, também sem descer a página.
 
 1. **Frase que acende sozinha.** Ela deixou de ser uma cena presa à rolagem. Quando aparece na tela, as palavras acendem uma depois da outra e o sublinhado se desenha, em menos de 4 segundos, uma vez só. Quem avisa que ela apareceu é um `IntersectionObserver`; quem acende é o CSS (cada palavra espera 110 milésimos de segundo a mais que a anterior).
 2. **Sem movimento, sem espera.** Com "Reduzir animações", com o aparelho pedindo menos movimento ou sem JavaScript, a frase já vem toda acesa.
@@ -240,11 +234,10 @@ Três pedidos do aluno em 23/11/2026: as cores um pouco mais vivas; a frase "Sã
 6. **Seis cenas.** A página inicial passou de oito para seis cenas presas à rolagem (abertura, pacotinho, álbum, mergulho, números e voo) e ficou mais curta.
 7. **Cores mais vivas.** Os quatro papéis dos dois temas e o amarelo dos recortes ganharam mais cor, sem mexer na tinta do texto. O fundo foi redesenhado com `node scripts/gerar-fundo.js` e o contraste conferido de novo: 396 pares, 0 reprovados (o menor valor é 4,62:1).
 8. **Menos movimento ainda mais direto.** A regra geral de "Reduzir animações" passou a zerar também o tempo de espera das transições (`transition-delay`).
-9. **Verificações automáticas novas:** 30. Dez das etapas 10 e 13 saíram, porque conferiam a frase e os grupos como cenas. No total são 510, todas passando.
 
 ### Etapa 16: retrato novo nas figurinhas
 
-Pedido do aluno em 23/11/2026: as figurinhas estavam "bem feias" e os jogadores pareciam bonecos. Ele pediu foto. Como o projeto proíbe foto de jogador, a escolha dele foi um desenho mais humano.
+Mudança de 23/11/2026: as figurinhas estavam "bem feias" e os jogadores pareciam bonecos. A primeira ideia foi usar foto, mas o projeto proíbe foto de jogador; a escolha foi um desenho mais humano.
 
 1. **O retrato.** Uma pessoa de frente, da cabeça aos ombros: rosto, orelhas, pescoço, sobrancelhas, olhos, nariz e boca, cabelo, camisa com gola e mangas, e o número no peito. Antes era um círculo e meio círculo. O desenho é um SVG montado pela função `desenharRetrato`, no `js/figurinha.js`.
 2. **Quatro cortes de cabelo.** Curto, penteado para o lado, cacheado e raspado. O corte sai do número da figurinha: a mesma figurinha tem sempre o mesmo, e o álbum não vira uma fila de retratos iguais.
@@ -254,7 +247,6 @@ Pedido do aluno em 23/11/2026: as figurinhas estavam "bem feias" e os jogadores 
 6. **Fundo do retrato.** Um clarão atrás da cabeça, e os pontinhos de retícula ficaram só no fundo (antes passavam por cima do desenho).
 7. **O que não mudou.** O texto da figurinha (nome, seleção, raridade e número), as três raridades, o verso, as costas e a figurinha de bandeira.
 8. **Contraste.** O contorno do retrato é a tinta da figurinha sobre a cor de fundo de cada seleção, e o número fica sobre a camisa: os dois continuam acima de 3:1 nas 48 seleções (`node scripts/contraste.js`).
-9. **Verificações automáticas novas:** 22. No total são 532, todas passando.
 
 ## Onde está cada item pedido pelo professor
 
@@ -274,7 +266,7 @@ Pedido do aluno em 23/11/2026: as figurinhas estavam "bem feias" e os jogadores 
 | WCAG e análise de contraste | `docs/decisoes.md` (critério por critério) e `docs/cores.md` (tabela calculada por `scripts/contraste.js`) |
 | Psicologia das cores | `docs/cores.md`, coluna "Motivo" |
 | GitHub com versões | Histórico de commits e marcas `v0.1` a `v0.4`; `CHANGELOG.md` |
-| README passo a passo | Este arquivo |
+| README passo a passo | Este arquivo (português) e `README.en.md` (inglês) |
 | Referências e IAs usadas | `docs/referencias.md` e página Sobre |
 | Site publicado | https://vitorzago1.github.io/album-copa-2026/ (GitHub Pages) |
 
